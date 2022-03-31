@@ -21,11 +21,11 @@ For our group, there is no specific role assignment because we want everyone to 
 ## Development Logs
 
 ### Progress #1
-###### Task
+#### Task
 Create a new Xcode project and include the OpenGL libraries. Silence the OpenGL warnings and write a script that copies the Resources folder to the build directory upon running the project so that the program can locate the assets of the game. Finally, write a simple OpenGL program that displays a rotating cube.
-###### Author
+#### Author
 Kelin
-###### Requirements
+#### Requirements
 The following steps are needed before you run the code.
 1. Google and install Homebrew.
 2. Open the terminal - brew install glfw3 - brew install glew - brew install glm.
