@@ -22,11 +22,11 @@ For our group, there is no specific role assignment because we want everyone to 
 
 - [x] Task #1
 Create a new Xcode project and include the OpenGL libraries. Silence the OpenGL warnings and write a script that copies the Resources folder to the build directory upon running the project so that the program can locate the assets of the game. Finally, write a simple OpenGL program that displays a rotating cube. The following steps are needed before you run the code.
-1. Google and install Homebrew.
-2. Open the terminal - brew install glfw3 - brew install glew - brew install glm.
-3. Open Xcode. File - New - Project - macOS - Command Line Tool - Name: "Overcross", Team: "None", Organization: "UCSD-CSE125-Group5", Language: "C++" - Next - Select and open the master folder - Uncheck "Create Git Repo..." - Close the project - Rename the project to "Overcross[Xcode]" in finder - Open the project again.
-4. Click the project in the project navigator - Build Settings - Click "All" and "Combined" on the top - Search Paths - Header Search Paths: "/opt/homebrew/include/" (non-recursive) - Library Search Paths: first add "/opt/homebrew/Cellar/glfw/3.3.6/lib", then "/opt/homebrew/Cellar/glew/2.2.0_1/lib", and finally "/opt/homebrew/Cellar/glm/0.9.9.8/lib" (non-recursive)
-5. Click the project in the project navigator - Build Options - Validate Workspace - Ignored Frameworks: "OpenGL".
-6. Click the project in the project navigator - Apple Clang - Language - Modules - Documentation Comments (search "Documentation" if you cannot find it) - No.
-7. Click the project in the project navigator - Build Phases - Link Binary With Libraries - Add: "OpenGL.framework" - Then continue to add the other frameworks through "Add Other..." - "libglfw.3.3.dylib" (located in /opt/homebrew/Cellar/glfw/3.3.6/lib) - "libGLEW.2.2.0.dylib" (located in /opt/homebrew/Cellar/glew/2.2.0_1/lib).
-8. Click the project in the project navigator - Build Phase - Click the + icon - New Run Script Phase - Drag the new phase to the top - Write code: "cp -R XXX ${BUILT_PRODUCTS_DIR}" (where XXX is the absolute path to the "Resources" folder).
+   1. Google and install Homebrew.
+   2. Open the terminal - brew install glfw3 - brew install glew - brew install glm.
+   3. Open Xcode. File - New - Project - macOS - Command Line Tool - Name: "Overcross", Team: "None", Organization: "UCSD-CSE125-Group5", Language: "C++" - Next - Select and open the master folder - Uncheck "Create Git Repo..." - Close the project - Rename the project to "Overcross[Xcode]" in finder - Open the project again.
+   4. Click the project in the project navigator - Build Settings - Click "All" and "Combined" on the top - Search Paths - Header Search Paths: "/opt/homebrew/include/" (non-recursive) - Library Search Paths: first add "/opt/homebrew/Cellar/glfw/3.3.6/lib", then "/opt/homebrew/Cellar/glew/2.2.0_1/lib", and finally "/opt/homebrew/Cellar/glm/0.9.9.8/lib" (non-recursive)
+   5. Click the project in the project navigator - Build Options - Validate Workspace - Ignored Frameworks: "OpenGL".
+   6. Click the project in the project navigator - Apple Clang - Language - Modules - Documentation Comments (search "Documentation" if you cannot find it) - No.
+   7. Click the project in the project navigator - Build Phases - Link Binary With Libraries - Add: "OpenGL.framework" - Then continue to add the other frameworks through "Add Other..." - "libglfw.3.3.dylib" (located in /opt/homebrew/Cellar/glfw/3.3.6/lib) - "libGLEW.2.2.0.dylib" (located in /opt/homebrew/Cellar/glew/2.2.0_1/lib).
+   8. Click the project in the project navigator - Build Phase - Click the + icon - New Run Script Phase - Drag the new phase to the top - Write code: "cp -R XXX ${BUILT_PRODUCTS_DIR}" (where XXX is the absolute path to the "Resources" folder).
