@@ -20,13 +20,8 @@ For our group, there is no specific role assignment because we want everyone to 
 
 ## Development Logs
 
-### Progress #1
-#### Task
-Create a new Xcode project and include the OpenGL libraries. Silence the OpenGL warnings and write a script that copies the Resources folder to the build directory upon running the project so that the program can locate the assets of the game. Finally, write a simple OpenGL program that displays a rotating cube.
-#### Author
-Kelin
-#### Requirements
-The following steps are needed before you run the code.
+- [x] Task #1
+Create a new Xcode project and include the OpenGL libraries. Silence the OpenGL warnings and write a script that copies the Resources folder to the build directory upon running the project so that the program can locate the assets of the game. Finally, write a simple OpenGL program that displays a rotating cube. The following steps are needed before you run the code.
 1. Google and install Homebrew.
 2. Open the terminal - brew install glfw3 - brew install glew - brew install glm.
 3. Open Xcode. File - New - Project - macOS - Command Line Tool - Name: "Overcross", Team: "None", Organization: "UCSD-CSE125-Group5", Language: "C++" - Next - Select and open the master folder - Uncheck "Create Git Repo..." - Close the project - Rename the project to "Overcross[Xcode]" in finder - Open the project again.
