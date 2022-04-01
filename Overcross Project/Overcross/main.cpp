@@ -16,6 +16,9 @@ int main(int argc, const char * argv[]) {
     
     initializeWindow();
     
+    // temporarily initialize the map here:
+    map = new Map();
+    
     // temporarily set the application state to the game state:
     applicationState = 100;
     

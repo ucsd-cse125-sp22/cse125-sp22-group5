@@ -11,6 +11,8 @@
 		C24E7E7327F3E3D700C7CC7B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C24E7E7227F3E3D700C7CC7B /* OpenGL.framework */; };
 		C24E7E7527F3E3ED00C7CC7B /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C24E7E7427F3E3ED00C7CC7B /* libGLEW.2.2.0.dylib */; };
 		C24E7E7727F3E3F700C7CC7B /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C24E7E7627F3E3F700C7CC7B /* libglfw.3.3.dylib */; };
+		C29CA73927F68EE2006E0016 /* map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29CA73727F68EE2006E0016 /* map.cpp */; };
+		C29CA73E27F69068006E0016 /* FBXLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29CA73C27F69068006E0016 /* FBXLoader.cpp */; };
 		C2DC07D927F5EE9A005331C0 /* variables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DC07D727F5EE9A005331C0 /* variables.cpp */; };
 		C2DC07DC27F5F021005331C0 /* initializations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DC07DA27F5F021005331C0 /* initializations.cpp */; };
 		C2DC07DF27F5F228005331C0 /* interactions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2DC07DD27F5F228005331C0 /* interactions.cpp */; };
@@ -35,6 +37,10 @@
 		C24E7E7227F3E3D700C7CC7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C24E7E7427F3E3ED00C7CC7B /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../../opt/homebrew/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		C24E7E7627F3E3F700C7CC7B /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../opt/homebrew/Cellar/glfw/3.3.6/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		C29CA73727F68EE2006E0016 /* map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = map.cpp; sourceTree = "<group>"; };
+		C29CA73827F68EE2006E0016 /* map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = map.hpp; sourceTree = "<group>"; };
+		C29CA73C27F69068006E0016 /* FBXLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FBXLoader.cpp; sourceTree = "<group>"; };
+		C29CA73D27F69068006E0016 /* FBXLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FBXLoader.hpp; sourceTree = "<group>"; };
 		C2DC07D727F5EE9A005331C0 /* variables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = variables.cpp; sourceTree = "<group>"; };
 		C2DC07D827F5EE9A005331C0 /* variables.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = variables.hpp; sourceTree = "<group>"; };
 		C2DC07DA27F5F021005331C0 /* initializations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = initializations.cpp; sourceTree = "<group>"; };
@@ -79,6 +85,8 @@
 		C24E7E6927F3E32400C7CC7B /* Overcross */ = {
 			isa = PBXGroup;
 			children = (
+				C29CA73B27F69049006E0016 /* elements */,
+				C29CA73A27F69029006E0016 /* tools */,
 				C2DC07D827F5EE9A005331C0 /* variables.hpp */,
 				C2DC07D727F5EE9A005331C0 /* variables.cpp */,
 				C2DC07DB27F5F021005331C0 /* initializations.hpp */,
@@ -100,6 +108,24 @@
 				C24E7E7227F3E3D700C7CC7B /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C29CA73A27F69029006E0016 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				C29CA73C27F69068006E0016 /* FBXLoader.cpp */,
+				C29CA73D27F69068006E0016 /* FBXLoader.hpp */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		C29CA73B27F69049006E0016 /* elements */ = {
+			isa = PBXGroup;
+			children = (
+				C29CA73827F68EE2006E0016 /* map.hpp */,
+				C29CA73727F68EE2006E0016 /* map.cpp */,
+			);
+			path = elements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,9 +206,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C29CA73927F68EE2006E0016 /* map.cpp in Sources */,
 				C2DC07DF27F5F228005331C0 /* interactions.cpp in Sources */,
 				C2DC07DC27F5F021005331C0 /* initializations.cpp in Sources */,
 				C24E7E6B27F3E32400C7CC7B /* main.cpp in Sources */,
+				C29CA73E27F69068006E0016 /* FBXLoader.cpp in Sources */,
 				C2DC07D927F5EE9A005331C0 /* variables.cpp in Sources */,
 				C2DC07E227F5F57D005331C0 /* update.cpp in Sources */,
 			);

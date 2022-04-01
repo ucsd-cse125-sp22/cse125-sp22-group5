@@ -1,19 +1,17 @@
 
-#include "variables.hpp"
 #include "initializations.hpp"
-#include "interactions.hpp"
 
 void initializeWindow() {
     
     char directory[PATH_MAX];
     if(getcwd(directory, sizeof(directory)) == NULL) {
-        fprintf(stderr, "Cannot find the current working directory using getcwd().\n");
+        printf("Cannot find the current working directory using getcwd().\n");
         return;
     }
     strcat(directory, "/Resources");
     DIR * dir = opendir(directory);
     if(dir == NULL) {
-        fprintf(stderr, "Cannot find the resource folder.\n");
+        printf("Cannot find the resource folder.\n");
         return;
     }
     resourcesFolderPath = std::string(directory);
@@ -21,7 +19,7 @@ void initializeWindow() {
     glfwTerminate();
     
     if(!glfwInit()) {
-        fprintf(stderr, "Failed to initialize GLFW.\n");
+        printf("Failed to initialize GLFW.\n");
         return;
     }
     
@@ -44,7 +42,7 @@ void initializeWindow() {
     }
     
     if(window == NULL) {
-        fprintf(stderr, "Failed to open GLFW window.\n");
+        printf("Failed to open GLFW window.\n");
         glfwTerminate();
         return;
     }

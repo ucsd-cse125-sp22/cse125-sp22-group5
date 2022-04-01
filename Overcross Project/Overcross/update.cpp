@@ -1,5 +1,4 @@
 
-#include "variables.hpp"
 #include "update.hpp"
 
 const GLdouble pi = 3.1415926535897932384626433832795;
@@ -53,7 +52,7 @@ void update() {
         double now = glfwGetTime();
         double deltaTime = now - updateTime;
         double fps = 1.0 / deltaTime;
-        printf("FPS: %f\n", fps);
+        printf("FPS: %f.\n", fps);
         glfwPollEvents();
         if (deltaTime >= fpsLimit) {
             GLint dims[4] = {0};
@@ -68,7 +67,11 @@ void update() {
             perspectiveGL(60, (double)windowWidth / (double)windowHeight, 0.1, 100);
             glMatrixMode(GL_MODELVIEW_MATRIX);
             glTranslatef(0, 0, -5);
+            
             drawCube((float)(now - updateTime), 0);
+            // temporarily initialize the map here:
+            map->render();
+            
             glfwSwapInterval(1);
             glfwSwapBuffers(window);
             updateTime = now;

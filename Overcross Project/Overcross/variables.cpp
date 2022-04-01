@@ -13,3 +13,5 @@ int applicationState;
 std::string resourcesFolderPath = "";
 
 GLFWwindow * window;
+
+Map * map;

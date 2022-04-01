@@ -11,9 +11,12 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
+#include "map.hpp"
+
 extern int windowMode;
 extern int applicationState;
 extern std::string resourcesFolderPath;
 extern GLFWwindow * window;
+extern Map * map;
 
 #endif
