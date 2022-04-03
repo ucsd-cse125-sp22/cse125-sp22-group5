@@ -121,12 +121,16 @@ Now, you probably want to show something on the screen. The structure of the eng
 Textures - Shaders - Geometrys - Nodes - Engine
 ```
 So, to load and display a 3D model, you have to do the following. First, prepare all the texture files required by a shader:
-```
-~~Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);~~
-~~// parameters:~~
-~~// - path to the file~~
-~~// - the name of the uniform variable in the shader~~
-~~// - wrap mode~~
+```diff
+- Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);
+- // parameters:
+- // - path to the file
+- // - the name of the uniform variable in the shader
+- // - wrap mode
++ Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", GL_REPEAT);
++ // parameters:
++ // - path to the file
++ // - wrap mode
 ```
 Then, you can create a shader object and load the shader files:
 ```
@@ -139,8 +143,12 @@ shader->setFloat("intensity", 0.5f);
 shader->setVec3("objectColor", vec3(1.0f, 0.5f, 0.3f));
 ```
 And load the texture objects to the shader object:
-```
-shader->addTexture(texture);
+```diff
+- shader->addTexture(texture);
++ shader->addTexture(texture, "diffuse");
++ // parameters:
++ // - the texture object
++ // - the name of the uniform variable
 ```
 For the next step, you can directly load the 3D model to the node, skipping the step of creating the geometry objects. The reason behind this is that loading a node automatically constructs them for you:
 ```
