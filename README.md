@@ -116,7 +116,7 @@ node->setCamera(radians(60.0f), 0.1f, 1000.0f);
 engine->cameraNode = node;
 ```
 **You must set the engine's cameraNode to activate the camera. Otherwise, nothing will be rendered.**
-Now, you probably want to show something on the screen. The structure of the engine is the following:
+Now, you probably want to show something on the screen. The structure of the engine looks like:
 ```
 Textures - Shaders - Geometrys - Nodes - Engine
 ```
