@@ -5,7 +5,9 @@ A 3D multiplayer FPS game...[More details coming soon!]
 Kelin Lyu (Deze Lyu), Felix Zhang (Futian Zhang), Jackie Li (Mengxuan Li), Kelvin Yu (Kangming Yu), and Zifan Zhang.
 
 ## Milestone #1
-A simple but powerful OpenGL engine prototype has been developed! Here is a quick tutorial:
+A simple but powerful OpenGL engine prototype has been developed!
+![screenshot1](https://github.com/ucsd-cse125-sp22/cse125-sp22-group5/blob/main/Screenshots/Screenshot1.png?raw=true)
+Here is a quick tutorial:
 #### Requirements
 First, create a new C++ project. You need to link the GLFW, GLEW, GLM libraries, and the Assimp library for loading models.
 Next, add the Engine folder (Overcross/Overcross/Engine) and all the files inside to your project.
@@ -14,10 +16,11 @@ Finally, include the engine:
 ```
 #include "Engine/engine.hpp"
 ```
-#### Create a Window
+#### Creating a Window
 To create a window, you first need to create an engine object:
 ```
 Engine* engine = new Engine("Engine", 1.0f, true, NULL, 1.0f / 60.0f);
+
 // parameters: 
 // - the window's title;
 // - the resolution scaler based on the screen's resolution
@@ -38,3 +41,5 @@ Finally, delete the engine and free up the memory:
 delete(engine);
 ```
 That's it! There are also plenty of helper functions for hiding and showing the cursor and changing the window's resolution and so on. Please check the Engine.hpp file.
+#### Interactions
+It is extremely easy to handle user inputs!
