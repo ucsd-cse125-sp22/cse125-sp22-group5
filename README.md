@@ -91,7 +91,7 @@ And you can also get the acceleration of the mouse's scroll wheel by using:
 ```
 float acceleration = engine->input->getScrollWheelAcceleration();
 ```
-Currently, these are all the interactions that have been implemented.
+Currently, these are all the interactions that have been implemented. **The interaction logic should only be implemented inside the if statement in the while loop!**
 ### Rendering
 Now, you probably want to render something on the screen. First, you need to create an empty node and add it to the engine:
 ```
