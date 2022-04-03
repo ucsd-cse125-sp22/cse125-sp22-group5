@@ -146,4 +146,8 @@ For the next step, you can directly load the 3D model to the node, skipping the 
 ```
 node->loadGeometry("/Resources/Map/Map.dae");
 ```
-The next step is the most important. You have to assign the shaders to the geometries created by the node after loading the 3D model.
+The next step is the most important. You have to assign the shaders to the geometries created by the node after loading the 3D model. If your 3D model file contains only one node with a single material, then you just need to assign the shader to the first geometry of the node:
+```
+node->geometries[0]->setShader(shader);
+```
+Otherwise, if you have multiple nodes or multiple materials, you must assign all the subsequential geometries. The engine ignores the geometries without a shader. After these steps, you should see the model on the screen if it has a proper position. Congrats.
