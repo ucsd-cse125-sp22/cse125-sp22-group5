@@ -58,7 +58,7 @@ if(engine->input->isPressingKey(KEY_W)) {
 ```
 For detecting key press or release only **once**, use:
 ```
-// engine->input->wasKeyPressed(KEY_ESCAPE)
+// if(engine->input->wasKeyPressed(KEY_ESCAPE)) {...}
 if(engine->input->wasKeyReleased(KEY_ESCAPE)) {
     engine->terminate();
 }
@@ -92,3 +92,26 @@ And you can also get the acceleration of the mouse's scroll wheel by using:
 float acceleration = engine->input->getScrollWheelAcceleration();
 ```
 Currently, these are all the interactions that have been implemented.
+#### Rendering
+Now, you probably want to render something on the screen. First, you need to create an empth node and add it to the engine:
+```
+Node* node = new Node();
+engine->addChild(node);
+```
+**Make sure to attach the node to the engine using the engine's addChild method.**Note that currently, I haven't developed the scene graph yet, so all the node will be added directly to an array of the engine. After you add the node, you can adjust its position, rotation, and scale:
+```
+node->position = vec3(5.0f, 1.0f, 5.0f);
+node->eulerAngles = vec3(0.0f, -90.0f, 0.0f);
+node->scale = vec3(0.5f);
+```
+If you want to use your node as a camera, write:
+```
+node->setCamera(radians(60.0f), 0.1f, 1000.0f);
+// parameters: 
+// - field of view
+// - zNear
+// - zFar
+
+engine->cameraNode = node;
+```
+**You must set the engine's cameraNode to activate the camera. Otherwise, nothing will be rendered.** 
