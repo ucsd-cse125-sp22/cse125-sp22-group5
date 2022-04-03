@@ -8,15 +8,15 @@ Kelin Lyu (Deze Lyu), Felix Zhang (Futian Zhang), Jackie Li (Mengxuan Li), Kelvi
 A simple but powerful OpenGL engine prototype has been developed!
 ![screenshot1](https://github.com/ucsd-cse125-sp22/cse125-sp22-group5/blob/main/Screenshots/Screenshot1.png?raw=true)
 Here is a quick tutorial:
-#### Requirements
+### Requirements
 - First, create a new C++ project. You need to link the GLFW, GLEW, GLM libraries, and the Assimp library for loading models.
 - Next, add the Engine folder (Overcross/Overcross/Engine) and all the files inside to your project.
-- Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets! If you use an absolute path, the engine cannot find the file!**
+- Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets! If you use an absolute path, the engine cannot find the file!** For example, in our project, we copy the Resources folder under /Overcross/Overcross/ to the executable's directory, and every time we load a texture or a model, the relative path we use starts with /Resources/.
 - Finally, include the engine. This is probably the only library you need for the project because many system libraries are already included!
 ```
 #include "Engine/engine.hpp"
 ```
-#### Creating a Window
+### Creating a Window
 To create a window, you first need to create an engine object:
 ```
 Engine* engine = new Engine("Engine", 1.0f, true, NULL, 1.0f / 60.0f);
@@ -48,7 +48,7 @@ Finally, delete the engine and free up the memory:
 delete(engine);
 ```
 That's it! There are also plenty of helper functions for hiding and showing the cursor and changing the window's resolution, etc. Please check the Engine.hpp file.
-#### Interactions
+### Interactions
 It is extremely easy to handle user inputs!
 For detecting continuous keyboard inputs, use:
 ```
@@ -92,13 +92,14 @@ And you can also get the acceleration of the mouse's scroll wheel by using:
 float acceleration = engine->input->getScrollWheelAcceleration();
 ```
 Currently, these are all the interactions that have been implemented.
-#### Rendering
-Now, you probably want to render something on the screen. First, you need to create an empth node and add it to the engine:
+### Rendering
+Now, you probably want to render something on the screen. First, you need to create an empty node and add it to the engine:
 ```
 Node* node = new Node();
 engine->addChild(node);
 ```
-**Make sure to attach the node to the engine using the engine's addChild method.**Note that currently, I haven't developed the scene graph yet, so all the node will be added directly to an array of the engine. After you add the node, you can adjust its position, rotation, and scale:
+**Make sure to attach the node to the engine using the engine's addChild method.**
+Note that currently, I haven't developed the scene graph yet, so all the nodes will be added directly to an array of the engine. After you add the node, you can adjust its position, rotation, and scale:
 ```
 node->position = vec3(5.0f, 1.0f, 5.0f);
 node->eulerAngles = vec3(0.0f, -90.0f, 0.0f);
@@ -114,4 +115,35 @@ node->setCamera(radians(60.0f), 0.1f, 1000.0f);
 
 engine->cameraNode = node;
 ```
-**You must set the engine's cameraNode to activate the camera. Otherwise, nothing will be rendered.** 
+**You must set the engine's cameraNode to activate the camera. Otherwise, nothing will be rendered.**
+Now, you probably want to show something on the screen. The structure of the engine is the following:
+```
+Textures - Shaders - Geometrys - Nodes - Engine
+```
+So, to load and display a 3D model, you have to do the following. First, prepare all the texture files required by a shader:
+```
+Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);
+// parameters: 
+// - path to the file
+// - the name of the uniform variable in the shader
+// - wrap mode
+```
+Then, you can create a shader object and load the shader files:
+```
+// load the Shader.vs and Shader.fs files under /Resources/Map/Shaders/:
+Shader* shader = new Shader("/Resources/Map/Shaders/Shader");
+```
+Note that the shader object requires the vertex shader and the fragment shader to have the same name and be in the same directory. Then, you can bind some uniform values using the provided helper methods, for example:
+```
+shader->setFloat("intensity", 0.5f);
+shader->setVec3("objectColor", vec3(1.0f, 0.5f, 0.3f));
+```
+And load the texture objects to the shader object:
+```
+shader->addTexture(texture);
+```
+For the next step, you can directly load the 3D model to the node, skipping the step of creating the geometry objects. The reason behind this is that loading a node automatically constructs them for you:
+```
+node->loadGeometry("/Resources/Map/Map.dae");
+```
+The next step is the most important. You have to assign the shaders to the geometries created by the node after loading the 3D model.
