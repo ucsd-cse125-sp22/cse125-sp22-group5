@@ -11,7 +11,7 @@ Here is a quick tutorial:
 #### Requirements
 - First, create a new C++ project. You need to link the GLFW, GLEW, GLM libraries, and the Assimp library for loading models.
 - Next, add the Engine folder (Overcross/Overcross/Engine) and all the files inside to your project.
-- Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets! If you use absolute path, the engine cannot find the file!**
+- Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets! If you use an absolute path, the engine cannot find the file!**
 - Finally, include the engine. This is probably the only library you need for the project because many system libraries are already included!
 ```
 #include "Engine/engine.hpp"
@@ -25,15 +25,21 @@ Engine* engine = new Engine("Engine", 1.0f, true, NULL, 1.0f / 60.0f);
 // - the window's title;
 // - the resolution scaler based on the screen's resolution
 // - whether to use fullscreen
-// - relative path to the window icon
-// - fps
+// - relative path to the window's icon file (for Windows)
+// - the desired fps
 ```
 After that, create a render loop:
 ```
 while(engine->isRunning()) {
     if(engine->shouldUpdate()) {
+    
         // all your game logic should be here!
-        // coding outside the if statement results in unknown behavior...
+        // coding outside the if statement may result in undefined behavior!
+        
+        // termination:
+        if(engine->input->wasKeyReleased(GLFW_KEY_ESCAPE)) {
+            engine->terminate();
+        }
     }
 }
 ```
@@ -41,6 +47,48 @@ Finally, delete the engine and free up the memory:
 ```
 delete(engine);
 ```
-That's it! There are also plenty of helper functions for hiding and showing the cursor and changing the window's resolution and so on. Please check the Engine.hpp file.
+That's it! There are also plenty of helper functions for hiding and showing the cursor and changing the window's resolution, etc. Please check the Engine.hpp file.
 #### Interactions
 It is extremely easy to handle user inputs!
+For detecting continuous keyboard inputs, use:
+```
+if(engine->input->isPressingKey(KEY_W)) {
+    // move forward!
+}
+```
+For detecting key press or release only **once**, use:
+```
+// engine->input->wasKeyPressed(KEY_ESCAPE)
+if(engine->input->wasKeyReleased(KEY_ESCAPE)) {
+    engine->terminate();
+}
+```
+You can also get the duration since the time when the state of a key is changed:
+```
+// first, you need to get the current time:
+double currentTime = engine->getTime();
+
+// then, let's print out how long the user has been pressing the space bar:
+if(engine->input->isPressingKey(KEY_SPACE)) {
+    double duration = engine->input->getKeyDuration(KEY_SPACE, currentTime);
+    cout << "You have been holding the space key for " << duration << "s." << endl;
+}
+```
+If you are implementing a text box, using the methods above for text input might be complex. Therefore, you can use the following function that returns the recently pressed key's character. After getting the character, the engine reset it to the empty string. Note that this character will be capitalized if the user is holding shift.
+```
+string character = engine->input->getLastPressedCharacter();
+if(character.length() > 0) {
+    cout << "You typed [" << character << "]." << endl;
+}
+```
+Convenient, isn't it? You can also detect mouse clicks just like the keyboard events. You just need to replace the key's name with MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, or MOUSE_BUTTON_MIDDLE.
+To get the mouse's position and translation after the previous frame, use:
+```
+vec2 position = engine->input->getMousePosition();
+vec2 translation = engine->input->getMouseTranslation();
+```
+And you can also get the acceleration of the mouse's scroll wheel by using:
+```
+float acceleration = engine->input->getScrollWheelAcceleration();
+```
+Currently, these are all the interactions that have been implemented.
