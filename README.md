@@ -71,7 +71,7 @@ double currentTime = engine->getTime();
 // then, let's print out how long the user has been pressing the space bar:
 if(engine->input->isPressingKey(KEY_SPACE)) {
     double duration = engine->input->getKeyDuration(KEY_SPACE, currentTime);
-    cout << "You have been holding the space key for " << duration << "s." << endl;
+    cout << "You have been holding space for " << duration << "s." << endl;
 }
 ```
 If you are implementing a text box, using the methods above for text input might be complex. Therefore, you can use the following function that returns the recently pressed key's character. After getting the character, the engine reset it to the empty string. Note that this character will be capitalized if the user is holding shift.
