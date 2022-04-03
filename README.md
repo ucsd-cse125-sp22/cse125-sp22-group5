@@ -11,8 +11,8 @@ Here is a quick tutorial:
 #### Requirements
 First, create a new C++ project. You need to link the GLFW, GLEW, GLM libraries, and the Assimp library for loading models.
 Next, add the Engine folder (Overcross/Overcross/Engine) and all the files inside to your project.
-Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets.**
-Finally, include the engine:
+Then, prepare your game assets. Since our project uses PNG image files and DAE 3D model files, only these formats are tested. After that, you need to put all the assets under the same directory as the executable. You can either do that manually or write a short script that copies the resources before building the executable. **The engine only accepts the relative path of the executable when loading assets! If you use absolute path, the engine cannot find the file!**
+Finally, include the engine. This is probably the only library you need for the project because many system libraries are already included!
 ```
 #include "Engine/engine.hpp"
 ```
@@ -32,7 +32,8 @@ After that, create a render loop:
 ```
 while(engine->isRunning()) {
     if(engine->shouldUpdate()) {
-        // render!
+        // all your game logic should be here!
+        // coding outside the if statement results in unknown behavior...
     }
 }
 ```
