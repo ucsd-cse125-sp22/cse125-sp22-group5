@@ -37,10 +37,10 @@ void Geometry::setShader(Shader* shader) {
 void Geometry::render(mat4 modelTransform) {
     if(this->shader != NULL) {
         this->shader->render(modelTransform);
+        glBindVertexArray(this->VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(this->indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
     }
-    glBindVertexArray(this->VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(this->indices.size()), GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
 }
 Geometry::~Geometry() {
     this->vertices.clear();

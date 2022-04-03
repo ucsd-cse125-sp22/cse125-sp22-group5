@@ -60,7 +60,6 @@ int main(int argc, char** argv) {
             }
             cameraNode->position += (cameraTargetPosition - cameraNode->position) * 0.1f;
             
-            
             vec2 mouseTranslation = engine->input->getMouseTranslation() * 0.1f;
             cameraTargetEulerAngles.y += mouseTranslation.x;
             cameraTargetEulerAngles.x -= mouseTranslation.y;
