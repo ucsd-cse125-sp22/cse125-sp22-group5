@@ -122,11 +122,11 @@ Textures - Shaders - Geometrys - Nodes - Engine
 ```
 So, to load and display a 3D model, you have to do the following. First, prepare all the texture files required by a shader:
 ```
-Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);
-// parameters: 
-// - path to the file
-// - the name of the uniform variable in the shader
-// - wrap mode
+~~Texture* texture = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);~~
+~~// parameters:~~
+~~// - path to the file~~
+~~// - the name of the uniform variable in the shader~~
+~~// - wrap mode~~
 ```
 Then, you can create a shader object and load the shader files:
 ```
