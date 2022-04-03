@@ -63,9 +63,9 @@ if(engine->input->wasKeyReleased(KEY_ESCAPE)) {
     engine->terminate();
 }
 ```
-You can also get the duration since the time when the state of a key is changed:
+You can also get the duration since the time when the state of a key changed:
 ```
-// first, you need to get the current time:
+// first, you need to get the current time from the engine:
 double currentTime = engine->getTime();
 
 // then, let's print out how long the user has been pressing the space bar:
