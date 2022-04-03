@@ -43,9 +43,6 @@ void Geometry::render(mat4 modelTransform) {
     glBindVertexArray(0);
 }
 Geometry::~Geometry() {
-    if(this->shader != NULL) {
-        delete(this->shader);
-    }
     this->vertices.clear();
     this->indices.clear();
 }

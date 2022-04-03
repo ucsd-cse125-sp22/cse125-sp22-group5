@@ -6,7 +6,7 @@
 class Texture final {
 public:
     unsigned int data;
-    string uniformName;
-    Texture(string file, string uniformName, GLint wrapMode);
+    Texture(string file, GLint wrapMode);
+    ~Texture();
 };
 #endif

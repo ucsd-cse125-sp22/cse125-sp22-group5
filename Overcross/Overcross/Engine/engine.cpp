@@ -171,9 +171,6 @@ void Engine::terminate() {
     glfwSetWindowShouldClose(this->window, GL_TRUE);
 }
 Engine::~Engine() {
-    for(unsigned int i = 0; i < this->children.size(); i = i + 1) {
-        delete(this->children[i]);
-    }
     this->children.clear();
     glfwTerminate();
     delete(this->input);

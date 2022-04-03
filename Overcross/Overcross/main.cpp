@@ -16,17 +16,17 @@ int main(int argc, char** argv) {
     engine->addChild(cameraNode);
     engine->cameraNode = cameraNode;
     
-    Texture* atlasD = new Texture("/Resources/Map/Textures/Atlas D.png", "diffuse", GL_REPEAT);
-    Texture* glowsD = new Texture("/Resources/Map/Textures/Glows D.png", "diffuse", GL_REPEAT);
-    Texture* gridsD = new Texture("/Resources/Map/Textures/Grids D.png", "diffuse", GL_REPEAT);
+    Texture* atlasD = new Texture("/Resources/Map/Textures/Atlas D.png", GL_REPEAT);
+    Texture* glowsD = new Texture("/Resources/Map/Textures/Glows D.png", GL_REPEAT);
+    Texture* gridsD = new Texture("/Resources/Map/Textures/Grids D.png", GL_REPEAT);
     
     Shader* atlasShader = new Shader("/Resources/Map/Shaders/Shader");
     Shader* glowsShader = new Shader("/Resources/Map/Shaders/Shader");
     Shader* gridsShader = new Shader("/Resources/Map/Shaders/Shader");
     
-    atlasShader->addTexture(atlasD);
-    glowsShader->addTexture(glowsD);
-    gridsShader->addTexture(gridsD);
+    atlasShader->addTexture(atlasD, "diffuse");
+    glowsShader->addTexture(glowsD, "diffuse");
+    gridsShader->addTexture(gridsD, "diffuse");
 
     Node* map = new Node();
     map->scale = vec3(0.2f);
@@ -60,6 +60,7 @@ int main(int argc, char** argv) {
             }
             cameraNode->position += (cameraTargetPosition - cameraNode->position) * 0.1f;
             
+            
             vec2 mouseTranslation = engine->input->getMouseTranslation() * 0.1f;
             cameraTargetEulerAngles.y += mouseTranslation.x;
             cameraTargetEulerAngles.x -= mouseTranslation.y;
@@ -67,6 +68,17 @@ int main(int argc, char** argv) {
             cameraNode->eulerAngles += (cameraTargetEulerAngles - cameraNode->eulerAngles) * 0.2f;
         }
     }
+    
+    delete(cameraNode);
+    delete(map);
+    
+    delete(atlasD);
+    delete(glowsD);
+    delete(gridsD);
+    
+    delete(atlasShader);
+    delete(glowsShader);
+    delete(gridsShader);
     
     delete(engine);
     return(0);

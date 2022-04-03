@@ -47,8 +47,9 @@ Shader::Shader(string shaderFile) {
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }
-void Shader::addTexture(Texture* texture) {
+void Shader::addTexture(Texture* texture, string uniformName) {
     this->textures.push_back(texture);
+    this->uniformNames.push_back(uniformName);
 }
 void Shader::render(mat4 modelTransform) {
     this->setActivate();
@@ -57,7 +58,7 @@ void Shader::render(mat4 modelTransform) {
     this->setMat4("node.modelTransform", modelTransform);
     for(unsigned int i = 0; i < this->textures.size(); i = i + 1) {
         glActiveTexture(GL_TEXTURE0 + i);
-        this->setInt(this->textures[i]->uniformName, i);
+        this->setInt(this->uniformNames[i], i);
         glBindTexture(GL_TEXTURE_2D, textures[i]->data);
     }
 }
@@ -109,8 +110,6 @@ void Shader::checkCompileErrors(unsigned int shader, string type) {
 }
 Shader::~Shader() {
     glDeleteProgram(this->programID);
-    for(unsigned int i = 0; i < this->textures.size(); i = i + 1) {
-        delete(this->textures[i]);
-    }
     this->textures.clear();
+    this->uniformNames.clear();
 }

@@ -10,8 +10,9 @@ private:
 public:
     unsigned int programID;
     vector<Texture*> textures;
+    vector<string> uniformNames;
     Shader(string shaderFile);
-    void addTexture(Texture* texture);
+    void addTexture(Texture* texture, string uniformName);
     void render(mat4 modelTransform);
     void setActivate();
     void setInt(const string &name, int value) const;
