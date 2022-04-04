@@ -6,7 +6,12 @@
 #include <sstream>
 #include <vector>
 #include <dirent.h>
-#include <unistd.h>
+#ifdef _WIN32
+	#include <direct.h>
+	#define getcwd _getcwd
+#elif
+	#include <unistd.h>
+#endif
 #include <limits.h>
 #include <stdio.h>
 #include <ctype.h>
