@@ -150,7 +150,7 @@ And load the texture objects to the shader object:
 + // - the texture object
 + // - the name of the uniform variable
 ```
-For the next step, you can directly load the 3D model to the node, skipping the step of creating the geometry objects. The reason behind this is that loading a node automatically constructs them for you:
+For the next step, you can directly load the 3D model to the node, skipping the step of creating the geometry objects. The reason behind this is that loading a node automatically constructs the geometries for you:
 ```
 node->loadGeometry("/Resources/Map/Map.dae");
 ```
