@@ -40,6 +40,8 @@
 		C2F779692807B4AD001A214D /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F779672807B4AD001A214D /* Font.cpp */; };
 		C2F7796B2807C309001A214D /* SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7796A2807C309001A214D /* SpriteNode.cpp */; };
 		C2F7796D2807D9EF001A214D /* TextNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7796C2807D9EF001A214D /* TextNode.cpp */; };
+		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
+		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,6 +110,10 @@
 		C2F779682807B4AD001A214D /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
 		C2F7796A2807C309001A214D /* SpriteNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteNode.cpp; sourceTree = "<group>"; };
 		C2F7796C2807D9EF001A214D /* TextNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextNode.cpp; sourceTree = "<group>"; };
+		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
+		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
+		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
+		E2802088281315C000A810E7 /* MapSystemManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapSystemManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E28020832813159700A810E7 /* Map */,
 				12EA9AF3280FE6C600541504 /* Character */,
 			);
 			path = Game;
@@ -281,6 +288,17 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		E28020832813159700A810E7 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E2802084281315AF00A810E7 /* MapBoxObject.cpp */,
+				E2802085281315AF00A810E7 /* MapBoxObject.hpp */,
+				E2802087281315C000A810E7 /* MapSystemManager.cpp */,
+				E2802088281315C000A810E7 /* MapSystemManager.hpp */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -370,6 +388,7 @@
 				C2AD2E8D27FF0EE700A493D6 /* Engine.cpp in Sources */,
 				C274401D2800A789009DDD9F /* LightNode.cpp in Sources */,
 				C2F779692807B4AD001A214D /* Font.cpp in Sources */,
+				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
 				C2AD2E9027FF0EE700A493D6 /* Shader.cpp in Sources */,
 				C2AD2E8C27FF0EE700A493D6 /* Image.cpp in Sources */,
 				C2F7795828072F4E001A214D /* Sprite.cpp in Sources */,
@@ -379,6 +398,7 @@
 				C2F779662807B4A0001A214D /* FontLibrary.cpp in Sources */,
 				C2AD2E8E27FF0EE700A493D6 /* Node.cpp in Sources */,
 				C274401A2800A74E009DDD9F /* CameraNode.cpp in Sources */,
+				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,
 				C2AD2E9127FF0EE700A493D6 /* Animation.cpp in Sources */,
 				C2AD2E9227FF0EE700A493D6 /* Animator.cpp in Sources */,
 				C231B3222804AAAF0030CD85 /* PBRShader.cpp in Sources */,

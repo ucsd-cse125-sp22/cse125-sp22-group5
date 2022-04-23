@@ -2,6 +2,7 @@
 
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
+#include "Game/Map/MapSystemManager.hpp"
 
 int main(int argc, char** argv) {
     
@@ -43,13 +44,85 @@ int main(int argc, char** argv) {
     
     PBRShader* mapShader = new PBRShader(0.5f, 0.5f);
     mapShader->setReflectionMap(reflection);
+//
+//    Node* map = new Node();
+//    map->loadUnitCube();
+//    map->geometries[0]->setShader(mapShader);
+//    map->position = vec3(0.0f, -0.1f, 0.0f);
+//    map->scale = vec3(100.0f, 0.2f, 100.0f);
+//    sceneNode->addChildNode(map);
+//
+//    MapBoxObject* mapBox = new MapBoxObject();
+//    mapBox->size = map->scale;
+//    mapBox->position = map->position ;
+//    mapBox->yRotation = 0;
     
-    Node* map = new Node();
-    map->loadUnitCube();
-    map->geometries[0]->setShader(mapShader);
-    map->position = vec3(0.0f, -0.1f, 0.0f);
-    map->scale = vec3(100.0f, 0.2f, 100.0f);
-    sceneNode->addChildNode(map);
+    Node* box = new Node();
+    box->loadUnitCube();
+    PBRShader* box1shader = new PBRShader(0.5, 0.5);
+    box1shader->diffuseColor = vec4(0.3, 0.5, 1,1);
+    box->geometries[0]->setShader(box1shader);
+    box->position = vec3(0.0f, -0.1f, 0.0f);
+    box->scale = vec3(2.0f, 1.f, 2.0f);
+    box->eulerAngles.y = 30;
+    sceneNode->addChildNode(box);
+    
+    MapBoxObject* mapBox2 = new MapBoxObject();
+    mapBox2->size = box->scale;
+    mapBox2->position = box->position ;
+    mapBox2->yRotation = box->eulerAngles.y;
+    
+    Node* box2 = new Node();
+    box2->loadUnitCube();
+    PBRShader* box2shader = new PBRShader(0.5, 0.5);
+    box2shader->diffuseColor = vec4(0.5, 1, 0.3,1);
+    box2->geometries[0]->setShader(box2shader);
+    box2->position = vec3(3.0f, -0.1f, -3.0f);
+    box2->scale = vec3(2.0f, 8.f, 4.0f);
+    box2->eulerAngles.y = 45;
+    sceneNode->addChildNode(box2);
+    
+    MapBoxObject* mapBox3 = new MapBoxObject();
+    mapBox3->size = box2->scale;
+    mapBox3->position = box2->position ;
+    mapBox3->yRotation = box2->eulerAngles.y;
+    
+    Node* box3 = new Node();
+    box3->loadUnitCube();
+    PBRShader* box3shader = new PBRShader(0.5, 0.5);
+    box3shader->diffuseColor = vec4(1, 0.3, 0.5,0.5);
+    box3->geometries[0]->setShader(box3shader);
+    box3->position = vec3(-3.0f, 3.f, 3.0f);
+    box3->scale = vec3(3.0f, 4.f, 5.0f);
+    box3->eulerAngles.y = 60;
+    sceneNode->addChildNode(box3);
+    
+    MapBoxObject* mapBox4 = new MapBoxObject();
+    mapBox4->size = box3->scale;
+    mapBox4->position = box3->position ;
+    mapBox4->yRotation = box3->eulerAngles.y;
+    
+    Node* box4 = new Node();
+    box4->loadUnitCube();
+    PBRShader* box4shader = new PBRShader(0.5, 0.5);
+    box4shader->diffuseColor = vec4(0.9, 0.9, 0.3,1);
+    box4->geometries[0]->setShader(box4shader);
+    box4->position = vec3(0.0f, -0.1f, 0.0f);
+    box4->scale = vec3(0.5f, 2.f, 1.0f);
+    box4->eulerAngles.y = 0;
+    sceneNode->addChildNode(box4);
+    
+    MapBoxObject* mapBox5 = new MapBoxObject();
+    mapBox5->size = box4->scale;
+    mapBox5->position = box4->position ;
+    mapBox5->yRotation = box4->eulerAngles.y;
+    
+    MapSystemManager* mapSystemManager = new MapSystemManager();
+//    mapSystemManager->boxes.push_back(mapBox);
+    mapSystemManager->boxes.push_back(mapBox2);
+    mapSystemManager->boxes.push_back(mapBox3);
+    mapSystemManager->boxes.push_back(mapBox4);
+    mapSystemManager->boxes.push_back(mapBox5);
     
     Texture* mixamoD = new Texture("/Resources/Development/CharacterTest/Textures/Mixamo D.png", 2.0f, true);
     Texture* mixamoN = new Texture("/Resources/Development/CharacterTest/Textures/Mixamo N.png", 2.0f, true);
@@ -106,6 +179,7 @@ int main(int argc, char** argv) {
     engine->addNode(baseNode);
     character->setUINode(baseNode);
     character->setName("Player1");
+    cout << to_string(character->getDownVectorInWorld()) << endl;
     
     vector<CharNode*> enemies;
     
@@ -135,6 +209,21 @@ int main(int argc, char** argv) {
     weapon->geometries[0]->setShader(mixamoMaterial);
     weapon->geometries[1]->isHidden = true;
     weaponNode->addChildNode(weapon);
+    
+    Node* intersection = new Node();
+    intersection->loadModelFile("/Resources/Development/CharacterTest/MT.fbx");
+    intersection->scale = vec3(0.002);
+    intersection->geometries[0]->setShader(mixamoMaterial);
+    intersection->geometries[1]->isHidden = true;
+    engine->addNode(intersection);
+//
+//    Node* normal = new Node();
+//    normal->loadUnitCube();
+//    normal->scale = vec3(0.05);
+//    PBRShader* normalShader = new PBRShader(0.5, 0.5);
+//    normalShader->diffuseColor = vec4(0.2, 0.2, 1,1);
+//    normal->geometries[0]->setShader(normalShader);
+//    engine->addNode(normal);
     
     
     vector<Node*> characters;
@@ -177,9 +266,35 @@ int main(int argc, char** argv) {
             for (int i = 0; i < enemies.size(); i++){
                 enemies[i]->updatePosition();
                 enemies[i]->updateTransform();
-                cout << to_string(enemies[i]->getWorldTransform()) << endl;
+//                cout << to_string(enemies[i]->getWorldTransform()) << endl;
             }
-        
+            
+            vec3 position;
+            vec3 normalvec;
+            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
+                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
+                intersection->isDisabled = false;
+                intersection->position = position;
+                normalvec = normalize(normalvec);
+                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
+                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
+                if (normalvec.y > 0.9)
+                    intersection->eulerAngles = vec3(0);
+                else if (normalvec.y < -0.9)
+                    intersection->eulerAngles = vec3(0, 0, 180);
+                else
+                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
+//                intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
+//                normal->position = intersection->position + normalvec;
+                
+//                intersection->getUpVectorInWorld()
+                cout << "position: " << to_string(position) << endl;
+                cout << "angle: " << to_string(intersection->eulerAngles) << endl;
+            }
+            else {
+                intersection->isDisabled = true;
+            }
+            
             
             engine->render();
             
