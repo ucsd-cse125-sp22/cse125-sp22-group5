@@ -10,7 +10,7 @@
 
 class MapBoxObject {
 public:
-    vec3 position, size;
+    vec3 position, size, eulerAngles;
     float yRotation;
     void transform(mat4* matrix);
     bool hitTest(vec3 start, vec3 end, vec3* position, vec3* normal, float* timeHit);

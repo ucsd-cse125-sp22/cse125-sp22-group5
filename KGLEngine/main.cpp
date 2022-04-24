@@ -63,14 +63,14 @@ int main(int argc, char** argv) {
     box1shader->diffuseColor = vec4(0.3, 0.5, 1,1);
     box->geometries[0]->setShader(box1shader);
     box->position = vec3(0.0f, -0.1f, 0.0f);
+    box->eulerAngles = vec3(0, 30, 0);
     box->scale = vec3(2.0f, 1.f, 2.0f);
-    box->eulerAngles.y = 30;
     sceneNode->addChildNode(box);
     
     MapBoxObject* mapBox2 = new MapBoxObject();
     mapBox2->size = box->scale;
     mapBox2->position = box->position ;
-    mapBox2->yRotation = box->eulerAngles.y;
+    mapBox2->eulerAngles = box->eulerAngles;
     
     Node* box2 = new Node();
     box2->loadUnitCube();
@@ -79,13 +79,13 @@ int main(int argc, char** argv) {
     box2->geometries[0]->setShader(box2shader);
     box2->position = vec3(3.0f, -0.1f, -3.0f);
     box2->scale = vec3(2.0f, 8.f, 4.0f);
-    box2->eulerAngles.y = 45;
+    box2->eulerAngles = vec3(0, 45, 0);
     sceneNode->addChildNode(box2);
     
     MapBoxObject* mapBox3 = new MapBoxObject();
     mapBox3->size = box2->scale;
     mapBox3->position = box2->position ;
-    mapBox3->yRotation = box2->eulerAngles.y;
+    mapBox3->eulerAngles = box2->eulerAngles;
     
     Node* box3 = new Node();
     box3->loadUnitCube();
@@ -94,13 +94,13 @@ int main(int argc, char** argv) {
     box3->geometries[0]->setShader(box3shader);
     box3->position = vec3(-3.0f, 3.f, 3.0f);
     box3->scale = vec3(3.0f, 4.f, 5.0f);
-    box3->eulerAngles.y = 60;
+    box3->eulerAngles = vec3(0, 60, 0);
     sceneNode->addChildNode(box3);
     
     MapBoxObject* mapBox4 = new MapBoxObject();
     mapBox4->size = box3->scale;
     mapBox4->position = box3->position ;
-    mapBox4->yRotation = box3->eulerAngles.y;
+    mapBox4->eulerAngles = box3->eulerAngles;
     
     Node* box4 = new Node();
     box4->loadUnitCube();
@@ -109,13 +109,13 @@ int main(int argc, char** argv) {
     box4->geometries[0]->setShader(box4shader);
     box4->position = vec3(0.0f, -0.1f, 0.0f);
     box4->scale = vec3(0.5f, 2.f, 1.0f);
-    box4->eulerAngles.y = 0;
+    box4->eulerAngles = vec3(45, 0, 0);
     sceneNode->addChildNode(box4);
     
     MapBoxObject* mapBox5 = new MapBoxObject();
     mapBox5->size = box4->scale;
     mapBox5->position = box4->position ;
-    mapBox5->yRotation = box4->eulerAngles.y;
+    mapBox5->eulerAngles = box4->eulerAngles;
     
     MapSystemManager* mapSystemManager = new MapSystemManager();
 //    mapSystemManager->boxes.push_back(mapBox);
