@@ -107,9 +107,9 @@ int main(int argc, char** argv) {
     PBRShader* box4shader = new PBRShader(0.5, 0.5);
     box4shader->diffuseColor = vec4(0.9, 0.9, 0.3,1);
     box4->geometries[0]->setShader(box4shader);
-    box4->position = vec3(0.0f, -0.1f, 0.0f);
+    box4->position = vec3(0.0f, 1.0f, 0.0f);
     box4->scale = vec3(0.5f, 2.f, 1.0f);
-    box4->eulerAngles = vec3(45, 0, 0);
+    box4->eulerAngles = vec3(45, 45, 45);
     sceneNode->addChildNode(box4);
     
     MapBoxObject* mapBox5 = new MapBoxObject();
