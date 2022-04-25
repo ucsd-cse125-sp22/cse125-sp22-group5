@@ -3,16 +3,17 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
+#include "Game/Magic/StoneBlast.hpp"
 
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
-    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125";
+    engine->workingDirectory = ".";
     engine->lockCursor();
     
-    Skybox* skybox = new Skybox("/Resources/Development/Skybox/AR.png", "/Resources/Development/Skybox/AL.png",
-                                "/Resources/Development/Skybox/AT.png", "/Resources/Development/Skybox/ABo.png",
-                                "/Resources/Development/Skybox/AF.png", "/Resources/Development/Skybox/AB.png",
+    Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
+                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
+                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
                                 2.0f);
     engine->skybox = skybox;
     
@@ -34,13 +35,12 @@ int main(int argc, char** argv) {
     spotLight->setSpotLight(1.0f, 20.0f, 20.0f, 30.0f);
     spotLight->position = vec3(0.0f, 2.0f, 0.0f);
     spotLight->eulerAngles = vec3(0.0f, 0.0f, -30.0f);
-    spotLight->lightMask = 2;
     engine->addNode(spotLight);
     
     Node* sceneNode = new Node();
     engine->addNode(sceneNode);
     
-    Texture* reflection = new Texture("/Resources/Development/PBR/RF.png", 0.0f, false);
+    Texture* reflection = new Texture("/Resources/Game/PBR/RF.png", 0.0f, false);
     
     PBRShader* mapShader = new PBRShader(0.5f, 0.5f);
     mapShader->setReflectionMap(reflection);
@@ -63,8 +63,8 @@ int main(int argc, char** argv) {
     box1shader->diffuseColor = vec4(0.3, 0.5, 1,1);
     box->geometries[0]->setShader(box1shader);
     box->position = vec3(0.0f, -0.1f, 0.0f);
-    box->eulerAngles = vec3(0, 30, 0);
-    box->scale = vec3(2.0f, 1.f, 2.0f);
+    box->scale = vec3(100.0f, 0.2f, 100.0f);
+    //box->eulerAngles.y = 30;
     sceneNode->addChildNode(box);
     
     MapBoxObject* mapBox2 = new MapBoxObject();
@@ -77,9 +77,9 @@ int main(int argc, char** argv) {
     PBRShader* box2shader = new PBRShader(0.5, 0.5);
     box2shader->diffuseColor = vec4(0.5, 1, 0.3,1);
     box2->geometries[0]->setShader(box2shader);
-    box2->position = vec3(3.0f, -0.1f, -3.0f);
-    box2->scale = vec3(2.0f, 8.f, 4.0f);
-    box2->eulerAngles = vec3(0, 45, 0);
+    box2->position = vec3(10.0f, 4.0f, 10.0f);
+    box2->scale = vec3(20.0f, 8.f, 2.0f);
+    box2->eulerAngles.y = 45;
     sceneNode->addChildNode(box2);
     
     MapBoxObject* mapBox3 = new MapBoxObject();
@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
     PBRShader* box3shader = new PBRShader(0.5, 0.5);
     box3shader->diffuseColor = vec4(1, 0.3, 0.5,0.5);
     box3->geometries[0]->setShader(box3shader);
-    box3->position = vec3(-3.0f, 3.f, 3.0f);
+    box3->position = vec3(-5.0f, 2, 5.0f);
     box3->scale = vec3(3.0f, 4.f, 5.0f);
     box3->eulerAngles = vec3(0, 60, 0);
     sceneNode->addChildNode(box3);
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
     PBRShader* box4shader = new PBRShader(0.5, 0.5);
     box4shader->diffuseColor = vec4(0.9, 0.9, 0.3,1);
     box4->geometries[0]->setShader(box4shader);
-    box4->position = vec3(0.0f, 1.0f, 0.0f);
+    box4->position = vec3(5.0f, 1.0f, -5.0f);
     box4->scale = vec3(0.5f, 2.f, 1.0f);
     box4->eulerAngles = vec3(45, 45, 45);
     sceneNode->addChildNode(box4);
@@ -124,9 +124,9 @@ int main(int argc, char** argv) {
     mapSystemManager->boxes.push_back(mapBox4);
     mapSystemManager->boxes.push_back(mapBox5);
     
-    Texture* mixamoD = new Texture("/Resources/Development/CharacterTest/Textures/Mixamo D.png", 2.0f, true);
-    Texture* mixamoN = new Texture("/Resources/Development/CharacterTest/Textures/Mixamo N.png", 2.0f, true);
-    Texture* mixamoM = new Texture("/Resources/Development/CharacterTest/Textures/Mixamo M.png", 2.0f, true);
+    Texture* mixamoD = new Texture("/Resources/Game/Character/Textures/Mixamo D.png", 2.0f, true);
+    Texture* mixamoN = new Texture("/Resources/Game/Character/Textures/Mixamo N.png", 2.0f, true);
+    Texture* mixamoM = new Texture("/Resources/Game/Character/Textures/Mixamo M.png", 2.0f, true);
     
     PBRShader* mixamoMaterial = new PBRShader(0.0f, 0.0f);
     mixamoMaterial->setDiffuseMap(mixamoD);
@@ -154,26 +154,29 @@ int main(int argc, char** argv) {
     engine->mainCameraNode = cameraNode;
     
     Node* charModel = new Node();
-    charModel->scale = vec3(0.005f);
-    charModel->loadModelFile("/Resources/Development/CharacterTest/MT.fbx");
+    charModel->scale = vec3(0.5f);
+    charModel->loadModelFile("/Resources/Game/Character/MT.fbx");
     charModel->geometries[0]->setShader(mixamoMaterial);
     charModel->geometries[1]->isHidden = true;
     charModel->isDisabled = false;
     engine->addNode(character);
     character->setModel(charModel);
     
-    character->addAnimator("idle", "/Resources/Development/CharacterTest/Animations/Idle.dae");
+    character->addAnimator("idle", "/Resources/Game/Character/Animations/Idle.dae");
     character->stopAndPlay("idle", 0.0f, 0.0f);
     
-    character->addAnimator("running", "/Resources/Development/CharacterTest/Animations/Running.dae");
+    character->addAnimator("running", "/Resources/Game/Character/Animations/Running.dae");
     
-    character->addAnimator("back run", "/Resources/Development/CharacterTest/Animations/Back Run.fbx");
+    character->addAnimator("back run", "/Resources/Game/Character/Animations/Back Run.fbx");
     
-    character->addAnimator("left strafe", "/Resources/Development/CharacterTest/Animations/Left Strafe.fbx");
+    character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Left Strafe.fbx");
     
-    character->addAnimator("right strafe", "/Resources/Development/CharacterTest/Animations/Right Strafe.fbx");
+    character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.fbx");
     
-    character->addAnimator("roll", "/Resources/Development/CharacterTest/Animations/Roll.dae");
+    character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll.dae");
+    
+    character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
+    
     UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
     engine->addNode(baseNode);
@@ -187,7 +190,7 @@ int main(int argc, char** argv) {
     enemy->name = "enemy1";
     enemy->setEularAngle(vec3(0,90.0f,0));
     
-    enemy->modelNode->getAnimator("idle")->play(0.0f, 0.0f);
+    enemy->stopAndPlay("idle", 0.0f, 0.0f);
     engine->addNode(enemy);
     baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
@@ -204,18 +207,18 @@ int main(int argc, char** argv) {
     
     
     Node* weapon = new Node();
-    weapon->loadModelFile("/Resources/Development/CharacterTest/MT.fbx");
-    weapon->scale = vec3(0.7);
+    weapon->loadModelFile("/Resources/Game/Character/MT.fbx");
+    weapon->scale = vec3(0.005);
     weapon->geometries[0]->setShader(mixamoMaterial);
     weapon->geometries[1]->isHidden = true;
     weaponNode->addChildNode(weapon);
     
-    Node* intersection = new Node();
-    intersection->loadModelFile("/Resources/Development/CharacterTest/MT.fbx");
-    intersection->scale = vec3(0.002);
-    intersection->geometries[0]->setShader(mixamoMaterial);
-    intersection->geometries[1]->isHidden = true;
-    engine->addNode(intersection);
+//    Node* intersection = new Node();
+//    intersection->loadModelFile("/Resources/Game/Character/MT.fbx");
+//    intersection->scale = vec3(0.002);
+//    intersection->geometries[0]->setShader(mixamoMaterial);
+//    intersection->geometries[1]->isHidden = true;
+//    engine->addNode(intersection);
 //
 //    Node* normal = new Node();
 //    normal->loadUnitCube();
@@ -227,6 +230,11 @@ int main(int argc, char** argv) {
     
     
     vector<Node*> characters;
+    
+
+    
+    StoneBlast* stoneMagic = new StoneBlast();
+    character->addMagics(stoneMagic, KEY_1);
     
     
     while(engine->isRunning()) {
@@ -247,7 +255,7 @@ int main(int argc, char** argv) {
                 character->moveRight();
             }
             if(engine->input->wasKeyReleased(KEY_SPACE)){
-                character->stopAndPlay("roll", 0.5f, 1.f);
+                character->toggleLock(enemies);
             }
             
             
@@ -263,37 +271,43 @@ int main(int argc, char** argv) {
                 enemies[0]->characterTargetEulerAngles += vec3(0, 90, 0);
             }
             
+            if(engine->input->wasKeyReleased(KEY_1)){
+                character->castMagic(KEY_1);
+            }
+            
             for (int i = 0; i < enemies.size(); i++){
                 enemies[i]->updatePosition();
                 enemies[i]->updateTransform();
 //                cout << to_string(enemies[i]->getWorldTransform()) << endl;
             }
             
-            vec3 position;
-            vec3 normalvec;
-            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
-                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
-                intersection->isDisabled = false;
-                intersection->position = position;
-                normalvec = normalize(normalvec);
-                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
-                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
-                if (normalvec.y > 0.9)
-                    intersection->eulerAngles = vec3(0);
-                else if (normalvec.y < -0.9)
-                    intersection->eulerAngles = vec3(0, 0, 180);
-                else
-                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
-//                intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
-//                normal->position = intersection->position + normalvec;
-                
-//                intersection->getUpVectorInWorld()
-                cout << "position: " << to_string(position) << endl;
-                cout << "angle: " << to_string(intersection->eulerAngles) << endl;
-            }
-            else {
-                intersection->isDisabled = true;
-            }
+            stoneMagic->updateMagic();
+            
+//            vec3 position;
+//            vec3 normalvec;
+//            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
+//                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
+//                intersection->isDisabled = false;
+//                intersection->position = position;
+//                normalvec = normalize(normalvec);
+//                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
+//                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
+//                if (normalvec.y > 0.9)
+//                    intersection->eulerAngles = vec3(0);
+//                else if (normalvec.y < -0.9)
+//                    intersection->eulerAngles = vec3(0, 0, 180);
+//                else
+//                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
+//               intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
+//               normal->position = intersection->position + normalvec;
+//
+//               intersection->getUpVectorInWorld()
+//                //cout << "position: " << to_string(position) << endl;
+//                //cout << "angle: " << to_string(intersection->eulerAngles) << endl;
+//            }
+//            else {
+//                intersection->isDisabled = true;
+//            }
             
             
             engine->render();
