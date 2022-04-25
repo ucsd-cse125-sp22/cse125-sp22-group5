@@ -12,6 +12,8 @@
 
 class ThousandBlade : public BaseMagic{
     ThousandBlade(vec3 position, vec3 eularAngle);
+    void updateMagic();
+    void play();
     ~ThousandBlade();
 };
 

@@ -228,6 +228,7 @@ int main(int argc, char** argv) {
     
     vector<Node*> characters;
     
+
     
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
