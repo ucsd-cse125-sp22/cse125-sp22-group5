@@ -38,9 +38,16 @@ void Node::loadModelFile(string file) {
     }
     this->engineProcessNode(scene->mRootNode, scene);
 }
-void Node::loadAnimator(string name, string file) {
-    Animator* animator = new Animator(name, file, this);
+Animator* Node::loadAnimator(string name, string file) {
+    Animator* animator = new Animator(name, file, &this->boneNames, &this->boneTransforms);
     this->animators.push_back(animator);
+    for(unsigned int i = 0; i < this->animators.size(); i += 1) {
+        this->animators[i]->engineUpdateAnimatorBoneIndices(&this->boneNames);
+    }
+    for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
+        this->geometries[i]->engineUpdateGeometryBoneIndices(&this->boneNames);
+    }
+    return(animator);
 }
 Node* Node::generateBoneNode(string boneName) {
     Node* boneNode = new Node();
@@ -51,11 +58,14 @@ Node* Node::generateBoneNode(string boneName) {
 Node* Node::copy() {
     Node* node = new Node();
     node->name = this->name;
-    node->tags = this->tags;
     node->isDisabled = this->isDisabled;
+    node->renderingBitMask = this->renderingBitMask;
     node->position = this->position;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
+    node->orientationTargetNode = this->orientationTargetNode;
+    node->boneNames = this->boneNames;
+    node->boneTransforms = this->boneTransforms;
     for(unsigned int i = 0; i < this->animators.size(); i += 1) {
         node->animators.push_back(this->animators[i]->engineCopyAnimator());
     }
@@ -63,15 +73,27 @@ Node* Node::copy() {
         node->geometries.push_back(this->geometries[i]->copy(&node->animators));
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
-        node->addChildNode(this->childNodes[i]->copy());
+        Node* newNode = this->childNodes[i]->copy();
+        node->addChildNode(newNode);
+        map<string, Node*>::iterator iterator;
+        for(iterator = this->boneNodes.begin(); iterator != this->boneNodes.end(); iterator++) {
+            if(iterator->second == this->childNodes[i]) {
+                node->boneNodes[iterator->first] = newNode;
+                break;
+            }
+        }
     }
     return(node);
 }
 Node* Node::clone() {
     Node* node = new Node();
+    node->name = this->name;
+    node->isDisabled = this->isDisabled;
+    node->renderingBitMask = this->renderingBitMask;
     node->position = this->position;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
+    node->orientationTargetNode = this->orientationTargetNode;
     for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
         if(this->geometries[i]->engineGetGeometryInstanceCount() == 0) {
             this->geometryInstancingIndex = this->geometries[i]->engineGeometryAddInstance();
@@ -80,7 +102,15 @@ Node* Node::clone() {
         node->geometries.push_back(this->geometries[i]);
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
-        node->addChildNode(this->childNodes[i]->clone());
+        Node* newNode = this->childNodes[i]->clone();
+        node->addChildNode(newNode);
+        map<string, Node*>::iterator iterator;
+        for(iterator = this->boneNodes.begin(); iterator != this->boneNodes.end(); iterator++) {
+            if(iterator->second == this->childNodes[i]) {
+                node->boneNodes[iterator->first] = newNode;
+                break;
+            }
+        }
     }
     return(node);
 }
@@ -90,11 +120,25 @@ void Node::freeze() {
 }
 Animator* Node::getAnimator(string name) {
     for(unsigned int i = 0; i < this->animators.size(); i += 1) {
-        if(this->animators[i]->engineAnimationGetAnimatorName() == name) {
+        if(this->animators[i]->engineGetAnimatorName() == name) {
             return(this->animators[i]);
         }
     }
     return(NULL);
+}
+void Node::playAnimators(unsigned int mask, float fadeIn, float fadeOut) {
+    for(unsigned int i = 0; i < this->animators.size(); i += 1) {
+        if((this->animators[i]->animatorBitMask & mask) > 0) {
+            this->animators[i]->play(fadeIn, fadeOut);
+        }
+    }
+}
+void Node::stopAnimators(unsigned int mask, float fadeOut) {
+    for(unsigned int i = 0; i < this->animators.size(); i += 1) {
+        if((this->animators[i]->animatorBitMask & mask) > 0) {
+            this->animators[i]->stop(fadeOut);
+        }
+    }
 }
 void Node::updateTransform() {
     if(this->parent != NULL) {
@@ -103,6 +147,18 @@ void Node::updateTransform() {
             this->childNodes[i]->updateTransform();
         }
     }
+}
+Node* Node::getChildNode(string name) {
+    if(this->name == name) {
+        return(this);
+    }
+    for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
+        Node* childNode = this->childNodes[i]->getChildNode(name);
+        if(childNode != NULL) {
+            return(childNode);
+        }
+    }
+    return(NULL);
 }
 mat4 Node::getWorldTransform() {
     if(this->worldTransform == mat4(-1.0f)) {
@@ -118,7 +174,7 @@ vec3 Node::getWorldPosition() {
     return(glm_helper::getPosition(this->worldTransform));
 }
 vec3 Node::getWorldEulerAngles() {
-    return(glm_helper::getEularAngles(this->worldTransform));
+    return(glm_helper::getEulerAngles(this->worldTransform));
 }
 vec3 Node::getWorldScale() {
     return(glm_helper::getScale(this->worldTransform));
@@ -163,10 +219,31 @@ vec3 Node::getPositionOnScreen() {
         vec3 result;
         result.x = projection.x * 0.5f / projection.w + 0.5f;
         result.y = 0.5f - projection.y * 0.5f / projection.w;
-        result.z = projection.z / projection.w;
+        result.z = glm::length(Engine::main->mainCameraNode->getWorldPosition() - this->getWorldPosition());
+        if(projection.w < 0.0f) {
+            result.z = -result.z;
+        }
         return(result);
     }
     return(vec3(0.0f));
+}
+CameraNode* Node::convertToCameraNode() {
+    return(this->currentCameraNode);
+}
+LightNode* Node::convertToLightNode() {
+    return(this->currentLightNode);
+}
+ParticleNode* Node::convertToParticleNode() {
+    return(this->currentParticleNode);
+}
+UINode* Node::convertToUINode() {
+    return(this->currentUINode);
+}
+SpriteNode* Node::convertToSpriteNode() {
+    return(this->currentSpriteNode);
+}
+TextNode* Node::convertToTextNode() {
+    return(this->currentTextNode);
 }
 Node::~Node() {
     this->removeFromParentNode();
@@ -202,15 +279,21 @@ Node::~Node() {
 }
 void Node::engineInitializeNode() {
     this->name = "";
-    this->tags = 0;
     this->parent = NULL;
     this->isDisabled = false;
+    this->renderingBitMask = -1;
     this->position = vec3(0.0f);
     this->eulerAngles = vec3(0.0f);
     this->scale = vec3(1.0f);
     this->orientationTargetNode = NULL;
     this->worldTransform = mat4(-1.0f);
     this->geometryInstancingIndex = -1;
+    this->hasUnfreezableGeometries = false;
+    this->currentCameraNode = NULL;
+    this->currentLightNode = NULL;
+    this->currentUINode = NULL;
+    this->currentSpriteNode = NULL;
+    this->currentTextNode = NULL;
 }
 void Node::engineProcessNode(aiNode *node, const aiScene *scene) {
     for(unsigned int i = 0; i < node->mNumMeshes; i += 1) {
@@ -222,18 +305,19 @@ void Node::engineProcessNode(aiNode *node, const aiScene *scene) {
     }
 }
 void Node::engineUpdateNodeAnimators(mat4 parentWorldTransform) {
+    if(this->isDisabled) {
+        return;
+    }
     if(this->animators.size() > 0) {
         for(unsigned int i = 0; i < this->animators.size(); i += 1) {
             this->animators[i]->engineUpdateAnimator();
         }
-    }
-    if(this->isDisabled) {
-        return;
+        this->engineNodeCalculateBoneTransforms(this->animators[0]->engineAnimatorGetRootAnimationBoneNode(), mat4(1.0f));
+        for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
+            this->geometries[i]->engineUpdateGeometrySkeletalAnimations(this->boneTransforms);
+        }
     }
     this->engineCalculateNodeWorldTransform(parentWorldTransform);
-    for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
-        this->geometries[i]->engineUpdateGeometryAnimations();
-    }
     map<string, Node*>::iterator iterator;
     for(iterator = this->boneNodes.begin(); iterator != this->boneNodes.end(); iterator++) {
         mat4 transform = mat4(0.0f);
@@ -244,14 +328,44 @@ void Node::engineUpdateNodeAnimators(mat4 parentWorldTransform) {
             }
         }
         iterator->second->position = glm_helper::getPosition(transform);
-        iterator->second->eulerAngles = glm_helper::getEularAngles(transform);
+        iterator->second->eulerAngles = glm_helper::getEulerAngles(transform);
         iterator->second->updateTransform();
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
         this->childNodes[i]->engineUpdateNodeAnimators(this->worldTransform);
     }
 }
-void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data) {
+void Node::engineNodeCalculateBoneTransforms(AnimationBoneNode *node, mat4 parentTransform) {
+    string nodeName = node->name;
+    vec3 position = node->position;
+    quat rotation = node->rotation;
+    vec3 scale = node->scale;
+    int index = node->index;
+    for(unsigned int i = 0; i < this->animators.size(); i += 1) {
+        float blendFactor = this->animators[i]->engineGetAnimatorCurrentBlendFactor();
+        if(blendFactor == 0.0f) {
+            continue;
+        }
+        Bone* bone = this->animators[i]->engineAnimatorGetBone(nodeName);
+        if(bone == NULL) {
+            continue;
+        }else{
+            bone->engineUpdateBoneAnimation(this->animators[i]->engineGetAnimatorTime());
+            position = glm::mix(position, bone->engineGetBonePosition(), blendFactor);
+            rotation = glm::slerp(rotation, bone->engineGetBoneRotation(), blendFactor);
+            scale = glm::mix(scale, bone->engineGetBoneScale(), blendFactor);
+        }
+    }
+    mat4 finalTransform = glm::translate(mat4(1.0f), position) * glm::mat4_cast(rotation) * glm::scale(mat4(1.0f), scale);
+    mat4 globalTransform = parentTransform * finalTransform;
+    if(index != -1) {
+        this->boneTransforms[index] = globalTransform;
+    }
+    for(unsigned int i = 0; i < node->children.size(); i += 1) {
+        this->engineNodeCalculateBoneTransforms(node->children[i], globalTransform);
+    }
+}
+void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data, bool shadowMap) {
     if(this->isDisabled) {
         return;
     }
@@ -262,40 +376,44 @@ void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data) {
         matrix = glm::inverse(matrix);
         this->worldTransform = glm::scale(matrix, this->scale);
     }
-    for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
-        this->geometries[i]->enginePrepareGeometryForRendering(this->worldTransform);
-        if(this->geometryInstancingIndex >= 0) {
-            this->geometries[i]->engineUpdateGeometryInstanceTransform(this->geometryInstancingIndex, this->worldTransform, false);
+    if((this->renderingBitMask & Engine::main->mainCameraNode->renderingBitMask) > 0) {
+        for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
+            this->geometries[i]->enginePrepareGeometryForRendering(this->worldTransform);
+            if(this->geometryInstancingIndex >= 0) {
+                this->geometries[i]->engineUpdateGeometryInstanceTransform(this->geometryInstancingIndex, this->worldTransform, false);
+            }
         }
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
-        this->childNodes[i]->enginePrepareNodeForRendering(this->worldTransform, data);
+        this->childNodes[i]->enginePrepareNodeForRendering(this->worldTransform, data, shadowMap);
     }
 }
 void Node::engineCalculateNodeWorldTransform(mat4 parentWorldTransform) {
     mat4 translateMatrix = glm::translate(mat4(1.0f), this->position);
-    mat4 rotateMatrix = glm::eulerAngleXYZ(glm::radians(this->eulerAngles.x),
-                                           glm::radians(this->eulerAngles.y),
-                                           glm::radians(this->eulerAngles.z));
+    mat4 rotateMatrix = glm::eulerAngleYZX(glm::radians(this->eulerAngles.y),
+                                           glm::radians(this->eulerAngles.z),
+                                           glm::radians(this->eulerAngles.x));
     mat4 scaleMatrix = glm::scale(mat4(1.0f), vec3(this->scale));
     this->worldTransform = parentWorldTransform * (translateMatrix * rotateMatrix * scaleMatrix);
 }
 void Node::engineRecursivelyFreezeChildNodes(vector<Geometry*>* allGeometries, map<Geometry*, vector<unsigned int>>* indices) {
-    for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
-        if(find(allGeometries->begin(), allGeometries->end(), this->geometries[i]) == allGeometries->end()) {
-            allGeometries->push_back(this->geometries[i]);
-        }
-        if(this->geometries[i]->engineGetGeometryInstanceCount() == 0) {
-            this->geometryInstancingIndex = this->geometries[i]->engineGeometryAddInstance();
-        }
-        if(this->geometryInstancingIndex != -1) {
-            this->geometries[i]->engineUpdateGeometryInstanceTransform(this->geometryInstancingIndex, this->worldTransform, true);
-            if(indices->find(this->geometries[i]) == indices->end()) {
-                vector<unsigned int> array;
-                array.push_back(this->geometryInstancingIndex);
-                (*indices)[this->geometries[i]] = array;
-            }else{
-                (*indices)[this->geometries[i]].push_back(this->geometryInstancingIndex);
+    if(!this->hasUnfreezableGeometries) {
+        for(unsigned int i = 0; i < this->geometries.size(); i += 1) {
+            if(find(allGeometries->begin(), allGeometries->end(), this->geometries[i]) == allGeometries->end()) {
+                allGeometries->push_back(this->geometries[i]);
+            }
+            if(this->geometries[i]->engineGetGeometryInstanceCount() == 0) {
+                this->geometryInstancingIndex = this->geometries[i]->engineGeometryAddInstance();
+            }
+            if(this->geometryInstancingIndex != -1) {
+                this->geometries[i]->engineUpdateGeometryInstanceTransform(this->geometryInstancingIndex, this->worldTransform, true);
+                if(indices->find(this->geometries[i]) == indices->end()) {
+                    vector<unsigned int> array;
+                    array.push_back(this->geometryInstancingIndex);
+                    (*indices)[this->geometries[i]] = array;
+                }else{
+                    (*indices)[this->geometries[i]].push_back(this->geometryInstancingIndex);
+                }
             }
         }
     }

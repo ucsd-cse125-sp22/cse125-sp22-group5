@@ -2,6 +2,9 @@
 #include "Geometry.hpp"
 Geometry::Geometry(aiMesh* mesh) {
     this->engineInitializeGeometry();
+    bool boundingBoxInitialized = false;
+    vec3 minPosition = vec3(0.0f);
+    vec3 maxPosition = vec3(0.0f);
     vector<GeometryVertex> vertices;
     vector<unsigned int> indices;
     for(unsigned int i = 0; i < mesh->mNumVertices; i += 1) {
@@ -11,6 +14,30 @@ Geometry::Geometry(aiMesh* mesh) {
             vertex.weights[k] = 0.0f;
         }
         vertex.position = assimp_helper::getVec3(mesh->mVertices[i]);
+        if(boundingBoxInitialized) {
+            if(vertex.position.x < minPosition.x) {
+                minPosition.x = vertex.position.x;
+            }
+            if(vertex.position.y < minPosition.y) {
+                minPosition.y = vertex.position.y;
+            }
+            if(vertex.position.z < minPosition.z) {
+                minPosition.z = vertex.position.z;
+            }
+            if(vertex.position.x > maxPosition.x) {
+                maxPosition.x = vertex.position.x;
+            }
+            if(vertex.position.y > maxPosition.y) {
+                maxPosition.y = vertex.position.y;
+            }
+            if(vertex.position.z > maxPosition.z) {
+                maxPosition.z = vertex.position.z;
+            }
+        }else{
+            boundingBoxInitialized = true;
+            minPosition = vertex.position;
+            maxPosition = vertex.position;
+        }
         if(mesh->HasNormals()) {
             vertex.normal = assimp_helper::getVec3(mesh->mNormals[i]);
         }
@@ -36,15 +63,21 @@ Geometry::Geometry(aiMesh* mesh) {
         for(unsigned int i = 0; i < mesh->mNumBones; i += 1) {
             int boneID = -1;
             string boneName = mesh->mBones[i]->mName.C_Str();
-            if(this->bonesInfoMap.find(boneName) == this->bonesInfoMap.end()) {
+            bool found = false;
+            for(unsigned int j = 0; j < this->boneNames.size(); j += 1) {
+                if(boneName == this->boneNames[j]) {
+                    boneID = this->boneInfos[j].id;
+                }
+            }
+            if(!found) {
                 BoneInfo newBoneInfo;
                 newBoneInfo.id = this->boneCount;
                 newBoneInfo.offset = assimp_helper::getMat4(mesh->mBones[i]->mOffsetMatrix);
-                this->bonesInfoMap[boneName] = newBoneInfo;
+                newBoneInfo.index = -1;
+                this->boneNames.push_back(boneName);
+                this->boneInfos.push_back(newBoneInfo);
                 boneID = this->boneCount;
                 this->boneCount = this->boneCount + 1;
-            }else{
-                boneID = this->bonesInfoMap[boneName].id;
             }
             aiVertexWeight* weights = mesh->mBones[i]->mWeights;
             int numWeights = mesh->mBones[i]->mNumWeights;
@@ -89,21 +122,25 @@ Geometry::Geometry(aiMesh* mesh) {
     glEnableVertexAttribArray(6);
     glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(GeometryVertex), (void*)offsetof(GeometryVertex, weights));
     glBindVertexArray(0);
+    this->hasBoundingSphereInformation = true;
+    this->boundingSpherePosition = (maxPosition + minPosition) * 0.5f;
+    this->boundingSphereRadius = glm::length(maxPosition - minPosition);
 }
 Geometry* Geometry::copy(vector<Animator*>* animators) {
     Geometry* geometry = new Geometry();
     geometry->engineInitializeGeometry();
+    geometry->cullMode = this->cullMode;
     geometry->indiceCount = this->indiceCount;
-    for(unsigned int i = 0; i < this->animations.size(); i += 1) {
-        Animation* animation = this->animations[i]->engineCopyAnimation((*animators)[i]);
-        geometry->animations.push_back(animation);
-    }
     geometry->boneCount = this->boneCount;
-    geometry->bonesInfoMap = this->bonesInfoMap;
+    geometry->boneNames = this->boneNames;
+    geometry->boneInfos = this->boneInfos;
     geometry->boneTransforms = this->boneTransforms;
     geometry->isHidden = this->isHidden;
     geometry->renderingOrder = this->renderingOrder;
-    geometry->lightMask = this->lightMask;
+    geometry->lightingBitMask = this->lightingBitMask;
+    geometry->hasBoundingSphereInformation = this->hasBoundingSphereInformation;
+    geometry->boundingSpherePosition = this->boundingSpherePosition;
+    geometry->boundingSphereRadius = this->boundingSphereRadius;
     glGenVertexArrays(1, &geometry->vertexArrays);
     glGenBuffers(1, &geometry->vertexBuffers);
     glGenBuffers(1, &geometry->elementBuffers);
@@ -157,10 +194,6 @@ Geometry::~Geometry() {
     glDeleteBuffers(1, &this->normalTransformBuffers);
     this->modelTransforms.clear();
     this->normalTransforms.clear();
-    for(unsigned int i = 0; i < this->animations.size(); i += 1) {
-        delete(this->animations[i]);
-    }
-    this->animations.clear();
     this->shader = NULL;
 }
 void Geometry::engineInitializeGeometry() {
@@ -169,12 +202,16 @@ void Geometry::engineInitializeGeometry() {
     this->cullMode = 0;
     this->shader = NULL;
     this->boneCount = 0;
+    this->skeletalAnimationUpdated = false;
     this->modelTransform = mat4(0.0f);
     this->isHidden = false;
     this->renderingOrder = 0.0f;
-    this->lightMask = -1;
+    this->lightingBitMask = -1;
     this->instanceCount = 0;
     this->requiresInstanceUpdate = false;
+    this->hasBoundingSphereInformation = false;
+    this->boundingSpherePosition = vec3(0.0f);
+    this->boundingSphereRadius = 0.0f;
 }
 mat4 Geometry::engineGetGeometryModelTransform() {
     return(this->modelTransform);
@@ -188,82 +225,55 @@ unsigned int Geometry::engineGetGeometryIndiceCount() {
 bool Geometry::engineCheckWhetherGeometryHasBones() {
     return(this->boneCount > 0);
 }
-bool Geometry::engineCheckWhetherGeometryHasAnimations() {
-    return(this->animations.size() > 0);
-}
-map<string, BoneInfo>* Geometry::engineGetGeometryBonesInfoMap() {
-    return(&this->bonesInfoMap);
-}
 vector<mat4>* Geometry::engineGetGeometryBoneTransforms() {
     return(&this->boneTransforms);
 }
-void Geometry::engineCalculateGeometryBoneTransforms(AnimationBoneNode *node, mat4 parentTransform, bool first) {
-    string nodeName = node->name;
-    mat4 finalTransform = node->transform;
-    for(unsigned int i = 0; i < this->animations.size(); i += 1) {
-        if(this->animations[i]->engineAnimationGetAnimator() == NULL) {
-            continue;
-        }
-        float blendFactor = this->animations[i]->engineAnimationGetAnimator()->engineAnimationGetAnimatorCurrentBlendFactor();
-        if(blendFactor == 0.0f) {
-            continue;
-        }
-        mat4 newTransform = mat4(0.0f);
-        Bone* bone = this->animations[i]->engineAnimationGetBone(nodeName);
-        if(bone == NULL || this->animations[i]->engineAnimationGetAnimator() == NULL) {
-            if(first) {
-                newTransform = node->transform;
-            }
-        }else{
-            bone->engineUpdateBoneAnimation(this->animations[i]->engineAnimationGetAnimator()->getTime());
-            newTransform = bone->engineGetTransform();
-        }
-        if(newTransform == mat4(0.0f)) {
-            continue;
-        }
-        quat rotation = quat_cast(finalTransform);
-        quat newRotation = quat_cast(newTransform);
-        quat blendedRotation = slerp(rotation, newRotation, blendFactor);
-        mat4 matrix = mat4_cast(blendedRotation);
-        matrix[3] = finalTransform[3] * (1.0f - blendFactor) + newTransform[3] * blendFactor;
-        finalTransform = matrix;
-    }
-    mat4 globalTransform = parentTransform * finalTransform;
-    if(nodeName != "") {
-        int index = this->bonesInfoMap[nodeName].id;
-        mat4 offset = this->bonesInfoMap[nodeName].offset;
-        this->boneTransforms[index] = globalTransform * offset;
-    }
-    for(unsigned int i = 0; i < node->children.size(); i += 1) {
-        this->engineCalculateGeometryBoneTransforms(node->children[i], globalTransform, false);
-    }
-}
 mat4 Geometry::engineGetGeometryBoneTransform(string name) {
     if(this->engineCheckWhetherGeometryHasBones()) {
-        if(this->bonesInfoMap.find(name) != this->bonesInfoMap.end()) {
-            int index = this->bonesInfoMap[name].id;
-            mat4 transform = this->boneTransforms[index];
-            if(transform != mat4(0.0f)) {
-                mat4 offset = this->bonesInfoMap[name].offset;
-                return(transform * inverse(offset));
+        for(unsigned int i = 0; i < this->boneNames.size(); i += 1) {
+            if(name == this->boneNames[i]) {
+                int index = this->boneInfos[i].id;
+                mat4 transform = this->boneTransforms[index];
+                if(transform != mat4(0.0f)) {
+                    mat4 offset = this->boneInfos[i].offset;
+                    return(transform * glm::inverse(offset));
+                }
             }
         }
     }
     return(mat4(0.0f));
 }
-void Geometry::engineAddAnimationToGeometry(Animation* animation) {
-    this->animations.push_back(animation);
+void Geometry::engineUpdateGeometryBoneIndices(vector<string>* boneNames) {
+    for(unsigned int i = 0; i < (*boneNames).size(); i += 1) {
+        for(unsigned int j = 0; j < this->boneNames.size(); j += 1) {
+            if((*boneNames)[i] == this->boneNames[j]) {
+                this->boneInfos[j].index = i;
+            }
+        }
+    }
 }
-void Geometry::engineUpdateGeometryAnimations() {
+void Geometry::engineUpdateGeometrySkeletalAnimations(vector<mat4> boneTransforms) {
     if(this->updated) {
         return;
     }
-    if(this->engineCheckWhetherGeometryHasBones()) {
-        if(this->animations.size() > 0) {
-            this->engineCalculateGeometryBoneTransforms(this->animations[0]->engineGetRootAnimationBoneNode(), mat4(1.0f), true);
+    if(this->isHidden) {
+        return;
+    }
+    if(this->boneCount > 0) {
+        for(unsigned int i = 0; i < this->boneInfos.size(); i += 1) {
+            int index = this->boneInfos[i].index;
+            if(index > -1) {
+                int id = this->boneInfos[i].id;
+                mat4 offset = this->boneInfos[i].offset;
+                this->boneTransforms[id] = boneTransforms[index] * offset;
+            }
         }
+        this->skeletalAnimationUpdated = true;
     }
     this->updated = true;
+}
+bool Geometry::engineCheckWhetherGeometryHasUpdatedSkeletalAnimations() {
+    return(this->skeletalAnimationUpdated);
 }
 void Geometry::enginePrepareGeometryForRendering(mat4 worldTransform) {
     if(this->prepared) {
@@ -331,7 +341,7 @@ void Geometry::enginePrepareGeometryForRendering(mat4 worldTransform) {
     }
     Engine::main->preparedGeometries.push_back(this);
 }
-void Geometry::engineRenderGeometry() {
+void Geometry::engineRenderGeometry(bool shadowMap) {
     if(this->cullMode == 0) {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
@@ -349,7 +359,7 @@ void Geometry::engineRenderGeometry() {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         this->requiresInstanceUpdate = false;
     }
-    this->shader->engineRenderShader(this);
+    this->shader->engineRenderShader(this, shadowMap);
     this->updated = false;
     this->prepared = false;
 }
@@ -368,4 +378,27 @@ void Geometry::engineUpdateGeometryInstanceTransform(unsigned int index, mat4 mo
 }
 unsigned int Geometry::engineGetGeometryInstanceCount() {
     return((unsigned int)this->modelTransforms.size());
+}
+bool Geometry::engineCheckWhetherGeometryIsAffectedByLightNode(LightNode* lightNode) {
+    if((this->lightingBitMask & lightNode->lightingBitMask) == 0) {
+        return(false);
+    }
+    if(this->hasBoundingSphereInformation == true && this->instanceCount == 0) {
+        if(lightNode->engineGetLightType() > 1) {
+            mat4 transform = glm::translate(mat4(1.0f), this->boundingSpherePosition);
+            transform = this->modelTransform * transform;
+            glm::vec3 scale;
+            glm::quat rotation;
+            glm::vec3 translation;
+            glm::vec3 skew;
+            glm::vec4 perspective;
+            glm::decompose(transform, scale, rotation, translation, skew, perspective);
+            float distance = glm::length(lightNode->getWorldPosition() - translation);
+            float radius = glm::max(scale.x, glm::max(scale.y, scale.z)) * this->boundingSphereRadius;
+            if(distance > radius + lightNode->range) {
+                return(false);
+            }
+        }
+    }
+    return(true);
 }
