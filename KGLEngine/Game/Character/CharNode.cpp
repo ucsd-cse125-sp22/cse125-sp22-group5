@@ -60,8 +60,8 @@ void CharNode::setUINode(UINode* uiNode){
     TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
     nameNode->color = vec4(0.1f, 0.1f, 0.1f, 1.0f);
     nameNode->text = "New Character";
-    nameNode->setHorizontalAlignmentToCenter();
-    nameNode->setVerticalAlignmentToTop();
+    nameNode->setCenterHorizontalAlignment();
+    nameNode->setTopVerticalAlignment();
     nameNode->position = vec2(0, -0.07f);
     uiNode->addChildNode(nameNode);
     this->nameNode = nameNode;
@@ -268,7 +268,6 @@ void CharNode::updatePosition(){
 CharNode* CharNode::copy(vec3 position) {
     CharNode* node = new CharNode(position);
     node->name = this->name;
-    node->tags = this->tags;
     node->isDisabled = this->isDisabled;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
