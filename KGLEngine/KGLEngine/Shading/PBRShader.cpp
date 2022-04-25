@@ -20,6 +20,7 @@ out fragment_data {
     vec2 UV;
     mat3 TBN;
     mat3 inverseTBN;
+    vec4 lightSpacePosition;
 } fragment;
 struct frame_data {
     mat4 viewProjectionTransform;
@@ -36,6 +37,8 @@ uniform node_data node;
 uniform bool hasBones;
 uniform mat4 boneTransforms[BONES_LIMIT];
 uniform bool enableInstancing;
+uniform bool renderingShadow;
+uniform mat4 lightSpaceMatrix;
 void main() {
     mat4 modelTransform = node.modelTransform;
     mat4 normalTransform = node.normalTransform;
@@ -44,6 +47,23 @@ void main() {
         modelTransform = instancingModelTransform;
         normalTransform = instancingNormalTransform;
         modelViewProjectionTransform = frame.viewProjectionTransform * modelTransform;
+    }
+    if(renderingShadow) {
+
+
+
+        if(hasBones) {
+            mat4 boneTransform = mat4(0.0f);
+            for(int i = 0; i < MAX_BONE_INFLUENCE; i += 1) {
+                boneTransform += boneTransforms[boneIDs[i]] * weights[i];
+            }
+            vec4 localPosition = boneTransform * vec4(vertexPosition, 1.0f);
+            gl_Position = lightSpaceMatrix * modelTransform * localPosition;
+        }else{
+            vec4 localPosition = vec4(vertexPosition, 1.0f);
+            gl_Position = lightSpaceMatrix * modelTransform * localPosition;
+        }
+        return;
     }
     if(hasBones) {
         mat4 boneTransform = mat4(0.0f);
@@ -71,17 +91,19 @@ void main() {
     }
     fragment.inverseTBN = inverse(fragment.TBN);
     fragment.UV = vertexUV;
+    fragment.lightSpacePosition = lightSpaceMatrix * vec4(fragment.position, 1.0f);
 }
 )"""";
     string fragmentShaderCode = R""""(
 #version 330 core
-const int LIGHTS_LIMIT = 10;
+const int LIGHTS_LIMIT = 50;
 in fragment_data {
     vec3 position;
     vec3 normal;
     vec2 UV;
     mat3 TBN;
     mat3 inverseTBN;
+    vec4 lightSpacePosition;
 } fragment;
 out vec4 color;
 struct frame_data {
@@ -102,6 +124,7 @@ struct light_data {
     vec3 direction;
     float attenuationExponent;
     float range;
+    float penetrationRange;
     float innerAngle;
     float outerAngle;
 };
@@ -146,7 +169,16 @@ uniform vec3 defaultEmissionColor;
 uniform bool useEmissionMap;
 uniform sampler2D emissionMap;
 uniform float emissionIntensity;
+uniform bool renderingShadow;
+uniform bool useShadowMap;
+uniform sampler2D shadowMap;
+uniform mat4 lightSpaceMatrix;
+uniform float shadowBias;
+uniform int shadowSamples;
 void main() {
+    if(renderingShadow) {
+        return;
+    }
     vec2 UV = fragment.UV;
     if(useHeightMap) {
         vec3 cameraVector = frame.cameraPosition - fragment.position;
@@ -196,7 +228,7 @@ void main() {
         }
         metallic *= metallicIntensity;
     }
-    metallic = max(0.0f, min(metallic, 1.0f));
+    metallic = clamp(metallic, 0.0f, 1.0f);
     metallic = 0.2f + 0.6f * metallic;
     float roughness = defaultRoughness;
     if(useRoughnessMap) {
@@ -206,7 +238,7 @@ void main() {
         }
         roughness *= roughnessIntensity;
     }
-    roughness = max(0.0f, min(roughness, 1.0f));
+    roughness = clamp(roughness, 0.0f, 1.0f);
     roughness = 0.2f + 0.6f * roughness;
     vec3 viewVector = normalize(frame.cameraPosition - fragment.position);
     vec3 lightingColor = vec3(0.0f);
@@ -223,13 +255,50 @@ void main() {
         if(lights[i].type == 1) {
             lightVector = -lights[i].direction;
             lightFactor = max(dot(normal, lightVector), 0.0f);
+            if(useShadowMap) {
+                vec3 shadowMapUV = fragment.lightSpacePosition.xyz / fragment.lightSpacePosition.w;
+                shadowMapUV = shadowMapUV * 0.5f + 0.5f;
+                float shadowFactor = clamp(length(shadowMapUV.xy - vec2(0.5f)), 0.0f, 0.5f);
+                shadowFactor = 1.0f - shadowFactor * 2.0f;
+                float bias = max(shadowBias * (1.0f - dot(normal, lightVector)), shadowBias * 0.1f);
+                float currentDepth = shadowMapUV.z - bias;
+                float intensity = 0.0f;
+                if(shadowSamples > 0) {
+                    vec2 shadowUV;
+                    vec2 displacement = 1.0f / textureSize(shadowMap, 0);
+                    float count = 0.0f;
+                    for(int x = -shadowSamples; x <= shadowSamples; x += 1) {
+                        for(int y = -shadowSamples; y <= shadowSamples; y += 1) {
+                            shadowUV = shadowMapUV.xy + vec2(x, y) * displacement;
+                            float depth = texture(shadowMap, shadowUV).r;
+                            if(currentDepth > depth) {
+                                intensity += 1.0f;
+                            }
+                            count += 1.0f;
+                        }
+                    }
+                    intensity = (intensity / count) * shadowFactor;
+                }else{
+                    float depth = texture(shadowMap, shadowMapUV.xy).r;
+                    if(currentDepth > depth) {
+                        intensity = shadowFactor;
+                    }
+                }
+                lightFactor *= 1.0f - intensity;
+            }
         }else if(lights[i].type == 2) {
             lightVector = lights[i].position - fragment.position;
             float lightDistance = length(lightVector);
             float attenuationProgress = max((lights[i].range - lightDistance) / lights[i].range, 0.0f);
             float attenuation = pow(attenuationProgress, lights[i].attenuationExponent);
             lightVector = normalize(lightVector);
-            lightFactor = max(dot(normal, lightVector), 0.0f) * attenuation;
+            if(lights[i].penetrationRange > 0.0f) {
+                float penetrationProgress = max((lights[i].penetrationRange - lightDistance) / lights[i].penetrationRange, 0.0f);
+                float penetration = pow(penetrationProgress, lights[i].attenuationExponent);
+                lightFactor = (penetration + (1.0f - penetration) * max(dot(normal, lightVector), 0.0f)) * attenuation;
+            }else{
+                lightFactor = max(dot(normal, lightVector), 0.0f) * attenuation;
+            }
         }else if(lights[i].type == 3) {
             lightVector = lights[i].position - fragment.position;
             float lightDistance = length(lightVector);
@@ -241,7 +310,13 @@ void main() {
             float intensity = (theta - lights[i].outerAngle) / epsilon;
             intensity *= clamp(intensity, 0.0f, 1.0f);
             attenuation *= intensity * intensity;
-            lightFactor = max(dot(normal, lightVector), 0.0f) * attenuation;
+            if(lights[i].penetrationRange > 0.0f) {
+                float penetrationProgress = max((lights[i].penetrationRange - lightDistance) / lights[i].penetrationRange, 0.0f);
+                float penetration = pow(penetrationProgress, lights[i].attenuationExponent);
+                lightFactor = (penetration + (1.0f - penetration) * max(dot(normal, lightVector), 0.0f)) * attenuation;
+            }else{
+                lightFactor = max(dot(normal, lightVector), 0.0f) * attenuation;
+            }
         }
         if(lightFactor <= 0.0f) {
             continue;
@@ -292,6 +367,79 @@ void main() {
     color.rgb += emissionColor;
 }
 )"""";
+    this->engineInitializeShader(vertexShaderCode, fragmentShaderCode);
+    this->currentOpacity = -1.0f;
+    this->currentDiffuseColor = vec4(-1.0f);
+    this->currentDiffuseIntensity = -1.0f;
+    this->currentAlphaCutThreshold = -1.0f;
+    this->currentNormalIntensity = -1.0f;
+    this->currentHeightIntensity = -1.0f;
+    this->currentHeightLayerRange= vec2(-1.0f);
+    this->currentMetallic = -1.0f;
+    this->currentMetallicIntensity = -1.0f;
+    this->currentinvertMetallic = -1;
+    this->currentRoughness = -1.0f;
+    this->currentRoughnessIntensity = -1.0f;
+    this->currentinvertRoughness = -1;
+    this->currentReflectionIntensity = -1.0f;
+    this->currentAmbientOcclusionIntensity = -1.0f;
+    this->currentMultiplyColor = vec4(-1.0f);
+    this->currentMultiplyIntensity = -1.0f;
+    this->currentEmissionColor = vec4(-1.0f);
+    this->currentEmissionIntensity = -1.0f;
+    this->setBool("useDiffuseMap", false);
+    this->setBool("useNormalMap", false);
+    this->setBool("useHeightMap", false);
+    this->setBool("useMetallicMap", false);
+    this->setBool("useRoughnessMap", false);
+    this->setBool("useReflectionMap", false);
+    this->setBool("useAmbientOcclusionMap", false);
+    this->setBool("useMultiplyMap", false);
+    this->setBool("useEmissionMap", false);
+    this->opacity = 1.0f;
+    this->diffuseColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
+    this->diffuseIntensity = 1.0f;
+    this->alphaCutThreshold = 0.5f;
+    this->normalIntensity = 1.0f;
+    this->heightIntensity = 1.0f;
+    this->heightLayerRange = vec2(4.0f, 16.0f);
+    this->metallic = metallic;
+    this->metallicIntensity = 1.0f;
+    this->invertMetallic = false;
+    this->roughness = roughness;
+    this->roughnessIntensity = 1.0f;
+    this->invertRoughness = false;
+    this->reflectionIntensity = 1.0f;
+    this->ambientOcclusionIntensity = 1.0f;
+    this->multiplyColor = vec4(1.0f);
+    this->multiplyIntensity = 1.0f;
+    this->emissionColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    this->emissionIntensity = 1.0f;
+}
+PBRShader::PBRShader(string shaderFile, float metallic, float roughness) {
+    string vertexShaderCode;
+    string fragmentShaderCode;
+    ifstream vertexShaderStream;
+    ifstream fragmentShaderStream;
+    vertexShaderStream.exceptions(ifstream::failbit | ifstream::badbit);
+    fragmentShaderStream.exceptions(ifstream::failbit | ifstream::badbit);
+    try {
+        string vertexShaderFile = Engine::main->workingDirectory + shaderFile + ".vs";
+        string fragmentShaderFile = Engine::main->workingDirectory + shaderFile + ".fs";
+        vertexShaderStream.open(vertexShaderFile.c_str());
+        fragmentShaderStream.open(fragmentShaderFile.c_str());
+        stringstream vertexShader, fragmentShader;
+        vertexShader << vertexShaderStream.rdbuf();
+        fragmentShader << fragmentShaderStream.rdbuf();
+        vertexShaderStream.close();
+        fragmentShaderStream.close();
+        vertexShaderCode = vertexShader.str();
+        fragmentShaderCode = fragmentShader.str();
+    }catch(ifstream::failure error) {
+        cout << "\nFailed to load the shaders files: "
+        << Engine::main->workingDirectory + shaderFile << "!\n" << endl;
+        exit(1);
+    }
     this->engineInitializeShader(vertexShaderCode, fragmentShaderCode);
     this->currentOpacity = -1.0f;
     this->currentDiffuseColor = vec4(-1.0f);
@@ -423,7 +571,7 @@ void PBRShader::setEmissionMap(Texture* texture) {
     this->setBool("useEmissionMap", true);
     this->setTexture("emissionMap", texture);
 }
-void PBRShader::engineRenderShader(Geometry *geometry) {
+void PBRShader::engineRenderShader(Geometry *geometry, bool shadowMap) {
     if(this->currentOpacity != this->opacity) {
         this->currentOpacity = this->opacity;
         this->setFloat("opacity", this->opacity);
@@ -500,5 +648,5 @@ void PBRShader::engineRenderShader(Geometry *geometry) {
         this->currentEmissionIntensity = this->emissionIntensity;
         this->setFloat("emissionIntensity", this->emissionIntensity);
     }
-    this->Shader::engineRenderShader(geometry);
+    this->Shader::engineRenderShader(geometry, shadowMap);
 }

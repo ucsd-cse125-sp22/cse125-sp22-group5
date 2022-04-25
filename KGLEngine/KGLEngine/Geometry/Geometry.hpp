@@ -5,13 +5,12 @@
 #define MAX_BONE_INFLUENCE 4
 #define BONES_LIMIT 120
 struct BoneInfo;
-struct AnimationBoneNode;
 class Texture;
 class Shader;
-class Animation;
 class Animator;
 class Font;
 class Node;
+class LightNode;
 struct GeometryVertex {
     vec3 position;
     vec3 normal;
@@ -40,10 +39,11 @@ protected:
     unsigned int vertexBuffers;
     unsigned int elementBuffers;
     unsigned int indiceCount;
-    vector<Animation*> animations;
-    int boneCount;
-    map<string, BoneInfo> bonesInfoMap;
+    unsigned int boneCount;
+    vector<string> boneNames;
+    vector<BoneInfo> boneInfos;
     vector<mat4> boneTransforms;
+    bool skeletalAnimationUpdated;
     mat4 modelTransform;
     unsigned int modelTransformBuffers;
     unsigned int normalTransformBuffers;
@@ -52,10 +52,14 @@ protected:
     vector<mat4> modelTransforms;
     vector<mat4> normalTransforms;
     bool requiresInstanceUpdate;
+    bool hasBoundingSphereInformation;
 public:
     bool isHidden;
     float renderingOrder;
-    unsigned int lightMask;
+    unsigned int lightingBitMask;
+    vec3 boundingSpherePosition;
+    float boundingSphereRadius;
+    unsigned int affectedLightCount;
     Geometry() = default;
     Geometry(aiMesh* mesh);
     Geometry* copy(vector<Animator*>* animators);
@@ -69,18 +73,17 @@ public:
     unsigned int engineGetGeometryVertexArrays();
     unsigned int engineGetGeometryIndiceCount();
     bool engineCheckWhetherGeometryHasBones();
-    bool engineCheckWhetherGeometryHasAnimations();
-    map<string, BoneInfo>* engineGetGeometryBonesInfoMap();
     vector<mat4>* engineGetGeometryBoneTransforms();
-    void engineCalculateGeometryBoneTransforms(AnimationBoneNode* node, mat4 parentTransform, bool first);
     mat4 engineGetGeometryBoneTransform(string name);
-    void engineAddAnimationToGeometry(Animation* animation);
-    void engineUpdateGeometryAnimations();
+    void engineUpdateGeometryBoneIndices(vector<string>* boneNames);
+    void engineUpdateGeometrySkeletalAnimations(vector<mat4> boneTransforms);
+    bool engineCheckWhetherGeometryHasUpdatedSkeletalAnimations();
     void enginePrepareGeometryForRendering(mat4 worldTransform);
-    virtual void engineRenderGeometry();
+    virtual void engineRenderGeometry(bool shadowMap);
     unsigned int engineGeometryAddInstance();
     void engineUpdateGeometryInstanceTransform(unsigned int index, mat4 modelTransform, bool freeze);
     virtual unsigned int engineGetGeometryInstanceCount();
+    bool engineCheckWhetherGeometryIsAffectedByLightNode(LightNode* lightNode);
 };
 class UnitCube final: public Geometry {
 public:
@@ -95,7 +98,7 @@ public:
     ParticleRenderer(unsigned int amount);
     ~ParticleRenderer();
     void engineResetAllParticleData();
-    void engineRenderGeometry() override;
+    void engineRenderGeometry(bool shadowMap) override;
     ParticleData* engineGetParticleData(bool front);
     unsigned int engineGetGeometryInstanceCount() override;
 };
@@ -108,7 +111,7 @@ public:
            string front, string back,
            float maxAnisotropy);
     ~Skybox();
-    void engineRenderGeometry() override;
+    void engineRenderGeometry(bool shadowMap) override;
 };
 class Sprite final: public Geometry {
 public:
@@ -123,7 +126,7 @@ private:
 public:
     TextRenderer();
     ~TextRenderer();
-    void engineRenderGeometry() override;
+    void engineRenderGeometry(bool shadowMap) override;
     void engineSetTextRendererAlpha(float alpha);
     void engineSetTextRendererColor(vec4 color);
     void engineSetTextRendererTexturesAndTransforms(vector<Texture*> textures, vector<mat4> transforms);
