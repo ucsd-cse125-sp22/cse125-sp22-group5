@@ -156,10 +156,10 @@ void ParticleShader::engineSetSpriteSheetAnimation(unsigned int rows, unsigned i
     this->spriteSheetAnimationFPS = FPS;
     this->spriteSheetAnimationFPSVariation = FPSVariation;
 }
-void ParticleShader::engineRenderShader(Geometry* geometry) {
+void ParticleShader::engineRenderShader(Geometry* geometry, bool shadowMap) {
     if(this->currentUseLocalSpace != this->particleNode->useLocalSpace) {
         this->currentUseLocalSpace = this->particleNode->useLocalSpace;
-        this->setBool("useLocalTransform", this->particleNode->useLocalSpace);
+        this->setBool("useLocalSpace", this->particleNode->useLocalSpace);
     }
     if(this->currentIsAdditive != this->particleNode->isAdditive) {
         this->currentIsAdditive = this->particleNode->isAdditive;
@@ -196,5 +196,5 @@ void ParticleShader::engineRenderShader(Geometry* geometry) {
         this->setInt("spriteSheetAnimationRows", this->spriteSheetAnimationRows);
         this->setInt("spriteSheetAnimationColumns", this->spriteSheetAnimationColumns);
     }
-    this->Shader::engineRenderShader(geometry);
+    this->Shader::engineRenderShader(geometry, shadowMap);
 }

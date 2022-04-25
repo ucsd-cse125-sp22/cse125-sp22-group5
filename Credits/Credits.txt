@@ -1,0 +1,4 @@
+Stoneblast:
+	Model: Made by Felix
+	Texture: https://opengameart.org/content/space-skyboxes-0
+	Magic Circle: https://www.cleanpng.com/png-magic-circle-symbol-spell-runes-of-magic-2754711/

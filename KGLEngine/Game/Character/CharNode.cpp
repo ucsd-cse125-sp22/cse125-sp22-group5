@@ -11,6 +11,9 @@
 CharNode::CharNode(vec3 position){
     this->position = position;
     this->moveDirection = vec3(0);
+    
+    this->hitbox = new Hitbox(this->position, vec3(0.4, 0.8, 0.4));
+    this->uninjurable = false;
     this->characterTargetPosition = position;
     this->eulerAngles = vec3(0.0f);
     this->characterTargetEulerAngles = vec3(0.0f);
@@ -21,6 +24,7 @@ CharNode::CharNode(vec3 position){
     this->isLocked = false;
     this->refreshed = true;
     this->uiNode = 0;
+    this->allowAction = true;
 }
 CharNode::~CharNode(){
     
@@ -30,6 +34,7 @@ Node* CharNode::generateBoneNode(string boneName) {
 }
 void CharNode::setModel(Node* model){
     this->modelNode = model;
+    this->modelNode->name = "modelNode";
     this->addChildNode(model);
     this->headTop = generateBoneNode("HeadTop_End");
 }
@@ -56,8 +61,8 @@ void CharNode::setUINode(UINode* uiNode){
     TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
     nameNode->color = vec4(0.1f, 0.1f, 0.1f, 1.0f);
     nameNode->text = "New Character";
-    nameNode->setHorizontalAlignmentToCenter();
-    nameNode->setVerticalAlignmentToTop();
+    nameNode->setCenterHorizontalAlignment();
+    nameNode->setTopVerticalAlignment();
     nameNode->position = vec2(0, -0.07f);
     uiNode->addChildNode(nameNode);
     this->nameNode = nameNode;
@@ -163,36 +168,44 @@ void CharNode::moveCamera(vec2 mouseTranslation){
     }
 }
 void CharNode::moveFront(){
-    this->moveDirection += vec3(this->controlNode->getFrontVectorInWorld().x, 0, this->controlNode->getFrontVectorInWorld().z);
-    this->keyDirection = FRONT;
-    refreshed = false;
+    if (allowAction){
+        this->moveDirection += vec3(this->controlNode->getFrontVectorInWorld().x, 0, this->controlNode->getFrontVectorInWorld().z);
+        this->keyDirection = FRONT;
+        refreshed = false;
+    }
 }
 void CharNode::moveBack(){
-    this->moveDirection += vec3(this->controlNode->getBackVectorInWorld().x, 0, this->controlNode->getBackVectorInWorld().z);
-    this->keyDirection = BACK;
-    refreshed = false;
+    if (allowAction){
+        this->moveDirection += vec3(this->controlNode->getBackVectorInWorld().x, 0, this->controlNode->getBackVectorInWorld().z);
+        this->keyDirection = BACK;
+        refreshed = false;
+    }
 }
 void CharNode::moveLeft(){
-    this->moveDirection += vec3(this->controlNode->getLeftVectorInWorld().x, 0, this->controlNode->getLeftVectorInWorld().z);
-    if (refreshed){
-        keyDirection = LEFT;
-    }else if (this->keyDirection == FRONT){
-        keyDirection = FRONTLEFT;
-    }else if (this->keyDirection == BACK){
-        keyDirection = BACKLEFT;
+    if (allowAction){
+        this->moveDirection += vec3(this->controlNode->getLeftVectorInWorld().x, 0, this->controlNode->getLeftVectorInWorld().z);
+        if (refreshed){
+            keyDirection = LEFT;
+        }else if (this->keyDirection == FRONT){
+            keyDirection = FRONTLEFT;
+        }else if (this->keyDirection == BACK){
+            keyDirection = BACKLEFT;
+        }
+        refreshed = false;
     }
-    refreshed = false;
 }
 void CharNode::moveRight(){
-    this->moveDirection += vec3(this->controlNode->getRightVectorInWorld().x, 0, this->controlNode->getRightVectorInWorld().z);
-    if (refreshed){
-        keyDirection = RIGHT;
-    }else if (this->keyDirection == RIGHT){
-        keyDirection = FRONTRIGHT;
-    }else if (this->keyDirection == BACK){
-        keyDirection = BACKRIGHT;
+    if (allowAction){
+        this->moveDirection += vec3(this->controlNode->getRightVectorInWorld().x, 0, this->controlNode->getRightVectorInWorld().z);
+        if (refreshed){
+            keyDirection = RIGHT;
+        }else if (this->keyDirection == RIGHT){
+            keyDirection = FRONTRIGHT;
+        }else if (this->keyDirection == BACK){
+            keyDirection = BACKRIGHT;
+        }
+        refreshed = false;
     }
-    refreshed = false;
 }
 void CharNode::predictMoveTarget(){
     if (length(this->moveDirection) != 0){
@@ -212,58 +225,60 @@ void CharNode::predictMoveTarget(){
 }
 
 void CharNode::updatePosition(){
-    predictMoveTarget();
-    if(length(this->characterTargetPosition - this->position) > 0.1f){
-        if (this->isLocked){
-            if (this->keyDirection == LEFT){
-                this->stopAndPlay("left strafe", 0.1f, 0.1f);
-            }else if (this->keyDirection == RIGHT){
-                this->stopAndPlay("right strafe", 0.1f, 0.1f);
-            }else if (this->keyDirection == BACK){
-                this->stopAndPlay("back run", 0.1f, 0.1f);
+    if (allowAction){
+        predictMoveTarget();
+        if(length(this->characterTargetPosition - this->position) > 0.1f){
+            if (this->isLocked){
+                if (this->keyDirection == LEFT){
+                    this->stopAndPlay("left strafe", 0.1f, 0.1f);
+                }else if (this->keyDirection == RIGHT){
+                    this->stopAndPlay("right strafe", 0.1f, 0.1f);
+                }else if (this->keyDirection == BACK){
+                    this->stopAndPlay("back run", 0.1f, 0.1f);
+                }else{
+                    this->stopAndPlay("running", 0.1f, 0.1f);
+                }
             }else{
                 this->stopAndPlay("running", 0.1f, 0.1f);
             }
         }else{
-            this->stopAndPlay("running", 0.1f, 0.1f);
+            this->stopAndPlay("idle", 0.1f, 0.1f);
         }
-    }else{
-        this->stopAndPlay("idle", 0.1f, 0.1f);
+        this->position += (this->characterTargetPosition - this->position) * 0.1f;
+        this->hitbox->updatePosition(this->position);
+        vec3 naiveMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles;
+        vec3 moreMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles + vec3(0,360,0);
+        vec3 lessMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles - vec3(0,360,0);
+        if (length(naiveMove) < length(moreMove) && length(naiveMove) < length(lessMove)){
+            this->modelNode->eulerAngles += naiveMove * 0.2f;
+        }else if (length(moreMove) < length(lessMove)){
+            this->modelNode->eulerAngles += moreMove * 0.2f;
+        }else{
+            this->modelNode->eulerAngles += lessMove * 0.2f;
+        }
+        
+        if (this->characterTargetEulerAngles.y > 180){
+            this->characterTargetEulerAngles.y -= 360;
+        }
+        if (this->characterTargetEulerAngles.y < -180){
+            this->characterTargetEulerAngles.y += 360;
+        }
+        
+        if (this->modelNode->eulerAngles.y > 180){
+            this->modelNode->eulerAngles.y -= 360;
+        }
+        if (this->modelNode->eulerAngles.y < -180){
+            this->modelNode->eulerAngles.y += 360;
+        }
+        this->refreshed = true;
+        vec3 positionOnScreen = headTop->getPositionOnScreen();
+        this->uiNode->screenPosition = vec2(positionOnScreen);
+        this->uiNode->scale = vec2(1/pow(distance(headTop->getWorldPosition(), cameraNode->getWorldPosition()), 0.5));
     }
-    this->position += (this->characterTargetPosition - this->position) * 0.1f;
-    vec3 naiveMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles;
-    vec3 moreMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles + vec3(0,360,0);
-    vec3 lessMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles - vec3(0,360,0);
-    if (length(naiveMove) < length(moreMove) && length(naiveMove) < length(lessMove)){
-        this->modelNode->eulerAngles += naiveMove * 0.2f;
-    }else if (length(moreMove) < length(lessMove)){
-        this->modelNode->eulerAngles += moreMove * 0.2f;
-    }else{
-        this->modelNode->eulerAngles += lessMove * 0.2f;
-    }
-    
-    if (this->characterTargetEulerAngles.y > 180){
-        this->characterTargetEulerAngles.y -= 360;
-    }
-    if (this->characterTargetEulerAngles.y < -180){
-        this->characterTargetEulerAngles.y += 360;
-    }
-    
-    if (this->modelNode->eulerAngles.y > 180){
-        this->modelNode->eulerAngles.y -= 360;
-    }
-    if (this->modelNode->eulerAngles.y < -180){
-        this->modelNode->eulerAngles.y += 360;
-    }
-    this->refreshed = true;
-    vec3 positionOnScreen = headTop->getPositionOnScreen();
-    this->uiNode->screenPosition = vec2(positionOnScreen);
-    this->uiNode->scale = vec2(1/pow(distance(headTop->getWorldPosition(), cameraNode->getWorldPosition()), 0.5));
 }
 CharNode* CharNode::copy(vec3 position) {
     CharNode* node = new CharNode(position);
     node->name = this->name;
-    node->tags = this->tags;
     node->isDisabled = this->isDisabled;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
@@ -278,10 +293,29 @@ CharNode* CharNode::copy(vec3 position) {
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
         node->addChildNode(this->childNodes[i]->copy());
+        if(node->childNodes[i]->name == "modelNode"){
+            node->modelNode = node->childNodes[i];
+        }
     }
-    node->modelNode = node->childNodes[1];
     node->headTop = node->generateBoneNode("HeadTop_End");
     node->cameraNode = this->cameraNode;
     return(node);
 }
 
+void CharNode::addMagics(BaseMagic* magic, int key){
+    this->keyBind[key] = magic;
+}
+
+void CharNode::castMagic(int key){
+    if (allowAction && this->keyBind.find(key) != this->keyBind.end() && !this->keyBind[key]->start){
+        allowAction = false;
+        this->stopAndPlay(this->keyBind[key]->actionName, 0.2f, 0.2f);
+        this->keyBind[key]->play(this->getWorldPosition(), this->modelNode->getWorldEulerAngles() - vec3(0, 90, 0));
+        Animation* resume = new Animation(this->name + " resume", this->keyBind[key]->stopTime);
+        resume->setCompletionHandler([&]{
+            this->allowAction = true;
+            //delete resume
+        });
+        Engine::main->playAnimation(resume);
+    }
+}

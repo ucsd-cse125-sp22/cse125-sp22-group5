@@ -3,8 +3,9 @@
 #define Bone_hpp
 #include "../Engine.hpp"
 struct BoneInfo final {
-    int id;
+    unsigned int id;
     mat4 offset;
+    int index;
 };
 struct BoneKeyFramePosition final {
     vec3 position;
@@ -21,7 +22,9 @@ struct BoneKeyFrameScale final {
 class Bone final {
 private:
     string name;
-    mat4 transform;
+    vec3 position;
+    quat rotation;
+    vec3 scale;
     unsigned int currentKeyPositionIndex;
     unsigned int currentKeyRotationIndex;
     unsigned int currentKeyScaleIndex;
@@ -33,7 +36,9 @@ public:
     Bone(string name, aiNodeAnim* channel);
     ~Bone();
     string engineGetName() const;
-    mat4 engineGetTransform();
+    vec3 engineGetBonePosition();
+    quat engineGetBoneRotation();
+    vec3 engineGetBoneScale();
     void engineUpdateBoneAnimation(float animationTime);
 };
 #endif

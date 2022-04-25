@@ -5,15 +5,16 @@
 #include "System/Input.hpp"
 #include "System/FontLibrary.hpp"
 #include "System/Font.hpp"
+#include "System/Animation.hpp"
 #include "Shading/Image.hpp"
 #include "Shading/Texture.hpp"
 #include "Shading/Shader.hpp"
 #include "Geometry/Geometry.hpp"
 #include "SkeletalAnimation/Bone.hpp"
-#include "SkeletalAnimation/Animation.hpp"
 #include "SkeletalAnimation/Animator.hpp"
 #include "Node/Node.hpp"
 class Input;
+class Animation;
 class Skybox;
 class Node;
 class CameraNode;
@@ -32,6 +33,7 @@ private:
     bool cursorHidden;
     bool cursorLocked;
     Node* rootNode;
+    map<string, Animation*> animations;
 public:
     string workingDirectory;
     static Engine* main;
@@ -53,7 +55,10 @@ public:
     bool isRunning();
     bool shouldUpdate();
     void addNode(Node* node);
+    void playAnimation(Animation* animation);
+    void stopAnimation(string name);
     void render();
+    void renderDirectionalLightShadowMap(LightNode* directionalLightNode);
     vec2 getScreenResolution();
     vec2 getWindowResolution();
     float getTime();

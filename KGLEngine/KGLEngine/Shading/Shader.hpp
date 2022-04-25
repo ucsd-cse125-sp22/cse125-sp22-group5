@@ -8,6 +8,9 @@ class ParticleNode;
 class Shader {
 protected:
     static int currentProgramID;
+    static int currentBlendMode;
+    static int currentWriteToDepthBuffer;
+    static int currentDepthFunction;
     unsigned int programID;
     unsigned int blendMode;
     string vertexShaderSourceCode;
@@ -42,7 +45,7 @@ public:
     ~Shader();
     void engineInitializeShader(string vertexShaderCode, string fragmentShaderCode);
     bool engineCheckCompileErrors(unsigned int shader, string type);
-    virtual void engineRenderShader(Geometry* geometry);
+    virtual void engineRenderShader(Geometry* geometry, bool shadowMap);
 };
 class PBRShader final: public Shader {
 private:
@@ -86,6 +89,7 @@ public:
     vec3 emissionColor;
     float emissionIntensity;
     PBRShader(float metallic, float roughness);
+    PBRShader(string shaderFile, float metallic, float roughness);
     PBRShader* copy();
     void setDiffuseMap(Texture* texture);
     void setNormalMap(Texture* texture);
@@ -97,7 +101,7 @@ public:
     void setMultiplyMap(Texture* texture);
     void setEmissionMap(Texture* texture);
     ~PBRShader() = default;
-    void engineRenderShader(Geometry* geometry) override;
+    void engineRenderShader(Geometry* geometry, bool shadowMap) override;
 };
 class SpriteShader final: public Shader {
 private:
@@ -122,7 +126,7 @@ public:
     float emissionIntensity;
     SpriteShader();
     ~SpriteShader();
-    void engineRenderShader(Geometry* geometry) override;
+    void engineRenderShader(Geometry* geometry, bool shadowMap) override;
 };
 class ParticleShader final: public Shader {
 private:
@@ -148,6 +152,6 @@ public:
     void engineSetSpriteSheetAnimation(unsigned int rows, unsigned int columns,
                                        unsigned int initialFrameRange,
                                        unsigned int FPS, unsigned int FPSVariation);
-    void engineRenderShader(Geometry* geometry) override;
+    void engineRenderShader(Geometry* geometry, bool shadowMap) override;
 };
 #endif
