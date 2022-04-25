@@ -3,10 +3,14 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
+#include "Game/Magic/StoneBlast.hpp"
+#include "Game/Hitbox/HitController.hpp"
+
 
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
+
     engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125";
     engine->lockCursor();
     
@@ -1173,8 +1177,13 @@ int main(int argc, char** argv) {
 
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);
-
-
+    
+    
+    HitController enemyHitController;
+    
+    enemyHitController.magics.push_back(stoneMagic);
+    enemyHitController.characters.push_back(enemy);
+    
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
             
@@ -1221,6 +1230,9 @@ int main(int argc, char** argv) {
             
             stoneMagic->updateMagic();
 
+            
+            enemyHitController.checkHit();
+            
 //            vec3 position;
 //            vec3 normalvec;
 //            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +

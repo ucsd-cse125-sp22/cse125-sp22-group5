@@ -25,6 +25,8 @@ CharNode::CharNode(vec3 position){
     this->refreshed = true;
     this->uiNode = 0;
     this->allowAction = true;
+    
+    this->health = 10000;
 }
 CharNode::~CharNode(){
     
@@ -319,3 +321,10 @@ void CharNode::castMagic(int key){
         Engine::main->playAnimation(resume);
     }
 }
+
+
+void CharNode::receiveDamage(int damage){
+    this->health -= damage;
+    cout << this->name << " health " << this->health << endl;
+}
+

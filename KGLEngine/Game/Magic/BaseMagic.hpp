@@ -11,9 +11,12 @@
 #include "../../KGLEngine/Engine.hpp"
 
 struct hitLine{
+    bool canDamage;
     vec3 start;
     vec3 end;
+    vector<Node*> damagedChar;
 };
+
 class BaseMagic: public Node{
 public:
     vector<hitLine> hits;
