@@ -9,9 +9,9 @@
 
 
 void MapBoxObject::transform(glm::mat4 *matrix) {
-    *matrix = translate(mat4(1), position) * glm::eulerAngleXYZ(glm::radians(eulerAngles.x),
-                                                                glm::radians(eulerAngles.y),
-                                                                glm::radians(eulerAngles.z)) * scale(mat4(1), size);
+    *matrix = translate(mat4(1), position) * glm::eulerAngleYZX(glm::radians(eulerAngles.y),
+                                                                glm::radians(eulerAngles.z),
+                                                                glm::radians(eulerAngles.x)) * scale(mat4(1), size);
 }
 
 bool MapBoxObject::hitTest(glm::vec3 start, glm::vec3 end, glm::vec3 *position, glm::vec3 *normal, float *timeHit) {
