@@ -14,10 +14,11 @@
 #include "../Character/CharNode.hpp"
 
 class HitController{
+public:
     vector<CharNode*> characters;
     vector<BaseMagic*> magics;
     
-    BaseMagic* checkHit();
+    void checkHit();
 };
 
 #endif /* HitController_hpp */
