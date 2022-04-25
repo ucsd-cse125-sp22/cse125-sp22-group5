@@ -18,7 +18,11 @@ class BaseMagic: public Node{
 public:
     vector<hitLine> hits;
     float damage;
-    virtual void play()=0;
+    bool start;
+    string actionName;
+    float stopTime;
+    float waitTime;
+    virtual void play(vec3 position, vec3 euler)=0;
     virtual void updateMagic()=0;
 };
 

@@ -10,6 +10,8 @@
 
 #include "../../KGLEngine/Engine.hpp"
 #include "../Hitbox/Hitbox.hpp"
+#include "../Magic/BaseMagic.hpp"
+#include "../Magic/StoneBlast.hpp"
 
 class Geometry;
 class Animator;
@@ -72,5 +74,11 @@ public:
     void moveRight();
     void predictMoveTarget();
     void updatePosition();
+    
+    bool allowAction;
+    
+    map<int, BaseMagic*> keyBind;
+    void addMagics(BaseMagic* magic, int key);
+    void castMagic(int key);
 };
 #endif /* CharNode_hpp */

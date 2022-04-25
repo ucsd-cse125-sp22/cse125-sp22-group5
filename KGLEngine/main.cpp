@@ -3,7 +3,7 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
-#include "Game/Magic/BurstStones.hpp"
+#include "Game/Magic/StoneBlast.hpp"
 
 int main(int argc, char** argv) {
     
@@ -154,7 +154,7 @@ int main(int argc, char** argv) {
     engine->mainCameraNode = cameraNode;
     
     Node* charModel = new Node();
-    charModel->scale = vec3(0.005f);
+    charModel->scale = vec3(0.5f);
     charModel->loadModelFile("/Resources/Game/Character/MT.fbx");
     charModel->geometries[0]->setShader(mixamoMaterial);
     charModel->geometries[1]->isHidden = true;
@@ -174,6 +174,9 @@ int main(int argc, char** argv) {
     character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.fbx");
     
     character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll.dae");
+    
+    character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
+    
     UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
     engine->addNode(baseNode);
@@ -187,7 +190,7 @@ int main(int argc, char** argv) {
     enemy->name = "enemy1";
     enemy->setEularAngle(vec3(0,90.0f,0));
     
-    enemy->modelNode->getAnimator("idle")->play(0.0f, 0.0f);
+    enemy->stopAndPlay("idle", 0.0f, 0.0f);
     engine->addNode(enemy);
     baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
@@ -205,17 +208,17 @@ int main(int argc, char** argv) {
     
     Node* weapon = new Node();
     weapon->loadModelFile("/Resources/Game/Character/MT.fbx");
-    weapon->scale = vec3(0.7);
+    weapon->scale = vec3(0.005);
     weapon->geometries[0]->setShader(mixamoMaterial);
     weapon->geometries[1]->isHidden = true;
     weaponNode->addChildNode(weapon);
     
-    Node* intersection = new Node();
-    intersection->loadModelFile("/Resources/Game/Character/MT.fbx");
-    intersection->scale = vec3(0.002);
-    intersection->geometries[0]->setShader(mixamoMaterial);
-    intersection->geometries[1]->isHidden = true;
-    engine->addNode(intersection);
+//    Node* intersection = new Node();
+//    intersection->loadModelFile("/Resources/Game/Character/MT.fbx");
+//    intersection->scale = vec3(0.002);
+//    intersection->geometries[0]->setShader(mixamoMaterial);
+//    intersection->geometries[1]->isHidden = true;
+//    engine->addNode(intersection);
 //
 //    Node* normal = new Node();
 //    normal->loadUnitCube();
@@ -230,7 +233,8 @@ int main(int argc, char** argv) {
     
 
     
-    BurstStones* magic1 = new BurstStones(vec3(0), vec3(0,90,0));
+    StoneBlast* stoneMagic = new StoneBlast();
+    character->addMagics(stoneMagic, KEY_1);
     
     
     while(engine->isRunning()) {
@@ -251,7 +255,7 @@ int main(int argc, char** argv) {
                 character->moveRight();
             }
             if(engine->input->wasKeyReleased(KEY_SPACE)){
-                character->stopAndPlay("roll", 0.5f, 1.f);
+                character->toggleLock(enemies);
             }
             
             
@@ -267,11 +271,17 @@ int main(int argc, char** argv) {
                 enemies[0]->characterTargetEulerAngles += vec3(0, 90, 0);
             }
             
+            if(engine->input->wasKeyReleased(KEY_1)){
+                character->castMagic(KEY_1);
+            }
+            
             for (int i = 0; i < enemies.size(); i++){
                 enemies[i]->updatePosition();
                 enemies[i]->updateTransform();
 //                cout << to_string(enemies[i]->getWorldTransform()) << endl;
             }
+            
+            stoneMagic->updateMagic();
             
 //            vec3 position;
 //            vec3 normalvec;
