@@ -11,6 +11,9 @@
 CharNode::CharNode(vec3 position){
     this->position = position;
     this->moveDirection = vec3(0);
+    
+    this->hitbox = new Hitbox(this->position, vec3(0.4, 0.8, 0.4));
+    this->uninjurable = false;
     this->characterTargetPosition = position;
     this->eulerAngles = vec3(0.0f);
     this->characterTargetEulerAngles = vec3(0.0f);
@@ -30,6 +33,7 @@ Node* CharNode::generateBoneNode(string boneName) {
 }
 void CharNode::setModel(Node* model){
     this->modelNode = model;
+    this->modelNode->name = "modelNode";
     this->addChildNode(model);
     this->headTop = generateBoneNode("HeadTop_End");
 }
@@ -231,6 +235,7 @@ void CharNode::updatePosition(){
         this->stopAndPlay("idle", 0.1f, 0.1f);
     }
     this->position += (this->characterTargetPosition - this->position) * 0.1f;
+    this->hitbox->updatePosition(this->position);
     vec3 naiveMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles;
     vec3 moreMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles + vec3(0,360,0);
     vec3 lessMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles - vec3(0,360,0);
@@ -278,8 +283,10 @@ CharNode* CharNode::copy(vec3 position) {
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
         node->addChildNode(this->childNodes[i]->copy());
+        if(node->childNodes[i]->name == "modelNode"){
+            node->modelNode = node->childNodes[i];
+        }
     }
-    node->modelNode = node->childNodes[1];
     node->headTop = node->generateBoneNode("HeadTop_End");
     node->cameraNode = this->cameraNode;
     return(node);

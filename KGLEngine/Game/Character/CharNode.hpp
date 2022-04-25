@@ -9,6 +9,7 @@
 #define CharNode_hpp
 
 #include "../../KGLEngine/Engine.hpp"
+#include "../Hitbox/Hitbox.hpp"
 
 class Geometry;
 class Animator;
@@ -33,6 +34,8 @@ public:
     void setModel(Node* model);
     int health;
     int stamina;
+    Hitbox* hitbox;
+    bool uninjurable;
     vector<string> animatorNames;
     
     CameraNode* cameraNode;
