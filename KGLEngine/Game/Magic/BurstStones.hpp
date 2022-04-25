@@ -13,6 +13,7 @@
 #include "BaseMagic.hpp"
 
 class BurstStones : public BaseMagic{
+public:
     BurstStones(vec3 position, vec3 eularAngle);
     void updateMagic();
     void play();

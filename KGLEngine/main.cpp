@@ -3,6 +3,7 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
+#include "Game/Magic/BurstStones.hpp"
 
 int main(int argc, char** argv) {
     
@@ -34,7 +35,6 @@ int main(int argc, char** argv) {
     spotLight->setSpotLight(1.0f, 20.0f, 20.0f, 30.0f);
     spotLight->position = vec3(0.0f, 2.0f, 0.0f);
     spotLight->eulerAngles = vec3(0.0f, 0.0f, -30.0f);
-    spotLight->lightMask = 2;
     engine->addNode(spotLight);
     
     Node* sceneNode = new Node();
@@ -230,6 +230,9 @@ int main(int argc, char** argv) {
     
 
     
+    BurstStones* magic1 = new BurstStones(vec3(0), vec3(0,90,0));
+    
+    
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
             
@@ -270,31 +273,31 @@ int main(int argc, char** argv) {
 //                cout << to_string(enemies[i]->getWorldTransform()) << endl;
             }
             
-            vec3 position;
-            vec3 normalvec;
-            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
-                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
-                intersection->isDisabled = false;
-                intersection->position = position;
-                normalvec = normalize(normalvec);
-                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
-                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
-                if (normalvec.y > 0.9)
-                    intersection->eulerAngles = vec3(0);
-                else if (normalvec.y < -0.9)
-                    intersection->eulerAngles = vec3(0, 0, 180);
-                else
-                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
-//                intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
-//                normal->position = intersection->position + normalvec;
-                
-//                intersection->getUpVectorInWorld()
-                //cout << "position: " << to_string(position) << endl;
-                //cout << "angle: " << to_string(intersection->eulerAngles) << endl;
-            }
-            else {
-                intersection->isDisabled = true;
-            }
+//            vec3 position;
+//            vec3 normalvec;
+//            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
+//                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
+//                intersection->isDisabled = false;
+//                intersection->position = position;
+//                normalvec = normalize(normalvec);
+//                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
+//                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
+//                if (normalvec.y > 0.9)
+//                    intersection->eulerAngles = vec3(0);
+//                else if (normalvec.y < -0.9)
+//                    intersection->eulerAngles = vec3(0, 0, 180);
+//                else
+//                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
+//               intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
+//               normal->position = intersection->position + normalvec;
+//
+//               intersection->getUpVectorInWorld()
+//                //cout << "position: " << to_string(position) << endl;
+//                //cout << "angle: " << to_string(intersection->eulerAngles) << endl;
+//            }
+//            else {
+//                intersection->isDisabled = true;
+//            }
             
             
             engine->render();
