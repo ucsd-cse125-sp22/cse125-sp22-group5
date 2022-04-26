@@ -80,5 +80,6 @@ public:
     map<int, BaseMagic*> keyBind;
     void addMagics(BaseMagic* magic, int key);
     void castMagic(int key);
+    void receiveDamage(int damage);
 };
 #endif /* CharNode_hpp */

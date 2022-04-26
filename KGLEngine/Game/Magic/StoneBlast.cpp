@@ -95,41 +95,47 @@ StoneBlast::StoneBlast(){
             Engine::main->playAnimation(spins[this->rounds[0]]);
 
             moveStones(0);
+            
+            this->hits[this->rounds[0]].canDamage = true;
+            this->hits[this->rounds[0]].start = stones[this->rounds[0]]->getWorldPosition() + normalize(stones[this->rounds[0]]->getBackVectorInWorld()) * 0.2f;
+            this->hits[this->rounds[0]].end = stones[this->rounds[0]]->getWorldPosition() + normalize(stones[this->rounds[0]]->getFrontVectorInWorld()) * 0.2f;
 
             this->rounds[0] += 1;
         });
         
         forward->setCompletionHandler([&]{
             moveStones(1);
-            
+            hits[this->rounds[1]].damagedChar.clear();
             this->rounds[1] += 1;
         });
         
         forward2->setCompletionHandler([&]{
             this->stones[this->rounds[2]]->removeFromParentNode();
+            this->hits[this->rounds[2]].canDamage = false;
             this->rounds[2] += 1;
         });
         
+        hitLine hit;
+        hit.canDamage = false;
+        hits.push_back(hit);
     }
     cleanup = new Animation(this->name + "cleanup", 6 + this->waitTime);
     cleanup->setCompletionHandler([&]{
         start = false;
-        hits.clear();
         this->rounds = {0,0,0};
         for (int i = 0; i < stones.size(); i++){
             stones[i]->removeFromParentNode();
+            hits[i].canDamage = false;
+            hits[i].damagedChar.clear();
         }
         this->removeFromParentNode();
     });
 }
 void StoneBlast::updateMagic(){
     if (start){
-        hits.clear();
         for (int i = 0; i < this->rounds[0]; i++){
-            hitLine hit;
-            hit.start = stones[i]->getWorldPosition() + stones[i]->getBackVectorInWorld() * 0.05f;
-            hit.end = stones[i]->getWorldPosition() + stones[i]->getFrontVectorInWorld() *      0.05f;
-            hits.push_back(hit);
+            hits[i].start = stones[i]->getWorldPosition() + normalize(stones[i]->getBackVectorInWorld()) * 0.2f;
+            hits[i].end = stones[i]->getWorldPosition() + normalize(stones[i]->getFrontVectorInWorld()) * 0.2f;
         }
     }
 }
@@ -149,6 +155,7 @@ void StoneBlast::play(vec3 position, vec3 euler){
     }
 }
 void StoneBlast:: moveStones(int roundNum){
+    
     vec3 randomEuler = vec3(0, float(glm::linearRand(-500, 500))/100, float(glm::linearRand(-100, 100))/100);
     vec3 randomPosition = vec3(0.8, randomEuler.z/10, randomEuler.y/50);
     

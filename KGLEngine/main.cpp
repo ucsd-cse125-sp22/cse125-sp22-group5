@@ -3,6 +3,9 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
+#include "Game/Magic/StoneBlast.hpp"
+#include "Game/Hitbox/HitController.hpp"
+
 
 int main(int argc, char** argv) {
     
@@ -1164,12 +1167,21 @@ int main(int argc, char** argv) {
 
 
 
+
+
+
     vector<Node*> characters;
     
+
 
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);
 
+
+    HitController enemyHitController;
+
+    enemyHitController.magics.push_back(stoneMagic);
+    enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
@@ -1216,6 +1228,9 @@ int main(int argc, char** argv) {
             }
             
             stoneMagic->updateMagic();
+
+
+            enemyHitController.checkHit();
 
 //            vec3 position;
 //            vec3 normalvec;
