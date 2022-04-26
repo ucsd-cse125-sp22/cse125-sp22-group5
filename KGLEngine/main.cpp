@@ -7,12 +7,12 @@
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
-    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125";
+    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
     engine->lockCursor();
     
-    Skybox* skybox = new Skybox("/Resources/Development/Skybox/AR.png", "/Resources/Development/Skybox/AL.png",
-                                "/Resources/Development/Skybox/AT.png", "/Resources/Development/Skybox/ABo.png",
-                                "/Resources/Development/Skybox/AF.png", "/Resources/Development/Skybox/AB.png",
+    Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
+                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
+                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
                                 2.0f);
     engine->skybox = skybox;
     
@@ -34,13 +34,13 @@ int main(int argc, char** argv) {
     spotLight->setSpotLight(1.0f, 20.0f, 20.0f, 30.0f);
     spotLight->position = vec3(0.0f, 2.0f, 0.0f);
     spotLight->eulerAngles = vec3(0.0f, 0.0f, -30.0f);
-    spotLight->lightMask = 2;
+    spotLight->lightingBitMask = 2;
     engine->addNode(spotLight);
     
     Node* sceneNode = new Node();
     engine->addNode(sceneNode);
     
-    Texture* reflection = new Texture("/Resources/Development/PBR/RF.png", 0.0f, false);
+    Texture* reflection = new Texture("/Resources/Game/PBR/RF.png", 0.0f, false);
     
     PBRShader* mapShader = new PBRShader(0.5f, 0.5f);
     mapShader->setReflectionMap(reflection);
@@ -1164,12 +1164,8 @@ int main(int argc, char** argv) {
 
 
 
-
-
-
     vector<Node*> characters;
     
-
 
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);

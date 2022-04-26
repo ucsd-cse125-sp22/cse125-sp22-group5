@@ -36,7 +36,7 @@ void CharNode::setModel(Node* model){
     this->modelNode = model;
     this->modelNode->name = "modelNode";
     this->addChildNode(model);
-    this->headTop = generateBoneNode("HeadTop_End");
+    this->headTop = generateBoneNode("Head");
 }
 void CharNode::setControl(Node* control){
     this->controlNode = control;
@@ -56,14 +56,14 @@ void CharNode::setName(string name) {
 }
 void CharNode::setUINode(UINode* uiNode){
     this->uiNode = uiNode;
-    FontLibrary* fontLibrary = new FontLibrary();
+    FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
     Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
     TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
     nameNode->color = vec4(0.1f, 0.1f, 0.1f, 1.0f);
     nameNode->text = "New Character";
     nameNode->setCenterHorizontalAlignment();
     nameNode->setTopVerticalAlignment();
-    nameNode->position = vec2(0, -0.07f);
+    nameNode->position = vec2(0, -0.12f);
     uiNode->addChildNode(nameNode);
     this->nameNode = nameNode;
 }
@@ -270,10 +270,12 @@ void CharNode::updatePosition(){
         if (this->modelNode->eulerAngles.y < -180){
             this->modelNode->eulerAngles.y += 360;
         }
-        this->refreshed = true;
+//        this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->screenPosition = vec2(positionOnScreen);
-        this->uiNode->scale = vec2(1/pow(distance(headTop->getWorldPosition(), cameraNode->getWorldPosition()), 0.5));
+        cout << "head position: " << to_string(headTop->position) << endl;
+        cout << "screen position: " << to_string(positionOnScreen) << endl;
+        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
+        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 }
 CharNode* CharNode::copy(vec3 position) {
@@ -297,7 +299,7 @@ CharNode* CharNode::copy(vec3 position) {
             node->modelNode = node->childNodes[i];
         }
     }
-    node->headTop = node->generateBoneNode("HeadTop_End");
+    node->headTop = node->generateBoneNode("Head");
     node->cameraNode = this->cameraNode;
     return(node);
 }
