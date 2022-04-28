@@ -13,6 +13,9 @@
 		12309CA8281A022500423625 /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA3281A022500423625 /* BaseMagic.cpp */; };
 		12309CA9281A022500423625 /* StoneBlast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA4281A022500423625 /* StoneBlast.cpp */; };
 		12309CAC281A024800423625 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CAA281A024800423625 /* Animation.cpp */; };
+		1265310A281A125C00A712E1 /* Trajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12653108281A125C00A712E1 /* Trajectory.cpp */; };
+		1265310D281A22F200A712E1 /* MagicManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1265310B281A22F200A712E1 /* MagicManager.cpp */; };
+		12653110281A230300A712E1 /* LocalEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1265310E281A230300A712E1 /* LocalEffect.cpp */; };
 		12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12EA9AEF280FE68900541504 /* CharNode.cpp */; };
 		C231B3222804AAAF0030CD85 /* PBRShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C231B3212804AAAF0030CD85 /* PBRShader.cpp */; };
 		C26888AD280CC23D004E500B /* ParticleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C26888AC280CC23D004E500B /* ParticleNode.cpp */; };
@@ -74,6 +77,12 @@
 		12309CA4281A022500423625 /* StoneBlast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoneBlast.cpp; sourceTree = "<group>"; };
 		12309CAA281A024800423625 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		12309CAB281A024800423625 /* Animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
+		12653108281A125C00A712E1 /* Trajectory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Trajectory.cpp; sourceTree = "<group>"; };
+		12653109281A125C00A712E1 /* Trajectory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Trajectory.hpp; sourceTree = "<group>"; };
+		1265310B281A22F200A712E1 /* MagicManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MagicManager.cpp; sourceTree = "<group>"; };
+		1265310C281A22F200A712E1 /* MagicManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MagicManager.hpp; sourceTree = "<group>"; };
+		1265310E281A230300A712E1 /* LocalEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalEffect.cpp; sourceTree = "<group>"; };
+		1265310F281A230300A712E1 /* LocalEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LocalEffect.hpp; sourceTree = "<group>"; };
 		12EA9AEF280FE68900541504 /* CharNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharNode.cpp; sourceTree = "<group>"; };
 		12EA9AF0280FE68900541504 /* CharNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharNode.hpp; sourceTree = "<group>"; };
 		C231B31B280351120030CD85 /* glm_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glm_helper.h; sourceTree = "<group>"; };
@@ -161,12 +170,18 @@
 		12309C9E281A022500423625 /* Magic */ = {
 			isa = PBXGroup;
 			children = (
-				12309C9F281A022500423625 /* StoneBlast.hpp */,
-				12309CA0281A022500423625 /* ThousandBlade.cpp */,
 				12309CA1281A022500423625 /* BaseMagic.hpp */,
-				12309CA2281A022500423625 /* ThousandBlade.hpp */,
 				12309CA3281A022500423625 /* BaseMagic.cpp */,
+				1265310C281A22F200A712E1 /* MagicManager.hpp */,
+				1265310B281A22F200A712E1 /* MagicManager.cpp */,
+				12309CA2281A022500423625 /* ThousandBlade.hpp */,
+				12309CA0281A022500423625 /* ThousandBlade.cpp */,
+				12309C9F281A022500423625 /* StoneBlast.hpp */,
 				12309CA4281A022500423625 /* StoneBlast.cpp */,
+				12653109281A125C00A712E1 /* Trajectory.hpp */,
+				12653108281A125C00A712E1 /* Trajectory.cpp */,
+				1265310F281A230300A712E1 /* LocalEffect.hpp */,
+				1265310E281A230300A712E1 /* LocalEffect.cpp */,
 			);
 			path = Magic;
 			sourceTree = "<group>";
@@ -420,6 +435,7 @@
 			files = (
 				C26888AD280CC23D004E500B /* ParticleNode.cpp in Sources */,
 				C2F7796B2807C309001A214D /* SpriteNode.cpp in Sources */,
+				1265310D281A22F200A712E1 /* MagicManager.cpp in Sources */,
 				12309CAC281A024800423625 /* Animation.cpp in Sources */,
 				C294F8F027FCF9A6002B6550 /* main.cpp in Sources */,
 				C2AD2E8927FF0EE700A493D6 /* Bone.cpp in Sources */,
@@ -448,8 +464,10 @@
 				C2AD2E9227FF0EE700A493D6 /* Animator.cpp in Sources */,
 				C231B3222804AAAF0030CD85 /* PBRShader.cpp in Sources */,
 				C2AD2E8F27FF0EE700A493D6 /* Texture.cpp in Sources */,
+				1265310A281A125C00A712E1 /* Trajectory.cpp in Sources */,
 				12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */,
 				C2AD2E8B27FF0EE700A493D6 /* Input.cpp in Sources */,
+				12653110281A230300A712E1 /* LocalEffect.cpp in Sources */,
 				C2AD2E8A27FF0EE700A493D6 /* Geometry.cpp in Sources */,
 				C2F7796D2807D9EF001A214D /* TextNode.cpp in Sources */,
 				C2F7795A28072F5B001A214D /* UINode.cpp in Sources */,
