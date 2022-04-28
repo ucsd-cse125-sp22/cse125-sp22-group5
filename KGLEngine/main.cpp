@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
     mixamoMaterial->invertRoughness = true;
     mixamoMaterial->setReflectionMap(reflection);
     
-    CharNode* character = new CharNode(vec3(0.0f, 0.0f, 0.0f));
+    CharNode* character = new CharNode(vec3(0.0f, -1.0f, 0.0f));
     character->name = "main character";
     
     Node* controlNode = new Node();
@@ -189,7 +189,7 @@ int main(int argc, char** argv) {
     
     vector<CharNode*> enemies;
     
-    CharNode* enemy = character->copy(vec3(2.0, 0.0f, 2.0f));
+    CharNode* enemy = character->copy(vec3(2.0, -1.0f, 2.0f));
     enemy->name = "enemy1";
     enemy->setEularAngle(vec3(0,90.0f,0));
     
