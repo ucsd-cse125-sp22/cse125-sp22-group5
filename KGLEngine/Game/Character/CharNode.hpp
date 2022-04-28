@@ -28,7 +28,7 @@ enum direction{
     BACKLEFT = 7,
     BACKRIGHT = 8
 };
-class CharNode : public Node {
+class CharNode final : public Node {
 public:
     CharNode(vec3 position);
     ~CharNode();

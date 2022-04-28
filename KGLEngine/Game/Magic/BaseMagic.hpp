@@ -9,18 +9,11 @@
 #define BaseMagic_hpp
 
 #include "../../KGLEngine/Engine.hpp"
-
-struct hitLine{
-    bool canDamage;
-    vec3 start;
-    vec3 end;
-    vector<Node*> damagedChar;
-};
+#include "Trajectory.hpp"
 
 class BaseMagic: public Node{
 public:
-    vector<hitLine> hits;
-    float damage;
+    vector<Trajectory*> Trajectories;
     bool start;
     string actionName;
     float stopTime;
