@@ -7,12 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12309CA5281A022500423625 /* Hitbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9C281A022500423625 /* Hitbox.cpp */; };
+		12309CA6281A022500423625 /* HitController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9D281A022500423625 /* HitController.cpp */; };
+		12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA0281A022500423625 /* ThousandBlade.cpp */; };
+		12309CA8281A022500423625 /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA3281A022500423625 /* BaseMagic.cpp */; };
+		12309CA9281A022500423625 /* StoneBlast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA4281A022500423625 /* StoneBlast.cpp */; };
+		12309CAC281A024800423625 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CAA281A024800423625 /* Animation.cpp */; };
+		1265315F281CC04800A712E1 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1265315E281CC04800A712E1 /* Projectile.cpp */; };
 		12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12EA9AEF280FE68900541504 /* CharNode.cpp */; };
 		C294F8F027FCF9A6002B6550 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C294F8E527FCF9A6002B6550 /* main.cpp */; };
 		C294F8F527FCFB19002B6550 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F427FCFB19002B6550 /* OpenGL.framework */; };
 		C294F8F727FCFB22002B6550 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F627FCFB22002B6550 /* libglfw.3.3.dylib */; };
 		C294F8F927FCFB27002B6550 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F827FCFB27002B6550 /* libGLEW.2.2.0.dylib */; };
 		C294F8FB27FCFB2E002B6550 /* libassimp.5.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */; };
+		C2AD2E8927FF0EE700A493D6 /* Bone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7027FF0EE700A493D6 /* Bone.cpp */; };
+		C2AD2E8A27FF0EE700A493D6 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7127FF0EE700A493D6 /* Geometry.cpp */; };
+		C2AD2E8B27FF0EE700A493D6 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7227FF0EE700A493D6 /* Input.cpp */; };
+		C2AD2E8C27FF0EE700A493D6 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7327FF0EE700A493D6 /* Image.cpp */; };
+		C2AD2E8D27FF0EE700A493D6 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7427FF0EE700A493D6 /* Engine.cpp */; };
+		C2AD2E8E27FF0EE700A493D6 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7627FF0EE700A493D6 /* Node.cpp */; };
+		C2AD2E8F27FF0EE700A493D6 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7727FF0EE700A493D6 /* Texture.cpp */; };
+		C2AD2E9027FF0EE700A493D6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7927FF0EE700A493D6 /* Shader.cpp */; };
+		C2AD2E9227FF0EE700A493D6 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2AD2E7D27FF0EE700A493D6 /* Animator.cpp */; };
+		C2F7794E280666BE001A214D /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7794D280666BE001A214D /* Skybox.cpp */; };
+		C2F7795828072F4E001A214D /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7795728072F4E001A214D /* Sprite.cpp */; };
+		C2F7795A28072F5B001A214D /* UINode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7795928072F5B001A214D /* UINode.cpp */; };
+		C2F7795E28075612001A214D /* SpriteShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2F7795C28075612001A214D /* SpriteShader.cpp */; };
 		C2F7796028078726001A214D /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
 		E24BF734281754270044E868 /* ThousandBlade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF72F281754270044E868 /* ThousandBlade.cpp */; };
 		E24BF735281754270044E868 /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF732281754270044E868 /* BaseMagic.cpp */; };
@@ -62,6 +82,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		122788D6281CDADB001A9188 /* magics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = magics.hpp; sourceTree = "<group>"; };
+		12309C9A281A022500423625 /* Hitbox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Hitbox.hpp; sourceTree = "<group>"; };
+		12309C9B281A022500423625 /* HitController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HitController.hpp; sourceTree = "<group>"; };
+		12309C9C281A022500423625 /* Hitbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hitbox.cpp; sourceTree = "<group>"; };
+		12309C9D281A022500423625 /* HitController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitController.cpp; sourceTree = "<group>"; };
+		12309C9F281A022500423625 /* StoneBlast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StoneBlast.hpp; sourceTree = "<group>"; };
+		12309CA0281A022500423625 /* ThousandBlade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThousandBlade.cpp; sourceTree = "<group>"; };
+		12309CA1281A022500423625 /* BaseMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BaseMagic.hpp; sourceTree = "<group>"; };
+		12309CA2281A022500423625 /* ThousandBlade.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThousandBlade.hpp; sourceTree = "<group>"; };
+		12309CA3281A022500423625 /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMagic.cpp; sourceTree = "<group>"; };
+		12309CA4281A022500423625 /* StoneBlast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoneBlast.cpp; sourceTree = "<group>"; };
+		12309CAA281A024800423625 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
+		12309CAB281A024800423625 /* Animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
+		1265315D281CC04800A712E1 /* Projectile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Projectile.hpp; sourceTree = "<group>"; };
+		1265315E281CC04800A712E1 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		12653161281CC42D00A712E1 /* includes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = includes.hpp; sourceTree = "<group>"; };
 		12EA9AEF280FE68900541504 /* CharNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharNode.cpp; sourceTree = "<group>"; };
 		12EA9AF0280FE68900541504 /* CharNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharNode.hpp; sourceTree = "<group>"; };
 		C294F8C127FCF903002B6550 /* KGLEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KGLEngine; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +107,32 @@
 		C294F8F627FCFB22002B6550 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../opt/homebrew/Cellar/glfw/3.3.6/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		C294F8F827FCFB27002B6550 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../opt/homebrew/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.0.dylib; path = ../../../../opt/homebrew/Cellar/assimp/5.2.3/lib/libassimp.5.2.0.dylib; sourceTree = "<group>"; };
+		C2AD2E7027FF0EE700A493D6 /* Bone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bone.cpp; sourceTree = "<group>"; };
+		C2AD2E7127FF0EE700A493D6 /* Geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
+		C2AD2E7227FF0EE700A493D6 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
+		C2AD2E7327FF0EE700A493D6 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		C2AD2E7427FF0EE700A493D6 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
+		C2AD2E7627FF0EE700A493D6 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		C2AD2E7727FF0EE700A493D6 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		C2AD2E7827FF0EE700A493D6 /* Animator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animator.hpp; sourceTree = "<group>"; };
+		C2AD2E7927FF0EE700A493D6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		C2AD2E7B27FF0EE700A493D6 /* Node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
+		C2AD2E7C27FF0EE700A493D6 /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
+		C2AD2E7D27FF0EE700A493D6 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
+		C2AD2E7E27FF0EE700A493D6 /* Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		C2AD2E7F27FF0EE700A493D6 /* Bone.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bone.hpp; sourceTree = "<group>"; };
+		C2AD2E8027FF0EE700A493D6 /* Geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		C2AD2E8127FF0EE700A493D6 /* Input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
+		C2AD2E8327FF0EE700A493D6 /* keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
+		C2AD2E8427FF0EE700A493D6 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		C2AD2E8527FF0EE700A493D6 /* libraries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libraries.h; sourceTree = "<group>"; };
+		C2AD2E8627FF0EE700A493D6 /* assimp_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp_helper.h; sourceTree = "<group>"; };
+		C2AD2E8727FF0EE700A493D6 /* Image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
+		C2AD2E8827FF0EE700A493D6 /* Engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
+		C2F7794D280666BE001A214D /* Skybox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Skybox.cpp; sourceTree = "<group>"; };
+		C2F7795728072F4E001A214D /* Sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		C2F7795928072F5B001A214D /* UINode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UINode.cpp; sourceTree = "<group>"; };
+		C2F7795C28075612001A214D /* SpriteShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteShader.cpp; sourceTree = "<group>"; };
 		C2F7795F28078726001A214D /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../opt/homebrew/Cellar/freetype/2.12.0/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		E24BF72E281754270044E868 /* StoneBlast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StoneBlast.hpp; sourceTree = "<group>"; };
 		E24BF72F281754270044E868 /* ThousandBlade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThousandBlade.cpp; sourceTree = "<group>"; };
@@ -147,11 +209,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12309C99281A022500423625 /* Hitbox */ = {
+			isa = PBXGroup;
+			children = (
+				12309C9A281A022500423625 /* Hitbox.hpp */,
+				12309C9B281A022500423625 /* HitController.hpp */,
+				12309C9C281A022500423625 /* Hitbox.cpp */,
+				12309C9D281A022500423625 /* HitController.cpp */,
+			);
+			path = Hitbox;
+			sourceTree = "<group>";
+		};
+		12309C9E281A022500423625 /* Magic */ = {
+			isa = PBXGroup;
+			children = (
+				12309CA1281A022500423625 /* BaseMagic.hpp */,
+				12309CA3281A022500423625 /* BaseMagic.cpp */,
+				12309CA2281A022500423625 /* ThousandBlade.hpp */,
+				12309CA0281A022500423625 /* ThousandBlade.cpp */,
+				12309C9F281A022500423625 /* StoneBlast.hpp */,
+				12309CA4281A022500423625 /* StoneBlast.cpp */,
+				1265315D281CC04800A712E1 /* Projectile.hpp */,
+				1265315E281CC04800A712E1 /* Projectile.cpp */,
+			);
+			path = Magic;
+			sourceTree = "<group>";
+		};
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				E24BF737281754360044E868 /* Hitbox */,
-				E24BF72D281754270044E868 /* Magic */,
+				122788D6281CDADB001A9188 /* magics.hpp */,
+				12653161281CC42D00A712E1 /* includes.hpp */,
+				12309C99281A022500423625 /* Hitbox */,
+				12309C9E281A022500423625 /* Magic */,
 				E28020832813159700A810E7 /* Map */,
 				12EA9AF3280FE6C600541504 /* Character */,
 			);
@@ -167,6 +257,63 @@
 			path = Character;
 			sourceTree = "<group>";
 		};
+		C27440232800A85A009DDD9F /* SkeletalAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				C2AD2E7F27FF0EE700A493D6 /* Bone.hpp */,
+				C2AD2E7027FF0EE700A493D6 /* Bone.cpp */,
+				C2AD2E7827FF0EE700A493D6 /* Animator.hpp */,
+				C2AD2E7D27FF0EE700A493D6 /* Animator.cpp */,
+			);
+			path = SkeletalAnimation;
+			sourceTree = "<group>";
+		};
+		C27440242800A8FC009DDD9F /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				C2AD2E8027FF0EE700A493D6 /* Geometry.hpp */,
+				C2AD2E7127FF0EE700A493D6 /* Geometry.cpp */,
+				C274401E2800A7E0009DDD9F /* UnitCube.cpp */,
+				C26888AE280CD578004E500B /* ParticleRenderer.cpp */,
+				C2F7794D280666BE001A214D /* Skybox.cpp */,
+				C2F7795728072F4E001A214D /* Sprite.cpp */,
+				C2895260280923CF007BE8CD /* TextRenderer.cpp */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		C27440252800A9BE009DDD9F /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				C2AD2E7B27FF0EE700A493D6 /* Node.hpp */,
+				C2AD2E7627FF0EE700A493D6 /* Node.cpp */,
+				C27440182800A74E009DDD9F /* CameraNode.cpp */,
+				C274401B2800A789009DDD9F /* LightNode.cpp */,
+				C26888AC280CC23D004E500B /* ParticleNode.cpp */,
+				C2F7795928072F5B001A214D /* UINode.cpp */,
+				C2F7796A2807C309001A214D /* SpriteNode.cpp */,
+				C2F7796C2807D9EF001A214D /* TextNode.cpp */,
+			);
+			path = Node;
+			sourceTree = "<group>";
+		};
+		C27440262800AB05009DDD9F /* Shading */ = {
+			isa = PBXGroup;
+			children = (
+				C2AD2E8727FF0EE700A493D6 /* Image.hpp */,
+				C2AD2E7327FF0EE700A493D6 /* Image.cpp */,
+				C2AD2E7C27FF0EE700A493D6 /* Texture.hpp */,
+				C2AD2E7727FF0EE700A493D6 /* Texture.cpp */,
+				C2AD2E7E27FF0EE700A493D6 /* Shader.hpp */,
+				C2AD2E7927FF0EE700A493D6 /* Shader.cpp */,
+				C231B3212804AAAF0030CD85 /* PBRShader.cpp */,
+				C2F7795C28075612001A214D /* SpriteShader.cpp */,
+				C26888B0280CDF58004E500B /* ParticleShader.cpp */,
+			);
+			path = Shading;
+			sourceTree = "<group>";
+		};
+
 		C294F8B827FCF903002B6550 = {
 			isa = PBXGroup;
 			children = (
@@ -266,14 +413,14 @@
 		E24BF79628177FA00044E868 /* System */ = {
 			isa = PBXGroup;
 			children = (
-				E24BF79728177FA00044E868 /* Input.cpp */,
-				E24BF79828177FA00044E868 /* FontLibrary.cpp */,
-				E24BF79928177FA00044E868 /* Animation.hpp */,
-				E24BF79A28177FA00044E868 /* Font.cpp */,
-				E24BF79B28177FA00044E868 /* Animation.cpp */,
-				E24BF79C28177FA00044E868 /* Font.hpp */,
-				E24BF79D28177FA00044E868 /* Input.hpp */,
-				E24BF79E28177FA00044E868 /* FontLibrary.hpp */,
+				12309CAA281A024800423625 /* Animation.cpp */,
+				12309CAB281A024800423625 /* Animation.hpp */,
+				C2AD2E8127FF0EE700A493D6 /* Input.hpp */,
+				C2AD2E7227FF0EE700A493D6 /* Input.cpp */,
+				C2F779652807B4A0001A214D /* FontLibrary.hpp */,
+				C2F779642807B4A0001A214D /* FontLibrary.cpp */,
+				C2F779682807B4AD001A214D /* Font.hpp */,
+				C2F779672807B4AD001A214D /* Font.cpp */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -419,41 +566,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E24BF7C328177FA00044E868 /* Font.cpp in Sources */,
-				E24BF7BE28177FA00044E868 /* Shader.cpp in Sources */,
-				E24BF7C928177FA00044E868 /* Sprite.cpp in Sources */,
-				E24BF73D281754360044E868 /* HitController.cpp in Sources */,
-				E24BF7BB28177FA00044E868 /* SpriteShader.cpp in Sources */,
-				E24BF7BF28177FA00044E868 /* PBRShader.cpp in Sources */,
+				C26888AD280CC23D004E500B /* ParticleNode.cpp in Sources */,
+				C2F7796B2807C309001A214D /* SpriteNode.cpp in Sources */,
+				12309CAC281A024800423625 /* Animation.cpp in Sources */,
 				C294F8F027FCF9A6002B6550 /* main.cpp in Sources */,
+				C2AD2E8927FF0EE700A493D6 /* Bone.cpp in Sources */,
+				12309CA5281A022500423625 /* Hitbox.cpp in Sources */,
+				C27440202800A7E0009DDD9F /* UnitCube.cpp in Sources */,
 				12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */,
-				E24BF7C228177FA00044E868 /* FontLibrary.cpp in Sources */,
-				E24BF7D228177FA00044E868 /* CameraNode.cpp in Sources */,
-				E24BF7CF28177FA00044E868 /* Node.cpp in Sources */,
-				E24BF736281754270044E868 /* StoneBlast.cpp in Sources */,
-				E24BF7C628177FA00044E868 /* Animator.cpp in Sources */,
-				E24BF7CE28177FA00044E868 /* UINode.cpp in Sources */,
-				E24BF7CB28177FA00044E868 /* Skybox.cpp in Sources */,
-				E24BF7C528177FA00044E868 /* Bone.cpp in Sources */,
-				E24BF7C728177FA00044E868 /* Engine.cpp in Sources */,
+				C2895261280923CF007BE8CD /* TextRenderer.cpp in Sources */,
+				12309CA8281A022500423625 /* BaseMagic.cpp in Sources */,
+				C26888B1280CDF58004E500B /* ParticleShader.cpp in Sources */,
+				C2AD2E8D27FF0EE700A493D6 /* Engine.cpp in Sources */,
+				C274401D2800A789009DDD9F /* LightNode.cpp in Sources */,
+				12309CA6281A022500423625 /* HitController.cpp in Sources */,
+				C2F779692807B4AD001A214D /* Font.cpp in Sources */,
 				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
-				E24BF7D028177FA00044E868 /* TextNode.cpp in Sources */,
-				E24BF7D428177FA00044E868 /* LightNode.cpp in Sources */,
-				E24BF734281754270044E868 /* ThousandBlade.cpp in Sources */,
-				E24BF7CD28177FA00044E868 /* ParticleRenderer.cpp in Sources */,
-				E24BF7D328177FA00044E868 /* ParticleNode.cpp in Sources */,
-				E24BF7CC28177FA00044E868 /* TextRenderer.cpp in Sources */,
-				E24BF7C028177FA00044E868 /* ParticleShader.cpp in Sources */,
-				E24BF7C128177FA00044E868 /* Input.cpp in Sources */,
+				C2AD2E9027FF0EE700A493D6 /* Shader.cpp in Sources */,
+				C2AD2E8C27FF0EE700A493D6 /* Image.cpp in Sources */,
+				C2F7795828072F4E001A214D /* Sprite.cpp in Sources */,
+				1265315F281CC04800A712E1 /* Projectile.cpp in Sources */,
+				C2F7795E28075612001A214D /* SpriteShader.cpp in Sources */,
+				C26888AF280CD578004E500B /* ParticleRenderer.cpp in Sources */,
+				C2F7794E280666BE001A214D /* Skybox.cpp in Sources */,
+				C2F779662807B4A0001A214D /* FontLibrary.cpp in Sources */,
+				C2AD2E8E27FF0EE700A493D6 /* Node.cpp in Sources */,
+				12309CA9281A022500423625 /* StoneBlast.cpp in Sources */,
+				C274401A2800A74E009DDD9F /* CameraNode.cpp in Sources */,
 				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,
-				E24BF7CA28177FA00044E868 /* UnitCube.cpp in Sources */,
-				E24BF7BC28177FA00044E868 /* Image.cpp in Sources */,
-				E24BF7C428177FA00044E868 /* Animation.cpp in Sources */,
-				E24BF7BD28177FA00044E868 /* Texture.cpp in Sources */,
-				E24BF7D128177FA00044E868 /* SpriteNode.cpp in Sources */,
-				E24BF735281754270044E868 /* BaseMagic.cpp in Sources */,
-				E24BF7C828177FA00044E868 /* Geometry.cpp in Sources */,
-				E24BF73C281754360044E868 /* Hitbox.cpp in Sources */,
+				C2AD2E9227FF0EE700A493D6 /* Animator.cpp in Sources */,
+				C231B3222804AAAF0030CD85 /* PBRShader.cpp in Sources */,
+				C2AD2E8F27FF0EE700A493D6 /* Texture.cpp in Sources */,
+				12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */,
+				C2AD2E8B27FF0EE700A493D6 /* Input.cpp in Sources */,
+				C2AD2E8A27FF0EE700A493D6 /* Geometry.cpp in Sources */,
+				C2F7796D2807D9EF001A214D /* TextNode.cpp in Sources */,
+				C2F7795A28072F5B001A214D /* UINode.cpp in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

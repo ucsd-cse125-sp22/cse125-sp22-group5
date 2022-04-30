@@ -8,11 +8,10 @@
 #ifndef HitController_hpp
 #define HitController_hpp
 
-#include "Hitbox.hpp"
-#include "../../KGLEngine/Engine.hpp"
-#include "../Magic/BaseMagic.hpp"
-#include "../Character/CharNode.hpp"
+#include "../includes.hpp"
 
+class CharNode;
+class BaseMagic;
 class HitController{
 public:
     vector<CharNode*> characters;

@@ -8,7 +8,7 @@
 #ifndef Hitbox_hpp
 #define Hitbox_hpp
 
-#include "../../KGLEngine/Engine.hpp"
+#include "../includes.hpp"
 
 class Hitbox {
 private:

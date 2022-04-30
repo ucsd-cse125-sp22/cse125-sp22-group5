@@ -1,11 +1,8 @@
 // Developed by Kelin Lyu.
 
 #include "KGLEngine/Engine.hpp"
-#include "Game/Character/CharNode.hpp"
-#include "Game/Map/MapSystemManager.hpp"
-#include "Game/Magic/StoneBlast.hpp"
-#include "Game/Hitbox/HitController.hpp"
-
+#include "Game/includes.hpp"
+#include "Game/magics.hpp"
 
 int main(int argc, char** argv) {
     
@@ -37,7 +34,6 @@ int main(int argc, char** argv) {
     spotLight->setSpotLight(1.0f, 20.0f, 20.0f, 30.0f);
     spotLight->position = vec3(0.0f, 2.0f, 0.0f);
     spotLight->eulerAngles = vec3(0.0f, 0.0f, -30.0f);
-    spotLight->lightingBitMask = 2;
     engine->addNode(spotLight);
     
     Node* sceneNode = new Node();
@@ -140,7 +136,7 @@ int main(int argc, char** argv) {
     mixamoMaterial->invertRoughness = true;
     mixamoMaterial->setReflectionMap(reflection);
     
-    CharNode* character = new CharNode(vec3(0.0f, 0.0f, 0.0f));
+    CharNode* character = new CharNode(vec3(0.0f, -1.0f, 0.0f));
     character->name = "main character";
     
     Node* controlNode = new Node();
@@ -189,7 +185,7 @@ int main(int argc, char** argv) {
     
     vector<CharNode*> enemies;
     
-    CharNode* enemy = character->copy(vec3(2.0, 0.0f, 2.0f));
+    CharNode* enemy = character->copy(vec3(2.0, -1.0f, 2.0f));
     enemy->name = "enemy1";
     enemy->setEularAngle(vec3(0,90.0f,0));
     
@@ -1162,21 +1158,11 @@ int main(int argc, char** argv) {
     testNode71->eulerAngles = vec3(0.0f, 90.00000250447816f, 0.0f);
     engine->addNode(testNode71);
 
-
-
-
-
-
-
-
-
     vector<Node*> characters;
     
-
-
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);
-
+    engine->addNode(stoneMagic);
 
     HitController enemyHitController;
 
