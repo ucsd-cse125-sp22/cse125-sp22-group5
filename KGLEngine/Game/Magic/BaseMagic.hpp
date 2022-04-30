@@ -8,16 +8,18 @@
 #ifndef BaseMagic_hpp
 #define BaseMagic_hpp
 
-#include "../../KGLEngine/Engine.hpp"
-#include "Trajectory.hpp"
+#include "../includes.hpp"
 
-class BaseMagic: public Node{
+class Projectile;
+class BaseMagic : public Node{
 public:
-    vector<Trajectory*> Trajectories;
+    vector<Projectile*> projectiles;
     bool start;
     string actionName;
     float stopTime;
     float waitTime;
+    int damage;
+    void tryDamage(CharNode* character);
     virtual void play(vec3 position, vec3 euler)=0;
     virtual void updateMagic()=0;
 };

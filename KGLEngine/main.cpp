@@ -1,18 +1,15 @@
 // Developed by Kelin Lyu.
 
 #include "KGLEngine/Engine.hpp"
-#include "Game/Character/CharNode.hpp"
-#include "Game/Map/MapSystemManager.hpp"
-#include "Game/Magic/StoneBlast.hpp"
-#include "Game/Hitbox/HitController.hpp"
-
+#include "Game/includes.hpp"
+#include "Game/magics.hpp"
 
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
 
     engine->workingDirectory = ".";
-    engine->lockCursor();
+    //engine->lockCursor();
     
     Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
                                 "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
@@ -1162,21 +1159,11 @@ int main(int argc, char** argv) {
     testNode71->eulerAngles = vec3(0.0f, 90.00000250447816f, 0.0f);
     engine->addNode(testNode71);
 
-
-
-
-
-
-
-
-
     vector<Node*> characters;
     
-
-
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);
-    
+    engine->addNode(stoneMagic);
     
     HitController enemyHitController;
     

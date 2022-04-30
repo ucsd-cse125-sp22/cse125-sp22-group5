@@ -23,7 +23,7 @@ void Hitbox::updatePosition(vec3 position){
 }
 
 bool Hitbox::testHit(vec3 start, vec3 end){
-    vec3 direction = normalize(end - start);
+    vec3 direction = end - start;
     
     if ((start.x >= this->front && start.x <= this->back &&
         start.y >= this->bottom && start.y <= this->top &&
