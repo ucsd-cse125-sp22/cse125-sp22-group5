@@ -274,8 +274,6 @@ void CharNode::updatePosition(){
         }
 //        this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        cout << "head position: " << to_string(headTop->position) << endl;
-        cout << "screen position: " << to_string(positionOnScreen) << endl;
         this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
         this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }

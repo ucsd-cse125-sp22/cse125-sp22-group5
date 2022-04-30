@@ -45,6 +45,7 @@
 		E24BF7D228177FA00044E868 /* CameraNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF7B328177FA00044E868 /* CameraNode.cpp */; };
 		E24BF7D328177FA00044E868 /* ParticleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF7B428177FA00044E868 /* ParticleNode.cpp */; };
 		E24BF7D428177FA00044E868 /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF7B528177FA00044E868 /* LightNode.cpp */; };
+		E24BF7D8281A29F80044E868 /* LightningMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24BF7D6281A29F80044E868 /* LightningMagic.cpp */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
 		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
@@ -125,6 +126,8 @@
 		E24BF7B928177FA00044E868 /* assimp_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp_helper.h; sourceTree = "<group>"; };
 		E24BF7BA28177FA00044E868 /* glm_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm_helper.h; sourceTree = "<group>"; };
 		E24BF7D528177FFA0044E868 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		E24BF7D6281A29F80044E868 /* LightningMagic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LightningMagic.cpp; sourceTree = "<group>"; };
+		E24BF7D7281A29F80044E868 /* LightningMagic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LightningMagic.hpp; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
 		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
 		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				E24BF731281754270044E868 /* ThousandBlade.hpp */,
 				E24BF732281754270044E868 /* BaseMagic.cpp */,
 				E24BF733281754270044E868 /* StoneBlast.cpp */,
+				E24BF7D6281A29F80044E868 /* LightningMagic.cpp */,
+				E24BF7D7281A29F80044E868 /* LightningMagic.hpp */,
 			);
 			path = Magic;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 				E24BF7BE28177FA00044E868 /* Shader.cpp in Sources */,
 				E24BF7C928177FA00044E868 /* Sprite.cpp in Sources */,
 				E24BF73D281754360044E868 /* HitController.cpp in Sources */,
+				E24BF7D8281A29F80044E868 /* LightningMagic.cpp in Sources */,
 				E24BF7BB28177FA00044E868 /* SpriteShader.cpp in Sources */,
 				E24BF7BF28177FA00044E868 /* PBRShader.cpp in Sources */,
 				C294F8F027FCF9A6002B6550 /* main.cpp in Sources */,
