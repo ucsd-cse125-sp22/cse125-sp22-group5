@@ -8,13 +8,14 @@
 #ifndef ThousandBlade_hpp
 #define ThousandBlade_hpp
 
-#include "BaseMagic.hpp"
+#include "../includes.hpp"
 
 class ThousandBlade : public BaseMagic{
+public:
     ThousandBlade(vec3 position, vec3 eularAngle);
-    void updateMagic();
-    void play();
     ~ThousandBlade();
+    void updateMagic();
+    void play(vec3 position, vec3 euler);
 };
 
 #endif /* ThousandBlade_hpp */

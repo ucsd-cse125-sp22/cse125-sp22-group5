@@ -5,11 +5,11 @@
 //  Created by Zifan Zhang on 4/22/22.
 //
 
-#include "../../KGLEngine/Engine.hpp"
-#include "MapBoxObject.hpp"
 #ifndef MapSystemManager_hpp
 #define MapSystemManager_hpp
+#include "../includes.hpp"
 
+class MapBoxObject;
 class MapSystemManager {
 public:
     vector<MapBoxObject*> boxes;

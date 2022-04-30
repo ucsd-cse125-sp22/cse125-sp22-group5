@@ -8,15 +8,14 @@
 #ifndef CharNode_hpp
 #define CharNode_hpp
 
-#include "../../KGLEngine/Engine.hpp"
-#include "../Hitbox/Hitbox.hpp"
-#include "../Magic/BaseMagic.hpp"
-#include "../Magic/StoneBlast.hpp"
+#include "../includes.hpp"
 
 class Geometry;
 class Animator;
 class Node;
 class CameraNode;
+class Hitbox;
+class BaseMagic;
 enum direction{
     NONE = 0,
     FRONT = 1,
@@ -28,7 +27,7 @@ enum direction{
     BACKLEFT = 7,
     BACKRIGHT = 8
 };
-class CharNode : public Node {
+class CharNode final : public Node {
 public:
     CharNode(vec3 position);
     ~CharNode();

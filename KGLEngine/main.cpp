@@ -1,11 +1,8 @@
 // Developed by Kelin Lyu.
 
 #include "KGLEngine/Engine.hpp"
-#include "Game/Character/CharNode.hpp"
-#include "Game/Map/MapSystemManager.hpp"
-#include "Game/Magic/StoneBlast.hpp"
-#include "Game/Hitbox/HitController.hpp"
-
+#include "Game/includes.hpp"
+#include "Game/magics.hpp"
 
 int main(int argc, char** argv) {
     
@@ -140,7 +137,7 @@ int main(int argc, char** argv) {
     mixamoMaterial->invertRoughness = true;
     mixamoMaterial->setReflectionMap(reflection);
     
-    CharNode* character = new CharNode(vec3(0.0f, 0.0f, 0.0f));
+    CharNode* character = new CharNode(vec3(0.0f, -1.0f, 0.0f));
     character->name = "main character";
     
     Node* controlNode = new Node();
@@ -185,10 +182,11 @@ int main(int argc, char** argv) {
     engine->addNode(baseNode);
     character->setUINode(baseNode);
     character->setName("Player1");
+    cout << to_string(character->getDownVectorInWorld()) << endl;
     
     vector<CharNode*> enemies;
     
-    CharNode* enemy = character->copy(vec3(2.0, 0.0f, 2.0f));
+    CharNode* enemy = character->copy(vec3(2.0, -1.0f, 2.0f));
     enemy->name = "enemy1";
     enemy->setEularAngle(vec3(0,90.0f,0));
     
@@ -207,7 +205,7 @@ int main(int argc, char** argv) {
     weaponNode->scale = vec3(1);
     characterRightHand->addChildNode(weaponNode);
     
-    
+
     
 //
 //    Node* weapon = new Node();
@@ -1182,6 +1180,8 @@ int main(int argc, char** argv) {
     Texture* trailMap = new Texture("/Resources/Game/Effects/Trail3.png");
     Texture* explosionMap = new Texture("/Resources/Game/Effects/Explosion1.png");
     Texture* fog3Map = new Texture("/Resources/Game/Effects/Fog3.png");
+    engine->addNode(stoneMagic);
+
     HitController enemyHitController;
 
     enemyHitController.magics.push_back(stoneMagic);
@@ -1269,7 +1269,7 @@ int main(int argc, char** argv) {
                 LightNode* fireBallLightNode = new LightNode(vec4(1, 0.4, 0, 1));
                 fireBallLightNode->setPointLight(15, 30);
                 fireBallNode->addChildNode(fireBallLightNode);
-                
+
                 Animation* threw = new Animation("threw", 0.8);
                 threw->setFloatAnimation(&fireBall->initialScale, 0.4);
                 resume->setFloatAnimation(&flame->initialScale, 0.35);
@@ -1325,11 +1325,11 @@ int main(int argc, char** argv) {
                 });
                 Engine::main->playAnimation(resume);
                 Engine::main->playAnimation(threw);
-                
+
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 Texture* bloodD = new Texture("/Resources/Game/Effects/BloodDecal.png", 2.0f, true);
-                
+
                 PBRShader* bloodMaterial = new PBRShader(0.0f, 0.0f);
                 bloodMaterial->setDiffuseMap(bloodD);
                 bloodMaterial->metallicIntensity = 2.0f;
@@ -1378,6 +1378,7 @@ int main(int argc, char** argv) {
 //               intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
 //               normal->position = intersection->position + normalvec;
 //
+//               intersection->getUpVectorInWorld()
 //                //cout << "position: " << to_string(position) << endl;
 //                //cout << "angle: " << to_string(intersection->eulerAngles) << endl;
 //            }

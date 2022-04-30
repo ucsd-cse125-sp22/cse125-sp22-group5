@@ -4,10 +4,9 @@
 //
 //  Created by Zifan Zhang on 4/22/22.
 //
-#include "../../KGLEngine/Engine.hpp"
 #ifndef MapBoxObject_hpp
 #define MapBoxObject_hpp
-
+#include "../includes.hpp"
 class MapBoxObject {
 public:
     vec3 position, size, eulerAngles;

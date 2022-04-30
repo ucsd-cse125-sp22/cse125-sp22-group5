@@ -8,13 +8,10 @@
 #ifndef StoneBlast_hpp
 #define StoneBlast_hpp
 
-#include <stdio.h>
-
-#include "BaseMagic.hpp"
+#include "../includes.hpp"
 
 class StoneBlast : public BaseMagic{
 public:
-    vector<Node*> stones;
     vector<Animation*> waits;
     vector<Animation*> spins;
     vector<Animation*> forwards;
@@ -22,7 +19,6 @@ public:
     Texture* stone_D;
     Texture* stone_E;
     PBRShader* stone_shader;
-    Node* stone;
     Texture* circleTexture;
     
     Animation* cleanup;
