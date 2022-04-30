@@ -327,6 +327,14 @@ void Node::engineUpdateNodeAnimators(mat4 parentWorldTransform) {
                 break;
             }
         }
+        if(transform == mat4(0.0f)) {
+            for(unsigned int i = 0; i < this->boneNames.size(); i += 1) {
+                if(this->boneNames[i] == iterator->first) {
+                    transform = this->boneTransforms[i];
+                    break;
+                }
+            }
+        }
         iterator->second->position = glm_helper::getPosition(transform);
         iterator->second->eulerAngles = glm_helper::getEulerAngles(transform);
         iterator->second->updateTransform();
@@ -365,7 +373,7 @@ void Node::engineNodeCalculateBoneTransforms(AnimationBoneNode *node, mat4 paren
         this->engineNodeCalculateBoneTransforms(node->children[i], globalTransform);
     }
 }
-void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data, bool shadowMap) {
+void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data, unsigned int renderingMode) {
     if(this->isDisabled) {
         return;
     }
@@ -385,7 +393,7 @@ void Node::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data, b
         }
     }
     for(unsigned int i = 0; i < this->childNodes.size(); i += 1) {
-        this->childNodes[i]->enginePrepareNodeForRendering(this->worldTransform, data, shadowMap);
+        this->childNodes[i]->enginePrepareNodeForRendering(this->worldTransform, data, renderingMode);
     }
 }
 void Node::engineCalculateNodeWorldTransform(mat4 parentWorldTransform) {

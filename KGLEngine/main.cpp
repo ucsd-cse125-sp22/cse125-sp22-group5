@@ -7,9 +7,8 @@
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
-
-    engine->workingDirectory = ".";
-    //engine->lockCursor();
+    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
+    engine->lockCursor();
     
     Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
                                 "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
@@ -1164,12 +1163,12 @@ int main(int argc, char** argv) {
     StoneBlast* stoneMagic = new StoneBlast();
     character->addMagics(stoneMagic, KEY_1);
     engine->addNode(stoneMagic);
-    
+
     HitController enemyHitController;
-    
+
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.characters.push_back(enemy);
-    
+
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
             
@@ -1216,9 +1215,9 @@ int main(int argc, char** argv) {
             
             stoneMagic->updateMagic();
 
-            
+
             enemyHitController.checkHit();
-            
+
 //            vec3 position;
 //            vec3 normalvec;
 //            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +

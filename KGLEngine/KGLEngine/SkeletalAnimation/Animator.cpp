@@ -31,6 +31,7 @@ Animator::Animator(string name, string file, vector<string>* boneNames, vector<m
     for(unsigned int i = 0; i < size; i += 1) {
         aiNodeAnim* channel = animation->mChannels[i];
         string boneName = channel->mNodeName.data;
+        cout << boneName << endl;
         this->bones[boneName] = new Bone(channel->mNodeName.data, channel);
         bool found = false;
         for(unsigned int j = 0; j < (*boneNames).size(); j += 1) {
