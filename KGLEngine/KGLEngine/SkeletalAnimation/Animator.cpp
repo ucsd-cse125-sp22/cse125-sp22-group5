@@ -19,7 +19,7 @@ Animator::Animator(string name, string file, vector<string>* boneNames, vector<m
     const aiScene* scene = importer.ReadFile(Engine::main->workingDirectory + file, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if(scene == NULL || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         cout << "\nFailed to load the animation file: "
-             << Engine::main->workingDirectory + file << "!\n" << endl;
+        << Engine::main->workingDirectory + file << "!\n" << endl;
         exit(0);
     }
     aiAnimation* animation = scene->mAnimations[0];
@@ -31,7 +31,6 @@ Animator::Animator(string name, string file, vector<string>* boneNames, vector<m
     for(unsigned int i = 0; i < size; i += 1) {
         aiNodeAnim* channel = animation->mChannels[i];
         string boneName = channel->mNodeName.data;
-        cout << boneName << endl;
         this->bones[boneName] = new Bone(channel->mNodeName.data, channel);
         bool found = false;
         for(unsigned int j = 0; j < (*boneNames).size(); j += 1) {
@@ -62,6 +61,7 @@ void Animator::play(float fadeIn, float fadeOut) {
         this->reset();
     }
     this->fadeIn = fadeIn;
+    this->startTime = Engine::main->getTime();
     this->stateChangeTime = Engine::main->getTime();
     this->stateChangeBlendFactor = this->currentBlendFactor;
     this->state = 1;
@@ -151,7 +151,7 @@ void Animator::engineUpdateAnimator() {
     }
     if(!this->repeats && !this->clamps) {
         if(this->state == 1 || this->state == 2) {
-            float progress = Engine::main->getTime() - this->stateChangeTime;
+            float progress = Engine::main->getTime() - this->startTime;
             float maxProgress = (this->duration / this->baseSpeed - this->fadeOut) / this->speed;
             if(progress > maxProgress) {
                 this->stop(this->fadeOut);

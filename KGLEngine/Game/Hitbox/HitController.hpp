@@ -11,11 +11,11 @@
 #include "../includes.hpp"
 
 class CharNode;
-class BaseMagic;
+class DamageableMagic;
 class HitController{
 public:
     vector<CharNode*> characters;
-    vector<BaseMagic*> magics;
+    vector<DamageableMagic*> magics;
     
     void checkHit();
 };

@@ -10,12 +10,13 @@
 
 #include "../includes.hpp"
 
-class ThousandBlade : public BaseMagic{
+class ThousandBlade : public DamageableMagic{
 public:
     ThousandBlade(vec3 position, vec3 eularAngle);
     ~ThousandBlade();
     void updateMagic();
     void play(vec3 position, vec3 euler);
+    void tryDamage(CharNode* character) override {}
 };
 
 #endif /* ThousandBlade_hpp */

@@ -11,6 +11,7 @@
 #include "../includes.hpp"
 
 class Projectile;
+class DamageableMagic;
 class BaseMagic : public Node{
 public:
     vector<Projectile*> projectiles;
@@ -19,9 +20,12 @@ public:
     float stopTime;
     float waitTime;
     int damage;
-    void tryDamage(CharNode* character);
     virtual void play(vec3 position, vec3 euler)=0;
     virtual void updateMagic()=0;
+};
+class DamageableMagic : public BaseMagic {
+public:
+    virtual void tryDamage(CharNode* character){}
 };
 
 #endif /* BaseMagic_hpp */

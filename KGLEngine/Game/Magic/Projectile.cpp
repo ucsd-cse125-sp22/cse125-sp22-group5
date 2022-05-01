@@ -32,7 +32,7 @@ Projectile* Projectile::copy(){
     node->start = this->start;
     node->end = this->end;
     node->isDisabled = this->isDisabled;
-    node->renderingBitMask = this->renderingBitMask;
+//    node->renderingBitMask = this->renderingBitMask;
     node->position = this->position;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;

@@ -108,3 +108,17 @@ bool Hitbox::testHit(vec3 start, vec3 end){
     
     return false;
 }
+
+bool Hitbox::testSphere(vec3 center, float radius){
+    
+    float dist_squared = radius * radius;
+    vec3 corner2 = position + size;
+    /* assume C1 and C2 are element-wise sorted, if not, do that now */
+    if (center.x < position.x) dist_squared -= length2(center.x - position.x);
+    else if (center.x > corner2.x) dist_squared -= length2(center.x - corner2.x);
+    if (center.y < position.y) dist_squared -= length2(center.y - position.y);
+    else if (center.y > corner2.y) dist_squared -= length2(center.y - corner2.y);
+    if (center.z < position.z) dist_squared -= length2(center.z - position.z);
+    else if (center.z > corner2.z) dist_squared -= length2(center.z - corner2.z);
+    return dist_squared > 0;
+}

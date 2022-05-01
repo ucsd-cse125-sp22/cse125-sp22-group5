@@ -28,6 +28,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
+#include <glm/ext/matrix_projection.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 #include "glm/gtx/string_cast.hpp"
@@ -35,6 +36,8 @@
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
+#include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include "assimp_helper.h"
@@ -42,4 +45,5 @@
 #include "keys.h"
 using namespace std;
 using namespace glm;
+using namespace sf;
 #endif

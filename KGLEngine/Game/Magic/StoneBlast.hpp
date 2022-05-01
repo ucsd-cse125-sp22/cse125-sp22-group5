@@ -10,7 +10,7 @@
 
 #include "../includes.hpp"
 
-class StoneBlast : public BaseMagic{
+class StoneBlast : public DamageableMagic{
 public:
     vector<Animation*> waits;
     vector<Animation*> spins;
@@ -33,6 +33,7 @@ public:
     void updateMagic();
     void play(vec3 position, vec3 euler);
     void moveStones(int roundNum);
+    void tryDamage(CharNode* character);
     ~StoneBlast();
 };
 

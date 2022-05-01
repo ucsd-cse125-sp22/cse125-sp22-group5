@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv) {
     
-    Engine* engine = new Engine("KGLEngine", 0.8f, false, 0, NULL);
+    Engine* engine = new Engine("KGLEngine", 0.8f, 0, NULL);
     engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
     engine->lockCursor();
     
@@ -1174,17 +1174,19 @@ int main(int argc, char** argv) {
 
 
     StoneBlast* stoneMagic = new StoneBlast();
+    FireBall* fireMagic = new FireBall();
     character->addMagics(stoneMagic, KEY_1);
+    character->addMagics(fireMagic, KEY_2);
 
     Texture* ballMap = new Texture("/Resources/Game/Effects/Core2.png");
     Texture* trailMap = new Texture("/Resources/Game/Effects/Trail3.png");
     Texture* explosionMap = new Texture("/Resources/Game/Effects/Explosion1.png");
-    Texture* fog3Map = new Texture("/Resources/Game/Effects/Fog3.png");
     engine->addNode(stoneMagic);
 
     HitController enemyHitController;
 
     enemyHitController.magics.push_back(stoneMagic);
+    enemyHitController.magics.push_back(fireMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1225,107 +1227,8 @@ int main(int argc, char** argv) {
                 character->castMagic(KEY_1);
             }
             if(engine->input->wasKeyReleased(KEY_2)){
-                character->stopAndPlay("cast magic 1", 0.2, 0.2);
-                character->allowAction = false;
-                Animation* resume = new Animation("resume character", 1);
-                resume->setCompletionHandler([&]{
-                    character->allowAction = true;
-                });
-                Node* fireBallNode = new Node();
-                fireBallNode->position = vec3(-0.18, -0.040, 0);
-                weaponNode->addChildNode(fireBallNode);
-                ParticleNode* fireBall = new ParticleNode(50, 0.3f, 0.0f);
-                fireBall->renderingOrder = 12.0f;
-                fireBall->isAdditive = true;
-                fireBall->rotatingSpeed = 360.0f;
-                fireBall->rotatingSpeedVariation = 180.0f;
-                fireBall->randomizeRotatingDirection = true;
-                fireBall->initialScale = 0.03f;
-                fireBall->initialScaleVariation = 0.03f;
-                fireBall->texture = ballMap;
-                fireBall->setColorAnimation(vec4(1.0f, 0.4f, 0.0f, 0.0f), 0.0f);
-                fireBall->setColorAnimation(vec4(1.0f, 0.3f, 0.0f, 0.9f), 0.2f);
-                fireBall->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
-                fireBall->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
-                fireBallNode->addChildNode(fireBall);
-                ParticleNode* flame = new ParticleNode(120, 0.5f, 0.3f);
-                flame->setEmissionSphere(0.04f, 0.04f);
-                flame->renderingOrder = 12.0f;
-                flame->isAdditive = true;
-                flame->randomizeRotatingDirection = true;
-                flame->spreadingAngle = 30.0f;
-                flame->randomizeRotatingDirection = true;
-                flame->initialScale = 0.03f;
-                flame->initialScaleVariation = 0.03f;
-                flame->texture = trailMap;
-                flame->scalingSpeed = -0.06;
-                flame->rotatingSpeed = 180.0f;
-                flame->rotatingSpeedVariation = 90.0f;
-                flame->setColorAnimation(vec4(1.0f, 0.4f, 0.0f, 0.0f), 0.0f);
-                flame->setColorAnimation(vec4(1.0f, 0.3f, 0.0f, 0.9f), 0.2f);
-                flame->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
-                flame->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
-                fireBallNode->addChildNode(flame);
-                LightNode* fireBallLightNode = new LightNode(vec4(1, 0.4, 0, 1));
-                fireBallLightNode->setPointLight(15, 30);
-                fireBallNode->addChildNode(fireBallLightNode);
-
-                Animation* threw = new Animation("threw", 0.8);
-                threw->setFloatAnimation(&fireBall->initialScale, 0.4);
-                resume->setFloatAnimation(&flame->initialScale, 0.35);
-                threw->setCompletionHandler([&]{
-                    fireBallNode->removeFromParentNode();
-                    engine->addNode(fireBallNode);
-                    fireBallNode->position = weaponNode->getWorldPosition();
-                    fireBall->scalingSpeed = -0.4;
-                    threw = new Animation("threw2", 2);
-                    threw->setVec3Animation(&fireBallNode->position, fireBallNode->getWorldPosition() + normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1)) * 10.f);
-                    threw->setCompletionHandler([&] {
-//                        threw = new Animation("threw3", 0.5);
-//                        threw->setFloatAnimation(&fireBall->initialScale, 3);
-//                        threw->setEaseOutTimingMode();
-//                        Engine::main->playAnimation(threw);
-                        fireBall->scalingSpeed = 15;
-                        fireBall->scalingSpeedVariation = 10;
-                        threw = new Animation("threw4", 0.5);
-                        fireBall->color = vec4(1, 0.2, 0.0, 1);
-                        threw->setVec4Animation(&fireBall->color, vec4(1, 0.8, 0.0, 0));
-                        threw->setEaseOutTimingMode();
-                        Engine::main->playAnimation(threw);
-                        ParticleNode* explosionNode = new ParticleNode(300, 1.0f, 0.0f);
-                        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.25);
-                        fireBallLightIntensity->setFloatAnimation(&fireBallLightNode->attenuationExponent, 0.8);
-                        fireBallLightIntensity->setCompletionHandler([&] {
-                            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2", 0.25);
-                            fireBallLightIntensity2->setFloatAnimation(&fireBallLightNode->attenuationExponent, 5);
-                            Engine::main->playAnimation(fireBallLightIntensity2);
-                        });
-                        Engine::main->playAnimation(fireBallLightIntensity);
-                        fireBallLightNode->setPointLight(0.4, 30);
-                        explosionNode->setColorAnimation(vec4(1.0f, 0.7f, 0.0f, 0.0f), 0.0f);
-                        explosionNode->setColorAnimation(vec4(1.0f, 0.6f, 0.0f, 0.9f), 0.2f);
-                        explosionNode->setColorAnimation(vec4(1.0f, 0.5f, 0.0f, 0.9f), 0.6f);
-                        explosionNode->setColorAnimation(vec4(1.0f, 0.4f, 0.0f, 0.0f), 1.0f);
-                        explosionNode->texture = explosionMap;
-                        explosionNode->color = vec4(1, 0.4, 0.1, 1);
-                        explosionNode->isAdditive = true;
-                        explosionNode->initialRotationVariation = 45;
-                        explosionNode->renderingOrder = 1010;
-                        explosionNode->initialScale = 0.5;
-                        explosionNode->scalingSpeed = 30;
-                        explosionNode->setMaxAmount(50);
-                        explosionNode->setSpriteSheetAnimation(7, 12, 40, 120, 40);
-                        fireBallNode->addChildNode(explosionNode);
-                        delete (flame);
-                        threw->setCompletionHandler([&] {
-                            delete (fireBallNode);
-                        });
-                    });
-                    Engine::main->playAnimation(threw);
-                });
-                Engine::main->playAnimation(resume);
-                Engine::main->playAnimation(threw);
-
+                character->castMagic(KEY_2);
+                weaponNode->addChildNode(fireMagic);
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 Texture* bloodD = new Texture("/Resources/Game/Effects/BloodDecal.png", 2.0f, true);
@@ -1356,6 +1259,7 @@ int main(int argc, char** argv) {
             }
             
             stoneMagic->updateMagic();
+            fireMagic->updateMagic();
 
 
             enemyHitController.checkHit();

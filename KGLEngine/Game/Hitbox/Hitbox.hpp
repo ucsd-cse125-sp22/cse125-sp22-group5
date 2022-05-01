@@ -19,6 +19,7 @@ public:
     Hitbox(vec3 position, vec3 size);
     void updatePosition(vec3 position);
     bool testHit(vec3 start, vec3 end);
+    bool testSphere(vec3 center, float radius);
 };
 
 #endif /* Hitbox_hpp */

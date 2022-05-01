@@ -2,6 +2,7 @@
 #include "Node.hpp"
 SpriteNode::SpriteNode(vec2 size) {
     this->engineInitializeUINode();
+    this->currentUINode = this;
     this->currentSpriteNode = this;
     this->color = vec4(1.0f);
     this->texture = NULL;
@@ -28,7 +29,6 @@ Node* SpriteNode::copy() {
     node->renderingOrder = this->renderingOrder;
     node->name = this->name;
     node->isDisabled = this->isDisabled;
-    node->renderingBitMask = this->renderingBitMask;
     node->Node::position = this->Node::position;
     node->Node::eulerAngles = this->Node::eulerAngles;
     node->Node::scale = this->Node::scale;

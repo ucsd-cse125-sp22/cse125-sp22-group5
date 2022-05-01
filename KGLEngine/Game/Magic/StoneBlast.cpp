@@ -171,6 +171,13 @@ void StoneBlast:: moveStones(int roundNum){
                          eulerToDirection(randomEuler) * 100.0f);
     Engine::main->playAnimation(forwards[rounds[roundNum]*2 + roundNum]);
 }
+void StoneBlast::tryDamage(CharNode* character){
+    if (this->start){
+        for (int i = 0; i < this->projectiles.size(); i++){
+            this->projectiles[i]->tryDamageChar(character);
+        }
+    }
+}
 
 StoneBlast::~StoneBlast(){
     for (int i = 0; i < projectiles.size(); i++){
