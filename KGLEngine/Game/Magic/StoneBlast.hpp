@@ -30,10 +30,10 @@ public:
     
     StoneBlast();
     vector<int> rounds;
-    void updateMagic();
-    void play(vec3 position, vec3 euler);
+    void updateMagic() override;
+    void play(CharNode* character) override;
     void moveStones(int roundNum);
-    void tryDamage(CharNode* character);
+    void tryDamage(CharNode* character) override;
     ~StoneBlast();
 };
 

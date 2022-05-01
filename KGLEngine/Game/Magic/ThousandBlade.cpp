@@ -20,7 +20,7 @@ ThousandBlade::ThousandBlade(vec3 position, vec3 eularAngle){
 void ThousandBlade::updateMagic(){
     
 }
-void ThousandBlade::play(vec3 position, vec3 euler){
+void ThousandBlade::play(CharNode* character){
     
 }
 ThousandBlade::~ThousandBlade(){

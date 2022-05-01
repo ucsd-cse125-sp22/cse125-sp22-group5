@@ -8,8 +8,10 @@
 #include "FireBall.hpp"
 
 FireBall::FireBall(){
+    start = false;
+    canDamage = false;
     this->position = vec3(0);
-    this->acceleration = vec3(0, -0.002, 0);
+    this->acceleration = vec3(0, -0.004, 0);
     this->eulerAngles = vec3(0);
     this->actionName = "cast magic 1";
     this->stopTime = 2.0f;
@@ -76,8 +78,7 @@ FireBall::FireBall(){
         Node* engine = this->parent;
         threwOut = true;
         canDamage = true;
-        this->position = engine->getWorldPosition();
-        this->velocity = engine->getBackVectorInWorld();
+        this->position = getWorldPosition();
         while (engine->parent)
             engine = engine->parent; // todo make this global variable
         this->removeFromParentNode();
@@ -85,7 +86,11 @@ FireBall::FireBall(){
         flame->scalingSpeed = -0.4;
         Animation* threw = new Animation("threw", 2);
         threw->setCompletionHandler([&] {
-            exploded = true;
+            if (start) {
+                canDamage = false;
+                exploded = true;
+                explodeDamage = true;
+            }
         });
         Engine::main->playAnimation(threw);
     });
@@ -103,34 +108,35 @@ void FireBall::updateMagic(){
         Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.25);
         fireBallLightIntensity->setFloatAnimation(&light->attenuationExponent, 0.8);
         fireBallLightIntensity->setCompletionHandler([&] {
-            canDamage = true;
             Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2", 0.25);
             fireBallLightIntensity2->setFloatAnimation(&light->attenuationExponent, 5);
             Engine::main->playAnimation(fireBallLightIntensity2);
+            fireBallLightIntensity2->setCompletionHandler([&] {
+                canDamage = true;
+                this->isDisabled = true;
+                explosion->isDisabled = true;
+                start = false;
+                this->removeFromParentNode();
+            });
         });
         Engine::main->playAnimation(fireBallLightIntensity);
         light->setPointLight(0.4, 30);
         fireball->scalingSpeed = 15;
         fireball->scalingSpeedVariation = 10;
-        Animation* threw = new Animation("threw4", 0.5); // todo add player id to animation name
         fireball->color = vec4(1, 0.2, 0.0, 1);
-        threw->setVec4Animation(&fireball->color, vec4(1, 0.8, 0.0, 0));
-        threw->setEaseOutTimingMode();
-        Engine::main->playAnimation(threw);
         flame->isDisabled = true;
-        threw->setCompletionHandler([&] {
-            this->isDisabled = true;
-            explosion->isDisabled = true;
-            start = false;
-            this->removeFromParentNode();
-        });
     }
 }
-void FireBall::play(vec3 position, vec3 euler){
+void FireBall::play(CharNode* character){
     if (!start){
+        velocity = character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0);
         threwOut = false;
+        explodeDamage = false;
         flame->initialScale = 0.03f;
+        exploded = false;
         fireball->initialScale = 0.03f;
+        fireball->scalingSpeed = 0.0f;
+        fireball->scalingSpeedVariation = 0.0f;
         this->position = vec3(0);
         this->start = true;
         this->isDisabled = false;
@@ -141,18 +147,19 @@ void FireBall::play(vec3 position, vec3 euler){
     }
 }
 void FireBall::tryDamage(CharNode *character) {
-    if (!exploded && canDamage) {
+    if (!explodeDamage && canDamage) {
         if (character->hitbox->testHit(this->getWorldPosition(), vec3(vec4(this->position + this->velocity, 1) * this->getWorldTransform()))) {
             character->receiveDamage(this->damage);
             canDamage = false;
             exploded = true;
+            explodeDamage = true;
         }
     }
-    if (exploded && canDamage) {
-        if (character->hitbox->testSphere(this->getWorldPosition(), 1.5)) {
+    if (explodeDamage && canDamage) {
+        if (character->hitbox->testSphere(this->getWorldPosition(), 2)) {
             character->receiveDamage(this->damage);
-            canDamage = false;
         }
+        canDamage = false;
     }
 }
 FireBall::~FireBall(){

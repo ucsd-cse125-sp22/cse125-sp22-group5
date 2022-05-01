@@ -17,6 +17,7 @@ public:
     bool exploded;
     bool threwOut;
     bool canDamage;
+    bool explodeDamage;
     ParticleNode* fireball;
     ParticleNode* flame;
     ParticleNode* explosion;
@@ -26,7 +27,7 @@ public:
     FireBall();
     ~FireBall();
     void updateMagic() override;
-    void play(vec3 position, vec3 euler) override;
+    void play(CharNode* character) override;
     void tryDamage(CharNode* character) override;
 };
 

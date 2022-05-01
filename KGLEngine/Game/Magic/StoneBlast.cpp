@@ -141,12 +141,12 @@ void StoneBlast::updateMagic(){
         }
     }
 }
-void StoneBlast::play(vec3 position, vec3 euler){
+void StoneBlast::play(CharNode* character){
     if (!start){
         this->start = true;
         this->isDisabled = false;
-        this->position = vec3(position) + vec3(0, 0.5, 0);
-        this->eulerAngles = vec3(euler);
+        this->position = vec3(character->modelNode->getWorldPosition()) + vec3(0, 0.5, 0);
+        this->eulerAngles = vec3(character->modelNode->getWorldEulerAngles()) - vec3(0, 90, 0);
         
         magicCircle->position = vec3(0.5, 0, 0);
         for (int i = 0; i < waits.size(); i++){

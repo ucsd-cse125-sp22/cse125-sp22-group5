@@ -14,8 +14,8 @@ class ThousandBlade : public DamageableMagic{
 public:
     ThousandBlade(vec3 position, vec3 eularAngle);
     ~ThousandBlade();
-    void updateMagic();
-    void play(vec3 position, vec3 euler);
+    void updateMagic() override;
+    void play(CharNode* character) override;
     void tryDamage(CharNode* character) override {}
 };
 

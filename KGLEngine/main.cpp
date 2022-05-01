@@ -1227,8 +1227,10 @@ int main(int argc, char** argv) {
                 character->castMagic(KEY_1);
             }
             if(engine->input->wasKeyReleased(KEY_2)){
-                character->castMagic(KEY_2);
-                weaponNode->addChildNode(fireMagic);
+                if (!fireMagic->start) {
+                    weaponNode->addChildNode(fireMagic);
+                    character->castMagic(KEY_2);
+                }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 Texture* bloodD = new Texture("/Resources/Game/Effects/BloodDecal.png", 2.0f, true);

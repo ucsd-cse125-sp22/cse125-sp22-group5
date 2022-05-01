@@ -312,7 +312,7 @@ void CharNode::castMagic(int key){
     if (allowAction && this->keyBind.find(key) != this->keyBind.end() && !this->keyBind[key]->start){
         allowAction = false;
         this->stopAndPlay(this->keyBind[key]->actionName, 0.2f, 0.2f);
-        this->keyBind[key]->play(this->getWorldPosition(), this->modelNode->getWorldEulerAngles() - vec3(0, 90, 0));
+        this->keyBind[key]->play(this);
         Animation* resume = new Animation(this->name + " resume", this->keyBind[key]->stopTime);
         resume->setCompletionHandler([&]{
             this->allowAction = true;

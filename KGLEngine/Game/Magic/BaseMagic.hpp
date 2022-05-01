@@ -20,7 +20,7 @@ public:
     float stopTime;
     float waitTime;
     int damage;
-    virtual void play(vec3 position, vec3 euler)=0;
+    virtual void play(CharNode* character)=0;
     virtual void updateMagic()=0;
 };
 class DamageableMagic : public BaseMagic {
