@@ -16,5 +16,6 @@
 #include "./Hitbox/HitController.hpp"
 #include "./Magic/BaseMagic.hpp"
 #include "./Magic/Projectile.hpp"
+#include "./Shader/AlphaShader.hpp"
 
 #endif /* includes_hpp */

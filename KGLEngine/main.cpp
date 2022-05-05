@@ -7,7 +7,7 @@
 int main(int argc, char** argv) {
     
     Engine* engine = new Engine("KGLEngine", 0.8f, 0, NULL);
-    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
+    engine->workingDirectory = ".";
     engine->lockCursor();
     
     Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
@@ -1163,20 +1163,15 @@ int main(int argc, char** argv) {
 
 
 
-
-
-
-
-
-
     vector<Node*> characters;
-    
 
 
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
+    ThousandBlade* swordMagic = new ThousandBlade();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
+    character->addMagics(swordMagic, KEY_4);
 
     Texture* ballMap = new Texture("/Resources/Game/Effects/Core2.png");
     Texture* trailMap = new Texture("/Resources/Game/Effects/Trail3.png");
@@ -1187,6 +1182,7 @@ int main(int argc, char** argv) {
 
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.magics.push_back(fireMagic);
+    enemyHitController.magics.push_back(swordMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1253,6 +1249,9 @@ int main(int argc, char** argv) {
                 });
                 Engine::main->playAnimation(waveMovement);
             }
+            if(engine->input->wasKeyReleased(KEY_4)){
+                character->castMagic(KEY_4);
+            }
 
             for (int i = 0; i < enemies.size(); i++){
                 enemies[i]->updatePosition();
@@ -1262,6 +1261,7 @@ int main(int argc, char** argv) {
             
             stoneMagic->updateMagic();
             fireMagic->updateMagic();
+            swordMagic->updateMagic();
 
 
             enemyHitController.checkHit();
