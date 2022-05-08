@@ -50,6 +50,10 @@
 		E21F1824281DD41F0099A81C /* CameraNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F1803281DD41F0099A81C /* CameraNode.cpp */; };
 		E21F1825281DD41F0099A81C /* ParticleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F1804281DD41F0099A81C /* ParticleNode.cpp */; };
 		E21F1826281DD41F0099A81C /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F1805281DD41F0099A81C /* LightNode.cpp */; };
+		E21F182B2821DF5B0099A81C /* LightningSpear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F18292821DF5B0099A81C /* LightningSpear.cpp */; };
+		E21F182D2822F9FD0099A81C /* Particle3DNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F182C2822F9FD0099A81C /* Particle3DNode.cpp */; };
+		E21F182F2822FB2B0099A81C /* Particle3DShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */; };
+		E21F18312822FBFE0099A81C /* Particle3DRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
 		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
@@ -140,6 +144,11 @@
 		E21F1809281DD41F0099A81C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		E21F180A281DD41F0099A81C /* assimp_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp_helper.h; sourceTree = "<group>"; };
 		E21F180B281DD41F0099A81C /* glm_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm_helper.h; sourceTree = "<group>"; };
+		E21F18292821DF5B0099A81C /* LightningSpear.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LightningSpear.cpp; sourceTree = "<group>"; };
+		E21F182A2821DF5B0099A81C /* LightningSpear.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LightningSpear.hpp; sourceTree = "<group>"; };
+		E21F182C2822F9FD0099A81C /* Particle3DNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DNode.cpp; sourceTree = "<group>"; };
+		E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DShader.cpp; sourceTree = "<group>"; };
+		E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DRenderer.cpp; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
 		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
 		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
@@ -188,6 +197,8 @@
 				1265315E281CC04800A712E1 /* Projectile.cpp */,
 				E21F177C281CF5EC0099A81C /* FireBall.cpp */,
 				E21F177D281CF5EC0099A81C /* FireBall.hpp */,
+				E21F18292821DF5B0099A81C /* LightningSpear.cpp */,
+				E21F182A2821DF5B0099A81C /* LightningSpear.hpp */,
 			);
 			path = Magic;
 			sourceTree = "<group>";
@@ -283,6 +294,7 @@
 				E21F17E1281DD41F0099A81C /* Texture.hpp */,
 				E21F17E2281DD41F0099A81C /* Shader.hpp */,
 				E21F17E3281DD41F0099A81C /* Image.hpp */,
+				E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */,
 			);
 			path = Shading;
 			sourceTree = "<group>";
@@ -325,6 +337,7 @@
 				E21F17FA281DD41F0099A81C /* TextRenderer.cpp */,
 				E21F17FB281DD41F0099A81C /* Geometry.hpp */,
 				E21F17FC281DD41F0099A81C /* ParticleRenderer.cpp */,
+				E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */,
 			);
 			path = Geometry;
 			sourceTree = "<group>";
@@ -340,6 +353,7 @@
 				E21F1803281DD41F0099A81C /* CameraNode.cpp */,
 				E21F1804281DD41F0099A81C /* ParticleNode.cpp */,
 				E21F1805281DD41F0099A81C /* LightNode.cpp */,
+				E21F182C2822F9FD0099A81C /* Particle3DNode.cpp */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -456,6 +470,7 @@
 				E21F1814281DD41F0099A81C /* Font.cpp in Sources */,
 				E21F1817281DD41F0099A81C /* Bone.cpp in Sources */,
 				12309CA5281A022500423625 /* Hitbox.cpp in Sources */,
+				E21F18312822FBFE0099A81C /* Particle3DRenderer.cpp in Sources */,
 				E21F180F281DD41F0099A81C /* Shader.cpp in Sources */,
 				E21F1819281DD41F0099A81C /* Engine.cpp in Sources */,
 				E21F1812281DD41F0099A81C /* Input.cpp in Sources */,
@@ -465,14 +480,17 @@
 				12309CA8281A022500423625 /* BaseMagic.cpp in Sources */,
 				E21F1824281DD41F0099A81C /* CameraNode.cpp in Sources */,
 				12309CA6281A022500423625 /* HitController.cpp in Sources */,
+				E21F182F2822FB2B0099A81C /* Particle3DShader.cpp in Sources */,
 				E21F181C281DD41F0099A81C /* UnitCube.cpp in Sources */,
 				E21F1822281DD41F0099A81C /* TextNode.cpp in Sources */,
 				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
 				E21F181E281DD41F0099A81C /* TextRenderer.cpp in Sources */,
 				E21F1810281DD41F0099A81C /* PBRShader.cpp in Sources */,
+				E21F182B2821DF5B0099A81C /* LightningSpear.cpp in Sources */,
 				1265315F281CC04800A712E1 /* Projectile.cpp in Sources */,
 				E21F1826281DD41F0099A81C /* LightNode.cpp in Sources */,
 				E21F1825281DD41F0099A81C /* ParticleNode.cpp in Sources */,
+				E21F182D2822F9FD0099A81C /* Particle3DNode.cpp in Sources */,
 				E21F180C281DD41F0099A81C /* SpriteShader.cpp in Sources */,
 				12309CA9281A022500423625 /* StoneBlast.cpp in Sources */,
 				E21F1815281DD41F0099A81C /* Animation.cpp in Sources */,

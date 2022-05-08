@@ -5,6 +5,7 @@
 class Texture;
 class Geometry;
 class ParticleNode;
+class Particle3DNode;
 class Shader {
 protected:
     static int currentProgramID;
@@ -148,6 +149,32 @@ private:
 public:
     ParticleShader(ParticleNode* particleNode);
     ~ParticleShader();
+    void engineSetParticleShaderColorAnimation(vector<vec4> colorKeys, vector<float> progressKeys);
+    void engineSetSpriteSheetAnimation(unsigned int rows, unsigned int columns,
+                                       unsigned int initialFrameRange,
+                                       unsigned int FPS, unsigned int FPSVariation);
+    void engineRenderShader(Geometry* geometry, unsigned int renderingMode) override;
+};
+class Particle3DShader final: public Shader {
+private:
+    Particle3DNode* particleNode;
+    int currentUseLocalSpace;
+    int currentIsAdditive;
+    Texture* currentTexture;
+    vec4 currentColor;
+    bool colorAnimationVectorsChanged;
+    vector<vec4> colorKeys;
+    vector<float> progressKeys;
+    bool spriteSheetAnimationChanged;
+    bool hasSpriteSheetAnimation;
+    unsigned int spriteSheetAnimationRows;
+    unsigned int spriteSheetAnimationColumns;
+    unsigned int spriteSheetAnimationInitialFrameRange;
+    float spriteSheetAnimationFPS;
+    float spriteSheetAnimationFPSVariation;
+public:
+    Particle3DShader(Particle3DNode* particle3DNode);
+    ~Particle3DShader();
     void engineSetParticleShaderColorAnimation(vector<vec4> colorKeys, vector<float> progressKeys);
     void engineSetSpriteSheetAnimation(unsigned int rows, unsigned int columns,
                                        unsigned int initialFrameRange,

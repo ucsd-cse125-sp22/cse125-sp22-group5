@@ -11,5 +11,6 @@
 #include "Magic/ThousandBlade.hpp"
 #include "Magic/StoneBlast.hpp"
 #include "Magic/FireBall.hpp"
+#include "Magic/LightningSpear.hpp"
 
 #endif /* magics_hpp */

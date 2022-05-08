@@ -29,6 +29,24 @@ struct ParticleData {
     vec2 scaleData;
     vec2 spriteSheetAnimationData;
 };
+struct Particle3DData {
+    vec2 birthTimeAndDuration;
+    vec3 initialPosition;
+    vec3 initialSpeed;
+    vec4 accelerationData;
+    vec3 rotationData;
+    vec3 rotationSpeedData;
+    vec3 scaleData;
+    vec3 scaleSpeedData;
+    vec2 spriteSheetAnimationData;
+};
+struct Particle3DVertex {
+    vec3 position;
+    vec3 normal;
+    vec2 uv;
+    vec3 tangent;
+    vec3 bitangent;
+};
 class Geometry {
 protected:
     bool updated;
@@ -101,6 +119,19 @@ public:
     void engineResetAllParticleData();
     void engineRenderGeometry(unsigned int renderingMode) override;
     ParticleData* engineGetParticleData(bool front);
+    unsigned int engineGetGeometryInstanceCount() override;
+};
+class Particle3DRenderer final: public Geometry {
+private:
+    unsigned int particleAmount;
+    unsigned int dataBuffers;
+    vector<Particle3DData> dataVector;
+public:
+    Particle3DRenderer(unsigned int amount, aiMesh* mesh);
+    ~Particle3DRenderer();
+    void engineResetAllParticleData();
+    void engineRenderGeometry(unsigned int renderingMode) override;
+    Particle3DData* engineGetParticleData(bool front);
     unsigned int engineGetGeometryInstanceCount() override;
 };
 class Skybox final: public Geometry {

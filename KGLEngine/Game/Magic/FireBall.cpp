@@ -62,10 +62,10 @@ FireBall::FireBall(){
     explosion->texture = new Texture("/Resources/Game/Effects/Explosion1.png");
     explosion->color = vec4(1, 0.4, 0.1, 1);
     explosion->isAdditive = true;
-    explosion->initialRotationVariation = 45;
+    explosion->initialRotationVariation = 60;
     explosion->renderingOrder = 1010;
     explosion->initialScale = 0.5;
-    explosion->scalingSpeed = 30;
+    explosion->scalingSpeed = 15;
     explosion->setMaxAmount(50);
     explosion->setSpriteSheetAnimation(7, 12, 40, 120, 40);
     explosion->isDisabled = true;

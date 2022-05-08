@@ -1175,18 +1175,18 @@ int main(int argc, char** argv) {
 
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
+    LightningSpear* lightningMagic = new LightningSpear();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
+    character->addMagics(lightningMagic, KEY_3);
 
-    Texture* ballMap = new Texture("/Resources/Game/Effects/Core2.png");
-    Texture* trailMap = new Texture("/Resources/Game/Effects/Trail3.png");
-    Texture* explosionMap = new Texture("/Resources/Game/Effects/Explosion1.png");
     engine->addNode(stoneMagic);
 
     HitController enemyHitController;
 
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.magics.push_back(fireMagic);
+    enemyHitController.magics.push_back(lightningMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1233,25 +1233,26 @@ int main(int argc, char** argv) {
                 }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
-                Texture* bloodD = new Texture("/Resources/Game/Effects/BloodDecal.png", 2.0f, true);
-
-                PBRShader* bloodMaterial = new PBRShader(0.0f, 0.0f);
-                bloodMaterial->setDiffuseMap(bloodD);
-                bloodMaterial->metallicIntensity = 2.0f;
-                bloodMaterial->invertRoughness = true;
-                Node* waveNode = new Node();
-                waveNode->eulerAngles.x = 30;
-                waveNode->loadModelFile("/Resources/Game/Effects/Wave.dae");
-                waveNode->scale = vec3(0.05);
-                waveNode->geometries[0]->setShader(bloodMaterial);
-                waveNode->position = character->modelNode->getWorldPosition();
-                engine->addNode(waveNode);
-                Animation* waveMovement = new Animation("wave animation", 5);
-                waveMovement->setVec3Animation(&waveNode->position, waveNode->position + character->getFrontVectorInWorld() * 20.f);
-                waveMovement->setCompletionHandler([&] {
-                    waveNode->removeFromParentNode();
-                });
-                Engine::main->playAnimation(waveMovement);
+                if (!fireMagic->start) {
+                    weaponNode->addChildNode(lightningMagic);
+                    character->castMagic(KEY_3);
+                }
+            }
+            if (engine->input->wasKeyPressed(KEY_4)) {
+                ParticleNode* lightningNode = new ParticleNode(120, 0.03, 0);
+                weaponNode->addChildNode(lightningNode);
+            }
+            if (engine->input->wasKeyPressed(KEY_5)) {
+                Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
+                lightningNode->initialScale = vec3(3, 1, 0.3);
+                lightningNode->color = vec4(0.7, 0.7, 0.2, 0.8);
+                lightningNode->initialRotationVariation = vec3(180, 0, 0);
+                lightningNode->randomizeRotatingDirection = true;
+//                lightningNode->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png", 2.0f, true);
+//                lightningNode->setSpriteSheetAnimation(5, 5, 5, 28, 4);
+                lightningNode->isAdditive = true;
+                lightningNode->renderingOrder = 1000;
+                weaponNode->addChildNode(lightningNode);
             }
 
             for (int i = 0; i < enemies.size(); i++){
