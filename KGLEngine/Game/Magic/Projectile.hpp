@@ -22,6 +22,7 @@ public:
     int damage;
     void tryDamageChar(CharNode* character);
     Projectile* copy();
+    Projectile* clone();
 };
 
 #endif /* Projectile_hpp */

@@ -28,6 +28,7 @@ public:
     ~FireBall();
     void updateMagic() override;
     void play(CharNode* character) override;
+    void hitWall() override {}
     void tryDamage(CharNode* character) override;
 };
 

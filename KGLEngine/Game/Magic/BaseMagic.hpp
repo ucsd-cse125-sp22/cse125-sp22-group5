@@ -22,6 +22,7 @@ public:
     int damage;
     virtual void play(CharNode* character)=0;
     virtual void updateMagic()=0;
+    virtual void hitWall(){}
 };
 class DamageableMagic : public BaseMagic {
 public:

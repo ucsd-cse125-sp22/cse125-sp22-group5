@@ -316,7 +316,6 @@ void CharNode::castMagic(int key){
         Animation* resume = new Animation(this->name + " resume", this->keyBind[key]->stopTime);
         resume->setCompletionHandler([&]{
             this->allowAction = true;
-            //delete resume
         });
         Engine::main->playAnimation(resume);
     }
