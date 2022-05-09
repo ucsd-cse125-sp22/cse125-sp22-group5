@@ -117,7 +117,7 @@ void Particle3DRenderer::engineResetAllParticleData() {
 void Particle3DRenderer::engineRenderGeometry(unsigned int renderingMode) {
     glDisable(GL_CULL_FACE);
     glBindBuffer(GL_ARRAY_BUFFER, this->dataBuffers);
-    glBufferData(GL_ARRAY_BUFFER, this->particleAmount * sizeof(ParticleData), &this->dataVector[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->particleAmount * sizeof(Particle3DData), &this->dataVector[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     this->shader->engineRenderShader(this, renderingMode);
     this->updated = false;

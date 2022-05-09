@@ -190,6 +190,7 @@ Particle3DNode::~Particle3DNode() {
     this->progressKeys.clear();
 }
 void Particle3DNode::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2 data, unsigned int renderingMode) {
+    assert(this->spreadingAngle <= 90);
     if(this->isDisabled) {
         return;
     }
@@ -248,9 +249,9 @@ void Particle3DNode::enginePrepareNodeForRendering(mat4 parentWorldTransform, ve
             accelerationData.w = this->speedAcceleration;
             accelerationData.w += glm::linearRand(-this->speedAccelerationVariation, this->speedAccelerationVariation);
             data->accelerationData = accelerationData;
-            vec3 rotationData = vec3(0.0f);
+            vec3 rotationData = vec3(0, -(polarAngle) * glm::cos(alphaAngle), (polarAngle) * glm::sin(alphaAngle));
             vec3 rotationSpeedData = vec3(0.0f);
-            rotationData = glm::radians(this->initialRotation);
+            rotationData += glm::radians(this->initialRotation);
             vec3 variationAngle = glm::radians(this->initialRotationVariation);
             rotationData += glm::linearRand(-variationAngle, variationAngle);
             rotationSpeedData = glm::radians(this->rotatingSpeed);

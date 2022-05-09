@@ -1233,14 +1233,30 @@ int main(int argc, char** argv) {
                 }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
-                if (!fireMagic->start) {
+                if (!lightningMagic->start) {
                     weaponNode->addChildNode(lightningMagic);
                     character->castMagic(KEY_3);
                 }
             }
             if (engine->input->wasKeyPressed(KEY_4)) {
-                ParticleNode* lightningNode = new ParticleNode(120, 0.03, 0);
-                weaponNode->addChildNode(lightningNode);
+                Particle3DNode* radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 60, 0.2f, 0.3f);
+                radiation->color = vec4(0.9, 0.9, 0.1, 1);
+                radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
+                radiation->isAdditive = true;
+//                radiation->setMaxAmount(60);
+                radiation->renderingOrder = 1010;
+                radiation->initialScale = vec3(0.5, 1, 0.2);
+                radiation->initialScaleVariation = vec3(0.3, 0, 0.1);
+                radiation->initialRotation = vec3(0, 0, 0);
+                radiation->setEmissionSphere(0, 1);
+                radiation->spreadingAngle = 90;
+                radiation->initialSpeed = 0.1;
+                radiation->useLocalSpace = true;
+//                radiation->speedAcceleration = -0.4;
+                radiation->speedAccelerationVariation = 0.1;
+                radiation->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+                radiation->isDisabled = false;
+                weaponNode->addChildNode(radiation);
             }
             if (engine->input->wasKeyPressed(KEY_5)) {
                 Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
@@ -1263,6 +1279,7 @@ int main(int argc, char** argv) {
             
             stoneMagic->updateMagic();
             fireMagic->updateMagic();
+            lightningMagic->updateMagic();
 
 
             enemyHitController.checkHit();

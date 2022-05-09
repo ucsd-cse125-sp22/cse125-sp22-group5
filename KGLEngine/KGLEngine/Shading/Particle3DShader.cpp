@@ -42,8 +42,8 @@ mat4 rotationMatrix(vec3 axis, float angle)
 void main() {
     float progress = time - birthTimeAndDuration.x;
     if(progress > birthTimeAndDuration.y) {
-//        gl_Position = vec4(0.0f);
-//        return;
+        gl_Position = vec4(0.0f);
+        return;
     }
     float accelerationFactor = progress * progress * 0.5f;
     vec4 particlePosition = vec4(initialPosition, 1.0f);
@@ -55,9 +55,9 @@ void main() {
     vec3 rotation = rotationData + rotationSpeedData * progress;
     localVertexPosition *= rotationMatrix(vec3(0, 1, 0), rotation.y) * rotationMatrix(vec3(0, 0, 1), rotation.z) * rotationMatrix(vec3(1, 0, 0), rotation.x);
     if(useLocalSpace) {
-        gl_Position = projectionTransform * (modelViewTransform * particlePosition + localVertexPosition);
+        gl_Position = projectionTransform * (modelViewTransform * (particlePosition + localVertexPosition));
     }else{
-        gl_Position = projectionTransform * (viewTransform * particlePosition + localVertexPosition);
+        gl_Position = projectionTransform * (viewTransform * (particlePosition + localVertexPosition));
     }
     fragment.progress = progress / birthTimeAndDuration.y;
     fragment.UV = vertexUV;

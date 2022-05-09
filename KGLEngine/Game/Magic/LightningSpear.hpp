@@ -20,7 +20,7 @@ public:
     bool explodeDamage;
     Particle3DNode* spear;
     Particle3DNode* radiation;
-    ParticleNode* explosion;
+    CharNode* caster;
     LightNode* light;
     Animation* createFireball;
     Animation* createFlame;
