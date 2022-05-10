@@ -7,6 +7,11 @@
 
 #ifndef includes_hpp
 #define includes_hpp
+#ifdef MAINPROGRAM
+#define EXTERN
+#else
+#define EXTERN extern
+#endif
 
 #include "../KGLEngine/Engine.hpp"
 #include "./Character/CharNode.hpp"
@@ -17,5 +22,7 @@
 #include "./Magic/BaseMagic.hpp"
 #include "./Magic/Projectile.hpp"
 #include "./Shader/AlphaShader.hpp"
-
+class MapSystemManager;
+EXTERN MapSystemManager* mapSystemManager;
+EXTERN Engine* engine;
 #endif /* includes_hpp */

@@ -54,6 +54,7 @@
 		E21F182D2822F9FD0099A81C /* Particle3DNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F182C2822F9FD0099A81C /* Particle3DNode.cpp */; };
 		E21F182F2822FB2B0099A81C /* Particle3DShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */; };
 		E21F18312822FBFE0099A81C /* Particle3DRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */; };
+		E267FD172829AF5200DD6757 /* AlphaShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E267FD152829AF5200DD6757 /* AlphaShader.cpp */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
 		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
@@ -149,6 +150,9 @@
 		E21F182C2822F9FD0099A81C /* Particle3DNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DNode.cpp; sourceTree = "<group>"; };
 		E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DShader.cpp; sourceTree = "<group>"; };
 		E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Particle3DRenderer.cpp; sourceTree = "<group>"; };
+		E267FD0B2829AB5500DD6757 /* global.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = global.hpp; sourceTree = "<group>"; };
+		E267FD152829AF5200DD6757 /* AlphaShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlphaShader.cpp; sourceTree = "<group>"; };
+		E267FD162829AF5200DD6757 /* AlphaShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlphaShader.hpp; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
 		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
 		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
@@ -206,8 +210,10 @@
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E267FD142829AF5200DD6757 /* Shader */,
 				122788D6281CDADB001A9188 /* magics.hpp */,
 				12653161281CC42D00A712E1 /* includes.hpp */,
+				E267FD0B2829AB5500DD6757 /* global.hpp */,
 				12309C99281A022500423625 /* Hitbox */,
 				12309C9E281A022500423625 /* Magic */,
 				E28020832813159700A810E7 /* Map */,
@@ -370,6 +376,15 @@
 			path = Toolkit;
 			sourceTree = "<group>";
 		};
+		E267FD142829AF5200DD6757 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				E267FD152829AF5200DD6757 /* AlphaShader.cpp */,
+				E267FD162829AF5200DD6757 /* AlphaShader.hpp */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
 		E28020832813159700A810E7 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +481,7 @@
 				E21F180E281DD41F0099A81C /* Texture.cpp in Sources */,
 				E21F1811281DD41F0099A81C /* ParticleShader.cpp in Sources */,
 				E21F180D281DD41F0099A81C /* Image.cpp in Sources */,
+				E267FD172829AF5200DD6757 /* AlphaShader.cpp in Sources */,
 				E21F181A281DD41F0099A81C /* Geometry.cpp in Sources */,
 				E21F1814281DD41F0099A81C /* Font.cpp in Sources */,
 				E21F1817281DD41F0099A81C /* Bone.cpp in Sources */,

@@ -32,7 +32,7 @@ LightningSpear::LightningSpear(){
     light = new LightNode(vec4(1, 1, 0.2, 1));
     light->setPointLight(15, 30);
     this->addChildNode(light);
-    this->radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.6f, 0.3f);
+    this->radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.3f, 0.3f);
     this->radiation->color = vec4(1, 1, 0.2, 1);
     this->radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
     this->radiation->isAdditive = true;
@@ -55,10 +55,12 @@ void LightningSpear::updateMagic(){
     if (threwOut) {
         position += velocity * 0.3f;
         velocity += acceleration;
+        this->hitWall();
     }
     if (exploded) {
         exploded = false;
         radiation->isDisabled = false;
+        spear->isDisabled = true;
         Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.1);
         fireBallLightIntensity->setFloatAnimation(&light->attenuationExponent, 0.8);
         fireBallLightIntensity->setCompletionHandler([&] {
@@ -80,8 +82,9 @@ void LightningSpear::updateMagic(){
 void LightningSpear::play(CharNode* character){
     if (!start){
         this->caster = character;
+        this->spear->isDisabled = false;
+        this->threwOut = false;
         velocity = character->modelNode->getRightVectorInWorld();
-        threwOut = false;
         explodeDamage = false;
         this->spear->initialScale = vec3(0.1);
         exploded = false;
@@ -94,16 +97,26 @@ void LightningSpear::play(CharNode* character){
         createSpear->setVec3Animation(&this->spear->initialScale, vec3(4, 1, 0.4));
         createSpear->setEaseInEaseOutTimingMode();
         createSpear->setCompletionHandler([&]{
-            Node* engine = this->parent;
-            threwOut = true;
-            canDamage = true;
-            this->position = this->getWorldPosition();
             this->eulerAngles = caster->modelNode->getWorldEulerAngles();
             this->eulerAngles.y += 90;
-            while (engine->parent)
-                engine = engine->parent; // todo make this global variable
+            this->position = this->getWorldPosition();
             this->removeFromParentNode();
-            engine->addChildNode(this);
+            engine->addNode(this);
+            this->updateTransform();
+            if (this->caster->isLocked) {
+                vec3 targetPos = inverse(this->getWorldTransform()) * vec4(this->caster->target->getWorldPosition() + vec3(0, 0.5, 0), 1);
+                this->velocity = normalize(targetPos);
+                vec3 front = vec3(-1, 0, 0);
+                float dotProd = dot(targetPos, front);
+                float polarAngle = acos(dot(this->velocity, front));
+                vec3 coordinate = normalize(targetPos - front * dotProd);
+                
+                this->eulerAngles.z -= degrees(polarAngle) * coordinate.y;
+                this->eulerAngles.y += degrees(polarAngle) * coordinate.z;
+                this->velocity = this->convertLocalVectorToWorld(this->velocity);
+            }
+            threwOut = true;
+            canDamage = true;
             Animation* threw = new Animation("threw", 2);
             threw->setCompletionHandler([&] {
                 if (start) {
@@ -132,6 +145,39 @@ void LightningSpear::tryDamage(CharNode *character) {
         }
         canDamage = false;
     }
+}
+void LightningSpear::hitWall() {
+    if (!explodeDamage && canDamage) {
+        vec3 position;
+        vec3 normalvec;
+        this->updateTransform();
+        if (mapSystemManager->hitTest(this->position, this->position + this->velocity, &position, &normalvec)) {
+            cout << "hit wall!" << endl;
+            cout << to_string(this->getWorldPosition()) << ", " << to_string(velocity) << endl;
+            cout << to_string(position) << ", " << to_string(this->position + this->velocity * 0.5f) << endl;
+            canDamage = false;
+            exploded = true;
+            explodeDamage = true;
+            threwOut = false;
+        }
+    }
+}
+void LightningSpear::explode() {
+    radiation->isDisabled = false;
+    Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.1);
+    fireBallLightIntensity->setCompletionHandler([&] {
+        Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2", 0.5);
+        Engine::main->playAnimation(fireBallLightIntensity2);
+        fireBallLightIntensity2->setCompletionHandler([&] {
+            this->radiation->isDisabled = true;
+            canDamage = true;
+            this->isDisabled = true;
+            start = false;
+            this->removeFromParentNode();
+        });
+    });
+    Engine::main->playAnimation(fireBallLightIntensity);
+    light->setPointLight(0.4, 30);
 }
 LightningSpear::~LightningSpear(){
     

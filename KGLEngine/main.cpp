@@ -1,12 +1,13 @@
 // Developed by Kelin Lyu.
 
 #include "KGLEngine/Engine.hpp"
+#define MAINPROGRAM
 #include "Game/includes.hpp"
 #include "Game/magics.hpp"
 
 int main(int argc, char** argv) {
     
-    Engine* engine = new Engine("KGLEngine", 0.8f, 0, NULL);
+    engine = new Engine("KGLEngine", 0.8f, 0, NULL);
     engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
     engine->lockCursor();
     
@@ -117,7 +118,7 @@ int main(int argc, char** argv) {
 //    mapBox5->position = box4->position ;
 //    mapBox5->eulerAngles = box4->eulerAngles;
 //
-    MapSystemManager* mapSystemManager = new MapSystemManager();
+    mapSystemManager = new MapSystemManager();
 ////    mapSystemManager->boxes.push_back(mapBox);
 //    mapSystemManager->boxes.push_back(mapBox2);
 //    mapSystemManager->boxes.push_back(mapBox3);

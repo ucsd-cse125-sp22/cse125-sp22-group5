@@ -60,7 +60,7 @@ bool MapBoxObject::hitTest(glm::vec3 start, glm::vec3 end, glm::vec3 *position, 
     if (tzmax < tmax)
         tmax = tzmax;
 
-    if (maxt < tmin)
+    if (maxt < tmin || tmax < 0)
         return false;
     vec3 myposition = transtart + dir * tmin;
     *position = (trans) * vec4(myposition, 1);

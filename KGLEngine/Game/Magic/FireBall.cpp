@@ -65,7 +65,7 @@ FireBall::FireBall(){
     explosion->initialRotationVariation = 60;
     explosion->renderingOrder = 1010;
     explosion->initialScale = 0.5;
-    explosion->scalingSpeed = 15;
+    explosion->scalingSpeed = 7;
     explosion->setMaxAmount(50);
     explosion->setSpriteSheetAnimation(7, 12, 40, 120, 40);
     explosion->isDisabled = true;
@@ -75,16 +75,22 @@ FireBall::FireBall(){
     createFlame = new Animation("create flame", 0.8);
     createFlame->setFloatAnimation(&flame->initialScale, 0.35);
     createFireball->setCompletionHandler([&]{
-        Node* engine = this->parent;
         threwOut = true;
         canDamage = true;
         this->position = getWorldPosition();
-        while (engine->parent)
-            engine = engine->parent; // todo make this global variable
         this->removeFromParentNode();
-        engine->addChildNode(this);
+        engine->addNode(this);
         flame->scalingSpeed = -0.4;
-        Animation* threw = new Animation("threw", 2);
+        Animation* threw = new Animation("threw", 3);
+        this->updateTransform();
+        if (this->caster->isLocked) {
+            this->velocity = normalize((this->caster->target->getWorldPosition() - this->getWorldPosition()) * vec3(1, 0, 1));
+            float len = distance(this->caster->target->getWorldPosition(), this->getWorldPosition());
+            float speed = length(this->velocity) * 0.1f;
+            float tick = len / speed;
+            float up = 0.004 * tick / 2;
+            this->velocity.y += fmin(up, 0.71);
+        }
         threw->setCompletionHandler([&] {
             if (start) {
                 canDamage = false;
@@ -100,6 +106,7 @@ void FireBall::updateMagic(){
     if (threwOut) {
         position += velocity * 0.1f;
         velocity += acceleration;
+        this->hitWall();
     }
     if (exploded) {
         exploded = false;
@@ -121,14 +128,15 @@ void FireBall::updateMagic(){
         });
         Engine::main->playAnimation(fireBallLightIntensity);
         light->setPointLight(0.4, 30);
-        fireball->scalingSpeed = 15;
-        fireball->scalingSpeedVariation = 10;
+        fireball->scalingSpeed = 5;
+        fireball->scalingSpeedVariation = 2;
         fireball->color = vec4(1, 0.2, 0.0, 1);
         flame->isDisabled = true;
     }
 }
 void FireBall::play(CharNode* character){
     if (!start){
+        this->caster = character;
         velocity = character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0);
         threwOut = false;
         explodeDamage = false;
@@ -160,6 +168,19 @@ void FireBall::tryDamage(CharNode *character) {
             character->receiveDamage(this->damage);
         }
         canDamage = false;
+    }
+}
+void FireBall::hitWall() {
+    if (!explodeDamage && canDamage) {
+        vec3 position;
+        vec3 normalvec;
+        this->updateTransform();
+        if (mapSystemManager->hitTest(this->position, this->position + this->velocity, &position, &normalvec)) {
+            canDamage = false;
+            exploded = true;
+            explodeDamage = true;
+            threwOut = false;
+        }
     }
 }
 FireBall::~FireBall(){

@@ -21,6 +21,7 @@ public:
     ParticleNode* fireball;
     ParticleNode* flame;
     ParticleNode* explosion;
+    CharNode* caster;
     LightNode* light;
     Animation* createFireball;
     Animation* createFlame;
@@ -28,7 +29,7 @@ public:
     ~FireBall();
     void updateMagic() override;
     void play(CharNode* character) override;
-    void hitWall() override {}
+    void hitWall() override;
     void tryDamage(CharNode* character) override;
 };
 

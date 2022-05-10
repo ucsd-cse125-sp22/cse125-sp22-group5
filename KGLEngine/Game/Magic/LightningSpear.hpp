@@ -26,6 +26,8 @@ public:
     Animation* createFlame;
     LightningSpear();
     ~LightningSpear();
+    void explode();
+    void hitWall() override;
     void updateMagic() override;
     void play(CharNode* character) override;
     void tryDamage(CharNode* character) override;
