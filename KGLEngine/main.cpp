@@ -1177,17 +1177,25 @@ int main(int argc, char** argv) {
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
     LightningSpear* lightningMagic = new LightningSpear();
+    Thunder* thunderMagic = new Thunder();
+    Flame* flameMagic = new Flame();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
+    character->addMagics(thunderMagic, KEY_4);
+    character->addMagics(flameMagic, KEY_5);
 
     engine->addNode(stoneMagic);
+    engine->addNode(flameMagic);
+    engine->addNode(thunderMagic);
 
     HitController enemyHitController;
 
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.magics.push_back(fireMagic);
     enemyHitController.magics.push_back(lightningMagic);
+    enemyHitController.magics.push_back(thunderMagic);
+    enemyHitController.magics.push_back(flameMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1240,36 +1248,24 @@ int main(int argc, char** argv) {
                 }
             }
             if (engine->input->wasKeyPressed(KEY_4)) {
-                Particle3DNode* radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 60, 0.2f, 0.3f);
-                radiation->color = vec4(0.9, 0.9, 0.1, 1);
-                radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
-                radiation->isAdditive = true;
-//                radiation->setMaxAmount(60);
-                radiation->renderingOrder = 1010;
-                radiation->initialScale = vec3(0.5, 1, 0.2);
-                radiation->initialScaleVariation = vec3(0.3, 0, 0.1);
-                radiation->initialRotation = vec3(0, 0, 0);
-                radiation->setEmissionSphere(0, 1);
-                radiation->spreadingAngle = 90;
-                radiation->initialSpeed = 0.1;
-                radiation->useLocalSpace = true;
-//                radiation->speedAcceleration = -0.4;
-                radiation->speedAccelerationVariation = 0.1;
-                radiation->setSpriteSheetAnimation(5, 5, 20, 28, 4);
-                radiation->isDisabled = false;
-                weaponNode->addChildNode(radiation);
+                if (!lightningMagic->start) {
+                    character->castMagic(KEY_4);
+                }
             }
             if (engine->input->wasKeyPressed(KEY_5)) {
-                Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
-                lightningNode->initialScale = vec3(3, 1, 0.3);
-                lightningNode->color = vec4(0.7, 0.7, 0.2, 0.8);
-                lightningNode->initialRotationVariation = vec3(180, 0, 0);
-                lightningNode->randomizeRotatingDirection = true;
-//                lightningNode->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png", 2.0f, true);
-//                lightningNode->setSpriteSheetAnimation(5, 5, 5, 28, 4);
-                lightningNode->isAdditive = true;
-                lightningNode->renderingOrder = 1000;
-                weaponNode->addChildNode(lightningNode);
+                character->castMagic(KEY_5);
+                cout << "key 5 pressed" << endl;
+            }
+            if (engine->input->wasKeyPressed(KEY_6)) {
+                Particle3DNode* shield = new Particle3DNode("/Resources/Game/Effects/shield.dae", 1, 10.0f, 0);
+                shield->color = vec4(0.4, 0.4, 1, 0.4);
+                shield->position.y -= 0.4;
+                shield->isAdditive = true;
+                shield->setMaxAmount(1);
+                shield->renderingOrder = 2010;
+                shield->initialScale = vec3(5, 4, 4);
+                shield->isDisabled = false;
+                engine->addNode(shield);
             }
 
             for (int i = 0; i < enemies.size(); i++){

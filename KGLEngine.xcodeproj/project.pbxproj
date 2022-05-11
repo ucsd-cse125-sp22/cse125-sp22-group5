@@ -55,6 +55,9 @@
 		E21F182F2822FB2B0099A81C /* Particle3DShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F182E2822FB2B0099A81C /* Particle3DShader.cpp */; };
 		E21F18312822FBFE0099A81C /* Particle3DRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F18302822FBFE0099A81C /* Particle3DRenderer.cpp */; };
 		E267FD172829AF5200DD6757 /* AlphaShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E267FD152829AF5200DD6757 /* AlphaShader.cpp */; };
+		E267FD1A282B81BA00DD6757 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E267FD18282B81BA00DD6757 /* ThunderShock.cpp */; };
+		E267FD1D282B8FD200DD6757 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E267FD1B282B8FD200DD6757 /* Thunder.cpp */; };
+		E267FD20282C203100DD6757 /* Flame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E267FD1E282C203100DD6757 /* Flame.cpp */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
 		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
@@ -153,6 +156,12 @@
 		E267FD0B2829AB5500DD6757 /* global.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = global.hpp; sourceTree = "<group>"; };
 		E267FD152829AF5200DD6757 /* AlphaShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlphaShader.cpp; sourceTree = "<group>"; };
 		E267FD162829AF5200DD6757 /* AlphaShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlphaShader.hpp; sourceTree = "<group>"; };
+		E267FD18282B81BA00DD6757 /* ThunderShock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ThunderShock.cpp; sourceTree = "<group>"; };
+		E267FD19282B81BA00DD6757 /* ThunderShock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ThunderShock.hpp; sourceTree = "<group>"; };
+		E267FD1B282B8FD200DD6757 /* Thunder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Thunder.cpp; sourceTree = "<group>"; };
+		E267FD1C282B8FD200DD6757 /* Thunder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Thunder.hpp; sourceTree = "<group>"; };
+		E267FD1E282C203100DD6757 /* Flame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Flame.cpp; sourceTree = "<group>"; };
+		E267FD1F282C203100DD6757 /* Flame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Flame.hpp; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
 		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
 		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
@@ -203,6 +212,12 @@
 				E21F177D281CF5EC0099A81C /* FireBall.hpp */,
 				E21F18292821DF5B0099A81C /* LightningSpear.cpp */,
 				E21F182A2821DF5B0099A81C /* LightningSpear.hpp */,
+				E267FD18282B81BA00DD6757 /* ThunderShock.cpp */,
+				E267FD19282B81BA00DD6757 /* ThunderShock.hpp */,
+				E267FD1B282B8FD200DD6757 /* Thunder.cpp */,
+				E267FD1C282B8FD200DD6757 /* Thunder.hpp */,
+				E267FD1E282C203100DD6757 /* Flame.cpp */,
+				E267FD1F282C203100DD6757 /* Flame.hpp */,
 			);
 			path = Magic;
 			sourceTree = "<group>";
@@ -475,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E21F1818281DD41F0099A81C /* Animator.cpp in Sources */,
+				E267FD20282C203100DD6757 /* Flame.cpp in Sources */,
 				E21F181D281DD41F0099A81C /* Skybox.cpp in Sources */,
 				E21F181F281DD41F0099A81C /* ParticleRenderer.cpp in Sources */,
 				C294F8F027FCF9A6002B6550 /* main.cpp in Sources */,
@@ -515,8 +531,10 @@
 				12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */,
 				E21F177E281CF5EC0099A81C /* FireBall.cpp in Sources */,
 				E21F181B281DD41F0099A81C /* Sprite.cpp in Sources */,
+				E267FD1D282B8FD200DD6757 /* Thunder.cpp in Sources */,
 				E21F1823281DD41F0099A81C /* SpriteNode.cpp in Sources */,
 				E21F1820281DD41F0099A81C /* UINode.cpp in Sources */,
+				E267FD1A282B81BA00DD6757 /* ThunderShock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,5 +12,7 @@
 #include "Magic/StoneBlast.hpp"
 #include "Magic/FireBall.hpp"
 #include "Magic/LightningSpear.hpp"
+#include "Magic/Thunder.hpp"
+#include "Magic/Flame.hpp"
 
 #endif /* magics_hpp */

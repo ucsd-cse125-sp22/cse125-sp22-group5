@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9C365B2-2664-4039-85E3-DE182B8EF101"
+            uuid = "65EEE752-A197-420C-B291-0CD01F53A592"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KGLEngine/Game/Magic/LightningSpear.cpp"
+            filePath = "KGLEngine/Game/Magic/ThunderShock.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "LightningSpear::play(character)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "ThunderShock::play(character)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3C1152A3-F34D-4612-9BCA-62EC8DC789B4"
+            uuid = "93570223-491B-4B24-8B3C-CD8C7CD9366E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KGLEngine/Game/Magic/FireBall.cpp"
+            filePath = "KGLEngine/Game/Magic/Thunder.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "FireBall::FireBall()"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "Thunder::playNextThunder(index)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

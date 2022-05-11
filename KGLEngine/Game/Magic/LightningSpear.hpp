@@ -22,8 +22,6 @@ public:
     Particle3DNode* radiation;
     CharNode* caster;
     LightNode* light;
-    Animation* createFireball;
-    Animation* createFlame;
     LightningSpear();
     ~LightningSpear();
     void explode();
