@@ -50,6 +50,9 @@ public:
     UINode* uiNode;
     TextNode* nameNode;
     Node* generateBoneNode(string boneName);
+    
+    Node* rightHand;
+    
     void setCamera(CameraNode* model);
     void setControl(Node* control);
     void setEularAngle(vec3 eularAngle);

@@ -178,6 +178,8 @@ int main(int argc, char** argv) {
     
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
 
+    character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.fbx");
+
     UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
     engine->addNode(baseNode);
@@ -200,11 +202,11 @@ int main(int argc, char** argv) {
     enemy->setName("Enemy");
     enemies.push_back(enemy);
     
-    Node* characterRightHand = character->generateBoneNode("RightHand");
+    //Node* characterRightHand = character->generateBoneNode("RightHand");
     
-    Node* weaponNode = new Node();
-    weaponNode->scale = vec3(1);
-    characterRightHand->addChildNode(weaponNode);
+//    Node* weaponNode = new Node();
+//    weaponNode->scale = vec3(1);
+//    characterRightHand->addChildNode(weaponNode);
     
 
     
@@ -1177,11 +1179,13 @@ int main(int argc, char** argv) {
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
     LightningSpear* lightningMagic = new LightningSpear();
+    GroundSmash* smashMagic = new GroundSmash();
     Thunder* thunderMagic = new Thunder();
     Flame* flameMagic = new Flame();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
+    character->addMagics(smashMagic, KEY_4);
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
 
@@ -1194,6 +1198,7 @@ int main(int argc, char** argv) {
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.magics.push_back(fireMagic);
     enemyHitController.magics.push_back(lightningMagic);
+    enemyHitController.magics.push_back(smashMagic);
     enemyHitController.magics.push_back(thunderMagic);
     enemyHitController.magics.push_back(flameMagic);
     enemyHitController.characters.push_back(enemy);
@@ -1237,13 +1242,13 @@ int main(int argc, char** argv) {
             }
             if(engine->input->wasKeyReleased(KEY_2)){
                 if (!fireMagic->start) {
-                    weaponNode->addChildNode(fireMagic);
+                    character->rightHand->addChildNode(fireMagic);
                     character->castMagic(KEY_2);
                 }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 if (!lightningMagic->start) {
-                    weaponNode->addChildNode(lightningMagic);
+                    character->rightHand->addChildNode(lightningMagic);
                     character->castMagic(KEY_3);
                 }
             }

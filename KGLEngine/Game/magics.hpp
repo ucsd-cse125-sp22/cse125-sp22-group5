@@ -14,5 +14,6 @@
 #include "Magic/LightningSpear.hpp"
 #include "Magic/Thunder.hpp"
 #include "Magic/Flame.hpp"
+#include "Magic/GroundSmash.hpp"
 
 #endif /* magics_hpp */
