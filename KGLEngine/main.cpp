@@ -8,7 +8,7 @@
 int main(int argc, char** argv) {
     
     engine = new Engine("KGLEngine", 0.8f, 0, NULL);
-    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
+    engine->workingDirectory = ".";
     engine->lockCursor();
     
     Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
@@ -177,6 +177,8 @@ int main(int argc, char** argv) {
     character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll.dae");
     
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
+    
+    character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.fbx");
 
     UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
@@ -200,11 +202,11 @@ int main(int argc, char** argv) {
     enemy->setName("Enemy");
     enemies.push_back(enemy);
     
-    Node* characterRightHand = character->generateBoneNode("RightHand");
+    //Node* characterRightHand = character->generateBoneNode("RightHand");
     
-    Node* weaponNode = new Node();
-    weaponNode->scale = vec3(1);
-    characterRightHand->addChildNode(weaponNode);
+//    Node* weaponNode = new Node();
+//    weaponNode->scale = vec3(1);
+//    characterRightHand->addChildNode(weaponNode);
     
 
     
@@ -1177,9 +1179,11 @@ int main(int argc, char** argv) {
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
     LightningSpear* lightningMagic = new LightningSpear();
+    GroundSmash* smashMagic = new GroundSmash();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
+    character->addMagics(smashMagic, KEY_4);
 
     engine->addNode(stoneMagic);
 
@@ -1188,6 +1192,7 @@ int main(int argc, char** argv) {
     enemyHitController.magics.push_back(stoneMagic);
     enemyHitController.magics.push_back(fireMagic);
     enemyHitController.magics.push_back(lightningMagic);
+    enemyHitController.magics.push_back(smashMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1229,35 +1234,36 @@ int main(int argc, char** argv) {
             }
             if(engine->input->wasKeyReleased(KEY_2)){
                 if (!fireMagic->start) {
-                    weaponNode->addChildNode(fireMagic);
+                    character->rightHand->addChildNode(fireMagic);
                     character->castMagic(KEY_2);
                 }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 if (!lightningMagic->start) {
-                    weaponNode->addChildNode(lightningMagic);
+                    character->rightHand->addChildNode(lightningMagic);
                     character->castMagic(KEY_3);
                 }
             }
             if (engine->input->wasKeyPressed(KEY_4)) {
-                Particle3DNode* radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 60, 0.2f, 0.3f);
-                radiation->color = vec4(0.9, 0.9, 0.1, 1);
-                radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
-                radiation->isAdditive = true;
-//                radiation->setMaxAmount(60);
-                radiation->renderingOrder = 1010;
-                radiation->initialScale = vec3(0.5, 1, 0.2);
-                radiation->initialScaleVariation = vec3(0.3, 0, 0.1);
-                radiation->initialRotation = vec3(0, 0, 0);
-                radiation->setEmissionSphere(0, 1);
-                radiation->spreadingAngle = 90;
-                radiation->initialSpeed = 0.1;
-                radiation->useLocalSpace = true;
-//                radiation->speedAcceleration = -0.4;
-                radiation->speedAccelerationVariation = 0.1;
-                radiation->setSpriteSheetAnimation(5, 5, 20, 28, 4);
-                radiation->isDisabled = false;
-                weaponNode->addChildNode(radiation);
+                character->castMagic(KEY_4);
+//                Particle3DNode* radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 60, 0.2f, 0.3f);
+//                radiation->color = vec4(0.9, 0.9, 0.1, 1);
+//                radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
+//                radiation->isAdditive = true;
+////                radiation->setMaxAmount(60);
+//                radiation->renderingOrder = 1010;
+//                radiation->initialScale = vec3(0.5, 1, 0.2);
+//                radiation->initialScaleVariation = vec3(0.3, 0, 0.1);
+//                radiation->initialRotation = vec3(0, 0, 0);
+//                radiation->setEmissionSphere(0, 1);
+//                radiation->spreadingAngle = 90;
+//                radiation->initialSpeed = 0.1;
+//                radiation->useLocalSpace = true;
+////                radiation->speedAcceleration = -0.4;
+//                radiation->speedAccelerationVariation = 0.1;
+//                radiation->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+//                radiation->isDisabled = false;
+//                weaponNode->addChildNode(radiation);
             }
             if (engine->input->wasKeyPressed(KEY_5)) {
                 Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
@@ -1269,7 +1275,7 @@ int main(int argc, char** argv) {
 //                lightningNode->setSpriteSheetAnimation(5, 5, 5, 28, 4);
                 lightningNode->isAdditive = true;
                 lightningNode->renderingOrder = 1000;
-                weaponNode->addChildNode(lightningNode);
+                //weaponNode->addChildNode(lightningNode);
             }
 
             for (int i = 0; i < enemies.size(); i++){
@@ -1281,7 +1287,7 @@ int main(int argc, char** argv) {
             stoneMagic->updateMagic();
             fireMagic->updateMagic();
             lightningMagic->updateMagic();
-
+            smashMagic->updateMagic();
 
             enemyHitController.checkHit();
 

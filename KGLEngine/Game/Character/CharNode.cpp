@@ -39,6 +39,7 @@ void CharNode::setModel(Node* model){
     this->modelNode->name = "modelNode";
     this->addChildNode(model);
     this->headTop = generateBoneNode("Head");
+    this->rightHand = generateBoneNode("RightHand");
 }
 void CharNode::setControl(Node* control){
     this->controlNode = control;
@@ -300,6 +301,7 @@ CharNode* CharNode::copy(vec3 position) {
         }
     }
     node->headTop = node->generateBoneNode("Head");
+    node->rightHand = node->generateBoneNode("RightHand");
     node->cameraNode = this->cameraNode;
     return(node);
 }

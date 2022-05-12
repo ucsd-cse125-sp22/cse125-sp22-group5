@@ -14,7 +14,6 @@ vec3 randomPosition(float angle, float closest_rang, float cast_range){
     return vec3(cos(radians(random_angle)) * random_dist, 0, sin(radians(random_angle)) * random_dist);
 }
 
-
 ThousandBlade::ThousandBlade(){
     this->position = vec3(0);
     this->eulerAngles = vec3(1);
@@ -221,7 +220,6 @@ ThousandBlade::ThousandBlade(){
     delete shiningParticle;
 }
 
-
 void ThousandBlade::updateMagic(){
     if (start){
         float time = Engine::main->getTime();
@@ -238,8 +236,6 @@ void ThousandBlade::updateMagic(){
 float distanceBetween(vec3 a, vec3 b){
     return sqrt((a.x - b.x) * (a.x - b.x) + (a.z - b.z) * (a.z - b.z));
 }
-
-
 
 void ThousandBlade::play(CharNode* character){
     if (!start){
