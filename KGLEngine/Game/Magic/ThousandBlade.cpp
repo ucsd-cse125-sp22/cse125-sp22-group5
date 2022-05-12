@@ -64,6 +64,7 @@ ThousandBlade::ThousandBlade(){
     
     this->rounds = {0,0,0,0};
     
+    
     sword_d = new Texture(this->swordTextureFile, 2.0f, true);
    
     AlphaShader* swordShader = new AlphaShader(this->shaderFile);
@@ -139,22 +140,22 @@ ThousandBlade::ThousandBlade(){
     
     shiningParticleTexture = new Texture(this->shiningParticleFile, 2.0f, true);
     
-    ParticleNode* shiningParticle = new ParticleNode(500, 2.0f, 1.0f);
+    ParticleNode* shiningParticle = new ParticleNode(500, 0.75f, 0.25f);
     shiningParticle->eulerAngles = vec3(0,0,90);
     shiningParticle->setMaxAmount(750);
     shiningParticle->renderingOrder = 995;
-    shiningParticle->texture = swordParticleTexture;
+    shiningParticle->texture = shiningParticleTexture;
     shiningParticle->isAdditive = true;
     shiningParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 1.0f), 0.0f);
-    shiningParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 0.0f), 0.5f);
-    shiningParticle->initialSpeed = 0.1f;
+    shiningParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 0.0f), 1.0f);
+    shiningParticle->initialSpeed = 0.2f;
     shiningParticle->initialSpeedVariation = 0.1f;
-    shiningParticle->initialScale = 0.075;
-    shiningParticle->initialScaleVariation = 0.025;
+    shiningParticle->initialScale = 0.5;
+    shiningParticle->initialScaleVariation = 0.1;
     shiningParticle->accelerationVariation = vec3(0.2);
     shiningParticle->initialRotationVariation = 360.0f;
     shiningParticle->rotatingSpeed = 0.0f;
-    shiningParticle->rotatingSpeedVariation = 720.0f;
+    shiningParticle->rotatingSpeedVariation = 90.0f;
     
     
     for (int i = 0; i < this->number_groups; i++){

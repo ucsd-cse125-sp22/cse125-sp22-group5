@@ -50,6 +50,8 @@ GroundSmash::GroundSmash(){
     this->hammerPosition = vec3(-0.1,0,1.5);
     this->hammerAlpha = 0.8;
     
+    this->boom = false;
+    
     Projectile* hammer = new Projectile();
     hammer->loadModelFile(this->hammerModelFile);
     hammer->geometries[0]->setShader(hammerShader);
@@ -168,6 +170,9 @@ void GroundSmash::play(CharNode* character){
             scale->setEaseOutTimingMode();
             scale->setVec3Animation(&this->projectiles[0]->scale, this->hammerScale);
             Engine::main->playAnimation(scale);
+            scale->setCompletionHandler([&]{
+                this->projectiles[0]->canDamage = true;
+            });
             
             Animation* translate = new Animation(this->name + " translate", this->holdTime);
             translate->setEaseInTimingMode();
@@ -176,16 +181,17 @@ void GroundSmash::play(CharNode* character){
             
             Animation* down = new Animation(this->name + " down", this->holdTime + this->downTime - 0.2f);
             down->setCompletionHandler([&]{
+                boom = true;
                 explosion->play();
                 spreadParticle->play();
-                
                 shiningParticle->play();
             });
             Engine::main->playAnimation(down);
             
             Animation* wait = new Animation(this->name + " wait", this->holdTime + this->downTime + this->smashTime);
             wait->setCompletionHandler([&]{
-                this->projectiles[0]->canDamage = true;
+                this->projectiles[0]->canDamage = false;
+                boom = false;
                 
                 Animation* disappear = new Animation(this->name + " disappear", this->recoverTime);
                 disappear->setEaseInTimingMode();
@@ -203,6 +209,7 @@ void GroundSmash::play(CharNode* character){
             this->projectiles[0]->isDisabled = true;
             this->projectiles[0]->scale = vec3(0);
             this->projectiles[0]->position = this->hammerInitPosition;
+            this->projectiles[0]->damagedChar.clear();
             this->hammerShader->emissionColor = this->hammerEmission;
             this->hammerShader->alpha = 0;
             this->shiningParticle->reset();
@@ -210,6 +217,7 @@ void GroundSmash::play(CharNode* character){
             this->explosion->reset();
             this->shiningParticle->speedFactor = 0.1;
             this->removeFromParentNode();
+            this->boomedChar.clear();
         });
         Engine::main->playAnimation(cleanup);
     }
@@ -217,5 +225,9 @@ void GroundSmash::play(CharNode* character){
 void GroundSmash::tryDamage(CharNode* character){
     if (this->start){
         this->projectiles[0]->tryDamageChar(character);
+        if (boom && find(this->boomedChar.begin(), this->boomedChar.end(), character) == this->boomedChar.end() &&character->hitbox->testSphere(explosion->getWorldPosition(), 2)){
+            character->receiveDamage(this->damage);
+            boomedChar.push_back(character);
+        }
     }
 }

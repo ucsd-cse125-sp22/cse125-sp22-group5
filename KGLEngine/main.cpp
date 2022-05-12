@@ -178,6 +178,8 @@ int main(int argc, char** argv) {
     
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
     
+    character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/Cast Magic 2.fbx");
+    
     character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.fbx");
 
     UINode* baseNode = new UINode();
@@ -1180,10 +1182,12 @@ int main(int argc, char** argv) {
     FireBall* fireMagic = new FireBall();
     LightningSpear* lightningMagic = new LightningSpear();
     GroundSmash* smashMagic = new GroundSmash();
+    ThousandBlade* swordMagic = new ThousandBlade();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
     character->addMagics(smashMagic, KEY_4);
+    character->addMagics(swordMagic, KEY_5);
 
     engine->addNode(stoneMagic);
 
@@ -1193,6 +1197,7 @@ int main(int argc, char** argv) {
     enemyHitController.magics.push_back(fireMagic);
     enemyHitController.magics.push_back(lightningMagic);
     enemyHitController.magics.push_back(smashMagic);
+    enemyHitController.magics.push_back(swordMagic);
     enemyHitController.characters.push_back(enemy);
 
     while(engine->isRunning()) {
@@ -1266,16 +1271,17 @@ int main(int argc, char** argv) {
 //                weaponNode->addChildNode(radiation);
             }
             if (engine->input->wasKeyPressed(KEY_5)) {
-                Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
-                lightningNode->initialScale = vec3(3, 1, 0.3);
-                lightningNode->color = vec4(0.7, 0.7, 0.2, 0.8);
-                lightningNode->initialRotationVariation = vec3(180, 0, 0);
-                lightningNode->randomizeRotatingDirection = true;
-//                lightningNode->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png", 2.0f, true);
-//                lightningNode->setSpriteSheetAnimation(5, 5, 5, 28, 4);
-                lightningNode->isAdditive = true;
-                lightningNode->renderingOrder = 1000;
-                //weaponNode->addChildNode(lightningNode);
+                character->castMagic(KEY_5);
+//                Particle3DNode* lightningNode = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.2, 0);
+//                lightningNode->initialScale = vec3(3, 1, 0.3);
+//                lightningNode->color = vec4(0.7, 0.7, 0.2, 0.8);
+//                lightningNode->initialRotationVariation = vec3(180, 0, 0);
+//                lightningNode->randomizeRotatingDirection = true;
+////                lightningNode->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png", 2.0f, true);
+////                lightningNode->setSpriteSheetAnimation(5, 5, 5, 28, 4);
+//                lightningNode->isAdditive = true;
+//                lightningNode->renderingOrder = 1000;
+//                //weaponNode->addChildNode(lightningNode);
             }
 
             for (int i = 0; i < enemies.size(); i++){
@@ -1288,6 +1294,7 @@ int main(int argc, char** argv) {
             fireMagic->updateMagic();
             lightningMagic->updateMagic();
             smashMagic->updateMagic();
+            swordMagic->updateMagic();
 
             enemyHitController.checkHit();
 

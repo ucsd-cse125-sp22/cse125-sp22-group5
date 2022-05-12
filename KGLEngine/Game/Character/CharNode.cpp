@@ -273,11 +273,12 @@ void CharNode::updatePosition(){
         if (this->modelNode->eulerAngles.y < -180){
             this->modelNode->eulerAngles.y += 360;
         }
-//        this->refreshed = true;
+        this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
         this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
         this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
+
 }
 CharNode* CharNode::copy(vec3 position) {
     CharNode* node = new CharNode(position);
