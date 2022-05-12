@@ -18,6 +18,22 @@ ThunderShock::ThunderShock() {
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
+    this->base = new Node();
+    this->base->isDisabled = true;
+    this->base->position.y = -0.5;
+    this->base->eulerAngles.z = 90;
+    this->addChildNode(base);
+    Particle3DNode* discharge = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 16, 0.3f, 0.3f);
+    discharge->setEmissionSphere(0, 0.5);
+    this->base->addChildNode(discharge);
+    discharge->isDisabled = false;
+    discharge->color = vec4(0.9, 0.9, 0.3, 1);
+    discharge->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
+    discharge->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+    discharge->initialRotationVariation = vec3(180, 10, 10);
+    discharge->renderingOrder = 2000;
+    discharge->useLocalSpace = true;
+    discharge->isAdditive = true;
     for (int k = 0; k < 6; k++) {
         Node* lightningNode = new Node();
         this->addChildNode(lightningNode);
@@ -46,11 +62,18 @@ void ThunderShock::play(CharNode* character){
     if (!start){
         this->caster = character;
         this->updateTransform();
-        for (int k = 0; k < lightnings.size(); k++) {
-            lightnings[k]->updateTransform();
-            lightnings[k]->reset();
-            lightnings[k]->isDisabled = false;
-        }
+        this->base->isDisabled = false;
+        Animation* shock = new Animation("shock " + to_string(this->ID), 0.3);
+        shock->setCompletionHandler([&] {
+            this->base->isDisabled = true;
+            this->canDamage = true;
+            for (int k = 0; k < this->lightnings.size(); k++) {
+                this->lightnings[k]->updateTransform();
+                this->lightnings[k]->reset();
+                this->lightnings[k]->isDisabled = false;
+            }
+        });
+        Engine::main->playAnimation(shock);
     }
 }
 void ThunderShock::tryDamage(CharNode *character) {
