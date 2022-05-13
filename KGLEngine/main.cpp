@@ -8,7 +8,7 @@
 int main(int argc, char** argv) {
     
     engine = new Engine("KGLEngine", 0.8f, 0, NULL);
-    engine->workingDirectory = "/Users/zifanzhang/Documents/Personal/UCSD/2022/spring/CSE125/cse125-sp22-group5/KGLEngine";
+    engine->workingDirectory = ".";
     engine->lockCursor();
     
     Skybox* skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
@@ -177,6 +177,8 @@ int main(int argc, char** argv) {
     character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll.dae");
     
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/Cast Magic 1.fbx");
+
+    character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/Cast Magic 2.fbx");
 
     character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.fbx");
 
@@ -1182,12 +1184,15 @@ int main(int argc, char** argv) {
     GroundSmash* smashMagic = new GroundSmash();
     Thunder* thunderMagic = new Thunder();
     Flame* flameMagic = new Flame();
+    ThousandBlade* swordMagic = new ThousandBlade();
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
     character->addMagics(smashMagic, KEY_7);
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
+    character->addMagics(smashMagic, KEY_4);
+    character->addMagics(swordMagic, KEY_5);
 
     engine->addNode(stoneMagic);
     engine->addNode(flameMagic);
@@ -1199,6 +1204,7 @@ int main(int argc, char** argv) {
     enemyHitController.magics.push_back(fireMagic);
     enemyHitController.magics.push_back(lightningMagic);
     enemyHitController.magics.push_back(smashMagic);
+    enemyHitController.magics.push_back(swordMagic);
     enemyHitController.magics.push_back(thunderMagic);
     enemyHitController.magics.push_back(flameMagic);
     enemyHitController.characters.push_back(enemy);
@@ -1284,6 +1290,8 @@ int main(int argc, char** argv) {
             stoneMagic->updateMagic();
             fireMagic->updateMagic();
             lightningMagic->updateMagic();
+            smashMagic->updateMagic();
+            swordMagic->updateMagic();
 
 
             enemyHitController.checkHit();

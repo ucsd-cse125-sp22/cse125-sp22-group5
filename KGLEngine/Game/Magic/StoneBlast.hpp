@@ -13,20 +13,30 @@
 class StoneBlast : public DamageableMagic{
 public:
     vector<Animation*> waits;
-    vector<Animation*> spins;
     vector<Animation*> forwards;
     
     Texture* stone_D;
     Texture* stone_E;
-    PBRShader* stone_shader;
+    vector<AlphaShader*> stone_shaders;
     Texture* circleTexture;
     
     Animation* cleanup;
     Animation* createMagicCircle;
     Animation* removeMagicCircle;
     
-    Node* magicCircle;
-    PBRShader* circle_shader;
+    vector<Node*> magicCircles;
+    vector<AlphaShader*> circle_shaders;
+    
+    vector<vec3> randomPositions;
+    
+    vector<vec3> translatePosition;
+    vec3 rotationPosition;
+    
+    vector<vec3> circleEmissions;
+    vec3 circleVariantion;
+    
+    Texture* shiningParticleTexture;
+    vector<ParticleNode*> shinnings;
     
     StoneBlast();
     vector<int> rounds;

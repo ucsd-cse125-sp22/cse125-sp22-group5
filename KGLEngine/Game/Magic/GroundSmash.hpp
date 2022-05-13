@@ -46,6 +46,10 @@ public:
     
     ParticleNode* explosion;
     
+    bool boom;
+    
+    vector<CharNode*> boomedChar;
+    
     GroundSmash();
     ~GroundSmash();
     void updateMagic() override;
