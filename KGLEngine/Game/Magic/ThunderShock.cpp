@@ -18,22 +18,28 @@ ThunderShock::ThunderShock() {
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
-    this->base = new Node();
-    this->base->isDisabled = true;
-    this->base->position.y = -0.5;
-    this->base->eulerAngles.z = 90;
-    this->addChildNode(base);
-    Particle3DNode* discharge = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 16, 0.3f, 0.3f);
-    discharge->setEmissionSphere(0, 0.5);
-    this->base->addChildNode(discharge);
-    discharge->isDisabled = false;
+    Particle3DNode* discharge = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 50, 0.8f, 0.3f);
+    discharge->setMaxAmount(20);
+    discharge->setEmissionSphere(0, 1.5);
+    discharge->isDisabled = true;
+    discharge->eulerAngles.z = 90;
     discharge->color = vec4(0.9, 0.9, 0.3, 1);
     discharge->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
     discharge->setSpriteSheetAnimation(5, 5, 20, 28, 4);
-    discharge->initialRotationVariation = vec3(180, 10, 10);
+    discharge->initialRotationVariation = vec3(180, 45, 45);
+    discharge->initialScaleVariation = vec3(0.5, 0, 0.5);
+    discharge->initialSpeedVariation = 1;
     discharge->renderingOrder = 2000;
     discharge->useLocalSpace = true;
     discharge->isAdditive = true;
+    this->addChildNode(discharge);
+    this->base = discharge;
+    this->light = new LightNode(vec3(0.5f, 0.5f, 0.2f));
+    this->light->setPointLight(1.0f, 8.0f);
+    this->light->penetrationRange = 0.0f;
+    this->light->position = vec3(0.0f, 0.1f, 0.0f);
+    this->light->isDisabled = true;
+    this->addChildNode(this->light);
     for (int k = 0; k < 6; k++) {
         Node* lightningNode = new Node();
         this->addChildNode(lightningNode);
@@ -61,17 +67,26 @@ ThunderShock::ThunderShock() {
 void ThunderShock::play(CharNode* character){
     if (!start){
         this->caster = character;
+        this->light->colorFactor = vec3(20.0f, 20.0f, 5.0f);
         this->updateTransform();
         this->base->isDisabled = false;
-        Animation* shock = new Animation("shock " + to_string(this->ID), 0.3);
+        this->light->isDisabled = false;
+        this->base->reset();
+        Animation* shock = new Animation("shock " + to_string(reinterpret_cast<long>(this)), 0.5);
         shock->setCompletionHandler([&] {
-            this->base->isDisabled = true;
             this->canDamage = true;
             for (int k = 0; k < this->lightnings.size(); k++) {
                 this->lightnings[k]->updateTransform();
                 this->lightnings[k]->reset();
                 this->lightnings[k]->isDisabled = false;
             }
+            this->light->colorFactor *= 60;
+            Animation* dim = new Animation("thunder shock dim " + to_string(reinterpret_cast<long>(this)), 0.5);
+            dim->setVec3Animation(&this->light->colorFactor, vec3(0));
+            dim->setCompletionHandler([&] {
+                this->light->isDisabled = true;
+            });
+            Engine::main->playAnimation(dim);
         });
         Engine::main->playAnimation(shock);
     }

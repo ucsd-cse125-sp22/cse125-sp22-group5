@@ -70,9 +70,9 @@ FireBall::FireBall(){
     explosion->setSpriteSheetAnimation(7, 12, 40, 120, 40);
     explosion->isDisabled = true;
     this->addChildNode(explosion);
-    createFireball = new Animation("create fireball", 0.8);
+    createFireball = new Animation("create fireball " + to_string(reinterpret_cast<long>(this)), 0.8);
     createFireball->setFloatAnimation(&fireball->initialScale, 0.4);
-    createFlame = new Animation("create flame", 0.8);
+    createFlame = new Animation("create flame " + to_string(reinterpret_cast<long>(this)), 0.8);
     createFlame->setFloatAnimation(&flame->initialScale, 0.35);
     createFireball->setCompletionHandler([&]{
         threwOut = true;
@@ -112,10 +112,10 @@ void FireBall::updateMagic(){
         exploded = false;
         explosion->isDisabled = false;
         flame->isDisabled = true;
-        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.25);
+        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.25);
         fireBallLightIntensity->setFloatAnimation(&light->attenuationExponent, 0.8);
         fireBallLightIntensity->setCompletionHandler([&] {
-            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2", 0.25);
+            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.25);
             fireBallLightIntensity2->setFloatAnimation(&light->attenuationExponent, 5);
             Engine::main->playAnimation(fireBallLightIntensity2);
             fireBallLightIntensity2->setCompletionHandler([&] {

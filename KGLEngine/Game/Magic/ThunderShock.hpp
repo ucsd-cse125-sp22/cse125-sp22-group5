@@ -15,8 +15,8 @@ public:
     bool threwOut;
     bool canDamage;
     vector<Particle3DNode*> lightnings;
-    Node* base;
-    CharNode* caster;
+    Particle3DNode* base;
+    LightNode* light;
     ThunderShock();
     ~ThunderShock();
     void explode();

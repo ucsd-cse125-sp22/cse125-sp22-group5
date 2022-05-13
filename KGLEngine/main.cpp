@@ -1185,7 +1185,7 @@ int main(int argc, char** argv) {
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
-    character->addMagics(smashMagic, KEY_4);
+    character->addMagics(smashMagic, KEY_7);
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
 
@@ -1259,7 +1259,6 @@ int main(int argc, char** argv) {
             }
             if (engine->input->wasKeyPressed(KEY_5)) {
                 character->castMagic(KEY_5);
-                cout << "key 5 pressed" << endl;
             }
             if (engine->input->wasKeyPressed(KEY_6)) {
                 Particle3DNode* shield = new Particle3DNode("/Resources/Game/Effects/shield.dae", 1, 10.0f, 0);
@@ -1271,6 +1270,9 @@ int main(int argc, char** argv) {
                 shield->initialScale = vec3(5, 4, 4);
                 shield->isDisabled = false;
                 engine->addNode(shield);
+            }
+            if (engine->input->wasKeyPressed(KEY_7)) {
+                character->castMagic(KEY_7);
             }
 
             for (int i = 0; i < enemies.size(); i++){

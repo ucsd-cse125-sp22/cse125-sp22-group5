@@ -35,7 +35,7 @@ void Thunder::playNextThunder(int index){
     if (index < thunders.size()){
         thunders[index]->position.x = glm::linearRand(-glm::log2(thunders[index]->position.z) * 0.1, glm::log2(thunders[index]->position.z) * 0.1);
         thunders[index]->play(this->caster);
-        Animation* playNext = new Animation("play next thunder " + to_string(index), 0.2);
+        Animation* playNext = new Animation("play next thunder " + to_string(reinterpret_cast<long>(&thunders[index])), 0.2);
         playNext->setCompletionHandler([&, index] {
             playNextThunder(1 + index);
         });

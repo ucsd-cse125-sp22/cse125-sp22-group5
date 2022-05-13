@@ -16,7 +16,6 @@ public:
     bool threwOut;
     bool canDamage;
     vector<ThunderShock*> thunders;
-    CharNode* caster;
     LightNode* light;
     Animation* createFireball;
     Thunder();

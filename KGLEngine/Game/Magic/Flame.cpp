@@ -35,7 +35,7 @@ void Flame::play(CharNode *character) {
         this->eulerAngles = character->modelNode->getWorldEulerAngles() - vec3(0, 90, 0);
         this->flame->isDisabled = false;
         this->flame->reset();
-        Animation* coolDown = new Animation("flame magic cool down", 0.5);
+        Animation* coolDown = new Animation("flame magic cool down " + to_string(reinterpret_cast<long>(this)), 0.5);
         coolDown->setCompletionHandler([&] {
             this->start = false;
         });
