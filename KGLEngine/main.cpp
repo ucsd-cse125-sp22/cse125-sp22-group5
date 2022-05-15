@@ -26,9 +26,10 @@ int main(int argc, char** argv) {
     ambientLight->setAmbientLight();
     engine->addNode(ambientLight);
     
-    LightNode* directionalLight = new LightNode(vec3(2.5f, 2.0f, 2.0f));
+    LightNode* directionalLight = new LightNode(vec3(1.0f, 1.0f, 1.0f));
     directionalLight->setDirectionalLight();
     directionalLight->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
+    directionalLight->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
     engine->addNode(directionalLight);
     
     LightNode* spotLight = new LightNode(vec3(20.0f, 0.5f, 0.5f));
@@ -212,6 +213,78 @@ int main(int argc, char** argv) {
     
 
     
+    Node* newMap = new Node();
+    newMap->loadModelFile("/Resources/Game/Map/MergedMapBase.dae");
+    newMap->position.z -= 55;
+//    newMap->scale = vec3(5);
+    newMap->position.y -= 101;
+    
+    
+    PBRShader* wallShader = new PBRShader(0.1f, 0.2f);
+    wallShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_01_Albedo.png", 2, true));
+    wallShader->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_01_Normal.png", 1, true));
+    wallShader->alphaCutThreshold = 0.0f;
+    newMap->geometries[0]->setDoubleSided();
+    newMap->geometries[0]->setShader(wallShader);
+    PBRShader* wallShader2 = new PBRShader(0.1f, 0.2f);
+    wallShader2->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_03_Albedo.png", 2, true));
+    wallShader2->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_03_Normal.png", 1, true));
+    wallShader2->alphaCutThreshold = 0.0f;
+    newMap->geometries[1]->setDoubleSided();
+    newMap->geometries[1]->setShader(wallShader2);
+    PBRShader* wallShader3 = new PBRShader(0.1f, 0.2f);
+    wallShader3->setDiffuseMap(new Texture("/Resources/Game/Map/T_Bricks_01_Albedo.png", 2, true));
+    wallShader3->setNormalMap(new Texture("/Resources/Game/Map/T_Bricks_01_Normal.png", 1, true));
+    wallShader3->alphaCutThreshold = 0.0f;
+    newMap->geometries[2]->setDoubleSided();
+    newMap->geometries[2]->setShader(wallShader3);
+    PBRShader* wallShader4 = new PBRShader(0.1f, 0.2f);
+    wallShader4->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_01_Albedo.png", 2, true));
+    wallShader4->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_01_Normal.png", 1, true));
+    wallShader4->alphaCutThreshold = 0.0f;
+    newMap->geometries[3]->setDoubleSided();
+    newMap->geometries[3]->setShader(wallShader4);
+    PBRShader* wallShader5 = new PBRShader(0.1f, 0.2f);
+    wallShader5->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Albedo.png", 2, true));
+    wallShader5->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Normal.png", 1, true));
+    wallShader5->alphaCutThreshold = 0.0f;
+    newMap->geometries[4]->setDoubleSided();
+    newMap->geometries[4]->setShader(wallShader5);
+    PBRShader* wallShader6 = new PBRShader(0.1f, 0.2f);
+    wallShader6->setDiffuseMap(new Texture("/Resources/Game/Map/T_Trim_01_Albedo.png", 2, true));
+    wallShader6->setNormalMap(new Texture("/Resources/Game/Map/T_Trim_01_Normal.png", 1, true));
+    wallShader6->alphaCutThreshold = 0.0f;
+    newMap->geometries[5]->setDoubleSided();
+    newMap->geometries[5]->setShader(wallShader6);
+    PBRShader* wallShader7 = new PBRShader(0.1f, 0.2f);
+    wallShader7->setDiffuseMap(new Texture("/Resources/Game/Map/T_Battlement_01_Albedo.png", 2, true));
+    wallShader7->setNormalMap(new Texture("/Resources/Game/Map/T_Battlement_01_Normal.png", 1, true));
+    wallShader7->alphaCutThreshold = 0.0f;
+    newMap->geometries[6]->setDoubleSided();
+    newMap->geometries[6]->setShader(wallShader7);
+    PBRShader* wallShader8 = new PBRShader(0.1f, 0.2f);
+    wallShader8->setDiffuseMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Albedo.png", 2, true));
+    wallShader8->setNormalMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Normal.png", 1, true));
+    wallShader8->alphaCutThreshold = 0.0f;
+    newMap->geometries[7]->setDoubleSided();
+    newMap->geometries[7]->setShader(wallShader8);
+    PBRShader* wallShader9 = new PBRShader(0.1f, 0.2f);
+    wallShader9->setDiffuseMap(new Texture("/Resources/Game/Map/New Terrain Basemap Diffuse.png", 2, true));
+    wallShader9->setNormalMap(new Texture("/Resources/Game/Map/New Terrain Basemap Normal.png", 1, true));
+    wallShader9->alphaCutThreshold = 0.0f;
+    newMap->geometries[8]->setDoubleSided();
+    newMap->geometries[8]->setShader(wallShader9);
+    PBRShader* wallShadera = new PBRShader(0.1f, 0.2f);
+    wallShadera->setDiffuseMap(new Texture("/Resources/Game/Map/T_Column_01_Albedo.png", 2, true));
+    wallShadera->setNormalMap(new Texture("/Resources/Game/Map/T_Column_01_Normal.png", 1, true));
+    wallShadera->alphaCutThreshold = 0.0f;
+    newMap->geometries[9]->setDoubleSided();
+    newMap->geometries[9]->setShader(wallShadera);
+    
+    for (int n = 11; n < newMap->geometries.size(); n++) {
+        newMap->geometries[n]->setShader(new PBRShader(0.5, 0.5));
+    }
+    engine->addNode(newMap);
 //
 //    Node* weapon = new Node();
 //    weapon->loadModelFile("/Resources/Game/Character/MT.fbx");
@@ -1191,8 +1264,8 @@ int main(int argc, char** argv) {
     character->addMagics(smashMagic, KEY_7);
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
-    character->addMagics(smashMagic, KEY_4);
-    character->addMagics(swordMagic, KEY_5);
+//    character->addMagics(smashMagic, KEY_4);
+//    character->addMagics(swordMagic, KEY_5);
 
     engine->addNode(stoneMagic);
     engine->addNode(flameMagic);
@@ -1248,12 +1321,14 @@ int main(int argc, char** argv) {
             }
             if(engine->input->wasKeyReleased(KEY_2)){
                 if (!fireMagic->start) {
+                    fireMagic->removeFromParentNode();
                     character->rightHand->addChildNode(fireMagic);
                     character->castMagic(KEY_2);
                 }
             }
             if (engine->input->wasKeyPressed(KEY_3)) {
                 if (!lightningMagic->start) {
+                    lightningMagic->removeFromParentNode();
                     character->rightHand->addChildNode(lightningMagic);
                     character->castMagic(KEY_3);
                 }
@@ -1267,15 +1342,25 @@ int main(int argc, char** argv) {
                 character->castMagic(KEY_5);
             }
             if (engine->input->wasKeyPressed(KEY_6)) {
-                Particle3DNode* shield = new Particle3DNode("/Resources/Game/Effects/shield.dae", 1, 10.0f, 0);
-                shield->color = vec4(0.4, 0.4, 1, 0.4);
-                shield->position.y -= 0.4;
-                shield->isAdditive = true;
-                shield->setMaxAmount(1);
-                shield->renderingOrder = 2010;
-                shield->initialScale = vec3(5, 4, 4);
-                shield->isDisabled = false;
-                engine->addNode(shield);
+                ParticleNode* spark = new ParticleNode(130, 1, 0);
+                spark->setMaxAmount(100);
+                spark->spreadingAngle = 360;
+                spark->initialSpeed = 0.5;
+                spark->initialSpeedVariation = 0.3;
+                spark->isAdditive = true;
+                spark->setEmissionSphere(0.3, 0.5);
+                spark->renderingOrder = 999l;
+                spark->acceleration = vec3(0, -1, 0);
+                spark->texture = new Texture("/Resources/Game/Effects/TeleportParticles.png");
+                spark->setSpriteSheetAnimation(1, 8, 8, 1, 0);
+                spark->initialScale = 0.1;
+                spark->scalingSpeed = -0.05;
+                spark->initialRotationVariation = 360;
+                spark->color = vec4(0.3, 0.4, 1, 1);
+                spark->initialScaleVariation = 0.05;
+                spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
+                spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
+                engine->addNode(spark);
             }
             if (engine->input->wasKeyPressed(KEY_7)) {
                 character->castMagic(KEY_7);
@@ -1322,6 +1407,7 @@ int main(int argc, char** argv) {
 //                intersection->isDisabled = true;
 //            }
             
+            engine->renderDirectionalLightShadowMap(directionalLight);
             
             engine->render();
             

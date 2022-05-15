@@ -35,7 +35,7 @@ ThunderShock::ThunderShock() {
     this->addChildNode(discharge);
     this->base = discharge;
     this->light = new LightNode(vec3(0.5f, 0.5f, 0.2f));
-    this->light->setPointLight(1.0f, 8.0f);
+    this->light->setPointLight(3.0f, 8.0f);
     this->light->penetrationRange = 0.0f;
     this->light->position = vec3(0.0f, 0.1f, 0.0f);
     this->light->isDisabled = true;
@@ -67,7 +67,7 @@ ThunderShock::ThunderShock() {
 void ThunderShock::play(CharNode* character){
     if (!start){
         this->caster = character;
-        this->light->colorFactor = vec3(20.0f, 20.0f, 5.0f);
+        this->light->colorFactor = vec3(20.0f, 20.0f, 2.0f);
         this->updateTransform();
         this->base->isDisabled = false;
         this->light->isDisabled = false;
@@ -80,7 +80,7 @@ void ThunderShock::play(CharNode* character){
                 this->lightnings[k]->reset();
                 this->lightnings[k]->isDisabled = false;
             }
-            this->light->colorFactor *= 60;
+            this->light->colorFactor *= 20;
             Animation* dim = new Animation("thunder shock dim " + to_string(reinterpret_cast<long>(this)), 0.5);
             dim->setVec3Animation(&this->light->colorFactor, vec3(0));
             dim->setCompletionHandler([&] {
@@ -98,5 +98,9 @@ void ThunderShock::tryDamage(CharNode *character) {
             character->receiveDamage(this->damage);
             canDamage = false;
         }
+        if (character->hitbox->testSphere(this->getWorldPosition(), 0.1)) {
+            character->receiveDamage(this->damage);
+        }
+        canDamage = false;
     }
 }

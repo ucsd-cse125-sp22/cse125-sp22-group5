@@ -30,24 +30,28 @@ LightningSpear::LightningSpear(){
     this->spear->useLocalSpace = true;
     this->addChildNode(this->spear);
     light = new LightNode(vec4(1, 1, 0.2, 1));
-    light->setPointLight(15, 30);
+    light->setPointLight(2, 10);
     this->addChildNode(light);
     this->radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.3f, 0.3f);
     this->radiation->color = vec4(1, 1, 0.2, 1);
     this->radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
     this->radiation->isAdditive = true;
-    this->radiation->setMaxAmount(60);
+    this->radiation->setMaxAmount(20);
     this->radiation->renderingOrder = 1010;
-    radiation->initialScale = vec3(0.5, 1, 0.2);
-    radiation->initialScaleVariation = vec3(0.3, 0, 0.1);
+    radiation->initialScale = vec3(0.3, 1, 0.4);
+    radiation->initialScaleVariation = vec3(0.1, 0, 0.1);
     radiation->initialRotation = vec3(0, 0, 0);
-    radiation->setEmissionSphere(0, 1);
+    radiation->setEmissionSphere(0, 0.6);
     radiation->spreadingAngle = 90;
     radiation->initialSpeed = 0.1;
     radiation->useLocalSpace = true;
     radiation->speedAccelerationVariation = 0.1;
-    this->radiation->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+    this->radiation->setSpriteSheetAnimation(5, 5, 20, 25, 4);
     this->radiation->isDisabled = true;
+    this->radiation->setColorAnimation(vec4(1.0f, 1, 0.0f, 0.0f), 0.0f);
+    this->radiation->setColorAnimation(vec4(1.0f, 1, 0.0f, 0.9f), 0.4f);
+    this->radiation->setColorAnimation(vec4(1.0f, 1, 0.0f, 0.9f), 0.6f);
+    this->radiation->setColorAnimation(vec4(1, 1, 0.0f, 0.0f), 1.0f);
     this->addChildNode(this->radiation);
 
 }
@@ -59,40 +63,41 @@ void LightningSpear::updateMagic(){
     }
     if (exploded) {
         exploded = false;
+        threwOut = false;
+        this->radiation->reset();
         radiation->isDisabled = false;
         spear->isDisabled = true;
         Animation* lightningSpearLightIntensity = new Animation("lightning spear light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.1);
-        lightningSpearLightIntensity->setFloatAnimation(&light->attenuationExponent, 0.8);
+        lightningSpearLightIntensity->setEaseInTimingMode();
+        lightningSpearLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(10, 10, 1));
         lightningSpearLightIntensity->setCompletionHandler([&] {
-            Animation* lightningSpearLightIntensity2 = new Animation("lightning spear light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.1);
-            lightningSpearLightIntensity2->setFloatAnimation(&light->attenuationExponent, 50);
+            Animation* lightningSpearLightIntensity2 = new Animation("lightning spear light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.2);
+            lightningSpearLightIntensity2->setEaseOutTimingMode();
+            lightningSpearLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
             Engine::main->playAnimation(lightningSpearLightIntensity2);
             lightningSpearLightIntensity2->setCompletionHandler([&] {
-                this->radiation->isDisabled = true;
-                canDamage = true;
-                this->isDisabled = true;
+                this->light->isDisabled = true;
                 start = false;
-                this->removeFromParentNode();
             });
         });
         Engine::main->playAnimation(lightningSpearLightIntensity);
-        light->setPointLight(0.4, 30);
     }
 }
 void LightningSpear::play(CharNode* character){
     if (!start){
+        this->radiation->isDisabled = true;
+        this->exploded = false;
         this->caster = character;
         this->spear->isDisabled = false;
         this->threwOut = false;
         velocity = character->modelNode->getRightVectorInWorld();
         explodeDamage = false;
         this->spear->initialScale = vec3(0.1);
-        exploded = false;
-        this->radiation->reset();
         this->position = vec3(0);
         this->eulerAngles = vec3(0);
         this->start = true;
-        this->isDisabled = false;
+        this->light->colorFactor = vec3(2, 2, 0.2);
+        this->light->isDisabled = false;
         Animation* createSpear = new Animation("create spear " + caster->name, 0.8);
         createSpear->setVec3Animation(&this->spear->initialScale, vec3(6, 1, 0.6));
         createSpear->setEaseInEaseOutTimingMode();
@@ -117,12 +122,11 @@ void LightningSpear::play(CharNode* character){
             }
             threwOut = true;
             canDamage = true;
-            Animation* threw = new Animation("light spear threw " + caster->name, 2);
+            Animation* threw = new Animation("light spear threw " + to_string(reinterpret_cast<long>(this)), 1.3);
             threw->setCompletionHandler([&] {
                 if (start) {
                     canDamage = false;
                     exploded = true;
-                    explodeDamage = true;
                 }
             });
             Engine::main->playAnimation(threw);
@@ -131,30 +135,22 @@ void LightningSpear::play(CharNode* character){
     }
 }
 void LightningSpear::tryDamage(CharNode *character) {
-    if (!explodeDamage && canDamage) {
+    if (canDamage) {
         if (character->hitbox->testHit(this->getWorldPosition(), vec3(vec4(this->position + this->velocity, 1) * this->getWorldTransform()))) {
             character->receiveDamage(this->damage);
             canDamage = false;
             exploded = true;
-            explodeDamage = true;
         }
-    }
-    if (explodeDamage && canDamage) {
-        if (character->hitbox->testSphere(this->getWorldPosition(), 2)) {
-            character->receiveDamage(this->damage);
-        }
-        canDamage = false;
     }
 }
 void LightningSpear::hitWall() {
-    if (!explodeDamage && canDamage) {
+    if (!exploded && canDamage) {
         vec3 position;
         vec3 normalvec;
         this->updateTransform();
         if (mapSystemManager->hitTest(this->position, this->position + this->velocity, &position, &normalvec)) {
             canDamage = false;
             exploded = true;
-            explodeDamage = true;
             threwOut = false;
         }
     }

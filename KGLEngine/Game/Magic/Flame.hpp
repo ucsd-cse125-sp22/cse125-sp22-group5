@@ -14,6 +14,7 @@ class Flame : public DamageableMagic{
 public:
     bool canDamage;
     ParticleNode* flame;
+    ParticleNode* spark;
     Flame();
     ~Flame();
     void updateMagic() override {}
