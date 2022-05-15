@@ -51,28 +51,49 @@ FireBall::FireBall(){
     flame->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
     flame->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
     this->addChildNode(flame);
-    light = new LightNode(vec4(1, 0.4, 0, 1));
-    light->setPointLight(15, 30);
+    light = new LightNode(vec3(1, 0.4, 0));
+    light->setPointLight(2, 10);
     this->addChildNode(light);
-    explosion = new ParticleNode(300, 1.0f, 0.0f);
+    spark = new ParticleNode(300, 1, 0);
+    spark->isDisabled = true;
+    spark->setMaxAmount(100);
+    spark->spreadingAngle = 360;
+    spark->initialSpeed = 3;
+    spark->speedAcceleration = -1.25;
+    spark->initialSpeedVariation = 0.5;
+    spark->isAdditive = true;
+//    spark->setEmissionSphere(0.5, 1);
+    spark->renderingOrder = 999l;
+    spark->acceleration = vec3(0, -1, 0);
+    spark->texture = new Texture("/Resources/Game/Effects/TeleportParticles.png");
+    spark->setSpriteSheetAnimation(1, 8, 8, 1, 0);
+    spark->initialScale = 0.1;
+    spark->scalingSpeed = -0.05;
+    spark->initialRotationVariation = 360;
+    spark->color = vec4(0.3, 0.4, 1, 1);
+    spark->initialScaleVariation = 0.05;
+    spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
+    spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
+    this->addChildNode(spark);
+    explosion = new ParticleNode(300, 1.3f, 0.0f);
     explosion->setColorAnimation(vec4(1.0f, 0.7f, 0.0f, 0.0f), 0.0f);
     explosion->setColorAnimation(vec4(1.0f, 0.6f, 0.0f, 0.9f), 0.2f);
     explosion->setColorAnimation(vec4(1.0f, 0.5f, 0.0f, 0.9f), 0.6f);
-    explosion->setColorAnimation(vec4(1.0f, 0.4f, 0.0f, 0.0f), 1.0f);
+    explosion->setColorAnimation(vec4(0.0f, 0.0f, 0.0f, 0.0f), 1.0f);
     explosion->texture = new Texture("/Resources/Game/Effects/Explosion1.png");
     explosion->color = vec4(1, 0.4, 0.1, 1);
     explosion->isAdditive = true;
     explosion->initialRotationVariation = 60;
     explosion->renderingOrder = 1010;
     explosion->initialScale = 0.5;
-    explosion->scalingSpeed = 7;
+    explosion->scalingSpeed = 4;
     explosion->setMaxAmount(50);
-    explosion->setSpriteSheetAnimation(7, 12, 40, 120, 40);
+    explosion->setSpriteSheetAnimation(7, 12, 40, 100, 40);
     explosion->isDisabled = true;
     this->addChildNode(explosion);
-    createFireball = new Animation("create fireball", 0.8);
+    createFireball = new Animation("create fireball " + to_string(reinterpret_cast<long>(this)), 0.8);
     createFireball->setFloatAnimation(&fireball->initialScale, 0.4);
-    createFlame = new Animation("create flame", 0.8);
+    createFlame = new Animation("create flame " + to_string(reinterpret_cast<long>(this)), 0.8);
     createFlame->setFloatAnimation(&flame->initialScale, 0.35);
     createFireball->setCompletionHandler([&]{
         threwOut = true;
@@ -81,7 +102,7 @@ FireBall::FireBall(){
         this->removeFromParentNode();
         engine->addNode(this);
         flame->scalingSpeed = -0.4;
-        Animation* threw = new Animation("threw", 3);
+        Animation* threw = new Animation("threw " + to_string(reinterpret_cast<long>(this)), 4);
         this->updateTransform();
         if (this->caster->isLocked) {
             this->velocity = normalize((this->caster->target->getWorldPosition() - this->getWorldPosition()) * vec3(1, 0, 1));
@@ -110,46 +131,49 @@ void FireBall::updateMagic(){
     }
     if (exploded) {
         exploded = false;
+        spark->isDisabled = false;
+        spark->reset();
+        explosion->reset();
         explosion->isDisabled = false;
-        flame->isDisabled = true;
-        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1", 0.25);
-        fireBallLightIntensity->setFloatAnimation(&light->attenuationExponent, 0.8);
+        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.15);
+        fireBallLightIntensity->setEaseInTimingMode();
+        fireBallLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(40, 16, 0));
         fireBallLightIntensity->setCompletionHandler([&] {
-            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2", 0.25);
-            fireBallLightIntensity2->setFloatAnimation(&light->attenuationExponent, 5);
+            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.15);
+            fireBallLightIntensity2->setEaseOutTimingMode();
+            fireBallLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
             Engine::main->playAnimation(fireBallLightIntensity2);
             fireBallLightIntensity2->setCompletionHandler([&] {
                 canDamage = true;
-                this->isDisabled = true;
-                explosion->isDisabled = true;
                 start = false;
-                this->removeFromParentNode();
+                this->light->isDisabled = true;
             });
         });
         Engine::main->playAnimation(fireBallLightIntensity);
-        light->setPointLight(0.4, 30);
-        fireball->scalingSpeed = 5;
-        fireball->scalingSpeedVariation = 2;
-        fireball->color = vec4(1, 0.2, 0.0, 1);
+        fireball->isDisabled = true;
         flame->isDisabled = true;
     }
 }
 void FireBall::play(CharNode* character){
     if (!start){
+        this->explosion->isDisabled = true;
         this->caster = character;
         velocity = character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0);
+        this->spark->isDisabled = true;
         threwOut = false;
         explodeDamage = false;
         flame->initialScale = 0.03f;
-        exploded = false;
+        this->exploded = false;
         fireball->initialScale = 0.03f;
         fireball->scalingSpeed = 0.0f;
         fireball->scalingSpeedVariation = 0.0f;
         this->position = vec3(0);
         this->start = true;
         this->isDisabled = false;
+        fireball->isDisabled = false;
         flame->isDisabled = false;
-        explosion->reset();
+        this->light->isDisabled = false;
+        this->light->colorFactor = vec3(1, 0.4, 0);
         Engine::main->playAnimation(createFlame);
         Engine::main->playAnimation(createFireball);
     }
@@ -164,7 +188,7 @@ void FireBall::tryDamage(CharNode *character) {
         }
     }
     if (explodeDamage && canDamage) {
-        if (character->hitbox->testSphere(this->getWorldPosition(), 2)) {
+        if (character->hitbox->testSphere(this->getWorldPosition(), 0.9)) {
             character->receiveDamage(this->damage);
         }
         canDamage = false;

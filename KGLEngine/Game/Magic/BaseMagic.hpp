@@ -20,6 +20,7 @@ public:
     float stopTime;
     float waitTime;
     int damage;
+    CharNode* caster;
     virtual void play(CharNode* character)=0;
     virtual void updateMagic()=0;
     virtual void hitWall(){}

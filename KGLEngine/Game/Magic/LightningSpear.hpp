@@ -20,13 +20,9 @@ public:
     bool explodeDamage;
     Particle3DNode* spear;
     Particle3DNode* radiation;
-    CharNode* caster;
     LightNode* light;
-    Animation* createFireball;
-    Animation* createFlame;
     LightningSpear();
     ~LightningSpear();
-    void explode();
     void hitWall() override;
     void updateMagic() override;
     void play(CharNode* character) override;

@@ -21,6 +21,7 @@ public:
     ParticleNode* fireball;
     ParticleNode* flame;
     ParticleNode* explosion;
+    ParticleNode* spark;
     CharNode* caster;
     LightNode* light;
     Animation* createFireball;
