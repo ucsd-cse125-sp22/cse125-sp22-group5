@@ -28,6 +28,7 @@ Particle3DNode::Particle3DNode(string modelFile, unsigned int birthrate, float d
     this->particleDuration = duration;
     this->particleDurationVariation = durationVariation;
     this->emissionShape = 0;
+    this->emissionAlpha = 1;
     this->innerSphereRadius = 0.0f;
     this->outerSphereRadius = 0.0f;
     this->boxSize = vec3(0.0f);

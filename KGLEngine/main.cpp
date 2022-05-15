@@ -1261,7 +1261,7 @@ int main(int argc, char** argv) {
     character->addMagics(stoneMagic, KEY_1);
     character->addMagics(fireMagic, KEY_2);
     character->addMagics(lightningMagic, KEY_3);
-    character->addMagics(smashMagic, KEY_1);
+    character->addMagics(smashMagic, KEY_7);
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
 //    character->addMagics(smashMagic, KEY_4);

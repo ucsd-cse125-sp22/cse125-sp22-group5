@@ -52,8 +52,8 @@ void main() {
     particlePosition.xyz += accelerationData.xyz * accelerationFactor;
     vec4 localVertexPosition = vec4(vertexPosition, 1.0f);
     vec3 rotation = rotationData + rotationSpeedData * progress;
-    localVertexPosition *= rotationMatrix(vec3(0, 1, 0), rotation.y) * rotationMatrix(vec3(0, 0, 1), rotation.z) * rotationMatrix(vec3(1, 0, 0), rotation.x);
     localVertexPosition.xyz *= max(vec3(0.0f), scaleData + scaleSpeedData * progress);
+    localVertexPosition *= rotationMatrix(vec3(0, 1, 0), rotation.y) * rotationMatrix(vec3(0, 0, 1), rotation.z) * rotationMatrix(vec3(1, 0, 0), rotation.x);
     if(useLocalSpace) {
         gl_Position = projectionTransform * (modelViewTransform * (particlePosition + localVertexPosition));
     }else{
@@ -85,6 +85,8 @@ uniform sampler2D textureMap;
 uniform vec4 particleColor;
 uniform bool hasSpriteSheetAnimation;
 uniform bool useLocalSpace;
+uniform bool useEmissionColor;
+uniform float emissionAlpha;
 uniform int spriteSheetAnimationRows;
 uniform int spriteSheetAnimationColumns;
 void main() {
@@ -105,7 +107,11 @@ void main() {
         color = vec4(1.0f);
     }
     if (useEmissionColor) {
-        color += particleColor;
+        if(color.a < 0.1) {
+            discard;
+        }
+        color.a *= emissionAlpha;
+        color.rgb += particleColor.rgb;
     }
     else {
         color *= particleColor;
@@ -182,6 +188,10 @@ void Particle3DShader::engineRenderShader(Geometry* geometry, unsigned int rende
     if(this->useEmissionColor != this->particleNode->useEmissionColor) {
         this->useEmissionColor = this->particleNode->useEmissionColor;
         this->setBool("useEmissionColor", this->particleNode->useEmissionColor);
+    }
+    if(this->emissionAlpha != this->particleNode->emissionAlpha) {
+        this->emissionAlpha = this->particleNode->emissionAlpha;
+        this->setFloat("emissionAlpha", this->particleNode->emissionAlpha);
     }
     if(this->currentIsAdditive != this->particleNode->isAdditive) {
         this->currentIsAdditive = this->particleNode->isAdditive;

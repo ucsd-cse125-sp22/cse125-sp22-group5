@@ -86,9 +86,11 @@ StoneBlast::StoneBlast(){
         //arrow->isAdditive = true;
         arrow->setMaxAmount(100);
         arrow->renderingOrder = 1010;
-        arrow->scale = vec3(0.15, 0.6, 0.15);
+        arrow->useEmissionColor = true;
+        arrow->emissionAlpha = 0.5;
+        arrow->initialScale = vec3(0.15, 0.6, 0.15);
         arrow->initialScaleVariation = vec3(0.1, 0.1, 0.1);
-        arrow->initialRotation = vec3(0, 0, 0);
+        arrow->initialRotation = vec3(0, 0, -90);
         arrow->setEmissionSphere(0, 4);
         arrow->spreadingAngle = 5;
         arrow->initialSpeed = 10;
