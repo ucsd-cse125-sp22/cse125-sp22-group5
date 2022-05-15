@@ -17,6 +17,7 @@ Particle3DNode::Particle3DNode(string modelFile, unsigned int birthrate, float d
     this->isPlaying = true;
     this->hasLimit = false;
     this->maxAmount = 0;
+    this->useEmissionColor = false;
     this->currentAmount = 0;
     this->birthrate = birthrate;
     this->duration = duration;
