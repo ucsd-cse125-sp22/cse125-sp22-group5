@@ -17,12 +17,13 @@ public:
     
     Texture* stone_D;
     Texture* stone_E;
-    vector<AlphaShader*> stone_shaders;
     Texture* circleTexture;
     
     Animation* cleanup;
     Animation* createMagicCircle;
     Animation* removeMagicCircle;
+    
+    Animation* playArrow;
     
     vector<Node*> magicCircles;
     vector<AlphaShader*> circle_shaders;
@@ -37,6 +38,10 @@ public:
     
     Texture* shiningParticleTexture;
     vector<ParticleNode*> shinnings;
+    
+    vector<Particle3DNode*> arrows;
+    
+    bool canDamage;
     
     StoneBlast();
     vector<int> rounds;

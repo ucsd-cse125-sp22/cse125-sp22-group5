@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author/>
+      <authoring_tool>FBX COLLADA exporter</authoring_tool>
+      <comments/>
+    </contributor>
+    <created>2022-05-15T21:52:59Z</created>
+    <keywords/>
+    <modified>2022-05-15T21:52:59Z</modified>
+    <revision/>
+    <subject/>
+    <title/>
+    <unit meter="0.010000" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="file1-image" name="file1">
+      <init_from>file:///Users/futianzhang/Downloads/Arrow_D.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="lambert1" name="lambert1">
+      <instance_effect url="#lambert1-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="lambert1-fx" name="lambert1">
+      <profile_COMMON>
+        <technique sid="standard">
+          <lambert>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file1-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <texture texture="file1-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="pCube1-lib" name="pCube1Mesh">
+      <mesh>
+        <source id="pCube1-POSITION">
+          <float_array id="pCube1-POSITION-array" count="36">
+0.500000 0.316974 0.500000
+-0.503710 -0.503710 -0.000000
+0.000000 -0.503710 0.503710
+0.503710 -0.503710 -0.000000
+-0.500000 0.316974 0.500000
+-0.503710 0.503710 -0.000000
+0.000000 0.503710 0.503710
+0.503710 0.503710 -0.000000
+-0.500000 0.316974 -0.500000
+0.000000 0.503710 -0.503710
+0.500000 0.316974 -0.500000
+0.000000 -0.503710 -0.503710
+</float_array>
+          <technique_common>
+            <accessor source="#pCube1-POSITION-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCube1-Normal0">
+          <float_array id="pCube1-Normal0-array" count="36">
+0.000000 1.000000 0.000000
+0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000
+0.000000 0.000000 1.000000
+0.000000 1.000000 0.000000
+0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000
+0.000000 0.000000 1.000000
+0.000000 1.000000 0.000000
+1.000000 0.000000 0.000000
+0.000000 1.000000 0.000000
+1.000000 0.000000 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#pCube1-Normal0-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pCube1-UV0">
+          <float_array id="pCube1-UV0-array" count="24">
+0.043352 -0.000000
+0.353352 -0.000000
+0.296648 -0.000000
+0.296648 1.000000
+0.043352 1.000000
+0.606648 -0.000000
+0.606648 1.000000
+0.353352 1.000000
+0.703352 0.779536
+0.956648 0.779536
+0.956648 0.976203
+0.703352 0.976203
+</float_array>
+          <technique_common>
+            <accessor source="#pCube1-UV0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pCube1-VERTEX">
+          <input semantic="POSITION" source="#pCube1-POSITION"/>
+          <input semantic="NORMAL" source="#pCube1-Normal0"/>
+        </vertices>
+        <triangles count="6" material="lambert1">
+          <input semantic="VERTEX" offset="0" source="#pCube1-VERTEX"/>
+          <input semantic="TEXCOORD" offset="1" set="0" source="#pCube1-UV0"/>
+          <p> 7 3 5 4 1 0 7 3 1 0 3 2 0 9 10 10 4 8 4 8 10 10 8 11 6 7 2 1 9 6 2 1 11 5 9 6</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="arrow_simple" name="arrow_simple">
+      <node name="pCube1" id="pCube1" sid="pCube1">
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 4.000000 0.000000 2.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <instance_geometry url="#pCube1-lib">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert1" target="#lambert1"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>24.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.041667</start_time>
+          <end_time>8.333333</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#arrow_simple"/>
+  </scene>
+</COLLADA>

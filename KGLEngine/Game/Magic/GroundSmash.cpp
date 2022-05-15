@@ -101,7 +101,7 @@ GroundSmash::GroundSmash(){
     spreadParticle->setColorAnimation(vec4(this->hammerEmission, 0.0f), 0.75f);
     hammer->addChildNode(spreadParticle);
     
-    explosion = new ParticleNode(300, 1.0f, 0.0f);
+    explosion = new ParticleNode(200, 1.0f, 0.0f);
     explosion->position = relativePosition;
     explosion->setColorAnimation(vec4(this->hammerEmission, 0.0f), 0.0f);
     explosion->setColorAnimation(vec4(this->hammerEmission + this->hammerEmissionVariation, 0.9f), 0.2f);
@@ -114,7 +114,7 @@ GroundSmash::GroundSmash(){
     explosion->initialScale = 1.0;
     explosion->initialScale = 2.0;
     explosion->scalingSpeed = 7;
-    explosion->setMaxAmount(50);
+    explosion->setMaxAmount(25);
     explosion->spreadingAngle = 90;
     explosion->setSpriteSheetAnimation(7, 12, 40, 120, 40);
     hammer->addChildNode(explosion);
