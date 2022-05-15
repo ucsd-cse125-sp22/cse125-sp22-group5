@@ -48,9 +48,10 @@ StoneBlast::StoneBlast(){
     
     shiningParticleTexture = new Texture("/Resources/Game/Magic/ThousandBlade/shining.png", 2.0f, true);
     
-    ParticleNode* shiningParticle = new ParticleNode(20, 0.65f, 0.1f);
-    shiningParticle->eulerAngles = vec3(0,0,90);
-    shiningParticle->setMaxAmount(20);
+    ParticleNode* shiningParticle = new ParticleNode(200, 0.65f, 0.1f);
+    shiningParticle->eulerAngles = vec3(0,0,0);
+    shiningParticle->setEmissionSphere(0, 1);
+    shiningParticle->setMaxAmount(700);
     shiningParticle->renderingOrder = 1010;
     shiningParticle->texture = shiningParticleTexture;
     shiningParticle->isAdditive = true;
@@ -84,7 +85,7 @@ StoneBlast::StoneBlast(){
         arrow->color = vec4(0, 0.5f, 1.0f, 1.0f);
         arrow->texture = new Texture("/Resources/Game/Magic/StoneBlast/Arrow_D.png");
         //arrow->isAdditive = true;
-        arrow->setMaxAmount(100);
+        arrow->setMaxAmount(150);
         arrow->renderingOrder = 1010;
         arrow->scale = vec3(0.15, 0.6, 0.15);
         arrow->initialScaleVariation = vec3(0.1, 0.1, 0.1);
@@ -104,8 +105,8 @@ StoneBlast::StoneBlast(){
         arrows.push_back(arrow);
         
         ParticleNode* shinning = (ParticleNode*)shiningParticle->copy();
-        shinning->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i%5] * 2.0f, 1.0f), 0.0f);
-        shinning->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i%5] * 2.0f, 0.0f), 0.75f);
+        shinning->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 2.0f, 1.0f), 0.0f);
+        shinning->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 2.0f, 0.0f), 0.75f);
         this->shinnings.push_back(shinning);
         newCircle->addChildNode(shinning);
     }
@@ -115,6 +116,7 @@ StoneBlast::StoneBlast(){
         for (int i = 0; i < this->magicCircles.size(); i++){
             magicCircles[i]->isDisabled = false;
             arrows[i]->stop();
+            shinnings[i]->stop();
             Animation* appear = new Animation(this->name + " appear " + to_string(i), 0.5);
             appear->setFloatAnimation(&this->circle_shaders[i]->alpha, 1.0);
             Engine::main->playAnimation(appear);
@@ -125,12 +127,18 @@ StoneBlast::StoneBlast(){
     playArrow->setCompletionHandler([&]{
         for (int i = 0; i < this->magicCircles.size(); i++){
             arrows[i]->play();
+            shinnings[i]->play();
         }
-        this->canDamage = true;
+        Animation* damage = new Animation(this->name + " damage ", 0.2);
+        damage->setCompletionHandler([&]{
+            this->canDamage = true;
+        });
+        Engine::main->playAnimation(damage);
     });
     
     removeMagicCircle = new Animation(this->name + " remove magic circle ", 5.5f);
     removeMagicCircle->setCompletionHandler([&]{
+        this->canDamage = false;
         for (int i = 0; i < this->magicCircles.size(); i++){
             Animation* disappear = new Animation(this->name + " disappear " + to_string(i), 0.5);
             disappear->setFloatAnimation(&this->circle_shaders[i]->alpha, 0.0);
@@ -142,10 +150,12 @@ StoneBlast::StoneBlast(){
     cleanup->setCompletionHandler([&]{
         start = false;
         this->isDisabled = true;
+        this->canDamage = false;
         this->rounds = {0,0,0};
         for (int i = 0; i < this->magicCircles.size(); i++){
             this->magicCircles[i]->isDisabled = true;
             arrows[i]->reset();
+            shinnings[i]->reset();
         }
     });
     
@@ -155,11 +165,6 @@ StoneBlast::StoneBlast(){
 }
 void StoneBlast::updateMagic(){
     if (start){
-//        for (int i = 0; i < this->rounds[0]; i++){
-//            this->projectiles[i]->start = this->projectiles[i]->getWorldPosition();
-//            this->projectiles[i]->end = this->projectiles[i]->getWorldPosition() + normalize(this->projectiles[i]->getUpVectorInWorld()) * 0.4f;
-//        }
-        
         float time = Engine::main->getTime();
         for (int i = 0; i < this->magicCircles.size(); i++){
             if (!this->magicCircles[i]->isDisabled){
@@ -183,9 +188,12 @@ void StoneBlast::play(CharNode* character){
 }
 
 void StoneBlast::tryDamage(CharNode* character){
-    if (this->start){
-        for (int i = 0; i < this->projectiles.size(); i++){
-            this->projectiles[i]->tryDamageChar(character);
+    if (this->start && this->canDamage){
+        for (int i = 0; i < this->magicCircles.size(); i++){
+            if (character->hitbox->testSphere(this->magicCircles[i]->position-vec3(0,5,0), 4)){
+                character->receiveDamage(this->damage);
+                return;
+            }
         }
     }
 }
