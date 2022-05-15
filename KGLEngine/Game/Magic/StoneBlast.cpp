@@ -30,7 +30,7 @@ StoneBlast::StoneBlast(){
     this->translatePosition = {vec3(0,5,7), vec3(-3,5,4), vec3(3,5,4), vec3(-3,5,10), vec3(3,5,10)};
     this->rotationPosition = vec3(0,0,-90);
     
-    this->circleEmissions = {vec3(0.5,-0.5,-0.5), vec3(0.3,-0.3,0), vec3(-0.3,0,-0.3), vec3(0.5,0,-0.5), vec3(0,0,0)};
+    this->circleEmissions = {vec3(0.8,0,-0.6), vec3(0.5,-0.3,0), vec3(0.5,0.5,-0.3), vec3(0.8,-0.3,-0.3), vec3(0,0,0)};
     this->circleVariantion = vec3(0.1f);
     
     stone_D = new Texture("/Resources/Game/Magic/StoneBlast/StoneBlast_D.jpg", 2.0f, true);
@@ -206,6 +206,7 @@ void StoneBlast::updateMagic(){
         for (int i = 0; i < this->magicCircles.size(); i++){
             if (!this->magicCircles[i]->isDisabled){
                 this->circle_shaders[i]->emissionColor =  this->circleEmissions[i] + sin((time + i) * (3 + i * 0.2f)) * circleVariantion;
+                this->magicCircles[i]->eulerAngles = this->rotationPosition + vec3(0,(time + i)*10,0);
             }
         }
     }
