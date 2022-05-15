@@ -1265,7 +1265,7 @@ int main(int argc, char** argv) {
     character->addMagics(thunderMagic, KEY_4);
     character->addMagics(flameMagic, KEY_5);
 //    character->addMagics(smashMagic, KEY_4);
-//    character->addMagics(swordMagic, KEY_5);
+    character->addMagics(swordMagic, KEY_6);
 
     engine->addNode(stoneMagic);
     engine->addNode(flameMagic);
@@ -1342,25 +1342,26 @@ int main(int argc, char** argv) {
                 character->castMagic(KEY_5);
             }
             if (engine->input->wasKeyPressed(KEY_6)) {
-                ParticleNode* spark = new ParticleNode(130, 1, 0);
-                spark->setMaxAmount(100);
-                spark->spreadingAngle = 360;
-                spark->initialSpeed = 0.5;
-                spark->initialSpeedVariation = 0.3;
-                spark->isAdditive = true;
-                spark->setEmissionSphere(0.3, 0.5);
-                spark->renderingOrder = 999l;
-                spark->acceleration = vec3(0, -1, 0);
-                spark->texture = new Texture("/Resources/Game/Effects/TeleportParticles.png");
-                spark->setSpriteSheetAnimation(1, 8, 8, 1, 0);
-                spark->initialScale = 0.1;
-                spark->scalingSpeed = -0.05;
-                spark->initialRotationVariation = 360;
-                spark->color = vec4(0.3, 0.4, 1, 1);
-                spark->initialScaleVariation = 0.05;
-                spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
-                spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
-                engine->addNode(spark);
+                character->castMagic(KEY_6);
+//                ParticleNode* spark = new ParticleNode(130, 1, 0);
+//                spark->setMaxAmount(100);
+//                spark->spreadingAngle = 360;
+//                spark->initialSpeed = 0.5;
+//                spark->initialSpeedVariation = 0.3;
+//                spark->isAdditive = true;
+//                spark->setEmissionSphere(0.3, 0.5);
+//                spark->renderingOrder = 999l;
+//                spark->acceleration = vec3(0, -1, 0);
+//                spark->texture = new Texture("/Resources/Game/Effects/TeleportParticles.png");
+//                spark->setSpriteSheetAnimation(1, 8, 8, 1, 0);
+//                spark->initialScale = 0.1;
+//                spark->scalingSpeed = -0.05;
+//                spark->initialRotationVariation = 360;
+//                spark->color = vec4(0.3, 0.4, 1, 1);
+//                spark->initialScaleVariation = 0.05;
+//                spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
+//                spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
+//                engine->addNode(spark);
             }
             if (engine->input->wasKeyPressed(KEY_7)) {
                 character->castMagic(KEY_7);
@@ -1405,8 +1406,7 @@ int main(int argc, char** argv) {
 //            }
 //            else {
 //                intersection->isDisabled = true;
-//            }
-            
+//            
             engine->renderDirectionalLightShadowMap(directionalLight);
             
             engine->render();
