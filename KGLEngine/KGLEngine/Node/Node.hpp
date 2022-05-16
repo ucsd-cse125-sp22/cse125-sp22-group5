@@ -331,6 +331,8 @@ public:
     bool useLocalSpace;
     bool isAdditive;
     bool youngestFirst;
+    bool useEmissionColor;
+    float emissionAlpha;
     float speedFactor;
     float spreadingAngle;
     float initialSpeed;

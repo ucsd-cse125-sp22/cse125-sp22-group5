@@ -39,6 +39,8 @@ public:
     Texture* shiningParticleTexture;
     vector<ParticleNode*> shinnings;
     
+    vector<ParticleNode*> clouds;
+    
     vector<Particle3DNode*> arrows;
     
     bool canDamage;

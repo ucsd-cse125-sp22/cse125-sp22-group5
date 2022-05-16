@@ -114,7 +114,7 @@ ThousandBlade::ThousandBlade(){
     circleParticle->texture = circleParticleTexture;
     circleParticle->isAdditive = true;
     circleParticle->setColorAnimation(vec4(this->swordEmission, 1.0f), 0.0f);
-    circleParticle->setColorAnimation(vec4(this->circleEmission, 0.0f), 2.0f);
+    circleParticle->setColorAnimation(vec4(this->circleEmission, 0.0f), 1.0f);
     circleParticle->initialSpeed = 0.05f;
     circleParticle->initialSpeedVariation = 0.025f;
     circleParticle->initialScale = 0.3;
@@ -130,7 +130,7 @@ ThousandBlade::ThousandBlade(){
     swordParticle->texture = swordParticleTexture;
     swordParticle->isAdditive = true;
     swordParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 1.0f), 0.0f);
-    swordParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 0.0f), 0.5f);
+    swordParticle->setColorAnimation(vec4(this->circleEmission + this->circleVariantion, 0.0f), 1.0f);
     swordParticle->initialSpeed = 1.0f;
     swordParticle->initialSpeedVariation = 0.5f;
     swordParticle->initialScale = 0.75;

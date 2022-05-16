@@ -83,7 +83,7 @@ GroundSmash::GroundSmash(){
     shiningParticle->spreadingAngle = 90;
     shiningParticle->rotatingSpeedVariation = 100;
     shiningParticle->setColorAnimation(vec4(this->hammerEmission, 1.0f), 0.0f);
-    shiningParticle->setColorAnimation(vec4(this->hammerEmission + this->hammerEmissionVariation, 0.0f), 1.5f);
+    shiningParticle->setColorAnimation(vec4(this->hammerEmission + this->hammerEmissionVariation, 0.0f), 1.0f);
     hammer->addChildNode(shiningParticle);
     
     spreadTexture = new Texture("/Resources/Game/Magic/GroundSmash/spread.png", 2.0f, true);
@@ -98,10 +98,10 @@ GroundSmash::GroundSmash(){
     spreadParticle->speedAccelerationVariation = 1.0f;
     spreadParticle->renderingOrder = 996;
     spreadParticle->setColorAnimation(vec4(this->hammerEmission + this->hammerEmissionVariation, 0.5f), 0.0f);
-    spreadParticle->setColorAnimation(vec4(this->hammerEmission, 0.0f), 0.75f);
+    spreadParticle->setColorAnimation(vec4(this->hammerEmission, 0.0f), 1.0f);
     hammer->addChildNode(spreadParticle);
     
-    explosion = new ParticleNode(200, 1.0f, 0.0f);
+    explosion = new ParticleNode(100, 1.0f, 0.0f);
     explosion->position = relativePosition;
     explosion->setColorAnimation(vec4(this->hammerEmission, 0.0f), 0.0f);
     explosion->setColorAnimation(vec4(this->hammerEmission + this->hammerEmissionVariation, 0.9f), 0.2f);
@@ -225,7 +225,7 @@ void GroundSmash::play(CharNode* character){
 void GroundSmash::tryDamage(CharNode* character){
     if (this->start){
         this->projectiles[0]->tryDamageChar(character);
-        if (boom && find(this->boomedChar.begin(), this->boomedChar.end(), character) == this->boomedChar.end() &&character->hitbox->testSphere(explosion->getWorldPosition(), 2)){
+        if (boom && find(this->boomedChar.begin(), this->boomedChar.end(), character) == this->boomedChar.end() &&character->hitbox->testSphere(explosion->getWorldPosition(), 1.6)){
             character->receiveDamage(this->damage);
             boomedChar.push_back(character);
         }

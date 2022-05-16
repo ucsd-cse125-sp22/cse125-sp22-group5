@@ -211,81 +211,81 @@ int main(int argc, char** argv) {
 //    weaponNode->scale = vec3(1);
 //    characterRightHand->addChildNode(weaponNode);
     
-
-    
-    Node* newMap = new Node();
-    newMap->loadModelFile("/Resources/Game/Map/MergedMapBase.dae");
-    newMap->position.z -= 55;
-//    newMap->scale = vec3(5);
-    newMap->position.y -= 101;
-    
-    
-    PBRShader* wallShader = new PBRShader(0.1f, 0.2f);
-    wallShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_01_Albedo.png", 2, true));
-    wallShader->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_01_Normal.png", 1, true));
-    wallShader->alphaCutThreshold = 0.0f;
-    newMap->geometries[0]->setDoubleSided();
-    newMap->geometries[0]->setShader(wallShader);
-    PBRShader* wallShader2 = new PBRShader(0.1f, 0.2f);
-    wallShader2->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_03_Albedo.png", 2, true));
-    wallShader2->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_03_Normal.png", 1, true));
-    wallShader2->alphaCutThreshold = 0.0f;
-    newMap->geometries[1]->setDoubleSided();
-    newMap->geometries[1]->setShader(wallShader2);
-    PBRShader* wallShader3 = new PBRShader(0.1f, 0.2f);
-    wallShader3->setDiffuseMap(new Texture("/Resources/Game/Map/T_Bricks_01_Albedo.png", 2, true));
-    wallShader3->setNormalMap(new Texture("/Resources/Game/Map/T_Bricks_01_Normal.png", 1, true));
-    wallShader3->alphaCutThreshold = 0.0f;
-    newMap->geometries[2]->setDoubleSided();
-    newMap->geometries[2]->setShader(wallShader3);
-    PBRShader* wallShader4 = new PBRShader(0.1f, 0.2f);
-    wallShader4->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_01_Albedo.png", 2, true));
-    wallShader4->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_01_Normal.png", 1, true));
-    wallShader4->alphaCutThreshold = 0.0f;
-    newMap->geometries[3]->setDoubleSided();
-    newMap->geometries[3]->setShader(wallShader4);
-    PBRShader* wallShader5 = new PBRShader(0.1f, 0.2f);
-    wallShader5->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Albedo.png", 2, true));
-    wallShader5->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Normal.png", 1, true));
-    wallShader5->alphaCutThreshold = 0.0f;
-    newMap->geometries[4]->setDoubleSided();
-    newMap->geometries[4]->setShader(wallShader5);
-    PBRShader* wallShader6 = new PBRShader(0.1f, 0.2f);
-    wallShader6->setDiffuseMap(new Texture("/Resources/Game/Map/T_Trim_01_Albedo.png", 2, true));
-    wallShader6->setNormalMap(new Texture("/Resources/Game/Map/T_Trim_01_Normal.png", 1, true));
-    wallShader6->alphaCutThreshold = 0.0f;
-    newMap->geometries[5]->setDoubleSided();
-    newMap->geometries[5]->setShader(wallShader6);
-    PBRShader* wallShader7 = new PBRShader(0.1f, 0.2f);
-    wallShader7->setDiffuseMap(new Texture("/Resources/Game/Map/T_Battlement_01_Albedo.png", 2, true));
-    wallShader7->setNormalMap(new Texture("/Resources/Game/Map/T_Battlement_01_Normal.png", 1, true));
-    wallShader7->alphaCutThreshold = 0.0f;
-    newMap->geometries[6]->setDoubleSided();
-    newMap->geometries[6]->setShader(wallShader7);
-    PBRShader* wallShader8 = new PBRShader(0.1f, 0.2f);
-    wallShader8->setDiffuseMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Albedo.png", 2, true));
-    wallShader8->setNormalMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Normal.png", 1, true));
-    wallShader8->alphaCutThreshold = 0.0f;
-    newMap->geometries[7]->setDoubleSided();
-    newMap->geometries[7]->setShader(wallShader8);
-    PBRShader* wallShader9 = new PBRShader(0.1f, 0.2f);
-    wallShader9->setDiffuseMap(new Texture("/Resources/Game/Map/New Terrain Basemap Diffuse.png", 2, true));
-    wallShader9->setNormalMap(new Texture("/Resources/Game/Map/New Terrain Basemap Normal.png", 1, true));
-    wallShader9->alphaCutThreshold = 0.0f;
-    newMap->geometries[8]->setDoubleSided();
-    newMap->geometries[8]->setShader(wallShader9);
-    PBRShader* wallShadera = new PBRShader(0.1f, 0.2f);
-    wallShadera->setDiffuseMap(new Texture("/Resources/Game/Map/T_Column_01_Albedo.png", 2, true));
-    wallShadera->setNormalMap(new Texture("/Resources/Game/Map/T_Column_01_Normal.png", 1, true));
-    wallShadera->alphaCutThreshold = 0.0f;
-    newMap->geometries[9]->setDoubleSided();
-    newMap->geometries[9]->setShader(wallShadera);
-    
-    for (int n = 11; n < newMap->geometries.size(); n++) {
-        newMap->geometries[n]->setShader(new PBRShader(0.5, 0.5));
-    }
-    engine->addNode(newMap);
 //
+//
+//    Node* newMap = new Node();
+//    newMap->loadModelFile("/Resources/Game/Map/MergedMapBase.dae");
+//    newMap->position.z -= 55;
+////    newMap->scale = vec3(5);
+//    newMap->position.y -= 101;
+//
+//
+//    PBRShader* wallShader = new PBRShader(0.1f, 0.2f);
+//    wallShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_01_Albedo.png", 2, true));
+//    wallShader->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_01_Normal.png", 1, true));
+//    wallShader->alphaCutThreshold = 0.0f;
+//    newMap->geometries[0]->setDoubleSided();
+//    newMap->geometries[0]->setShader(wallShader);
+//    PBRShader* wallShader2 = new PBRShader(0.1f, 0.2f);
+//    wallShader2->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wall_03_Albedo.png", 2, true));
+//    wallShader2->setNormalMap(new Texture("/Resources/Game/Map/T_Wall_03_Normal.png", 1, true));
+//    wallShader2->alphaCutThreshold = 0.0f;
+//    newMap->geometries[1]->setDoubleSided();
+//    newMap->geometries[1]->setShader(wallShader2);
+//    PBRShader* wallShader3 = new PBRShader(0.1f, 0.2f);
+//    wallShader3->setDiffuseMap(new Texture("/Resources/Game/Map/T_Bricks_01_Albedo.png", 2, true));
+//    wallShader3->setNormalMap(new Texture("/Resources/Game/Map/T_Bricks_01_Normal.png", 1, true));
+//    wallShader3->alphaCutThreshold = 0.0f;
+//    newMap->geometries[2]->setDoubleSided();
+//    newMap->geometries[2]->setShader(wallShader3);
+//    PBRShader* wallShader4 = new PBRShader(0.1f, 0.2f);
+//    wallShader4->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_01_Albedo.png", 2, true));
+//    wallShader4->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_01_Normal.png", 1, true));
+//    wallShader4->alphaCutThreshold = 0.0f;
+//    newMap->geometries[3]->setDoubleSided();
+//    newMap->geometries[3]->setShader(wallShader4);
+//    PBRShader* wallShader5 = new PBRShader(0.1f, 0.2f);
+//    wallShader5->setDiffuseMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Albedo.png", 2, true));
+//    wallShader5->setNormalMap(new Texture("/Resources/Game/Map/T_Floor_Bricks_01_Normal.png", 1, true));
+//    wallShader5->alphaCutThreshold = 0.0f;
+//    newMap->geometries[4]->setDoubleSided();
+//    newMap->geometries[4]->setShader(wallShader5);
+//    PBRShader* wallShader6 = new PBRShader(0.1f, 0.2f);
+//    wallShader6->setDiffuseMap(new Texture("/Resources/Game/Map/T_Trim_01_Albedo.png", 2, true));
+//    wallShader6->setNormalMap(new Texture("/Resources/Game/Map/T_Trim_01_Normal.png", 1, true));
+//    wallShader6->alphaCutThreshold = 0.0f;
+//    newMap->geometries[5]->setDoubleSided();
+//    newMap->geometries[5]->setShader(wallShader6);
+//    PBRShader* wallShader7 = new PBRShader(0.1f, 0.2f);
+//    wallShader7->setDiffuseMap(new Texture("/Resources/Game/Map/T_Battlement_01_Albedo.png", 2, true));
+//    wallShader7->setNormalMap(new Texture("/Resources/Game/Map/T_Battlement_01_Normal.png", 1, true));
+//    wallShader7->alphaCutThreshold = 0.0f;
+//    newMap->geometries[6]->setDoubleSided();
+//    newMap->geometries[6]->setShader(wallShader7);
+//    PBRShader* wallShader8 = new PBRShader(0.1f, 0.2f);
+//    wallShader8->setDiffuseMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Albedo.png", 2, true));
+//    wallShader8->setNormalMap(new Texture("/Resources/Game/Map/T_Metal_Surface_01_Normal.png", 1, true));
+//    wallShader8->alphaCutThreshold = 0.0f;
+//    newMap->geometries[7]->setDoubleSided();
+//    newMap->geometries[7]->setShader(wallShader8);
+//    PBRShader* wallShader9 = new PBRShader(0.1f, 0.2f);
+//    wallShader9->setDiffuseMap(new Texture("/Resources/Game/Map/New Terrain Basemap Diffuse.png", 2, true));
+//    wallShader9->setNormalMap(new Texture("/Resources/Game/Map/New Terrain Basemap Normal.png", 1, true));
+//    wallShader9->alphaCutThreshold = 0.0f;
+//    newMap->geometries[8]->setDoubleSided();
+//    newMap->geometries[8]->setShader(wallShader9);
+//    PBRShader* wallShadera = new PBRShader(0.1f, 0.2f);
+//    wallShadera->setDiffuseMap(new Texture("/Resources/Game/Map/T_Column_01_Albedo.png", 2, true));
+//    wallShadera->setNormalMap(new Texture("/Resources/Game/Map/T_Column_01_Normal.png", 1, true));
+//    wallShadera->alphaCutThreshold = 0.0f;
+//    newMap->geometries[9]->setDoubleSided();
+//    newMap->geometries[9]->setShader(wallShadera);
+//
+//    for (int n = 11; n < newMap->geometries.size(); n++) {
+//        newMap->geometries[n]->setShader(new PBRShader(0.5, 0.5));
+//    }
+//    engine->addNode(newMap);
+////
 //    Node* weapon = new Node();
 //    weapon->loadModelFile("/Resources/Game/Character/MT.fbx");
 //    weapon->scale = vec3(0.005);
@@ -1249,7 +1249,7 @@ int main(int argc, char** argv) {
 
     vector<Node*> characters;
     
-
+//    TextNode* fpsDisplay = new TextNode();
 
     StoneBlast* stoneMagic = new StoneBlast();
     FireBall* fireMagic = new FireBall();
@@ -1281,7 +1281,7 @@ int main(int argc, char** argv) {
     enemyHitController.magics.push_back(thunderMagic);
     enemyHitController.magics.push_back(flameMagic);
     enemyHitController.characters.push_back(enemy);
-
+    Particle3DNode* radiation = nullptr;
     while(engine->isRunning()) {
         if(engine->shouldUpdate()) {
             
@@ -1372,7 +1372,8 @@ int main(int argc, char** argv) {
                 enemies[i]->updateTransform();
 //                cout << to_string(enemies[i]->getWorldTransform()) << endl;
             }
-            
+            if (radiation != nullptr)
+                radiation->eulerAngles.y += 10;
             stoneMagic->updateMagic();
             fireMagic->updateMagic();
             lightningMagic->updateMagic();

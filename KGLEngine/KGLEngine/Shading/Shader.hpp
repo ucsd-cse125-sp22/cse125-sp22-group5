@@ -163,6 +163,8 @@ private:
     Texture* currentTexture;
     vec4 currentColor;
     bool colorAnimationVectorsChanged;
+    bool useEmissionColor;
+    float emissionAlpha;
     vector<vec4> colorKeys;
     vector<float> progressKeys;
     bool spriteSheetAnimationChanged;

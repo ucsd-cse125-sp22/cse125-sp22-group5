@@ -48,14 +48,14 @@ StoneBlast::StoneBlast(){
     
     shiningParticleTexture = new Texture("/Resources/Game/Magic/ThousandBlade/shining.png", 2.0f, true);
     
-    ParticleNode* shiningParticle = new ParticleNode(200, 0.65f, 0.1f);
+    ParticleNode* shiningParticle = new ParticleNode(200, 2.0f, 0.1f);
     shiningParticle->eulerAngles = vec3(0,0,0);
     shiningParticle->setEmissionSphere(0, 1);
-    shiningParticle->setMaxAmount(700);
+    shiningParticle->setMaxAmount(400);
     shiningParticle->renderingOrder = 1010;
     shiningParticle->texture = shiningParticleTexture;
     shiningParticle->isAdditive = true;
-    shiningParticle->initialSpeed = 8.0f;
+    shiningParticle->initialSpeed = 4.0f;
     shiningParticle->initialSpeedVariation = 2.0f;
     shiningParticle->initialScale = 0.5;
     shiningParticle->initialScaleVariation = 0.25;
@@ -63,6 +63,18 @@ StoneBlast::StoneBlast(){
     shiningParticle->initialRotationVariation = 360.0f;
     shiningParticle->rotatingSpeed = 0.0f;
     shiningParticle->rotatingSpeedVariation = 180;
+    
+    ParticleNode* cloud = new ParticleNode(30, 5.0f, 0.0f);
+    cloud->position = vec3(-0.5f,0,0);
+    cloud->texture = new Texture("/Resources/Game/Magic/StoneBlast/cloud.png");
+    //cloud->isAdditive = true;
+    cloud->rotatingSpeedVariation = 10;
+    cloud->initialRotationVariation = 30;
+    cloud->initialScaleVariation = 1.0;
+    cloud->renderingOrder = 990;
+    cloud->initialScale = 4.0;
+    cloud->setMaxAmount(3);
+    cloud->spreadingAngle = 180;
     
     for (int i = 0; i < 5; i++){
         AlphaShader* newShader = circle_shader->copy();
@@ -81,26 +93,27 @@ StoneBlast::StoneBlast(){
         magicCircles.push_back(newCircle);
         this->addChildNode(newCircle);
         
-        Particle3DNode* arrow = new Particle3DNode("/Resources/Game/Magic/StoneBlast/arrow_simple.dae", 50, 10.0f, 0.0f);
-        arrow->color = vec4(0, 0.5f, 1.0f, 1.0f);
+        Particle3DNode* arrow = new Particle3DNode("/Resources/Game/Magic/StoneBlast/arrow_simple.dae", 200, 1.0f, 0.0f);
+        //arrow->color = vec4(0, 0.5f, 1.0f, 1.0f);
         arrow->texture = new Texture("/Resources/Game/Magic/StoneBlast/Arrow_D.png");
         //arrow->isAdditive = true;
-        arrow->setMaxAmount(150);
+        arrow->setMaxAmount(600);
         arrow->renderingOrder = 1010;
-        arrow->scale = vec3(0.15, 0.6, 0.15);
-        arrow->initialScaleVariation = vec3(0.1, 0.1, 0.1);
-        arrow->initialRotation = vec3(0, 0, 0);
-        arrow->setEmissionSphere(0, 4);
+        arrow->useEmissionColor = true;
+        arrow->emissionAlpha = 1.0;
+        arrow->initialScale = vec3(0.15, 0.6, 0.15);
+        arrow->initialRotation = vec3(0, 0, -90);
+        arrow->setEmissionSphere(0, 1.5);
         arrow->spreadingAngle = 5;
         arrow->initialSpeed = 10;
         arrow->useLocalSpace = true;
         arrow->speedAccelerationVariation = 0.1;
         arrow->eulerAngles = vec3(0,0,0);
-        arrow->position = vec3(0,0,0);
-        arrow->setColorAnimation(vec4(this->circleEmissions[i], 0.0f), 0.0f);
-        arrow->setColorAnimation(vec4(this->circleEmissions[i], 0.9f), 0.2f);
-        arrow->setColorAnimation(vec4(this->circleEmissions[i], 0.9f), 0.8f);
-        arrow->setColorAnimation(vec4(this->circleEmissions[i], 0.0f), 1.0f);
+        arrow->position = vec3(0.5,0,0);
+        arrow->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 1.5f, 0.0f), 0.0f);
+        arrow->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 1.5f, 0.9f), 0.05f);
+        arrow->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 1.5f, 0.9f), 0.8f);
+        arrow->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 1.5f, 0.0f), 1.0f);
         newCircle->addChildNode(arrow);
         arrows.push_back(arrow);
         
@@ -109,6 +122,14 @@ StoneBlast::StoneBlast(){
         shinning->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i] * 2.0f, 0.0f), 0.75f);
         this->shinnings.push_back(shinning);
         newCircle->addChildNode(shinning);
+        
+        ParticleNode* newCloud = cloud->copy()->convertToParticleNode();
+        newCloud->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i], 0.0f), 0.0f);
+        newCloud->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i], 0.6f), 0.1f);
+        newCloud->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i], 0.6f), 0.9f);
+        newCloud->setColorAnimation(vec4(vec3(0.0f, 0.5f, 1.0f) + this->circleEmissions[i], 0.0f), 1.0f);
+        this->clouds.push_back(newCloud);
+        newCircle->addChildNode(newCloud);
     }
     
     createMagicCircle = new Animation(this->name + " create magic circle ", 0.5f);
@@ -117,6 +138,7 @@ StoneBlast::StoneBlast(){
             magicCircles[i]->isDisabled = false;
             arrows[i]->stop();
             shinnings[i]->stop();
+            clouds[i]->play();
             Animation* appear = new Animation(this->name + " appear " + to_string(i), 0.5);
             appear->setFloatAnimation(&this->circle_shaders[i]->alpha, 1.0);
             Engine::main->playAnimation(appear);
@@ -156,12 +178,14 @@ StoneBlast::StoneBlast(){
             this->magicCircles[i]->isDisabled = true;
             arrows[i]->reset();
             shinnings[i]->reset();
+            clouds[i]->reset();
         }
     });
     
     delete circle;
     delete circle_shader;
     delete shiningParticle;
+    delete cloud;
 }
 void StoneBlast::updateMagic(){
     if (start){
@@ -190,7 +214,7 @@ void StoneBlast::play(CharNode* character){
 void StoneBlast::tryDamage(CharNode* character){
     if (this->start && this->canDamage){
         for (int i = 0; i < this->magicCircles.size(); i++){
-            if (character->hitbox->testSphere(this->magicCircles[i]->position-vec3(0,5,0), 4)){
+            if (character->hitbox->testSphere(this->magicCircles[i]->getWorldPosition()-vec3(0,5,0), 1.6)){
                 character->receiveDamage(this->damage);
                 return;
             }

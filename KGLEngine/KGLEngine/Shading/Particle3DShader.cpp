@@ -51,8 +51,8 @@ void main() {
     particlePosition.xyz += initialSpeed * accelerationData.w * accelerationFactor;
     particlePosition.xyz += accelerationData.xyz * accelerationFactor;
     vec4 localVertexPosition = vec4(vertexPosition, 1.0f);
-    localVertexPosition.xyz *= max(vec3(0.0f), scaleData + scaleSpeedData * progress);
     vec3 rotation = rotationData + rotationSpeedData * progress;
+    localVertexPosition.xyz *= max(vec3(0.0f), scaleData + scaleSpeedData * progress);
     localVertexPosition *= rotationMatrix(vec3(0, 1, 0), rotation.y) * rotationMatrix(vec3(0, 0, 1), rotation.z) * rotationMatrix(vec3(1, 0, 0), rotation.x);
     if(useLocalSpace) {
         gl_Position = projectionTransform * (modelViewTransform * (particlePosition + localVertexPosition));
@@ -84,6 +84,9 @@ uniform bool useTextureMap;
 uniform sampler2D textureMap;
 uniform vec4 particleColor;
 uniform bool hasSpriteSheetAnimation;
+uniform bool useLocalSpace;
+uniform bool useEmissionColor;
+uniform float emissionAlpha;
 uniform int spriteSheetAnimationRows;
 uniform int spriteSheetAnimationColumns;
 void main() {
@@ -103,7 +106,16 @@ void main() {
     }else{
         color = vec4(1.0f);
     }
-    color *= particleColor;
+    if (useEmissionColor) {
+        if(color.a < 0.1) {
+            discard;
+        }
+        color.a *= emissionAlpha;
+        color.rgb += particleColor.rgb;
+    }
+    else {
+        color *= particleColor;
+    }
     if(keyCount == 1) {
         color *= keys[0].color;
     }else if(keyCount > 1) {
@@ -172,6 +184,14 @@ void Particle3DShader::engineRenderShader(Geometry* geometry, unsigned int rende
     if(this->currentUseLocalSpace != this->particleNode->useLocalSpace) {
         this->currentUseLocalSpace = this->particleNode->useLocalSpace;
         this->setBool("useLocalSpace", this->particleNode->useLocalSpace);
+    }
+    if(this->useEmissionColor != this->particleNode->useEmissionColor) {
+        this->useEmissionColor = this->particleNode->useEmissionColor;
+        this->setBool("useEmissionColor", this->particleNode->useEmissionColor);
+    }
+    if(this->emissionAlpha != this->particleNode->emissionAlpha) {
+        this->emissionAlpha = this->particleNode->emissionAlpha;
+        this->setFloat("emissionAlpha", this->particleNode->emissionAlpha);
     }
     if(this->currentIsAdditive != this->particleNode->isAdditive) {
         this->currentIsAdditive = this->particleNode->isAdditive;
