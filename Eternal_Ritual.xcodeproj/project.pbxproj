@@ -182,6 +182,12 @@
 		3D2D276D2834220100159082 /* LightningMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightningMagic.hpp; sourceTree = "<group>"; };
 		3D2D276E2834220100159082 /* Thunder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thunder.cpp; sourceTree = "<group>"; };
 		3D2D276F2834220100159082 /* AllMagic.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllMagic.inc; sourceTree = "<group>"; };
+		3D2D277D2834247D00159082 /* serverCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serverCore.cpp; sourceTree = "<group>"; };
+		3D2D277E2834247D00159082 /* serverCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = serverCore.hpp; sourceTree = "<group>"; };
+		3D2D277F2834249400159082 /* server-main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "server-main.cpp"; sourceTree = "<group>"; };
+		3D2D2781283424A700159082 /* serverSocket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = serverSocket.hpp; sourceTree = "<group>"; };
+		3D2D2782283424A700159082 /* common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
+		3D2D2783283424A700159082 /* serverSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serverSocket.cpp; sourceTree = "<group>"; };
 		3D47059C282BD8230068156B /* HittableObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HittableObject.cpp; sourceTree = "<group>"; };
 		3D47059D282BD8230068156B /* HittableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HittableObject.hpp; sourceTree = "<group>"; };
 		3DD5A5B2282FAAE30010B1A5 /* credits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = credits.txt; sourceTree = "<group>"; };
@@ -251,6 +257,7 @@
 		3D2D260D2831A4EB00159082 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3D2D277C2834247D00159082 /* ServerCore */,
 				3D2D27542833CA1200159082 /* ClientCore */,
 				3D2D27502833C86F00159082 /* OfflineCore */,
 			);
@@ -260,6 +267,7 @@
 		3D2D26972831BA3D00159082 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3D2D2780283424A700159082 /* ServerSide */,
 				3D2D26982831BA3D00159082 /* ClientSide */,
 				3D2D269C2831BA3D00159082 /* Packet */,
 			);
@@ -444,6 +452,25 @@
 			path = Magic;
 			sourceTree = "<group>";
 		};
+		3D2D277C2834247D00159082 /* ServerCore */ = {
+			isa = PBXGroup;
+			children = (
+				3D2D277D2834247D00159082 /* serverCore.cpp */,
+				3D2D277E2834247D00159082 /* serverCore.hpp */,
+			);
+			path = ServerCore;
+			sourceTree = "<group>";
+		};
+		3D2D2780283424A700159082 /* ServerSide */ = {
+			isa = PBXGroup;
+			children = (
+				3D2D2781283424A700159082 /* serverSocket.hpp */,
+				3D2D2782283424A700159082 /* common.hpp */,
+				3D2D2783283424A700159082 /* serverSocket.cpp */,
+			);
+			path = ServerSide;
+			sourceTree = "<group>";
+		};
 		3DD5A5B1282FAAE30010B1A5 /* Credits */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +503,7 @@
 		C294F8C327FCF903002B6550 /* Eternal_Ritual */ = {
 			isa = PBXGroup;
 			children = (
+				3D2D277F2834249400159082 /* server-main.cpp */,
 				3DD5A5D128319AE80010B1A5 /* client-main.cpp */,
 				3D2D26262831AA1300159082 /* offline-main.cpp */,
 				3D2D260D2831A4EB00159082 /* Core */,
