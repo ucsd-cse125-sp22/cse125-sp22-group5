@@ -14,7 +14,6 @@
 #include <SFML/Audio.hpp>
 
 #include "KGLEngine/Shading/Image.hpp"
-#include "keys.h"
 
 using namespace std;
 using namespace glm;
