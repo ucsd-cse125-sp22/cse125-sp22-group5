@@ -21,7 +21,7 @@
 #include "KGLEngine/SkeletalAnimation/Bone.hpp"
 #include "KGLEngine/SkeletalAnimation/Animator.hpp"
 #include "KGLEngine/Node/Node.hpp"
-
+#include "KGLEngine/Toolkit/keys.h"
 
 class Engine final {
 private:

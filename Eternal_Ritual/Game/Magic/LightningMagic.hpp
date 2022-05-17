@@ -1,20 +1,25 @@
 //
 //  LightningMagic.hpp
-//  KGLEngine
 //
 //  Created by Zifan Zhang on 4/27/22.
+//  Updated by Kangming Yu on 5/16/22.
 //
 
 #ifndef LightningMagic_hpp
 #define LightningMagic_hpp
 
-#include "BaseMagic.hpp"
-class LightningMagic : public BaseMagic{
+#include <vector>
+
+#include "KGLEngine/Engine.hpp"
+#include "Game/Magic/BaseMagic.hpp"
+
+
+class LightningMagic final: public BaseMagic{
 public:
-    vector<Node*> stones;
-    vector<Animation*> waits;
-    vector<Animation*> spins;
-    vector<Animation*> forwards;
+    std::vector<Node*> stones;
+    std::vector<Animation*> waits;
+    std::vector<Animation*> spins;
+    std::vector<Animation*> forwards;
     
     Texture* stone_D;
     Texture* stone_E;
@@ -30,11 +35,11 @@ public:
     PBRShader* circle_shader;
     
     LightningMagic();
-    vector<int> rounds;
-    void updateMagic();
-    void play(vec3 position, vec3 euler);
+    std::vector<int> rounds;
+    void updateMagic() override;
+    void play(CharNode* character) override;
     void moveStones(int roundNum);
-    ~LightningMagic();
+    ~LightningMagic() override = default;
 };
 
 #endif /* LightningMagic_hpp */

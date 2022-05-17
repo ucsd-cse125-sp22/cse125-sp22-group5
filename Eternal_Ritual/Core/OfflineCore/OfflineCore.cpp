@@ -1,5 +1,7 @@
 #include "Core/OfflineCore/OfflineCore.hpp"
 
+#include <iostream>
+
 #include "Game/Map/ImportMapHelper.hpp"
 #include "Game/Character/ImportCharHelper.hpp"
 #include "Game/Magic/AllMagic.inc"

@@ -7,6 +7,7 @@
 
 #include "Game/Character/CharNode.hpp"
 
+#include <iostream>
 #include <cmath>
 #include <glm/gtx/io.hpp>
 

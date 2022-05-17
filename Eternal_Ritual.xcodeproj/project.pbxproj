@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		12309CA5281A022500423625 /* Hitbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9C281A022500423625 /* Hitbox.cpp */; };
 		12309CA6281A022500423625 /* HitController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9D281A022500423625 /* HitController.cpp */; };
-		12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA0281A022500423625 /* ThousandBlade.cpp */; };
-		12309CA8281A022500423625 /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA3281A022500423625 /* BaseMagic.cpp */; };
-		12309CA9281A022500423625 /* StoneBlast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309CA4281A022500423625 /* StoneBlast.cpp */; };
-		1265315F281CC04800A712E1 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1265315E281CC04800A712E1 /* Projectile.cpp */; };
 		12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12EA9AEF280FE68900541504 /* CharNode.cpp */; };
 		3D2D26272831AA1300159082 /* offline-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26262831AA1300159082 /* offline-main.cpp */; };
 		3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26C82831D53E00159082 /* ImportMapHelper.cpp */; };
@@ -47,14 +43,20 @@
 		3D2D271E283231CD00159082 /* ParticleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FA283231CD00159082 /* ParticleNode.cpp */; };
 		3D2D271F283231CD00159082 /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FB283231CD00159082 /* LightNode.cpp */; };
 		3D2D27232832363A00159082 /* AlphaShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27212832363A00159082 /* AlphaShader.cpp */; };
-		3D2D273C2832364400159082 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27282832364400159082 /* ThunderShock.cpp */; };
-		3D2D273D2832364400159082 /* LightningSpear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27292832364400159082 /* LightningSpear.cpp */; };
-		3D2D273E2832364400159082 /* LightningMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D272A2832364400159082 /* LightningMagic.cpp */; };
-		3D2D27402832364400159082 /* Flame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D272D2832364400159082 /* Flame.cpp */; };
-		3D2D27432832364400159082 /* GroundSmash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27342832364400159082 /* GroundSmash.cpp */; };
-		3D2D27452832364400159082 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D273A2832364400159082 /* Thunder.cpp */; };
 		3D2D274E2832448A00159082 /* ImportCharHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D274C2832448A00159082 /* ImportCharHelper.cpp */; };
 		3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
+		3D2D27702834220100159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
+		3D2D27712834220100159082 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275C2834220100159082 /* ThunderShock.cpp */; };
+		3D2D27722834220100159082 /* LightningSpear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275D2834220100159082 /* LightningSpear.cpp */; };
+		3D2D27732834220100159082 /* LightningMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275E2834220100159082 /* LightningMagic.cpp */; };
+		3D2D27742834220100159082 /* ThousandBlade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27602834220100159082 /* ThousandBlade.cpp */; };
+		3D2D27752834220100159082 /* Flame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27612834220100159082 /* Flame.cpp */; };
+		3D2D27762834220100159082 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27632834220100159082 /* Projectile.cpp */; };
+		3D2D27772834220100159082 /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27662834220100159082 /* BaseMagic.cpp */; };
+		3D2D27782834220100159082 /* GroundSmash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27682834220100159082 /* GroundSmash.cpp */; };
+		3D2D27792834220100159082 /* StoneBlast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27692834220100159082 /* StoneBlast.cpp */; };
+		3D2D277A2834220100159082 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276E2834220100159082 /* Thunder.cpp */; };
+		3D2D277B2834220100159082 /* AllMagic.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276F2834220100159082 /* AllMagic.inc */; };
 		3D47059E282BD8230068156B /* HittableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D47059C282BD8230068156B /* HittableObject.cpp */; };
 		3DD5A5B7282FFA510010B1A5 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		C294F8F527FCFB19002B6550 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F427FCFB19002B6550 /* OpenGL.framework */; };
@@ -62,7 +64,6 @@
 		C294F8F927FCFB27002B6550 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F827FCFB27002B6550 /* libGLEW.2.2.0.dylib */; };
 		C294F8FB27FCFB2E002B6550 /* libassimp.5.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */; };
 		C2F7796028078726001A214D /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
-		E21F177E281CF5EC0099A81C /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F177C281CF5EC0099A81C /* FireBall.cpp */; };
 		E21F17D3281DCB260099A81C /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */; };
 		E21F17D5281DCB260099A81C /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
@@ -86,14 +87,6 @@
 		12309C9B281A022500423625 /* HitController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HitController.hpp; sourceTree = "<group>"; };
 		12309C9C281A022500423625 /* Hitbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hitbox.cpp; sourceTree = "<group>"; };
 		12309C9D281A022500423625 /* HitController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitController.cpp; sourceTree = "<group>"; };
-		12309C9F281A022500423625 /* StoneBlast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StoneBlast.hpp; sourceTree = "<group>"; };
-		12309CA0281A022500423625 /* ThousandBlade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThousandBlade.cpp; sourceTree = "<group>"; };
-		12309CA1281A022500423625 /* BaseMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BaseMagic.hpp; sourceTree = "<group>"; };
-		12309CA2281A022500423625 /* ThousandBlade.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThousandBlade.hpp; sourceTree = "<group>"; };
-		12309CA3281A022500423625 /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMagic.cpp; sourceTree = "<group>"; };
-		12309CA4281A022500423625 /* StoneBlast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoneBlast.cpp; sourceTree = "<group>"; };
-		1265315D281CC04800A712E1 /* Projectile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Projectile.hpp; sourceTree = "<group>"; };
-		1265315E281CC04800A712E1 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
 		12EA9AEF280FE68900541504 /* CharNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharNode.cpp; sourceTree = "<group>"; };
 		12EA9AF0280FE68900541504 /* CharNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharNode.hpp; sourceTree = "<group>"; };
 		3D2D26262831AA1300159082 /* offline-main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "offline-main.cpp"; sourceTree = "<group>"; };
@@ -160,25 +153,35 @@
 		3D2D2700283231CD00159082 /* assimp_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp_helper.h; sourceTree = "<group>"; };
 		3D2D2701283231CD00159082 /* glm_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm_helper.h; sourceTree = "<group>"; };
 		3D2D27212832363A00159082 /* AlphaShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlphaShader.cpp; sourceTree = "<group>"; };
-		3D2D27252832364400159082 /* GroundSmash.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GroundSmash.hpp; sourceTree = "<group>"; };
-		3D2D27282832364400159082 /* ThunderShock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThunderShock.cpp; sourceTree = "<group>"; };
-		3D2D27292832364400159082 /* LightningSpear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightningSpear.cpp; sourceTree = "<group>"; };
-		3D2D272A2832364400159082 /* LightningMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightningMagic.cpp; path = ../newMagic/LightningMagic.cpp; sourceTree = "<group>"; };
-		3D2D272B2832364400159082 /* Thunder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thunder.hpp; sourceTree = "<group>"; };
-		3D2D272D2832364400159082 /* Flame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flame.cpp; sourceTree = "<group>"; };
-		3D2D27312832364400159082 /* Flame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Flame.hpp; sourceTree = "<group>"; };
-		3D2D27342832364400159082 /* GroundSmash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GroundSmash.cpp; sourceTree = "<group>"; };
-		3D2D27372832364400159082 /* ThunderShock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThunderShock.hpp; sourceTree = "<group>"; };
-		3D2D27382832364400159082 /* LightningSpear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightningSpear.hpp; sourceTree = "<group>"; };
-		3D2D27392832364400159082 /* LightningMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LightningMagic.hpp; path = ../newMagic/LightningMagic.hpp; sourceTree = "<group>"; };
-		3D2D273A2832364400159082 /* Thunder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thunder.cpp; sourceTree = "<group>"; };
 		3D2D274C2832448A00159082 /* ImportCharHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImportCharHelper.cpp; sourceTree = "<group>"; };
 		3D2D274D2832448A00159082 /* ImportCharHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImportCharHelper.hpp; sourceTree = "<group>"; };
-		3D2D274F2833A7BE00159082 /* AllMagic.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = AllMagic.inc; sourceTree = "<group>"; };
 		3D2D27512833C86F00159082 /* OfflineCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OfflineCore.cpp; sourceTree = "<group>"; };
 		3D2D27522833C86F00159082 /* OfflineCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OfflineCore.hpp; sourceTree = "<group>"; };
 		3D2D27552833CA1200159082 /* ClientCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientCore.cpp; sourceTree = "<group>"; };
 		3D2D27562833CA1200159082 /* ClientCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClientCore.hpp; sourceTree = "<group>"; };
+		3D2D27592834220100159082 /* GroundSmash.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GroundSmash.hpp; sourceTree = "<group>"; };
+		3D2D275A2834220100159082 /* StoneBlast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StoneBlast.hpp; sourceTree = "<group>"; };
+		3D2D275B2834220100159082 /* FireBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FireBall.cpp; sourceTree = "<group>"; };
+		3D2D275C2834220100159082 /* ThunderShock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThunderShock.cpp; sourceTree = "<group>"; };
+		3D2D275D2834220100159082 /* LightningSpear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightningSpear.cpp; sourceTree = "<group>"; };
+		3D2D275E2834220100159082 /* LightningMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightningMagic.cpp; sourceTree = "<group>"; };
+		3D2D275F2834220100159082 /* Thunder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thunder.hpp; sourceTree = "<group>"; };
+		3D2D27602834220100159082 /* ThousandBlade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThousandBlade.cpp; sourceTree = "<group>"; };
+		3D2D27612834220100159082 /* Flame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flame.cpp; sourceTree = "<group>"; };
+		3D2D27622834220100159082 /* BaseMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BaseMagic.hpp; sourceTree = "<group>"; };
+		3D2D27632834220100159082 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		3D2D27642834220100159082 /* ThousandBlade.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThousandBlade.hpp; sourceTree = "<group>"; };
+		3D2D27652834220100159082 /* Flame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Flame.hpp; sourceTree = "<group>"; };
+		3D2D27662834220100159082 /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMagic.cpp; sourceTree = "<group>"; };
+		3D2D27672834220100159082 /* Projectile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Projectile.hpp; sourceTree = "<group>"; };
+		3D2D27682834220100159082 /* GroundSmash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GroundSmash.cpp; sourceTree = "<group>"; };
+		3D2D27692834220100159082 /* StoneBlast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoneBlast.cpp; sourceTree = "<group>"; };
+		3D2D276A2834220100159082 /* FireBall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FireBall.hpp; sourceTree = "<group>"; };
+		3D2D276B2834220100159082 /* ThunderShock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThunderShock.hpp; sourceTree = "<group>"; };
+		3D2D276C2834220100159082 /* LightningSpear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightningSpear.hpp; sourceTree = "<group>"; };
+		3D2D276D2834220100159082 /* LightningMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightningMagic.hpp; sourceTree = "<group>"; };
+		3D2D276E2834220100159082 /* Thunder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thunder.cpp; sourceTree = "<group>"; };
+		3D2D276F2834220100159082 /* AllMagic.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllMagic.inc; sourceTree = "<group>"; };
 		3D47059C282BD8230068156B /* HittableObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HittableObject.cpp; sourceTree = "<group>"; };
 		3D47059D282BD8230068156B /* HittableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HittableObject.hpp; sourceTree = "<group>"; };
 		3DD5A5B2282FAAE30010B1A5 /* credits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = credits.txt; sourceTree = "<group>"; };
@@ -193,8 +196,6 @@
 		C294F8F827FCFB27002B6550 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../opt/homebrew/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.0.dylib; path = ../../../../opt/homebrew/Cellar/assimp/5.2.3/lib/libassimp.5.2.0.dylib; sourceTree = "<group>"; };
 		C2F7795F28078726001A214D /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../opt/homebrew/Cellar/freetype/2.12.0/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
-		E21F177C281CF5EC0099A81C /* FireBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FireBall.cpp; sourceTree = "<group>"; };
-		E21F177D281CF5EC0099A81C /* FireBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FireBall.hpp; sourceTree = "<group>"; };
 		E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "../../../../../../../../../opt/homebrew/Cellar/sfml/2.5.1_1/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
 		E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "../../../../../../../../../opt/homebrew/Cellar/sfml/2.5.1_1/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
@@ -222,40 +223,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		12309C9E281A022500423625 /* Magic */ = {
-			isa = PBXGroup;
-			children = (
-				12309CA3281A022500423625 /* BaseMagic.cpp */,
-				12309CA1281A022500423625 /* BaseMagic.hpp */,
-				E21F177C281CF5EC0099A81C /* FireBall.cpp */,
-				E21F177D281CF5EC0099A81C /* FireBall.hpp */,
-				3D2D272D2832364400159082 /* Flame.cpp */,
-				3D2D27312832364400159082 /* Flame.hpp */,
-				3D2D27342832364400159082 /* GroundSmash.cpp */,
-				3D2D27252832364400159082 /* GroundSmash.hpp */,
-				3D2D272A2832364400159082 /* LightningMagic.cpp */,
-				3D2D27392832364400159082 /* LightningMagic.hpp */,
-				3D2D27292832364400159082 /* LightningSpear.cpp */,
-				3D2D27382832364400159082 /* LightningSpear.hpp */,
-				1265315E281CC04800A712E1 /* Projectile.cpp */,
-				1265315D281CC04800A712E1 /* Projectile.hpp */,
-				12309CA4281A022500423625 /* StoneBlast.cpp */,
-				12309C9F281A022500423625 /* StoneBlast.hpp */,
-				12309CA0281A022500423625 /* ThousandBlade.cpp */,
-				12309CA2281A022500423625 /* ThousandBlade.hpp */,
-				3D2D273A2832364400159082 /* Thunder.cpp */,
-				3D2D272B2832364400159082 /* Thunder.hpp */,
-				3D2D27282832364400159082 /* ThunderShock.cpp */,
-				3D2D27372832364400159082 /* ThunderShock.hpp */,
-				3D2D274F2833A7BE00159082 /* AllMagic.inc */,
-			);
-			path = Magic;
-			sourceTree = "<group>";
-		};
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				12309C9E281A022500423625 /* Magic */,
+				3D2D27582834220100159082 /* Magic */,
 				E28020832813159700A810E7 /* Map */,
 				12EA9AF3280FE6C600541504 /* Character */,
 			);
@@ -265,12 +236,12 @@
 		12EA9AF3280FE6C600541504 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				12EA9AEF280FE68900541504 /* CharNode.cpp */,
+				12EA9AF0280FE68900541504 /* CharNode.hpp */,
 				12309C9C281A022500423625 /* Hitbox.cpp */,
 				12309C9A281A022500423625 /* Hitbox.hpp */,
 				12309C9D281A022500423625 /* HitController.cpp */,
 				12309C9B281A022500423625 /* HitController.hpp */,
-				12EA9AF0280FE68900541504 /* CharNode.hpp */,
-				12EA9AEF280FE68900541504 /* CharNode.cpp */,
 				3D2D274C2832448A00159082 /* ImportCharHelper.cpp */,
 				3D2D274D2832448A00159082 /* ImportCharHelper.hpp */,
 			);
@@ -443,6 +414,36 @@
 			path = ClientCore;
 			sourceTree = "<group>";
 		};
+		3D2D27582834220100159082 /* Magic */ = {
+			isa = PBXGroup;
+			children = (
+				3D2D276F2834220100159082 /* AllMagic.inc */,
+				3D2D27662834220100159082 /* BaseMagic.cpp */,
+				3D2D27622834220100159082 /* BaseMagic.hpp */,
+				3D2D275B2834220100159082 /* FireBall.cpp */,
+				3D2D276A2834220100159082 /* FireBall.hpp */,
+				3D2D27612834220100159082 /* Flame.cpp */,
+				3D2D27652834220100159082 /* Flame.hpp */,
+				3D2D27682834220100159082 /* GroundSmash.cpp */,
+				3D2D27592834220100159082 /* GroundSmash.hpp */,
+				3D2D275E2834220100159082 /* LightningMagic.cpp */,
+				3D2D276D2834220100159082 /* LightningMagic.hpp */,
+				3D2D275D2834220100159082 /* LightningSpear.cpp */,
+				3D2D276C2834220100159082 /* LightningSpear.hpp */,
+				3D2D27632834220100159082 /* Projectile.cpp */,
+				3D2D27672834220100159082 /* Projectile.hpp */,
+				3D2D27692834220100159082 /* StoneBlast.cpp */,
+				3D2D275A2834220100159082 /* StoneBlast.hpp */,
+				3D2D27602834220100159082 /* ThousandBlade.cpp */,
+				3D2D27642834220100159082 /* ThousandBlade.hpp */,
+				3D2D276E2834220100159082 /* Thunder.cpp */,
+				3D2D275F2834220100159082 /* Thunder.hpp */,
+				3D2D275C2834220100159082 /* ThunderShock.cpp */,
+				3D2D276B2834220100159082 /* ThunderShock.hpp */,
+			);
+			path = Magic;
+			sourceTree = "<group>";
+		};
 		3DD5A5B1282FAAE30010B1A5 /* Credits */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,50 +598,51 @@
 				3D47059E282BD8230068156B /* HittableObject.cpp in Sources */,
 				3D2D2706283231CD00159082 /* PBRShader.cpp in Sources */,
 				3D2D271F283231CD00159082 /* LightNode.cpp in Sources */,
-				3D2D27452832364400159082 /* Thunder.cpp in Sources */,
+				3D2D27732834220100159082 /* LightningMagic.cpp in Sources */,
 				3D2D2704283231CD00159082 /* Texture.cpp in Sources */,
 				12309CA5281A022500423625 /* Hitbox.cpp in Sources */,
-				3D2D273D2832364400159082 /* LightningSpear.cpp in Sources */,
 				3D2D2707283231CD00159082 /* Particle3DShader.cpp in Sources */,
 				12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */,
-				12309CA8281A022500423625 /* BaseMagic.cpp in Sources */,
-				3D2D27402832364400159082 /* Flame.cpp in Sources */,
+				3D2D27712834220100159082 /* ThunderShock.cpp in Sources */,
+				3D2D277A2834220100159082 /* Thunder.cpp in Sources */,
+				3D2D27702834220100159082 /* FireBall.cpp in Sources */,
 				3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */,
 				3D2D270B283231CD00159082 /* Font.cpp in Sources */,
+				3D2D27782834220100159082 /* GroundSmash.cpp in Sources */,
 				12309CA6281A022500423625 /* HitController.cpp in Sources */,
 				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
-				3D2D273E2832364400159082 /* LightningMagic.cpp in Sources */,
-				1265315F281CC04800A712E1 /* Projectile.cpp in Sources */,
-				12309CA9281A022500423625 /* StoneBlast.cpp in Sources */,
+				3D2D27752834220100159082 /* Flame.cpp in Sources */,
 				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,
 				3D2D2708283231CD00159082 /* ParticleShader.cpp in Sources */,
-				12309CA7281A022500423625 /* ThousandBlade.cpp in Sources */,
 				3D2D270D283231CD00159082 /* AudioBuffer.cpp in Sources */,
 				3D2D27232832363A00159082 /* AlphaShader.cpp in Sources */,
 				3D2D2712283231CD00159082 /* Sprite.cpp in Sources */,
 				3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */,
 				3D2D2713283231CD00159082 /* Particle3DRenderer.cpp in Sources */,
 				3D2D2710283231CD00159082 /* Engine.cpp in Sources */,
+				3D2D27722834220100159082 /* LightningSpear.cpp in Sources */,
+				3D2D27742834220100159082 /* ThousandBlade.cpp in Sources */,
+				3D2D277B2834220100159082 /* AllMagic.inc in Sources */,
 				3D2D2703283231CD00159082 /* Image.cpp in Sources */,
 				3D2D2715283231CD00159082 /* Skybox.cpp in Sources */,
-				E21F177E281CF5EC0099A81C /* FireBall.cpp in Sources */,
 				3D2D2716283231CD00159082 /* TextRenderer.cpp in Sources */,
 				3D2D271B283231CD00159082 /* TextNode.cpp in Sources */,
 				3D2D26272831AA1300159082 /* offline-main.cpp in Sources */,
 				3D2D270A283231CD00159082 /* FontLibrary.cpp in Sources */,
-				3D2D27432832364400159082 /* GroundSmash.cpp in Sources */,
+				3D2D27762834220100159082 /* Projectile.cpp in Sources */,
 				3D2D270F283231CD00159082 /* Animator.cpp in Sources */,
 				3D2D270C283231CD00159082 /* Animation.cpp in Sources */,
 				3D2D2711283231CD00159082 /* Geometry.cpp in Sources */,
-				3D2D273C2832364400159082 /* ThunderShock.cpp in Sources */,
 				3D2D2719283231CD00159082 /* Particle3DNode.cpp in Sources */,
 				3D2D2705283231CD00159082 /* Shader.cpp in Sources */,
+				3D2D27792834220100159082 /* StoneBlast.cpp in Sources */,
 				3D2D2714283231CD00159082 /* UnitCube.cpp in Sources */,
 				3D2D271D283231CD00159082 /* CameraNode.cpp in Sources */,
 				3D2D270E283231CD00159082 /* Bone.cpp in Sources */,
 				3D2D2709283231CD00159082 /* Input.cpp in Sources */,
 				3D2D2702283231CD00159082 /* SpriteShader.cpp in Sources */,
 				3D2D2717283231CD00159082 /* ParticleRenderer.cpp in Sources */,
+				3D2D27772834220100159082 /* BaseMagic.cpp in Sources */,
 				3D2D2718283231CD00159082 /* UINode.cpp in Sources */,
 				3D2D271C283231CD00159082 /* SpriteNode.cpp in Sources */,
 				3D2D271A283231CD00159082 /* Node.cpp in Sources */,
