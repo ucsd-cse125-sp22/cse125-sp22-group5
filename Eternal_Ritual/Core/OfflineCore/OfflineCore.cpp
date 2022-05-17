@@ -72,7 +72,7 @@ void OfflineCore::loadMap() {
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+//    ImportMapHelper::importMapModel();
 }
 
 
@@ -139,6 +139,7 @@ void OfflineCore::loadMagic() {
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* flame = new Flame();
     DamageableMagic* thousandBlade = new ThousandBlade();
+    DamageableMagic* dragon = new DragonMagic(character_);
     
     key_to_magic_[KEY_1] = Magic::STONEBLAST;
     magic_to_key_[Magic::STONEBLAST] = KEY_1;
@@ -168,6 +169,10 @@ void OfflineCore::loadMagic() {
     magic_to_key_[Magic::GROUNDSMASH] = KEY_7;
     character_->addMagics(Magic::GROUNDSMASH, groundSmash);
     all_magics_.insert(groundSmash);
+    key_to_magic_[KEY_8] = Magic::DRAGON;
+    magic_to_key_[Magic::DRAGON] = KEY_8;
+    character_->addMagics(Magic::DRAGON, dragon);
+    all_magics_.insert(dragon);
     
     engine_->addNode(stoneBlast);
     engine_->addNode(flame);
@@ -254,6 +259,9 @@ void OfflineCore::handleEvent() {
     }
     if (engine_->input->wasKeyPressed(KEY_7)) {
         character_->castMagic(key_to_magic_[KEY_7]);
+    }
+    if (engine_->input->wasKeyPressed(KEY_8)) {
+        character_->castMagic(key_to_magic_[KEY_8]);
     }
 }
 

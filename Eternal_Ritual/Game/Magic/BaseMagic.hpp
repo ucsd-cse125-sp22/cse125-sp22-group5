@@ -26,7 +26,8 @@ enum Type {
     GROUNDSMASH = 3,
     THUNDER = 4,
     FLAME = 5,
-    THOUSANDBLADE = 6
+    THOUSANDBLADE = 6,
+    DRAGON = 7
 };
 
 } // namespace Magic

@@ -37,7 +37,7 @@ FireBall::FireBall(){
     fireball->randomizeRotatingDirection = true;
     fireball->initialScale = 0.03f;
     fireball->initialScaleVariation = 0.03f;
-    fireball->texture = new Texture("/Resources/Game/Effects/Core2.png");;
+    fireball->texture = new Texture("/Resources/Game/Effects/Core2.png");
     fireball->setColorAnimation(vec4(1.0f, 0.4f, 0.0f, 0.0f), 0.0f);
     fireball->setColorAnimation(vec4(1.0f, 0.3f, 0.0f, 0.9f), 0.2f);
     fireball->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
