@@ -1,4 +1,4 @@
-# Overcross - UCSD CSE125 Group5 Project
+# Eternal Ritual - UCSD CSE125 Group5 Project
 More details coming soon!
 
 ## Developers
