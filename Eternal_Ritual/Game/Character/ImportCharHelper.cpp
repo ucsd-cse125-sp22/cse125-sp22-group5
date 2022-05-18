@@ -119,13 +119,13 @@ void importCharModel(CharNode* character) {
 
 void importCharAnimation(CharNode* character) {
     character->addAnimator("idle", "/Resources/Game/Character/Animations/Idle.dae");
-    character->addAnimator("running", "/Resources/Game/Character/Animations/Idle.dae");
+    character->addAnimator("running", "/Resources/Game/Character/Animations/Running.dae");
     character->addAnimator("back run", "/Resources/Game/Character/Animations/Idle.dae");
     character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Idle.dae");
     character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Idle.dae");
     character->addAnimator("roll", "/Resources/Game/Character/Animations/Idle.dae");
     character->addAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
-    character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/DragonAttack.dae");
+    character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
     character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/DragonAttack.dae");
     character->addAnimator("smash ground", "/Resources/Game/Character/Animations/DragonAttack.dae");
 }
