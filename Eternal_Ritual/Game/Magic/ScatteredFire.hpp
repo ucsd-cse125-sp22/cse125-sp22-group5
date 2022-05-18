@@ -12,7 +12,7 @@
 
 #include "KGLEngine/Engine.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-#include "Game/Magic/FireBall.hpp""
+#include "Game/Magic/FireBall.hpp"
 
 class CharNode;
 
