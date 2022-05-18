@@ -108,41 +108,43 @@ void LightningSpear::play(CharNode* character){
         this->start = true;
         this->light->colorFactor = vec3(2, 2, 0.2);
         this->light->isDisabled = false;
-        Animation* createSpear = new Animation("create spear " + caster->name, 0.8);
-        createSpear->setVec3Animation(&this->spear->initialScale, vec3(6, 1, 0.6));
+        Animation* createSpear = new Animation("create spear " + to_string(reinterpret_cast<long>(this)), 0.8);
+        createSpear->setVec3Animation(&this->spear->initialScale, vec3(4, 1, 0.4));
         createSpear->setEaseInEaseOutTimingMode();
-        createSpear->setCompletionHandler([&]{
-            this->eulerAngles = caster->modelNode->getWorldEulerAngles();
-            this->eulerAngles.y += 90;
-            this->position = this->getWorldPosition();
-            this->removeFromParentNode();
-            Engine::main->addNode(this);
-            this->updateTransform();
-            if (this->caster->isLocked) {
-                vec3 targetPos = inverse(this->getWorldTransform()) * vec4(this->caster->target->getWorldPosition() + vec3(0, 0.5, 0), 1);
-                this->velocity = normalize(targetPos);
-                vec3 front = vec3(-1, 0, 0);
-                float dotProd = dot(targetPos, front);
-                float polarAngle = acos(dot(this->velocity, front));
-                vec3 coordinate = normalize(targetPos - front * dotProd);
-                
-                this->eulerAngles.z -= degrees(polarAngle) * coordinate.y;
-                this->eulerAngles.y += degrees(polarAngle) * coordinate.z;
-                this->velocity = this->convertLocalVectorToWorld(this->velocity);
-            }
-            threwOut = true;
-            canDamage = true;
-            Animation* threw = new Animation("light spear threw " + to_string(reinterpret_cast<long>(this)), 1.3);
-            threw->setCompletionHandler([&] {
-                if (start) {
-                    canDamage = false;
-                    exploded = true;
-                }
-            });
-            Engine::main->playAnimation(threw);
-        });
         Engine::main->playAnimation(createSpear);
     }
+}
+void LightningSpear::setThrew() {
+    this->eulerAngles = caster->modelNode->getWorldEulerAngles();
+    this->eulerAngles.y += 90;
+    this->position = this->getWorldPosition();
+    this->removeFromParentNode();
+    Engine::main->addNode(this);
+    this->velocity = this->caster->modelNode->getRightVectorInWorld();
+    this->updateTransform();
+    if (this->caster->isLocked) {
+        vec3 targetPos = inverse(this->getWorldTransform()) * vec4(this->caster->target->getWorldPosition() + vec3(0, 0.5, 0), 1);
+        this->velocity = normalize(targetPos);
+        vec3 front = vec3(-1, 0, 0);
+        float dotProd = dot(targetPos, front);
+        float polarAngle = acos(dot(this->velocity, front));
+        vec3 coordinate = normalize(targetPos - front * dotProd);
+        
+        this->eulerAngles.z -= degrees(polarAngle) * coordinate.y;
+        this->eulerAngles.y += degrees(polarAngle) * coordinate.z;
+        this->velocity = this->convertLocalVectorToWorld(this->velocity);
+    }
+    threwOut = true;
+    canDamage = true;
+    Animation* threw = new Animation("light spear threw " + to_string(reinterpret_cast<long>(this)), 1.3);
+    threw->setCompletionHandler([&] {
+        if (start) {
+            canDamage = false;
+            exploded = true;
+        }
+    });
+    Engine::main->playAnimation(threw);
+    
 }
 void LightningSpear::tryDamage(CharNode *character) {
     if (canDamage) {

@@ -66,6 +66,7 @@
 		E21F17D3281DCB260099A81C /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */; };
 		E21F17D5281DCB260099A81C /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */; };
 		E265F1922834446E008B4AD0 /* DragonMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F1902834446E008B4AD0 /* DragonMagic.cpp */; };
+		E265F2632835661D008B4AD0 /* LightningPhalanx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F2612835661D008B4AD0 /* LightningPhalanx.cpp */; };
 		E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802084281315AF00A810E7 /* MapBoxObject.cpp */; };
 		E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2802087281315C000A810E7 /* MapSystemManager.cpp */; };
 /* End PBXBuildFile section */
@@ -198,6 +199,8 @@
 		E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "../../../../../../../../../opt/homebrew/Cellar/sfml/2.5.1_1/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
 		E265F1902834446E008B4AD0 /* DragonMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DragonMagic.cpp; sourceTree = "<group>"; };
 		E265F1912834446E008B4AD0 /* DragonMagic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DragonMagic.hpp; sourceTree = "<group>"; };
+		E265F2612835661D008B4AD0 /* LightningPhalanx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LightningPhalanx.cpp; sourceTree = "<group>"; };
+		E265F2622835661D008B4AD0 /* LightningPhalanx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LightningPhalanx.hpp; sourceTree = "<group>"; };
 		E2802084281315AF00A810E7 /* MapBoxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapBoxObject.cpp; sourceTree = "<group>"; };
 		E2802085281315AF00A810E7 /* MapBoxObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapBoxObject.hpp; sourceTree = "<group>"; };
 		E2802087281315C000A810E7 /* MapSystemManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystemManager.cpp; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				3D2D275F2834220100159082 /* Thunder.hpp */,
 				3D2D275C2834220100159082 /* ThunderShock.cpp */,
 				3D2D276B2834220100159082 /* ThunderShock.hpp */,
+				E265F2612835661D008B4AD0 /* LightningPhalanx.cpp */,
+				E265F2622835661D008B4AD0 /* LightningPhalanx.hpp */,
 			);
 			path = Magic;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 				3D2D270B283231CD00159082 /* Font.cpp in Sources */,
 				3D2D27782834220100159082 /* GroundSmash.cpp in Sources */,
 				12309CA6281A022500423625 /* HitController.cpp in Sources */,
+				E265F2632835661D008B4AD0 /* LightningPhalanx.cpp in Sources */,
 				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
 				3D2D27752834220100159082 /* Flame.cpp in Sources */,
 				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,

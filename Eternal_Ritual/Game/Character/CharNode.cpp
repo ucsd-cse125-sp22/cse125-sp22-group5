@@ -308,7 +308,7 @@ CharNode* CharNode::copy(vec3 position) {
             node->modelNode = node->childNodes[i];
         }
     }
-    node->headTop = node->generateBoneNode("Head");
+    node->headTop = node->generateBoneNode("head");
     node->rightHand = node->generateBoneNode("Weapon_r");
     node->cameraNode = this->cameraNode;
     return(node);

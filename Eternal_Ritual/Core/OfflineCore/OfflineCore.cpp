@@ -134,7 +134,7 @@ void OfflineCore::loadMagic() {
     
     DamageableMagic* stoneBlast = new StoneBlast();
     DamageableMagic* fireBall = new FireBall();
-    DamageableMagic* lightningSpear = new LightningSpear();
+    DamageableMagic* lightningSpear = new LightningPhalanx();
     DamageableMagic* groundSmash = new GroundSmash();
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* flame = new Flame();
@@ -241,7 +241,7 @@ void OfflineCore::handleEvent() {
         BaseMagic* magic = character_->magics[key_to_magic_[KEY_3]];
         if (!magic->start) {
             magic->removeFromParentNode();
-            character_->rightHand->addChildNode(magic);
+            character_->headTop->addChildNode(magic);
             character_->castMagic(key_to_magic_[KEY_3]);
         }
     }
