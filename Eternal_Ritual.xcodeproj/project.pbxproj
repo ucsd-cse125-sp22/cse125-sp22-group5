@@ -67,7 +67,6 @@
 		3D2D27E12835B23100159082 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275C2834220100159082 /* ThunderShock.cpp */; };
 		3D2D27E22835B23100159082 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276E2834220100159082 /* Thunder.cpp */; };
 		3D2D27E32835B23100159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
-		3D2D27E42835B23100159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
 		3D2D27E52835B23100159082 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26DC283231CD00159082 /* Font.cpp */; };
 		3D2D27E62835B23100159082 /* GroundSmash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27682834220100159082 /* GroundSmash.cpp */; };
 		3D2D27E72835B23100159082 /* HitController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9D281A022500423625 /* HitController.cpp */; };
@@ -89,7 +88,6 @@
 		3D2D27F72835B23100159082 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26EE283231CD00159082 /* Skybox.cpp */; };
 		3D2D27F82835B23100159082 /* TextRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26EF283231CD00159082 /* TextRenderer.cpp */; };
 		3D2D27F92835B23100159082 /* TextNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26F6283231CD00159082 /* TextNode.cpp */; };
-		3D2D27FA2835B23100159082 /* offline-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26262831AA1300159082 /* offline-main.cpp */; };
 		3D2D27FB2835B23100159082 /* FontLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26DA283231CD00159082 /* FontLibrary.cpp */; };
 		3D2D27FC2835B23100159082 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27632834220100159082 /* Projectile.cpp */; };
 		3D2D27FD2835B23100159082 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26E6283231CD00159082 /* Animator.cpp */; };
@@ -130,7 +128,6 @@
 		3D2D28292835B3C500159082 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275C2834220100159082 /* ThunderShock.cpp */; };
 		3D2D282A2835B3C500159082 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276E2834220100159082 /* Thunder.cpp */; };
 		3D2D282B2835B3C500159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
-		3D2D282C2835B3C500159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
 		3D2D282D2835B3C500159082 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26DC283231CD00159082 /* Font.cpp */; };
 		3D2D282E2835B3C500159082 /* GroundSmash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27682834220100159082 /* GroundSmash.cpp */; };
 		3D2D282F2835B3C500159082 /* HitController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9D281A022500423625 /* HitController.cpp */; };
@@ -152,7 +149,6 @@
 		3D2D283F2835B3C500159082 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26EE283231CD00159082 /* Skybox.cpp */; };
 		3D2D28402835B3C500159082 /* TextRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26EF283231CD00159082 /* TextRenderer.cpp */; };
 		3D2D28412835B3C500159082 /* TextNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26F6283231CD00159082 /* TextNode.cpp */; };
-		3D2D28422835B3C500159082 /* offline-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26262831AA1300159082 /* offline-main.cpp */; };
 		3D2D28432835B3C500159082 /* FontLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26DA283231CD00159082 /* FontLibrary.cpp */; };
 		3D2D28442835B3C500159082 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27632834220100159082 /* Projectile.cpp */; };
 		3D2D28452835B3C500159082 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26E6283231CD00159082 /* Animator.cpp */; };
@@ -182,10 +178,22 @@
 		3D2D285E2835B3C500159082 /* libassimp.5.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */; };
 		3D2D285F2835B3C500159082 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		3D2D28602835B3C500159082 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
-		3D2D28692835B4A200159082 /* serverCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D28672835B4A200159082 /* serverCore.cpp */; };
-		3D2D286B2835B4AB00159082 /* server-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286A2835B4AB00159082 /* server-main.cpp */; };
-		3D2D28702835B5BA00159082 /* serverSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286F2835B5BA00159082 /* serverSocket.cpp */; };
 		3D2D28712835B5BA00159082 /* serverSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286F2835B5BA00159082 /* serverSocket.cpp */; };
+		3D2D28722835B7E900159082 /* client-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5A5D128319AE80010B1A5 /* client-main.cpp */; };
+		3D2D28732835B7ED00159082 /* server-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286A2835B4AB00159082 /* server-main.cpp */; };
+		3D2D28742835B7F800159082 /* serverCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D28672835B4A200159082 /* serverCore.cpp */; };
+		3D2D28752835B80000159082 /* ClientCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27552833CA1200159082 /* ClientCore.cpp */; };
+		3D2D28762835B81700159082 /* clientSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26992831BA3D00159082 /* clientSocket.cpp */; };
+		3D2D28772835B82000159082 /* eventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* eventPb.cpp */; };
+		3D2D28782835B82000159082 /* eventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* eventPb.cpp */; };
+		3D2D28792835B82300159082 /* gameData.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269F2831BA3D00159082 /* gameData.pb.cc */; };
+		3D2D287A2835B82400159082 /* gameData.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269F2831BA3D00159082 /* gameData.pb.cc */; };
+		3D2D287B2835B82600159082 /* pbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* pbData.cpp */; };
+		3D2D287C2835B82700159082 /* pbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* pbData.cpp */; };
+		3D2D287D2835B82B00159082 /* statePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* statePb.cpp */; };
+		3D2D287E2835B82B00159082 /* statePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* statePb.cpp */; };
+		3D2D287F2835B82E00159082 /* gameData.proto in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A22831BA3D00159082 /* gameData.proto */; };
+		3D2D28802835B82F00159082 /* gameData.proto in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A22831BA3D00159082 /* gameData.proto */; };
 		3D47059E282BD8230068156B /* HittableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D47059C282BD8230068156B /* HittableObject.cpp */; };
 		3DD5A5B7282FFA510010B1A5 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		C294F8F527FCFB19002B6550 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F427FCFB19002B6550 /* OpenGL.framework */; };
@@ -897,20 +905,24 @@
 				3D2D27E12835B23100159082 /* ThunderShock.cpp in Sources */,
 				3D2D27E22835B23100159082 /* Thunder.cpp in Sources */,
 				3D2D27E32835B23100159082 /* FireBall.cpp in Sources */,
-				3D2D27E42835B23100159082 /* OfflineCore.cpp in Sources */,
 				3D2D27E52835B23100159082 /* Font.cpp in Sources */,
 				3D2D27E62835B23100159082 /* GroundSmash.cpp in Sources */,
 				3D2D27E72835B23100159082 /* HitController.cpp in Sources */,
+				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
+				3D2D28772835B82000159082 /* eventPb.cpp in Sources */,
 				3D2D27EA2835B23100159082 /* Flame.cpp in Sources */,
 				3D2D27EB2835B23100159082 /* MapBoxObject.cpp in Sources */,
 				3D2D27EC2835B23100159082 /* ParticleShader.cpp in Sources */,
 				3D2D27ED2835B23100159082 /* AudioBuffer.cpp in Sources */,
 				3D2D27EE2835B23100159082 /* AlphaShader.cpp in Sources */,
+				3D2D287D2835B82B00159082 /* statePb.cpp in Sources */,
+				3D2D287F2835B82E00159082 /* gameData.proto in Sources */,
 				3D2D27EF2835B23100159082 /* Sprite.cpp in Sources */,
 				3D2D27F02835B23100159082 /* ImportMapHelper.cpp in Sources */,
 				3D2D27F12835B23100159082 /* Particle3DRenderer.cpp in Sources */,
+				3D2D28762835B81700159082 /* clientSocket.cpp in Sources */,
 				3D2D27F22835B23100159082 /* Engine.cpp in Sources */,
 				3D2D27F32835B23100159082 /* LightningSpear.cpp in Sources */,
 				3D2D27F42835B23100159082 /* ThousandBlade.cpp in Sources */,
@@ -918,8 +930,8 @@
 				3D2D27F62835B23100159082 /* Image.cpp in Sources */,
 				3D2D27F72835B23100159082 /* Skybox.cpp in Sources */,
 				3D2D27F82835B23100159082 /* TextRenderer.cpp in Sources */,
+				3D2D28792835B82300159082 /* gameData.pb.cc in Sources */,
 				3D2D27F92835B23100159082 /* TextNode.cpp in Sources */,
-				3D2D27FA2835B23100159082 /* offline-main.cpp in Sources */,
 				3D2D27FB2835B23100159082 /* FontLibrary.cpp in Sources */,
 				3D2D27FC2835B23100159082 /* Projectile.cpp in Sources */,
 				3D2D27FD2835B23100159082 /* Animator.cpp in Sources */,
@@ -928,10 +940,12 @@
 				3D2D28002835B23100159082 /* Particle3DNode.cpp in Sources */,
 				3D2D28012835B23100159082 /* DragonMagic.cpp in Sources */,
 				3D2D28022835B23100159082 /* Shader.cpp in Sources */,
+				3D2D287B2835B82600159082 /* pbData.cpp in Sources */,
 				3D2D28032835B23100159082 /* StoneBlast.cpp in Sources */,
 				3D2D28042835B23100159082 /* UnitCube.cpp in Sources */,
 				3D2D28052835B23100159082 /* CameraNode.cpp in Sources */,
 				3D2D28062835B23100159082 /* Bone.cpp in Sources */,
+				3D2D28722835B7E900159082 /* client-main.cpp in Sources */,
 				3D2D28072835B23100159082 /* Input.cpp in Sources */,
 				3D2D28082835B23100159082 /* SpriteShader.cpp in Sources */,
 				3D2D28092835B23100159082 /* ParticleRenderer.cpp in Sources */,
@@ -959,17 +973,20 @@
 				3D2D28292835B3C500159082 /* ThunderShock.cpp in Sources */,
 				3D2D282A2835B3C500159082 /* Thunder.cpp in Sources */,
 				3D2D282B2835B3C500159082 /* FireBall.cpp in Sources */,
-				3D2D282C2835B3C500159082 /* OfflineCore.cpp in Sources */,
 				3D2D282D2835B3C500159082 /* Font.cpp in Sources */,
 				3D2D282E2835B3C500159082 /* GroundSmash.cpp in Sources */,
 				3D2D282F2835B3C500159082 /* HitController.cpp in Sources */,
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
+				3D2D28732835B7ED00159082 /* server-main.cpp in Sources */,
+				3D2D28782835B82000159082 /* eventPb.cpp in Sources */,
 				3D2D28322835B3C500159082 /* Flame.cpp in Sources */,
 				3D2D28332835B3C500159082 /* MapBoxObject.cpp in Sources */,
 				3D2D28342835B3C500159082 /* ParticleShader.cpp in Sources */,
 				3D2D28352835B3C500159082 /* AudioBuffer.cpp in Sources */,
 				3D2D28362835B3C500159082 /* AlphaShader.cpp in Sources */,
+				3D2D287E2835B82B00159082 /* statePb.cpp in Sources */,
+				3D2D28802835B82F00159082 /* gameData.proto in Sources */,
 				3D2D28372835B3C500159082 /* Sprite.cpp in Sources */,
 				3D2D28382835B3C500159082 /* ImportMapHelper.cpp in Sources */,
 				3D2D28392835B3C500159082 /* Particle3DRenderer.cpp in Sources */,
@@ -981,7 +998,7 @@
 				3D2D283F2835B3C500159082 /* Skybox.cpp in Sources */,
 				3D2D28402835B3C500159082 /* TextRenderer.cpp in Sources */,
 				3D2D28412835B3C500159082 /* TextNode.cpp in Sources */,
-				3D2D28422835B3C500159082 /* offline-main.cpp in Sources */,
+				3D2D287A2835B82400159082 /* gameData.pb.cc in Sources */,
 				3D2D28432835B3C500159082 /* FontLibrary.cpp in Sources */,
 				3D2D28442835B3C500159082 /* Projectile.cpp in Sources */,
 				3D2D28452835B3C500159082 /* Animator.cpp in Sources */,
@@ -991,10 +1008,12 @@
 				3D2D28492835B3C500159082 /* DragonMagic.cpp in Sources */,
 				3D2D284A2835B3C500159082 /* Shader.cpp in Sources */,
 				3D2D284B2835B3C500159082 /* StoneBlast.cpp in Sources */,
+				3D2D287C2835B82700159082 /* pbData.cpp in Sources */,
 				3D2D284C2835B3C500159082 /* UnitCube.cpp in Sources */,
 				3D2D284D2835B3C500159082 /* CameraNode.cpp in Sources */,
 				3D2D284E2835B3C500159082 /* Bone.cpp in Sources */,
 				3D2D284F2835B3C500159082 /* Input.cpp in Sources */,
+				3D2D28742835B7F800159082 /* serverCore.cpp in Sources */,
 				3D2D28502835B3C500159082 /* SpriteShader.cpp in Sources */,
 				3D2D28512835B3C500159082 /* ParticleRenderer.cpp in Sources */,
 				3D2D28712835B5BA00159082 /* serverSocket.cpp in Sources */,
@@ -1012,7 +1031,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2D274E2832448A00159082 /* ImportCharHelper.cpp in Sources */,
-				3D2D28702835B5BA00159082 /* serverSocket.cpp in Sources */,
 				3D47059E282BD8230068156B /* HittableObject.cpp in Sources */,
 				3D2D2706283231CD00159082 /* PBRShader.cpp in Sources */,
 				3D2D271F283231CD00159082 /* LightNode.cpp in Sources */,
@@ -1033,7 +1051,6 @@
 				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,
 				3D2D2708283231CD00159082 /* ParticleShader.cpp in Sources */,
 				3D2D270D283231CD00159082 /* AudioBuffer.cpp in Sources */,
-				3D2D286B2835B4AB00159082 /* server-main.cpp in Sources */,
 				3D2D27232832363A00159082 /* AlphaShader.cpp in Sources */,
 				3D2D2712283231CD00159082 /* Sprite.cpp in Sources */,
 				3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */,
@@ -1052,7 +1069,6 @@
 				3D2D270F283231CD00159082 /* Animator.cpp in Sources */,
 				3D2D270C283231CD00159082 /* Animation.cpp in Sources */,
 				3D2D2711283231CD00159082 /* Geometry.cpp in Sources */,
-				3D2D28692835B4A200159082 /* serverCore.cpp in Sources */,
 				3D2D2719283231CD00159082 /* Particle3DNode.cpp in Sources */,
 				E265F1922834446E008B4AD0 /* DragonMagic.cpp in Sources */,
 				3D2D2705283231CD00159082 /* Shader.cpp in Sources */,
