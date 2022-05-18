@@ -84,11 +84,11 @@ void OfflineCore::loadCharacter() {
     character_->name = "main character";
     
     Node* controlNode = new Node();
-    controlNode->position = vec3(0.0f, 1.0f, 0.0f);
+    controlNode->position = vec3(0.0f, 1.2f, 0.0f);
     character_->setControl(controlNode);
     
     CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
-    cameraNode->position = vec3(-2.0f, 0.0f, 0.0f);
+    cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
     cameraNode->addChildNode(point_light_);
     character_->setCamera(cameraNode);
     engine_->mainCameraNode = cameraNode;
@@ -133,7 +133,7 @@ void OfflineCore::loadMagic() {
     std::cout << "|-- Loading Stage 7 - Load Magic --|" << std::endl;
     
     DamageableMagic* stoneBlast = new StoneBlast();
-    DamageableMagic* fireBall = new FireBall();
+    DamageableMagic* fireBall = new ScatteredFire();
     DamageableMagic* lightningSpear = new LightningPhalanx();
     DamageableMagic* groundSmash = new GroundSmash();
     DamageableMagic* thunder = new Thunder();

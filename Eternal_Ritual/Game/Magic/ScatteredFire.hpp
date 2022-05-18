@@ -23,7 +23,6 @@ public:
     Node* ballNode;
     ScatteredFire();
     ~ScatteredFire() override = default;
-    void playNextSpear(int index);
     void hitWall() override {}
     void updateMagic() override;
     void play(CharNode* character, int seed) override;
