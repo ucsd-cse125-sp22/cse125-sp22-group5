@@ -19,7 +19,7 @@ CharNode::CharNode(vec3 position){
     this->position = position;
     this->moveDirection = vec3(0);
     
-    this->hitbox = new Hitbox(this->position, vec3(0.4, 0.8, 0.4));
+    this->hitbox = new Hitbox(this->position, vec3(0.8, 1.6, 0.8));
     this->uninjurable = false;
     this->characterTargetPosition = position;
     this->eulerAngles = vec3(0.0f);
@@ -45,8 +45,8 @@ void CharNode::setModel(Node* model){
     this->modelNode = model;
     this->modelNode->name = "modelNode";
     this->addChildNode(model);
-    this->headTop = generateBoneNode("Head");
-    this->rightHand = generateBoneNode("RightHand");
+    this->headTop = generateBoneNode("head");
+    this->rightHand = generateBoneNode("Weapon_r");
 }
 void CharNode::setControl(Node* control){
     this->controlNode = control;
@@ -240,19 +240,19 @@ void CharNode::updatePosition(){
         if(length(this->characterTargetPosition - this->position) > 0.1f){
             if (this->isLocked){
                 if (this->keyDirection == Direction::LEFT){
-                    this->stopAndPlay("left strafe", 0.1f, 0.1f);
+                    this->stopAndPlay("left strafe", 0.2f, 0.4f);
                 }else if (this->keyDirection == Direction::RIGHT){
-                    this->stopAndPlay("right strafe", 0.1f, 0.1f);
+                    this->stopAndPlay("right strafe", 0.2f, 0.4f);
                 }else if (this->keyDirection == Direction::BACK){
-                    this->stopAndPlay("back run", 0.1f, 0.1f);
+                    this->stopAndPlay("back run", 0.2f, 0.4f);
                 }else{
-                    this->stopAndPlay("running", 0.1f, 0.1f);
+                    this->stopAndPlay("running", 0.2f, 0.4f);
                 }
             }else{
-                this->stopAndPlay("running", 0.1f, 0.1f);
+                this->stopAndPlay("running", 0.2f, 0.4f);
             }
         }else{
-            this->stopAndPlay("idle", 0.1f, 0.1f);
+            this->stopAndPlay("idle", 0.2f, 0.2f);
         }
         this->position += (this->characterTargetPosition - this->position) * 0.1f;
         this->hitbox->updatePosition(this->position);
@@ -309,7 +309,7 @@ CharNode* CharNode::copy(vec3 position) {
         }
     }
     node->headTop = node->generateBoneNode("Head");
-    node->rightHand = node->generateBoneNode("RightHand");
+    node->rightHand = node->generateBoneNode("Weapon_r");
     node->cameraNode = this->cameraNode;
     return(node);
 }
@@ -333,7 +333,7 @@ void CharNode::castMagic(Magic::Type magicKey){
     if (allowAction && this->magics.count(magicKey) && !this->magics[magicKey]->start){
         BaseMagic* magic = this->magics[magicKey];
         allowAction = false;
-        this->stopAndPlay(magic->actionName, 0.2f, 0.2f);
+        this->stopAndPlay(magic->actionName, 0.2f, 0.5f);
         magic->play(this);
         Animation* resume = new Animation(this->name + " resume", magic->stopTime);
         resume->setCompletionHandler([&]{

@@ -23,7 +23,7 @@ LightningSpear::LightningSpear(){
     this->position = vec3(0);
     this->acceleration = vec3(0, 0, 0);
     this->eulerAngles = vec3(0);
-    this->actionName = "cast magic 1";
+    this->actionName = "cast magic 2";
     this->stopTime = 2.0f;
     this->scale = vec3(1.0f);
     this->parent = NULL;

@@ -2,6 +2,9 @@
 
 #include "Game/Magic/DragonMagic.hpp"
 
+#include "Game/Character/CharNode.hpp"
+#include "Game/Map/MapSystemManager.hpp"
+
 using namespace std;
 using namespace glm;
 
@@ -183,7 +186,8 @@ void DragonMagic::load() {
 DragonMagic::DragonMagic(Node* characterNode) {
     if (!loaded) { load(); loaded = true; }
     this->actionName = "dragon attack";
-    this->stopTime = 2.0f;
+    this->stopTime = 5.0f;
+    this->damage = 50;
     this->ID = DragonMagic::UID;
     DragonMagic::UID += 1;
     this->characterNode = characterNode;
@@ -415,6 +419,14 @@ void DragonMagic::updateMagic() {
 }
 
 void DragonMagic::tryDamage(CharNode * character) {
+    vec3 startPosition = this->getBeamPosition();
+    vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * this->range * this->rangeFactor;
+    
+    if (this->rangeFactor > 0.9) {
+        if (character->hitbox->testHit(startPosition, endPosition)) {
+            character->receiveDamage(this->damage);
+        }
+    }
     
 }
 

@@ -18,6 +18,7 @@ using namespace glm;
 Flame::Flame() {
     this->damage = 1.5;
     this->start = false;
+    this->stopTime = 1;
     this->actionName = "cast magic 1";
     this->flame = new ParticleNode(300, 1.5f, 0.0f);
     this->flame->setColorAnimation(vec4(1.0f, 0.7f, 0.05f, 0.0f), 0.0f);

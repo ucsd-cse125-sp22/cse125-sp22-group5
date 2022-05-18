@@ -139,7 +139,7 @@ void OfflineCore::loadMagic() {
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* flame = new Flame();
     DamageableMagic* thousandBlade = new ThousandBlade();
-    DamageableMagic* dragon = new DragonMagic(character_);
+    DamageableMagic* dragon = new DragonMagic(character_->modelNode);
     
     key_to_magic_[KEY_1] = Magic::STONEBLAST;
     magic_to_key_[Magic::STONEBLAST] = KEY_1;

@@ -120,14 +120,20 @@ void importCharModel(CharNode* character) {
 void importCharAnimation(CharNode* character) {
     character->addAnimator("idle", "/Resources/Game/Character/Animations/Idle.dae");
     character->addAnimator("running", "/Resources/Game/Character/Animations/Running.dae");
-    character->addAnimator("back run", "/Resources/Game/Character/Animations/Idle.dae");
-    character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Idle.dae");
-    character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Idle.dae");
-    character->addAnimator("roll", "/Resources/Game/Character/Animations/Idle.dae");
+    character->addAnimator("back run", "/Resources/Game/Character/Animations/Walk Bck.dae");
+    character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Left Strafe.dae");
+    character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.dae");
+    character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll Fwd.dae");
     character->addAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
+    character->modelNode->getAnimator("dragon attack")->repeats = false;
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
-    character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/DragonAttack.dae");
-    character->addAnimator("smash ground", "/Resources/Game/Character/Animations/DragonAttack.dae");
+    character->modelNode->getAnimator("cast magic 1")->repeats = false;
+    character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/CastMagic2.dae");
+    character->modelNode->getAnimator("cast magic 2")->repeats = false;
+    character->addAnimator("cast magic 3", "/Resources/Game/Character/Animations/CastMagic3.dae");
+    character->modelNode->getAnimator("cast magic 3")->repeats = false;
+    character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.dae");
+    character->modelNode->getAnimator("smash ground")->repeats = false;
 }
 
 
