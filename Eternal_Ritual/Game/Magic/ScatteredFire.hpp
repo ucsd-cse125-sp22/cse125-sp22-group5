@@ -12,7 +12,7 @@
 
 #include "KGLEngine/Engine.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-#include "Game/Magic/FireBall.hpp""
+#include "Game/Magic/FireBall.hpp"
 
 class CharNode;
 
@@ -23,7 +23,6 @@ public:
     Node* ballNode;
     ScatteredFire();
     ~ScatteredFire() override = default;
-    void playNextSpear(int index);
     void hitWall() override {}
     void updateMagic() override;
     void play(CharNode* character, int seed) override;

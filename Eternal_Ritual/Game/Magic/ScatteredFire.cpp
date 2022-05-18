@@ -15,12 +15,12 @@
 using namespace std;
 using namespace glm;
 
-#define NUMSPEAR 6
+#define NUMSPEAR 10
 
 ScatteredFire::ScatteredFire() {
     start = false;
     this->actionName = "cast magic 3";
-    this->stopTime = 4.0f;
+    this->stopTime = 2.0f;
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
@@ -36,27 +36,25 @@ void ScatteredFire::play(CharNode* character, int seed){
     if (!start){
         this->caster = character;
         this->seed = seed;
+        start = true;
         srand(seed);
         for (int k = 0; k < balls.size(); k++) {
             this->ballNode->addChildNode(balls[k]);
-            balls[k]->velocityError = vec3((rand() / (RAND_MAX + 1.0f) - 0.5) * 0.2, (rand() / (RAND_MAX + 1.0f) - 0.5) * 0.2, (rand() / (RAND_MAX + 1.0f) - 0.5) * 0.2);
+            balls[k]->velocityError = vec3((rand() / (RAND_MAX + 1.0f) - 0.5) * 0.5, (rand() / (RAND_MAX + 1.0f) - 0.5) * 0.5, (rand() / (RAND_MAX + 1.0f) - 0.5) * 0.5);
             balls[k]->play(this->caster, this->seed);
         }
-        Animation* playNext = new Animation("play first spear " + to_string(reinterpret_cast<long>(&balls[0])), 1);
+        Animation* playNext = new Animation("throw fire balls " + to_string(reinterpret_cast<long>(&balls[0])), 0.75);
         playNext->setCompletionHandler([&] {
-            playNextSpear(0);
+            for (int k = 0; k < balls.size(); k++) {
+                balls[k]->setThrew();
+            }
         });
         Engine::main->playAnimation(playNext);
-    }
-}
-void ScatteredFire::playNextSpear(int index){
-    if (index < balls.size()){
-        balls[index]->setThrew();
-        Animation* playNext = new Animation("play next spear " + to_string(reinterpret_cast<long>(&balls[index])), 0.4);
-        playNext->setCompletionHandler([&, index] {
-            playNextSpear(1 + index);
+        Animation* stop = new Animation("stop scattered fire " + to_string(reinterpret_cast<long>(&balls[0])), 4);
+        stop->setCompletionHandler([&] {
+            start = false;
         });
-        Engine::main->playAnimation(playNext);
+        Engine::main->playAnimation(stop);
     }
 }
 void ScatteredFire::updateMagic() {
