@@ -390,7 +390,7 @@ void DragonMagic::play() {
     Engine::main->playAnimation(completion2);
 }
 
-void DragonMagic::play(CharNode * character) {
+void DragonMagic::play(CharNode * character, int seed) {
     play();
 }
 

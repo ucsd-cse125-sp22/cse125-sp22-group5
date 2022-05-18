@@ -139,7 +139,7 @@ void GroundSmash::updateMagic(){
         this->projectiles[0]->end = this->projectiles[0]->getWorldPosition() + this->projectiles[0]->getRightVectorInWorld() * 4.0f;
     }
 }
-void GroundSmash::play(CharNode* character){
+void GroundSmash::play(CharNode* character, int seed){
     if (!start){
         this->start = true;
         this->isDisabled = false;

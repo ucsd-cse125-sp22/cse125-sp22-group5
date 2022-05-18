@@ -40,8 +40,9 @@ public:
     float stopTime;
     float waitTime;
     int damage;
+    int seed;
     CharNode* caster;
-    virtual void play(CharNode* character) = 0;
+    virtual void play(CharNode* character, int seed) = 0;
     virtual void updateMagic() = 0;
     virtual void hitWall() = 0;
     

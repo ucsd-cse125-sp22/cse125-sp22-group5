@@ -246,7 +246,7 @@ float distanceBetween(vec3 a, vec3 b){
     return sqrt((a.x - b.x) * (a.x - b.x) + (a.z - b.z) * (a.z - b.z));
 }
 
-void ThousandBlade::play(CharNode* character){
+void ThousandBlade::play(CharNode* character, int seed){
     if (!start){
         start = true;
         this->isDisabled = false;

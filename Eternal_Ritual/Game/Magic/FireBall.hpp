@@ -19,6 +19,7 @@ class CharNode;
 class FireBall final : public DamageableMagic{
 public:
     glm::vec3 velocity;
+    glm::vec3 velocityError;
     glm::vec3 acceleration;
     bool exploded;
     bool threwOut;
@@ -34,8 +35,9 @@ public:
     FireBall();
     ~FireBall() override = default;
     void updateMagic() override;
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void tryDamage(CharNode* character) override;
+    void setThrew();
     void hitWall() override;
 };
 

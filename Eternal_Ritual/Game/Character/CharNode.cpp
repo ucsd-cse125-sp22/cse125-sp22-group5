@@ -334,7 +334,7 @@ void CharNode::castMagic(Magic::Type magicKey){
         BaseMagic* magic = this->magics[magicKey];
         allowAction = false;
         this->stopAndPlay(magic->actionName, 0.2f, 0.5f);
-        magic->play(this);
+        magic->play(this, 30);
         Animation* resume = new Animation(this->name + " resume", magic->stopTime);
         resume->setCompletionHandler([&]{
             this->allowAction = true;

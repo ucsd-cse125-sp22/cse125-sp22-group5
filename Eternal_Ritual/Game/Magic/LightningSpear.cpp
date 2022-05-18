@@ -93,7 +93,7 @@ void LightningSpear::updateMagic(){
         Engine::main->playAnimation(lightningSpearLightIntensity);
     }
 }
-void LightningSpear::play(CharNode* character){
+void LightningSpear::play(CharNode* character, int seed){
     if (!start){
         this->radiation->isDisabled = true;
         this->exploded = false;

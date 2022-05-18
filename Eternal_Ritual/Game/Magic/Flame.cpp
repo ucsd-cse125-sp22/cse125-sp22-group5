@@ -59,9 +59,10 @@ Flame::Flame() {
     spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
     this->addChildNode(spark);
 }
-void Flame::play(CharNode *character) {
+void Flame::play(CharNode *character, int seed) {
     if (!start) {
         this->start = true;
+        this->seed = seed;
         this->canDamage = true;
         this->position = character->getWorldPosition() + vec3(0, 0.5, 0) + character->modelNode->getRightVectorInWorld() * 2.f;
         this->eulerAngles = character->modelNode->getWorldEulerAngles() - vec3(0, 90, 0);

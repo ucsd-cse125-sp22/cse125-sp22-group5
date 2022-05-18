@@ -1,28 +1,28 @@
 //
-//  LightningPhalanx.hpp
+//  ScatteredFire.hpp
 //  Eternal_Ritual
 //
 //  Created by Zifan Zhang on 5/18/22.
 //
 
-#ifndef LightningPhalanx_hpp
-#define LightningPhalanx_hpp
+#ifndef ScatteredFire_hpp
+#define ScatteredFire_hpp
 
 #include <vector>
 
 #include "KGLEngine/Engine.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-#include "Game/Magic/LightningSpear.hpp"
+#include "Game/Magic/FireBall.hpp""
 
 class CharNode;
 
 
-class LightningPhalanx final : public DamageableMagic{
+class ScatteredFire final : public DamageableMagic{
 public:
-    std::vector<LightningSpear*> spears;
-    std::vector<Node*> spearNodes;
-    LightningPhalanx();
-    ~LightningPhalanx() override = default;
+    std::vector<FireBall*> balls;
+    Node* ballNode;
+    ScatteredFire();
+    ~ScatteredFire() override = default;
     void playNextSpear(int index);
     void hitWall() override {}
     void updateMagic() override;
@@ -30,4 +30,4 @@ public:
     void tryDamage(CharNode* character) override;
 };
 
-#endif /* LightningPhalanx_hpp */
+#endif /* ScatteredFire_hpp */

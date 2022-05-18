@@ -207,7 +207,7 @@ void StoneBlast::updateMagic(){
         }
     }
 }
-void StoneBlast::play(CharNode* character){
+void StoneBlast::play(CharNode* character, int seed){
     if (!start){
         this->start = true;
         this->isDisabled = false;

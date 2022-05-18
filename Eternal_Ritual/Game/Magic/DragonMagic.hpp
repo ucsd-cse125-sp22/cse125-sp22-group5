@@ -69,7 +69,7 @@ public:
     DragonMagic(Node* characterNode);
     ~DragonMagic() override = default;
     void play();
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void update();
     void updateMagic() override;
     void hitWall() override {}

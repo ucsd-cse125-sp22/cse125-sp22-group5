@@ -35,12 +35,12 @@ LightningPhalanx::LightningPhalanx() {
         this->addChildNode(spearNode);
     }
 }
-void LightningPhalanx::play(CharNode* character){
+void LightningPhalanx::play(CharNode* character, int seed){
     if (!start){
         this->caster = character;
         for (int k = 0; k < spears.size(); k++) {
             this->spearNodes[k]->addChildNode(spears[k]);
-            spears[k]->play(this->caster);
+            spears[k]->play(this->caster, this->seed);
         }
         Animation* playNext = new Animation("play first spear " + to_string(reinterpret_cast<long>(&spears[0])), 1);
         playNext->setCompletionHandler([&] {
