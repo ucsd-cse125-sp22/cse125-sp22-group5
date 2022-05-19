@@ -19,7 +19,7 @@ Flame::Flame() {
     this->damage = 1.5;
     this->start = false;
     this->stopTime = 1;
-    this->actionName = "cast magic 1";
+    this->actionName = "cast magic 4";
     this->flame = new ParticleNode(300, 1.5f, 0.0f);
     this->flame->setColorAnimation(vec4(1.0f, 0.7f, 0.05f, 0.0f), 0.0f);
     this->flame->setColorAnimation(vec4(1.0f, 0.6f, 0.05f, 0.9f), 0.2f);
@@ -70,7 +70,7 @@ void Flame::play(CharNode *character, int seed) {
         this->spark->isDisabled = false;
         this->spark->reset();
         this->flame->reset();
-        Animation* coolDown = new Animation("flame magic cool down " + to_string(reinterpret_cast<long>(this)), 0.5);
+        Animation* coolDown = new Animation("flame magic cool down " + to_string(reinterpret_cast<long>(this)), 0.2);
         coolDown->setCompletionHandler([&] {
             this->start = false;
         });

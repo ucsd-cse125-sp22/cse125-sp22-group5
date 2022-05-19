@@ -345,6 +345,7 @@ void CharNode::castMagic(Magic::Type magicKey){
 
 
 void CharNode::receiveDamage(int damage){
-    this->health -= damage;
+    if (!uninjurable)
+        this->health -= damage;
     cout << this->name << " health " << this->health << endl;
 }

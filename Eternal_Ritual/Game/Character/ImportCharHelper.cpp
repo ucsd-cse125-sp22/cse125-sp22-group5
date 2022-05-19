@@ -124,6 +124,7 @@ void importCharAnimation(CharNode* character) {
     character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Left Strafe.dae");
     character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.dae");
     character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll Fwd.dae");
+    character->modelNode->getAnimator("roll")->repeats = false;
     character->addAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
     character->modelNode->getAnimator("dragon attack")->repeats = false;
     character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
@@ -132,6 +133,8 @@ void importCharAnimation(CharNode* character) {
     character->modelNode->getAnimator("cast magic 2")->repeats = false;
     character->addAnimator("cast magic 3", "/Resources/Game/Character/Animations/CastMagic3.dae");
     character->modelNode->getAnimator("cast magic 3")->repeats = false;
+    character->addAnimator("cast magic 4", "/Resources/Game/Character/Animations/CastMagic4.dae");
+    character->modelNode->getAnimator("cast magic 4")->repeats = false;
     character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.dae");
     character->modelNode->getAnimator("smash ground")->repeats = false;
 }

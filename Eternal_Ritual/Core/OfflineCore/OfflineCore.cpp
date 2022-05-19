@@ -215,7 +215,9 @@ void OfflineCore::handleEvent() {
         character_->moveRight();
     }
     if(engine_->input->wasKeyReleased(KEY_SPACE)){
-        character_->toggleLock(enemies_);
+        enemies_[0]->modelNode->getAnimator("roll")->play(0.5);
+        enemies_[0]->uninjurable = true;
+        cout << enemies_[0]->modelNode->getAnimator("roll")->isPlaying() << endl;
     }
     
     if(engine_->input->wasKeyReleased(KEY_G)){
