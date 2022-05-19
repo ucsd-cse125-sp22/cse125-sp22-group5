@@ -1,28 +1,40 @@
+//
+//  ClientCore.hpp
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
 #ifndef CLIENTCORE_HPP
 #define CLIENTCORE_HPP
 
-#include "common.hpp"
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
 
-#include "statePb.hpp"
-#include "eventPb.hpp"
-#include "clientSocket.hpp"
-#include "../Game/includes.hpp"
-#include "../Game/magics.hpp"
+#include "KGLEngine/Engine.hpp"
+
+#include "Network/Packet/StatePb.hpp"
+#include "Network/Packet/EventPb.hpp"
+#include "Network/ClientSide/ClientSocket.hpp"
+#include "Game/Map/MapSystemManager.hpp"
+#include "Game/Character/HitController.hpp"
+#include "Game/Character/CharNode.hpp"
+#include "Game/Magic/BaseMagic.hpp"
 
 
 class ClientCore {
 public:
     static ClientCore* Instance() {
-        if (clientCore == nullptr) {
-            clientCore = new ClientCore();
+        if (client_core_ == nullptr) {
+            client_core_ = new ClientCore();
         }
-        return clientCore;
+        return client_core_;
     }
 
     static void Destructor() {
-        if (clientCore != nullptr) {
-            delete clientCore;
-            clientCore = nullptr;
+        if (client_core_ != nullptr) {
+            delete client_core_;
+            client_core_ = nullptr;
         }
     }
     
@@ -31,9 +43,10 @@ public:
     void loadLight();
     void loadScene();
     void loadCharacter();
-    void loadWeapon();
+    void loadMagic();
+    void loadDamageSystem();
     
-    void initPbPacket();
+    void loadPbPacket();
     void connectServer();
     void handleEvent();
     void sendData();
@@ -42,69 +55,53 @@ public:
     void updateState();
     void renderWorld();
     void closeConnect();
-    
 
 private:
     // Singleton pattern
-    static ClientCore* clientCore;
+    static ClientCore* client_core_;
     ClientCore();
     ~ClientCore();
     
     // Socket
-    ClientSocket* clientSocket;
-    ulonglong clientCycle;
+    ClientSocket* client_socket_;
+    unsigned long long client_cycle_ = 0;
     
     // Pb
-    EventPb* eventPb;
-    StatePb* statePb;
+    EventPb* event_pb_;
+    StatePb* state_pb_;
     
     // Engine
-    Engine* engine;
-    
-    // Sky
-    Skybox* skybox;
+    Engine* engine_;
     
     // Light
-    LightNode* pointLight;
-    LightNode* ambientLight;
-    LightNode* directionalLight;
-    LightNode* spotLight;
+    LightNode* point_light_;
+    LightNode* ambient_light_;
+    LightNode* directional_light_;
+    LightNode* spot_light_;
     
-    // Texture
-    Texture* reflection;
-    Texture* mixamoD;
-    Texture* mixamoN;
-    Texture* mixamoM;
-    
-    // Shader
-    PBRShader* mapShader;
-    PBRShader* mixamoMaterial;
-    
-    // Scene
-    Node* sceneNode;
-    MapSystemManager* mapSystemManager;
+    // Map
+    MapSystemManager* map_system_manager_;
     
     // Character
-    CharNode* character;
-    ulong characterIP;
+    CharNode* character_;
+    unsigned long character_ip_;
     
     // Magic
-    unordered_map<int, Magic> keyToMagic;
-    unordered_map<Magic, int> magicToKey;
-    unordered_set<BaseMagic*> allMagics;
+    std::unordered_map<int, Magic::Type> key_to_magic_;
+    std::unordered_map<Magic::Type, int> magic_to_key_;
+    std::unordered_set<BaseMagic*> all_magics_;
     
-    // Weapon
-    Node* weaponNode;
-    unordered_map<ulong, Node*> enemyWeapons;
+    // All Characters
+    std::vector<CharNode*> pre_chars_;
+    std::unordered_map<unsigned long, CharNode*> all_chars_;
     
-    // Enemy
-    unordered_map<ulong, CharNode*> enemies;
-    vector<ulong> enemyIPs;
+    // HitController
+    HitController*  hit_controller_;
     
     // Game
-    bool startGame = true;
+    bool start_game_ = true;
 };
 
+void destructClientCore(int signum);
 
-
-#endif /* clientCore_hpp */
+#endif /* ClientCore_hpp */

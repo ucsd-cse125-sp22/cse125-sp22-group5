@@ -50,7 +50,7 @@ struct TableStruct_gameData_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[9]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -61,9 +61,18 @@ namespace gameDataPb {
 class Event;
 struct EventDefaultTypeInternal;
 extern EventDefaultTypeInternal _Event_default_instance_;
+class Event_PlayerAttrsEntry_DoNotUse;
+struct Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal;
+extern Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal _Event_PlayerAttrsEntry_DoNotUse_default_instance_;
+class PlayerAttr;
+struct PlayerAttrDefaultTypeInternal;
+extern PlayerAttrDefaultTypeInternal _PlayerAttr_default_instance_;
 class State;
 struct StateDefaultTypeInternal;
 extern StateDefaultTypeInternal _State_default_instance_;
+class State_PlayerAttrsEntry_DoNotUse;
+struct State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal;
+extern State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal _State_PlayerAttrsEntry_DoNotUse_default_instance_;
 class State_PlayerInfo;
 struct State_PlayerInfoDefaultTypeInternal;
 extern State_PlayerInfoDefaultTypeInternal _State_PlayerInfo_default_instance_;
@@ -79,7 +88,10 @@ extern Vec3DefaultTypeInternal _Vec3_default_instance_;
 }  // namespace gameDataPb
 PROTOBUF_NAMESPACE_OPEN
 template<> ::gameDataPb::Event* Arena::CreateMaybeMessage<::gameDataPb::Event>(Arena*);
+template<> ::gameDataPb::Event_PlayerAttrsEntry_DoNotUse* Arena::CreateMaybeMessage<::gameDataPb::Event_PlayerAttrsEntry_DoNotUse>(Arena*);
+template<> ::gameDataPb::PlayerAttr* Arena::CreateMaybeMessage<::gameDataPb::PlayerAttr>(Arena*);
 template<> ::gameDataPb::State* Arena::CreateMaybeMessage<::gameDataPb::State>(Arena*);
+template<> ::gameDataPb::State_PlayerAttrsEntry_DoNotUse* Arena::CreateMaybeMessage<::gameDataPb::State_PlayerAttrsEntry_DoNotUse>(Arena*);
 template<> ::gameDataPb::State_PlayerInfo* Arena::CreateMaybeMessage<::gameDataPb::State_PlayerInfo>(Arena*);
 template<> ::gameDataPb::State_PlayerInfosEntry_DoNotUse* Arena::CreateMaybeMessage<::gameDataPb::State_PlayerInfosEntry_DoNotUse>(Arena*);
 template<> ::gameDataPb::Vec2* Arena::CreateMaybeMessage<::gameDataPb::Vec2>(Arena*);
@@ -119,42 +131,21 @@ inline bool DirState_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<DirState>(
     DirState_descriptor(), name, value);
 }
-enum MovEvent : int {
-  MOVEFRONT = 0,
-  MOVEBACK = 1,
-  MOVELEFT = 2,
-  MOVERIGHT = 3,
-  MovEvent_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  MovEvent_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
-};
-bool MovEvent_IsValid(int value);
-constexpr MovEvent MovEvent_MIN = MOVEFRONT;
-constexpr MovEvent MovEvent_MAX = MOVERIGHT;
-constexpr int MovEvent_ARRAYSIZE = MovEvent_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MovEvent_descriptor();
-template<typename T>
-inline const std::string& MovEvent_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, MovEvent>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function MovEvent_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    MovEvent_descriptor(), enum_t_value);
-}
-inline bool MovEvent_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MovEvent* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MovEvent>(
-    MovEvent_descriptor(), name, value);
-}
 enum MagicPb : int {
-  STONEMAGIC = 0,
+  STONEBLAST = 0,
   FIREBALL = 1,
+  LIGHTNINGSPEAR = 2,
+  GROUNDSMASH = 3,
+  THUNDER = 4,
+  FLAME = 5,
+  THOUSANDBLADE = 6,
+  DRAGON = 7,
   MagicPb_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   MagicPb_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool MagicPb_IsValid(int value);
-constexpr MagicPb MagicPb_MIN = STONEMAGIC;
-constexpr MagicPb MagicPb_MAX = FIREBALL;
+constexpr MagicPb MagicPb_MIN = STONEBLAST;
+constexpr MagicPb MagicPb_MAX = DRAGON;
 constexpr int MagicPb_ARRAYSIZE = MagicPb_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MagicPb_descriptor();
@@ -498,6 +489,175 @@ class Vec2 final :
 };
 // -------------------------------------------------------------------
 
+class PlayerAttr final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gameDataPb.PlayerAttr) */ {
+ public:
+  inline PlayerAttr() : PlayerAttr(nullptr) {}
+  ~PlayerAttr() override;
+  explicit constexpr PlayerAttr(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  PlayerAttr(const PlayerAttr& from);
+  PlayerAttr(PlayerAttr&& from) noexcept
+    : PlayerAttr() {
+    *this = ::std::move(from);
+  }
+
+  inline PlayerAttr& operator=(const PlayerAttr& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PlayerAttr& operator=(PlayerAttr&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PlayerAttr& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PlayerAttr* internal_default_instance() {
+    return reinterpret_cast<const PlayerAttr*>(
+               &_PlayerAttr_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(PlayerAttr& a, PlayerAttr& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PlayerAttr* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PlayerAttr* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PlayerAttr* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<PlayerAttr>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const PlayerAttr& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const PlayerAttr& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PlayerAttr* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gameDataPb.PlayerAttr";
+  }
+  protected:
+  explicit PlayerAttr(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerHPFieldNumber = 1,
+  };
+  // uint32 playerHP = 1;
+  void clear_playerhp();
+  uint32_t playerhp() const;
+  void set_playerhp(uint32_t value);
+  private:
+  uint32_t _internal_playerhp() const;
+  void _internal_set_playerhp(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gameDataPb.PlayerAttr)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  uint32_t playerhp_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gameData_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Event_PlayerAttrsEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Event_PlayerAttrsEntry_DoNotUse, 
+    uint64_t, ::gameDataPb::PlayerAttr,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Event_PlayerAttrsEntry_DoNotUse, 
+    uint64_t, ::gameDataPb::PlayerAttr,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> SuperType;
+  Event_PlayerAttrsEntry_DoNotUse();
+  explicit constexpr Event_PlayerAttrsEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit Event_PlayerAttrsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const Event_PlayerAttrsEntry_DoNotUse& other);
+  static const Event_PlayerAttrsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Event_PlayerAttrsEntry_DoNotUse*>(&_Event_PlayerAttrsEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(void*) { return true; }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+};
+
+// -------------------------------------------------------------------
+
 class Event final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gameDataPb.Event) */ {
  public:
@@ -546,7 +706,7 @@ class Event final :
                &_Event_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    4;
 
   friend void swap(Event& a, Event& b) {
     a.Swap(&b);
@@ -617,37 +777,21 @@ class Event final :
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMovEventsFieldNumber = 6,
-    kMagicEventsFieldNumber = 7,
-    kAddMagicsFieldNumber = 8,
-    kRmMagicsFieldNumber = 9,
+    kMagicEventsFieldNumber = 8,
+    kPlayerAttrsFieldNumber = 9,
     kPlayerNameFieldNumber = 3,
-    kMouseTranslationFieldNumber = 4,
     kControlNodeEulerAnglesFieldNumber = 5,
+    kMoveDirectionFieldNumber = 6,
     kStartFieldNumber = 1,
     kRestartFieldNumber = 2,
+    kPlayerStyleFieldNumber = 4,
+    kDirStateFieldNumber = 7,
   };
-  // repeated .gameDataPb.MovEvent movEvents = 6;
-  int movevents_size() const;
-  private:
-  int _internal_movevents_size() const;
-  public:
-  void clear_movevents();
-  private:
-  ::gameDataPb::MovEvent _internal_movevents(int index) const;
-  void _internal_add_movevents(::gameDataPb::MovEvent value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_movevents();
-  public:
-  ::gameDataPb::MovEvent movevents(int index) const;
-  void set_movevents(int index, ::gameDataPb::MovEvent value);
-  void add_movevents(::gameDataPb::MovEvent value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& movevents() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_movevents();
-
-  // repeated .gameDataPb.MagicPb magicEvents = 7;
+  // repeated .gameDataPb.MagicPb magicEvents = 8;
   int magicevents_size() const;
   private:
   int _internal_magicevents_size() const;
@@ -664,39 +808,22 @@ class Event final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& magicevents() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_magicevents();
 
-  // repeated .gameDataPb.MagicPb addMagics = 8;
-  int addmagics_size() const;
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  int playerattrs_size() const;
   private:
-  int _internal_addmagics_size() const;
+  int _internal_playerattrs_size() const;
   public:
-  void clear_addmagics();
+  void clear_playerattrs();
   private:
-  ::gameDataPb::MagicPb _internal_addmagics(int index) const;
-  void _internal_add_addmagics(::gameDataPb::MagicPb value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_addmagics();
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+      _internal_playerattrs() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+      _internal_mutable_playerattrs();
   public:
-  ::gameDataPb::MagicPb addmagics(int index) const;
-  void set_addmagics(int index, ::gameDataPb::MagicPb value);
-  void add_addmagics(::gameDataPb::MagicPb value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& addmagics() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_addmagics();
-
-  // repeated .gameDataPb.MagicPb rmMagics = 9;
-  int rmmagics_size() const;
-  private:
-  int _internal_rmmagics_size() const;
-  public:
-  void clear_rmmagics();
-  private:
-  ::gameDataPb::MagicPb _internal_rmmagics(int index) const;
-  void _internal_add_rmmagics(::gameDataPb::MagicPb value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_rmmagics();
-  public:
-  ::gameDataPb::MagicPb rmmagics(int index) const;
-  void set_rmmagics(int index, ::gameDataPb::MagicPb value);
-  void add_rmmagics(::gameDataPb::MagicPb value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& rmmagics() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_rmmagics();
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+      playerattrs() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+      mutable_playerattrs();
 
   // string playerName = 3;
   void clear_playername();
@@ -711,24 +838,6 @@ class Event final :
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_playername(const std::string& value);
   std::string* _internal_mutable_playername();
   public:
-
-  // .gameDataPb.Vec2 mouseTranslation = 4;
-  bool has_mousetranslation() const;
-  private:
-  bool _internal_has_mousetranslation() const;
-  public:
-  void clear_mousetranslation();
-  const ::gameDataPb::Vec2& mousetranslation() const;
-  PROTOBUF_NODISCARD ::gameDataPb::Vec2* release_mousetranslation();
-  ::gameDataPb::Vec2* mutable_mousetranslation();
-  void set_allocated_mousetranslation(::gameDataPb::Vec2* mousetranslation);
-  private:
-  const ::gameDataPb::Vec2& _internal_mousetranslation() const;
-  ::gameDataPb::Vec2* _internal_mutable_mousetranslation();
-  public:
-  void unsafe_arena_set_allocated_mousetranslation(
-      ::gameDataPb::Vec2* mousetranslation);
-  ::gameDataPb::Vec2* unsafe_arena_release_mousetranslation();
 
   // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
   bool has_controlnodeeulerangles() const;
@@ -748,6 +857,24 @@ class Event final :
       ::gameDataPb::Vec3* controlnodeeulerangles);
   ::gameDataPb::Vec3* unsafe_arena_release_controlnodeeulerangles();
 
+  // .gameDataPb.Vec3 moveDirection = 6;
+  bool has_movedirection() const;
+  private:
+  bool _internal_has_movedirection() const;
+  public:
+  void clear_movedirection();
+  const ::gameDataPb::Vec3& movedirection() const;
+  PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_movedirection();
+  ::gameDataPb::Vec3* mutable_movedirection();
+  void set_allocated_movedirection(::gameDataPb::Vec3* movedirection);
+  private:
+  const ::gameDataPb::Vec3& _internal_movedirection() const;
+  ::gameDataPb::Vec3* _internal_mutable_movedirection();
+  public:
+  void unsafe_arena_set_allocated_movedirection(
+      ::gameDataPb::Vec3* movedirection);
+  ::gameDataPb::Vec3* unsafe_arena_release_movedirection();
+
   // bool start = 1;
   void clear_start();
   bool start() const;
@@ -766,6 +893,24 @@ class Event final :
   void _internal_set_restart(bool value);
   public:
 
+  // uint32 playerStyle = 4;
+  void clear_playerstyle();
+  uint32_t playerstyle() const;
+  void set_playerstyle(uint32_t value);
+  private:
+  uint32_t _internal_playerstyle() const;
+  void _internal_set_playerstyle(uint32_t value);
+  public:
+
+  // .gameDataPb.DirState dirState = 7;
+  void clear_dirstate();
+  ::gameDataPb::DirState dirstate() const;
+  void set_dirstate(::gameDataPb::DirState value);
+  private:
+  ::gameDataPb::DirState _internal_dirstate() const;
+  void _internal_set_dirstate(::gameDataPb::DirState value);
+  public:
+
   // @@protoc_insertion_point(class_scope:gameDataPb.Event)
  private:
   class _Internal;
@@ -773,19 +918,20 @@ class Event final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> movevents_;
-  mutable std::atomic<int> _movevents_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> magicevents_;
   mutable std::atomic<int> _magicevents_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> addmagics_;
-  mutable std::atomic<int> _addmagics_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> rmmagics_;
-  mutable std::atomic<int> _rmmagics_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+      Event_PlayerAttrsEntry_DoNotUse,
+      uint64_t, ::gameDataPb::PlayerAttr,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> playerattrs_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr playername_;
-  ::gameDataPb::Vec2* mousetranslation_;
   ::gameDataPb::Vec3* controlnodeeulerangles_;
+  ::gameDataPb::Vec3* movedirection_;
   bool start_;
   bool restart_;
+  uint32_t playerstyle_;
+  int dirstate_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
 };
@@ -839,7 +985,7 @@ class State_PlayerInfo final :
                &_State_PlayerInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    5;
 
   friend void swap(State_PlayerInfo& a, State_PlayerInfo& b) {
     a.Swap(&b);
@@ -913,15 +1059,14 @@ class State_PlayerInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMagicEventsFieldNumber = 5,
-    kAddMagicsFieldNumber = 6,
-    kRmMagicsFieldNumber = 7,
+    kMagicEventsFieldNumber = 6,
     kPlayerNameFieldNumber = 1,
-    kPositionFieldNumber = 3,
-    kEulerAngleFieldNumber = 4,
-    kDirStateFieldNumber = 2,
+    kControlNodeEulerAnglesFieldNumber = 3,
+    kMoveDirectionFieldNumber = 4,
+    kPlayerStyleFieldNumber = 2,
+    kDirStateFieldNumber = 5,
   };
-  // repeated .gameDataPb.MagicPb magicEvents = 5;
+  // repeated .gameDataPb.MagicPb magicEvents = 6;
   int magicevents_size() const;
   private:
   int _internal_magicevents_size() const;
@@ -938,40 +1083,6 @@ class State_PlayerInfo final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& magicevents() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_magicevents();
 
-  // repeated .gameDataPb.MagicPb addMagics = 6;
-  int addmagics_size() const;
-  private:
-  int _internal_addmagics_size() const;
-  public:
-  void clear_addmagics();
-  private:
-  ::gameDataPb::MagicPb _internal_addmagics(int index) const;
-  void _internal_add_addmagics(::gameDataPb::MagicPb value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_addmagics();
-  public:
-  ::gameDataPb::MagicPb addmagics(int index) const;
-  void set_addmagics(int index, ::gameDataPb::MagicPb value);
-  void add_addmagics(::gameDataPb::MagicPb value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& addmagics() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_addmagics();
-
-  // repeated .gameDataPb.MagicPb rmMagics = 7;
-  int rmmagics_size() const;
-  private:
-  int _internal_rmmagics_size() const;
-  public:
-  void clear_rmmagics();
-  private:
-  ::gameDataPb::MagicPb _internal_rmmagics(int index) const;
-  void _internal_add_rmmagics(::gameDataPb::MagicPb value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_rmmagics();
-  public:
-  ::gameDataPb::MagicPb rmmagics(int index) const;
-  void set_rmmagics(int index, ::gameDataPb::MagicPb value);
-  void add_rmmagics(::gameDataPb::MagicPb value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& rmmagics() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_rmmagics();
-
   // string playerName = 1;
   void clear_playername();
   const std::string& playername() const;
@@ -986,43 +1097,52 @@ class State_PlayerInfo final :
   std::string* _internal_mutable_playername();
   public:
 
-  // .gameDataPb.Vec3 position = 3;
-  bool has_position() const;
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  bool has_controlnodeeulerangles() const;
   private:
-  bool _internal_has_position() const;
+  bool _internal_has_controlnodeeulerangles() const;
   public:
-  void clear_position();
-  const ::gameDataPb::Vec3& position() const;
-  PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_position();
-  ::gameDataPb::Vec3* mutable_position();
-  void set_allocated_position(::gameDataPb::Vec3* position);
+  void clear_controlnodeeulerangles();
+  const ::gameDataPb::Vec3& controlnodeeulerangles() const;
+  PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_controlnodeeulerangles();
+  ::gameDataPb::Vec3* mutable_controlnodeeulerangles();
+  void set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* controlnodeeulerangles);
   private:
-  const ::gameDataPb::Vec3& _internal_position() const;
-  ::gameDataPb::Vec3* _internal_mutable_position();
+  const ::gameDataPb::Vec3& _internal_controlnodeeulerangles() const;
+  ::gameDataPb::Vec3* _internal_mutable_controlnodeeulerangles();
   public:
-  void unsafe_arena_set_allocated_position(
-      ::gameDataPb::Vec3* position);
-  ::gameDataPb::Vec3* unsafe_arena_release_position();
+  void unsafe_arena_set_allocated_controlnodeeulerangles(
+      ::gameDataPb::Vec3* controlnodeeulerangles);
+  ::gameDataPb::Vec3* unsafe_arena_release_controlnodeeulerangles();
 
-  // .gameDataPb.Vec3 eulerAngle = 4;
-  bool has_eulerangle() const;
+  // .gameDataPb.Vec3 moveDirection = 4;
+  bool has_movedirection() const;
   private:
-  bool _internal_has_eulerangle() const;
+  bool _internal_has_movedirection() const;
   public:
-  void clear_eulerangle();
-  const ::gameDataPb::Vec3& eulerangle() const;
-  PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_eulerangle();
-  ::gameDataPb::Vec3* mutable_eulerangle();
-  void set_allocated_eulerangle(::gameDataPb::Vec3* eulerangle);
+  void clear_movedirection();
+  const ::gameDataPb::Vec3& movedirection() const;
+  PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_movedirection();
+  ::gameDataPb::Vec3* mutable_movedirection();
+  void set_allocated_movedirection(::gameDataPb::Vec3* movedirection);
   private:
-  const ::gameDataPb::Vec3& _internal_eulerangle() const;
-  ::gameDataPb::Vec3* _internal_mutable_eulerangle();
+  const ::gameDataPb::Vec3& _internal_movedirection() const;
+  ::gameDataPb::Vec3* _internal_mutable_movedirection();
   public:
-  void unsafe_arena_set_allocated_eulerangle(
-      ::gameDataPb::Vec3* eulerangle);
-  ::gameDataPb::Vec3* unsafe_arena_release_eulerangle();
+  void unsafe_arena_set_allocated_movedirection(
+      ::gameDataPb::Vec3* movedirection);
+  ::gameDataPb::Vec3* unsafe_arena_release_movedirection();
 
-  // .gameDataPb.DirState dirState = 2;
+  // uint32 playerStyle = 2;
+  void clear_playerstyle();
+  uint32_t playerstyle() const;
+  void set_playerstyle(uint32_t value);
+  private:
+  uint32_t _internal_playerstyle() const;
+  void _internal_set_playerstyle(uint32_t value);
+  public:
+
+  // .gameDataPb.DirState dirState = 5;
   void clear_dirstate();
   ::gameDataPb::DirState dirstate() const;
   void set_dirstate(::gameDataPb::DirState value);
@@ -1040,13 +1160,10 @@ class State_PlayerInfo final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> magicevents_;
   mutable std::atomic<int> _magicevents_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> addmagics_;
-  mutable std::atomic<int> _addmagics_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> rmmagics_;
-  mutable std::atomic<int> _rmmagics_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr playername_;
-  ::gameDataPb::Vec3* position_;
-  ::gameDataPb::Vec3* eulerangle_;
+  ::gameDataPb::Vec3* controlnodeeulerangles_;
+  ::gameDataPb::Vec3* movedirection_;
+  uint32_t playerstyle_;
   int dirstate_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
@@ -1068,6 +1185,29 @@ public:
   explicit State_PlayerInfosEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   void MergeFrom(const State_PlayerInfosEntry_DoNotUse& other);
   static const State_PlayerInfosEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const State_PlayerInfosEntry_DoNotUse*>(&_State_PlayerInfosEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(void*) { return true; }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+};
+
+// -------------------------------------------------------------------
+
+class State_PlayerAttrsEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<State_PlayerAttrsEntry_DoNotUse, 
+    uint64_t, ::gameDataPb::PlayerAttr,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<State_PlayerAttrsEntry_DoNotUse, 
+    uint64_t, ::gameDataPb::PlayerAttr,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> SuperType;
+  State_PlayerAttrsEntry_DoNotUse();
+  explicit constexpr State_PlayerAttrsEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit State_PlayerAttrsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const State_PlayerAttrsEntry_DoNotUse& other);
+  static const State_PlayerAttrsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const State_PlayerAttrsEntry_DoNotUse*>(&_State_PlayerAttrsEntry_DoNotUse_default_instance_); }
   static bool ValidateKey(void*) { return true; }
   static bool ValidateValue(void*) { return true; }
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
@@ -1124,7 +1264,7 @@ class State final :
                &_State_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    8;
 
   friend void swap(State& a, State& b) {
     a.Swap(&b);
@@ -1201,6 +1341,7 @@ class State final :
 
   enum : int {
     kPlayerInfosFieldNumber = 2,
+    kPlayerAttrsFieldNumber = 3,
     kPlayerIPFieldNumber = 1,
   };
   // map<uint64, .gameDataPb.State.PlayerInfo> playerInfos = 2;
@@ -1219,6 +1360,23 @@ class State final :
       playerinfos() const;
   ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::State_PlayerInfo >*
       mutable_playerinfos();
+
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
+  int playerattrs_size() const;
+  private:
+  int _internal_playerattrs_size() const;
+  public:
+  void clear_playerattrs();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+      _internal_playerattrs() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+      _internal_mutable_playerattrs();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+      playerattrs() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+      mutable_playerattrs();
 
   // uint64 playerIP = 1;
   void clear_playerip();
@@ -1241,6 +1399,11 @@ class State final :
       uint64_t, ::gameDataPb::State_PlayerInfo,
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> playerinfos_;
+  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+      State_PlayerAttrsEntry_DoNotUse,
+      uint64_t, ::gameDataPb::PlayerAttr,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> playerattrs_;
   uint64_t playerip_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
@@ -1362,6 +1525,32 @@ inline void Vec2::set_y(float value) {
 
 // -------------------------------------------------------------------
 
+// PlayerAttr
+
+// uint32 playerHP = 1;
+inline void PlayerAttr::clear_playerhp() {
+  playerhp_ = 0u;
+}
+inline uint32_t PlayerAttr::_internal_playerhp() const {
+  return playerhp_;
+}
+inline uint32_t PlayerAttr::playerhp() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.PlayerAttr.playerHP)
+  return _internal_playerhp();
+}
+inline void PlayerAttr::_internal_set_playerhp(uint32_t value) {
+  
+  playerhp_ = value;
+}
+inline void PlayerAttr::set_playerhp(uint32_t value) {
+  _internal_set_playerhp(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.PlayerAttr.playerHP)
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // Event
 
 // bool start = 1;
@@ -1455,94 +1644,24 @@ inline void Event::set_allocated_playername(std::string* playername) {
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.playerName)
 }
 
-// .gameDataPb.Vec2 mouseTranslation = 4;
-inline bool Event::_internal_has_mousetranslation() const {
-  return this != internal_default_instance() && mousetranslation_ != nullptr;
+// uint32 playerStyle = 4;
+inline void Event::clear_playerstyle() {
+  playerstyle_ = 0u;
 }
-inline bool Event::has_mousetranslation() const {
-  return _internal_has_mousetranslation();
+inline uint32_t Event::_internal_playerstyle() const {
+  return playerstyle_;
 }
-inline void Event::clear_mousetranslation() {
-  if (GetArenaForAllocation() == nullptr && mousetranslation_ != nullptr) {
-    delete mousetranslation_;
-  }
-  mousetranslation_ = nullptr;
+inline uint32_t Event::playerstyle() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.playerStyle)
+  return _internal_playerstyle();
 }
-inline const ::gameDataPb::Vec2& Event::_internal_mousetranslation() const {
-  const ::gameDataPb::Vec2* p = mousetranslation_;
-  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec2&>(
-      ::gameDataPb::_Vec2_default_instance_);
-}
-inline const ::gameDataPb::Vec2& Event::mousetranslation() const {
-  // @@protoc_insertion_point(field_get:gameDataPb.Event.mouseTranslation)
-  return _internal_mousetranslation();
-}
-inline void Event::unsafe_arena_set_allocated_mousetranslation(
-    ::gameDataPb::Vec2* mousetranslation) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mousetranslation_);
-  }
-  mousetranslation_ = mousetranslation;
-  if (mousetranslation) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.Event.mouseTranslation)
-}
-inline ::gameDataPb::Vec2* Event::release_mousetranslation() {
+inline void Event::_internal_set_playerstyle(uint32_t value) {
   
-  ::gameDataPb::Vec2* temp = mousetranslation_;
-  mousetranslation_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
+  playerstyle_ = value;
 }
-inline ::gameDataPb::Vec2* Event::unsafe_arena_release_mousetranslation() {
-  // @@protoc_insertion_point(field_release:gameDataPb.Event.mouseTranslation)
-  
-  ::gameDataPb::Vec2* temp = mousetranslation_;
-  mousetranslation_ = nullptr;
-  return temp;
-}
-inline ::gameDataPb::Vec2* Event::_internal_mutable_mousetranslation() {
-  
-  if (mousetranslation_ == nullptr) {
-    auto* p = CreateMaybeMessage<::gameDataPb::Vec2>(GetArenaForAllocation());
-    mousetranslation_ = p;
-  }
-  return mousetranslation_;
-}
-inline ::gameDataPb::Vec2* Event::mutable_mousetranslation() {
-  ::gameDataPb::Vec2* _msg = _internal_mutable_mousetranslation();
-  // @@protoc_insertion_point(field_mutable:gameDataPb.Event.mouseTranslation)
-  return _msg;
-}
-inline void Event::set_allocated_mousetranslation(::gameDataPb::Vec2* mousetranslation) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete mousetranslation_;
-  }
-  if (mousetranslation) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec2>::GetOwningArena(mousetranslation);
-    if (message_arena != submessage_arena) {
-      mousetranslation = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, mousetranslation, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  mousetranslation_ = mousetranslation;
-  // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.mouseTranslation)
+inline void Event::set_playerstyle(uint32_t value) {
+  _internal_set_playerstyle(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.playerStyle)
 }
 
 // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
@@ -1635,50 +1754,117 @@ inline void Event::set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* cont
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.controlNodeEulerAngles)
 }
 
-// repeated .gameDataPb.MovEvent movEvents = 6;
-inline int Event::_internal_movevents_size() const {
-  return movevents_.size();
+// .gameDataPb.Vec3 moveDirection = 6;
+inline bool Event::_internal_has_movedirection() const {
+  return this != internal_default_instance() && movedirection_ != nullptr;
 }
-inline int Event::movevents_size() const {
-  return _internal_movevents_size();
+inline bool Event::has_movedirection() const {
+  return _internal_has_movedirection();
 }
-inline void Event::clear_movevents() {
-  movevents_.Clear();
+inline void Event::clear_movedirection() {
+  if (GetArenaForAllocation() == nullptr && movedirection_ != nullptr) {
+    delete movedirection_;
+  }
+  movedirection_ = nullptr;
 }
-inline ::gameDataPb::MovEvent Event::_internal_movevents(int index) const {
-  return static_cast< ::gameDataPb::MovEvent >(movevents_.Get(index));
+inline const ::gameDataPb::Vec3& Event::_internal_movedirection() const {
+  const ::gameDataPb::Vec3* p = movedirection_;
+  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec3&>(
+      ::gameDataPb::_Vec3_default_instance_);
 }
-inline ::gameDataPb::MovEvent Event::movevents(int index) const {
-  // @@protoc_insertion_point(field_get:gameDataPb.Event.movEvents)
-  return _internal_movevents(index);
+inline const ::gameDataPb::Vec3& Event::movedirection() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.moveDirection)
+  return _internal_movedirection();
 }
-inline void Event::set_movevents(int index, ::gameDataPb::MovEvent value) {
-  movevents_.Set(index, value);
-  // @@protoc_insertion_point(field_set:gameDataPb.Event.movEvents)
+inline void Event::unsafe_arena_set_allocated_movedirection(
+    ::gameDataPb::Vec3* movedirection) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(movedirection_);
+  }
+  movedirection_ = movedirection;
+  if (movedirection) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.Event.moveDirection)
 }
-inline void Event::_internal_add_movevents(::gameDataPb::MovEvent value) {
-  movevents_.Add(value);
+inline ::gameDataPb::Vec3* Event::release_movedirection() {
+  
+  ::gameDataPb::Vec3* temp = movedirection_;
+  movedirection_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
 }
-inline void Event::add_movevents(::gameDataPb::MovEvent value) {
-  _internal_add_movevents(value);
-  // @@protoc_insertion_point(field_add:gameDataPb.Event.movEvents)
+inline ::gameDataPb::Vec3* Event::unsafe_arena_release_movedirection() {
+  // @@protoc_insertion_point(field_release:gameDataPb.Event.moveDirection)
+  
+  ::gameDataPb::Vec3* temp = movedirection_;
+  movedirection_ = nullptr;
+  return temp;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
-Event::movevents() const {
-  // @@protoc_insertion_point(field_list:gameDataPb.Event.movEvents)
-  return movevents_;
+inline ::gameDataPb::Vec3* Event::_internal_mutable_movedirection() {
+  
+  if (movedirection_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gameDataPb::Vec3>(GetArenaForAllocation());
+    movedirection_ = p;
+  }
+  return movedirection_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::_internal_mutable_movevents() {
-  return &movevents_;
+inline ::gameDataPb::Vec3* Event::mutable_movedirection() {
+  ::gameDataPb::Vec3* _msg = _internal_mutable_movedirection();
+  // @@protoc_insertion_point(field_mutable:gameDataPb.Event.moveDirection)
+  return _msg;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::mutable_movevents() {
-  // @@protoc_insertion_point(field_mutable_list:gameDataPb.Event.movEvents)
-  return _internal_mutable_movevents();
+inline void Event::set_allocated_movedirection(::gameDataPb::Vec3* movedirection) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete movedirection_;
+  }
+  if (movedirection) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec3>::GetOwningArena(movedirection);
+    if (message_arena != submessage_arena) {
+      movedirection = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, movedirection, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  movedirection_ = movedirection;
+  // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.moveDirection)
 }
 
-// repeated .gameDataPb.MagicPb magicEvents = 7;
+// .gameDataPb.DirState dirState = 7;
+inline void Event::clear_dirstate() {
+  dirstate_ = 0;
+}
+inline ::gameDataPb::DirState Event::_internal_dirstate() const {
+  return static_cast< ::gameDataPb::DirState >(dirstate_);
+}
+inline ::gameDataPb::DirState Event::dirstate() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.dirState)
+  return _internal_dirstate();
+}
+inline void Event::_internal_set_dirstate(::gameDataPb::DirState value) {
+  
+  dirstate_ = value;
+}
+inline void Event::set_dirstate(::gameDataPb::DirState value) {
+  _internal_set_dirstate(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.dirState)
+}
+
+// repeated .gameDataPb.MagicPb magicEvents = 8;
 inline int Event::_internal_magicevents_size() const {
   return magicevents_.size();
 }
@@ -1721,90 +1907,33 @@ Event::mutable_magicevents() {
   return _internal_mutable_magicevents();
 }
 
-// repeated .gameDataPb.MagicPb addMagics = 8;
-inline int Event::_internal_addmagics_size() const {
-  return addmagics_.size();
+// map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+inline int Event::_internal_playerattrs_size() const {
+  return playerattrs_.size();
 }
-inline int Event::addmagics_size() const {
-  return _internal_addmagics_size();
+inline int Event::playerattrs_size() const {
+  return _internal_playerattrs_size();
 }
-inline void Event::clear_addmagics() {
-  addmagics_.Clear();
+inline void Event::clear_playerattrs() {
+  playerattrs_.Clear();
 }
-inline ::gameDataPb::MagicPb Event::_internal_addmagics(int index) const {
-  return static_cast< ::gameDataPb::MagicPb >(addmagics_.Get(index));
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+Event::_internal_playerattrs() const {
+  return playerattrs_.GetMap();
 }
-inline ::gameDataPb::MagicPb Event::addmagics(int index) const {
-  // @@protoc_insertion_point(field_get:gameDataPb.Event.addMagics)
-  return _internal_addmagics(index);
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+Event::playerattrs() const {
+  // @@protoc_insertion_point(field_map:gameDataPb.Event.PlayerAttrs)
+  return _internal_playerattrs();
 }
-inline void Event::set_addmagics(int index, ::gameDataPb::MagicPb value) {
-  addmagics_.Set(index, value);
-  // @@protoc_insertion_point(field_set:gameDataPb.Event.addMagics)
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+Event::_internal_mutable_playerattrs() {
+  return playerattrs_.MutableMap();
 }
-inline void Event::_internal_add_addmagics(::gameDataPb::MagicPb value) {
-  addmagics_.Add(value);
-}
-inline void Event::add_addmagics(::gameDataPb::MagicPb value) {
-  _internal_add_addmagics(value);
-  // @@protoc_insertion_point(field_add:gameDataPb.Event.addMagics)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
-Event::addmagics() const {
-  // @@protoc_insertion_point(field_list:gameDataPb.Event.addMagics)
-  return addmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::_internal_mutable_addmagics() {
-  return &addmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::mutable_addmagics() {
-  // @@protoc_insertion_point(field_mutable_list:gameDataPb.Event.addMagics)
-  return _internal_mutable_addmagics();
-}
-
-// repeated .gameDataPb.MagicPb rmMagics = 9;
-inline int Event::_internal_rmmagics_size() const {
-  return rmmagics_.size();
-}
-inline int Event::rmmagics_size() const {
-  return _internal_rmmagics_size();
-}
-inline void Event::clear_rmmagics() {
-  rmmagics_.Clear();
-}
-inline ::gameDataPb::MagicPb Event::_internal_rmmagics(int index) const {
-  return static_cast< ::gameDataPb::MagicPb >(rmmagics_.Get(index));
-}
-inline ::gameDataPb::MagicPb Event::rmmagics(int index) const {
-  // @@protoc_insertion_point(field_get:gameDataPb.Event.rmMagics)
-  return _internal_rmmagics(index);
-}
-inline void Event::set_rmmagics(int index, ::gameDataPb::MagicPb value) {
-  rmmagics_.Set(index, value);
-  // @@protoc_insertion_point(field_set:gameDataPb.Event.rmMagics)
-}
-inline void Event::_internal_add_rmmagics(::gameDataPb::MagicPb value) {
-  rmmagics_.Add(value);
-}
-inline void Event::add_rmmagics(::gameDataPb::MagicPb value) {
-  _internal_add_rmmagics(value);
-  // @@protoc_insertion_point(field_add:gameDataPb.Event.rmMagics)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
-Event::rmmagics() const {
-  // @@protoc_insertion_point(field_list:gameDataPb.Event.rmMagics)
-  return rmmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::_internal_mutable_rmmagics() {
-  return &rmmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-Event::mutable_rmmagics() {
-  // @@protoc_insertion_point(field_mutable_list:gameDataPb.Event.rmMagics)
-  return _internal_mutable_rmmagics();
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+Event::mutable_playerattrs() {
+  // @@protoc_insertion_point(field_mutable_map:gameDataPb.Event.PlayerAttrs)
+  return _internal_mutable_playerattrs();
 }
 
 // -------------------------------------------------------------------
@@ -1862,7 +1991,207 @@ inline void State_PlayerInfo::set_allocated_playername(std::string* playername) 
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.playerName)
 }
 
-// .gameDataPb.DirState dirState = 2;
+// uint32 playerStyle = 2;
+inline void State_PlayerInfo::clear_playerstyle() {
+  playerstyle_ = 0u;
+}
+inline uint32_t State_PlayerInfo::_internal_playerstyle() const {
+  return playerstyle_;
+}
+inline uint32_t State_PlayerInfo::playerstyle() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.playerStyle)
+  return _internal_playerstyle();
+}
+inline void State_PlayerInfo::_internal_set_playerstyle(uint32_t value) {
+  
+  playerstyle_ = value;
+}
+inline void State_PlayerInfo::set_playerstyle(uint32_t value) {
+  _internal_set_playerstyle(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.playerStyle)
+}
+
+// .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+inline bool State_PlayerInfo::_internal_has_controlnodeeulerangles() const {
+  return this != internal_default_instance() && controlnodeeulerangles_ != nullptr;
+}
+inline bool State_PlayerInfo::has_controlnodeeulerangles() const {
+  return _internal_has_controlnodeeulerangles();
+}
+inline void State_PlayerInfo::clear_controlnodeeulerangles() {
+  if (GetArenaForAllocation() == nullptr && controlnodeeulerangles_ != nullptr) {
+    delete controlnodeeulerangles_;
+  }
+  controlnodeeulerangles_ = nullptr;
+}
+inline const ::gameDataPb::Vec3& State_PlayerInfo::_internal_controlnodeeulerangles() const {
+  const ::gameDataPb::Vec3* p = controlnodeeulerangles_;
+  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec3&>(
+      ::gameDataPb::_Vec3_default_instance_);
+}
+inline const ::gameDataPb::Vec3& State_PlayerInfo::controlnodeeulerangles() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
+  return _internal_controlnodeeulerangles();
+}
+inline void State_PlayerInfo::unsafe_arena_set_allocated_controlnodeeulerangles(
+    ::gameDataPb::Vec3* controlnodeeulerangles) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(controlnodeeulerangles_);
+  }
+  controlnodeeulerangles_ = controlnodeeulerangles;
+  if (controlnodeeulerangles) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::release_controlnodeeulerangles() {
+  
+  ::gameDataPb::Vec3* temp = controlnodeeulerangles_;
+  controlnodeeulerangles_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::unsafe_arena_release_controlnodeeulerangles() {
+  // @@protoc_insertion_point(field_release:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
+  
+  ::gameDataPb::Vec3* temp = controlnodeeulerangles_;
+  controlnodeeulerangles_ = nullptr;
+  return temp;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::_internal_mutable_controlnodeeulerangles() {
+  
+  if (controlnodeeulerangles_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gameDataPb::Vec3>(GetArenaForAllocation());
+    controlnodeeulerangles_ = p;
+  }
+  return controlnodeeulerangles_;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::mutable_controlnodeeulerangles() {
+  ::gameDataPb::Vec3* _msg = _internal_mutable_controlnodeeulerangles();
+  // @@protoc_insertion_point(field_mutable:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
+  return _msg;
+}
+inline void State_PlayerInfo::set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* controlnodeeulerangles) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete controlnodeeulerangles_;
+  }
+  if (controlnodeeulerangles) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec3>::GetOwningArena(controlnodeeulerangles);
+    if (message_arena != submessage_arena) {
+      controlnodeeulerangles = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, controlnodeeulerangles, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  controlnodeeulerangles_ = controlnodeeulerangles;
+  // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
+}
+
+// .gameDataPb.Vec3 moveDirection = 4;
+inline bool State_PlayerInfo::_internal_has_movedirection() const {
+  return this != internal_default_instance() && movedirection_ != nullptr;
+}
+inline bool State_PlayerInfo::has_movedirection() const {
+  return _internal_has_movedirection();
+}
+inline void State_PlayerInfo::clear_movedirection() {
+  if (GetArenaForAllocation() == nullptr && movedirection_ != nullptr) {
+    delete movedirection_;
+  }
+  movedirection_ = nullptr;
+}
+inline const ::gameDataPb::Vec3& State_PlayerInfo::_internal_movedirection() const {
+  const ::gameDataPb::Vec3* p = movedirection_;
+  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec3&>(
+      ::gameDataPb::_Vec3_default_instance_);
+}
+inline const ::gameDataPb::Vec3& State_PlayerInfo::movedirection() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.moveDirection)
+  return _internal_movedirection();
+}
+inline void State_PlayerInfo::unsafe_arena_set_allocated_movedirection(
+    ::gameDataPb::Vec3* movedirection) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(movedirection_);
+  }
+  movedirection_ = movedirection;
+  if (movedirection) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.State.PlayerInfo.moveDirection)
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::release_movedirection() {
+  
+  ::gameDataPb::Vec3* temp = movedirection_;
+  movedirection_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::unsafe_arena_release_movedirection() {
+  // @@protoc_insertion_point(field_release:gameDataPb.State.PlayerInfo.moveDirection)
+  
+  ::gameDataPb::Vec3* temp = movedirection_;
+  movedirection_ = nullptr;
+  return temp;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::_internal_mutable_movedirection() {
+  
+  if (movedirection_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gameDataPb::Vec3>(GetArenaForAllocation());
+    movedirection_ = p;
+  }
+  return movedirection_;
+}
+inline ::gameDataPb::Vec3* State_PlayerInfo::mutable_movedirection() {
+  ::gameDataPb::Vec3* _msg = _internal_mutable_movedirection();
+  // @@protoc_insertion_point(field_mutable:gameDataPb.State.PlayerInfo.moveDirection)
+  return _msg;
+}
+inline void State_PlayerInfo::set_allocated_movedirection(::gameDataPb::Vec3* movedirection) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete movedirection_;
+  }
+  if (movedirection) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec3>::GetOwningArena(movedirection);
+    if (message_arena != submessage_arena) {
+      movedirection = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, movedirection, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  movedirection_ = movedirection;
+  // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.moveDirection)
+}
+
+// .gameDataPb.DirState dirState = 5;
 inline void State_PlayerInfo::clear_dirstate() {
   dirstate_ = 0;
 }
@@ -1882,187 +2211,7 @@ inline void State_PlayerInfo::set_dirstate(::gameDataPb::DirState value) {
   // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.dirState)
 }
 
-// .gameDataPb.Vec3 position = 3;
-inline bool State_PlayerInfo::_internal_has_position() const {
-  return this != internal_default_instance() && position_ != nullptr;
-}
-inline bool State_PlayerInfo::has_position() const {
-  return _internal_has_position();
-}
-inline void State_PlayerInfo::clear_position() {
-  if (GetArenaForAllocation() == nullptr && position_ != nullptr) {
-    delete position_;
-  }
-  position_ = nullptr;
-}
-inline const ::gameDataPb::Vec3& State_PlayerInfo::_internal_position() const {
-  const ::gameDataPb::Vec3* p = position_;
-  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec3&>(
-      ::gameDataPb::_Vec3_default_instance_);
-}
-inline const ::gameDataPb::Vec3& State_PlayerInfo::position() const {
-  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.position)
-  return _internal_position();
-}
-inline void State_PlayerInfo::unsafe_arena_set_allocated_position(
-    ::gameDataPb::Vec3* position) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(position_);
-  }
-  position_ = position;
-  if (position) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.State.PlayerInfo.position)
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::release_position() {
-  
-  ::gameDataPb::Vec3* temp = position_;
-  position_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::unsafe_arena_release_position() {
-  // @@protoc_insertion_point(field_release:gameDataPb.State.PlayerInfo.position)
-  
-  ::gameDataPb::Vec3* temp = position_;
-  position_ = nullptr;
-  return temp;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::_internal_mutable_position() {
-  
-  if (position_ == nullptr) {
-    auto* p = CreateMaybeMessage<::gameDataPb::Vec3>(GetArenaForAllocation());
-    position_ = p;
-  }
-  return position_;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::mutable_position() {
-  ::gameDataPb::Vec3* _msg = _internal_mutable_position();
-  // @@protoc_insertion_point(field_mutable:gameDataPb.State.PlayerInfo.position)
-  return _msg;
-}
-inline void State_PlayerInfo::set_allocated_position(::gameDataPb::Vec3* position) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete position_;
-  }
-  if (position) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec3>::GetOwningArena(position);
-    if (message_arena != submessage_arena) {
-      position = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, position, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  position_ = position;
-  // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.position)
-}
-
-// .gameDataPb.Vec3 eulerAngle = 4;
-inline bool State_PlayerInfo::_internal_has_eulerangle() const {
-  return this != internal_default_instance() && eulerangle_ != nullptr;
-}
-inline bool State_PlayerInfo::has_eulerangle() const {
-  return _internal_has_eulerangle();
-}
-inline void State_PlayerInfo::clear_eulerangle() {
-  if (GetArenaForAllocation() == nullptr && eulerangle_ != nullptr) {
-    delete eulerangle_;
-  }
-  eulerangle_ = nullptr;
-}
-inline const ::gameDataPb::Vec3& State_PlayerInfo::_internal_eulerangle() const {
-  const ::gameDataPb::Vec3* p = eulerangle_;
-  return p != nullptr ? *p : reinterpret_cast<const ::gameDataPb::Vec3&>(
-      ::gameDataPb::_Vec3_default_instance_);
-}
-inline const ::gameDataPb::Vec3& State_PlayerInfo::eulerangle() const {
-  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.eulerAngle)
-  return _internal_eulerangle();
-}
-inline void State_PlayerInfo::unsafe_arena_set_allocated_eulerangle(
-    ::gameDataPb::Vec3* eulerangle) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(eulerangle_);
-  }
-  eulerangle_ = eulerangle;
-  if (eulerangle) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameDataPb.State.PlayerInfo.eulerAngle)
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::release_eulerangle() {
-  
-  ::gameDataPb::Vec3* temp = eulerangle_;
-  eulerangle_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::unsafe_arena_release_eulerangle() {
-  // @@protoc_insertion_point(field_release:gameDataPb.State.PlayerInfo.eulerAngle)
-  
-  ::gameDataPb::Vec3* temp = eulerangle_;
-  eulerangle_ = nullptr;
-  return temp;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::_internal_mutable_eulerangle() {
-  
-  if (eulerangle_ == nullptr) {
-    auto* p = CreateMaybeMessage<::gameDataPb::Vec3>(GetArenaForAllocation());
-    eulerangle_ = p;
-  }
-  return eulerangle_;
-}
-inline ::gameDataPb::Vec3* State_PlayerInfo::mutable_eulerangle() {
-  ::gameDataPb::Vec3* _msg = _internal_mutable_eulerangle();
-  // @@protoc_insertion_point(field_mutable:gameDataPb.State.PlayerInfo.eulerAngle)
-  return _msg;
-}
-inline void State_PlayerInfo::set_allocated_eulerangle(::gameDataPb::Vec3* eulerangle) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete eulerangle_;
-  }
-  if (eulerangle) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::gameDataPb::Vec3>::GetOwningArena(eulerangle);
-    if (message_arena != submessage_arena) {
-      eulerangle = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, eulerangle, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  eulerangle_ = eulerangle;
-  // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.eulerAngle)
-}
-
-// repeated .gameDataPb.MagicPb magicEvents = 5;
+// repeated .gameDataPb.MagicPb magicEvents = 6;
 inline int State_PlayerInfo::_internal_magicevents_size() const {
   return magicevents_.size();
 }
@@ -2105,91 +2254,7 @@ State_PlayerInfo::mutable_magicevents() {
   return _internal_mutable_magicevents();
 }
 
-// repeated .gameDataPb.MagicPb addMagics = 6;
-inline int State_PlayerInfo::_internal_addmagics_size() const {
-  return addmagics_.size();
-}
-inline int State_PlayerInfo::addmagics_size() const {
-  return _internal_addmagics_size();
-}
-inline void State_PlayerInfo::clear_addmagics() {
-  addmagics_.Clear();
-}
-inline ::gameDataPb::MagicPb State_PlayerInfo::_internal_addmagics(int index) const {
-  return static_cast< ::gameDataPb::MagicPb >(addmagics_.Get(index));
-}
-inline ::gameDataPb::MagicPb State_PlayerInfo::addmagics(int index) const {
-  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.addMagics)
-  return _internal_addmagics(index);
-}
-inline void State_PlayerInfo::set_addmagics(int index, ::gameDataPb::MagicPb value) {
-  addmagics_.Set(index, value);
-  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.addMagics)
-}
-inline void State_PlayerInfo::_internal_add_addmagics(::gameDataPb::MagicPb value) {
-  addmagics_.Add(value);
-}
-inline void State_PlayerInfo::add_addmagics(::gameDataPb::MagicPb value) {
-  _internal_add_addmagics(value);
-  // @@protoc_insertion_point(field_add:gameDataPb.State.PlayerInfo.addMagics)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
-State_PlayerInfo::addmagics() const {
-  // @@protoc_insertion_point(field_list:gameDataPb.State.PlayerInfo.addMagics)
-  return addmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-State_PlayerInfo::_internal_mutable_addmagics() {
-  return &addmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-State_PlayerInfo::mutable_addmagics() {
-  // @@protoc_insertion_point(field_mutable_list:gameDataPb.State.PlayerInfo.addMagics)
-  return _internal_mutable_addmagics();
-}
-
-// repeated .gameDataPb.MagicPb rmMagics = 7;
-inline int State_PlayerInfo::_internal_rmmagics_size() const {
-  return rmmagics_.size();
-}
-inline int State_PlayerInfo::rmmagics_size() const {
-  return _internal_rmmagics_size();
-}
-inline void State_PlayerInfo::clear_rmmagics() {
-  rmmagics_.Clear();
-}
-inline ::gameDataPb::MagicPb State_PlayerInfo::_internal_rmmagics(int index) const {
-  return static_cast< ::gameDataPb::MagicPb >(rmmagics_.Get(index));
-}
-inline ::gameDataPb::MagicPb State_PlayerInfo::rmmagics(int index) const {
-  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.rmMagics)
-  return _internal_rmmagics(index);
-}
-inline void State_PlayerInfo::set_rmmagics(int index, ::gameDataPb::MagicPb value) {
-  rmmagics_.Set(index, value);
-  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.rmMagics)
-}
-inline void State_PlayerInfo::_internal_add_rmmagics(::gameDataPb::MagicPb value) {
-  rmmagics_.Add(value);
-}
-inline void State_PlayerInfo::add_rmmagics(::gameDataPb::MagicPb value) {
-  _internal_add_rmmagics(value);
-  // @@protoc_insertion_point(field_add:gameDataPb.State.PlayerInfo.rmMagics)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
-State_PlayerInfo::rmmagics() const {
-  // @@protoc_insertion_point(field_list:gameDataPb.State.PlayerInfo.rmMagics)
-  return rmmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-State_PlayerInfo::_internal_mutable_rmmagics() {
-  return &rmmagics_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
-State_PlayerInfo::mutable_rmmagics() {
-  // @@protoc_insertion_point(field_mutable_list:gameDataPb.State.PlayerInfo.rmMagics)
-  return _internal_mutable_rmmagics();
-}
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 
@@ -2246,9 +2311,44 @@ State::mutable_playerinfos() {
   return _internal_mutable_playerinfos();
 }
 
+// map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
+inline int State::_internal_playerattrs_size() const {
+  return playerattrs_.size();
+}
+inline int State::playerattrs_size() const {
+  return _internal_playerattrs_size();
+}
+inline void State::clear_playerattrs() {
+  playerattrs_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+State::_internal_playerattrs() const {
+  return playerattrs_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
+State::playerattrs() const {
+  // @@protoc_insertion_point(field_map:gameDataPb.State.PlayerAttrs)
+  return _internal_playerattrs();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+State::_internal_mutable_playerattrs() {
+  return playerattrs_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
+State::mutable_playerattrs() {
+  // @@protoc_insertion_point(field_mutable_map:gameDataPb.State.PlayerAttrs)
+  return _internal_mutable_playerattrs();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -2270,11 +2370,6 @@ template <> struct is_proto_enum< ::gameDataPb::DirState> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::gameDataPb::DirState>() {
   return ::gameDataPb::DirState_descriptor();
-}
-template <> struct is_proto_enum< ::gameDataPb::MovEvent> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::gameDataPb::MovEvent>() {
-  return ::gameDataPb::MovEvent_descriptor();
 }
 template <> struct is_proto_enum< ::gameDataPb::MagicPb> : ::std::true_type {};
 template <>

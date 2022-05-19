@@ -1,12 +1,16 @@
-#include "common.hpp"
-#include "clientCore.hpp"
+//
+//  client-main.cpp
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
+#include <signal.h>
+
+#include "Core/ClientCore/ClientCore.hpp"
 
 
-ClientCore* ClientCore::clientCore = nullptr;
-
-
-int no_main(int argc, char* argv[]) {
-    if (signal(SIGINT, signal_handler_fun) == SIG_ERR) {
+int main(int argc, char* argv[]) {
+    if (signal(SIGINT, destructClientCore) == SIG_ERR) {
         perror("Signal_handler error");
         exit(1);
     }
@@ -21,10 +25,12 @@ int no_main(int argc, char* argv[]) {
     
     ClientCore::Instance()->loadCharacter();
     
-    ClientCore::Instance()->loadWeapon();
+    ClientCore::Instance()->loadMagic();
+    
+    ClientCore::Instance()->loadDamageSystem();
     
     
-    ClientCore::Instance()->initPbPacket();
+    ClientCore::Instance()->loadPbPacket();
     
     ClientCore::Instance()->connectServer();
     

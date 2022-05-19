@@ -1,3 +1,9 @@
+//
+//  gameData.proto
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
 syntax = "proto3";
 package gameDataPb;
 
@@ -15,16 +21,15 @@ enum DirState {
     BACKRIGHT = 8;
 }
 
-enum MovEvent {
-    MOVEFRONT = 0;
-    MOVEBACK = 1;
-    MOVELEFT = 2;
-    MOVERIGHT = 3;
-}
-
 enum MagicPb {
-    STONEMAGIC = 0;
+    STONEBLAST = 0;
     FIREBALL = 1;
+    LIGHTNINGSPEAR = 2;
+    GROUNDSMASH = 3;
+    THUNDER = 4;
+    FLAME = 5;
+    THOUSANDBLADE = 6;
+    DRAGON = 7;
 }
 
 message Vec3 {
@@ -38,37 +43,42 @@ message Vec2 {
     float y = 2;
 }
 
+message PlayerAttr {
+    uint32 playerHP = 1;
+}
+
 message Event {
     bool start = 1;
     bool restart = 2;
     
     string playerName = 3;
+    uint32 playerStyle = 4;
         
-    Vec3 controlNodeEulerAngles = 4;
-    Vec3 moveDirection = 5;
-    DirState movEvents = 6;
+    Vec3 controlNodeEulerAngles = 5;
+    Vec3 moveDirection = 6;
+    DirState dirState = 7;
     
-    repeated MagicPb magicEvents = 7;
-    repeated MagicPb addMagics = 8;
-    repeated MagicPb rmMagics = 9;
+    repeated MagicPb magicEvents = 8;
+    
+    map <uint64, PlayerAttr> PlayerAttrs = 9;
 }
 
 
 message State {
     message PlayerInfo {
         string playerName = 1;
+        uint32 playerStyle = 2;
         
-        DirState dirState = 2;
-        Vec3 position = 3;
-        Vec3 eulerAngle = 4;
+        Vec3 controlNodeEulerAngles = 3;
+        Vec3 moveDirection = 4;
+        DirState dirState = 5;
         
-        repeated MagicPb magicEvents = 5;
-        repeated MagicPb addMagics = 6;
-        repeated MagicPb rmMagics = 7;
+        repeated MagicPb magicEvents = 6;
     }
     
     uint64 playerIP = 1;
     map <uint64, PlayerInfo> playerInfos = 2;
+    map <uint64, PlayerAttr> PlayerAttrs = 3;
 }
 
 

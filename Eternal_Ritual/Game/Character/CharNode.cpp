@@ -33,7 +33,7 @@ CharNode::CharNode(vec3 position){
     this->uiNode = 0;
     this->allowAction = true;
     
-    this->health = 10000;
+    this->health = 2000;
 }
 CharNode::~CharNode(){
     
@@ -293,6 +293,7 @@ CharNode* CharNode::copy(vec3 position) {
     node->isDisabled = this->isDisabled;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
+
     for(unsigned int i = 0; i < this->animators.size(); i += 1) {
         node->animators.push_back(this->animators[i]->engineCopyAnimator());
     }
@@ -310,7 +311,7 @@ CharNode* CharNode::copy(vec3 position) {
     }
     node->headTop = node->generateBoneNode("head");
     node->rightHand = node->generateBoneNode("Weapon_r");
-    node->cameraNode = this->cameraNode;
+//    node->cameraNode = this->cameraNode;
     return(node);
 }
 

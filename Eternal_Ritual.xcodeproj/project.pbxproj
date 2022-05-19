@@ -178,20 +178,20 @@
 		3D2D285E2835B3C500159082 /* libassimp.5.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */; };
 		3D2D285F2835B3C500159082 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		3D2D28602835B3C500159082 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
-		3D2D28712835B5BA00159082 /* serverSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286F2835B5BA00159082 /* serverSocket.cpp */; };
+		3D2D28712835B5BA00159082 /* ServerSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286F2835B5BA00159082 /* ServerSocket.cpp */; };
 		3D2D28722835B7E900159082 /* client-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3DD5A5D128319AE80010B1A5 /* client-main.cpp */; };
 		3D2D28732835B7ED00159082 /* server-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D286A2835B4AB00159082 /* server-main.cpp */; };
-		3D2D28742835B7F800159082 /* serverCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D28672835B4A200159082 /* serverCore.cpp */; };
+		3D2D28742835B7F800159082 /* ServerCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D28672835B4A200159082 /* ServerCore.cpp */; };
 		3D2D28752835B80000159082 /* ClientCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27552833CA1200159082 /* ClientCore.cpp */; };
-		3D2D28762835B81700159082 /* clientSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26992831BA3D00159082 /* clientSocket.cpp */; };
-		3D2D28772835B82000159082 /* eventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* eventPb.cpp */; };
-		3D2D28782835B82000159082 /* eventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* eventPb.cpp */; };
+		3D2D28762835B81700159082 /* ClientSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26992831BA3D00159082 /* ClientSocket.cpp */; };
+		3D2D28772835B82000159082 /* EventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* EventPb.cpp */; };
+		3D2D28782835B82000159082 /* EventPb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269D2831BA3D00159082 /* EventPb.cpp */; };
 		3D2D28792835B82300159082 /* gameData.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269F2831BA3D00159082 /* gameData.pb.cc */; };
 		3D2D287A2835B82400159082 /* gameData.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D269F2831BA3D00159082 /* gameData.pb.cc */; };
-		3D2D287B2835B82600159082 /* pbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* pbData.cpp */; };
-		3D2D287C2835B82700159082 /* pbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* pbData.cpp */; };
-		3D2D287D2835B82B00159082 /* statePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* statePb.cpp */; };
-		3D2D287E2835B82B00159082 /* statePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* statePb.cpp */; };
+		3D2D287B2835B82600159082 /* PbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* PbData.cpp */; };
+		3D2D287C2835B82700159082 /* PbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A42831BA3D00159082 /* PbData.cpp */; };
+		3D2D287D2835B82B00159082 /* StatePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* StatePb.cpp */; };
+		3D2D287E2835B82B00159082 /* StatePb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A02831BA3D00159082 /* StatePb.cpp */; };
 		3D2D287F2835B82E00159082 /* gameData.proto in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A22831BA3D00159082 /* gameData.proto */; };
 		3D2D28802835B82F00159082 /* gameData.proto in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26A22831BA3D00159082 /* gameData.proto */; };
 		3D47059E282BD8230068156B /* HittableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D47059C282BD8230068156B /* HittableObject.cpp */; };
@@ -248,18 +248,17 @@
 		12EA9AEF280FE68900541504 /* CharNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharNode.cpp; sourceTree = "<group>"; };
 		12EA9AF0280FE68900541504 /* CharNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharNode.hpp; sourceTree = "<group>"; };
 		3D2D26262831AA1300159082 /* offline-main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "offline-main.cpp"; sourceTree = "<group>"; };
-		3D2D26992831BA3D00159082 /* clientSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = clientSocket.cpp; sourceTree = "<group>"; };
-		3D2D269A2831BA3D00159082 /* common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
-		3D2D269B2831BA3D00159082 /* clientSocket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = clientSocket.hpp; sourceTree = "<group>"; };
-		3D2D269D2831BA3D00159082 /* eventPb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eventPb.cpp; sourceTree = "<group>"; };
+		3D2D26992831BA3D00159082 /* ClientSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ClientSocket.cpp; sourceTree = "<group>"; };
+		3D2D269B2831BA3D00159082 /* ClientSocket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClientSocket.hpp; sourceTree = "<group>"; };
+		3D2D269D2831BA3D00159082 /* EventPb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventPb.cpp; sourceTree = "<group>"; };
 		3D2D269E2831BA3D00159082 /* gameData.pb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameData.pb.h; sourceTree = "<group>"; };
 		3D2D269F2831BA3D00159082 /* gameData.pb.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameData.pb.cc; sourceTree = "<group>"; };
-		3D2D26A02831BA3D00159082 /* statePb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = statePb.cpp; sourceTree = "<group>"; };
-		3D2D26A12831BA3D00159082 /* pbData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pbData.hpp; sourceTree = "<group>"; };
+		3D2D26A02831BA3D00159082 /* StatePb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StatePb.cpp; sourceTree = "<group>"; };
+		3D2D26A12831BA3D00159082 /* PbData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PbData.hpp; sourceTree = "<group>"; };
 		3D2D26A22831BA3D00159082 /* gameData.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = gameData.proto; sourceTree = "<group>"; };
-		3D2D26A32831BA3D00159082 /* statePb.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = statePb.hpp; sourceTree = "<group>"; };
-		3D2D26A42831BA3D00159082 /* pbData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pbData.cpp; sourceTree = "<group>"; };
-		3D2D26A52831BA3D00159082 /* eventPb.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = eventPb.hpp; sourceTree = "<group>"; };
+		3D2D26A32831BA3D00159082 /* StatePb.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StatePb.hpp; sourceTree = "<group>"; };
+		3D2D26A42831BA3D00159082 /* PbData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PbData.cpp; sourceTree = "<group>"; };
+		3D2D26A52831BA3D00159082 /* EventPb.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventPb.hpp; sourceTree = "<group>"; };
 		3D2D26C82831D53E00159082 /* ImportMapHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImportMapHelper.cpp; sourceTree = "<group>"; };
 		3D2D26C92831D53E00159082 /* ImportMapHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImportMapHelper.hpp; sourceTree = "<group>"; };
 		3D2D26CC283231CD00159082 /* Engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
@@ -340,12 +339,12 @@
 		3D2D276F2834220100159082 /* AllMagic.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllMagic.inc; sourceTree = "<group>"; };
 		3D2D281D2835B23100159082 /* Eternal_Ritual_Client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Eternal_Ritual_Client; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2D28652835B3C500159082 /* Eternal_Ritual_Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Eternal_Ritual_Server; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D2D28672835B4A200159082 /* serverCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serverCore.cpp; sourceTree = "<group>"; };
-		3D2D28682835B4A200159082 /* serverCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = serverCore.hpp; sourceTree = "<group>"; };
+		3D2D28672835B4A200159082 /* ServerCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCore.cpp; sourceTree = "<group>"; };
+		3D2D28682835B4A200159082 /* ServerCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerCore.hpp; sourceTree = "<group>"; };
 		3D2D286A2835B4AB00159082 /* server-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "server-main.cpp"; sourceTree = "<group>"; };
-		3D2D286D2835B5BA00159082 /* serverSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = serverSocket.hpp; sourceTree = "<group>"; };
-		3D2D286E2835B5BA00159082 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
-		3D2D286F2835B5BA00159082 /* serverSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serverSocket.cpp; sourceTree = "<group>"; };
+		3D2D286D2835B5BA00159082 /* ServerSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerSocket.hpp; sourceTree = "<group>"; };
+		3D2D286F2835B5BA00159082 /* ServerSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerSocket.cpp; sourceTree = "<group>"; };
+		3D2D28812836575300159082 /* NetworkSetting.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = NetworkSetting.inc; sourceTree = "<group>"; };
 		3D47059C282BD8230068156B /* HittableObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HittableObject.cpp; sourceTree = "<group>"; };
 		3D47059D282BD8230068156B /* HittableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HittableObject.hpp; sourceTree = "<group>"; };
 		3DD5A5B2282FAAE30010B1A5 /* credits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = credits.txt; sourceTree = "<group>"; };
@@ -464,6 +463,7 @@
 				3D2D286C2835B5BA00159082 /* ServerSide */,
 				3D2D26982831BA3D00159082 /* ClientSide */,
 				3D2D269C2831BA3D00159082 /* Packet */,
+				3D2D28812836575300159082 /* NetworkSetting.inc */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -471,9 +471,8 @@
 		3D2D26982831BA3D00159082 /* ClientSide */ = {
 			isa = PBXGroup;
 			children = (
-				3D2D26992831BA3D00159082 /* clientSocket.cpp */,
-				3D2D269A2831BA3D00159082 /* common.hpp */,
-				3D2D269B2831BA3D00159082 /* clientSocket.hpp */,
+				3D2D26992831BA3D00159082 /* ClientSocket.cpp */,
+				3D2D269B2831BA3D00159082 /* ClientSocket.hpp */,
 			);
 			path = ClientSide;
 			sourceTree = "<group>";
@@ -481,15 +480,15 @@
 		3D2D269C2831BA3D00159082 /* Packet */ = {
 			isa = PBXGroup;
 			children = (
-				3D2D269D2831BA3D00159082 /* eventPb.cpp */,
-				3D2D26A52831BA3D00159082 /* eventPb.hpp */,
+				3D2D269D2831BA3D00159082 /* EventPb.cpp */,
+				3D2D26A52831BA3D00159082 /* EventPb.hpp */,
 				3D2D269F2831BA3D00159082 /* gameData.pb.cc */,
 				3D2D269E2831BA3D00159082 /* gameData.pb.h */,
 				3D2D26A22831BA3D00159082 /* gameData.proto */,
-				3D2D26A42831BA3D00159082 /* pbData.cpp */,
-				3D2D26A12831BA3D00159082 /* pbData.hpp */,
-				3D2D26A02831BA3D00159082 /* statePb.cpp */,
-				3D2D26A32831BA3D00159082 /* statePb.hpp */,
+				3D2D26A42831BA3D00159082 /* PbData.cpp */,
+				3D2D26A12831BA3D00159082 /* PbData.hpp */,
+				3D2D26A02831BA3D00159082 /* StatePb.cpp */,
+				3D2D26A32831BA3D00159082 /* StatePb.hpp */,
 			);
 			path = Packet;
 			sourceTree = "<group>";
@@ -653,8 +652,8 @@
 		3D2D28662835B4A200159082 /* ServerCore */ = {
 			isa = PBXGroup;
 			children = (
-				3D2D28672835B4A200159082 /* serverCore.cpp */,
-				3D2D28682835B4A200159082 /* serverCore.hpp */,
+				3D2D28672835B4A200159082 /* ServerCore.cpp */,
+				3D2D28682835B4A200159082 /* ServerCore.hpp */,
 			);
 			path = ServerCore;
 			sourceTree = "<group>";
@@ -662,9 +661,8 @@
 		3D2D286C2835B5BA00159082 /* ServerSide */ = {
 			isa = PBXGroup;
 			children = (
-				3D2D286D2835B5BA00159082 /* serverSocket.hpp */,
-				3D2D286E2835B5BA00159082 /* common.hpp */,
-				3D2D286F2835B5BA00159082 /* serverSocket.cpp */,
+				3D2D286D2835B5BA00159082 /* ServerSocket.hpp */,
+				3D2D286F2835B5BA00159082 /* ServerSocket.cpp */,
 			);
 			path = ServerSide;
 			sourceTree = "<group>";
@@ -911,18 +909,18 @@
 				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
-				3D2D28772835B82000159082 /* eventPb.cpp in Sources */,
+				3D2D28772835B82000159082 /* EventPb.cpp in Sources */,
 				3D2D27EA2835B23100159082 /* Flame.cpp in Sources */,
 				3D2D27EB2835B23100159082 /* MapBoxObject.cpp in Sources */,
 				3D2D27EC2835B23100159082 /* ParticleShader.cpp in Sources */,
 				3D2D27ED2835B23100159082 /* AudioBuffer.cpp in Sources */,
 				3D2D27EE2835B23100159082 /* AlphaShader.cpp in Sources */,
-				3D2D287D2835B82B00159082 /* statePb.cpp in Sources */,
+				3D2D287D2835B82B00159082 /* StatePb.cpp in Sources */,
 				3D2D287F2835B82E00159082 /* gameData.proto in Sources */,
 				3D2D27EF2835B23100159082 /* Sprite.cpp in Sources */,
 				3D2D27F02835B23100159082 /* ImportMapHelper.cpp in Sources */,
 				3D2D27F12835B23100159082 /* Particle3DRenderer.cpp in Sources */,
-				3D2D28762835B81700159082 /* clientSocket.cpp in Sources */,
+				3D2D28762835B81700159082 /* ClientSocket.cpp in Sources */,
 				3D2D27F22835B23100159082 /* Engine.cpp in Sources */,
 				3D2D27F32835B23100159082 /* LightningSpear.cpp in Sources */,
 				3D2D27F42835B23100159082 /* ThousandBlade.cpp in Sources */,
@@ -940,7 +938,7 @@
 				3D2D28002835B23100159082 /* Particle3DNode.cpp in Sources */,
 				3D2D28012835B23100159082 /* DragonMagic.cpp in Sources */,
 				3D2D28022835B23100159082 /* Shader.cpp in Sources */,
-				3D2D287B2835B82600159082 /* pbData.cpp in Sources */,
+				3D2D287B2835B82600159082 /* PbData.cpp in Sources */,
 				3D2D28032835B23100159082 /* StoneBlast.cpp in Sources */,
 				3D2D28042835B23100159082 /* UnitCube.cpp in Sources */,
 				3D2D28052835B23100159082 /* CameraNode.cpp in Sources */,
@@ -979,13 +977,13 @@
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
 				3D2D28732835B7ED00159082 /* server-main.cpp in Sources */,
-				3D2D28782835B82000159082 /* eventPb.cpp in Sources */,
+				3D2D28782835B82000159082 /* EventPb.cpp in Sources */,
 				3D2D28322835B3C500159082 /* Flame.cpp in Sources */,
 				3D2D28332835B3C500159082 /* MapBoxObject.cpp in Sources */,
 				3D2D28342835B3C500159082 /* ParticleShader.cpp in Sources */,
 				3D2D28352835B3C500159082 /* AudioBuffer.cpp in Sources */,
 				3D2D28362835B3C500159082 /* AlphaShader.cpp in Sources */,
-				3D2D287E2835B82B00159082 /* statePb.cpp in Sources */,
+				3D2D287E2835B82B00159082 /* StatePb.cpp in Sources */,
 				3D2D28802835B82F00159082 /* gameData.proto in Sources */,
 				3D2D28372835B3C500159082 /* Sprite.cpp in Sources */,
 				3D2D28382835B3C500159082 /* ImportMapHelper.cpp in Sources */,
@@ -1008,15 +1006,15 @@
 				3D2D28492835B3C500159082 /* DragonMagic.cpp in Sources */,
 				3D2D284A2835B3C500159082 /* Shader.cpp in Sources */,
 				3D2D284B2835B3C500159082 /* StoneBlast.cpp in Sources */,
-				3D2D287C2835B82700159082 /* pbData.cpp in Sources */,
+				3D2D287C2835B82700159082 /* PbData.cpp in Sources */,
 				3D2D284C2835B3C500159082 /* UnitCube.cpp in Sources */,
 				3D2D284D2835B3C500159082 /* CameraNode.cpp in Sources */,
 				3D2D284E2835B3C500159082 /* Bone.cpp in Sources */,
 				3D2D284F2835B3C500159082 /* Input.cpp in Sources */,
-				3D2D28742835B7F800159082 /* serverCore.cpp in Sources */,
+				3D2D28742835B7F800159082 /* ServerCore.cpp in Sources */,
 				3D2D28502835B3C500159082 /* SpriteShader.cpp in Sources */,
 				3D2D28512835B3C500159082 /* ParticleRenderer.cpp in Sources */,
-				3D2D28712835B5BA00159082 /* serverSocket.cpp in Sources */,
+				3D2D28712835B5BA00159082 /* ServerSocket.cpp in Sources */,
 				3D2D28522835B3C500159082 /* ScatteredFire.cpp in Sources */,
 				3D2D28532835B3C500159082 /* BaseMagic.cpp in Sources */,
 				3D2D28542835B3C500159082 /* UINode.cpp in Sources */,
