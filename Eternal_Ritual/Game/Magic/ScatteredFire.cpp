@@ -5,7 +5,7 @@
 //  Created by Zifan Zhang on 5/18/22.
 //
 
-#include "ScatteredFire.hpp"
+#include "Game/Magic/ScatteredFire.hpp"
 
 #include <string>
 #include <glm/gtc/random.hpp>

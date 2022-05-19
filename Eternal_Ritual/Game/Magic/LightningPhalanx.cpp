@@ -5,7 +5,7 @@
 //  Created by Zifan Zhang on 5/18/22.
 //
 
-#include "LightningPhalanx.hpp"
+#include "Game/Magic/LightningPhalanx.hpp"
 
 #include <string>
 #include <glm/gtc/random.hpp>
