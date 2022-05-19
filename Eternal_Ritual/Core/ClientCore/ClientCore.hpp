@@ -1,116 +1,110 @@
 #ifndef CLIENTCORE_HPP
 #define CLIENTCORE_HPP
 
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
+#include "common.hpp"
 
-//#include "Network/Packet/statePb.hpp"
-//#include "Network/Packet/eventPb.hpp"
-//#include "Network/ClientSide/clientSocket.hpp"
-
-#include "KGLEngine/Engine.hpp"
-
-#include "Game/Map/MapSystemManager.hpp"
-#include "Game/Character/HitController.hpp"
-#include "Game/Character/CharNode.hpp"
-#include "Game/Magic/BaseMagic.hpp"
+#include "statePb.hpp"
+#include "eventPb.hpp"
+#include "clientSocket.hpp"
+#include "../Game/includes.hpp"
+#include "../Game/magics.hpp"
 
 
-class ClientCore final{
+class ClientCore {
 public:
     static ClientCore* Instance() {
-        if (client_core_ == nullptr) {
-            client_core_ = new ClientCore();
+        if (clientCore == nullptr) {
+            clientCore = new ClientCore();
         }
-        return client_core_;
+        return clientCore;
     }
 
     static void Destructor() {
-        if (client_core_ != nullptr) {
-            delete client_core_;
-            client_core_ = nullptr;
+        if (clientCore != nullptr) {
+            delete clientCore;
+            clientCore = nullptr;
         }
     }
     
     void initEngine();
     void loadSky();
     void loadLight();
-    void loadMap();
+    void loadScene();
     void loadCharacter();
     void loadWeapon();
+    
+    void initPbPacket();
+    void connectServer();
+    void handleEvent();
+    void sendData();
+    void receiveData();
+    void processData(char* pbArr, int dataLen);
+    void updateState();
+    void renderWorld();
+    void closeConnect();
+    
 
-    // Offline game
-    void loadEnemy();
-    void loadMagic();
-    void loadDamageSystem();
-    void noNetworkLoop();
-    
-    
-    //    Online game
-    //    void initPbPacket();
-    //    void connectServer();
-    //    void handleEvent();
-    //    void sendData();
-    //    void receiveData();
-    //    void processData(char* pbArr, int dataLen);
-    //    void updateState();
-    //    void renderWorld();
-    //    void closeConnect();
-    
-    
 private:
     // Singleton pattern
-    static ClientCore* client_core_;
+    static ClientCore* clientCore;
     ClientCore();
     ~ClientCore();
     
     // Socket
-//    ClientSocket* clientSocket;
-//    unsigned long long client_cycle_ = 0;
+    ClientSocket* clientSocket;
+    ulonglong clientCycle;
     
-//    // Pb
-//    EventPb* eventPb;
-//    StatePb* statePb;
+    // Pb
+    EventPb* eventPb;
+    StatePb* statePb;
     
     // Engine
-    Engine* engine_;
+    Engine* engine;
+    
+    // Sky
+    Skybox* skybox;
     
     // Light
-    LightNode* point_light_;
-    LightNode* ambient_light_;
-    LightNode* directional_light_;
-    LightNode* spot_light_;
+    LightNode* pointLight;
+    LightNode* ambientLight;
+    LightNode* directionalLight;
+    LightNode* spotLight;
     
-    // Map
-    MapSystemManager* map_system_manager_;
+    // Texture
+    Texture* reflection;
+    Texture* mixamoD;
+    Texture* mixamoN;
+    Texture* mixamoM;
+    
+    // Shader
+    PBRShader* mapShader;
+    PBRShader* mixamoMaterial;
+    
+    // Scene
+    Node* sceneNode;
+    MapSystemManager* mapSystemManager;
     
     // Character
-    CharNode* character_;
-//    unsigned long character_ip_;
+    CharNode* character;
+    ulong characterIP;
     
     // Magic
-    std::unordered_map<int, Magic::Type> key_to_magic_;
-    std::unordered_map<Magic::Type, int> magic_to_key_;
-    std::unordered_set<BaseMagic*> all_magics_;
+    unordered_map<int, Magic> keyToMagic;
+    unordered_map<Magic, int> magicToKey;
+    unordered_set<BaseMagic*> allMagics;
     
     // Weapon
-    Node* weapon_node_;
-//    std::unordered_map<unsigned long, Node*> enemy_weapons_;
+    Node* weaponNode;
+    unordered_map<ulong, Node*> enemyWeapons;
     
     // Enemy
-    std::vector<CharNode*> enemies_;
-//    std::unordered_map<unsigned long, CharNode*> enemies_;
-//    std::vector<unsigned long> enemy_ips_;
-    
-    // HitController
-    HitController*  hit_controller_;
+    unordered_map<ulong, CharNode*> enemies;
+    vector<ulong> enemyIPs;
     
     // Game
-//    bool start_game_ = true;
+    bool startGame = true;
 };
 
 
-void destructClientCore(int signum);
 
 #endif /* clientCore_hpp */

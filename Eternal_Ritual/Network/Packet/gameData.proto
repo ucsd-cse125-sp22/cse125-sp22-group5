@@ -44,10 +44,10 @@ message Event {
     
     string playerName = 3;
         
-    Vec2 mouseTranslation = 4;
-    Vec3 controlNodeEulerAngles = 5;
+    Vec3 controlNodeEulerAngles = 4;
+    Vec3 moveDirection = 5;
+    DirState movEvents = 6;
     
-    repeated MovEvent movEvents = 6;
     repeated MagicPb magicEvents = 7;
     repeated MagicPb addMagics = 8;
     repeated MagicPb rmMagics = 9;
