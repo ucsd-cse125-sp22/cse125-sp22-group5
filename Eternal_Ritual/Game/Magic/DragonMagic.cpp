@@ -223,7 +223,7 @@ DragonMagic::DragonMagic(Node* characterNode) {
     this->beamShader->setTexture("beamMap", DragonMagic::beamMap);
     this->beamNode->geometries[0]->setShader(this->beamShader);
     this->beamNode->geometries[0]->renderingOrder = dragonMagicBaseRenderingOrder;
-    this->range = 10;
+    this->range = 10000;
     
     this->emission = DragonMagic::fireTemplate->copy()->convertToParticleNode();
     this->emission->position = vec3(0.5f, 0.0f, 0.0f);
@@ -415,6 +415,9 @@ void DragonMagic::update() {
 }
 
 void DragonMagic::updateMagic() {
+    if (rangeFactor > 0.5) {
+        hitWall();
+    }
     update();
 }
 
@@ -422,7 +425,7 @@ void DragonMagic::tryDamage(CharNode * character) {
     vec3 startPosition = this->getBeamPosition();
     vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * this->range * this->rangeFactor;
     
-    if (this->rangeFactor > 0.9) {
+    if (this->rangeFactor > 0.1) {
         if (character->hitbox->testHit(startPosition, endPosition)) {
             character->receiveDamage(this->damage);
         }
@@ -443,5 +446,17 @@ vec3 DragonMagic::getBeamDirection() {
 }
 
 void DragonMagic::setRange(float range) {
-    this->range = glm::clamp(range, 0.0f, 1000.0f);
+    this->range = glm::clamp(range, 0.0f, 10000.0f);
+}
+
+void DragonMagic::hitWall() {
+    HitInfo hitInfo;
+    this->updateTransform();
+    vec3 startPosition = this->getBeamPosition();
+    vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * 10000.0f * this->rangeFactor;
+    if (MapSystemManager::Instance()->hitTest(startPosition, endPosition, hitInfo)) {
+        this->setRange(glm::length(hitInfo.hit_point - this->getBeamPosition()));
+    }else{
+        this->setRange(10000.0f);
+    }
 }

@@ -72,7 +72,7 @@ public:
     void play(CharNode* character, int seed) override;
     void update();
     void updateMagic() override;
-    void hitWall() override {}
+    void hitWall() override;
     
     glm::vec3 getBeamPosition();
     glm::vec3 getBeamDirection();
