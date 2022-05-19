@@ -69,7 +69,7 @@ void CharNode::setUINode(UINode* uiNode){
     FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
     Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
     TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
-    nameNode->color = vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    nameNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     nameNode->text = "New Character";
     nameNode->setCenterHorizontalAlignment();
     nameNode->setTopVerticalAlignment();

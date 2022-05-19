@@ -353,9 +353,10 @@ void ClientCore::updateState() {
             all_chars_[enemyIPs[i - 1]] = pre_chars_[i];
         }
 
-        this->start_game_ = false;
+        start_game_ = false;
     }
     else {
+        bool show = false;
         for (auto& it : all_chars_) {
             unsigned long character_ip = it.first;
             CharNode* character = it.second;
@@ -369,6 +370,54 @@ void ClientCore::updateState() {
             character->health = state_pb_->getPlayerHP(character_ip);
             
             character->setName(character->name + "  " + to_string(character->health));
+            
+            if (character->health <= 0) {
+                // Load the font file:
+                FontLibrary* fontLibrary = new FontLibrary();
+                Font* title = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
+                delete(fontLibrary);
+                
+                // Create the base node that contains all the UI nodes:
+                UINode* baseNode = new UINode();
+                baseNode->screenPosition = vec2(0.5f);
+                baseNode->renderingOrder = 1000.0f;
+                engine_->addNode(baseNode);
+                
+                
+                
+                // Create the logo unit node that contains the logo image and a label:
+                UINode* logoUnitNode = new UINode();
+                baseNode->addChildNode(logoUnitNode);
+                
+                // Create the logo label node:
+                TextNode* logoLabelNode = new TextNode(title, 0.06f, 1.0f, 0.0f);
+                logoLabelNode->position = vec2(-0.165f, 0.0f);
+                logoLabelNode->color = vec4(1.0f);
+                
+                
+                if (character_ip != character_ip_) {
+                    if (!show) {
+                        logoLabelNode->text = "Victory !!";
+                        show = true;
+                    }
+                }
+                else {
+                    if (!show) {
+                        logoLabelNode->text = "Defeat !!";
+                        show = true;
+                    }
+                }
+                
+                logoLabelNode->setLeftHorizontalAlignment();
+                logoLabelNode->setTopVerticalAlignment();
+                logoUnitNode->addChildNode(logoLabelNode);
+                
+                SpriteNode* backgroundNode = new SpriteNode(vec2(10.0f));
+                backgroundNode->renderingOrder = -10.0f;
+                backgroundNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+                baseNode->addChildNode(backgroundNode);
+            }
+            
             
             if (state_pb_->hasMagicEvents(character_ip)) {
                 vector<gameDataPb::MagicPb> magicEvents = state_pb_->getMagicEvents(character_ip);
@@ -437,7 +486,7 @@ void ClientCore::closeConnect() {
     std::cout << std::endl;
     std::cout << "|-- Finsh - Close Connect --|" << std::endl;
     
-    this->client_socket_->closeSockets();
+    client_socket_->closeSockets();
 }
 
 
