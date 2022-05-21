@@ -62,7 +62,7 @@ void ServerCore::setTickEnd() {
     std::cout << "-----------------------------" << std::endl;
     
     gettimeofday(tick_end_, NULL);
-    tick_end_->tv_usec += 33000;
+    tick_end_->tv_usec += 15000;
     if (tick_end_->tv_usec >= 1000000) {
         tick_end_->tv_usec -= 1000000;
         tick_end_->tv_sec += 1;
