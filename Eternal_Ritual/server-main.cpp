@@ -1,5 +1,5 @@
-#include "common.hpp"
-#include "serverCore.hpp"
+#include "Network/ServerSide/common.hpp"
+#include "Core/ServerCore/serverCore.hpp"
 
 
 ServerCore* ServerCore::serverCore = nullptr;

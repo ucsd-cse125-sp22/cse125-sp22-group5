@@ -1,5 +1,5 @@
-#include "common.hpp"
-#include "clientCore.hpp"
+#include "Network/ClientSide/common.hpp"
+#include "Core/ClientCore/clientCore.hpp"
 
 
 ClientCore* ClientCore::clientCore = nullptr;
