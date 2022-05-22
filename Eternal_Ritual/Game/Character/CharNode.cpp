@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cmath>
 #include <glm/gtx/io.hpp>
+#include "Game/Map/MapSystemManager.hpp"
 
 using namespace std;
 using namespace glm;
@@ -175,6 +176,13 @@ void CharNode::moveCamera(vec2 mouseTranslation){
     }
     if (controlNode->eulerAngles.y < -180){
         controlNode->eulerAngles.y += 360;
+    }
+    HitInfo hitInfo;
+    if (MapSystemManager::Instance()->hitTest(this->controlNode->getWorldPosition(), this->cameraNode->getWorldPosition() + normalize(this->cameraNode->getWorldPosition() - this->controlNode->getWorldPosition()) * 0.3f, hitInfo)) {
+        this->cameraNode->position.x = std::max(-length(hitInfo.hit_point - this->controlNode->getWorldPosition()) + 0.1f, -2.5f);
+    }
+    else {
+        this->cameraNode->position.x = -2.5;
     }
 }
 void CharNode::moveFront(){
