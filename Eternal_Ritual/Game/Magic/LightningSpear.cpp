@@ -87,7 +87,6 @@ void LightningSpear::updateMagic(){
             Engine::main->playAnimation(lightningSpearLightIntensity2);
             lightningSpearLightIntensity2->setCompletionHandler([&] {
                 this->light->isDisabled = true;
-                start = false;
             });
         });
         Engine::main->playAnimation(lightningSpearLightIntensity);
@@ -112,6 +111,11 @@ void LightningSpear::play(CharNode* character, int seed){
         createSpear->setVec3Animation(&this->spear->initialScale, vec3(4, 1, 0.4));
         createSpear->setEaseInEaseOutTimingMode();
         Engine::main->playAnimation(createSpear);
+        Animation* lightningSpearCoolDown = new Animation("lightning spear cool down " + to_string(reinterpret_cast<long>(this)), 3);
+        Engine::main->playAnimation(lightningSpearCoolDown);
+        lightningSpearCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
     }
 }
 void LightningSpear::setThrew() {

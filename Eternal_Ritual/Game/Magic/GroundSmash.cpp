@@ -27,8 +27,8 @@ GroundSmash::GroundSmash(){
     this->stopTime = 3.0f;
     this->waitTime = 0.0f;
     
-    this->raiseTime = 0.5f;
-    this->holdTime = 1.0f;
+    this->raiseTime = 0.1f;
+    this->holdTime = 0.1f;
     this->smashTime = 0.33f;
     this->downTime = 0.5f;
     this->recoverTime = 0.5f;

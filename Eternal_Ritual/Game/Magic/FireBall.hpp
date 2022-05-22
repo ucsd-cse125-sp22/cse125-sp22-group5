@@ -34,6 +34,7 @@ public:
     Animation* createFlame;
     FireBall();
     ~FireBall() override = default;
+    void explode();
     void updateMagic() override;
     void play(CharNode* character, int seed) override;
     void tryDamage(CharNode* character) override;

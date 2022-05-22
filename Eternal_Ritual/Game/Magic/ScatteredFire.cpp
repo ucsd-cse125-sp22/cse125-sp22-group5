@@ -50,7 +50,7 @@ void ScatteredFire::play(CharNode* character, int seed){
             }
         });
         Engine::main->playAnimation(playNext);
-        Animation* stop = new Animation("stop scattered fire " + to_string(reinterpret_cast<long>(&balls[0])), 4);
+        Animation* stop = new Animation("stop scattered fire " + to_string(reinterpret_cast<long>(&balls[0])), 6);
         stop->setCompletionHandler([&] {
             start = false;
         });

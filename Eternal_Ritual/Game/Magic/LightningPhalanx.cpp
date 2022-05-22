@@ -37,6 +37,7 @@ LightningPhalanx::LightningPhalanx() {
 }
 void LightningPhalanx::play(CharNode* character, int seed){
     if (!start){
+        start = true;
         this->caster = character;
         for (int k = 0; k < spears.size(); k++) {
             this->spearNodes[k]->addChildNode(spears[k]);
@@ -47,6 +48,11 @@ void LightningPhalanx::play(CharNode* character, int seed){
             playNextSpear(0);
         });
         Engine::main->playAnimation(playNext);
+        Animation* lightningPhalanxCoolDown = new Animation("lightning phalanx cool down " + to_string(reinterpret_cast<long>(this)), 7);
+        Engine::main->playAnimation(lightningPhalanxCoolDown);
+        lightningPhalanxCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
     }
 }
 void LightningPhalanx::playNextSpear(int index){

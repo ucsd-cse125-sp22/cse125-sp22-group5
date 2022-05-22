@@ -186,7 +186,7 @@ void DragonMagic::load() {
 DragonMagic::DragonMagic(Node* characterNode) {
     if (!loaded) { load(); loaded = true; }
     this->actionName = "dragon attack";
-    this->stopTime = 5.0f;
+    this->stopTime = 3.0f;
     this->damage = 50;
     this->ID = DragonMagic::UID;
     DragonMagic::UID += 1;
@@ -391,7 +391,15 @@ void DragonMagic::play() {
 }
 
 void DragonMagic::play(CharNode * character, int seed) {
-    play();
+    if (!start) {
+        start = true;
+        play();
+        Animation* dragonCoolDown = new Animation("dragon cool down " + to_string(reinterpret_cast<long>(this)), 5.5);
+        Engine::main->playAnimation(dragonCoolDown);
+        dragonCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
+    }
 }
 
 void DragonMagic::update() {

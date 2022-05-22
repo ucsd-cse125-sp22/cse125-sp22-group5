@@ -21,6 +21,7 @@ public:
     bool canDamage;
     ParticleNode* flame;
     ParticleNode* spark;
+    LightNode* light;
     Flame();
     ~Flame() override = default;
     void updateMagic() override {}

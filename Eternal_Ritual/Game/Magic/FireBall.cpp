@@ -114,30 +114,6 @@ void FireBall::updateMagic(){
         velocity += acceleration;
         this->hitWall();
     }
-    if (exploded) {
-        exploded = false;
-        spark->isDisabled = false;
-        spark->reset();
-        explosion->reset();
-        explosion->isDisabled = false;
-        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.15);
-        fireBallLightIntensity->setEaseInTimingMode();
-        fireBallLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(40, 16, 0));
-        fireBallLightIntensity->setCompletionHandler([&] {
-            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.15);
-            fireBallLightIntensity2->setEaseOutTimingMode();
-            fireBallLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
-            Engine::main->playAnimation(fireBallLightIntensity2);
-            fireBallLightIntensity2->setCompletionHandler([&] {
-                canDamage = true;
-                start = false;
-                this->light->isDisabled = true;
-            });
-        });
-        Engine::main->playAnimation(fireBallLightIntensity);
-        fireball->isDisabled = true;
-        flame->isDisabled = true;
-    }
 }
 void FireBall::play(CharNode* character, int seed){
     if (!start){
@@ -162,7 +138,35 @@ void FireBall::play(CharNode* character, int seed){
         this->light->colorFactor = vec3(1, 0.4, 0);
         Engine::main->playAnimation(createFlame);
         Engine::main->playAnimation(createFireball);
+        Animation* fireBallCoolDown = new Animation("fire ball cool down " + to_string(reinterpret_cast<long>(this)), 5.5);
+        Engine::main->playAnimation(fireBallCoolDown);
+        fireBallCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
     }
+}
+void FireBall::explode() {
+    exploded = true;
+    spark->isDisabled = false;
+    spark->reset();
+    explosion->reset();
+    explosion->isDisabled = false;
+    Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.15);
+    fireBallLightIntensity->setEaseInTimingMode();
+    fireBallLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(40, 16, 0));
+    fireBallLightIntensity->setCompletionHandler([&] {
+        Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.15);
+        fireBallLightIntensity2->setEaseOutTimingMode();
+        fireBallLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
+        Engine::main->playAnimation(fireBallLightIntensity2);
+        fireBallLightIntensity2->setCompletionHandler([&] {
+            canDamage = true;
+            this->light->isDisabled = true;
+        });
+    });
+    Engine::main->playAnimation(fireBallLightIntensity);
+    fireball->isDisabled = true;
+    flame->isDisabled = true;
 }
 void FireBall::setThrew() {
     threwOut = true;
@@ -183,8 +187,10 @@ void FireBall::setThrew() {
     threw->setCompletionHandler([&] {
         if (start) {
             canDamage = false;
-            exploded = true;
             explodeDamage = true;
+            if (!exploded) {
+                explode();
+            }
         }
     });
     Engine::main->playAnimation(threw);
@@ -194,8 +200,10 @@ void FireBall::tryDamage(CharNode *character) {
         if (character->hitbox->testHit(this->getWorldPosition(), vec3(vec4(this->position + this->velocity, 1) * this->getWorldTransform()))) {
             character->receiveDamage(this->damage);
             canDamage = false;
-            exploded = true;
             explodeDamage = true;
+            if (!exploded) {
+                explode();
+            }
         }
     }
     if (explodeDamage && canDamage) {
@@ -211,9 +219,11 @@ void FireBall::hitWall() {
         this->updateTransform();
         if (MapSystemManager::Instance()->hitTest(this->position, this->position + this->velocity, hitInfo)) {
             canDamage = false;
-            exploded = true;
             explodeDamage = true;
             threwOut = false;
+            if (!exploded) {
+                explode();
+            }
         }
     }
 }
