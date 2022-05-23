@@ -20,6 +20,8 @@ using namespace glm;
 FireBall::FireBall(){
     start = false;
     canDamage = false;
+    this->cooldown = 0;
+    this->cost = 0;
     this->position = vec3(0);
     this->acceleration = vec3(0, -0.01, 0);
     this->velocityError = vec3(0);
@@ -29,7 +31,7 @@ FireBall::FireBall(){
     this->scale = vec3(1.0f);
     this->parent = NULL;
     this->isDisabled = false;
-    this->damage = 1;
+    this->damage = 1000;
     fireball = new ParticleNode(60, 0.1f, 0.0f);
     fireball->renderingOrder = 12.0f;
     fireball->isAdditive = true;
@@ -117,6 +119,8 @@ void FireBall::updateMagic(){
 }
 void FireBall::play(CharNode* character, int seed){
     if (!start){
+        this->removeFromParentNode();
+        character->rightHand->addChildNode(this);
         this->seed = seed;
         this->explosion->isDisabled = true;
         this->caster = character;
@@ -138,11 +142,12 @@ void FireBall::play(CharNode* character, int seed){
         this->light->colorFactor = vec3(1, 0.4, 0);
         Engine::main->playAnimation(createFlame);
         Engine::main->playAnimation(createFireball);
-        Animation* fireBallCoolDown = new Animation("fire ball cool down " + to_string(reinterpret_cast<long>(this)), 5.5);
+        Animation* fireBallCoolDown = new Animation("fire ball cool down " + to_string(reinterpret_cast<long>(this)), this->cooldown);
         Engine::main->playAnimation(fireBallCoolDown);
         fireBallCoolDown->setCompletionHandler([&] {
             start = false;
         });
+        this->availableTime = Engine::main->getTime() + cooldown;
     }
 }
 void FireBall::explode() {

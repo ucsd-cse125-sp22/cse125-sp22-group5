@@ -39,6 +39,9 @@ public:
     std::string actionName;
     float stopTime;
     float waitTime;
+    float cooldown;
+    float cost;
+    float availableTime;
     int damage;
     int seed;
     CharNode* caster;

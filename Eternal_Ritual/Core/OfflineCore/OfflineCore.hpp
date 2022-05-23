@@ -70,8 +70,8 @@ private:
     CharNode* character_;
     
     // Magic
-    std::unordered_map<int, Magic::Type> key_to_magic_;
-    std::unordered_map<Magic::Type, int> magic_to_key_;
+    std::unordered_map<int, int> key_to_magic_;
+    std::unordered_map<int, int> magic_to_key_;
     std::unordered_set<BaseMagic*> all_magics_;
     
     // Enemy

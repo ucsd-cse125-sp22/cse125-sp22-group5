@@ -20,7 +20,9 @@ using namespace glm;
 ScatteredFire::ScatteredFire() {
     start = false;
     this->actionName = "cast magic 3";
-    this->stopTime = 2.0f;
+    this->stopTime = 1.8f;
+    this->cooldown = 5;
+    this->cost = 30;
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
@@ -50,7 +52,7 @@ void ScatteredFire::play(CharNode* character, int seed){
             }
         });
         Engine::main->playAnimation(playNext);
-        Animation* stop = new Animation("stop scattered fire " + to_string(reinterpret_cast<long>(&balls[0])), 6);
+        Animation* stop = new Animation("stop scattered fire " + to_string(reinterpret_cast<long>(&balls[0])), this->cooldown);
         stop->setCompletionHandler([&] {
             start = false;
         });

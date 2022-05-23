@@ -116,6 +116,7 @@ void LightningSpear::play(CharNode* character, int seed){
         lightningSpearCoolDown->setCompletionHandler([&] {
             start = false;
         });
+        this->availableTime = Engine::main->getTime() + cooldown;
     }
 }
 void LightningSpear::setThrew() {

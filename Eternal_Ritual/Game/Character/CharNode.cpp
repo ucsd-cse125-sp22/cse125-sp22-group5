@@ -19,6 +19,7 @@ using namespace glm;
 CharNode::CharNode(vec3 position){
     this->position = position;
     this->moveDirection = vec3(0);
+    this->displacement = vec3(0);
     
     this->hitbox = new Hitbox(this->position, vec3(0.8, 1.6, 0.8));
     this->uninjurable = false;
@@ -32,9 +33,12 @@ CharNode::CharNode(vec3 position){
     this->isLocked = false;
     this->refreshed = true;
     this->uiNode = 0;
-    this->allowAction = true;
+    this->state = CharState::IDLE;
+    this->currMagic = 0;
+    this->scrollValue = 0;
     
     this->health = 2000;
+    this->mana = 100;
 }
 CharNode::~CharNode(){
     
@@ -86,15 +90,15 @@ float calcAngle(vec3 a, vec3 b){
 
 void CharNode::lock(vector<CharNode*>& targets){
     CharNode* target = NULL;
-    float targetDist;
+    float targetDist = MAXFLOAT;
     vec3 cameraPos = cameraNode->getWorldPosition();
     vec3 cameraFront = controlNode->getFrontVectorInWorld();
     for (int i = 0; i < targets.size(); i++) {
         vec3 targetPos = targets[i]->getWorldPosition() + vec3(0, 0.2f, 0);
         vec3 diffVec = targetPos - cameraPos;
         float angle = acos(dot(normalize(diffVec), normalize(cameraFront)));
-        if (angle < radians(30.0f) && length(diffVec) < 10){
-            if (target == NULL || targetDist > diffVec.length()){
+        if (angle < radians(30.0f) && length(diffVec) < 20){
+            if (targetDist > diffVec.length()){
                 target = targets[i];
                 targetDist = diffVec.length();
             }
@@ -132,9 +136,18 @@ vec3 CharNode::getLockAngle(){
     }
     return eularAngle;
 }
-void CharNode::addAnimator(string name, string file){
-    this->modelNode->loadAnimator(name, file);
+Animator* CharNode::addAnimator(string name, string file){
     this->animatorNames.push_back(name);
+    return this->modelNode->loadAnimator(name, file);
+}
+Animator* CharNode::getAnimator(std::string name){
+    return this->modelNode->getAnimator(name);
+}
+void CharNode::playAnimators(unsigned int mask, float fadeIn, float fadeOut) {
+    this->modelNode->playAnimators(mask, fadeIn, fadeOut);
+}
+void CharNode::stopAnimators(unsigned int mask, float fadeOut) {
+    this->modelNode->stopAnimators(mask, fadeOut);
 }
 void CharNode::stopAndPlay(string name, float fade_in, float fade_out){
     for (int i = 0; i < this->animatorNames.size(); i++){
@@ -186,22 +199,25 @@ void CharNode::moveCamera(vec2 mouseTranslation){
     }
 }
 void CharNode::moveFront(){
-    if (allowAction){
-        this->moveDirection += vec3(this->controlNode->getFrontVectorInWorld().x, 0, this->controlNode->getFrontVectorInWorld().z);
+    if (state <= CharState::ROLLING){
+        this->moveDirection += vec3(this->controlNode->getFrontVectorInWorld());
+        this->moveDirection.y = 0;
         this->keyDirection = Direction::FRONT;
         refreshed = false;
     }
 }
 void CharNode::moveBack(){
-    if (allowAction){
-        this->moveDirection += vec3(this->controlNode->getBackVectorInWorld().x, 0, this->controlNode->getBackVectorInWorld().z);
+    if (state <= CharState::ROLLING){
+        this->moveDirection += vec3(this->controlNode->getBackVectorInWorld());
+        this->moveDirection.y = 0;
         this->keyDirection = Direction::BACK;
         refreshed = false;
     }
 }
 void CharNode::moveLeft(){
-    if (allowAction){
-        this->moveDirection += vec3(this->controlNode->getLeftVectorInWorld().x, 0, this->controlNode->getLeftVectorInWorld().z);
+    if (state <= CharState::ROLLING){
+        this->moveDirection += vec3(this->controlNode->getLeftVectorInWorld());
+        this->moveDirection.y = 0;
         if (refreshed){
             keyDirection = Direction::LEFT;
         }else if (this->keyDirection == Direction::FRONT){
@@ -213,11 +229,12 @@ void CharNode::moveLeft(){
     }
 }
 void CharNode::moveRight(){
-    if (allowAction){
-        this->moveDirection += vec3(this->controlNode->getRightVectorInWorld().x, 0, this->controlNode->getRightVectorInWorld().z);
+    if (state <= CharState::ROLLING){
+        this->moveDirection += vec3(this->controlNode->getRightVectorInWorld());
+        this->moveDirection.y = 0;
         if (refreshed){
             keyDirection = Direction::RIGHT;
-        }else if (this->keyDirection == Direction::RIGHT){
+        }else if (this->keyDirection == Direction::FRONT){
             keyDirection = Direction::FRONTRIGHT;
         }else if (this->keyDirection == Direction::BACK){
             keyDirection = Direction::BACKRIGHT;
@@ -226,41 +243,46 @@ void CharNode::moveRight(){
     }
 }
 void CharNode::predictMoveTarget(){
-    if (length(this->moveDirection) != 0){
-        this->characterTargetPosition += this->moveDirection * 0.1f;
-        if (this->isLocked){
+    this->displacement *=  0.85f;
+    if (length(this->moveDirection) > 0){
+        if (this->isLocked && (state != CharState::ROLLING)){
+            this->displacement += normalize(this->moveDirection) * 0.1f;
+            this->characterTargetPosition += this->displacement * 0.1f;
             this->characterTargetEulerAngles = vec3(0, this->getLockAngle().y + 90.0f, 0);
         }else{
+            this->displacement += normalize(this->moveDirection) * 0.15f;
+            this->characterTargetPosition += this->displacement * 0.1f;
             if (this->moveDirection.x >= 0){
-                this->characterTargetEulerAngles = vec3(0, degrees(calcAngle(this->moveDirection, vec3(0,0,1))), 0);
+                this->characterTargetEulerAngles = vec3(0, degrees(calcAngle(this->displacement, vec3(0,0,1))), 0);
             }else{
-                this->characterTargetEulerAngles = -vec3(0, degrees(calcAngle(this->moveDirection, vec3(0,0,1))), 0);
+                this->characterTargetEulerAngles = -vec3(0, degrees(calcAngle(this->displacement, vec3(0,0,1))), 0);
             }
         }
     }
-    this->moveDirection = vec3(0);
+    if (state < CharState::ROLLING){
+        this->moveDirection = vec3(0);
+    }
 
 }
 
 void CharNode::updatePosition(){
-    if (allowAction){
+    if (state <= CharState::COMBATING){
         predictMoveTarget();
-        if(length(this->characterTargetPosition - this->position) > 0.1f){
-            if (this->isLocked){
-                if (this->keyDirection == Direction::LEFT){
-                    this->stopAndPlay("left strafe", 0.2f, 0.4f);
-                }else if (this->keyDirection == Direction::RIGHT){
-                    this->stopAndPlay("right strafe", 0.2f, 0.4f);
-                }else if (this->keyDirection == Direction::BACK){
-                    this->stopAndPlay("back run", 0.2f, 0.4f);
+        this->stopAnimators(0x000003fc, 0.4);
+        this->stopAnimators(Bitmask::RUNNING, 0.4f);
+        if (state < CharState::ROLLING) {
+            if(length(this->characterTargetPosition - this->position) > 0.2f){
+                if (this->isLocked){
+                    this->playAnimators(this->keyDirection, 0.1f);
+                    state = CharState::MOVING;
                 }else{
-                    this->stopAndPlay("running", 0.2f, 0.4f);
+                    this->playAnimators(Bitmask::RUNNING, 0.1f);
+                    state = CharState::MOVING;
                 }
             }else{
-                this->stopAndPlay("running", 0.2f, 0.4f);
+                this->playAnimators(1, 0.1);
+                state = CharState::IDLE;
             }
-        }else{
-            this->stopAndPlay("idle", 0.2f, 0.2f);
         }
         this->position += (this->characterTargetPosition - this->position) * 0.1f;
         this->hitbox->updatePosition(this->position);
@@ -301,10 +323,13 @@ CharNode* CharNode::copy(vec3 position) {
     node->isDisabled = this->isDisabled;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
+    node->state = this->state;
+    node->modelNode = this->modelNode->copy();
+    node->uiNode = this->uiNode->copy()->convertToUINode();
+    node->controlNode = this->controlNode->copy();
+    node->health = this->health;
+    node->stamina = this->stamina;
 
-    for(unsigned int i = 0; i < this->animators.size(); i += 1) {
-        node->animators.push_back(this->animators[i]->engineCopyAnimator());
-    }
     for(unsigned int i = 0; i < this->animatorNames.size(); i += 1) {
         node->animatorNames.push_back(this->animatorNames[i]);
     }
@@ -317,6 +342,9 @@ CharNode* CharNode::copy(vec3 position) {
             node->modelNode = node->childNodes[i];
         }
     }
+    node->addChildNode(node->modelNode);
+    node->addChildNode(node->controlNode);
+    node->addChildNode(node->uiNode);
     node->headTop = node->generateBoneNode("head");
     node->rightHand = node->generateBoneNode("Weapon_r");
 //    node->cameraNode = this->cameraNode;
@@ -324,29 +352,78 @@ CharNode* CharNode::copy(vec3 position) {
 }
 
 
-void CharNode::addMagics(Magic::Type magicKey, BaseMagic* magic){
-    this->magics[magicKey] = magic;
+void CharNode::addMagics(BaseMagic* magic){
+    this->magics.push_back(magic);
 }
 
-BaseMagic* CharNode::rmMagics(Magic::Type magicKey) {
-    if (this->magics.count(magicKey)) {
-        BaseMagic* temp = this->magics[magicKey];
-        this->magics.erase(magicKey);
-        return temp;
+BaseMagic* CharNode::rmMagics() {
+    BaseMagic* temp = this->magics[currMagic];
+    this->magics.erase(this->magics.begin()+currMagic);
+    return temp;
+}
+
+void CharNode::chooseNextMagic() {
+    this->currMagic++;
+    this->currMagic %= this->magics.size();
+}
+
+void CharNode::chooseLastMagic() {
+    this->currMagic+= this->magics.size();
+    this->currMagic--;
+    this->currMagic %= this->magics.size();
+}
+
+void CharNode::scrollMagic(float acceleration) {
+    scrollValue += std::min(acceleration, 0.5f);
+    if (abs(scrollValue) > 2) {
+        this->currMagic += round(scrollValue / abs(scrollValue)) + this->magics.size();
+        this->currMagic = this->currMagic % this->magics.size();
+        this->scrollValue = 0;
     }
-    return nullptr;
 }
 
+void CharNode::setCurrMagic(int index) {
+    if (index < this->magics.size()) {
+        this->currMagic = index;
+        scrollValue = 0;
+    }
+}
 
-void CharNode::castMagic(Magic::Type magicKey){
-    if (allowAction && this->magics.count(magicKey) && !this->magics[magicKey]->start){
-        BaseMagic* magic = this->magics[magicKey];
-        allowAction = false;
-        this->stopAndPlay(magic->actionName, 0.2f, 0.5f);
-        magic->play(this, 30);
-        Animation* resume = new Animation(this->name + " resume", magic->stopTime);
+void CharNode::castMagic(){
+    if (state < CharState::ROLLING && !this->magics[currMagic]->start){
+        BaseMagic* magic = this->magics[currMagic];
+        if (mana > magic->cost && Engine::main->getTime() > magic->availableTime) {
+            mana -= magic->cost;
+            state = CharState::COMBATING;
+            this->moveDirection = vec3(0);
+            stopAnimators(0xfffffffe, 0.2);
+            this->getAnimator(magic->actionName)->play(0.5);
+            magic->play(this, 30);
+            Animation* resume = new Animation(this->name + " resume", magic->stopTime);
+            resume->setCompletionHandler([&]{
+                this->state = CharState::IDLE;
+            });
+            Engine::main->playAnimation(resume);
+            cout << "remaining mana: " << mana << endl;
+        }
+    }
+}
+
+void CharNode::roll() {
+    if (state < CharState::ROLLING) {
+        state = CharState::ROLLING;
+        stopAnimators(0xfffffffe, 0.2);
+        playAnimators(Bitmask::ROLL, 0.2);
+        Animation* resume = new Animation(this->name + " resume", 0.7);
+        this->moveDirection = this->modelNode->getRightVectorInWorld();
+        this->moveDirection.y = 0;
+        this->moveDirection = normalize(this->moveDirection);
+        this->uninjurable = true;
         resume->setCompletionHandler([&]{
-            this->allowAction = true;
+            this->state = CharState::IDLE;
+            this->moveDirection = vec3(0);
+            stopAnimators(Bitmask::ROLL, 0.3);
+            this->uninjurable = false;
         });
         Engine::main->playAnimation(resume);
     }
@@ -354,7 +431,29 @@ void CharNode::castMagic(Magic::Type magicKey){
 
 
 void CharNode::receiveDamage(int damage){
-    if (!uninjurable)
+    if (!uninjurable && this->state < CharState::DAMAGED) {
         this->health -= damage;
+        state = CharState::DAMAGED;
+        stopAnimators(0xffff8000, 0.2);
+        playAnimators(Bitmask::DAMAGED, 0.1);
+        this->state = CharState::COMBATING;
+        this->displacement = vec3(0);
+        this->moveDirection = vec3(0);
+        Animation* resume = new Animation(this->name + " resume", 0.5);
+        this->uninjurable = true;
+        resume->setCompletionHandler([&]{
+            this->state = CharState::IDLE;
+            stopAnimators(Bitmask::DAMAGED, 0.2);
+            this->uninjurable = false;
+            if (this->health <= 0) {
+                stopAnimators(0xffffffff, 0.2);
+                playAnimators(Bitmask::DEAD, 0.1);
+                this->state = CharState::DEAD;
+                this->uiNode->isDisabled = true;
+            }
+        });
+        Engine::main->playAnimation(resume);
+
+    }
     cout << this->name << " health " << this->health << endl;
 }

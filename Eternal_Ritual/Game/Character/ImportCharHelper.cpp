@@ -118,25 +118,54 @@ void importCharModel(CharNode* character) {
 
 
 void importCharAnimation(CharNode* character) {
-    character->addAnimator("idle", "/Resources/Game/Character/Animations/Idle.dae");
-    character->addAnimator("running", "/Resources/Game/Character/Animations/Running.dae");
-    character->addAnimator("back run", "/Resources/Game/Character/Animations/Walk Bck.dae");
-    character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Left Strafe.dae");
-    character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.dae");
-    character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll Fwd.dae");
-    character->modelNode->getAnimator("roll")->repeats = false;
-    character->addAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
-    character->modelNode->getAnimator("dragon attack")->repeats = false;
-    character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
-    character->modelNode->getAnimator("cast magic 1")->repeats = false;
-    character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/CastMagic2.dae");
-    character->modelNode->getAnimator("cast magic 2")->repeats = false;
-    character->addAnimator("cast magic 3", "/Resources/Game/Character/Animations/CastMagic3.dae");
-    character->modelNode->getAnimator("cast magic 3")->repeats = false;
-    character->addAnimator("cast magic 4", "/Resources/Game/Character/Animations/CastMagic4.dae");
-    character->modelNode->getAnimator("cast magic 4")->repeats = false;
-    character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.dae");
-    character->modelNode->getAnimator("smash ground")->repeats = false;
+    Animator* idle = character->addAnimator("idle", "/Resources/Game/Character/Animations/Idle.dae");
+    idle->play(0.2);
+    idle->animatorBitMask = Bitmask::IDLE;
+    Animator* running = character->addAnimator("running", "/Resources/Game/Character/Animations/Running.dae");
+    running->animatorBitMask = Bitmask::RUNNING;
+    Animator* fwdWalk = character->addAnimator("fwd walk", "/Resources/Game/Character/Animations/Walk Fwd.dae");
+    fwdWalk->animatorBitMask = Bitmask::WALKFWD;
+    Animator* backWalk = character->addAnimator("back walk", "/Resources/Game/Character/Animations/Walk Bck.dae");
+    backWalk->animatorBitMask = Bitmask::WALKBCK;
+    Animator* leftStrafe = character->addAnimator("left strafe", "/Resources/Game/Character/Animations/Left Strafe.dae");
+    leftStrafe->animatorBitMask = Bitmask::WALKLEFT;
+    Animator* rightStrafe = character->addAnimator("right strafe", "/Resources/Game/Character/Animations/Right Strafe.dae");
+    rightStrafe->animatorBitMask = Bitmask::WALKRIGHT;
+    Animator* frontRight = character->addAnimator("front right", "/Resources/Game/Character/Animations/Front Right.dae");
+    frontRight->animatorBitMask = Bitmask::WALKFR;
+    Animator* frontLeft = character->addAnimator("front left", "/Resources/Game/Character/Animations/Front Left.dae");
+    frontLeft->animatorBitMask = Bitmask::WALKFL;
+    Animator* backLeft = character->addAnimator("back left", "/Resources/Game/Character/Animations/Back Left.dae");
+    backLeft->animatorBitMask = Bitmask::WALKBL;
+    Animator* backRight = character->addAnimator("back right", "/Resources/Game/Character/Animations/Back Right.dae");
+    backRight->animatorBitMask = Bitmask::WALKBR;
+    Animator* roll = character->addAnimator("roll", "/Resources/Game/Character/Animations/Roll Fwd.dae");
+    roll->animatorBitMask = Bitmask::ROLL;
+    roll->speed = 1.5;
+    roll->repeats = false;
+    Animator* dragonAttack = character->addAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
+    dragonAttack->animatorBitMask = Bitmask::DRAGON_ATT;
+    dragonAttack->repeats = false;
+    Animator* castMagic1 = character->addAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
+    castMagic1->animatorBitMask = Bitmask::MAGIC_CAST_1;
+    castMagic1->repeats = false;
+    Animator* castMagic2 = character->addAnimator("cast magic 2", "/Resources/Game/Character/Animations/CastMagic2.dae");
+    castMagic2->animatorBitMask = Bitmask::MAGIC_CAST_2;
+    castMagic2->repeats = false;
+    Animator* castMagic3 = character->addAnimator("cast magic 3", "/Resources/Game/Character/Animations/CastMagic3.dae");
+    castMagic3->animatorBitMask = Bitmask::MAGIC_CAST_3;
+    castMagic3->repeats = false;
+    Animator* damaged = character->addAnimator("damaged", "/Resources/Game/Character/Animations/Damaged.dae");
+    damaged->animatorBitMask = Bitmask::DAMAGED;
+    damaged->repeats = false;
+    Animator* death = character->addAnimator("death", "/Resources/Game/Character/Animations/Death.dae");
+    death->animatorBitMask = Bitmask::DEAD;
+    death->repeats = false;
+    death->clamps = true;
+//    Animator* castMagic4 = character->addAnimator("cast magic 4", "/Resources/Game/Character/Animations/CastMagic4.dae");
+//    character->modelNode->getAnimator("cast magic 4")->repeats = false;
+//    Animator* castMagic5 = character->addAnimator("smash ground", "/Resources/Game/Character/Animations/Smash Ground.dae");
+//    character->modelNode->getAnimator("smash ground")->repeats = false;
 }
 
 
