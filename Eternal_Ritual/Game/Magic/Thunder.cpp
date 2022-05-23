@@ -20,13 +20,13 @@ Thunder::Thunder() {
     start = false;
     canDamage = false;
     this->actionName = "cast magic 1";
-    this->stopTime = 2.0f;
+    this->stopTime = 3.0f;
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
     for (int k = 0; k < 12; k++) {
         ThunderShock* thunder = new ThunderShock();
-        thunder->position.z = glm::log2((float)k) / 2 + k;
+        thunder->position.z = glm::log2((float)k + 2) / 2 + k;
         this->addChildNode(thunder);
         thunders.push_back(thunder);
     }

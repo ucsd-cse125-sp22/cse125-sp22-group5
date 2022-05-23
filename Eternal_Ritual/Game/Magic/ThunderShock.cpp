@@ -74,11 +74,13 @@ ThunderShock::ThunderShock() {
 
 void ThunderShock::play(CharNode* character, int seed){
     if (!start){
+        this->start = true;
         this->caster = character;
         this->light->colorFactor = vec3(20.0f, 20.0f, 2.0f);
         this->updateTransform();
         this->base->isDisabled = false;
         this->light->isDisabled = false;
+        this->canDamage = false;
         this->base->reset();
         Animation* shock = new Animation("shock " + to_string(reinterpret_cast<long>(this)), 0.5);
         shock->setCompletionHandler([&] {
@@ -93,6 +95,8 @@ void ThunderShock::play(CharNode* character, int seed){
             dim->setVec3Animation(&this->light->colorFactor, vec3(0));
             dim->setCompletionHandler([&] {
                 this->light->isDisabled = true;
+                this->start = false;
+                this->canDamage = false;
             });
             Engine::main->playAnimation(dim);
         });
@@ -104,7 +108,6 @@ void ThunderShock::tryDamage(CharNode *character) {
         vec3 position = this->getWorldPosition() * vec3(1, 0, 1);
         if (character->hitbox->testHit(position + vec3(0, -99999, 0), position + vec3(0, 99999, 0))) {
             character->receiveDamage(this->damage);
-            canDamage = false;
         }
         if (character->hitbox->testSphere(this->getWorldPosition(), 0.1)) {
             character->receiveDamage(this->damage);
