@@ -142,14 +142,14 @@ void OfflineCore::loadMagic() {
     
     key_to_magic_[KEY_1] = magicIndex;
     magic_to_key_[magicIndex] = KEY_1;
-    character_->addMagics(stoneBlast);
-    magicIndex++;
-    all_magics_.insert(stoneBlast);
-    key_to_magic_[KEY_2] = magicIndex;
-    magic_to_key_[magicIndex] = KEY_2;
     character_->addMagics(fireBall);
     magicIndex++;
     all_magics_.insert(fireBall);
+    key_to_magic_[KEY_2] = magicIndex;
+    magic_to_key_[magicIndex] = KEY_2;
+    character_->addMagics(stoneBlast);
+    magicIndex++;
+    all_magics_.insert(stoneBlast);
     key_to_magic_[KEY_3] = magicIndex;
     magic_to_key_[magicIndex] = KEY_3;
     character_->addMagics(thunder);
