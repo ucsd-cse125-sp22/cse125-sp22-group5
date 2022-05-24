@@ -62,8 +62,8 @@
             filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "CharNode::moveCamera(mouseTranslation)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "CharNode::moveCamera(mouseTranslation)"
             landmarkType = "7">
          </BreakpointContent>

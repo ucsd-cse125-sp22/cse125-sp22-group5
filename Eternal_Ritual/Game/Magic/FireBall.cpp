@@ -139,7 +139,10 @@ void FireBall::updateMagic(){
 void FireBall::play(CharNode* character, int seed){
     if (!start){
         this->removeFromParentNode();
-        character->rightHand->addChildNode(this);
+        Node* staffTop = new Node();
+        staffTop->position.y = 1;
+        character->rightHand->addChildNode(staffTop);
+        staffTop->addChildNode(this);
         this->seed = seed;
         this->explosion->isDisabled = true;
         this->caster = character;
