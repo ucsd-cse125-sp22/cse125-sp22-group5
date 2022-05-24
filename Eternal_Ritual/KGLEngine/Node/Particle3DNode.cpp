@@ -12,17 +12,8 @@ using namespace std;
 using namespace glm;
 
 
-Particle3DNode::Particle3DNode(string modelFile, unsigned int birthrate, float duration, float durationVariation) {
+Particle3DNode::Particle3DNode(unsigned int birthrate, float duration, float durationVariation) {
     this->mesh = nullptr;
-    Assimp::Importer importer;
-    unsigned int flags = aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace;
-    const aiScene* scene = importer.ReadFile(Engine::main->workingDirectory + modelFile, flags);
-    if(scene == NULL || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        cout << "\nFailed to load the 3D model file: "
-        << Engine::main->workingDirectory + modelFile << "!\n" << endl;
-        exit(0);
-    }
-    this->engineProcessNode2(scene->mRootNode, scene);
     this->engineInitializeNode();
     this->currentParticle3DNode = this;
     this->hasUnfreezableGeometries = true;
@@ -70,22 +61,33 @@ Particle3DNode::Particle3DNode(string modelFile, unsigned int birthrate, float d
     this->spriteSheetAnimationInitialFrameRange = 0;
     this->spriteSheetAnimationFPS = 0;
     this->spriteSheetAnimationFPSVariation = 0;
-    float amount = birthrate * ((unsigned int)glm::floor(duration + durationVariation) + 1);
-    this->renderer = new Particle3DRenderer(amount, this->mesh);
     this->shader = new Particle3DShader(this);
-    this->renderer->setShader(this->shader);
+}
+void Particle3DNode::loadModelFile(std::string file) {
+    Assimp::Importer importer;
+    unsigned int flags = aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace;
+    const aiScene* scene = importer.ReadFile(Engine::main->workingDirectory + file, flags);
+    if(scene == NULL || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        cout << "\nFailed to load the 3D model file: "
+        << Engine::main->workingDirectory + file << "!\n" << endl;
+        exit(0);
+    }
+    this->engineProcessNode2(scene->mRootNode, scene);
 }
 void Particle3DNode::engineProcessNode2(aiNode *node, const aiScene *scene) {
     for(unsigned int i = 0; i < node->mNumMeshes; i += 1) {
         this->mesh = scene->mMeshes[node->mMeshes[i]];
+        this->renderer = new Particle3DRenderer(birthrate * ((unsigned int)glm::floor(duration + durationVariation) + 1), this->mesh);
+        this->renderer->setShader(this->shader);
     }
     for(unsigned int i = 0; i < node->mNumChildren; i += 1) {
         this->engineProcessNode2(node->mChildren[i], scene);
     }
 }
 Node* Particle3DNode::copy() {
-    assert(false);
-    Particle3DNode* node = new Particle3DNode(" ", this->birthrate, this->duration, this->durationVariation);// todo change model file
+    Particle3DNode* node = new Particle3DNode(this->birthrate, this->duration, this->durationVariation);
+    node->mesh = this->mesh;
+    node->shader = this->shader;
     node->isPlaying = this->isPlaying;
     node->hasLimit = this->hasLimit;
     node->maxAmount = this->maxAmount;
@@ -128,6 +130,8 @@ Node* Particle3DNode::copy() {
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
     node->orientationTargetNode = this->orientationTargetNode;
+    node->renderer = this->renderer->copy();
+    node->renderer->setShader(this->shader);
     for(unsigned int i = 0; i < this->animators.size(); i += 1) {
         node->animators.push_back(this->animators[i]->engineCopyAnimator());
     }

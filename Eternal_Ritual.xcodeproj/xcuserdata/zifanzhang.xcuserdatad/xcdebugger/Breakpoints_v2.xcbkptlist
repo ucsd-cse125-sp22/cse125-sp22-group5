@@ -62,8 +62,8 @@
             filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "CharNode::moveCamera(mouseTranslation)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "CharNode::moveCamera(mouseTranslation)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,9 +94,25 @@
             filePath = "Eternal_Ritual/Game/Magic/ThunderShock.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "ThunderShock::tryDamage(character)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "462EBB73-63E5-4156-B863-BCE1003C6787"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Eternal_Ritual/Core/OfflineCore/OfflineCore.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "OfflineCore::updateState()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

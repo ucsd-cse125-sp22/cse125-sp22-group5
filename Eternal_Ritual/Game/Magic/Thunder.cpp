@@ -12,6 +12,9 @@
 
 #include "Game/Character/CharNode.hpp"
 
+#define COOLDOWN 3
+#define COST 250
+
 using namespace std;
 using namespace glm;
 
@@ -20,7 +23,9 @@ Thunder::Thunder() {
     start = false;
     canDamage = false;
     this->actionName = "cast magic 1";
-    this->stopTime = 3.0f;
+    this->stopTime = 2.0f;
+    this->cooldown = COOLDOWN;
+    this->cost = COST;
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
@@ -40,6 +45,12 @@ void Thunder::play(CharNode* character, int seed){
         this->updateTransform();
         this->eulerAngles = character->modelNode->getWorldEulerAngles();
         playNextThunder(0);
+        Animation* dragonCoolDown = new Animation("thunder cool down " + to_string(reinterpret_cast<long>(this)), this->cooldown);
+        Engine::main->playAnimation(dragonCoolDown);
+        dragonCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
+        this->availableTime = Engine::main->getTime() + cooldown;
     }
 }
 void Thunder::playNextThunder(int index){

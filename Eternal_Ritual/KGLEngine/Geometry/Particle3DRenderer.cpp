@@ -12,12 +12,6 @@ using namespace glm;
 Particle3DRenderer::Particle3DRenderer(unsigned int amount, aiMesh* mesh) {
     this->engineInitializeGeometry();
     this->particleAmount = amount;
-    struct Particle3DVertex {
-        vec3 position;
-        vec2 uv;
-        vec3 normal;
-        vec3 tangent;
-        vec3 bitangent;    };
     vector<Particle3DVertex> vertices;
     vector<unsigned int> indices;
     for(unsigned int i = 0; i < mesh->mNumVertices; i += 1) {
@@ -113,6 +107,73 @@ Particle3DRenderer::Particle3DRenderer(unsigned int amount, aiMesh* mesh) {
     glVertexAttribDivisor(13, 1);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+}
+Particle3DRenderer* Particle3DRenderer::copy() {
+    Particle3DRenderer* renderer = new Particle3DRenderer();
+    renderer->engineInitializeGeometry();
+    renderer->particleAmount = this->particleAmount;
+    renderer->indiceCount = this->indiceCount;
+    glGenVertexArrays(1, &renderer->vertexArrays);
+    glGenBuffers(1, &renderer->vertexBuffers);
+    glGenBuffers(1, &renderer->elementBuffers);
+    glBindVertexArray(renderer->vertexArrays);
+    int size = 0;
+    glBindBuffer(GL_COPY_READ_BUFFER, this->vertexBuffers);
+    glGetBufferParameteriv(GL_COPY_READ_BUFFER, GL_BUFFER_SIZE, &size);
+    glBindBuffer(GL_ARRAY_BUFFER, renderer->vertexBuffers);
+    glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STATIC_DRAW);
+    glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_ARRAY_BUFFER, 0, 0, size);
+    glBindBuffer(GL_COPY_READ_BUFFER, this->elementBuffers);
+    glGetBufferParameteriv(GL_COPY_READ_BUFFER, GL_BUFFER_SIZE, &size);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderer->elementBuffers);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, nullptr, GL_STATIC_DRAW);
+    glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_ELEMENT_ARRAY_BUFFER, 0, 0, size);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DVertex), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Particle3DVertex), (void*)offsetof(Particle3DVertex, uv));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DVertex), (void*)offsetof(Particle3DVertex, normal));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DVertex), (void*)offsetof(Particle3DVertex, tangent));
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DVertex), (void*)offsetof(Particle3DVertex, bitangent));
+    for(unsigned int i = 0; i < this->particleAmount; i += 1) {
+        renderer->dataVector.push_back(this->dataVector[i]);
+    }
+    glGenBuffers(1, &renderer->dataBuffers);
+    glBindBuffer(GL_ARRAY_BUFFER, renderer->dataBuffers);
+    glBufferData(GL_ARRAY_BUFFER, renderer->particleAmount * sizeof(Particle3DData), &renderer->dataVector[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(5);
+    glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)0);
+    glEnableVertexAttribArray(6);
+    glVertexAttribPointer(6, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, initialPosition));
+    glEnableVertexAttribArray(7);
+    glVertexAttribPointer(7, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, initialSpeed));
+    glEnableVertexAttribArray(8);
+    glVertexAttribPointer(8, 4, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, accelerationData));
+    glEnableVertexAttribArray(9);
+    glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, rotationData));
+    glEnableVertexAttribArray(10);
+    glVertexAttribPointer(10, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, rotationSpeedData));
+    glEnableVertexAttribArray(11);
+    glVertexAttribPointer(11, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, scaleData));
+    glEnableVertexAttribArray(12);
+    glVertexAttribPointer(12, 3, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, scaleSpeedData));
+    glEnableVertexAttribArray(13);
+    glVertexAttribPointer(13, 2, GL_FLOAT, GL_FALSE, sizeof(Particle3DData), (void*)offsetof(Particle3DData, spriteSheetAnimationData));
+    glVertexAttribDivisor(5, 1);
+    glVertexAttribDivisor(6, 1);
+    glVertexAttribDivisor(7, 1);
+    glVertexAttribDivisor(8, 1);
+    glVertexAttribDivisor(9, 1);
+    glVertexAttribDivisor(10, 1);
+    glVertexAttribDivisor(11, 1);
+    glVertexAttribDivisor(12, 1);
+    glVertexAttribDivisor(13, 1);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    return renderer;
 }
 Particle3DRenderer::~Particle3DRenderer() {
     glDeleteBuffers(1, &this->dataBuffers);

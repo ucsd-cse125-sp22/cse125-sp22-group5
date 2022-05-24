@@ -29,7 +29,7 @@ LightningSpear::LightningSpear(){
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
-    this->spear = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.35, 0);
+//    this->spear = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 120, 0.35, 0);
     this->spear->color = vec4(0.7, 0.7, 0.2, 0.8);
     this->spear->initialRotationVariation = vec3(180, 0, 0);
     this->spear->randomizeRotatingDirection = true;
@@ -42,7 +42,7 @@ LightningSpear::LightningSpear(){
     light = new LightNode(vec4(1, 1, 0.2, 1));
     light->setPointLight(2, 10);
     this->addChildNode(light);
-    this->radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.3f, 0.3f);
+//    this->radiation = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.3f, 0.3f);
     this->radiation->color = vec4(1, 1, 0.2, 1);
     this->radiation->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
     this->radiation->isAdditive = true;

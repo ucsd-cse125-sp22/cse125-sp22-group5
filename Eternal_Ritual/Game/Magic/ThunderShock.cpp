@@ -11,11 +11,47 @@
 
 #include "Game/Character/CharNode.hpp"
 
+#define DAMAGE 100
+
 using namespace std;
 using namespace glm;
 
+bool ThunderShock::loaded = false;
+LightNode* ThunderShock::metaLight = NULL;
+Particle3DNode* ThunderShock::metaBase = NULL;
+Particle3DNode* ThunderShock::metaLightning = NULL;
+
+void ThunderShock::load() {
+    metaBase = new Particle3DNode(50, 0.8f, 0.3f);
+    metaBase->loadModelFile("/Resources/Game/Effects/Sheet3.dae");
+    metaBase->setMaxAmount(20);
+    metaBase->setEmissionSphere(0, 1.5);
+    metaBase->isDisabled = true;
+    metaBase->eulerAngles.z = 90;
+    metaBase->color = vec4(0.9, 0.9, 0.3, 1);
+    metaBase->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
+    metaBase->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+    metaBase->initialRotationVariation = vec3(180, 45, 45);
+    metaBase->initialScaleVariation = vec3(0.5, 0, 0.5);
+    metaBase->initialSpeedVariation = 1;
+    metaBase->renderingOrder = 2000;
+    metaBase->useLocalSpace = true;
+    metaBase->isAdditive = true;
+    metaLightning = new Particle3DNode(100, 0.2f, 0.3f);
+    metaLightning->loadModelFile("/Resources/Game/Effects/Sheet3.dae");
+    metaLightning->color = vec4(0.9, 0.9, 0.3, 1);
+    metaLightning->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
+    metaLightning->isAdditive = true;
+    metaLightning->setMaxAmount(20);
+    metaLightning->renderingOrder = 1010;
+    metaLightning->initialScaleVariation = vec3(0, 0, 0);
+    metaLightning->useLocalSpace = true;
+    metaLightning->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+    metaLightning->isDisabled = true;
+}
 
 ThunderShock::ThunderShock() {
+    if (!loaded) load();
     start = false;
     canDamage = false;
     this->position = vec3(0);
@@ -25,23 +61,10 @@ ThunderShock::ThunderShock() {
     this->scale = vec3(1.0f);
     this->parent = NULL;
     this->isDisabled = false;
-    this->damage = 1;
-    Particle3DNode* discharge = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 50, 0.8f, 0.3f);
-    discharge->setMaxAmount(20);
-    discharge->setEmissionSphere(0, 1.5);
-    discharge->isDisabled = true;
-    discharge->eulerAngles.z = 90;
-    discharge->color = vec4(0.9, 0.9, 0.3, 1);
-    discharge->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
-    discharge->setSpriteSheetAnimation(5, 5, 20, 28, 4);
-    discharge->initialRotationVariation = vec3(180, 45, 45);
-    discharge->initialScaleVariation = vec3(0.5, 0, 0.5);
-    discharge->initialSpeedVariation = 1;
-    discharge->renderingOrder = 2000;
-    discharge->useLocalSpace = true;
-    discharge->isAdditive = true;
-    this->addChildNode(discharge);
-    this->base = discharge;
+    this->damage = DAMAGE;
+    this->base = metaBase->copy()->convertToParticle3DNode();
+    this->base->setSpriteSheetAnimation(5, 5, 20, 28, 4);
+    this->addChildNode(this->base);
     this->light = new LightNode(vec3(0.5f, 0.5f, 0.2f));
     this->light->setPointLight(3.0f, 8.0f);
     this->light->penetrationRange = 0.0f;
@@ -54,17 +77,10 @@ ThunderShock::ThunderShock() {
         lightningNode->eulerAngles.z = 90;
         lightningNode->isDisabled = false;
         lightningNode->position.y = 6.6 - 1.6 * k;
-        Particle3DNode* lightning = new Particle3DNode("/Resources/Game/Effects/Sheet3.dae", 100, 0.2f, 0.3f);
-        lightning->color = vec4(0.9, 0.9, 0.3, 1);
-        lightning->texture = new Texture("/Resources/Game/Effects/Lightning5-sheet.png");
-        lightning->isAdditive = true;
-        lightning->setMaxAmount(20);
-        lightning->renderingOrder = 1010;
+        Particle3DNode* lightning = metaLightning->copy()->convertToParticle3DNode();
         lightning->initialScale = vec3(6, 1, 2 - 0.35 * k);
-        lightning->initialScaleVariation = vec3(0, 0, 0);
         lightning->initialRotationVariation = vec3(180, 10 - 2 * k, 10 - 2 * k);
         lightning->setEmissionSphere(0, 0.5 - 0.1 * k);
-        lightning->useLocalSpace = true;
         lightning->setSpriteSheetAnimation(5, 5, 20, 28, 4);
         lightning->isDisabled = true;
         lightningNode->addChildNode(lightning);

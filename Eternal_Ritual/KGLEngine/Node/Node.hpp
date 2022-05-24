@@ -90,6 +90,7 @@ public:
     CameraNode* convertToCameraNode();
     LightNode* convertToLightNode();
     ParticleNode* convertToParticleNode();
+    Particle3DNode* convertToParticle3DNode();
     UINode* convertToUINode();
     SpriteNode* convertToSpriteNode();
     TextNode* convertToTextNode();
@@ -355,7 +356,8 @@ public:
     glm::vec3 scalingSpeedVariation;
     Texture* texture;
     glm::vec4 color;
-    Particle3DNode(std::string modelFile, unsigned int birthrate, float duration, float durationVariation);
+    Particle3DNode(unsigned int birthrate, float duration, float durationVariation);
+    void loadModelFile(std::string file);
     void engineProcessNode2(aiNode *node, const aiScene *scene);
     Node* copy() override;
     Node* clone() override;

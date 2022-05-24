@@ -43,7 +43,6 @@
 		3D2D271E283231CD00159082 /* ParticleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FA283231CD00159082 /* ParticleNode.cpp */; };
 		3D2D271F283231CD00159082 /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FB283231CD00159082 /* LightNode.cpp */; };
 		3D2D27232832363A00159082 /* AlphaShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27212832363A00159082 /* AlphaShader.cpp */; };
-		3D2D274E2832448A00159082 /* ImportCharHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D274C2832448A00159082 /* ImportCharHelper.cpp */; };
 		3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
 		3D2D27702834220100159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
 		3D2D27712834220100159082 /* ThunderShock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275C2834220100159082 /* ThunderShock.cpp */; };
@@ -56,7 +55,6 @@
 		3D2D27792834220100159082 /* StoneBlast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27692834220100159082 /* StoneBlast.cpp */; };
 		3D2D277A2834220100159082 /* Thunder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276E2834220100159082 /* Thunder.cpp */; };
 		3D2D277B2834220100159082 /* AllMagic.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D276F2834220100159082 /* AllMagic.inc */; };
-		3D2D27D92835B23100159082 /* ImportCharHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D274C2832448A00159082 /* ImportCharHelper.cpp */; };
 		3D2D27DA2835B23100159082 /* HittableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D47059C282BD8230068156B /* HittableObject.cpp */; };
 		3D2D27DB2835B23100159082 /* PBRShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26D2283231CD00159082 /* PBRShader.cpp */; };
 		3D2D27DC2835B23100159082 /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FB283231CD00159082 /* LightNode.cpp */; };
@@ -117,7 +115,6 @@
 		3D2D28162835B23100159082 /* libassimp.5.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8FA27FCFB2E002B6550 /* libassimp.5.2.0.dylib */; };
 		3D2D28172835B23100159082 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		3D2D28182835B23100159082 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
-		3D2D28212835B3C500159082 /* ImportCharHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D274C2832448A00159082 /* ImportCharHelper.cpp */; };
 		3D2D28222835B3C500159082 /* HittableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D47059C282BD8230068156B /* HittableObject.cpp */; };
 		3D2D28232835B3C500159082 /* PBRShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26D2283231CD00159082 /* PBRShader.cpp */; };
 		3D2D28242835B3C500159082 /* LightNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26FB283231CD00159082 /* LightNode.cpp */; };
@@ -310,8 +307,6 @@
 		3D2D2700283231CD00159082 /* assimp_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp_helper.h; sourceTree = "<group>"; };
 		3D2D2701283231CD00159082 /* glm_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm_helper.h; sourceTree = "<group>"; };
 		3D2D27212832363A00159082 /* AlphaShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlphaShader.cpp; sourceTree = "<group>"; };
-		3D2D274C2832448A00159082 /* ImportCharHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImportCharHelper.cpp; sourceTree = "<group>"; };
-		3D2D274D2832448A00159082 /* ImportCharHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImportCharHelper.hpp; sourceTree = "<group>"; };
 		3D2D27512833C86F00159082 /* OfflineCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OfflineCore.cpp; sourceTree = "<group>"; };
 		3D2D27522833C86F00159082 /* OfflineCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OfflineCore.hpp; sourceTree = "<group>"; };
 		3D2D27552833CA1200159082 /* ClientCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientCore.cpp; sourceTree = "<group>"; };
@@ -441,8 +436,6 @@
 				12309C9A281A022500423625 /* Hitbox.hpp */,
 				12309C9D281A022500423625 /* HitController.cpp */,
 				12309C9B281A022500423625 /* HitController.hpp */,
-				3D2D274C2832448A00159082 /* ImportCharHelper.cpp */,
-				3D2D274D2832448A00159082 /* ImportCharHelper.hpp */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -572,15 +565,15 @@
 		3D2D26F2283231CD00159082 /* Node */ = {
 			isa = PBXGroup;
 			children = (
-				3D2D26F3283231CD00159082 /* UINode.cpp */,
-				3D2D26F4283231CD00159082 /* Particle3DNode.cpp */,
-				3D2D26F5283231CD00159082 /* Node.cpp */,
-				3D2D26F6283231CD00159082 /* TextNode.cpp */,
-				3D2D26F7283231CD00159082 /* Node.hpp */,
-				3D2D26F8283231CD00159082 /* SpriteNode.cpp */,
 				3D2D26F9283231CD00159082 /* CameraNode.cpp */,
-				3D2D26FA283231CD00159082 /* ParticleNode.cpp */,
 				3D2D26FB283231CD00159082 /* LightNode.cpp */,
+				3D2D26F5283231CD00159082 /* Node.cpp */,
+				3D2D26F7283231CD00159082 /* Node.hpp */,
+				3D2D26F4283231CD00159082 /* Particle3DNode.cpp */,
+				3D2D26FA283231CD00159082 /* ParticleNode.cpp */,
+				3D2D26F8283231CD00159082 /* SpriteNode.cpp */,
+				3D2D26F6283231CD00159082 /* TextNode.cpp */,
+				3D2D26F3283231CD00159082 /* UINode.cpp */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -892,7 +885,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D2D27D92835B23100159082 /* ImportCharHelper.cpp in Sources */,
 				3D2D27DA2835B23100159082 /* HittableObject.cpp in Sources */,
 				3D2D27DB2835B23100159082 /* PBRShader.cpp in Sources */,
 				3D2D27DC2835B23100159082 /* LightNode.cpp in Sources */,
@@ -960,7 +952,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D2D28212835B3C500159082 /* ImportCharHelper.cpp in Sources */,
 				3D2D28222835B3C500159082 /* HittableObject.cpp in Sources */,
 				3D2D28232835B3C500159082 /* PBRShader.cpp in Sources */,
 				3D2D28242835B3C500159082 /* LightNode.cpp in Sources */,
@@ -1028,7 +1019,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D2D274E2832448A00159082 /* ImportCharHelper.cpp in Sources */,
 				3D47059E282BD8230068156B /* HittableObject.cpp in Sources */,
 				3D2D2706283231CD00159082 /* PBRShader.cpp in Sources */,
 				3D2D271F283231CD00159082 /* LightNode.cpp in Sources */,

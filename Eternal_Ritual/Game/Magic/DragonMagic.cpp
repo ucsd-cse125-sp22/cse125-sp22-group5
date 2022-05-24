@@ -5,6 +5,10 @@
 #include "Game/Character/CharNode.hpp"
 #include "Game/Map/MapSystemManager.hpp"
 
+#define COOLDOWN 5.5
+#define COST 800
+#define DAMAGE 200
+
 using namespace std;
 using namespace glm;
 
@@ -187,9 +191,9 @@ DragonMagic::DragonMagic(Node* characterNode) {
     if (!loaded) { load(); loaded = true; }
     this->actionName = "dragon attack";
     this->stopTime = 3.0f;
-    this->damage = 500;
-    this->cooldown = 4;
-    this->cost = 90;
+    this->damage = DAMAGE;
+    this->cooldown = COOLDOWN;
+    this->cost = COST;
     this->ID = DragonMagic::UID;
     DragonMagic::UID += 1;
     this->characterNode = characterNode;

@@ -102,7 +102,8 @@ StoneBlast::StoneBlast(){
         magicCircles.push_back(newCircle);
         this->addChildNode(newCircle);
         
-        Particle3DNode* arrow = new Particle3DNode("/Resources/Game/Magic/StoneBlast/arrow_simple.dae", 200, 1.0f, 0.0f);
+        Particle3DNode* arrow = new Particle3DNode(200, 1.0f, 0.0f);
+        arrow->loadModelFile("/Resources/Game/Magic/StoneBlast/arrow_simple.dae");
         //arrow->color = vec4(0, 0.5f, 1.0f, 1.0f);
         arrow->texture = new Texture("/Resources/Game/Magic/StoneBlast/Arrow_D.png");
         //arrow->isAdditive = true;

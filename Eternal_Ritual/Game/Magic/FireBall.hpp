@@ -13,10 +13,19 @@
 #include "KGLEngine/Engine.hpp"
 #include "Game/Magic/BaseMagic.hpp"
 
+
 class CharNode;
 
 
 class FireBall final : public DamageableMagic{
+private:
+    static bool loaded;
+    static ParticleNode* metaFireball;
+    static ParticleNode* metaFlame;
+    static ParticleNode* metaExplosion;
+    static ParticleNode* metaSpark;
+    static LightNode* metaLight;
+    
 public:
     glm::vec3 velocity;
     glm::vec3 velocityError;
@@ -32,6 +41,7 @@ public:
     LightNode* light;
     Animation* createFireball;
     Animation* createFlame;
+    void load();
     FireBall();
     ~FireBall() override = default;
     void explode();

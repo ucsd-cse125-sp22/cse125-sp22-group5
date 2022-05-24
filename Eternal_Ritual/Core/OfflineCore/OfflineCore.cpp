@@ -9,7 +9,6 @@
 #include <iostream>
 
 #include "Game/Map/ImportMapHelper.hpp"
-#include "Game/Character/ImportCharHelper.hpp"
 #include "Game/Magic/AllMagic.inc"
 
 using namespace glm;
@@ -33,7 +32,7 @@ void OfflineCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
+    engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
     engine_->workingDirectory = ".";
     engine_->lockCursor();
 }
@@ -98,10 +97,7 @@ void OfflineCore::loadCharacter() {
     cameraNode->addChildNode(point_light_);
     character_->setCamera(cameraNode);
     engine_->mainCameraNode = cameraNode;
-
-    ImportCharHelper::importCharModel(character_);
     
-    ImportCharHelper::importCharAnimation(character_);
     character_->stopAndPlay("idle", 0.0f, 0.0f);;
     
     engine_->addNode(character_);
@@ -250,6 +246,7 @@ void OfflineCore::updateState() {
     }
 
     hit_controller_->checkHit();
+    character_->genMana();
 }
 
 

@@ -12,24 +12,27 @@
 
 #include "Game/Character/CharNode.hpp"
 
+#define COOLDOWN 5
+#define COST 300
+
 using namespace std;
 using namespace glm;
 
-#define NUMSPEAR 10
+#define NUMBALLS 10
 
 ScatteredFire::ScatteredFire() {
     start = false;
     this->actionName = "cast magic 3";
     this->stopTime = 1.8f;
-    this->cooldown = 5;
-    this->cost = 30;
+    this->cooldown = COOLDOWN;
+    this->cost = COST;
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
     ballNode = new Node();
     ballNode->position.y = 1;
     this->addChildNode(ballNode);
-    for (int k = 0; k < NUMSPEAR; k++) {
+    for (int k = 0; k < NUMBALLS; k++) {
         FireBall* fireBall = new FireBall();
         balls.push_back(fireBall);
     }
@@ -57,6 +60,7 @@ void ScatteredFire::play(CharNode* character, int seed){
             start = false;
         });
         Engine::main->playAnimation(stop);
+        this->availableTime = Engine::main->getTime() + cooldown;
     }
 }
 void ScatteredFire::updateMagic() {

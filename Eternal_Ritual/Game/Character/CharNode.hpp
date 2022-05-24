@@ -17,6 +17,11 @@
 #include "Game/Magic/BaseMagic.hpp"
 #include "Game/Character/Hitbox.hpp"
 
+#define MAXHP 1000
+#define MAXMANA 1000
+#define MAXMANAREGEN 4
+#define ROLL_COST 200
+
 namespace Bitmask {
 enum Type {
     IDLE = 0x00000001,
@@ -67,6 +72,35 @@ enum Type{
 
 
 class CharNode final : public Node {
+private:
+    static bool loaded;
+    static Node* metaModel;
+    static Texture* bootsD;
+    static Texture* bootsN;
+    static Texture* bootsAO;
+    static Texture* glovesD;
+    static Texture* glovesN;
+    static Texture* glovesAO;
+    static Texture* bodyD;
+    static Texture* bodyN;
+    static Texture* bodyAO;
+    static Texture* chestD;
+    static Texture* chestN;
+    static Texture* chestAO;
+    static Texture* staffD;
+    static Texture* staffN;
+    static Texture* staffAO;
+    static Texture* helmetD;
+    static Texture* helmetN;
+    static Texture* helmetAO;
+    static Texture* eyeD;
+    static Texture* headD;
+    static Texture* headN;
+    static Texture* headAO;
+    static Texture* pantsD;
+    static Texture* pantsN;
+    static Texture* hairD;
+    static Texture* hairBaseD;
 public:
     CharNode(glm::vec3 position);
     ~CharNode();
@@ -106,6 +140,7 @@ public:
     bool isLocked;
     bool refreshed;
     CharNode* target;
+    void load();
     void lock(std::vector<CharNode*>& targets);
     void unlock();
     void toggleLock(std::vector<CharNode*>& enemies);
@@ -125,6 +160,7 @@ public:
     void predictMoveTarget();
     void updatePosition();
     
+    void genMana();
     std::vector<BaseMagic*> magics;
     void addMagics(BaseMagic* magic);
     BaseMagic* rmMagics();
