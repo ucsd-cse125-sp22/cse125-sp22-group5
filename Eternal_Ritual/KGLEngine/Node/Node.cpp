@@ -254,6 +254,9 @@ LightNode* Node::convertToLightNode() {
 ParticleNode* Node::convertToParticleNode() {
     return(this->currentParticleNode);
 }
+Particle3DNode* Node::convertToParticle3DNode() {
+    return(this->currentParticle3DNode);
+}
 UINode* Node::convertToUINode() {
     return(this->currentUINode);
 }

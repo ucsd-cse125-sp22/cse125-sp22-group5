@@ -133,7 +133,9 @@ private:
     unsigned int dataBuffers;
     std::vector<Particle3DData> dataVector;
 public:
+    Particle3DRenderer() = default;
     Particle3DRenderer(unsigned int amount, aiMesh* mesh);
+    Particle3DRenderer* copy();
     ~Particle3DRenderer() override;
     void engineResetAllParticleData();
     void engineRenderGeometry(unsigned int renderingMode) override;

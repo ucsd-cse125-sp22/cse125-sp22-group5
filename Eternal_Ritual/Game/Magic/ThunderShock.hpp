@@ -17,12 +17,18 @@ class CharNode;
 
 
 class ThunderShock final : public DamageableMagic{
+private:
+    static bool loaded;
+    static Particle3DNode* metaLightning;
+    static Particle3DNode* metaBase;
+    static LightNode* metaLight;
 public:
     bool threwOut;
     bool canDamage;
     std::vector<Particle3DNode*> lightnings;
     Particle3DNode* base;
     LightNode* light;
+    void load();
     ThunderShock();
     ~ThunderShock() override = default;
     void explode();
