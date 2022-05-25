@@ -5,7 +5,7 @@
 #include <glm/gtc/random.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
-#include "glm_helper.h"
+#include "KGLEngine/Toolkit/glm_helper.h"
 
 #include "KGLEngine/Engine.hpp"
 

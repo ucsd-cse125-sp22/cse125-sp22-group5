@@ -6,22 +6,26 @@
 
 #include "Network/ClientSide/ClientSocket.hpp"
 
-#include <unistd.h>
-#include <sys/socket.h>
+#pragma comment (lib, "ws2_32.lib") 
+
 #include <stdlib.h>
 #include <signal.h>
-#include <netdb.h>
 #include <string.h>
 #include <string>
 #include <iostream>
-
-#include "Core/ClientCore/ClientCore.hpp"
 
 using namespace std;
 
 
 ClientSocket::ClientSocket() {
-    if ((client_socket_fd_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+	WORD sockVersion = MAKEWORD(2, 2);
+	WSADATA data;
+	if(WSAStartup(sockVersion, &data)!=0) {
+		perror("Client socket startup error");
+        exit(1);
+	}
+
+    if ((client_socket_fd_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET) {
         perror("Client socket error");
         exit(1);
     }
@@ -33,20 +37,23 @@ void ClientSocket::connectServer() {
     server_addr_.sin_addr.s_addr = inet_addr(SERVER_IP);
     server_addr_.sin_port = htons(SERVER_PORT);
     
-    if(connect(client_socket_fd_, (sockaddr*) &server_addr_, sizeof(server_addr_)) < 0) {
+    if(connect(client_socket_fd_, (sockaddr*) &server_addr_, sizeof(server_addr_)) == SOCKET_ERROR) {
         perror("Connection error");
+        closesocket(client_socket_fd_);
         exit(1);
     }
 }
 
-void ClientSocket::receiveData() {
-    int dataLen = static_cast<int> (read(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE));
+void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
+    int newDataLen = static_cast<int> (recv(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE, 0));
     
 //    std::cout << std::endl;
 //    std::cout << "Receive" << dataLen << std::endl;
     
     if (dataLen > 0) {
-        ClientCore::Instance()->processData(read_buffer_, dataLen);
+        // ClientCore::Instance()->processData(read_buffer_, dataLen);
+        pbArr = read_buffer_;
+        dataLen = newDataLen;
     }
 }
 
@@ -54,7 +61,7 @@ void ClientSocket::sendData(char* pbArr,int dataLen) {
     memset(write_buffer_, 0, MAX_BUFFER_SIZE);
     memcpy(write_buffer_, pbArr, dataLen);
     
-    long writeLen = write(client_socket_fd_, write_buffer_, MAX_BUFFER_SIZE);
+    long writeLen = send(client_socket_fd_, write_buffer_, MAX_BUFFER_SIZE, 0);
     
 //    std::cout << std::endl;
 //    std::cout << "Sending: " << writeLen << std::endl;
@@ -66,5 +73,6 @@ void ClientSocket::sendData(char* pbArr,int dataLen) {
 }
 
 void ClientSocket::closeSockets() {
-    close(client_socket_fd_);
+    closesocket(client_socket_fd_);
+    WSACleanup();
 }
