@@ -10,6 +10,7 @@
 
 const float dragonMagicBaseRenderingOrder = 100.0f;
 
+class CharNode;
 class DragonMagic final : public DamageableMagic {
     
 private:
@@ -68,10 +69,10 @@ public:
     DragonMagic(Node* characterNode);
     ~DragonMagic() override = default;
     void play();
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void update();
     void updateMagic() override;
-    void hitWall() override {}
+    void hitWall() override;
     
     glm::vec3 getBeamPosition();
     glm::vec3 getBeamDirection();

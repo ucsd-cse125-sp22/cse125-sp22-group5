@@ -13,7 +13,7 @@ ButtonNode::ButtonNode(UINode* parentNode,Font* font, glm::vec2 size){
     
     background = new SpriteNode(size);
     background->texture = new Texture("/Resources/Game/UI/Button_RL_Background.png");
-    background->multiplyColor = ColorBlue::ButtonBackground;
+    background->multiplyColor = Color::ButtonBackground;
     
     overlay = new SpriteNode(size*0.96f);
     overlay->texture = new Texture("/Resources/Game/UI/Button_RL_Overlay.png");
@@ -65,13 +65,13 @@ void ButtonNode::setPosition(glm::vec2 position){
 
 void ButtonNode::switchOn(){
     glow->isDisabled = false;
-    background->multiplyColor = ColorBlue::ButtonBackground;
+    background->multiplyColor = Color::ButtonBackground;
 }
-void ButtonNode::switchOff(){background->multiplyColor = ColorBlue::ButtonBackgroundOff;}
+void ButtonNode::switchOff(){background->multiplyColor = Color::ButtonBackgroundOff;}
 
 void ButtonNode::restore(){
     glow->isDisabled = true;
-    background->multiplyColor = ColorBlue::ButtonBackground;
+    background->multiplyColor = Color::ButtonBackground;
 }
 
 bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input){

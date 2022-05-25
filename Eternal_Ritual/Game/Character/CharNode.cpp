@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cmath>
 #include <glm/gtx/io.hpp>
+#include "Game/Map/MapSystemManager.hpp"
 
 using namespace std;
 using namespace glm;
@@ -19,7 +20,7 @@ CharNode::CharNode(vec3 position){
     this->position = position;
     this->moveDirection = vec3(0);
     
-    this->hitbox = new Hitbox(this->position, vec3(0.4, 0.8, 0.4));
+    this->hitbox = new Hitbox(this->position, vec3(0.8, 1.6, 0.8));
     this->uninjurable = false;
     this->characterTargetPosition = position;
     this->eulerAngles = vec3(0.0f);
@@ -33,7 +34,7 @@ CharNode::CharNode(vec3 position){
     this->uiNode = 0;
     this->allowAction = true;
     
-    this->health = 10000;
+    this->health = 2000;
 }
 CharNode::~CharNode(){
     
@@ -45,8 +46,8 @@ void CharNode::setModel(Node* model){
     this->modelNode = model;
     this->modelNode->name = "modelNode";
     this->addChildNode(model);
-    this->headTop = generateBoneNode("Head");
-    this->rightHand = generateBoneNode("RightHand");
+    this->headTop = generateBoneNode("head");
+    this->rightHand = generateBoneNode("Weapon_r");
 }
 void CharNode::setControl(Node* control){
     this->controlNode = control;
@@ -69,7 +70,7 @@ void CharNode::setUINode(UINode* uiNode){
     FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
     Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
     TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
-    nameNode->color = vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    nameNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     nameNode->text = "New Character";
     nameNode->setCenterHorizontalAlignment();
     nameNode->setTopVerticalAlignment();
@@ -176,6 +177,13 @@ void CharNode::moveCamera(vec2 mouseTranslation){
     if (controlNode->eulerAngles.y < -180){
         controlNode->eulerAngles.y += 360;
     }
+    HitInfo hitInfo;
+    if (MapSystemManager::Instance()->hitTest(this->controlNode->getWorldPosition(), this->cameraNode->getWorldPosition() + normalize(this->cameraNode->getWorldPosition() - this->controlNode->getWorldPosition()) * 0.3f, hitInfo)) {
+        this->cameraNode->position.x = std::max(-length(hitInfo.hit_point - this->controlNode->getWorldPosition()) + 0.1f, -2.5f);
+    }
+    else {
+        this->cameraNode->position.x = -2.5;
+    }
 }
 void CharNode::moveFront(){
     if (allowAction){
@@ -240,19 +248,19 @@ void CharNode::updatePosition(){
         if(length(this->characterTargetPosition - this->position) > 0.1f){
             if (this->isLocked){
                 if (this->keyDirection == Direction::LEFT){
-                    this->stopAndPlay("left strafe", 0.1f, 0.1f);
+                    this->stopAndPlay("left strafe", 0.2f, 0.4f);
                 }else if (this->keyDirection == Direction::RIGHT){
-                    this->stopAndPlay("right strafe", 0.1f, 0.1f);
+                    this->stopAndPlay("right strafe", 0.2f, 0.4f);
                 }else if (this->keyDirection == Direction::BACK){
-                    this->stopAndPlay("back run", 0.1f, 0.1f);
+                    this->stopAndPlay("back run", 0.2f, 0.4f);
                 }else{
-                    this->stopAndPlay("running", 0.1f, 0.1f);
+                    this->stopAndPlay("running", 0.2f, 0.4f);
                 }
             }else{
-                this->stopAndPlay("running", 0.1f, 0.1f);
+                this->stopAndPlay("running", 0.2f, 0.4f);
             }
         }else{
-            this->stopAndPlay("idle", 0.1f, 0.1f);
+            this->stopAndPlay("idle", 0.2f, 0.2f);
         }
         this->position += (this->characterTargetPosition - this->position) * 0.1f;
         this->hitbox->updatePosition(this->position);
@@ -282,8 +290,8 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
+        //this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
+        //this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 
 }
@@ -293,6 +301,7 @@ CharNode* CharNode::copy(vec3 position) {
     node->isDisabled = this->isDisabled;
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
+
     for(unsigned int i = 0; i < this->animators.size(); i += 1) {
         node->animators.push_back(this->animators[i]->engineCopyAnimator());
     }
@@ -308,9 +317,9 @@ CharNode* CharNode::copy(vec3 position) {
             node->modelNode = node->childNodes[i];
         }
     }
-    node->headTop = node->generateBoneNode("Head");
-    node->rightHand = node->generateBoneNode("RightHand");
-    node->cameraNode = this->cameraNode;
+    node->headTop = node->generateBoneNode("head");
+    node->rightHand = node->generateBoneNode("Weapon_r");
+//    node->cameraNode = this->cameraNode;
     return(node);
 }
 
@@ -333,8 +342,8 @@ void CharNode::castMagic(Magic::Type magicKey){
     if (allowAction && this->magics.count(magicKey) && !this->magics[magicKey]->start){
         BaseMagic* magic = this->magics[magicKey];
         allowAction = false;
-        this->stopAndPlay(magic->actionName, 0.2f, 0.2f);
-        magic->play(this);
+        this->stopAndPlay(magic->actionName, 0.2f, 0.5f);
+        magic->play(this, 30);
         Animation* resume = new Animation(this->name + " resume", magic->stopTime);
         resume->setCompletionHandler([&]{
             this->allowAction = true;
@@ -345,6 +354,7 @@ void CharNode::castMagic(Magic::Type magicKey){
 
 
 void CharNode::receiveDamage(int damage){
-    this->health -= damage;
+    if (!uninjurable)
+        this->health -= damage;
     cout << this->name << " health " << this->health << endl;
 }

@@ -81,7 +81,7 @@ public:
     
     ~ThousandBlade() override;
     void updateMagic() override;
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void tryDamage(CharNode* character) override;
     void hitWall() override {}
 };

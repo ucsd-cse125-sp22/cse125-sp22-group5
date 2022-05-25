@@ -18,7 +18,8 @@ using namespace glm;
 Flame::Flame() {
     this->damage = 1.5;
     this->start = false;
-    this->actionName = "cast magic 1";
+    this->stopTime = 0.5;
+    this->actionName = "cast magic 4";
     this->flame = new ParticleNode(300, 1.5f, 0.0f);
     this->flame->setColorAnimation(vec4(1.0f, 0.7f, 0.05f, 0.0f), 0.0f);
     this->flame->setColorAnimation(vec4(1.0f, 0.6f, 0.05f, 0.9f), 0.2f);
@@ -57,10 +58,16 @@ Flame::Flame() {
     spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
     spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
     this->addChildNode(spark);
+    this->light = new LightNode(vec3(5, 2, 0));
+    light->setPointLight(1, 10);
+    light->isDisabled = true;
+    this->addChildNode(light);
 }
-void Flame::play(CharNode *character) {
+void Flame::play(CharNode *character, int seed) {
     if (!start) {
         this->start = true;
+        this->seed = seed;
+        this->light->isDisabled = false;
         this->canDamage = true;
         this->position = character->getWorldPosition() + vec3(0, 0.5, 0) + character->modelNode->getRightVectorInWorld() * 2.f;
         this->eulerAngles = character->modelNode->getWorldEulerAngles() - vec3(0, 90, 0);
@@ -68,11 +75,20 @@ void Flame::play(CharNode *character) {
         this->spark->isDisabled = false;
         this->spark->reset();
         this->flame->reset();
-        Animation* coolDown = new Animation("flame magic cool down " + to_string(reinterpret_cast<long>(this)), 0.5);
-        coolDown->setCompletionHandler([&] {
-            this->start = false;
+        Animation* lightUp = new Animation("flame magic light up " + to_string(reinterpret_cast<long>(this)), 0.25);
+        lightUp->setEaseInTimingMode();
+        lightUp->setVec3Animation(&light->colorFactor, vec3(5, 2, 0));
+        lightUp->setCompletionHandler([&] {
+            Animation* lightDown = new Animation("flame magic light down " + to_string(reinterpret_cast<long>(this)), 0.25);
+            lightDown->setEaseOutTimingMode();
+            lightDown->setVec3Animation(&light->colorFactor, vec3(0, 0, 0));
+            lightDown->setCompletionHandler([&] {
+                this->start = false;
+                this->light->isDisabled = true;
+            });
+            Engine::main->playAnimation(lightDown);
         });
-        Engine::main->playAnimation(coolDown);
+        Engine::main->playAnimation(lightUp);
     }
 }
 void Flame::tryDamage(CharNode *character) {

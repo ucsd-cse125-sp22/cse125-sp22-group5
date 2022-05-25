@@ -55,12 +55,12 @@ HPBarNode::HPBarNode(UINode* parentNode,Font* font, float length,bool isEnemy,fl
     
     HpValue = new SpriteNode(glm::vec2(HpBar->size.x,HpBar->size.y * 0.75));
     HpValue->texture = barTexture;
-    HpValue->multiplyColor = ColorBlue::Hp;
+    HpValue->multiplyColor = Color::Hp;
     HpValue->position = glm::vec2(HpValue->size.x*0.5f,0.0);
     
     MpValue = new SpriteNode(glm::vec2(MpBar->size.x,MpBar->size.y * 0.75));
     MpValue->texture = barTexture;
-    MpValue->multiplyColor = ColorBlue::Mp;
+    MpValue->multiplyColor = Color::Mp;
     MpValue->position = glm::vec2(MpValue->size.x*0.5f,0.0);
     
     HpFadeNode->addChildNode(HpFade);

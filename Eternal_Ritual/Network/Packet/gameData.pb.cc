@@ -44,21 +44,42 @@ struct Vec2DefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Vec2DefaultTypeInternal _Vec2_default_instance_;
+constexpr PlayerAttr::PlayerAttr(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : playerhp_(0u){}
+struct PlayerAttrDefaultTypeInternal {
+  constexpr PlayerAttrDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~PlayerAttrDefaultTypeInternal() {}
+  union {
+    PlayerAttr _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PlayerAttrDefaultTypeInternal _PlayerAttr_default_instance_;
+constexpr Event_PlayerAttrsEntry_DoNotUse::Event_PlayerAttrsEntry_DoNotUse(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
+struct Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal {
+  constexpr Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal() {}
+  union {
+    Event_PlayerAttrsEntry_DoNotUse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Event_PlayerAttrsEntry_DoNotUseDefaultTypeInternal _Event_PlayerAttrsEntry_DoNotUse_default_instance_;
 constexpr Event::Event(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : movevents_()
-  , _movevents_cached_byte_size_(0)
-  , magicevents_()
+  : magicevents_()
   , _magicevents_cached_byte_size_(0)
-  , addmagics_()
-  , _addmagics_cached_byte_size_(0)
-  , rmmagics_()
-  , _rmmagics_cached_byte_size_(0)
+  , playerattrs_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
   , playername_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , mousetranslation_(nullptr)
   , controlnodeeulerangles_(nullptr)
+  , movedirection_(nullptr)
   , start_(false)
-  , restart_(false){}
+  , restart_(false)
+  , playerstyle_(0u)
+  , dirstate_(0)
+{}
 struct EventDefaultTypeInternal {
   constexpr EventDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -72,13 +93,10 @@ constexpr State_PlayerInfo::State_PlayerInfo(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : magicevents_()
   , _magicevents_cached_byte_size_(0)
-  , addmagics_()
-  , _addmagics_cached_byte_size_(0)
-  , rmmagics_()
-  , _rmmagics_cached_byte_size_(0)
   , playername_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , position_(nullptr)
-  , eulerangle_(nullptr)
+  , controlnodeeulerangles_(nullptr)
+  , movedirection_(nullptr)
+  , playerstyle_(0u)
   , dirstate_(0)
 {}
 struct State_PlayerInfoDefaultTypeInternal {
@@ -101,9 +119,21 @@ struct State_PlayerInfosEntry_DoNotUseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT State_PlayerInfosEntry_DoNotUseDefaultTypeInternal _State_PlayerInfosEntry_DoNotUse_default_instance_;
+constexpr State_PlayerAttrsEntry_DoNotUse::State_PlayerAttrsEntry_DoNotUse(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized){}
+struct State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal {
+  constexpr State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal() {}
+  union {
+    State_PlayerAttrsEntry_DoNotUse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT State_PlayerAttrsEntry_DoNotUseDefaultTypeInternal _State_PlayerAttrsEntry_DoNotUse_default_instance_;
 constexpr State::State(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : playerinfos_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
+  , playerattrs_(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{})
   , playerip_(uint64_t{0u}){}
 struct StateDefaultTypeInternal {
   constexpr StateDefaultTypeInternal()
@@ -115,8 +145,8 @@ struct StateDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StateDefaultTypeInternal _State_default_instance_;
 }  // namespace gameDataPb
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gameData_2eproto[6];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gameData_2eproto[3];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gameData_2eproto[9];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gameData_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gameData_2eproto = nullptr;
 
 const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -138,6 +168,23 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Vec2, x_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Vec2, y_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::PlayerAttr, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::PlayerAttr, playerhp_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -146,12 +193,12 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, start_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, restart_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playername_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, mousetranslation_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playerstyle_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, controlnodeeulerangles_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, movevents_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, movedirection_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, dirstate_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, magicevents_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, addmagics_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, rmmagics_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playerattrs_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -159,12 +206,11 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, playername_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, playerstyle_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, controlnodeeulerangles_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, movedirection_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, dirstate_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, position_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, eulerangle_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, magicevents_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, addmagics_),
-  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, rmmagics_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfosEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfosEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -175,6 +221,16 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfosEntry_DoNotUse, value_),
   0,
   1,
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerAttrsEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerAttrsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerAttrsEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerAttrsEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -183,59 +239,71 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State, playerip_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State, playerinfos_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State, playerattrs_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::gameDataPb::Vec3)},
   { 9, -1, -1, sizeof(::gameDataPb::Vec2)},
-  { 17, -1, -1, sizeof(::gameDataPb::Event)},
-  { 32, -1, -1, sizeof(::gameDataPb::State_PlayerInfo)},
-  { 45, 53, -1, sizeof(::gameDataPb::State_PlayerInfosEntry_DoNotUse)},
-  { 55, -1, -1, sizeof(::gameDataPb::State)},
+  { 17, -1, -1, sizeof(::gameDataPb::PlayerAttr)},
+  { 24, 32, -1, sizeof(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse)},
+  { 34, -1, -1, sizeof(::gameDataPb::Event)},
+  { 49, -1, -1, sizeof(::gameDataPb::State_PlayerInfo)},
+  { 61, 69, -1, sizeof(::gameDataPb::State_PlayerInfosEntry_DoNotUse)},
+  { 71, 79, -1, sizeof(::gameDataPb::State_PlayerAttrsEntry_DoNotUse)},
+  { 81, -1, -1, sizeof(::gameDataPb::State)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_Vec3_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_Vec2_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_PlayerAttr_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_Event_PlayerAttrsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_Event_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_State_PlayerInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_State_PlayerInfosEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_State_PlayerAttrsEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gameDataPb::_State_default_instance_),
 };
 
 const char descriptor_table_protodef_gameData_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016gameData.proto\022\ngameDataPb\"\'\n\004Vec3\022\t\n\001"
   "x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\"\034\n\004Vec2\022\t\n"
-  "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\273\002\n\005Event\022\r\n\005start\030\001"
-  " \001(\010\022\017\n\007restart\030\002 \001(\010\022\022\n\nplayerName\030\003 \001("
-  "\t\022*\n\020mouseTranslation\030\004 \001(\0132\020.gameDataPb"
-  ".Vec2\0220\n\026controlNodeEulerAngles\030\005 \001(\0132\020."
-  "gameDataPb.Vec3\022\'\n\tmovEvents\030\006 \003(\0162\024.gam"
-  "eDataPb.MovEvent\022(\n\013magicEvents\030\007 \003(\0162\023."
-  "gameDataPb.MagicPb\022&\n\taddMagics\030\010 \003(\0162\023."
-  "gameDataPb.MagicPb\022%\n\010rmMagics\030\t \003(\0162\023.g"
-  "ameDataPb.MagicPb\"\262\003\n\005State\022\020\n\010playerIP\030"
-  "\001 \001(\004\0227\n\013playerInfos\030\002 \003(\0132\".gameDataPb."
-  "State.PlayerInfosEntry\032\213\002\n\nPlayerInfo\022\022\n"
-  "\nplayerName\030\001 \001(\t\022&\n\010dirState\030\002 \001(\0162\024.ga"
-  "meDataPb.DirState\022\"\n\010position\030\003 \001(\0132\020.ga"
-  "meDataPb.Vec3\022$\n\neulerAngle\030\004 \001(\0132\020.game"
-  "DataPb.Vec3\022(\n\013magicEvents\030\005 \003(\0162\023.gameD"
-  "ataPb.MagicPb\022&\n\taddMagics\030\006 \003(\0162\023.gameD"
-  "ataPb.MagicPb\022%\n\010rmMagics\030\007 \003(\0162\023.gameDa"
-  "taPb.MagicPb\032P\n\020PlayerInfosEntry\022\013\n\003key\030"
-  "\001 \001(\004\022+\n\005value\030\002 \001(\0132\034.gameDataPb.State."
-  "PlayerInfo:\0028\001*z\n\010DirState\022\010\n\004NONE\020\000\022\t\n\005"
-  "FRONT\020\001\022\010\n\004BACK\020\002\022\010\n\004LEFT\020\003\022\t\n\005RIGHT\020\004\022\r"
-  "\n\tFRONTLEFT\020\005\022\016\n\nFRONTRIGHT\020\006\022\014\n\010BACKLEF"
-  "T\020\007\022\r\n\tBACKRIGHT\020\010*D\n\010MovEvent\022\r\n\tMOVEFR"
-  "ONT\020\000\022\014\n\010MOVEBACK\020\001\022\014\n\010MOVELEFT\020\002\022\r\n\tMOV"
-  "ERIGHT\020\003*\'\n\007MagicPb\022\016\n\nSTONEMAGIC\020\000\022\014\n\010F"
-  "IREBALL\020\001B\002H\001b\006proto3"
+  "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\036\n\nPlayerAttr\022\020\n\010pla"
+  "yerHP\030\001 \001(\r\"\202\003\n\005Event\022\r\n\005start\030\001 \001(\010\022\017\n\007"
+  "restart\030\002 \001(\010\022\022\n\nplayerName\030\003 \001(\t\022\023\n\013pla"
+  "yerStyle\030\004 \001(\r\0220\n\026controlNodeEulerAngles"
+  "\030\005 \001(\0132\020.gameDataPb.Vec3\022\'\n\rmoveDirectio"
+  "n\030\006 \001(\0132\020.gameDataPb.Vec3\022&\n\010dirState\030\007 "
+  "\001(\0162\024.gameDataPb.DirState\022(\n\013magicEvents"
+  "\030\010 \003(\0162\023.gameDataPb.MagicPb\0227\n\013PlayerAtt"
+  "rs\030\t \003(\0132\".gameDataPb.Event.PlayerAttrsE"
+  "ntry\032J\n\020PlayerAttrsEntry\022\013\n\003key\030\001 \001(\004\022%\n"
+  "\005value\030\002 \001(\0132\026.gameDataPb.PlayerAttr:\0028\001"
+  "\"\216\004\n\005State\022\020\n\010playerIP\030\001 \001(\004\0227\n\013playerIn"
+  "fos\030\002 \003(\0132\".gameDataPb.State.PlayerInfos"
+  "Entry\0227\n\013PlayerAttrs\030\003 \003(\0132\".gameDataPb."
+  "State.PlayerAttrsEntry\032\342\001\n\nPlayerInfo\022\022\n"
+  "\nplayerName\030\001 \001(\t\022\023\n\013playerStyle\030\002 \001(\r\0220"
+  "\n\026controlNodeEulerAngles\030\003 \001(\0132\020.gameDat"
+  "aPb.Vec3\022\'\n\rmoveDirection\030\004 \001(\0132\020.gameDa"
+  "taPb.Vec3\022&\n\010dirState\030\005 \001(\0162\024.gameDataPb"
+  ".DirState\022(\n\013magicEvents\030\006 \003(\0162\023.gameDat"
+  "aPb.MagicPb\032P\n\020PlayerInfosEntry\022\013\n\003key\030\001"
+  " \001(\004\022+\n\005value\030\002 \001(\0132\034.gameDataPb.State.P"
+  "layerInfo:\0028\001\032J\n\020PlayerAttrsEntry\022\013\n\003key"
+  "\030\001 \001(\004\022%\n\005value\030\002 \001(\0132\026.gameDataPb.Playe"
+  "rAttr:\0028\001*z\n\010DirState\022\010\n\004NONE\020\000\022\t\n\005FRONT"
+  "\020\001\022\010\n\004BACK\020\002\022\010\n\004LEFT\020\003\022\t\n\005RIGHT\020\004\022\r\n\tFRO"
+  "NTLEFT\020\005\022\016\n\nFRONTRIGHT\020\006\022\014\n\010BACKLEFT\020\007\022\r"
+  "\n\tBACKRIGHT\020\010*\203\001\n\007MagicPb\022\016\n\nSTONEBLAST\020"
+  "\000\022\014\n\010FIREBALL\020\001\022\022\n\016LIGHTNINGSPEAR\020\002\022\017\n\013G"
+  "ROUNDSMASH\020\003\022\013\n\007THUNDER\020\004\022\t\n\005FLAME\020\005\022\021\n\r"
+  "THOUSANDBLADE\020\006\022\n\n\006DRAGON\020\007B\002H\001b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gameData_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gameData_2eproto = {
-  false, false, 1101, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
-  &descriptor_table_gameData_2eproto_once, nullptr, 0, 6,
+  false, false, 1319, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
+  &descriptor_table_gameData_2eproto_once, nullptr, 0, 9,
   schemas, file_default_instances, TableStruct_gameData_2eproto::offsets,
   file_level_metadata_gameData_2eproto, file_level_enum_descriptors_gameData_2eproto, file_level_service_descriptors_gameData_2eproto,
 };
@@ -267,30 +335,20 @@ bool DirState_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MovEvent_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gameData_2eproto);
-  return file_level_enum_descriptors_gameData_2eproto[1];
-}
-bool MovEvent_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MagicPb_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gameData_2eproto);
-  return file_level_enum_descriptors_gameData_2eproto[2];
+  return file_level_enum_descriptors_gameData_2eproto[1];
 }
 bool MagicPb_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
       return true;
     default:
       return false;
@@ -806,27 +864,217 @@ void Vec2::InternalSwap(Vec2* other) {
 
 // ===================================================================
 
-class Event::_Internal {
+class PlayerAttr::_Internal {
  public:
-  static const ::gameDataPb::Vec2& mousetranslation(const Event* msg);
-  static const ::gameDataPb::Vec3& controlnodeeulerangles(const Event* msg);
 };
 
-const ::gameDataPb::Vec2&
-Event::_Internal::mousetranslation(const Event* msg) {
-  return *msg->mousetranslation_;
+PlayerAttr::PlayerAttr(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:gameDataPb.PlayerAttr)
 }
+PlayerAttr::PlayerAttr(const PlayerAttr& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  playerhp_ = from.playerhp_;
+  // @@protoc_insertion_point(copy_constructor:gameDataPb.PlayerAttr)
+}
+
+inline void PlayerAttr::SharedCtor() {
+playerhp_ = 0u;
+}
+
+PlayerAttr::~PlayerAttr() {
+  // @@protoc_insertion_point(destructor:gameDataPb.PlayerAttr)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+inline void PlayerAttr::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void PlayerAttr::ArenaDtor(void* object) {
+  PlayerAttr* _this = reinterpret_cast< PlayerAttr* >(object);
+  (void)_this;
+}
+void PlayerAttr::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void PlayerAttr::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void PlayerAttr::Clear() {
+// @@protoc_insertion_point(message_clear_start:gameDataPb.PlayerAttr)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  playerhp_ = 0u;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* PlayerAttr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 playerHP = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          playerhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* PlayerAttr::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gameDataPb.PlayerAttr)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 playerHP = 1;
+  if (this->_internal_playerhp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_playerhp(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gameDataPb.PlayerAttr)
+  return target;
+}
+
+size_t PlayerAttr::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gameDataPb.PlayerAttr)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 playerHP = 1;
+  if (this->_internal_playerhp() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerhp());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData PlayerAttr::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    PlayerAttr::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*PlayerAttr::GetClassData() const { return &_class_data_; }
+
+void PlayerAttr::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<PlayerAttr *>(to)->MergeFrom(
+      static_cast<const PlayerAttr &>(from));
+}
+
+
+void PlayerAttr::MergeFrom(const PlayerAttr& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gameDataPb.PlayerAttr)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_playerhp() != 0) {
+    _internal_set_playerhp(from._internal_playerhp());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PlayerAttr::CopyFrom(const PlayerAttr& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gameDataPb.PlayerAttr)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PlayerAttr::IsInitialized() const {
+  return true;
+}
+
+void PlayerAttr::InternalSwap(PlayerAttr* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(playerhp_, other->playerhp_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata PlayerAttr::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
+      file_level_metadata_gameData_2eproto[2]);
+}
+
+// ===================================================================
+
+Event_PlayerAttrsEntry_DoNotUse::Event_PlayerAttrsEntry_DoNotUse() {}
+Event_PlayerAttrsEntry_DoNotUse::Event_PlayerAttrsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void Event_PlayerAttrsEntry_DoNotUse::MergeFrom(const Event_PlayerAttrsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata Event_PlayerAttrsEntry_DoNotUse::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
+      file_level_metadata_gameData_2eproto[3]);
+}
+
+// ===================================================================
+
+class Event::_Internal {
+ public:
+  static const ::gameDataPb::Vec3& controlnodeeulerangles(const Event* msg);
+  static const ::gameDataPb::Vec3& movedirection(const Event* msg);
+};
+
 const ::gameDataPb::Vec3&
 Event::_Internal::controlnodeeulerangles(const Event* msg) {
   return *msg->controlnodeeulerangles_;
 }
+const ::gameDataPb::Vec3&
+Event::_Internal::movedirection(const Event* msg) {
+  return *msg->movedirection_;
+}
 Event::Event(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
-  movevents_(arena),
   magicevents_(arena),
-  addmagics_(arena),
-  rmmagics_(arena) {
+  playerattrs_(arena) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
@@ -835,11 +1083,9 @@ Event::Event(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 }
 Event::Event(const Event& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      movevents_(from.movevents_),
-      magicevents_(from.magicevents_),
-      addmagics_(from.addmagics_),
-      rmmagics_(from.rmmagics_) {
+      magicevents_(from.magicevents_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  playerattrs_.MergeFrom(from.playerattrs_);
   playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     playername_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
@@ -848,19 +1094,19 @@ Event::Event(const Event& from)
     playername_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_playername(), 
       GetArenaForAllocation());
   }
-  if (from._internal_has_mousetranslation()) {
-    mousetranslation_ = new ::gameDataPb::Vec2(*from.mousetranslation_);
-  } else {
-    mousetranslation_ = nullptr;
-  }
   if (from._internal_has_controlnodeeulerangles()) {
     controlnodeeulerangles_ = new ::gameDataPb::Vec3(*from.controlnodeeulerangles_);
   } else {
     controlnodeeulerangles_ = nullptr;
   }
+  if (from._internal_has_movedirection()) {
+    movedirection_ = new ::gameDataPb::Vec3(*from.movedirection_);
+  } else {
+    movedirection_ = nullptr;
+  }
   ::memcpy(&start_, &from.start_,
-    static_cast<size_t>(reinterpret_cast<char*>(&restart_) -
-    reinterpret_cast<char*>(&start_)) + sizeof(restart_));
+    static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
+    reinterpret_cast<char*>(&start_)) + sizeof(dirstate_));
   // @@protoc_insertion_point(copy_constructor:gameDataPb.Event)
 }
 
@@ -870,9 +1116,9 @@ playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringA
   playername_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&mousetranslation_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&restart_) -
-    reinterpret_cast<char*>(&mousetranslation_)) + sizeof(restart_));
+    reinterpret_cast<char*>(&controlnodeeulerangles_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
+    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(dirstate_));
 }
 
 Event::~Event() {
@@ -885,15 +1131,19 @@ Event::~Event() {
 inline void Event::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   playername_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete mousetranslation_;
   if (this != internal_default_instance()) delete controlnodeeulerangles_;
+  if (this != internal_default_instance()) delete movedirection_;
 }
 
 void Event::ArenaDtor(void* object) {
   Event* _this = reinterpret_cast< Event* >(object);
   (void)_this;
+  _this->playerattrs_. ~MapField();
 }
-void Event::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+inline void Event::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena) {
+  if (arena != nullptr) {
+    arena->OwnCustomDestructor(this, &Event::ArenaDtor);
+  }
 }
 void Event::SetCachedSize(int size) const {
   _cached_size_.Set(size);
@@ -905,22 +1155,20 @@ void Event::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  movevents_.Clear();
   magicevents_.Clear();
-  addmagics_.Clear();
-  rmmagics_.Clear();
+  playerattrs_.Clear();
   playername_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && mousetranslation_ != nullptr) {
-    delete mousetranslation_;
-  }
-  mousetranslation_ = nullptr;
   if (GetArenaForAllocation() == nullptr && controlnodeeulerangles_ != nullptr) {
     delete controlnodeeulerangles_;
   }
   controlnodeeulerangles_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && movedirection_ != nullptr) {
+    delete movedirection_;
+  }
+  movedirection_ = nullptr;
   ::memset(&start_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&restart_) -
-      reinterpret_cast<char*>(&start_)) + sizeof(restart_));
+      reinterpret_cast<char*>(&dirstate_) -
+      reinterpret_cast<char*>(&start_)) + sizeof(dirstate_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -956,10 +1204,10 @@ const char* Event::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec2 mouseTranslation = 4;
+      // uint32 playerStyle = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_mousetranslation(), ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          playerstyle_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -972,51 +1220,45 @@ const char* Event::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // repeated .gameDataPb.MovEvent movEvents = 6;
+      // .gameDataPb.Vec3 moveDirection = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_movevents(), ptr, ctx);
+          ptr = ctx->ParseMessage(_internal_mutable_movedirection(), ptr);
           CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 48) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_add_movevents(static_cast<::gameDataPb::MovEvent>(val));
         } else
           goto handle_unusual;
         continue;
-      // repeated .gameDataPb.MagicPb magicEvents = 7;
+      // .gameDataPb.DirState dirState = 7;
       case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_dirstate(static_cast<::gameDataPb::DirState>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .gameDataPb.MagicPb magicEvents = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_magicevents(), ptr, ctx);
           CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 56) {
+        } else if (static_cast<uint8_t>(tag) == 64) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_add_magicevents(static_cast<::gameDataPb::MagicPb>(val));
         } else
           goto handle_unusual;
         continue;
-      // repeated .gameDataPb.MagicPb addMagics = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_addmagics(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 64) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_add_addmagics(static_cast<::gameDataPb::MagicPb>(val));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated .gameDataPb.MagicPb rmMagics = 9;
+      // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_rmmagics(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 72) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_add_rmmagics(static_cast<::gameDataPb::MagicPb>(val));
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&playerattrs_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -1071,12 +1313,10 @@ uint8_t* Event::_InternalSerialize(
         3, this->_internal_playername(), target);
   }
 
-  // .gameDataPb.Vec2 mouseTranslation = 4;
-  if (this->_internal_has_mousetranslation()) {
+  // uint32 playerStyle = 4;
+  if (this->_internal_playerstyle() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        4, _Internal::mousetranslation(this), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_playerstyle(), target);
   }
 
   // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
@@ -1087,39 +1327,58 @@ uint8_t* Event::_InternalSerialize(
         5, _Internal::controlnodeeulerangles(this), target, stream);
   }
 
-  // repeated .gameDataPb.MovEvent movEvents = 6;
-  {
-    int byte_size = _movevents_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          6, movevents_, byte_size, target);
-    }
+  // .gameDataPb.Vec3 moveDirection = 6;
+  if (this->_internal_has_movedirection()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        6, _Internal::movedirection(this), target, stream);
   }
 
-  // repeated .gameDataPb.MagicPb magicEvents = 7;
+  // .gameDataPb.DirState dirState = 7;
+  if (this->_internal_dirstate() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      7, this->_internal_dirstate(), target);
+  }
+
+  // repeated .gameDataPb.MagicPb magicEvents = 8;
   {
     int byte_size = _magicevents_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
       target = stream->WriteEnumPacked(
-          7, magicevents_, byte_size, target);
+          8, magicevents_, byte_size, target);
     }
   }
 
-  // repeated .gameDataPb.MagicPb addMagics = 8;
-  {
-    int byte_size = _addmagics_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          8, addmagics_, byte_size, target);
-    }
-  }
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  if (!this->_internal_playerattrs().empty()) {
+    typedef ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_pointer
+        ConstPtr;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< uint64_t, ConstPtr > SortItem;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
 
-  // repeated .gameDataPb.MagicPb rmMagics = 9;
-  {
-    int byte_size = _rmmagics_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          9, rmmagics_, byte_size, target);
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_playerattrs().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->_internal_playerattrs().size()]);
+      typedef ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::size_type size_type;
+      size_type n = 0;
+      for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+          it = this->_internal_playerattrs().begin();
+          it != this->_internal_playerattrs().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      for (size_type i = 0; i < n; i++) {
+        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(9, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target, stream);
+      }
+    } else {
+      for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+          it = this->_internal_playerattrs().begin();
+          it != this->_internal_playerattrs().end(); ++it) {
+        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(9, it->first, it->second, target, stream);
+      }
     }
   }
 
@@ -1139,25 +1398,7 @@ size_t Event::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .gameDataPb.MovEvent movEvents = 6;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->_internal_movevents_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
-        this->_internal_movevents(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<int32_t>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _movevents_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
-
-  // repeated .gameDataPb.MagicPb magicEvents = 7;
+  // repeated .gameDataPb.MagicPb magicEvents = 8;
   {
     size_t data_size = 0;
     unsigned int count = static_cast<unsigned int>(this->_internal_magicevents_size());for (unsigned int i = 0; i < count; i++) {
@@ -1175,40 +1416,13 @@ size_t Event::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated .gameDataPb.MagicPb addMagics = 8;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->_internal_addmagics_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
-        this->_internal_addmagics(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<int32_t>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _addmagics_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
-
-  // repeated .gameDataPb.MagicPb rmMagics = 9;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->_internal_rmmagics_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
-        this->_internal_rmmagics(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<int32_t>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _rmmagics_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_playerattrs_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+      it = this->_internal_playerattrs().begin();
+      it != this->_internal_playerattrs().end(); ++it) {
+    total_size += Event_PlayerAttrsEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
   // string playerName = 3;
@@ -1218,18 +1432,18 @@ size_t Event::ByteSizeLong() const {
         this->_internal_playername());
   }
 
-  // .gameDataPb.Vec2 mouseTranslation = 4;
-  if (this->_internal_has_mousetranslation()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *mousetranslation_);
-  }
-
   // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
   if (this->_internal_has_controlnodeeulerangles()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *controlnodeeulerangles_);
+  }
+
+  // .gameDataPb.Vec3 moveDirection = 6;
+  if (this->_internal_has_movedirection()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *movedirection_);
   }
 
   // bool start = 1;
@@ -1240,6 +1454,17 @@ size_t Event::ByteSizeLong() const {
   // bool restart = 2;
   if (this->_internal_restart() != 0) {
     total_size += 1 + 1;
+  }
+
+  // uint32 playerStyle = 4;
+  if (this->_internal_playerstyle() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerstyle());
+  }
+
+  // .gameDataPb.DirState dirState = 7;
+  if (this->_internal_dirstate() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_dirstate());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1264,24 +1489,28 @@ void Event::MergeFrom(const Event& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  movevents_.MergeFrom(from.movevents_);
   magicevents_.MergeFrom(from.magicevents_);
-  addmagics_.MergeFrom(from.addmagics_);
-  rmmagics_.MergeFrom(from.rmmagics_);
+  playerattrs_.MergeFrom(from.playerattrs_);
   if (!from._internal_playername().empty()) {
     _internal_set_playername(from._internal_playername());
   }
-  if (from._internal_has_mousetranslation()) {
-    _internal_mutable_mousetranslation()->::gameDataPb::Vec2::MergeFrom(from._internal_mousetranslation());
-  }
   if (from._internal_has_controlnodeeulerangles()) {
     _internal_mutable_controlnodeeulerangles()->::gameDataPb::Vec3::MergeFrom(from._internal_controlnodeeulerangles());
+  }
+  if (from._internal_has_movedirection()) {
+    _internal_mutable_movedirection()->::gameDataPb::Vec3::MergeFrom(from._internal_movedirection());
   }
   if (from._internal_start() != 0) {
     _internal_set_start(from._internal_start());
   }
   if (from._internal_restart() != 0) {
     _internal_set_restart(from._internal_restart());
+  }
+  if (from._internal_playerstyle() != 0) {
+    _internal_set_playerstyle(from._internal_playerstyle());
+  }
+  if (from._internal_dirstate() != 0) {
+    _internal_set_dirstate(from._internal_dirstate());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1302,51 +1531,47 @@ void Event::InternalSwap(Event* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  movevents_.InternalSwap(&other->movevents_);
   magicevents_.InternalSwap(&other->magicevents_);
-  addmagics_.InternalSwap(&other->addmagics_);
-  rmmagics_.InternalSwap(&other->rmmagics_);
+  playerattrs_.InternalSwap(&other->playerattrs_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       &playername_, lhs_arena,
       &other->playername_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Event, restart_)
-      + sizeof(Event::restart_)
-      - PROTOBUF_FIELD_OFFSET(Event, mousetranslation_)>(
-          reinterpret_cast<char*>(&mousetranslation_),
-          reinterpret_cast<char*>(&other->mousetranslation_));
+      PROTOBUF_FIELD_OFFSET(Event, dirstate_)
+      + sizeof(Event::dirstate_)
+      - PROTOBUF_FIELD_OFFSET(Event, controlnodeeulerangles_)>(
+          reinterpret_cast<char*>(&controlnodeeulerangles_),
+          reinterpret_cast<char*>(&other->controlnodeeulerangles_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Event::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
-      file_level_metadata_gameData_2eproto[2]);
+      file_level_metadata_gameData_2eproto[4]);
 }
 
 // ===================================================================
 
 class State_PlayerInfo::_Internal {
  public:
-  static const ::gameDataPb::Vec3& position(const State_PlayerInfo* msg);
-  static const ::gameDataPb::Vec3& eulerangle(const State_PlayerInfo* msg);
+  static const ::gameDataPb::Vec3& controlnodeeulerangles(const State_PlayerInfo* msg);
+  static const ::gameDataPb::Vec3& movedirection(const State_PlayerInfo* msg);
 };
 
 const ::gameDataPb::Vec3&
-State_PlayerInfo::_Internal::position(const State_PlayerInfo* msg) {
-  return *msg->position_;
+State_PlayerInfo::_Internal::controlnodeeulerangles(const State_PlayerInfo* msg) {
+  return *msg->controlnodeeulerangles_;
 }
 const ::gameDataPb::Vec3&
-State_PlayerInfo::_Internal::eulerangle(const State_PlayerInfo* msg) {
-  return *msg->eulerangle_;
+State_PlayerInfo::_Internal::movedirection(const State_PlayerInfo* msg) {
+  return *msg->movedirection_;
 }
 State_PlayerInfo::State_PlayerInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
-  magicevents_(arena),
-  addmagics_(arena),
-  rmmagics_(arena) {
+  magicevents_(arena) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
@@ -1355,9 +1580,7 @@ State_PlayerInfo::State_PlayerInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 }
 State_PlayerInfo::State_PlayerInfo(const State_PlayerInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      magicevents_(from.magicevents_),
-      addmagics_(from.addmagics_),
-      rmmagics_(from.rmmagics_) {
+      magicevents_(from.magicevents_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -1367,17 +1590,19 @@ State_PlayerInfo::State_PlayerInfo(const State_PlayerInfo& from)
     playername_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_playername(), 
       GetArenaForAllocation());
   }
-  if (from._internal_has_position()) {
-    position_ = new ::gameDataPb::Vec3(*from.position_);
+  if (from._internal_has_controlnodeeulerangles()) {
+    controlnodeeulerangles_ = new ::gameDataPb::Vec3(*from.controlnodeeulerangles_);
   } else {
-    position_ = nullptr;
+    controlnodeeulerangles_ = nullptr;
   }
-  if (from._internal_has_eulerangle()) {
-    eulerangle_ = new ::gameDataPb::Vec3(*from.eulerangle_);
+  if (from._internal_has_movedirection()) {
+    movedirection_ = new ::gameDataPb::Vec3(*from.movedirection_);
   } else {
-    eulerangle_ = nullptr;
+    movedirection_ = nullptr;
   }
-  dirstate_ = from.dirstate_;
+  ::memcpy(&playerstyle_, &from.playerstyle_,
+    static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
+    reinterpret_cast<char*>(&playerstyle_)) + sizeof(dirstate_));
   // @@protoc_insertion_point(copy_constructor:gameDataPb.State.PlayerInfo)
 }
 
@@ -1387,9 +1612,9 @@ playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringA
   playername_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&position_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&controlnodeeulerangles_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
-    reinterpret_cast<char*>(&position_)) + sizeof(dirstate_));
+    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(dirstate_));
 }
 
 State_PlayerInfo::~State_PlayerInfo() {
@@ -1402,8 +1627,8 @@ State_PlayerInfo::~State_PlayerInfo() {
 inline void State_PlayerInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   playername_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete position_;
-  if (this != internal_default_instance()) delete eulerangle_;
+  if (this != internal_default_instance()) delete controlnodeeulerangles_;
+  if (this != internal_default_instance()) delete movedirection_;
 }
 
 void State_PlayerInfo::ArenaDtor(void* object) {
@@ -1423,18 +1648,18 @@ void State_PlayerInfo::Clear() {
   (void) cached_has_bits;
 
   magicevents_.Clear();
-  addmagics_.Clear();
-  rmmagics_.Clear();
   playername_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && position_ != nullptr) {
-    delete position_;
+  if (GetArenaForAllocation() == nullptr && controlnodeeulerangles_ != nullptr) {
+    delete controlnodeeulerangles_;
   }
-  position_ = nullptr;
-  if (GetArenaForAllocation() == nullptr && eulerangle_ != nullptr) {
-    delete eulerangle_;
+  controlnodeeulerangles_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && movedirection_ != nullptr) {
+    delete movedirection_;
   }
-  eulerangle_ = nullptr;
-  dirstate_ = 0;
+  movedirection_ = nullptr;
+  ::memset(&playerstyle_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&dirstate_) -
+      reinterpret_cast<char*>(&playerstyle_)) + sizeof(dirstate_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1454,64 +1679,48 @@ const char* State_PlayerInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.DirState dirState = 2;
+      // uint32 playerStyle = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          playerstyle_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_controlnodeeulerangles(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .gameDataPb.Vec3 moveDirection = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_movedirection(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .gameDataPb.DirState dirState = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_dirstate(static_cast<::gameDataPb::DirState>(val));
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec3 position = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_position(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // .gameDataPb.Vec3 eulerAngle = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_eulerangle(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated .gameDataPb.MagicPb magicEvents = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_magicevents(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 40) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_add_magicevents(static_cast<::gameDataPb::MagicPb>(val));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated .gameDataPb.MagicPb addMagics = 6;
+      // repeated .gameDataPb.MagicPb magicEvents = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_addmagics(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_magicevents(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<uint8_t>(tag) == 48) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_add_addmagics(static_cast<::gameDataPb::MagicPb>(val));
-        } else
-          goto handle_unusual;
-        continue;
-      // repeated .gameDataPb.MagicPb rmMagics = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_rmmagics(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 56) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_add_rmmagics(static_cast<::gameDataPb::MagicPb>(val));
+          _internal_add_magicevents(static_cast<::gameDataPb::MagicPb>(val));
         } else
           goto handle_unusual;
         continue;
@@ -1554,53 +1763,41 @@ uint8_t* State_PlayerInfo::_InternalSerialize(
         1, this->_internal_playername(), target);
   }
 
-  // .gameDataPb.DirState dirState = 2;
+  // uint32 playerStyle = 2;
+  if (this->_internal_playerstyle() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_playerstyle(), target);
+  }
+
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  if (this->_internal_has_controlnodeeulerangles()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::controlnodeeulerangles(this), target, stream);
+  }
+
+  // .gameDataPb.Vec3 moveDirection = 4;
+  if (this->_internal_has_movedirection()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::movedirection(this), target, stream);
+  }
+
+  // .gameDataPb.DirState dirState = 5;
   if (this->_internal_dirstate() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      2, this->_internal_dirstate(), target);
+      5, this->_internal_dirstate(), target);
   }
 
-  // .gameDataPb.Vec3 position = 3;
-  if (this->_internal_has_position()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        3, _Internal::position(this), target, stream);
-  }
-
-  // .gameDataPb.Vec3 eulerAngle = 4;
-  if (this->_internal_has_eulerangle()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        4, _Internal::eulerangle(this), target, stream);
-  }
-
-  // repeated .gameDataPb.MagicPb magicEvents = 5;
+  // repeated .gameDataPb.MagicPb magicEvents = 6;
   {
     int byte_size = _magicevents_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
       target = stream->WriteEnumPacked(
-          5, magicevents_, byte_size, target);
-    }
-  }
-
-  // repeated .gameDataPb.MagicPb addMagics = 6;
-  {
-    int byte_size = _addmagics_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          6, addmagics_, byte_size, target);
-    }
-  }
-
-  // repeated .gameDataPb.MagicPb rmMagics = 7;
-  {
-    int byte_size = _rmmagics_cached_byte_size_.load(std::memory_order_relaxed);
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          7, rmmagics_, byte_size, target);
+          6, magicevents_, byte_size, target);
     }
   }
 
@@ -1620,7 +1817,7 @@ size_t State_PlayerInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .gameDataPb.MagicPb magicEvents = 5;
+  // repeated .gameDataPb.MagicPb magicEvents = 6;
   {
     size_t data_size = 0;
     unsigned int count = static_cast<unsigned int>(this->_internal_magicevents_size());for (unsigned int i = 0; i < count; i++) {
@@ -1638,42 +1835,6 @@ size_t State_PlayerInfo::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated .gameDataPb.MagicPb addMagics = 6;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->_internal_addmagics_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
-        this->_internal_addmagics(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<int32_t>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _addmagics_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
-
-  // repeated .gameDataPb.MagicPb rmMagics = 7;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->_internal_rmmagics_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
-        this->_internal_rmmagics(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<int32_t>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _rmmagics_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
-
   // string playerName = 1;
   if (!this->_internal_playername().empty()) {
     total_size += 1 +
@@ -1681,21 +1842,26 @@ size_t State_PlayerInfo::ByteSizeLong() const {
         this->_internal_playername());
   }
 
-  // .gameDataPb.Vec3 position = 3;
-  if (this->_internal_has_position()) {
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  if (this->_internal_has_controlnodeeulerangles()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *position_);
+        *controlnodeeulerangles_);
   }
 
-  // .gameDataPb.Vec3 eulerAngle = 4;
-  if (this->_internal_has_eulerangle()) {
+  // .gameDataPb.Vec3 moveDirection = 4;
+  if (this->_internal_has_movedirection()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *eulerangle_);
+        *movedirection_);
   }
 
-  // .gameDataPb.DirState dirState = 2;
+  // uint32 playerStyle = 2;
+  if (this->_internal_playerstyle() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerstyle());
+  }
+
+  // .gameDataPb.DirState dirState = 5;
   if (this->_internal_dirstate() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_dirstate());
@@ -1724,16 +1890,17 @@ void State_PlayerInfo::MergeFrom(const State_PlayerInfo& from) {
   (void) cached_has_bits;
 
   magicevents_.MergeFrom(from.magicevents_);
-  addmagics_.MergeFrom(from.addmagics_);
-  rmmagics_.MergeFrom(from.rmmagics_);
   if (!from._internal_playername().empty()) {
     _internal_set_playername(from._internal_playername());
   }
-  if (from._internal_has_position()) {
-    _internal_mutable_position()->::gameDataPb::Vec3::MergeFrom(from._internal_position());
+  if (from._internal_has_controlnodeeulerangles()) {
+    _internal_mutable_controlnodeeulerangles()->::gameDataPb::Vec3::MergeFrom(from._internal_controlnodeeulerangles());
   }
-  if (from._internal_has_eulerangle()) {
-    _internal_mutable_eulerangle()->::gameDataPb::Vec3::MergeFrom(from._internal_eulerangle());
+  if (from._internal_has_movedirection()) {
+    _internal_mutable_movedirection()->::gameDataPb::Vec3::MergeFrom(from._internal_movedirection());
+  }
+  if (from._internal_playerstyle() != 0) {
+    _internal_set_playerstyle(from._internal_playerstyle());
   }
   if (from._internal_dirstate() != 0) {
     _internal_set_dirstate(from._internal_dirstate());
@@ -1758,8 +1925,6 @@ void State_PlayerInfo::InternalSwap(State_PlayerInfo* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   magicevents_.InternalSwap(&other->magicevents_);
-  addmagics_.InternalSwap(&other->addmagics_);
-  rmmagics_.InternalSwap(&other->rmmagics_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       &playername_, lhs_arena,
@@ -1768,15 +1933,15 @@ void State_PlayerInfo::InternalSwap(State_PlayerInfo* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(State_PlayerInfo, dirstate_)
       + sizeof(State_PlayerInfo::dirstate_)
-      - PROTOBUF_FIELD_OFFSET(State_PlayerInfo, position_)>(
-          reinterpret_cast<char*>(&position_),
-          reinterpret_cast<char*>(&other->position_));
+      - PROTOBUF_FIELD_OFFSET(State_PlayerInfo, controlnodeeulerangles_)>(
+          reinterpret_cast<char*>(&controlnodeeulerangles_),
+          reinterpret_cast<char*>(&other->controlnodeeulerangles_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata State_PlayerInfo::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
-      file_level_metadata_gameData_2eproto[3]);
+      file_level_metadata_gameData_2eproto[5]);
 }
 
 // ===================================================================
@@ -1790,7 +1955,21 @@ void State_PlayerInfosEntry_DoNotUse::MergeFrom(const State_PlayerInfosEntry_DoN
 ::PROTOBUF_NAMESPACE_ID::Metadata State_PlayerInfosEntry_DoNotUse::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
-      file_level_metadata_gameData_2eproto[4]);
+      file_level_metadata_gameData_2eproto[6]);
+}
+
+// ===================================================================
+
+State_PlayerAttrsEntry_DoNotUse::State_PlayerAttrsEntry_DoNotUse() {}
+State_PlayerAttrsEntry_DoNotUse::State_PlayerAttrsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void State_PlayerAttrsEntry_DoNotUse::MergeFrom(const State_PlayerAttrsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata State_PlayerAttrsEntry_DoNotUse::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
+      file_level_metadata_gameData_2eproto[7]);
 }
 
 // ===================================================================
@@ -1802,7 +1981,8 @@ class State::_Internal {
 State::State(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
-  playerinfos_(arena) {
+  playerinfos_(arena),
+  playerattrs_(arena) {
   SharedCtor();
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
@@ -1813,6 +1993,7 @@ State::State(const State& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   playerinfos_.MergeFrom(from.playerinfos_);
+  playerattrs_.MergeFrom(from.playerattrs_);
   playerip_ = from.playerip_;
   // @@protoc_insertion_point(copy_constructor:gameDataPb.State)
 }
@@ -1836,6 +2017,7 @@ void State::ArenaDtor(void* object) {
   State* _this = reinterpret_cast< State* >(object);
   (void)_this;
   _this->playerinfos_. ~MapField();
+  _this->playerattrs_. ~MapField();
 }
 inline void State::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena) {
   if (arena != nullptr) {
@@ -1853,6 +2035,7 @@ void State::Clear() {
   (void) cached_has_bits;
 
   playerinfos_.Clear();
+  playerattrs_.Clear();
   playerip_ = uint64_t{0u};
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -1881,6 +2064,19 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&playerattrs_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -1950,6 +2146,37 @@ uint8_t* State::_InternalSerialize(
     }
   }
 
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
+  if (!this->_internal_playerattrs().empty()) {
+    typedef ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_pointer
+        ConstPtr;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< uint64_t, ConstPtr > SortItem;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
+
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_playerattrs().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->_internal_playerattrs().size()]);
+      typedef ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::size_type size_type;
+      size_type n = 0;
+      for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+          it = this->_internal_playerattrs().begin();
+          it != this->_internal_playerattrs().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      for (size_type i = 0; i < n; i++) {
+        target = State_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(3, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target, stream);
+      }
+    } else {
+      for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+          it = this->_internal_playerattrs().begin();
+          it != this->_internal_playerattrs().end(); ++it) {
+        target = State_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(3, it->first, it->second, target, stream);
+      }
+    }
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1973,6 +2200,15 @@ size_t State::ByteSizeLong() const {
       it = this->_internal_playerinfos().begin();
       it != this->_internal_playerinfos().end(); ++it) {
     total_size += State_PlayerInfosEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
+
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_playerattrs_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
+      it = this->_internal_playerattrs().begin();
+      it != this->_internal_playerattrs().end(); ++it) {
+    total_size += State_PlayerAttrsEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
   // uint64 playerIP = 1;
@@ -2003,6 +2239,7 @@ void State::MergeFrom(const State& from) {
   (void) cached_has_bits;
 
   playerinfos_.MergeFrom(from.playerinfos_);
+  playerattrs_.MergeFrom(from.playerattrs_);
   if (from._internal_playerip() != 0) {
     _internal_set_playerip(from._internal_playerip());
   }
@@ -2024,13 +2261,14 @@ void State::InternalSwap(State* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   playerinfos_.InternalSwap(&other->playerinfos_);
+  playerattrs_.InternalSwap(&other->playerattrs_);
   swap(playerip_, other->playerip_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata State::GetMetadata() const {
   return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
       &descriptor_table_gameData_2eproto_getter, &descriptor_table_gameData_2eproto_once,
-      file_level_metadata_gameData_2eproto[5]);
+      file_level_metadata_gameData_2eproto[8]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -2042,6 +2280,12 @@ template<> PROTOBUF_NOINLINE ::gameDataPb::Vec3* Arena::CreateMaybeMessage< ::ga
 template<> PROTOBUF_NOINLINE ::gameDataPb::Vec2* Arena::CreateMaybeMessage< ::gameDataPb::Vec2 >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gameDataPb::Vec2 >(arena);
 }
+template<> PROTOBUF_NOINLINE ::gameDataPb::PlayerAttr* Arena::CreateMaybeMessage< ::gameDataPb::PlayerAttr >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gameDataPb::PlayerAttr >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gameDataPb::Event_PlayerAttrsEntry_DoNotUse* Arena::CreateMaybeMessage< ::gameDataPb::Event_PlayerAttrsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gameDataPb::Event_PlayerAttrsEntry_DoNotUse >(arena);
+}
 template<> PROTOBUF_NOINLINE ::gameDataPb::Event* Arena::CreateMaybeMessage< ::gameDataPb::Event >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gameDataPb::Event >(arena);
 }
@@ -2050,6 +2294,9 @@ template<> PROTOBUF_NOINLINE ::gameDataPb::State_PlayerInfo* Arena::CreateMaybeM
 }
 template<> PROTOBUF_NOINLINE ::gameDataPb::State_PlayerInfosEntry_DoNotUse* Arena::CreateMaybeMessage< ::gameDataPb::State_PlayerInfosEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gameDataPb::State_PlayerInfosEntry_DoNotUse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gameDataPb::State_PlayerAttrsEntry_DoNotUse* Arena::CreateMaybeMessage< ::gameDataPb::State_PlayerAttrsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gameDataPb::State_PlayerAttrsEntry_DoNotUse >(arena);
 }
 template<> PROTOBUF_NOINLINE ::gameDataPb::State* Arena::CreateMaybeMessage< ::gameDataPb::State >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gameDataPb::State >(arena);

@@ -74,6 +74,7 @@ public:
     void stopAndPlay(std::string name, float fade_in, float fade_out);
     void addAnimator(std::string name, std::string file);
     CharNode* copy(glm::vec3 position);
+    
     void moveCamera(glm::vec2 mouseTranslation);
     void moveFront();
     void moveBack();

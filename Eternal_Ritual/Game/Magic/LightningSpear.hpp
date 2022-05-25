@@ -29,9 +29,10 @@ public:
     LightNode* light;
     LightningSpear();
     ~LightningSpear() override = default;
+    void setThrew();
     void hitWall() override;
     void updateMagic() override;
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void tryDamage(CharNode* character) override;
 };
 

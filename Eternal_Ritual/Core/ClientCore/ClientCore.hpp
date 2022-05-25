@@ -1,3 +1,9 @@
+//
+//  ClientCore.hpp
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
 #ifndef CLIENTCORE_HPP
 #define CLIENTCORE_HPP
 
@@ -5,19 +11,18 @@
 #include <unordered_set>
 #include <vector>
 
-//#include "Network/Packet/statePb.hpp"
-//#include "Network/Packet/eventPb.hpp"
-//#include "Network/ClientSide/clientSocket.hpp"
-
 #include "KGLEngine/Engine.hpp"
 
+#include "Network/Packet/StatePb.hpp"
+#include "Network/Packet/EventPb.hpp"
+#include "Network/ClientSide/ClientSocket.hpp"
 #include "Game/Map/MapSystemManager.hpp"
 #include "Game/Character/HitController.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Magic/BaseMagic.hpp"
 
 
-class ClientCore final{
+class ClientCore {
 public:
     static ClientCore* Instance() {
         if (client_core_ == nullptr) {
@@ -36,29 +41,21 @@ public:
     void initEngine();
     void loadSky();
     void loadLight();
-    void loadMap();
+    void loadScene();
     void loadCharacter();
-    void loadWeapon();
-
-    // Offline game
-    void loadEnemy();
     void loadMagic();
     void loadDamageSystem();
-    void noNetworkLoop();
     
-    
-    //    Online game
-    //    void initPbPacket();
-    //    void connectServer();
-    //    void handleEvent();
-    //    void sendData();
-    //    void receiveData();
-    //    void processData(char* pbArr, int dataLen);
-    //    void updateState();
-    //    void renderWorld();
-    //    void closeConnect();
-    
-    
+    void loadPbPacket();
+    void connectServer();
+    void handleEvent();
+    void sendData();
+    void receiveData();
+    void processData(char* pbArr, int dataLen);
+    void updateState();
+    void renderWorld();
+    void closeConnect();
+
 private:
     // Singleton pattern
     static ClientCore* client_core_;
@@ -66,12 +63,12 @@ private:
     ~ClientCore();
     
     // Socket
-//    ClientSocket* clientSocket;
-//    unsigned long long client_cycle_ = 0;
+    ClientSocket* client_socket_;
+    unsigned long long client_cycle_ = 0;
     
-//    // Pb
-//    EventPb* eventPb;
-//    StatePb* statePb;
+    // Pb
+    EventPb* event_pb_;
+    StatePb* state_pb_;
     
     // Engine
     Engine* engine_;
@@ -87,30 +84,24 @@ private:
     
     // Character
     CharNode* character_;
-//    unsigned long character_ip_;
+    unsigned long character_ip_;
     
     // Magic
     std::unordered_map<int, Magic::Type> key_to_magic_;
     std::unordered_map<Magic::Type, int> magic_to_key_;
     std::unordered_set<BaseMagic*> all_magics_;
     
-    // Weapon
-    Node* weapon_node_;
-//    std::unordered_map<unsigned long, Node*> enemy_weapons_;
-    
-    // Enemy
-    std::vector<CharNode*> enemies_;
-//    std::unordered_map<unsigned long, CharNode*> enemies_;
-//    std::vector<unsigned long> enemy_ips_;
+    // All Characters
+    std::vector<CharNode*> pre_chars_;
+    std::unordered_map<unsigned long, CharNode*> all_chars_;
     
     // HitController
     HitController*  hit_controller_;
     
     // Game
-//    bool start_game_ = true;
+    bool start_game_ = true;
 };
-
 
 void destructClientCore(int signum);
 
-#endif /* clientCore_hpp */
+#endif /* ClientCore_hpp */

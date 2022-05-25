@@ -31,8 +31,10 @@ Thunder::Thunder() {
         thunders.push_back(thunder);
     }
 }
-void Thunder::play(CharNode* character){
+void Thunder::play(CharNode* character, int seed){
     if (!start){
+        this->seed = seed;
+        srand(seed);
         this->caster = character;
         this->position = character->getWorldPosition();
         this->updateTransform();
@@ -42,8 +44,8 @@ void Thunder::play(CharNode* character){
 }
 void Thunder::playNextThunder(int index){
     if (index < thunders.size()){
-        thunders[index]->position.x = glm::linearRand(-glm::log2(thunders[index]->position.z) * 0.1, glm::log2(thunders[index]->position.z) * 0.1);
-        thunders[index]->play(this->caster);
+        thunders[index]->position.x = glm::log2(thunders[index]->position.z) * 0.1 * (rand() / (RAND_MAX + 1.0f) - 0.5);
+        thunders[index]->play(this->caster, this->seed);
         Animation* playNext = new Animation("play next thunder " + to_string(reinterpret_cast<long>(&thunders[index])), 0.2);
         playNext->setCompletionHandler([&, index] {
             playNextThunder(1 + index);

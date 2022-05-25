@@ -21,15 +21,16 @@ FireBall::FireBall(){
     start = false;
     canDamage = false;
     this->position = vec3(0);
-    this->acceleration = vec3(0, -0.004, 0);
+    this->acceleration = vec3(0, -0.01, 0);
+    this->velocityError = vec3(0);
     this->eulerAngles = vec3(0);
-    this->actionName = "cast magic 1";
+    this->actionName = "cast magic 3";
     this->stopTime = 2.0f;
     this->scale = vec3(1.0f);
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
-    fireball = new ParticleNode(50, 0.3f, 0.0f);
+    fireball = new ParticleNode(60, 0.1f, 0.0f);
     fireball->renderingOrder = 12.0f;
     fireball->isAdditive = true;
     fireball->rotatingSpeed = 360.0f;
@@ -43,7 +44,7 @@ FireBall::FireBall(){
     fireball->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
     fireball->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
     this->addChildNode(fireball);
-    flame = new ParticleNode(120, 0.5f, 0.3f);
+    flame = new ParticleNode(60, 0.5f, 0.3f);
     flame->setEmissionSphere(0.04f, 0.04f);
     flame->renderingOrder = 12.0f;
     flame->isAdditive = true;
@@ -96,79 +97,30 @@ FireBall::FireBall(){
     explosion->initialRotationVariation = 60;
     explosion->renderingOrder = 1010;
     explosion->initialScale = 0.5;
-    explosion->scalingSpeed = 4;
+    explosion->scalingSpeed = 5;
     explosion->setMaxAmount(50);
     explosion->setSpriteSheetAnimation(7, 12, 40, 100, 40);
     explosion->isDisabled = true;
     this->addChildNode(explosion);
     createFireball = new Animation("create fireball " + to_string(reinterpret_cast<long>(this)), 0.8);
-    createFireball->setFloatAnimation(&fireball->initialScale, 0.4);
+    createFireball->setFloatAnimation(&fireball->initialScale, 0.5);
     createFlame = new Animation("create flame " + to_string(reinterpret_cast<long>(this)), 0.8);
-    createFlame->setFloatAnimation(&flame->initialScale, 0.35);
-    createFireball->setCompletionHandler([&]{
-        threwOut = true;
-        canDamage = true;
-        this->position = getWorldPosition();
-        this->removeFromParentNode();
-        Engine::main->addNode(this);
-        flame->scalingSpeed = -0.4;
-        Animation* threw = new Animation("threw " + to_string(reinterpret_cast<long>(this)), 4);
-        this->updateTransform();
-        if (this->caster->isLocked) {
-            this->velocity = normalize((this->caster->target->getWorldPosition() - this->getWorldPosition()) * vec3(1, 0, 1));
-            float len = distance(this->caster->target->getWorldPosition(), this->getWorldPosition());
-            float speed = length(this->velocity) * 0.1f;
-            float tick = len / speed;
-            float up = 0.004 * tick / 2;
-            this->velocity.y += fmin(up, 0.71);
-        }
-        threw->setCompletionHandler([&] {
-            if (start) {
-                canDamage = false;
-                exploded = true;
-                explodeDamage = true;
-            }
-        });
-        Engine::main->playAnimation(threw);
-    });
+    createFlame->setFloatAnimation(&flame->initialScale, 0.4);
 
 }
 void FireBall::updateMagic(){
     if (threwOut) {
-        position += velocity * 0.1f;
+        position += velocity * 0.15f;
         velocity += acceleration;
         this->hitWall();
     }
-    if (exploded) {
-        exploded = false;
-        spark->isDisabled = false;
-        spark->reset();
-        explosion->reset();
-        explosion->isDisabled = false;
-        Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.15);
-        fireBallLightIntensity->setEaseInTimingMode();
-        fireBallLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(40, 16, 0));
-        fireBallLightIntensity->setCompletionHandler([&] {
-            Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.15);
-            fireBallLightIntensity2->setEaseOutTimingMode();
-            fireBallLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
-            Engine::main->playAnimation(fireBallLightIntensity2);
-            fireBallLightIntensity2->setCompletionHandler([&] {
-                canDamage = true;
-                start = false;
-                this->light->isDisabled = true;
-            });
-        });
-        Engine::main->playAnimation(fireBallLightIntensity);
-        fireball->isDisabled = true;
-        flame->isDisabled = true;
-    }
 }
-void FireBall::play(CharNode* character){
+void FireBall::play(CharNode* character, int seed){
     if (!start){
+        this->seed = seed;
         this->explosion->isDisabled = true;
         this->caster = character;
-        velocity = character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0);
+        velocity = normalize((character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0)) + velocityError);
         this->spark->isDisabled = true;
         threwOut = false;
         explodeDamage = false;
@@ -186,15 +138,72 @@ void FireBall::play(CharNode* character){
         this->light->colorFactor = vec3(1, 0.4, 0);
         Engine::main->playAnimation(createFlame);
         Engine::main->playAnimation(createFireball);
+        Animation* fireBallCoolDown = new Animation("fire ball cool down " + to_string(reinterpret_cast<long>(this)), 5.5);
+        Engine::main->playAnimation(fireBallCoolDown);
+        fireBallCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
     }
+}
+void FireBall::explode() {
+    exploded = true;
+    spark->isDisabled = false;
+    spark->reset();
+    explosion->reset();
+    explosion->isDisabled = false;
+    Animation* fireBallLightIntensity = new Animation("fire ball light intensity 1 " + to_string(reinterpret_cast<long>(this)), 0.15);
+    fireBallLightIntensity->setEaseInTimingMode();
+    fireBallLightIntensity->setVec3Animation(&this->light->colorFactor, vec3(40, 16, 0));
+    fireBallLightIntensity->setCompletionHandler([&] {
+        Animation* fireBallLightIntensity2 = new Animation("fire ball light intensity 2 " + to_string(reinterpret_cast<long>(this)), 0.15);
+        fireBallLightIntensity2->setEaseOutTimingMode();
+        fireBallLightIntensity2->setVec3Animation(&this->light->colorFactor, vec3(0, 0, 0));
+        Engine::main->playAnimation(fireBallLightIntensity2);
+        fireBallLightIntensity2->setCompletionHandler([&] {
+            canDamage = true;
+            this->light->isDisabled = true;
+        });
+    });
+    Engine::main->playAnimation(fireBallLightIntensity);
+    fireball->isDisabled = true;
+    flame->isDisabled = true;
+}
+void FireBall::setThrew() {
+    threwOut = true;
+    canDamage = true;
+    this->position = getWorldPosition();
+    this->removeFromParentNode();
+    Engine::main->addNode(this);
+    flame->scalingSpeed = -0.4;
+    Animation* threw = new Animation("threw " + to_string(reinterpret_cast<long>(this)), 4);
+    this->updateTransform();
+    if (this->caster->isLocked) {
+        this->velocity = normalize((this->caster->target->getWorldPosition() - this->getWorldPosition()) + velocityError * 5.f);
+        float len = distance(this->caster->target->getWorldPosition(), this->getWorldPosition());
+        float tick = len * 10;
+        float up = 0.01 * tick / 2;
+        this->velocity.y += fmin(up, 0.71);
+    }
+    threw->setCompletionHandler([&] {
+        if (start) {
+            canDamage = false;
+            explodeDamage = true;
+            if (!exploded) {
+                explode();
+            }
+        }
+    });
+    Engine::main->playAnimation(threw);
 }
 void FireBall::tryDamage(CharNode *character) {
     if (!explodeDamage && canDamage) {
         if (character->hitbox->testHit(this->getWorldPosition(), vec3(vec4(this->position + this->velocity, 1) * this->getWorldTransform()))) {
             character->receiveDamage(this->damage);
             canDamage = false;
-            exploded = true;
             explodeDamage = true;
+            if (!exploded) {
+                explode();
+            }
         }
     }
     if (explodeDamage && canDamage) {
@@ -210,9 +219,11 @@ void FireBall::hitWall() {
         this->updateTransform();
         if (MapSystemManager::Instance()->hitTest(this->position, this->position + this->velocity, hitInfo)) {
             canDamage = false;
-            exploded = true;
             explodeDamage = true;
             threwOut = false;
+            if (!exploded) {
+                explode();
+            }
         }
     }
 }

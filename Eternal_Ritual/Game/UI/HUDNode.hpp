@@ -12,6 +12,7 @@ protected:
     Engine* engine;
 
     // Main ============================
+    SpriteNode* leftBack;
     SpriteNode* mainBackground;
     BarNode* mainHpBar;
     BarNode* mainMpBar;
@@ -51,12 +52,16 @@ protected:
     CharNode* selfChar;
     CharNode* ally;
 
+    // Tutorial
+    SpriteNode* listTop;
+    SpriteNode* listBottom;
+    TextNode* tutorialText;
+
     UINode* parentNode;
 public:
     HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally);
     ~HUDNode() = default;
-    void toggleEnermy(CharNode* chara);
-    void updateChar(CharNode* en);
+    void update();
     void updateMagic();
 };
 

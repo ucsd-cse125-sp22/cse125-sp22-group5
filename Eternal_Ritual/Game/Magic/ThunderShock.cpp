@@ -72,7 +72,7 @@ ThunderShock::ThunderShock() {
     }
 }
 
-void ThunderShock::play(CharNode* character){
+void ThunderShock::play(CharNode* character, int seed){
     if (!start){
         this->caster = character;
         this->light->colorFactor = vec3(20.0f, 20.0f, 2.0f);

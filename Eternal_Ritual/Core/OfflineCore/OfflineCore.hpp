@@ -1,3 +1,9 @@
+//
+//  OfflineCore.hpp
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
 #ifndef OFFLINECORE_HPP
 #define OFFLINECORE_HPP
 

@@ -21,10 +21,11 @@ public:
     bool canDamage;
     ParticleNode* flame;
     ParticleNode* spark;
+    LightNode* light;
     Flame();
     ~Flame() override = default;
     void updateMagic() override {}
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void hitWall() override {}
     void tryDamage(CharNode* character) override;
 };

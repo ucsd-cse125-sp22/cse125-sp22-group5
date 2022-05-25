@@ -1,358 +1,501 @@
-//#include "Core/ClientCore/ClientCore.hpp"
 //
-//#include "Game/Map/ImportMapHelper.hpp"
-//#include "Game/Character/ImportCharHelper.hpp"
-//#include "Game/Magic/AllMagic.inc"
+//  ClientCore.cpp
 //
-//using namespace glm;
-//using namespace std;
+//  Created by Kangming Yu on 4/15/22.
 //
-//
-//ClientCore* ClientCore::client_core_ = nullptr;
-//
-//ClientCore::ClientCore() {
-//}
-//
-//
-//ClientCore::~ClientCore() {
-////    delete clientSocket;
-////    delete statePb;
-////    delete eventPb;
-//
-//    map_system_manager_->Destructor();
-//    hit_controller_->Destructor();
-//    delete engine_;
-//}
-//
-//
-//void ClientCore::initEngine() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Stage 1 - Initial Engine --|" << std::endl;
-//
-//    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
-//    engine_->workingDirectory = "/Users/kang/Desktop/Week6/Client/KGLEngine";
-//    engine_->lockCursor();
-//}
-//
-//
-//void ClientCore::loadSky() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Stage 2 - Load Sky Box --|" << std::endl;
-//
-//    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
-//                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
-//                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
-//                                2.0f);
-//}
-//
-//
-//void ClientCore::loadLight() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Stage 3 - Load Lights --|" << std::endl;
-//
-//    point_light_ = new LightNode(vec3(5.0f));
-//    point_light_->setPointLight(2.0f, 20.0f);
-//    point_light_->highlightIntensity = 0.0f;
-//
-//    ambient_light_ = new LightNode(vec3(0.5f));
-//    ambient_light_->setAmbientLight();
-//    engine_->addNode(ambient_light_);
-//
-//    directional_light_ = new LightNode(vec3(2.5f, 2.0f, 2.0f));
-//    directional_light_->setDirectionalLight();
-//    directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
-//    engine_->addNode(directional_light_);
-//
-//}
-//
-//
-//void ClientCore::loadMap() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Stage 4 - Load Scene --|" << std::endl;
-//
-//    map_system_manager_ = MapSystemManager::Instance();
-//
-//    ImportMapHelper::importMapBox();
+
+#include "Core/ClientCore/ClientCore.hpp"
+
+#include <iostream>
+#include <string>
+
+#include "Game/Map/ImportMapHelper.hpp"
+#include "Game/Character/ImportCharHelper.hpp"
+#include "Game/Magic/AllMagic.inc"
+
+using namespace glm;
+using namespace std;
+
+
+ClientCore* ClientCore::client_core_ = nullptr;
+
+ClientCore::ClientCore() {
+}
+
+
+ClientCore::~ClientCore() {
+    delete client_socket_;
+    delete state_pb_;
+    delete event_pb_;
+    
+    map_system_manager_->Destructor();
+    hit_controller_->Destructor();
+    delete engine_;
+}
+
+
+void ClientCore::initEngine() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
+    
+    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
+    engine_->workingDirectory = ".";
+    engine_->lockCursor();
+}
+
+
+void ClientCore::loadSky() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
+    
+    engine_->skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
+                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
+                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
+                                2.0f);
+}
+
+
+void ClientCore::loadLight() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 3 - Load Lights --|" << std::endl;
+    
+    point_light_ = new LightNode(vec3(5.0f));
+    point_light_->setPointLight(2.0f, 20.0f);
+    point_light_->highlightIntensity = 0.0f;
+    
+    ambient_light_ = new LightNode(vec3(0.5f));
+    ambient_light_->setAmbientLight();
+    engine_->addNode(ambient_light_);
+    
+    directional_light_ = new LightNode(vec3(1.0f, 1.0f, 1.0f));
+    directional_light_->setDirectionalLight();
+    directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
+    directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
+    engine_->addNode(directional_light_);
+}
+
+
+void ClientCore::loadScene() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 4 - Load Scene --|" << std::endl;
+
+    map_system_manager_ = MapSystemManager::Instance();
+    
+    ImportMapHelper::importMapBox();
 //    ImportMapHelper::importMapModel();
-//}
-//
-//
-//void ClientCore::loadCharacter() {
+}
+
+
+void ClientCore::loadCharacter() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 5 - Load Character --|" << std::endl;
+    
+    bool mainChar = true;
+    
+    for (int i = 0; i < PLAYER_CAPACITY; i++) {
+        CharNode* newChar;
+        if (mainChar) {
+            newChar = new CharNode(vec3(0.0f, -1.0f, 0.0f));
+        }
+        else {
+            newChar = pre_chars_[0]->copy(vec3(0.0f, -1.0f, 0.0f));
+        }
+        newChar->name = "player" + to_string(i);
+        
+        Node* controlNode = new Node();
+        controlNode->position = vec3(0.0f, 1.2f, 0.0f);
+        newChar->setControl(controlNode);
+        
+        CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
+        cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
+        newChar->setCamera(cameraNode);
+        if (mainChar) {
+            character_ = newChar;
+            cameraNode->addChildNode(point_light_);
+            engine_->mainCameraNode = cameraNode;
+            
+            ImportCharHelper::importCharModel(newChar);
+
+            ImportCharHelper::importCharAnimation(newChar);
+            
+            mainChar = false;
+        }
+        
+        newChar->stopAndPlay("idle", 0.0f, 0.0f);;
+        
+        engine_->addNode(newChar);
+        
+        UINode* baseNode = new UINode();
+        baseNode->renderingOrder = 1000.0f;
+        engine_->addNode(baseNode);
+        newChar->setUINode(baseNode);
+        newChar->setName("player" + to_string(i) + "  " + to_string(newChar->health));
+        
+        pre_chars_.push_back(newChar);
+    }
+}
+
+void ClientCore::loadMagic() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Magic --|" << std::endl;
+    
+    for (int i = 0; i < PLAYER_CAPACITY; i++) {
+        DamageableMagic* stoneBlast = new StoneBlast();
+        DamageableMagic* fireBall = new ScatteredFire();
+        DamageableMagic* lightningSpear = new LightningPhalanx();
+        DamageableMagic* groundSmash = new GroundSmash();
+        DamageableMagic* thunder = new Thunder();
+        DamageableMagic* flame = new Flame();
+        DamageableMagic* thousandBlade = new ThousandBlade();
+        DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
+        
+        pre_chars_[i]->addMagics(Magic::STONEBLAST, stoneBlast);
+        all_magics_.insert(stoneBlast);
+        pre_chars_[i]->addMagics(Magic::FIREBALL, fireBall);
+        all_magics_.insert(fireBall);
+        pre_chars_[i]->addMagics(Magic::LIGHTNINGSPEAR, lightningSpear);
+        all_magics_.insert(lightningSpear);
+        pre_chars_[i]->addMagics(Magic::THUNDER, thunder);
+        all_magics_.insert(thunder);
+        pre_chars_[i]->addMagics(Magic::FLAME, flame);
+        all_magics_.insert(flame);
+        pre_chars_[i]->addMagics(Magic::THOUSANDBLADE, thousandBlade);
+        all_magics_.insert(thousandBlade);
+        pre_chars_[i]->addMagics(Magic::GROUNDSMASH, groundSmash);
+        all_magics_.insert(groundSmash);
+        pre_chars_[i]->addMagics(Magic::DRAGON, dragon);
+        all_magics_.insert(dragon);
+        
+        engine_->addNode(stoneBlast);
+        engine_->addNode(flame);
+        engine_->addNode(thunder);
+    }
+}
+
+void ClientCore::loadDamageSystem() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 7 - Load Damage System --|" << std::endl;
+    
+    hit_controller_ = HitController::Instance();
+    
+    for (auto& magic : all_magics_) {
+        DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
+        if (damageableMagic != nullptr) {
+            hit_controller_->addMagic(damageableMagic);
+        }
+    }
+    
+    for (auto& character : pre_chars_) {
+        hit_controller_->addCharacter(character);
+    }
+}
+
+void ClientCore::loadPbPacket() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load ProtoBuf Packet --|" << std::endl;
+    
+    state_pb_ = new StatePb();
+    event_pb_ = new EventPb();
+}
+
+
+void ClientCore::connectServer() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 9 - Connect to Server --|" << std::endl;
+    
+    client_socket_ = new ClientSocket();
+    client_socket_->connectServer();
+}
+
+
+void ClientCore::handleEvent() {
 //    std::cout << std::endl;
-//    std::cout << "|-- Stage 5 - Load Character --|" << std::endl;
-//
-//    character_ = new CharNode(vec3(0.0f, -1.0f, 0.0f));
-//    character_->name = "main character";
-//
-//    Node* controlNode = new Node();
-//    controlNode->position = vec3(0.0f, 1.0f, 0.0f);
-//    character_->setControl(controlNode);
-//
-//    CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
-//    cameraNode->position = vec3(-2.0f, 0.0f, 0.0f);
-//    cameraNode->addChildNode(point_light_);
-//    character_->setCamera(cameraNode);
-//    engine_->mainCameraNode = cameraNode;
-//
-//    ImportCharHelper::importCharModel(character_);
-//
-//    ImportCharHelper::importCharAnimation(character_);
-//    character_->stopAndPlay("idle", 0.0f, 0.0f);;
-//
-//    engine_->addNode(character_);
-//
-//    UINode* baseNode = new UINode();
-//    baseNode->renderingOrder = 1000.0f;
-//    engine_->addNode(baseNode);
-//    character_->setUINode(baseNode);
-//    character_->setName("Player1");
-//}
-//
-//
-//void ClientCore::loadWeapon() {
+//    std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
+
+    engine_->shouldUpdate();
+    
+    if (engine_->input->wasKeyReleased(KEY_ESCAPE)) {
+        exit(1);
+    }
+    
+    if (engine_->input->wasKeyPressed(KEY_MINUS)) {
+        engine_->unlockCursor();
+    }
+    
+    if (engine_->input->wasKeyPressed(KEY_EQUAL)) {
+        engine_->lockCursor();
+    }
+    
+    if (start_game_) {
+        character_->setName(character_->name);
+    }
+    else {
+        character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
+        event_pb_->setControlNodeEulerAngles(character_->controlNode->eulerAngles);
+        
+        if(engine_->input->isPressingKey(KEY_W)) {
+            character_->moveFront();
+        }else if(engine_->input->isPressingKey(KEY_S)) {
+            character_->moveBack();
+        }
+        if(engine_->input->isPressingKey(KEY_A)) {
+            character_->moveLeft();
+        }else if(engine_->input->isPressingKey(KEY_D)) {
+            character_->moveRight();
+        }
+        
+        event_pb_->setDirState(gameDataPb::DirState(character_->keyDirection));
+        event_pb_->setMoveDirection(character_->moveDirection);
+        
+        event_pb_->setPlayerStyle(1);
+        
+        if (engine_->input->wasKeyPressed(KEY_8)) {
+            key_to_magic_[KEY_1] = Magic::FIREBALL;
+            magic_to_key_[Magic::FIREBALL] = KEY_1;
+            key_to_magic_[KEY_2] = Magic::FLAME;
+            magic_to_key_[Magic::FLAME] = KEY_2;
+            key_to_magic_[KEY_3] = Magic::DRAGON;
+            magic_to_key_[Magic::DRAGON] = KEY_3;
+            
+            event_pb_->setPlayerStyle(2);
+        }
+        
+        if (engine_->input->wasKeyPressed(KEY_9)) {
+            key_to_magic_[KEY_1] = Magic::LIGHTNINGSPEAR;
+            magic_to_key_[Magic::LIGHTNINGSPEAR] = KEY_1;
+            key_to_magic_[KEY_2] = Magic::THUNDER;
+            magic_to_key_[Magic::THUNDER] = KEY_2;
+            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
+            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
+            
+            event_pb_->setPlayerStyle(3);
+        }
+        
+        if (engine_->input->wasKeyPressed(KEY_0)) {
+            key_to_magic_[KEY_1] = Magic::STONEBLAST;
+            magic_to_key_[Magic::STONEBLAST] = KEY_1;
+            key_to_magic_[KEY_2] = Magic::GROUNDSMASH;
+            magic_to_key_[Magic::GROUNDSMASH] = KEY_2;
+            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
+            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
+            
+            event_pb_->setPlayerStyle(3);
+        }
+        
+        if(engine_->input->wasKeyReleased(KEY_1)) {
+            if (key_to_magic_.count(KEY_1)) {
+                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_1]));
+            }
+        }
+        
+        if(engine_->input->wasKeyReleased(KEY_2)) {
+            if (key_to_magic_.count(KEY_2)) {
+                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_2]));
+            }
+        }
+        
+        if(engine_->input->wasKeyReleased(KEY_3)) {
+            if (key_to_magic_.count(KEY_3)) {
+                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_3]));
+            }
+        }
+        
+        for (auto& it : all_chars_) {
+            unsigned long character_ip = it.first;
+            CharNode* character = it.second;
+            event_pb_->setPlayerHP(character_ip, character->health);
+        }
+    }
+}
+
+
+void ClientCore::sendData() {
 //    std::cout << std::endl;
-//    std::cout << "|-- Stage 6 - Load Weapon --|" << std::endl;
-//
-//    Node* characterRightHand = character_->generateBoneNode("RightHand");
-//
-//    weapon_node_ = new Node();
-//    weapon_node_->scale = vec3(1);
-//
-//    characterRightHand->addChildNode(weapon_node_);
-//}
-//
-//
-//void ClientCore::loadEnemy() {
+//    std::cout << "|-- Cycle Stage 2 - Send Data --|" << std::endl;
+
+    char* pbArr = event_pb_->sendData();
+    int dataLen = event_pb_->data_len();
+    
+    client_socket_->sendData(pbArr, dataLen);
+    event_pb_->clearData();
+}
+
+
+void ClientCore::receiveData() {
 //    std::cout << std::endl;
-//    std::cout << "|-- Stage 7 - Load Enemy --|" << std::endl;
-//
-//    CharNode* enemy = character_->copy(vec3(2.0, -1.0f, 2.0f));
-//    enemy->name = "enemy1";
-//    enemy->setEularAngle(vec3(0,90.0f,0));
-//
-//    enemy->stopAndPlay("idle", 0.0f, 0.0f);
-//    engine_->addNode(enemy);
-//    UINode* baseNode = new UINode();
-//    baseNode->renderingOrder = 1000.0f;
-//    engine_->addNode(baseNode);
-//    enemy->setUINode(baseNode);
-//    enemy->setName("Enemy");
-//
-//    enemies_.push_back(enemy);
-//}
-//
-//
-//void ClientCore::loadMagic() {
+//    std::cout << "|-- Cycle Stage 3 - Receive Data --|" << std::endl;
+    
+    client_socket_->receiveData();
+}
+
+
+void ClientCore::processData(char* pbArr, int dataLen) {
+    state_pb_->clearData();
+    state_pb_->readData(pbArr, dataLen);
+}
+
+
+void ClientCore::updateState() {
 //    std::cout << std::endl;
-//    std::cout << "|-- Stage 8 - Load Magic --|" << std::endl;
-//
-//    DamageableMagic* stoneBlast = new StoneBlast();
-//    DamageableMagic* fireBall = new FireBall();
-//    DamageableMagic* lightningSpear = new LightningSpear();
-//    DamageableMagic* groundSmash = new GroundSmash();
-//    DamageableMagic* thunder = new Thunder();
-//    DamageableMagic* flame = new Flame();
-//    DamageableMagic* thousandBlade = new ThousandBlade();
-//
-//    key_to_magic_[KEY_1] = Magic::STONEBLAST;
-//    magic_to_key_[Magic::STONEBLAST] = KEY_1;
-//    character_->addMagics(Magic::STONEBLAST, stoneBlast);
-//    all_magics_.insert(stoneBlast);
-//    key_to_magic_[KEY_2] = Magic::FIREBALL;
-//    magic_to_key_[Magic::FIREBALL] = KEY_2;
-//    character_->addMagics(Magic::FIREBALL, fireBall);
-//    all_magics_.insert(fireBall);
-//    key_to_magic_[KEY_3] = Magic::LIGHTNINGSPEAR;
-//    magic_to_key_[Magic::LIGHTNINGSPEAR] = KEY_3;
-//    character_->addMagics(Magic::LIGHTNINGSPEAR, lightningSpear);
-//    all_magics_.insert(lightningSpear);
-//    key_to_magic_[KEY_4] = Magic::THUNDER;
-//    magic_to_key_[Magic::THUNDER] = KEY_4;
-//    character_->addMagics(Magic::THUNDER, thunder);
-//    all_magics_.insert(thunder);
-//    key_to_magic_[KEY_5] = Magic::FLAME;
-//    magic_to_key_[Magic::FLAME] = KEY_5;
-//    character_->addMagics(Magic::FLAME, flame);
-//    all_magics_.insert(flame);
-//    key_to_magic_[KEY_6] = Magic::THOUSANDBLADE;
-//    magic_to_key_[Magic::THOUSANDBLADE] = KEY_6;
-//    character_->addMagics(Magic::THOUSANDBLADE, thousandBlade);
-//    all_magics_.insert(thousandBlade);
-//    key_to_magic_[KEY_7] = Magic::GROUNDSMASH;
-//    magic_to_key_[Magic::GROUNDSMASH] = KEY_7;
-//    character_->addMagics(Magic::GROUNDSMASH, groundSmash);
-//    all_magics_.insert(groundSmash);
-//
-//    engine_->addNode(stoneBlast);
-//    engine_->addNode(flame);
-//    engine_->addNode(thunder);
-//}
-//
-//
-//void ClientCore::loadDamageSystem() {
-//    hit_controller_ = HitController::Instance();
-//
-//    for (auto& magic : all_magics_) {
-//        DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
-//        if (damageableMagic == nullptr) {
-//            perror("Magic to damageableMagic fail");
-//            exit(1);
-//        }
-//        hit_controller_->addMagic(damageableMagic);
-//    }
-//
-//    for (auto& enemy : enemies_) {
-//        hit_controller_->addCharacter(enemy);
-//    }
-//}
-//
-//
-//void ClientCore::noNetworkLoop() {
-//    Particle3DNode* radiation = nullptr;
-//    while(engine_->isRunning()) {
-//        if(engine_->shouldUpdate()) {
-//            if(engine_->input->wasKeyReleased(KEY_ESCAPE)) {
-//                engine_->terminate();
-//            }
-//
-//            if(engine_->input->isPressingKey(KEY_W)) {
-//                character_->moveFront();
-//            }else if(engine_->input->isPressingKey(KEY_S)) {
-//                character_->moveBack();
-//            }
-//            if(engine_->input->isPressingKey(KEY_A)) {
-//                character_->moveLeft();
-//            }else if(engine_->input->isPressingKey(KEY_D)) {
-//                character_->moveRight();
-//            }
-//            if(engine_->input->wasKeyReleased(KEY_SPACE)){
-//                character_->toggleLock(enemies_);
-//            }
-//
-//
-//            if(engine_->input->wasKeyReleased(KEY_G)){
-//                character_->toggleLock(enemies_);
-//            }
-//            character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
-//
-//            character_->updatePosition();
-//            character_->updateTransform();
-//
-//            if(engine_->input->wasKeyReleased(KEY_Q)){
-//                enemies_[0]->characterTargetEulerAngles += vec3(0, 90, 0);
-//            }
-//
-//            if(engine_->input->wasKeyReleased(KEY_1)){
-//                character_->castMagic(key_to_magic_[KEY_1]);
-//            }
-//            if(engine_->input->wasKeyReleased(KEY_2)){
-//                BaseMagic* magic = character_->magics[key_to_magic_[KEY_2]];
-//                if (!magic->start) {
-//                    magic->removeFromParentNode();
-//                    character_->rightHand->addChildNode(magic);
-//                    character_->castMagic(key_to_magic_[KEY_2]);
-//                }
-//            }
-//            if (engine_->input->wasKeyPressed(KEY_3)) {
-//                BaseMagic* magic = character_->magics[key_to_magic_[KEY_3]];
-//                if (!magic->start) {
-//                    magic->removeFromParentNode();
-//                    character_->rightHand->addChildNode(magic);
-//                    character_->castMagic(key_to_magic_[KEY_3]);
-//                }
-//            }
-//            if (engine_->input->wasKeyPressed(KEY_4)) {
-//                if (!lightningMagic->start) {
-//                    character->castMagic(KEY_4);
-//                }
-//            }
-//            if (engine->input->wasKeyPressed(KEY_5)) {
-//                character->castMagic(KEY_5);
-//            }
-//            if (engine->input->wasKeyPressed(KEY_6)) {
-//                character->castMagic(KEY_6);
-////                ParticleNode* spark = new ParticleNode(130, 1, 0);
-////                spark->setMaxAmount(100);
-////                spark->spreadingAngle = 360;
-////                spark->initialSpeed = 0.5;
-////                spark->initialSpeedVariation = 0.3;
-////                spark->isAdditive = true;
-////                spark->setEmissionSphere(0.3, 0.5);
-////                spark->renderingOrder = 999l;
-////                spark->acceleration = vec3(0, -1, 0);
-////                spark->texture = new Texture("/Resources/Game/Effects/TeleportParticles.png");
-////                spark->setSpriteSheetAnimation(1, 8, 8, 1, 0);
-////                spark->initialScale = 0.1;
-////                spark->scalingSpeed = -0.05;
-////                spark->initialRotationVariation = 360;
-////                spark->color = vec4(0.3, 0.4, 1, 1);
-////                spark->initialScaleVariation = 0.05;
-////                spark->setColorAnimation(vec4(1, 0.7, 0.1, 1), 0.0f);
-////                spark->setColorAnimation(vec4(1, 0.4, 0.1, 0), 1.0f);
-////                engine->addNode(spark);
-//            }
-//            if (engine->input->wasKeyPressed(KEY_7)) {
-//                character->castMagic(KEY_7);
-//            }
-//
-//            for (int i = 0; i < enemies.size(); i++){
-//                enemies[i]->updatePosition();
-//                enemies[i]->updateTransform();
-////                cout << to_string(enemies[i]->getWorldTransform()) << endl;
-//            }
-//            if (radiation != nullptr)
-//                radiation->eulerAngles.y += 10;
-//            stoneMagic->updateMagic();
-//            fireMagic->updateMagic();
-//            lightningMagic->updateMagic();
-//            smashMagic->updateMagic();
-//            swordMagic->updateMagic();
-//
-//
-//            enemyHitController.checkHit();
-//
-////            vec3 position;
-////            vec3 normalvec;
-////            if (mapSystemManager->hitTest(cameraNode->getWorldPosition(), cameraNode->getWorldPosition() +
-////                                          cameraNode->getFrontVectorInWorld() * 999.f, &position, &normalvec)) {
-////                intersection->isDisabled = false;
-////                intersection->position = position;
-////                normalvec = normalize(normalvec);
-////                float theta = -acos(dot(normalvec, vec3(0, 1, 0)));
-////                vec3 axis = normalize(cross(normalvec, vec3(0, 1, 0)));
-////                if (normalvec.y > 0.9)
-////                    intersection->eulerAngles = vec3(0);
-////                else if (normalvec.y < -0.9)
-////                    intersection->eulerAngles = vec3(0, 0, 180);
-////                else
-////                    intersection->eulerAngles = glm_helper::getEularAngles(rotate(mat4(1), theta, axis));
-////               intersection->eulerAngles.x = acos(dot((normalvec), vec3(0, 1, 0))) / M_PI * 180;
-////               normal->position = intersection->position + normalvec;
-////
-////               intersection->getUpVectorInWorld()
-////                //cout << "position: " << to_string(position) << endl;
-////                //cout << "angle: " << to_string(intersection->eulerAngles) << endl;
-////            }
-////            else {
-////                intersection->isDisabled = true;
-////
-//            engine->renderDirectionalLightShadowMap(directionalLight);
-//
-//            engine->render();
-//
-//        }
-//    }
-//}
-//
-//
-//
-//
-//void destructClientCore(int signum) {
-//    std::cout << "Game over" << std::endl;
-//
-////    ClientCore::Instance()->closeConnect();
-//
-//    ClientCore::Destructor();
-//
-//    exit(1);
-//}
+//    std::cout << "|-- Cycle Stage 4 - Update State --|" << std::endl;
+
+    if (start_game_) {
+        character_ip_ = this->state_pb_->getPlayerIP();
+        all_chars_[character_ip_] = character_;
+        
+        vector<unsigned long> enemyIPs = state_pb_->getEnemyIPs(this->character_ip_);
+        
+        for (auto enemyIP : enemyIPs) {
+            cout << enemyIP << endl;
+        }
+        
+        for (int i = 1; i < PLAYER_CAPACITY; i++) {
+            all_chars_[enemyIPs[i - 1]] = pre_chars_[i];
+        }
+
+        start_game_ = false;
+    }
+    else {
+        bool show = false;
+        for (auto& it : all_chars_) {
+            unsigned long character_ip = it.first;
+            CharNode* character = it.second;
+            
+            character->controlNode->eulerAngles = state_pb_->getControlNodeEulerAngles(character_ip);
+            character->keyDirection = Direction::Type(state_pb_->getDirState(character_ip));
+            character->moveDirection = state_pb_->getMoveDirection(character_ip);
+            character->updatePosition();
+            character->updateTransform();
+            
+            character->health = state_pb_->getPlayerHP(character_ip);
+            
+            character->setName(character->name + "  " + to_string(character->health));
+            
+            if (character->health <= 0) {
+                // Load the font file:
+                FontLibrary* fontLibrary = new FontLibrary();
+                Font* title = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
+                delete(fontLibrary);
+                
+                // Create the base node that contains all the UI nodes:
+                UINode* baseNode = new UINode();
+                baseNode->screenPosition = vec2(0.5f);
+                baseNode->renderingOrder = 1000.0f;
+                engine_->addNode(baseNode);
+                
+                
+                
+                // Create the logo unit node that contains the logo image and a label:
+                UINode* logoUnitNode = new UINode();
+                baseNode->addChildNode(logoUnitNode);
+                
+                // Create the logo label node:
+                TextNode* logoLabelNode = new TextNode(title, 0.06f, 1.0f, 0.0f);
+                logoLabelNode->position = vec2(-0.165f, 0.0f);
+                logoLabelNode->color = vec4(1.0f);
+                
+                
+                if (character_ip != character_ip_) {
+                    if (!show) {
+                        logoLabelNode->text = "Victory !!";
+                        show = true;
+                    }
+                }
+                else {
+                    if (!show) {
+                        logoLabelNode->text = "Defeat !!";
+                        show = true;
+                    }
+                }
+                
+                logoLabelNode->setLeftHorizontalAlignment();
+                logoLabelNode->setTopVerticalAlignment();
+                logoUnitNode->addChildNode(logoLabelNode);
+                
+                SpriteNode* backgroundNode = new SpriteNode(vec2(10.0f));
+                backgroundNode->renderingOrder = -10.0f;
+                backgroundNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+                baseNode->addChildNode(backgroundNode);
+            }
+            
+            
+            if (state_pb_->hasMagicEvents(character_ip)) {
+                vector<gameDataPb::MagicPb> magicEvents = state_pb_->getMagicEvents(character_ip);
+                for (auto it : magicEvents) {
+                    Magic::Type magicEvent = Magic::Type(it);
+                    
+                    BaseMagic* magic = character->magics[magicEvent];
+                    if (magicEvent == Magic::STONEBLAST) {
+                        character->castMagic(magicEvent);
+                    }
+                    else if (magicEvent == Magic::FIREBALL) {
+                        if (!magic->start) {
+                            magic->removeFromParentNode();
+                            character->rightHand->addChildNode(magic);
+                            character->castMagic(magicEvent);
+                        }
+                    }
+                    else if (magicEvent == Magic::LIGHTNINGSPEAR) {
+                        if (!magic->start) {
+                            magic->removeFromParentNode();
+                            character->headTop->addChildNode(magic);
+                            character->castMagic(magicEvent);
+                        }
+                    }
+                    else if (magicEvent == Magic::THUNDER) {
+                        if (!magic->start) {
+                            character->castMagic(magicEvent);
+                        }
+                    }
+                    else if (magicEvent == Magic::FLAME) {
+                        character->castMagic(magicEvent);
+                    }
+                    else if (magicEvent == Magic::THOUSANDBLADE) {
+                        character->castMagic(magicEvent);
+                    }
+                    else if (magicEvent == Magic::GROUNDSMASH) {
+                        character->castMagic(magicEvent);
+                    }
+                    else if (magicEvent == Magic::DRAGON) {
+                        character->castMagic(magicEvent);
+                    }
+                }
+            }
+        }
+        
+        for (auto& magic : all_magics_) {
+            magic->updateMagic();
+        }
+        
+        hit_controller_->checkHit();
+    }
+}
+
+
+void ClientCore::renderWorld() {
+//    std::cout << std::endl;
+//    std::cout << "|-- Cycle Stage 5 - Render World --|" << std::endl;
+    
+//    engine_->renderDirectionalLightShadowMap(directional_light_);
+    
+    engine_->render();
+}
+
+
+void ClientCore::closeConnect() {
+    std::cout << std::endl;
+    std::cout << "|-- Finsh - Close Connect --|" << std::endl;
+    
+    client_socket_->closeSockets();
+}
+
+
+void destructClientCore(int signum) {
+    std::cout << "Game over" << std::endl;
+    
+    ClientCore::Instance()->closeConnect();
+    
+    ClientCore::Destructor();
+    
+    exit(1);
+}

@@ -2,6 +2,9 @@
 
 #include "Game/Magic/DragonMagic.hpp"
 
+#include "Game/Character/CharNode.hpp"
+#include "Game/Map/MapSystemManager.hpp"
+
 using namespace std;
 using namespace glm;
 
@@ -183,7 +186,8 @@ void DragonMagic::load() {
 DragonMagic::DragonMagic(Node* characterNode) {
     if (!loaded) { load(); loaded = true; }
     this->actionName = "dragon attack";
-    this->stopTime = 2.0f;
+    this->stopTime = 3.0f;
+    this->damage = 50;
     this->ID = DragonMagic::UID;
     DragonMagic::UID += 1;
     this->characterNode = characterNode;
@@ -219,7 +223,7 @@ DragonMagic::DragonMagic(Node* characterNode) {
     this->beamShader->setTexture("beamMap", DragonMagic::beamMap);
     this->beamNode->geometries[0]->setShader(this->beamShader);
     this->beamNode->geometries[0]->renderingOrder = dragonMagicBaseRenderingOrder;
-    this->range = 10;
+    this->range = 10000;
     
     this->emission = DragonMagic::fireTemplate->copy()->convertToParticleNode();
     this->emission->position = vec3(0.5f, 0.0f, 0.0f);
@@ -386,8 +390,16 @@ void DragonMagic::play() {
     Engine::main->playAnimation(completion2);
 }
 
-void DragonMagic::play(CharNode * character) {
-    play();
+void DragonMagic::play(CharNode * character, int seed) {
+    if (!start) {
+        start = true;
+        play();
+        Animation* dragonCoolDown = new Animation("dragon cool down " + to_string(reinterpret_cast<long>(this)), 5.5);
+        Engine::main->playAnimation(dragonCoolDown);
+        dragonCoolDown->setCompletionHandler([&] {
+            start = false;
+        });
+    }
 }
 
 void DragonMagic::update() {
@@ -411,10 +423,21 @@ void DragonMagic::update() {
 }
 
 void DragonMagic::updateMagic() {
+    if (rangeFactor > 0.5) {
+        hitWall();
+    }
     update();
 }
 
 void DragonMagic::tryDamage(CharNode * character) {
+    vec3 startPosition = this->getBeamPosition();
+    vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * this->range * this->rangeFactor;
+    
+    if (this->rangeFactor > 0.1) {
+        if (character->hitbox->testHit(startPosition, endPosition)) {
+            character->receiveDamage(this->damage);
+        }
+    }
     
 }
 
@@ -431,5 +454,17 @@ vec3 DragonMagic::getBeamDirection() {
 }
 
 void DragonMagic::setRange(float range) {
-    this->range = glm::clamp(range, 0.0f, 1000.0f);
+    this->range = glm::clamp(range, 0.0f, 10000.0f);
+}
+
+void DragonMagic::hitWall() {
+    HitInfo hitInfo;
+    this->updateTransform();
+    vec3 startPosition = this->getBeamPosition();
+    vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * 10000.0f * this->rangeFactor;
+    if (MapSystemManager::Instance()->hitTest(startPosition, endPosition, hitInfo)) {
+        this->setRange(glm::length(hitInfo.hit_point - this->getBeamPosition()));
+    }else{
+        this->setRange(10000.0f);
+    }
 }

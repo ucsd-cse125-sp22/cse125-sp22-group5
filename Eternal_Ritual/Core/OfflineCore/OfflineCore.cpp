@@ -1,3 +1,9 @@
+//
+//  OfflineCore.cpp
+//
+//  Created by Kangming Yu on 4/15/22.
+//
+
 #include "Core/OfflineCore/OfflineCore.hpp"
 
 #include <iostream>
@@ -84,11 +90,11 @@ void OfflineCore::loadCharacter() {
     character_->name = "main character";
     
     Node* controlNode = new Node();
-    controlNode->position = vec3(0.0f, 1.0f, 0.0f);
+    controlNode->position = vec3(0.0f, 1.2f, 0.0f);
     character_->setControl(controlNode);
     
     CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
-    cameraNode->position = vec3(-2.0f, 0.0f, 0.0f);
+    cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
     cameraNode->addChildNode(point_light_);
     character_->setCamera(cameraNode);
     engine_->mainCameraNode = cameraNode;
@@ -133,13 +139,13 @@ void OfflineCore::loadMagic() {
     std::cout << "|-- Loading Stage 7 - Load Magic --|" << std::endl;
     
     DamageableMagic* stoneBlast = new StoneBlast();
-    DamageableMagic* fireBall = new FireBall();
-    DamageableMagic* lightningSpear = new LightningSpear();
+    DamageableMagic* fireBall = new ScatteredFire();
+    DamageableMagic* lightningSpear = new LightningPhalanx();
     DamageableMagic* groundSmash = new GroundSmash();
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* flame = new Flame();
     DamageableMagic* thousandBlade = new ThousandBlade();
-    DamageableMagic* dragon = new DragonMagic(character_);
+    DamageableMagic* dragon = new DragonMagic(character_->modelNode);
     
     key_to_magic_[KEY_1] = Magic::STONEBLAST;
     magic_to_key_[Magic::STONEBLAST] = KEY_1;
@@ -215,7 +221,9 @@ void OfflineCore::handleEvent() {
         character_->moveRight();
     }
     if(engine_->input->wasKeyReleased(KEY_SPACE)){
-        character_->toggleLock(enemies_);
+        enemies_[0]->modelNode->getAnimator("roll")->play(0.5);
+        enemies_[0]->uninjurable = true;
+        cout << enemies_[0]->modelNode->getAnimator("roll")->isPlaying() << endl;
     }
     
     if(engine_->input->wasKeyReleased(KEY_G)){
@@ -241,7 +249,7 @@ void OfflineCore::handleEvent() {
         BaseMagic* magic = character_->magics[key_to_magic_[KEY_3]];
         if (!magic->start) {
             magic->removeFromParentNode();
-            character_->rightHand->addChildNode(magic);
+            character_->headTop->addChildNode(magic);
             character_->castMagic(key_to_magic_[KEY_3]);
         }
     }

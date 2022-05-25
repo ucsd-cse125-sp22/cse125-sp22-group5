@@ -55,7 +55,7 @@ public:
     StoneBlast();
     std::vector<int> rounds;
     void updateMagic() override;
-    void play(CharNode* character) override;
+    void play(CharNode* character, int seed) override;
     void hitWall() override {}
     void moveStones(int roundNum);
     void tryDamage(CharNode* character) override;
