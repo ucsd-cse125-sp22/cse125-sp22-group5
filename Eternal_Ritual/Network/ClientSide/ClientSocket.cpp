@@ -34,7 +34,7 @@ ClientSocket::ClientSocket() {
 void ClientSocket::connectServer() {
     memset(&server_addr_, 0, sizeof(server_addr_));
     server_addr_.sin_family = AF_INET;
-    server_addr_.sin_addr.s_addr = inet_addr(SERVER_IP);
+    server_addr_.sin_addr.S_un.S_addr = inet_addr(SERVER_IP);
     server_addr_.sin_port = htons(SERVER_PORT);
     
     if(connect(client_socket_fd_, (sockaddr*) &server_addr_, sizeof(server_addr_)) == SOCKET_ERROR) {
@@ -50,10 +50,18 @@ void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
 //    std::cout << std::endl;
 //    std::cout << "Receive" << dataLen << std::endl;
     
-    if (dataLen > 0) {
+    if (newDataLen > 0) {
         // ClientCore::Instance()->processData(read_buffer_, dataLen);
         pbArr = read_buffer_;
         dataLen = newDataLen;
+    }
+    else {
+        cout << endl;
+        cout << "-----------------------------" << endl;
+        cout << "Game Over " << endl;
+        cout << "-----------------------------" << endl;
+        cout << endl;
+        exit(1);
     }
 }
 

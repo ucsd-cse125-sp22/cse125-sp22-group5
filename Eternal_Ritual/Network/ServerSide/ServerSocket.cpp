@@ -36,7 +36,7 @@ void ServerSocket::startListen() {
     memset(&server_addr_, 0, sizeof(server_addr_));
     server_addr_.sin_family = AF_INET;
     server_addr_.sin_port = htons(SERVER_PORT);
-    server_addr_.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr_.sin_addr.S_un.S_addr = INADDR_ANY;
     
     if(::bind(server_socket_fd_, (struct sockaddr*)&server_addr_, sizeof(server_addr_)) == SOCKET_ERROR) {
         perror("Server socket bind error");
@@ -87,8 +87,8 @@ void ServerSocket::receiveData(unsigned long& playerIP, char*& pbArr, int& dataL
 //        std::cout << "Receive (string lenth): " << strlen(read_buffer_) << std::endl;
 //        std::cout << "Receive: " << read_buffer_ << std::endl;
 
-        if (dataLen > 0) {
-            read_buffer_[dataLen] = 0x00;
+        if (newDataLen > 0) {
+            read_buffer_[newDataLen] = 0x00;
             playerIP = clientSocketFD.first;
             pbArr = read_buffer_;
             dataLen = newDataLen;

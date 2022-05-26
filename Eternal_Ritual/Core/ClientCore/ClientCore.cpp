@@ -37,7 +37,7 @@ void ClientCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
+    engine_ = new Engine("KGLEngine", 0.3f, 0, NULL);
     engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
     engine_->lockCursor();
 }
@@ -136,32 +136,32 @@ void ClientCore::loadMagic() {
     for (int i = 0; i < PLAYER_CAPACITY; i++) {
         DamageableMagic* stoneBlast = new StoneBlast();
         DamageableMagic* fireBall = new ScatteredFire();
-        DamageableMagic* lightningSpear = new LightningPhalanx();
-        DamageableMagic* groundSmash = new GroundSmash();
+        //DamageableMagic* lightningSpear = new LightningPhalanx();
+        //DamageableMagic* groundSmash = new GroundSmash();
         DamageableMagic* thunder = new Thunder();
-        DamageableMagic* flame = new Flame();
-        DamageableMagic* thousandBlade = new ThousandBlade();
+        //DamageableMagic* flame = new Flame();
+        //DamageableMagic* thousandBlade = new ThousandBlade();
         DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
         
         pre_chars_[i]->addMagics(stoneBlast);
         all_magics_.insert(stoneBlast);
         pre_chars_[i]->addMagics(fireBall);
         all_magics_.insert(fireBall);
-        pre_chars_[i]->addMagics(lightningSpear);
-        all_magics_.insert(lightningSpear);
+        //pre_chars_[i]->addMagics(lightningSpear);
+        //all_magics_.insert(lightningSpear);
         pre_chars_[i]->addMagics(thunder);
         all_magics_.insert(thunder);
-        pre_chars_[i]->addMagics(flame);
-        all_magics_.insert(flame);
-        pre_chars_[i]->addMagics(thousandBlade);
-        all_magics_.insert(thousandBlade);
-        pre_chars_[i]->addMagics(groundSmash);
-        all_magics_.insert(groundSmash);
+        //pre_chars_[i]->addMagics(flame);
+        //all_magics_.insert(flame);
+        //pre_chars_[i]->addMagics(thousandBlade);
+        //all_magics_.insert(thousandBlade);
+        //pre_chars_[i]->addMagics(groundSmash);
+        //all_magics_.insert(groundSmash);
         pre_chars_[i]->addMagics(dragon);
         all_magics_.insert(dragon);
         
         engine_->addNode(stoneBlast);
-        engine_->addNode(flame);
+        //engine_->addNode(flame);
         engine_->addNode(thunder);
     }
 }
@@ -203,8 +203,8 @@ void ClientCore::connectServer() {
 
 
 void ClientCore::handleEvent() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
+    std::cout << std::endl;
+    std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
 
     engine_->shouldUpdate();
     
@@ -304,8 +304,8 @@ void ClientCore::handleEvent() {
 
 
 void ClientCore::sendData() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Cycle Stage 2 - Send Data --|" << std::endl;
+    std::cout << std::endl;
+    std::cout << "|-- Cycle Stage 2 - Send Data --|" << std::endl;
 
     char* pbArr = event_pb_->sendData();
     int dataLen = event_pb_->data_len();
@@ -316,8 +316,8 @@ void ClientCore::sendData() {
 
 
 void ClientCore::receiveData() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Cycle Stage 3 - Receive Data --|" << std::endl;
+    std::cout << std::endl;
+    std::cout << "|-- Cycle Stage 3 - Receive Data --|" << std::endl;
     
     char* pbArr;
     int dataLen;
@@ -334,8 +334,8 @@ void ClientCore::processData(char* pbArr, int dataLen) {
 
 
 void ClientCore::updateState() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Cycle Stage 4 - Update State --|" << std::endl;
+    std::cout << std::endl;
+    std::cout << "|-- Cycle Stage 4 - Update State --|" << std::endl;
 
     if (start_game_) {
         character_ip_ = this->state_pb_->getPlayerIP();
@@ -471,8 +471,8 @@ void ClientCore::updateState() {
 
 
 void ClientCore::renderWorld() {
-//    std::cout << std::endl;
-//    std::cout << "|-- Cycle Stage 5 - Render World --|" << std::endl;
+    std::cout << std::endl;
+    std::cout << "|-- Cycle Stage 5 - Render World --|" << std::endl;
     
 //    engine_->renderDirectionalLightShadowMap(directional_light_);
     
