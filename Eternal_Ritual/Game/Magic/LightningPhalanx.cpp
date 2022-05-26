@@ -8,8 +8,10 @@
 #include "Game/Magic/LightningPhalanx.hpp"
 
 #include <string>
-#include <corecrt_math_defines.h>
 #include <glm/gtc/random.hpp>
+#ifdef _WIN64
+#include <corecrt_math_defines.h>
+#endif
 
 #include "Game/Character/CharNode.hpp"
 

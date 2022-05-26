@@ -7,8 +7,13 @@
 #ifndef SERVERCORE_HPP
 #define SERVERCORE_HPP
 
+#ifdef _WIN64
 #include <winsock2.h>
 #include <windows.h>
+#elif __APPLE__
+#include <sys/time.h>
+#endif
+
 
 #include <unordered_map>
 #include <vector>

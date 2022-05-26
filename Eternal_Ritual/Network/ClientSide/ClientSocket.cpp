@@ -6,7 +6,13 @@
 
 #include "Network/ClientSide/ClientSocket.hpp"
 
+#ifdef _WIN64
 #pragma comment (lib, "ws2_32.lib") 
+#elif __APPLE__
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#endif
 
 #include <stdlib.h>
 #include <signal.h>
@@ -17,6 +23,7 @@
 using namespace std;
 
 
+#ifdef _WIN64
 ClientSocket::ClientSocket() {
 	WORD sockVersion = MAKEWORD(2, 2);
 	WSADATA data;
@@ -30,7 +37,17 @@ ClientSocket::ClientSocket() {
         exit(1);
     }
 }
+#elif __APPLE__
+ClientSocket::ClientSocket() {
+    if ((client_socket_fd_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("Client socket error");
+        exit(1);
+    }
+}
+#endif
 
+
+#ifdef _WIN64
 void ClientSocket::connectServer() {
     memset(&server_addr_, 0, sizeof(server_addr_));
     server_addr_.sin_family = AF_INET;
@@ -43,7 +60,22 @@ void ClientSocket::connectServer() {
         exit(1);
     }
 }
+#elif __APPLE__
+void ClientSocket::connectServer() {
+    memset(&server_addr_, 0, sizeof(server_addr_));
+    server_addr_.sin_family = AF_INET;
+    server_addr_.sin_addr.s_addr = inet_addr(SERVER_IP);
+    server_addr_.sin_port = htons(SERVER_PORT);
 
+    if (connect(client_socket_fd_, (sockaddr*)&server_addr_, sizeof(server_addr_)) < 0) {
+        perror("Connection error");
+        exit(1);
+    }
+}
+#endif
+
+
+#ifdef _WIN64
 void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
     int newDataLen = static_cast<int> (recv(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE, 0));
     
@@ -64,7 +96,21 @@ void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
         exit(1);
     }
 }
+#elif __APPLE__
+void ClientSocket::receiveData() {
+    int dataLen = static_cast<int> (read(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE));
 
+    //    std::cout << std::endl;
+    //    std::cout << "Receive" << dataLen << std::endl;
+
+    if (dataLen > 0) {
+        ClientCore::Instance()->processData(read_buffer_, dataLen);
+    }
+}
+#endif
+
+
+#ifdef _WIN64
 void ClientSocket::sendData(char* pbArr,int dataLen) {
     memset(write_buffer_, 0, MAX_BUFFER_SIZE);
     memcpy(write_buffer_, pbArr, dataLen);
@@ -79,8 +125,31 @@ void ClientSocket::sendData(char* pbArr,int dataLen) {
         exit(1);
     }
 }
+#elif __APPLE__
+void ClientSocket::sendData(char* pbArr, int dataLen) {
+    memset(write_buffer_, 0, MAX_BUFFER_SIZE);
+    memcpy(write_buffer_, pbArr, dataLen);
 
+    long writeLen = write(client_socket_fd_, write_buffer_, MAX_BUFFER_SIZE);
+
+    //    std::cout << std::endl;
+    //    std::cout << "Sending: " << writeLen << std::endl;
+
+    if (writeLen != MAX_BUFFER_SIZE) {
+        perror("Send to client error");
+        exit(1);
+    }
+}
+#endif
+
+
+#ifdef _WIN64
 void ClientSocket::closeSockets() {
     closesocket(client_socket_fd_);
     WSACleanup();
 }
+#elif __APPLE__
+void ClientSocket::closeSockets() {
+    close(client_socket_fd_);
+}
+#endif

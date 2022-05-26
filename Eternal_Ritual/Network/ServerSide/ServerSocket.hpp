@@ -7,7 +7,14 @@
 #ifndef SERVERSOCKET_HPP
 #define SERVERSOCKET_HPP
 
+#ifdef _WIN64
 #include <winsock2.h>
+#define SOCKET SOCKET
+#elif __APPLE__
+#include <arpa/inet.h>
+#define SOCKET int
+#endif
+
 #include <vector>
 #include <unordered_map>
 

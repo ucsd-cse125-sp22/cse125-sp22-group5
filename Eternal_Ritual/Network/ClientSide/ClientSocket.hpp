@@ -7,7 +7,13 @@
 #ifndef CLIENTSOCKET_HPP
 #define CLIENTSOCKET_HPP
 
-#include <winsock2.h>  
+#ifdef _WIN64
+#include <winsock2.h>
+#define SOCKET SOCKET
+#elif __APPLE__
+#include <arpa/inet.h>
+#define SOCKET int
+#endif
 
 #include "Network/NetworkSetting.inc"
 

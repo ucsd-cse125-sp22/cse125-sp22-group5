@@ -12,6 +12,12 @@
 #include "Game/Map/ImportMapHelper.hpp"
 #include "Game/Magic/AllMagic.inc"
 
+#ifdef _WIN64
+#define ROOT_PATH "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5"
+#elif __APPLE__
+#define ROOT_PATH "."
+#endif
+
 using namespace glm;
 using namespace std;
 
@@ -38,7 +44,7 @@ void ClientCore::initEngine() {
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
     engine_ = new Engine("KGLEngine", 0.3f, 0, NULL);
-    engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
+    engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
 
