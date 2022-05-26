@@ -9,11 +9,15 @@
 
 #include <iostream>
 #include <cmath>
+#include <cfloat>
 #include <glm/gtx/io.hpp>
+
 #include "Game/Map/MapSystemManager.hpp"
 
 using namespace std;
 using namespace glm;
+
+
 bool CharNode::loaded = false;
 Node* CharNode::metaModel = NULL;
 Texture* CharNode::bootsD = NULL;

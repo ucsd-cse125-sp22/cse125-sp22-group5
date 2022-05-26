@@ -2,3 +2,12 @@ Stoneblast:
 	Model: Made by Felix
 	Texture: https://opengameart.org/content/space-skyboxes-0
 	Magic Circle: https://www.cleanpng.com/png-magic-circle-symbol-spell-runes-of-magic-2754711/
+
+3rdparty:
+	assimp: https://github.com/assimp/assimp
+	freetype: https://freetype.org/
+	glew: http://glew.sourceforge.net/
+	glfw: https://www.glfw.org/
+	glm: https://github.com/g-truc/glm
+	protobuf: https://github.com/protocolbuffers/protobuf
+	SFML: https://www.sfml-dev.org/

@@ -7,6 +7,8 @@
 
 #include "Game/Map/MapSystemManager.hpp"
 
+#include <cfloat>
+
 using namespace glm;
 
 

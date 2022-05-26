@@ -33,7 +33,7 @@ void OfflineCore::initEngine() {
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
     engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
-    engine_->workingDirectory = ".";
+    engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
     engine_->lockCursor();
 }
 
