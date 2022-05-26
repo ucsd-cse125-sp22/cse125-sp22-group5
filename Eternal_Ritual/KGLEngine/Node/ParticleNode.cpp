@@ -70,6 +70,7 @@ Node* ParticleNode::copy() {
     node->innerSphereRadius = this->innerSphereRadius;
     node->outerSphereRadius = this->outerSphereRadius;
     node->boxSize = this->boxSize;
+    node->height = this->height;
     node->colorKeys = this->colorKeys;
     node->progressKeys = this->progressKeys;
     node->spriteSheetAnimationInitialFrameRange = this->spriteSheetAnimationInitialFrameRange;
@@ -141,6 +142,12 @@ void ParticleNode::setEmissionSphere(float innerRadius, float outerRadius) {
 void ParticleNode::setEmissionBox(vec3 size) {
     this->emissionShape = 1;
     this->boxSize = size;
+}
+void ParticleNode::setEmissionStorm(float innerRadius, float outerRadius, float height){
+    this->emissionShape = 2;
+    this->innerSphereRadius = innerRadius;
+    this->outerSphereRadius = outerRadius;
+    this->height = height;
 }
 void ParticleNode::setColorAnimation(vec4 color, float progress) {
     for(unsigned int i = 0; i < this->colorKeys.size(); i += 1) {
@@ -215,6 +222,11 @@ void ParticleNode::enginePrepareNodeForRendering(mat4 parentWorldTransform, vec2
                 initialPosition.x = glm::linearRand(-this->boxSize.x * 0.5f, this->boxSize.x * 0.5f);
                 initialPosition.y = glm::linearRand(-this->boxSize.y * 0.5f, this->boxSize.y * 0.5f);
                 initialPosition.z = glm::linearRand(-this->boxSize.z * 0.5f, this->boxSize.z * 0.5f);
+            }else if(this->emissionShape == 2) {
+                float h = glm::linearRand(-this->height, this->height);
+                vec2 cirPos = glm::circularRand(1.f);
+                cirPos *= linearRand(this->innerSphereRadius, this->outerSphereRadius);
+                initialPosition = vec3(cirPos.x, h, cirPos.y);
             }
             if(!this->useLocalSpace) {
                 initialPosition += this->getWorldPosition();

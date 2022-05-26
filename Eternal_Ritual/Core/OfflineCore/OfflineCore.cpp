@@ -78,9 +78,9 @@ void OfflineCore::loadSky() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
     
-    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
-                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
-                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
+    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
+                                "/Resources/Game/Skybox/Night Moon Burst_Cam_4_Up+Y.png", "/Resources/Game/Skybox/NMBo.png",
+                                "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                 2.0f);
 }
 
@@ -113,7 +113,7 @@ void OfflineCore::loadMap() {
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
-//    ImportMapHelper::importMapModel();
+    ImportMapHelper::importMapModel();
 }
 
 
@@ -171,7 +171,7 @@ void OfflineCore::loadMagic() {
     std::cout << "|-- Loading Stage 7 - Load Magic --|" << std::endl;
     int magicIndex = 0;
     
-    DamageableMagic* stoneBlast = new StoneBlast();
+    DamageableMagic* stoneBlast = new Storm();
     DamageableMagic* fireBall = new ScatteredFire();
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* dragon = new DragonMagic(character_->modelNode);

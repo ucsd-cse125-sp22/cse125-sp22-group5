@@ -1,0 +1,88 @@
+newmtl Add:MI_MetalSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Metal_Surface_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Col:MI_ColumnSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Column_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl TowerBottom2:MI_FloorSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Floor_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall1_1:MI_BricksSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Bricks_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall1_1:MI_Floor_BricksSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Floor_Bricks_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall1_5:MI_BattlementSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Battlement_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall1_5:MI_TrimSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Trim_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall5_3:MI_WallSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Wall_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl Wall5_3:MI_Wall_1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Wall_03_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd New_Terrain_Basemap_Diffuse.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd T_Arch_01_Albedo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
