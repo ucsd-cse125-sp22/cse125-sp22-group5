@@ -7,7 +7,8 @@
 #ifndef SERVERCORE_HPP
 #define SERVERCORE_HPP
 
-#include <sys/time.h>
+#include <winsock2.h>
+#include <windows.h>
 
 #include <unordered_map>
 #include <vector>

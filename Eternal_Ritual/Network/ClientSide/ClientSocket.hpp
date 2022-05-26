@@ -7,7 +7,7 @@
 #ifndef CLIENTSOCKET_HPP
 #define CLIENTSOCKET_HPP
 
-#include <arpa/inet.h>
+#include <winsock2.h>  
 
 #include "Network/NetworkSetting.inc"
 
@@ -18,12 +18,12 @@ public:
     ~ClientSocket() {}
 
     void connectServer();
-    void receiveData();
+    void receiveData(char*& pbArr, int& dataLen);
     void sendData(char* pbArr,int dataLen);
     void closeSockets();
 
 private:
-    int client_socket_fd_;
+    SOCKET client_socket_fd_;
     sockaddr_in server_addr_;
     char read_buffer_[MAX_BUFFER_SIZE];
     char write_buffer_[MAX_BUFFER_SIZE];

@@ -6,10 +6,13 @@
 
 #include "Core/ServerCore/ServerCore.hpp"
 
+#include <time.h>
 #include <iostream>
 
 using namespace std;
 
+
+int gettimeofday(struct timeval *tp, void *tzp);
 
 ServerCore* ServerCore::server_core_ = nullptr;
 
@@ -74,7 +77,12 @@ void ServerCore::receiveData() {
     std::cout << std::endl;
     std::cout << "|-- Stage 1 - Receive data --|" << std::endl;
     
-    server_socket_->receiveData();
+    unsigned long playerIP;
+    char* pbArr; 
+    int dataLen;
+    server_socket_->receiveData(playerIP, pbArr, dataLen);
+
+    processData(playerIP, pbArr, dataLen);
 }
 
 
@@ -185,4 +193,24 @@ void destructClientCore(int signum) {
     ServerCore::Destructor();
     
     exit(1);
+}
+
+
+int gettimeofday(struct timeval *tp, void *tzp)
+{
+  time_t clock;
+  struct tm tm;
+  SYSTEMTIME wtm;
+  GetLocalTime(&wtm);
+  tm.tm_year   = wtm.wYear - 1900;
+  tm.tm_mon   = wtm.wMonth - 1;
+  tm.tm_mday   = wtm.wDay;
+  tm.tm_hour   = wtm.wHour;
+  tm.tm_min   = wtm.wMinute;
+  tm.tm_sec   = wtm.wSecond;
+  tm. tm_isdst  = -1;
+  clock = mktime(&tm);
+  tp->tv_sec = clock;
+  tp->tv_usec = wtm.wMilliseconds * 1000;
+  return (0);
 }

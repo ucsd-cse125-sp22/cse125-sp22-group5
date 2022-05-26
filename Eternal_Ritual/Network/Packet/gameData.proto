@@ -82,4 +82,4 @@ message State {
 }
 
 
-//protoc -I=./ --cpp_out=./ gameData.proto
+//protoc -I= --cpp_out= gameData.proto

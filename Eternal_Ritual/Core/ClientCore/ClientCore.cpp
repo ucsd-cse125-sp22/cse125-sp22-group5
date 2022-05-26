@@ -10,7 +10,6 @@
 #include <string>
 
 #include "Game/Map/ImportMapHelper.hpp"
-#include "Game/Character/ImportCharHelper.hpp"
 #include "Game/Magic/AllMagic.inc"
 
 using namespace glm;
@@ -39,7 +38,7 @@ void ClientCore::initEngine() {
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
     engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
-    engine_->workingDirectory = ".";
+    engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
     engine_->lockCursor();
 }
 
@@ -96,15 +95,14 @@ void ClientCore::loadCharacter() {
         CharNode* newChar;
         if (mainChar) {
             newChar = new CharNode(vec3(0.0f, -1.0f, 0.0f));
+            Node* controlNode = new Node();
+            controlNode->position = vec3(0.0f, 1.2f, 0.0f);
+            newChar->setControl(controlNode);
         }
         else {
             newChar = pre_chars_[0]->copy(vec3(0.0f, -1.0f, 0.0f));
         }
         newChar->name = "player" + to_string(i);
-        
-        Node* controlNode = new Node();
-        controlNode->position = vec3(0.0f, 1.2f, 0.0f);
-        newChar->setControl(controlNode);
         
         CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
         cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
@@ -113,10 +111,6 @@ void ClientCore::loadCharacter() {
             character_ = newChar;
             cameraNode->addChildNode(point_light_);
             engine_->mainCameraNode = cameraNode;
-            
-            ImportCharHelper::importCharModel(newChar);
-
-            ImportCharHelper::importCharAnimation(newChar);
             
             mainChar = false;
         }
@@ -149,21 +143,21 @@ void ClientCore::loadMagic() {
         DamageableMagic* thousandBlade = new ThousandBlade();
         DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
         
-        pre_chars_[i]->addMagics(Magic::STONEBLAST, stoneBlast);
+        pre_chars_[i]->addMagics(stoneBlast);
         all_magics_.insert(stoneBlast);
-        pre_chars_[i]->addMagics(Magic::FIREBALL, fireBall);
+        pre_chars_[i]->addMagics(fireBall);
         all_magics_.insert(fireBall);
-        pre_chars_[i]->addMagics(Magic::LIGHTNINGSPEAR, lightningSpear);
+        pre_chars_[i]->addMagics(lightningSpear);
         all_magics_.insert(lightningSpear);
-        pre_chars_[i]->addMagics(Magic::THUNDER, thunder);
+        pre_chars_[i]->addMagics(thunder);
         all_magics_.insert(thunder);
-        pre_chars_[i]->addMagics(Magic::FLAME, flame);
+        pre_chars_[i]->addMagics(flame);
         all_magics_.insert(flame);
-        pre_chars_[i]->addMagics(Magic::THOUSANDBLADE, thousandBlade);
+        pre_chars_[i]->addMagics(thousandBlade);
         all_magics_.insert(thousandBlade);
-        pre_chars_[i]->addMagics(Magic::GROUNDSMASH, groundSmash);
+        pre_chars_[i]->addMagics(groundSmash);
         all_magics_.insert(groundSmash);
-        pre_chars_[i]->addMagics(Magic::DRAGON, dragon);
+        pre_chars_[i]->addMagics(dragon);
         all_magics_.insert(dragon);
         
         engine_->addNode(stoneBlast);
@@ -325,7 +319,11 @@ void ClientCore::receiveData() {
 //    std::cout << std::endl;
 //    std::cout << "|-- Cycle Stage 3 - Receive Data --|" << std::endl;
     
-    client_socket_->receiveData();
+    char* pbArr;
+    int dataLen;
+    client_socket_->receiveData(pbArr, dataLen);
+
+    processData(pbArr, dataLen);
 }
 
 
@@ -426,38 +424,38 @@ void ClientCore::updateState() {
                     
                     BaseMagic* magic = character->magics[magicEvent];
                     if (magicEvent == Magic::STONEBLAST) {
-                        character->castMagic(magicEvent);
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::FIREBALL) {
                         if (!magic->start) {
                             magic->removeFromParentNode();
                             character->rightHand->addChildNode(magic);
-                            character->castMagic(magicEvent);
+                            character->castMagic();
                         }
                     }
                     else if (magicEvent == Magic::LIGHTNINGSPEAR) {
                         if (!magic->start) {
                             magic->removeFromParentNode();
                             character->headTop->addChildNode(magic);
-                            character->castMagic(magicEvent);
+                            character->castMagic();
                         }
                     }
                     else if (magicEvent == Magic::THUNDER) {
                         if (!magic->start) {
-                            character->castMagic(magicEvent);
+                            character->castMagic();
                         }
                     }
                     else if (magicEvent == Magic::FLAME) {
-                        character->castMagic(magicEvent);
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::THOUSANDBLADE) {
-                        character->castMagic(magicEvent);
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::GROUNDSMASH) {
-                        character->castMagic(magicEvent);
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::DRAGON) {
-                        character->castMagic(magicEvent);
+                        character->castMagic();
                     }
                 }
             }

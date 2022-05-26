@@ -9,11 +9,15 @@
 
 #include <iostream>
 #include <cmath>
+#include <cfloat>
 #include <glm/gtx/io.hpp>
+
 #include "Game/Map/MapSystemManager.hpp"
 
 using namespace std;
 using namespace glm;
+
+
 bool CharNode::loaded = false;
 Node* CharNode::metaModel = NULL;
 Texture* CharNode::bootsD = NULL;
@@ -295,7 +299,7 @@ float calcAngle(vec3 a, vec3 b){
 
 void CharNode::lock(vector<CharNode*>& targets){
     CharNode* target = NULL;
-    float targetDist = MAXFLOAT;
+    float targetDist = FLT_MAX;
     vec3 cameraPos = cameraNode->getWorldPosition();
     vec3 cameraFront = controlNode->getFrontVectorInWorld();
     for (int i = 0; i < targets.size(); i++) {

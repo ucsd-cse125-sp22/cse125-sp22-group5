@@ -7,7 +7,7 @@
 #ifndef SERVERSOCKET_HPP
 #define SERVERSOCKET_HPP
 
-#include <arpa/inet.h>
+#include <winsock2.h>
 #include <vector>
 #include <unordered_map>
 
@@ -21,16 +21,16 @@ public:
 
     void startListen();
     std::vector<unsigned long> connectAllClients();
-    void receiveData();
-    void sendData(unsigned long playerIP, char* pbArr,int dataLen);
+    void receiveData(unsigned long& playerIP, char*& pbArr, int& dataLen);
+    void sendData(unsigned long playerIP, char* pbArr, int dataLen);
     void closeSockets();
     
     void show_client_info();
 
 private:
-    int server_socket_fd_;
+    SOCKET server_socket_fd_;
     unsigned short player_count_;
-    std::unordered_map<unsigned long, int> client_socket_fds_;
+    std::unordered_map<unsigned long, SOCKET> client_socket_fds_;
     sockaddr_in server_addr_;
     sockaddr_in client_addr_;
     char read_buffer_[MAX_BUFFER_SIZE];
