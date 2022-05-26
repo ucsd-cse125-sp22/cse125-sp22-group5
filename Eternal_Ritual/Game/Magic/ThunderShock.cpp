@@ -57,7 +57,7 @@ ThunderShock::ThunderShock() {
     this->position = vec3(0);
     this->eulerAngles = vec3(0);
     this->actionName = "cast magic 1";
-    this->stopTime = 2.0f;
+    this->stopTime = 1.8f;
     this->scale = vec3(1.0f);
     this->parent = NULL;
     this->isDisabled = false;
@@ -66,7 +66,7 @@ ThunderShock::ThunderShock() {
     this->base->setSpriteSheetAnimation(5, 5, 20, 28, 4);
     this->addChildNode(this->base);
     this->light = new LightNode(vec3(0.5f, 0.5f, 0.2f));
-    this->light->setPointLight(3.0f, 8.0f);
+    this->light->setPointLight(2.0f, 4.0f);
     this->light->penetrationRange = 0.0f;
     this->light->position = vec3(0.0f, 0.1f, 0.0f);
     this->light->isDisabled = true;

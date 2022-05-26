@@ -14,3 +14,4 @@
 #include "Game/Magic/Flame.hpp"                 // FLAME = 5
 #include "Game/Magic/ThousandBlade.hpp"         // THOUSANDBLADE = 6
 #include "Game/Magic/DragonMagic.hpp"           // DRAGON = 7
+#include "Game/Magic/Storm.hpp"                 // STORM = 8

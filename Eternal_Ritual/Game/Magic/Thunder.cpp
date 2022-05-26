@@ -29,10 +29,26 @@ Thunder::Thunder() {
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = 1;
+    left = new Node();
+    middle = new Node();
+    right = new Node();
+    left->eulerAngles.y = 30;
+    right->eulerAngles.y = -30;
+    addChildNode(left);
+    addChildNode(middle);
+    addChildNode(right);
     for (int k = 0; k < 12; k++) {
         ThunderShock* thunder = new ThunderShock();
         thunder->position.z = glm::log2((float)k + 2) / 2 + k;
-        this->addChildNode(thunder);
+        left->addChildNode(thunder);
+        thunders.push_back(thunder);
+        thunder = new ThunderShock();
+        thunder->position.z = glm::log2((float)k + 2) / 2 + k;
+        middle->addChildNode(thunder);
+        thunders.push_back(thunder);
+        thunder = new ThunderShock();
+        thunder->position.z = glm::log2((float)k + 2) / 2 + k;
+        right->addChildNode(thunder);
         thunders.push_back(thunder);
     }
 }
@@ -57,9 +73,13 @@ void Thunder::playNextThunder(int index){
     if (index < thunders.size()){
         thunders[index]->position.x = glm::log2(thunders[index]->position.z) * 0.1 * (rand() / (RAND_MAX + 1.0f) - 0.5);
         thunders[index]->play(this->caster, this->seed);
+        thunders[index + 1]->position.x = glm::log2(thunders[index]->position.z) * 0.1 * (rand() / (RAND_MAX + 1.0f) - 0.5);
+        thunders[index + 1]->play(this->caster, this->seed);
+        thunders[index + 2]->position.x = glm::log2(thunders[index]->position.z) * 0.1 * (rand() / (RAND_MAX + 1.0f) - 0.5);
+        thunders[index + 2]->play(this->caster, this->seed);
         Animation* playNext = new Animation("play next thunder " + to_string(reinterpret_cast<long>(&thunders[index])), 0.2);
         playNext->setCompletionHandler([&, index] {
-            playNextThunder(1 + index);
+            playNextThunder(3 + index);
         });
         Engine::main->playAnimation(playNext);
     }
