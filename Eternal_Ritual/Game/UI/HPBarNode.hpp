@@ -8,9 +8,10 @@
 #ifndef HPBarNode_hpp
 #define HPBarNode_hpp
 
-#include <stdio.h>
+#include <string>
+#include <glm/glm.hpp>
 #include "KGLEngine/Engine.hpp"
-#include "Game/UI/UI.hpp"
+
 
 class HPBarNode{
 protected:

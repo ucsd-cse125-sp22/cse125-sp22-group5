@@ -1,5 +1,10 @@
-#include "HUDNode.hpp"
+#include "Game/UI/HUDNode.hpp"
+
 #include <iostream>
+#include <glm/glm.hpp>
+
+#include "Game/UI/Constant.hpp"
+
 
 void HUDNode::selectMagic()
 {

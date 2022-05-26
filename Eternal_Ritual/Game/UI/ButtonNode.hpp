@@ -8,9 +8,11 @@
 #ifndef ButtonNode_hpp
 #define ButtonNode_hpp
 
-#include <stdio.h>
+#include <string>
+#include <glm/glm.hpp>
+
 #include "KGLEngine/Engine.hpp"
-#include "Game/UI/Constant.hpp"
+
 
 class SpriteNode;
 class TextNode;

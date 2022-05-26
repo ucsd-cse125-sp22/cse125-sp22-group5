@@ -323,7 +323,7 @@
 		3D6FD30C283F97B700BC5083 /* HUDNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUDNode.cpp; sourceTree = "<group>"; };
 		3D6FD30D283F97B700BC5083 /* ButtonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonNode.cpp; sourceTree = "<group>"; };
 		3D6FD30E283F97B700BC5083 /* HPBarNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPBarNode.cpp; sourceTree = "<group>"; };
-		3D6FD30F283F97B700BC5083 /* UI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UI.hpp; sourceTree = "<group>"; };
+		3D6FD30F283F97B700BC5083 /* AllUI.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllUI.inc; sourceTree = "<group>"; };
 		3D6FD310283F97B700BC5083 /* InputBoxNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputBoxNode.cpp; sourceTree = "<group>"; };
 		3D6FD311283F97B700BC5083 /* MagicButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MagicButton.hpp; sourceTree = "<group>"; };
 		3D6FD325283F985200BC5083 /* Engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
@@ -599,22 +599,22 @@
 		3D6FD301283F97B700BC5083 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3D6FD302283F97B700BC5083 /* HPBarNode.hpp */,
-				3D6FD303283F97B700BC5083 /* InputBoxNode.hpp */,
-				3D6FD304283F97B700BC5083 /* Constant.hpp */,
-				3D6FD305283F97B700BC5083 /* MagicButton.cpp */,
-				3D6FD306283F97B700BC5083 /* MagicShader.vs */,
-				3D6FD307283F97B700BC5083 /* HUDNode.hpp */,
-				3D6FD308283F97B700BC5083 /* BarNode.hpp */,
-				3D6FD309283F97B700BC5083 /* ButtonNode.hpp */,
-				3D6FD30A283F97B700BC5083 /* MagicShader.fs */,
 				3D6FD30B283F97B700BC5083 /* BarNode.cpp */,
-				3D6FD30C283F97B700BC5083 /* HUDNode.cpp */,
+				3D6FD308283F97B700BC5083 /* BarNode.hpp */,
 				3D6FD30D283F97B700BC5083 /* ButtonNode.cpp */,
+				3D6FD309283F97B700BC5083 /* ButtonNode.hpp */,
+				3D6FD304283F97B700BC5083 /* Constant.hpp */,
 				3D6FD30E283F97B700BC5083 /* HPBarNode.cpp */,
-				3D6FD30F283F97B700BC5083 /* UI.hpp */,
+				3D6FD302283F97B700BC5083 /* HPBarNode.hpp */,
+				3D6FD30C283F97B700BC5083 /* HUDNode.cpp */,
+				3D6FD307283F97B700BC5083 /* HUDNode.hpp */,
 				3D6FD310283F97B700BC5083 /* InputBoxNode.cpp */,
+				3D6FD303283F97B700BC5083 /* InputBoxNode.hpp */,
+				3D6FD305283F97B700BC5083 /* MagicButton.cpp */,
 				3D6FD311283F97B700BC5083 /* MagicButton.hpp */,
+				3D6FD30A283F97B700BC5083 /* MagicShader.fs */,
+				3D6FD306283F97B700BC5083 /* MagicShader.vs */,
+				3D6FD30F283F97B700BC5083 /* AllUI.inc */,
 			);
 			path = UI;
 			sourceTree = "<group>";

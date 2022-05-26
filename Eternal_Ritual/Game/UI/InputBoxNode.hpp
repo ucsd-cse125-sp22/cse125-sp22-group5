@@ -8,9 +8,6 @@
 #ifndef InputBoxNode_hpp
 #define InputBoxNode_hpp
 
-#include <stdio.h>
-
-class TextNode* inpute;
 
 class InputBoxNode{
 protected:
