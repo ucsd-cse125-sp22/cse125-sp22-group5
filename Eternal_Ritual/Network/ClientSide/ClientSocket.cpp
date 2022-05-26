@@ -97,14 +97,24 @@ void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
     }
 }
 #elif __APPLE__
-void ClientSocket::receiveData() {
-    int dataLen = static_cast<int> (read(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE));
-
-    //    std::cout << std::endl;
-    //    std::cout << "Receive" << dataLen << std::endl;
-
-    if (dataLen > 0) {
-        ClientCore::Instance()->processData(read_buffer_, dataLen);
+void ClientSocket::receiveData(char*& pbArr, int& dataLen) {
+    int newDataLen = static_cast<int> (read(client_socket_fd_, read_buffer_, MAX_BUFFER_SIZE));
+    
+//    std::cout << std::endl;
+//    std::cout << "Receive" << dataLen << std::endl;
+    
+    if (newDataLen > 0) {
+        // ClientCore::Instance()->processData(read_buffer_, dataLen);
+        pbArr = read_buffer_;
+        dataLen = newDataLen;
+    }
+    else {
+        cout << endl;
+        cout << "-----------------------------" << endl;
+        cout << "Game Over " << endl;
+        cout << "-----------------------------" << endl;
+        cout << endl;
+        exit(1);
     }
 }
 #endif
