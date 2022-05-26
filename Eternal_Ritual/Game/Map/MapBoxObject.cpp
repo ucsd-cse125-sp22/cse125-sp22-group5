@@ -132,3 +132,8 @@ void MapBoxObject::updateTransMtx() {
     inv_trans_mtx_ = inverse(trans_mtx_);
     normal_inv_trans_mtx_ = transpose(mat3(inv_trans_mtx_));
 }
+
+
+vec3 MapBoxObject::position() const {
+    return position_;
+}

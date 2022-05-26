@@ -16,30 +16,13 @@
 
 class HitController final {
 public:
-    static HitController* Instance() {
-        if (hit_controller_ == nullptr) {
-            hit_controller_ = new HitController();
-        }
-        return hit_controller_;
-    }
-
-    static void Destructor() {
-        if (hit_controller_ != nullptr) {
-            delete hit_controller_;
-            hit_controller_ = nullptr;
-        }
-    }
-    
+    HitController(){}
+    ~HitController(){}
     void addMagic(DamageableMagic* damageableMagic);
     void addCharacter(CharNode* charNode);
     void checkHit();
     
 private:
-    // Singleton pattern
-    static HitController* hit_controller_;
-    HitController(){}
-    ~HitController(){}
-    
     std::vector<CharNode*> characters_;
     std::vector<DamageableMagic*> magics_;
 };

@@ -29,7 +29,7 @@ OfflineCore::OfflineCore() {
 
 OfflineCore::~OfflineCore() {
     map_system_manager_->Destructor();
-    hit_controller_->Destructor();
+    delete hit_controller_;
     delete engine_;
 }
 
@@ -41,42 +41,6 @@ void OfflineCore::initEngine() {
     engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
-}
-
-void OfflineCore::loadFont()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 6 - Load Font --|" << std::endl;
-    FontLibrary* fontLibrary = new FontLibrary();
-    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
-}
-
-void OfflineCore::loadHUD()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 6 - Load HUD --|" << std::endl;
-    UINode* base = new UINode();
-    base->renderingOrder = 10000;
-    engine_->addNode(base);
-    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
-}
-
-void OfflineCore::loadAlly()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 6 - Load Ally --|" << std::endl;
-
-    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
-    ally_->name = "Ally";
-    ally_->setEularAngle(vec3(0, 90.0f, 0));
-
-    ally_->stopAndPlay("idle", 0.0f, 0.0f);
-    engine_->addNode(ally_);
-    UINode* baseNode = new UINode();
-    baseNode->renderingOrder = 1000.0f;
-    engine_->addNode(baseNode);
-    ally_->setUINode(baseNode);
-    ally_->setName("Ally");
 }
 
 
@@ -119,7 +83,7 @@ void OfflineCore::loadMap() {
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+//    ImportMapHelper::importMapModel();
 }
 
 
@@ -207,11 +171,51 @@ void OfflineCore::loadMagic() {
 }
 
 
+void OfflineCore::loadAlly()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load Ally --|" << std::endl;
+
+    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
+    ally_->name = "Ally";
+    ally_->setEularAngle(vec3(0, 90.0f, 0));
+
+    ally_->stopAndPlay("idle", 0.0f, 0.0f);
+    engine_->addNode(ally_);
+    UINode* baseNode = new UINode();
+    baseNode->renderingOrder = 1000.0f;
+    engine_->addNode(baseNode);
+    ally_->setUINode(baseNode);
+    ally_->setName("Ally");
+}
+
+
+void OfflineCore::loadFont()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 9 - Load Font --|" << std::endl;
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+void OfflineCore::loadHUD()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 10 - Load HUD --|" << std::endl;
+    UINode* base = new UINode();
+    base->renderingOrder = 10000.0f;
+    engine_->addNode(base);
+    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+}
+
+
+
+
 void OfflineCore::loadDamageSystem() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 8 - Load Damage System --|" << std::endl;
+    std::cout << "|-- Loading Stage 11 - Load Damage System --|" << std::endl;
     
-    hit_controller_ = HitController::Instance();
+    hit_controller_ = new HitController();
     
     for (auto& magic : all_magics_) {
         DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);

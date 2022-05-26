@@ -11,6 +11,7 @@
 #include <cmath>
 #include <cfloat>
 #include <glm/gtx/io.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "Game/Map/MapSystemManager.hpp"
 
@@ -502,7 +503,78 @@ void CharNode::updatePosition(){
                 this->playAnimators(1, 0.1);
             }
         }
-        this->position += (this->characterTargetPosition - this->position) * 0.1f;
+        
+        // Hit map test
+        vec3 movement = this->characterTargetPosition - this->position;
+        vec3 movementNorm = normalize(movement);
+  
+        HitInfo leftBottomHitInfo, rightBottomHitInfo, midBottomHitInfo, leftTopHitInfo, rightTopHitInfo;
+        vec3 modelWorldPosition = this->modelNode->getWorldPosition();
+        vec3 startBottom = modelWorldPosition + vec3(0.0f, 0.3f, 0.0f);
+        vec3 startTop = modelWorldPosition + vec3(0.0f, 1.6f, 0.0f);
+        
+        mat4 trans = mat4(1.0f);
+        mat3 rotationMtx = glm::rotate(trans, radians(45.0f), vec3(0.0f, 1.0f, 0.0f));
+        vec3 midDir = movementNorm * 0.8f;
+        vec3 leftDir = rotationMtx * movementNorm * 0.7f;
+        rotationMtx = glm::rotate(trans, radians(-45.0f), vec3(0.0f, 1.0f, 0.0f));
+        vec3 rightDir = rotationMtx * movementNorm * 0.7f;
+        
+        bool midBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + midDir, midBottomHitInfo);
+        
+        bool leftBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + leftDir, leftBottomHitInfo);
+        
+        bool rightBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom,  startBottom + rightDir, rightBottomHitInfo);
+        
+        bool leftTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + leftDir, leftTopHitInfo);
+
+        bool rightTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + rightDir, rightTopHitInfo);
+        
+        if (leftBottomHit && rightBottomHit) {
+            this->characterTargetPosition = this->position;
+        }
+        else if (leftBottomHit) {
+            vec3 hitNormal = normalize(vec3(leftBottomHitInfo.normal.x, 0.0f, leftBottomHitInfo.normal.z));
+            this->characterTargetPosition -= dot(hitNormal, movement) * hitNormal;
+        }
+        else if (rightBottomHit) {
+            vec3 hitNormal = normalize(vec3(rightBottomHitInfo.normal.x, 0.0f, rightBottomHitInfo.normal.z));
+            this->characterTargetPosition -= dot(hitNormal, movement) * hitNormal;
+        }
+        else if (midBottomHit) {
+            this->characterTargetPosition = this->position;
+        }
+        else if (leftTopHit) {
+            vec3 hitNormal = normalize(vec3(leftTopHitInfo.normal.x, 0.0f, leftTopHitInfo.normal.z));
+            this->characterTargetPosition -= dot(hitNormal, movement) * hitNormal;
+        }
+        else if (rightTopHit) {
+            vec3 hitNormal = normalize(vec3(rightTopHitInfo.normal.x, 0.0f, rightTopHitInfo.normal.z));
+            this->characterTargetPosition -= dot(hitNormal, movement) * hitNormal;
+        }
+        
+        
+        HitInfo heightHitInfo;
+        vec3 startHeight = startBottom + vec3(0.0f, 0.1f, 0.0f);
+        vec3 endHeight = vec3(startHeight.x, startHeight.y - 10.0f, startHeight.z);
+        MapSystemManager::Instance()->gridsHitTest(startHeight, endHeight, heightHitInfo);
+        vec3 hitPoint = heightHitInfo.hit_point;
+        if (hitPoint.y < modelWorldPosition.y - 0.08f) {
+            this->characterTargetPosition.y = hitPoint.y;
+//            this->isFall = true;
+        }
+        else {
+            this->position.y = hitPoint.y;
+            this->characterTargetPosition.y = hitPoint.y;
+//            this->isFall = false;
+        }
+        
+        
+        this->position.x += (this->characterTargetPosition.x - this->position.x) * 0.1f;
+        this->position.z += (this->characterTargetPosition.z - this->position.z) * 0.1f;
+        this->position.y += (this->characterTargetPosition.y - this->position.y) * 0.18f;
+        
+        
         this->hitbox->updatePosition(this->position);
         vec3 naiveMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles;
         vec3 moreMove = this->characterTargetEulerAngles - this->modelNode->eulerAngles + vec3(0,360,0);
