@@ -32,9 +32,45 @@ void OfflineCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
-    engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
+    engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
+    engine_->workingDirectory = "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5";
     engine_->lockCursor();
+}
+
+void OfflineCore::loadFont()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Font --|" << std::endl;
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+void OfflineCore::loadHUD()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load HUD --|" << std::endl;
+    UINode* base = new UINode();
+    base->renderingOrder = 10000;
+    engine_->addNode(base);
+    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+}
+
+void OfflineCore::loadAlly()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Ally --|" << std::endl;
+
+    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
+    ally_->name = "Ally";
+    ally_->setEularAngle(vec3(0, 90.0f, 0));
+
+    ally_->stopAndPlay("idle", 0.0f, 0.0f);
+    engine_->addNode(ally_);
+    UINode* baseNode = new UINode();
+    baseNode->renderingOrder = 1000.0f;
+    engine_->addNode(baseNode);
+    ally_->setUINode(baseNode);
+    ally_->setName("Ally");
 }
 
 
@@ -42,9 +78,9 @@ void OfflineCore::loadSky() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
     
-    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/AR.png", "/Resources/Game/Skybox/AL.png",
-                                "/Resources/Game/Skybox/AT.png", "/Resources/Game/Skybox/ABo.png",
-                                "/Resources/Game/Skybox/AF.png", "/Resources/Game/Skybox/AB.png",
+    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
+                                "/Resources/Game/Skybox/Night Moon Burst_Cam_4_Up+Y.png", "/Resources/Game/Skybox/NMBo.png",
+                                "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                 2.0f);
 }
 
@@ -77,7 +113,7 @@ void OfflineCore::loadMap() {
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
-//    ImportMapHelper::importMapModel();
+    ImportMapHelper::importMapModel();
 }
 
 
@@ -135,7 +171,7 @@ void OfflineCore::loadMagic() {
     std::cout << "|-- Loading Stage 7 - Load Magic --|" << std::endl;
     int magicIndex = 0;
     
-    DamageableMagic* stoneBlast = new StoneBlast();
+    DamageableMagic* stoneBlast = new Storm();
     DamageableMagic* fireBall = new ScatteredFire();
     DamageableMagic* thunder = new Thunder();
     DamageableMagic* dragon = new DragonMagic(character_->modelNode);
@@ -247,6 +283,8 @@ void OfflineCore::updateState() {
 
     hit_controller_->checkHit();
     character_->genMana();
+
+    HUD_->update();
 }
 
 

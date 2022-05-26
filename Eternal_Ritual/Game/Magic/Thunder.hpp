@@ -24,6 +24,9 @@ public:
     std::vector<ThunderShock*> thunders;
     LightNode* light;
     Animation* createFireball;
+    Node* left;
+    Node* middle;
+    Node* right;
     Thunder();
     ~Thunder() override = default;
     void playNextThunder(int index);

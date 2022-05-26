@@ -203,7 +203,7 @@ void CharNode::load() {
     Animator* castMagic1 = metaModel->loadAnimator("cast magic 1", "/Resources/Game/Character/Animations/CastMagic1.dae");
     castMagic1->animatorBitMask = Bitmask::MAGIC_CAST_1;
     castMagic1->repeats = false;
-    Animator* castMagic2 = metaModel->loadAnimator("cast magic 2", "/Resources/Game/Character/Animations/CastMagic2.dae");
+    Animator* castMagic2 = metaModel->loadAnimator("cast magic 2", "/Resources/Game/Character/Animations/CastMagic5.dae");
     castMagic2->animatorBitMask = Bitmask::MAGIC_CAST_2;
     castMagic2->repeats = false;
     Animator* castMagic3 = metaModel->loadAnimator("cast magic 3", "/Resources/Game/Character/Animations/CastMagic3.dae");
@@ -467,7 +467,7 @@ void CharNode::predictMoveTarget(){
     this->displacement *=  0.85f;
     if (length(this->moveDirection) > 0){
         if (this->isLocked && (state != CharState::ROLLING)){
-            this->displacement += normalize(this->moveDirection) * 0.8f;
+            this->displacement += normalize(this->moveDirection) * 0.08f;
             this->characterTargetPosition += this->displacement * 0.1f;
             this->characterTargetEulerAngles = vec3(0, this->getLockAngle().y + 90.0f, 0);
         }else{
@@ -530,8 +530,8 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
+        //this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
+        //this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 
 }

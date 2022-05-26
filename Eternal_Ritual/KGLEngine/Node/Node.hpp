@@ -185,6 +185,7 @@ private:
     unsigned int emissionShape;
     float innerSphereRadius;
     float outerSphereRadius;
+    float height;
     glm::vec3 boxSize;
     std::vector<glm::vec4> colorKeys;
     std::vector<float> progressKeys;
@@ -222,6 +223,7 @@ public:
     void setMaxAmount(unsigned int amount);
     void setEmissionSphere(float innerRadius, float outerRadius);
     void setEmissionBox(glm::vec3 size);
+    void setEmissionStorm(float innerRadius, float outerRadius, float height);
     void setColorAnimation(glm::vec4 color, float progress);
     void setSpriteSheetAnimation(unsigned int rows, unsigned int columns,
                                  unsigned int initialFrameRange,
