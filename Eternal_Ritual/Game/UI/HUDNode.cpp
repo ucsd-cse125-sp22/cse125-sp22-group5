@@ -1,6 +1,43 @@
 #include "HUDNode.hpp"
 #include <iostream>
 
+void HUDNode::selectMagic()
+{
+	switch (selfChar->currMagic)
+	{
+	case 0:
+		magicLarge->toggleSelect(false);
+		magic1->toggleSelect(true);
+		magic2->toggleSelect(false);
+		magic3->toggleSelect(false);
+		break;
+	case 1:
+		magicLarge->toggleSelect(false);
+		magic1->toggleSelect(false);
+		magic2->toggleSelect(true);
+		magic3->toggleSelect(false);
+		break;
+	case 2:
+		magicLarge->toggleSelect(false);
+		magic1->toggleSelect(false);
+		magic2->toggleSelect(false);
+		magic3->toggleSelect(true);
+		break;
+	case 3:
+		magicLarge->toggleSelect(true);
+		magic1->toggleSelect(false);
+		magic2->toggleSelect(false);
+		magic3->toggleSelect(false);
+		break;
+	default:
+		magicLarge->toggleSelect(true);
+		magic1->toggleSelect(false);
+		magic2->toggleSelect(false);
+		magic3->toggleSelect(false);
+		break;
+	}
+}
+
 HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally)
 {
 	engine = e;
@@ -190,7 +227,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	enAvatarBack->addChildNode(enAvatarTop);
 	enAvatarTop->addChildNode(enIcon);
 	enIcon->renderingOrder = 3;
-	//enBackground->isDisabled = true;
+	enBackground->isDisabled = true;
 
 	//---- en size ----
 	enBackground->scale = glm::vec2(winSize.x / UISizes::enBackgroundSize.x / 4.5);
@@ -205,15 +242,16 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	magicBack->scale = glm::vec2(winSize.y / UISizes::magicBackSize.y / 3.5);
 	magicBack->position = glm::vec2(magicBack->scale.x*magicBack->size.x/2, 1 - magicBack->scale.y*magicBack->size.y /2);
 
-	magicLarge = new MagicButton(magicBack,new Texture("/Resources/Game/UI/beast_44.png"), UISizes::magicIconLargeScale,selfChar->magics[Magic::DRAGON]);
+	magicLarge = new MagicButton(magicBack,new Texture("/Resources/Game/UI/beast_44.png"), UISizes::magicIconLargeScale,selfChar->magics[3]);
 	magicLarge->setPosition(glm::vec2(0.3,0.7));
-	magic1 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/fire_4.png"), UISizes::magicIconSmallScale, selfChar->magics[Magic::FIREBALL]);
+	magic1 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/fire_4.png"), UISizes::magicIconSmallScale, selfChar->magics[0]);
 	magic1->setPosition(glm::vec2(0.3, 0.27));
-	magic1->toggleSelect(true);
-	magic2 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_51.png"), UISizes::magicIconSmallScale, selfChar->magics[Magic::THUNDER]);
+	magic2 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_11.png"), UISizes::magicIconSmallScale, selfChar->magics[1]);
 	magic2->setPosition(glm::vec2(0.615, 0.4));
-	magic3 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_11.png"), UISizes::magicIconSmallScale, selfChar->magics[Magic::STONEBLAST]);
+	magic3 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_51.png"), UISizes::magicIconSmallScale, selfChar->magics[2]);
 	magic3->setPosition(glm::vec2(0.75, 0.72));
+
+	selectMagic();
 	
 	parentNode->addChildNode(magicBack);
 	
@@ -279,6 +317,10 @@ void HUDNode::update()
 	}
 
 	// Magic
+	selectMagic();
+	magicLarge->setProgess();
+	magic1->setProgess();
+	magic2->setProgess();
+	magic3->setProgess();
 
-	
 }

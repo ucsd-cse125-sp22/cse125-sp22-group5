@@ -3,8 +3,11 @@
 BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* fadeTex, glm::vec2 barSize, glm::vec2 fadeSize, int id)
 {
 	baseNode = new UINode();
+	baseNode->parentCoordinatePosition = glm::vec2(0, 0.5);
 	fadeBaseNode = new UINode();
+	fadeBaseNode->parentCoordinatePosition = glm::vec2(0, 0.5);
 	background = new UINode();
+	background->size = barSize;
 	parentNode->addChildNode(background);
 	background->renderingOrder = 1;
 	bar = new SpriteNode(barSize);
@@ -12,6 +15,8 @@ BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* 
 	bar->texture = barTex;
 	fade->texture = fadeTex;
 	fade->alpha = 0.8;
+	bar->position = glm::vec2(barSize.x/2,0.0);
+	fade->position = glm::vec2(fadeSize.x/2, 0.0);
 	background->addChildNode(fadeBaseNode);
 	background->addChildNode(baseNode);
 	fadeBaseNode->addChildNode(fade);

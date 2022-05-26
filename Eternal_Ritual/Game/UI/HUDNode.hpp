@@ -58,6 +58,7 @@ protected:
     TextNode* tutorialText;
 
     UINode* parentNode;
+    void selectMagic();
 public:
     HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally);
     ~HUDNode() = default;

@@ -52,6 +52,8 @@ namespace UISizes{
 	const glm::vec2 magicIconSmallScale = glm::vec2(0.6);
 	const glm::vec2 magicIconLargeScale = glm::vec2(0.8);
 	const glm::vec2 magicSelect = glm::vec2(0.316);
+	const glm::vec2 magicCooldownSize = glm::vec2(0.194);
+	const glm::vec2 magicPorgessSize = glm::vec2(0.197);
 
 	// Enermy ==============
 	const glm::vec2 enBackgroundSize = glm::vec2(0.626, 0.077);
