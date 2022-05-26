@@ -1,36 +1,34 @@
 #include "MagicButton.hpp"
+#include <iostream>
 
 MagicButton::MagicButton(UINode* parentNode, Texture* magicTex, glm::vec2 size, BaseMagic* magic)
 {
 	this->parentNode = parentNode;
 	this->magic = magic;
 
+	base = new UINode();
 	background = new SpriteNode(UISizes::magicButtonBackSize);
-	background->texture = new Texture("/Resources/Game/UI/magic_back.png");
+	background->texture = new Texture("/Resources/Game/UI/magic_back.png");	
 	magicSelect = new SpriteNode(UISizes::magicSelect);
 	magicSelect->texture = new Texture("/Resources/Game/UI/magic_back_select.png");
 	magicSelect->isDisabled = true;
 	magicIcon = new SpriteNode(UISizes::magicIconSize);
 	magicIcon->texture = magicTex;
 	magicIcon->renderingOrder = 1;
-	magicCooldown = new SpriteNode(UISizes::magicCooldownSize);
-	magicCooldown->texture = new Texture("/Resources/Game/UI/magic_cooldown.png");
-	magicCooldown->isDisabled = true;
-	magicCooldown->renderingOrder = 2;
 	progress = new Shader("/Resources/Game/UI/MagicShader");
 	progress->setTexture("textureMap", new Texture("/Resources/Game/UI/magic_progess.png"));
+	progress->setUIShader();
 	Sprite* s = new Sprite();
 	s->setShader(progress);
 	magicProgess = new UINode();
 	magicProgess->loadSprite(s);
-	magicProgess->isDisabled = true;
-	magicProgess->renderingOrder = 3;
+	magicProgess->renderingOrder = 2;
+	magicProgess->size = UISizes::magicPorgessSize;
 	
 	background->scale = size;
 	
-	background->addChildNode(magicIcon);
 	background->addChildNode(magicSelect);
-	background->addChildNode(magicCooldown);
+	background->addChildNode(magicIcon);
 	background->addChildNode(magicProgess);
 	parentNode->addChildNode(background);
 }
@@ -51,13 +49,16 @@ void MagicButton::toggleSelect(bool select) {
 
 void MagicButton::setProgess()
 {
-	if (magic->availableTime - Engine::main->getTime() > 0) {
-		magicCooldown->isDisabled = false;
+	float cd = magic->availableTime - Engine::main->getTime();
+	if (cd > 0) {
+		magicIcon->multiplyColor = glm::vec3(0.5,0.5,0.5);
 		magicProgess->isDisabled = false;
-		progress->setFloat("progess", magic->availableTime / magic->cooldown);
+		float p = cd / magic->cooldown;
+		progress->setFloat("progess", 1-p);
+		
 	}
 	else {
-		magicCooldown->isDisabled = true;
+		magicIcon->multiplyColor = glm::vec3(1);
 		magicProgess->isDisabled = true;
 	}
 }

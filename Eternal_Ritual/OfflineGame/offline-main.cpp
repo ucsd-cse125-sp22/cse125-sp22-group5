@@ -29,6 +29,14 @@ int main(int argc, char* argv[]) {
     OfflineCore::Instance()->loadEnemy();
     
     OfflineCore::Instance()->loadMagic();
+
+    // =============================
+    OfflineCore::Instance()->loadAlly();
+
+    OfflineCore::Instance()->loadFont();
+
+    OfflineCore::Instance()->loadHUD();
+    // =============================
     
     OfflineCore::Instance()->loadDamageSystem();
     

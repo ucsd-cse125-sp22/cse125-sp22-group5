@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include "KGLEngine/Engine.hpp"
 #include "Game/Character/CharNode.hpp"
-#include "BarNode.hpp"
-#include "MagicButton.hpp"
+#include "Game/UI/BarNode.hpp"
+#include "Game/UI/MagicButton.hpp"
 
 class HUDNode {
 protected:

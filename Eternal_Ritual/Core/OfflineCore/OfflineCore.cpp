@@ -32,9 +32,45 @@ void OfflineCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
-    engine_->workingDirectory = "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5";
+    engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
+    engine_->workingDirectory = "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5";
     engine_->lockCursor();
+}
+
+void OfflineCore::loadFont()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Font --|" << std::endl;
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+void OfflineCore::loadHUD()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load HUD --|" << std::endl;
+    UINode* base = new UINode();
+    base->renderingOrder = 10000;
+    engine_->addNode(base);
+    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+}
+
+void OfflineCore::loadAlly()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Ally --|" << std::endl;
+
+    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
+    ally_->name = "Ally";
+    ally_->setEularAngle(vec3(0, 90.0f, 0));
+
+    ally_->stopAndPlay("idle", 0.0f, 0.0f);
+    engine_->addNode(ally_);
+    UINode* baseNode = new UINode();
+    baseNode->renderingOrder = 1000.0f;
+    engine_->addNode(baseNode);
+    ally_->setUINode(baseNode);
+    ally_->setName("Ally");
 }
 
 
@@ -247,6 +283,8 @@ void OfflineCore::updateState() {
 
     hit_controller_->checkHit();
     character_->genMana();
+
+    HUD_->update();
 }
 
 

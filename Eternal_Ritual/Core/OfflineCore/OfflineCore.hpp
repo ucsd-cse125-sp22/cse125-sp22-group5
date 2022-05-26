@@ -17,7 +17,7 @@
 #include "Game/Character/HitController.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-
+#include "Game/UI/UI.hpp"
 
 class OfflineCore final{
 public:
@@ -36,6 +36,12 @@ public:
     }
     
     void initEngine();
+
+    void loadFont();
+    void loadHUD();
+    void loadAlly();
+
+
     void loadSky();
     void loadLight();
     void loadMap();
@@ -68,6 +74,7 @@ private:
     
     // Character
     CharNode* character_;
+    CharNode* ally_;
     
     // Magic
     std::unordered_map<int, int> key_to_magic_;
@@ -79,6 +86,13 @@ private:
     
     // HitController
     HitController*  hit_controller_;
+
+    //HUD
+    HUDNode* HUD_;
+
+    //Font
+    Font* font_;
+
 };
 
 

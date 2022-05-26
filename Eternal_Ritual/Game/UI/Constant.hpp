@@ -13,7 +13,7 @@ namespace Color{
 	const glm::vec4 ButtonBackgroundOff = glm::vec4(0.2,0.4,0.6,1.0);
 	const glm::vec4 Hp = glm::vec4(0.45,0.15,0.15,1.0);
 	const glm::vec4 Mp = glm::vec4(0.2,0.2,0.7,1.0);
-	const glm::vec4 textColor = glm::vec4(0.66,0.57,0.4,1.0);
+	const glm::vec4 textColor = glm::vec4(0.76,0.67,0.5,1.0);
 };
 
 namespace UISizes{

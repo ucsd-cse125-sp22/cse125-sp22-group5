@@ -58,15 +58,15 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 
 	mainBackground = new SpriteNode(UISizes::mainBackgroundSize);
 	mainBackground->texture = new Texture("/Resources/Game/UI/background_main.png");
-	mainHpBar = new BarNode(mainBackground,100,
+	mainHpBar = new BarNode(mainBackground,selfChar->health,
 		new Texture("/Resources/Game/UI/hp_bar_main.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_main.png"),
-		UISizes::mainHpBarSize, UISizes::mainHpFadeBarSize, id++);
+		UISizes::mainHpBarSize, UISizes::mainHpFadeBarSize, id++, true);
 	mainHpBar->setPosition(glm::vec2(0.5,0.32));
-	mainMpBar = new BarNode(mainBackground, 100,
+	mainMpBar = new BarNode(mainBackground, selfChar->mana,
 		new Texture("/Resources/Game/UI/mp_bar_main.png"),
 		new Texture("/Resources/Game/UI/mp_bar_fade_main.png"),
-		UISizes::mainMpBarSize, UISizes::mainMpFadeBarSize, id++);
+		UISizes::mainMpBarSize, UISizes::mainMpFadeBarSize, id++, true);
 	mainMpBar->setPosition(glm::vec2(0.44,0.75));
 	mainAvatar = new SpriteNode(UISizes::avatarSize);
 	mainAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
@@ -118,15 +118,15 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	// party =========================
 	partyBackground = new SpriteNode(UISizes::partyBackgroundSize);
 	partyBackground->texture = new Texture("/Resources/Game/UI/background_party.png");
-	partyHpBar = new BarNode(partyBackground, 100,
+	partyHpBar = new BarNode(partyBackground, ally->health,
 		new Texture("/Resources/Game/UI/hp_bar_party.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_party.png"),
-		UISizes::partyHpBarSize, UISizes::partyHpFadeBarSize, id++);
+		UISizes::partyHpBarSize, UISizes::partyHpFadeBarSize, id++, true);
 	partyHpBar->setPosition(glm::vec2(0.5, 0.32));
-	partyMpBar = new BarNode(partyBackground, 100,
+	partyMpBar = new BarNode(partyBackground, ally->mana,
 		new Texture("/Resources/Game/UI/mp_bar_party.png"),
 		new Texture("/Resources/Game/UI/mp_bar_fade_party.png"),
-		UISizes::partyMpBarSize, UISizes::partyMpFadeBarSize, id++);
+		UISizes::partyMpBarSize, UISizes::partyMpFadeBarSize, id++, true);
 	partyMpBar->setPosition(glm::vec2(0.44, 0.75));
 	partyAvatar = new SpriteNode(UISizes::avatarSize);
 	partyAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
@@ -184,10 +184,10 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	// Enermy ============
 	enBackground = new SpriteNode(UISizes::enBackgroundSize);
 	enBackground->texture = new Texture("/Resources/Game/UI/background_en.png");
-	enHpBar = new BarNode(enBackground, 100,
+	enHpBar = new BarNode(enBackground, selfChar->health,
 		new Texture("/Resources/Game/UI/hp_bar_en.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_en.png"),
-		UISizes::enHpBarSize, UISizes::enHpFadeBarSize, id++);
+		UISizes::enHpBarSize, UISizes::enHpFadeBarSize, id++, false);
 	enAvatar = new SpriteNode(UISizes::avatarSize);
 	enAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
 	enAvatar->scale = glm::vec2(0.9);
@@ -302,10 +302,10 @@ void HUDNode::update()
 {
 	// Character
 	mainHpBar->update(selfChar->health, engine);
-	mainMpBar->update(selfChar->stamina, engine);
+	mainMpBar->update(selfChar->mana, engine);
 
 	partyHpBar->update(ally->health, engine);
-	partyMpBar->update(ally->stamina, engine);
+	partyMpBar->update(ally->mana, engine);
 
 	if (selfChar->isLocked) {
 		enBackground->isDisabled = false;

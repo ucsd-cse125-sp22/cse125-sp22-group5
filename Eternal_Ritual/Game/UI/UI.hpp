@@ -10,5 +10,6 @@
 
 #include "Game/UI/ButtonNode.hpp"
 #include "Game/UI/HPBarNode.hpp"
+#include "Game/UI/HUDNode.hpp"
 
 #endif /* UI_h */

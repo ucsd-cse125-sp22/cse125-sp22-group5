@@ -1,6 +1,6 @@
 #include "BarNode.hpp"
 
-BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* fadeTex, glm::vec2 barSize, glm::vec2 fadeSize, int id)
+BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* fadeTex, glm::vec2 barSize, glm::vec2 fadeSize, int id,bool left)
 {
 	baseNode = new UINode();
 	baseNode->parentCoordinatePosition = glm::vec2(0, 0.5);
@@ -17,6 +17,12 @@ BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* 
 	fade->alpha = 0.8;
 	bar->position = glm::vec2(barSize.x/2,0.0);
 	fade->position = glm::vec2(fadeSize.x/2, 0.0);
+	if (!left) {
+		fadeBaseNode->parentCoordinatePosition = glm::vec2(1, 0.5);
+		baseNode->parentCoordinatePosition = glm::vec2(1, 0.5);
+		bar->position = glm::vec2(-barSize.x / 2, 0.0);
+		fade->position = glm::vec2(-fadeSize.x / 2, 0.0);
+	}
 	background->addChildNode(fadeBaseNode);
 	background->addChildNode(baseNode);
 	fadeBaseNode->addChildNode(fade);

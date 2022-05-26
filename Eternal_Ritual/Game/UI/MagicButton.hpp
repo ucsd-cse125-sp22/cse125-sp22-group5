@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "KGLEngine/Engine.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-#include "Constant.hpp"
+#include "Game/UI/Constant.hpp"
 
 class MagicButton
 {
@@ -15,6 +15,7 @@ private:
 	SpriteNode* magicCooldown;
 	UINode* magicProgess;
 	Shader* progress;
+	UINode* base;
 	UINode* parentNode;
 	BaseMagic* magic;
 public:
