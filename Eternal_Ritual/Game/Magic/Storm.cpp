@@ -81,10 +81,10 @@ void Storm::load() {
 }
 Storm::Storm() {
     if(!loaded) load();
-    this->loadAudioBuffer("storm sound", stormSound);
+    this->loadAudioBuffer("storm sound", stormSound, 2.0f, 1.0f);
     this->changeAudioVolume("storm sound", 0, 0);
     this->sounds["storm sound"].setLoop(true);
-    this->loadAudioBuffer("electric sound", electricSound);
+    this->loadAudioBuffer("electric sound", electricSound, 2.0f, 1.0f);
     this->changeAudioVolume("electric sound", 0, 0);
     this->sounds["electric sound"].setLoop(true);
     this->stopTime = 2.0f;

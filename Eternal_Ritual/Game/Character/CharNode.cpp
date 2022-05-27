@@ -15,6 +15,9 @@
 
 #include "Game/Map/MapSystemManager.hpp"
 
+#define RUN_STEP_TIME 0.4
+#define WALK_STEP_TIME 0.5
+
 using namespace std;
 using namespace glm;
 
@@ -47,6 +50,7 @@ Texture* CharNode::pantsD = NULL;
 Texture* CharNode::pantsN = NULL;
 Texture* CharNode::hairD = NULL;
 Texture* CharNode::hairBaseD = NULL;
+AudioBuffer* CharNode::footStep = NULL;
 
 void CharNode::load() {
     loaded = true;
@@ -217,6 +221,7 @@ void CharNode::load() {
     death->animatorBitMask = Bitmask::DEAD;
     death->repeats = false;
     death->clamps = true;
+    footStep = new AudioBuffer("/Resources/Game/Sound/footstep", "wav", 1, 9);
 }
 
 CharNode::CharNode(vec3 position){
@@ -243,10 +248,12 @@ CharNode::CharNode(vec3 position){
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
+    this->loadAudioBuffer("foot step", footStep);
     
     this->health = MAXHP;
     this->mana = MAXMANA;
     this->manaRegen = MAXMANAREGEN;
+    this->stepAvailable = 0;
 }
 CharNode::~CharNode(){
     
@@ -496,8 +503,16 @@ void CharNode::updatePosition(){
             if(state == CharState::MOVING){
                 if (this->isLocked){
                     this->playAnimators(this->keyDirection, 0.1f);
+                    if (Engine::main->getTime() > this->stepAvailable) {
+                        this->playAudio("foot step");
+                        this->stepAvailable = Engine::main->getTime() + WALK_STEP_TIME;
+                    }
                 }else{
                     this->playAnimators(Bitmask::RUNNING, 0.1f);
+                    if (Engine::main->getTime() > this->stepAvailable) {
+                        this->playAudio("foot step");
+                        this->stepAvailable = Engine::main->getTime() + RUN_STEP_TIME;
+                    }
                 }
                 state = CharState::IDLE;
             }else{

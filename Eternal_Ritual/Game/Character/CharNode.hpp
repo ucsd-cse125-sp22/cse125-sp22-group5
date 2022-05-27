@@ -101,6 +101,7 @@ private:
     static Texture* pantsN;
     static Texture* hairD;
     static Texture* hairBaseD;
+    static AudioBuffer* footStep;
 public:
     CharNode(glm::vec3 position);
     ~CharNode();
@@ -110,6 +111,7 @@ public:
     glm::vec3 acceleration;
     float health;
     float stamina;
+    float stepAvailable;
     float mana;
     float manaRegen;
     Hitbox* hitbox;
