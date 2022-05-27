@@ -7,6 +7,7 @@
 
 #include "Game/Map/MapSystemManager.hpp"
 
+#include <cfloat>
 #include <iostream>
 
 using namespace glm;
@@ -19,7 +20,7 @@ MapSystemManager::MapSystemManager() : min_xyz_(INT_MAX), max_xyz_(INT_MIN) {}
 
 bool MapSystemManager::hitTest(const vec3& start, const vec3& end, HitInfo& hitInfo) {
     bool isHit = false;
-    float minTime = MAXFLOAT;
+    float minTime = FLT_MAX;
     float hitTime;
     for (auto& box : boxes_) {
         if (box->hitTest(start, end)) {
@@ -39,7 +40,7 @@ bool MapSystemManager::hitTest(const vec3& start, const vec3& end, HitInfo& hitI
 bool MapSystemManager::gridsHitTest(const vec3& start, const vec3& end, HitInfo& hitInfo) {
     if (start == end) return false;
     bool isHit = false;
-    float minTime = MAXFLOAT;
+    float minTime = FLT_MAX;
     float hitTime;
     
     int widthIdx = (end.x - min_xyz_.x) / per_grid_width_;

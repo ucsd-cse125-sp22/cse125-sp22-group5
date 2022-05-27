@@ -240,6 +240,7 @@ CharNode::CharNode(vec3 position){
     this->refreshed = true;
     this->uiNode = 0;
     this->state = CharState::IDLE;
+    this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
     
@@ -507,6 +508,9 @@ void CharNode::updatePosition(){
         // Hit map test
         vec3 movement = this->characterTargetPosition - this->position;
         vec3 movementNorm = normalize(movement);
+        if (isnan(movementNorm.x)) {
+            movementNorm = vec3(0);
+        }
   
         HitInfo leftBottomHitInfo, rightBottomHitInfo, midBottomHitInfo, leftTopHitInfo, rightTopHitInfo;
         vec3 modelWorldPosition = this->modelNode->getWorldPosition();

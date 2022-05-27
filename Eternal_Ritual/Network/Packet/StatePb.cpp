@@ -72,6 +72,19 @@ int StatePb::getPlayerStyle(unsigned long playerIP) {
 }
 
 
+void StatePb::setPlayerGroup(unsigned long playerIP, int playerGroup) {
+    if (!state_data_->playerinfos().count(playerIP)) {
+        State_PlayerInfo playerInfo;
+        state_data_->mutable_playerinfos()->insert({playerIP, playerInfo});
+    }
+    state_data_->mutable_playerinfos()->at(playerIP).set_playergroup(playerGroup);
+}
+
+int StatePb::getPlayerGroup(unsigned long playerIP) {
+    return state_data_->playerinfos().at(playerIP).playergroup();
+}
+
+
 void StatePb::setControlNodeEulerAngles(unsigned long playerIP, glm::vec3 controlNodeEulerAngles) {
     if (!state_data_->playerinfos().count(playerIP)) {
         State_PlayerInfo playerInfo;
@@ -123,6 +136,45 @@ DirState StatePb::getDirState(unsigned long playerIP) {
 }
 
 
+void StatePb::setCharStatePb(unsigned long playerIP, gameDataPb::CharStatePb charStatePb) {
+    if (!state_data_->playerinfos().count(playerIP)) {
+        State_PlayerInfo playerInfo;
+        state_data_->mutable_playerinfos()->insert({playerIP, playerInfo});
+    }
+    state_data_->mutable_playerinfos()->at(playerIP).set_charstatepb(charStatePb);
+}
+
+gameDataPb::CharStatePb StatePb::getCharStatePb(unsigned long playerIP) {
+    return state_data_->playerinfos().at(playerIP).charstatepb();
+}
+
+
+void StatePb::setRoll(unsigned long playerIP, bool roll) {
+    if (!state_data_->playerinfos().count(playerIP)) {
+        State_PlayerInfo playerInfo;
+        state_data_->mutable_playerinfos()->insert({playerIP, playerInfo});
+    }
+    state_data_->mutable_playerinfos()->at(playerIP).set_roll(roll);
+}
+
+bool StatePb::getRoll(unsigned long playerIP) {
+    return state_data_->playerinfos().at(playerIP).roll();
+}
+
+
+void StatePb::setToggleLock(unsigned long playerIP, bool toggleLock) {
+    if (!state_data_->playerinfos().count(playerIP)) {
+        State_PlayerInfo playerInfo;
+        state_data_->mutable_playerinfos()->insert({playerIP, playerInfo});
+    }
+    state_data_->mutable_playerinfos()->at(playerIP).set_togglelock(toggleLock);
+}
+
+bool StatePb::getToggleLock(unsigned long playerIP) {
+    return state_data_->playerinfos().at(playerIP).togglelock();
+}
+
+
 void StatePb::addMagicEvent(unsigned long playerIP, MagicPb magicEvent) {
     if (!state_data_->playerinfos().count(playerIP)) {
         State_PlayerInfo playerInfo;
@@ -157,12 +209,25 @@ int StatePb::getPlayerHP(unsigned long playerIP){
 }
 
 
+void StatePb::setPlayerMP(unsigned long playerIP, int playerMP) {
+    if (!state_data_->playerattrs().count(playerIP)) {
+        PlayerAttr playerAttr;
+        state_data_->mutable_playerattrs()->insert({playerIP, playerAttr});
+    }
+    state_data_->mutable_playerattrs()->at(playerIP).set_playermp(playerMP);
+}
+
+int StatePb::getPlayerMP(unsigned long playerIP){
+    return state_data_->playerattrs().at(playerIP).playermp();
+}
+
+
 vector<unsigned long> StatePb::getEnemyIPs(unsigned long playerIP) {
     vector<unsigned long> enemyIPs;
     for (auto& it : state_data_->playerinfos()) {
         if (it.first != playerIP) {
             enemyIPs.emplace_back(it.first);
-            cout << it.first << endl;
+//            cout << it.first << endl;
         }
     }
     return enemyIPs;

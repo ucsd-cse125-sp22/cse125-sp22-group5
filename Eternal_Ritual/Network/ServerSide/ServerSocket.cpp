@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <string.h>
-#include <string>
 #include <iostream>
 
 using namespace std;
@@ -148,7 +147,8 @@ vector<unsigned long> ServerSocket::connectAllClients() {
 
 
 #ifdef _WIN64
-void ServerSocket::receiveData(unsigned long& playerIP, char*& pbArr, int& dataLen) {
+void ServerSocket::receiveData(vector<unsigned long>& playerIP, char (*readBuffer)[MAX_BUFFER_SIZE], vector<int>& dataLen)  {
+    int i = 0;
     for (auto& clientSocketFD : client_socket_fds_) {
         int newDataLen = static_cast<int> (recv(clientSocketFD.second, read_buffer_, MAX_BUFFER_SIZE, 0));
 //        std::cout <<clientSocketFD.second << std::endl;
@@ -159,9 +159,9 @@ void ServerSocket::receiveData(unsigned long& playerIP, char*& pbArr, int& dataL
 
         if (newDataLen > 0) {
             read_buffer_[newDataLen] = 0x00;
-            playerIP = clientSocketFD.first;
-            pbArr = read_buffer_;
-            dataLen = newDataLen;
+            playerIP.push_back(clientSocketFD.first);
+            memcpy(readBuffer[i++], read_buffer_, MAX_BUFFER_SIZE);
+            dataLen.push_back(newDataLen);
         }
         else {
             cout << endl;
@@ -174,20 +174,21 @@ void ServerSocket::receiveData(unsigned long& playerIP, char*& pbArr, int& dataL
     }
 }
 #elif __APPLE__
-void ServerSocket::receiveData(unsigned long& playerIP, char*& pbArr, int& dataLen) {
+void ServerSocket::receiveData(vector<unsigned long>& playerIP, char (*readBuffer)[MAX_BUFFER_SIZE], vector<int>& dataLen) {
+    int i = 0;
     for (auto& clientSocketFD : client_socket_fds_) {
         int newDataLen = static_cast<int> (read(clientSocketFD.second, read_buffer_, MAX_BUFFER_SIZE));
-        //        std::cout <<clientSocketFD.second << std::endl;
-        //        std::cout << std::endl;
-        //        std::cout << "Receive" << dataLen << std::endl;
-        //        std::cout << "Receive (string lenth): " << strlen(read_buffer_) << std::endl;
-        //        std::cout << "Receive: " << read_buffer_ << std::endl;
+//                std::cout <<clientSocketFD.second << std::endl;
+//                std::cout << std::endl;
+//                std::cout << "Receive" << newDataLen << std::endl;
+//                std::cout << "Receive (string lenth): " << strlen(read_buffer_) << std::endl;
+//                std::cout << "Receive: " << read_buffer_ << std::endl;
 
         if (newDataLen > 0) {
             read_buffer_[newDataLen] = 0x00;
-            playerIP = clientSocketFD.first;
-            pbArr = read_buffer_;
-            dataLen = newDataLen;
+            playerIP.push_back(clientSocketFD.first);
+            memcpy(readBuffer[i++], read_buffer_, MAX_BUFFER_SIZE);
+            dataLen.push_back(newDataLen);
         }
         else {
             cout << endl;
