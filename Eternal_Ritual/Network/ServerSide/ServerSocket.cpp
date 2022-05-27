@@ -148,6 +148,7 @@ vector<unsigned long> ServerSocket::connectAllClients() {
 
 #ifdef _WIN64
 void ServerSocket::receiveData(vector<unsigned long>& playerIP, char (*readBuffer)[MAX_BUFFER_SIZE], vector<int>& dataLen)  {
+    int i = 0;
     for (auto& clientSocketFD : client_socket_fds_) {
         int newDataLen = static_cast<int> (recv(clientSocketFD.second, read_buffer_, MAX_BUFFER_SIZE, 0));
 //        std::cout <<clientSocketFD.second << std::endl;
