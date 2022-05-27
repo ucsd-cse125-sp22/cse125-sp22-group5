@@ -85,6 +85,9 @@ private:
     // Map
     MapSystemManager* map_system_manager_;
     
+    // Camera
+    bool main_camera_ = true;
+    
     // Character
     CharNode* character_;
     unsigned long character_ip_;

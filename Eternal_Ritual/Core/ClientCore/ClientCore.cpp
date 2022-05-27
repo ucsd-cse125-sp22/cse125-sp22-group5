@@ -322,6 +322,18 @@ void ClientCore::handleEvent() {
             event_pb_->setToggleLock(false);
         }
         
+        if(engine_->input->wasKeyReleased(KEY_C)){
+            if (main_camera_) {
+                engine_->mainCameraNode = ally_->cameraNode;
+            }
+            else {
+                engine_->mainCameraNode = character_->cameraNode;
+            }
+            main_camera_ = !main_camera_;
+        }
+        else {
+            event_pb_->setToggleLock(false);
+        }
         
 //        if (engine_->input->wasKeyPressed(KEY_8)) {
 //            key_to_magic_[KEY_1] = Magic::FIREBALL;

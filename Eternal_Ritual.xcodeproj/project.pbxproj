@@ -10,6 +10,8 @@
 		12309CA5281A022500423625 /* Hitbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9C281A022500423625 /* Hitbox.cpp */; };
 		12309CA6281A022500423625 /* HitController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12309C9D281A022500423625 /* HitController.cpp */; };
 		12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12EA9AEF280FE68900541504 /* CharNode.cpp */; };
+		3D008937284094C6007E5CAD /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
+		3D008938284094C6007E5CAD /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
 		3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26C82831D53E00159082 /* ImportMapHelper.cpp */; };
 		3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
 		3D2D27702834220100159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
@@ -989,6 +991,7 @@
 				3D2D27E62835B23100159082 /* GroundSmash.cpp in Sources */,
 				3D6FD37C283F985200BC5083 /* Font.cpp in Sources */,
 				3D2D27E72835B23100159082 /* HitController.cpp in Sources */,
+				3D008937284094C6007E5CAD /* Storm.cpp in Sources */,
 				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
@@ -1062,6 +1065,7 @@
 				3D2D282E2835B3C500159082 /* GroundSmash.cpp in Sources */,
 				3D6FD37D283F985200BC5083 /* Font.cpp in Sources */,
 				3D2D282F2835B3C500159082 /* HitController.cpp in Sources */,
+				3D008938284094C6007E5CAD /* Storm.cpp in Sources */,
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
 				3D2D28782835B82000159082 /* EventPb.cpp in Sources */,
