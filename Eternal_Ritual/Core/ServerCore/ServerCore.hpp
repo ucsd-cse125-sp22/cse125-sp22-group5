@@ -60,6 +60,9 @@ private:
     // Socket
     ServerSocket* server_socket_;
     
+    // ReadBuffer
+    char read_buffer_[PLAYER_CAPACITY][MAX_BUFFER_SIZE];
+    
     // Pb
     std::vector<unsigned long> player_ips_;
     std::unordered_map<unsigned long, EventPb*> event_pbs_;

@@ -240,6 +240,7 @@ CharNode::CharNode(vec3 position){
     this->refreshed = true;
     this->uiNode = 0;
     this->state = CharState::IDLE;
+    this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
     

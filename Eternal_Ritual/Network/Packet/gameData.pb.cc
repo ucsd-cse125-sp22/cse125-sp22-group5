@@ -46,7 +46,8 @@ struct Vec2DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT Vec2DefaultTypeInternal _Vec2_default_instance_;
 constexpr PlayerAttr::PlayerAttr(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : playerhp_(0u){}
+  : playerhp_(0u)
+  , playermp_(0u){}
 struct PlayerAttrDefaultTypeInternal {
   constexpr PlayerAttrDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -75,10 +76,15 @@ constexpr Event::Event(
   , playername_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , controlnodeeulerangles_(nullptr)
   , movedirection_(nullptr)
+  , playerstyle_(0u)
+  , playergroup_(0u)
   , start_(false)
   , restart_(false)
-  , playerstyle_(0u)
+  , roll_(false)
+  , togglelock_(false)
   , dirstate_(0)
+
+  , charstatepb_(0)
 {}
 struct EventDefaultTypeInternal {
   constexpr EventDefaultTypeInternal()
@@ -97,8 +103,13 @@ constexpr State_PlayerInfo::State_PlayerInfo(
   , controlnodeeulerangles_(nullptr)
   , movedirection_(nullptr)
   , playerstyle_(0u)
+  , playergroup_(0u)
   , dirstate_(0)
-{}
+
+  , charstatepb_(0)
+
+  , roll_(false)
+  , togglelock_(false){}
 struct State_PlayerInfoDefaultTypeInternal {
   constexpr State_PlayerInfoDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -146,7 +157,7 @@ struct StateDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StateDefaultTypeInternal _State_default_instance_;
 }  // namespace gameDataPb
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gameData_2eproto[9];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gameData_2eproto[2];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gameData_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gameData_2eproto = nullptr;
 
 const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -174,6 +185,7 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::PlayerAttr, playerhp_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::PlayerAttr, playermp_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -194,9 +206,13 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, restart_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playername_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playerstyle_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playergroup_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, controlnodeeulerangles_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, movedirection_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, dirstate_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, charstatepb_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, roll_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, togglelock_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, magicevents_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::Event, playerattrs_),
   ~0u,  // no _has_bits_
@@ -207,9 +223,13 @@ const uint32_t TableStruct_gameData_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, playername_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, playerstyle_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, playergroup_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, controlnodeeulerangles_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, movedirection_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, dirstate_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, charstatepb_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, roll_),
+  PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, togglelock_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfo, magicevents_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfosEntry_DoNotUse, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::gameDataPb::State_PlayerInfosEntry_DoNotUse, _internal_metadata_),
@@ -245,12 +265,12 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 0, -1, -1, sizeof(::gameDataPb::Vec3)},
   { 9, -1, -1, sizeof(::gameDataPb::Vec2)},
   { 17, -1, -1, sizeof(::gameDataPb::PlayerAttr)},
-  { 24, 32, -1, sizeof(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse)},
-  { 34, -1, -1, sizeof(::gameDataPb::Event)},
-  { 49, -1, -1, sizeof(::gameDataPb::State_PlayerInfo)},
-  { 61, 69, -1, sizeof(::gameDataPb::State_PlayerInfosEntry_DoNotUse)},
-  { 71, 79, -1, sizeof(::gameDataPb::State_PlayerAttrsEntry_DoNotUse)},
-  { 81, -1, -1, sizeof(::gameDataPb::State)},
+  { 25, 33, -1, sizeof(::gameDataPb::Event_PlayerAttrsEntry_DoNotUse)},
+  { 35, -1, -1, sizeof(::gameDataPb::Event)},
+  { 54, -1, -1, sizeof(::gameDataPb::State_PlayerInfo)},
+  { 70, 78, -1, sizeof(::gameDataPb::State_PlayerInfosEntry_DoNotUse)},
+  { 80, 88, -1, sizeof(::gameDataPb::State_PlayerAttrsEntry_DoNotUse)},
+  { 90, -1, -1, sizeof(::gameDataPb::State)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -268,41 +288,49 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_gameData_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016gameData.proto\022\ngameDataPb\"\'\n\004Vec3\022\t\n\001"
   "x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\"\034\n\004Vec2\022\t\n"
-  "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\036\n\nPlayerAttr\022\020\n\010pla"
-  "yerHP\030\001 \001(\r\"\202\003\n\005Event\022\r\n\005start\030\001 \001(\010\022\017\n\007"
-  "restart\030\002 \001(\010\022\022\n\nplayerName\030\003 \001(\t\022\023\n\013pla"
-  "yerStyle\030\004 \001(\r\0220\n\026controlNodeEulerAngles"
-  "\030\005 \001(\0132\020.gameDataPb.Vec3\022\'\n\rmoveDirectio"
-  "n\030\006 \001(\0132\020.gameDataPb.Vec3\022&\n\010dirState\030\007 "
-  "\001(\0162\024.gameDataPb.DirState\022(\n\013magicEvents"
-  "\030\010 \003(\0162\023.gameDataPb.MagicPb\0227\n\013PlayerAtt"
-  "rs\030\t \003(\0132\".gameDataPb.Event.PlayerAttrsE"
-  "ntry\032J\n\020PlayerAttrsEntry\022\013\n\003key\030\001 \001(\004\022%\n"
-  "\005value\030\002 \001(\0132\026.gameDataPb.PlayerAttr:\0028\001"
-  "\"\216\004\n\005State\022\020\n\010playerIP\030\001 \001(\004\0227\n\013playerIn"
-  "fos\030\002 \003(\0132\".gameDataPb.State.PlayerInfos"
-  "Entry\0227\n\013PlayerAttrs\030\003 \003(\0132\".gameDataPb."
-  "State.PlayerAttrsEntry\032\342\001\n\nPlayerInfo\022\022\n"
-  "\nplayerName\030\001 \001(\t\022\023\n\013playerStyle\030\002 \001(\r\0220"
-  "\n\026controlNodeEulerAngles\030\003 \001(\0132\020.gameDat"
-  "aPb.Vec3\022\'\n\rmoveDirection\030\004 \001(\0132\020.gameDa"
-  "taPb.Vec3\022&\n\010dirState\030\005 \001(\0162\024.gameDataPb"
-  ".DirState\022(\n\013magicEvents\030\006 \003(\0162\023.gameDat"
-  "aPb.MagicPb\032P\n\020PlayerInfosEntry\022\013\n\003key\030\001"
-  " \001(\004\022+\n\005value\030\002 \001(\0132\034.gameDataPb.State.P"
-  "layerInfo:\0028\001\032J\n\020PlayerAttrsEntry\022\013\n\003key"
-  "\030\001 \001(\004\022%\n\005value\030\002 \001(\0132\026.gameDataPb.Playe"
-  "rAttr:\0028\001*z\n\010DirState\022\010\n\004NONE\020\000\022\t\n\005FRONT"
-  "\020\001\022\010\n\004BACK\020\002\022\010\n\004LEFT\020\003\022\t\n\005RIGHT\020\004\022\r\n\tFRO"
-  "NTLEFT\020\005\022\016\n\nFRONTRIGHT\020\006\022\014\n\010BACKLEFT\020\007\022\r"
-  "\n\tBACKRIGHT\020\010*\203\001\n\007MagicPb\022\016\n\nSTONEBLAST\020"
-  "\000\022\014\n\010FIREBALL\020\001\022\022\n\016LIGHTNINGSPEAR\020\002\022\017\n\013G"
-  "ROUNDSMASH\020\003\022\013\n\007THUNDER\020\004\022\t\n\005FLAME\020\005\022\021\n\r"
-  "THOUSANDBLADE\020\006\022\n\n\006DRAGON\020\007B\002H\001b\006proto3"
+  "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"0\n\nPlayerAttr\022\020\n\010pla"
+  "yerHP\030\001 \001(\r\022\020\n\010playerMP\030\002 \001(\r\"\347\003\n\005Event\022"
+  "\r\n\005start\030\001 \001(\010\022\017\n\007restart\030\002 \001(\010\022\022\n\nplaye"
+  "rName\030\003 \001(\t\022\023\n\013playerStyle\030\004 \001(\r\022\023\n\013play"
+  "erGroup\030\005 \001(\r\0220\n\026controlNodeEulerAngles\030"
+  "\006 \001(\0132\020.gameDataPb.Vec3\022\'\n\rmoveDirection"
+  "\030\007 \001(\0132\020.gameDataPb.Vec3\022&\n\010dirState\030\010 \001"
+  "(\0162\024.gameDataPb.DirState\022,\n\013charStatePb\030"
+  "\t \001(\0162\027.gameDataPb.CharStatePb\022\014\n\004roll\030\n"
+  " \001(\010\022\022\n\ntoggleLock\030\013 \001(\010\022(\n\013magicEvents\030"
+  "\014 \003(\0162\023.gameDataPb.MagicPb\0227\n\013PlayerAttr"
+  "s\030\r \003(\0132\".gameDataPb.Event.PlayerAttrsEn"
+  "try\032J\n\020PlayerAttrsEntry\022\013\n\003key\030\001 \001(\004\022%\n\005"
+  "value\030\002 \001(\0132\026.gameDataPb.PlayerAttr:\0028\001\""
+  "\363\004\n\005State\022\020\n\010playerIP\030\001 \001(\004\0227\n\013playerInf"
+  "os\030\002 \003(\0132\".gameDataPb.State.PlayerInfosE"
+  "ntry\0227\n\013PlayerAttrs\030\003 \003(\0132\".gameDataPb.S"
+  "tate.PlayerAttrsEntry\032\307\002\n\nPlayerInfo\022\022\n\n"
+  "playerName\030\001 \001(\t\022\023\n\013playerStyle\030\002 \001(\r\022\023\n"
+  "\013playerGroup\030\003 \001(\r\0220\n\026controlNodeEulerAn"
+  "gles\030\004 \001(\0132\020.gameDataPb.Vec3\022\'\n\rmoveDire"
+  "ction\030\005 \001(\0132\020.gameDataPb.Vec3\022&\n\010dirStat"
+  "e\030\006 \001(\0162\024.gameDataPb.DirState\022,\n\013charSta"
+  "tePb\030\007 \001(\0162\027.gameDataPb.CharStatePb\022\014\n\004r"
+  "oll\030\010 \001(\010\022\022\n\ntoggleLock\030\t \001(\010\022(\n\013magicEv"
+  "ents\030\n \003(\0162\023.gameDataPb.MagicPb\032P\n\020Playe"
+  "rInfosEntry\022\013\n\003key\030\001 \001(\004\022+\n\005value\030\002 \001(\0132"
+  "\034.gameDataPb.State.PlayerInfo:\0028\001\032J\n\020Pla"
+  "yerAttrsEntry\022\013\n\003key\030\001 \001(\004\022%\n\005value\030\002 \001("
+  "\0132\026.gameDataPb.PlayerAttr:\0028\001*}\n\010DirStat"
+  "e\022\010\n\004NONE\020\000\022\t\n\005FRONT\020\004\022\010\n\004BACK\020\010\022\010\n\004LEFT"
+  "\020\020\022\t\n\005RIGHT\020 \022\r\n\tFRONTLEFT\020@\022\017\n\nFRONTRIG"
+  "HT\020\200\001\022\r\n\010BACKLEFT\020\200\002\022\016\n\tBACKRIGHT\020\200\004*\203\001\n"
+  "\007MagicPb\022\014\n\010FIREBALL\020\000\022\016\n\nSTONEBLAST\020\001\022\013"
+  "\n\007THUNDER\020\002\022\n\n\006DRAGON\020\003\022\022\n\016LIGHTNINGSPEA"
+  "R\020\004\022\017\n\013GROUNDSMASH\020\005\022\t\n\005FLAME\020\006\022\021\n\rTHOUS"
+  "ANDBLADE\020\007*V\n\013CharStatePb\022\010\n\004IDLE\020\000\022\n\n\006M"
+  "OVING\020\001\022\013\n\007ROLLING\020\002\022\r\n\tCOMBATING\020\003\022\013\n\007D"
+  "AMAGED\020\004\022\010\n\004DEAD\020\005B\002H\001b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gameData_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gameData_2eproto = {
-  false, false, 1319, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
+  false, false, 1630, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
   &descriptor_table_gameData_2eproto_once, nullptr, 0, 9,
   schemas, file_default_instances, TableStruct_gameData_2eproto::offsets,
   file_level_metadata_gameData_2eproto, file_level_enum_descriptors_gameData_2eproto, file_level_service_descriptors_gameData_2eproto,
@@ -321,14 +349,14 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* DirState_descriptor() {
 bool DirState_IsValid(int value) {
   switch (value) {
     case 0:
-    case 1:
-    case 2:
-    case 3:
     case 4:
-    case 5:
-    case 6:
-    case 7:
     case 8:
+    case 16:
+    case 32:
+    case 64:
+    case 128:
+    case 256:
+    case 512:
       return true;
     default:
       return false;
@@ -349,6 +377,24 @@ bool MagicPb_IsValid(int value) {
     case 5:
     case 6:
     case 7:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CharStatePb_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gameData_2eproto);
+  return file_level_enum_descriptors_gameData_2eproto[2];
+}
+bool CharStatePb_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -880,12 +926,17 @@ PlayerAttr::PlayerAttr(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 PlayerAttr::PlayerAttr(const PlayerAttr& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  playerhp_ = from.playerhp_;
+  ::memcpy(&playerhp_, &from.playerhp_,
+    static_cast<size_t>(reinterpret_cast<char*>(&playermp_) -
+    reinterpret_cast<char*>(&playerhp_)) + sizeof(playermp_));
   // @@protoc_insertion_point(copy_constructor:gameDataPb.PlayerAttr)
 }
 
 inline void PlayerAttr::SharedCtor() {
-playerhp_ = 0u;
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&playerhp_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&playermp_) -
+    reinterpret_cast<char*>(&playerhp_)) + sizeof(playermp_));
 }
 
 PlayerAttr::~PlayerAttr() {
@@ -915,7 +966,9 @@ void PlayerAttr::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  playerhp_ = 0u;
+  ::memset(&playerhp_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&playermp_) -
+      reinterpret_cast<char*>(&playerhp_)) + sizeof(playermp_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -929,6 +982,14 @@ const char* PlayerAttr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           playerhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 playerMP = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          playermp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -968,6 +1029,12 @@ uint8_t* PlayerAttr::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_playerhp(), target);
   }
 
+  // uint32 playerMP = 2;
+  if (this->_internal_playermp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_playermp(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -987,6 +1054,11 @@ size_t PlayerAttr::ByteSizeLong() const {
   // uint32 playerHP = 1;
   if (this->_internal_playerhp() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerhp());
+  }
+
+  // uint32 playerMP = 2;
+  if (this->_internal_playermp() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playermp());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1014,6 +1086,9 @@ void PlayerAttr::MergeFrom(const PlayerAttr& from) {
   if (from._internal_playerhp() != 0) {
     _internal_set_playerhp(from._internal_playerhp());
   }
+  if (from._internal_playermp() != 0) {
+    _internal_set_playermp(from._internal_playermp());
+  }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1031,7 +1106,12 @@ bool PlayerAttr::IsInitialized() const {
 void PlayerAttr::InternalSwap(PlayerAttr* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(playerhp_, other->playerhp_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(PlayerAttr, playermp_)
+      + sizeof(PlayerAttr::playermp_)
+      - PROTOBUF_FIELD_OFFSET(PlayerAttr, playerhp_)>(
+          reinterpret_cast<char*>(&playerhp_),
+          reinterpret_cast<char*>(&other->playerhp_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata PlayerAttr::GetMetadata() const {
@@ -1104,9 +1184,9 @@ Event::Event(const Event& from)
   } else {
     movedirection_ = nullptr;
   }
-  ::memcpy(&start_, &from.start_,
-    static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
-    reinterpret_cast<char*>(&start_)) + sizeof(dirstate_));
+  ::memcpy(&playerstyle_, &from.playerstyle_,
+    static_cast<size_t>(reinterpret_cast<char*>(&charstatepb_) -
+    reinterpret_cast<char*>(&playerstyle_)) + sizeof(charstatepb_));
   // @@protoc_insertion_point(copy_constructor:gameDataPb.Event)
 }
 
@@ -1117,8 +1197,8 @@ playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringA
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&controlnodeeulerangles_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
-    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(dirstate_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&charstatepb_) -
+    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(charstatepb_));
 }
 
 Event::~Event() {
@@ -1166,9 +1246,9 @@ void Event::Clear() {
     delete movedirection_;
   }
   movedirection_ = nullptr;
-  ::memset(&start_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&dirstate_) -
-      reinterpret_cast<char*>(&start_)) + sizeof(dirstate_));
+  ::memset(&playerstyle_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&charstatepb_) -
+      reinterpret_cast<char*>(&playerstyle_)) + sizeof(charstatepb_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1212,53 +1292,86 @@ const char* Event::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
+      // uint32 playerGroup = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          playergroup_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .gameDataPb.Vec3 controlNodeEulerAngles = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_controlnodeeulerangles(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec3 moveDirection = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+      // .gameDataPb.Vec3 moveDirection = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr = ctx->ParseMessage(_internal_mutable_movedirection(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.DirState dirState = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+      // .gameDataPb.DirState dirState = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_dirstate(static_cast<::gameDataPb::DirState>(val));
         } else
           goto handle_unusual;
         continue;
-      // repeated .gameDataPb.MagicPb magicEvents = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+      // .gameDataPb.CharStatePb charStatePb = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_charstatepb(static_cast<::gameDataPb::CharStatePb>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // bool roll = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+          roll_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool toggleLock = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+          togglelock_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .gameDataPb.MagicPb magicEvents = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_magicevents(), ptr, ctx);
           CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 64) {
+        } else if (static_cast<uint8_t>(tag) == 96) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_add_magicevents(static_cast<::gameDataPb::MagicPb>(val));
         } else
           goto handle_unusual;
         continue;
-      // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+      // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(&playerattrs_, ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<106>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -1319,39 +1432,64 @@ uint8_t* Event::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_playerstyle(), target);
   }
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
+  // uint32 playerGroup = 5;
+  if (this->_internal_playergroup() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(5, this->_internal_playergroup(), target);
+  }
+
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 6;
   if (this->_internal_has_controlnodeeulerangles()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        5, _Internal::controlnodeeulerangles(this), target, stream);
+        6, _Internal::controlnodeeulerangles(this), target, stream);
   }
 
-  // .gameDataPb.Vec3 moveDirection = 6;
+  // .gameDataPb.Vec3 moveDirection = 7;
   if (this->_internal_has_movedirection()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        6, _Internal::movedirection(this), target, stream);
+        7, _Internal::movedirection(this), target, stream);
   }
 
-  // .gameDataPb.DirState dirState = 7;
+  // .gameDataPb.DirState dirState = 8;
   if (this->_internal_dirstate() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      7, this->_internal_dirstate(), target);
+      8, this->_internal_dirstate(), target);
   }
 
-  // repeated .gameDataPb.MagicPb magicEvents = 8;
+  // .gameDataPb.CharStatePb charStatePb = 9;
+  if (this->_internal_charstatepb() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      9, this->_internal_charstatepb(), target);
+  }
+
+  // bool roll = 10;
+  if (this->_internal_roll() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(10, this->_internal_roll(), target);
+  }
+
+  // bool toggleLock = 11;
+  if (this->_internal_togglelock() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_togglelock(), target);
+  }
+
+  // repeated .gameDataPb.MagicPb magicEvents = 12;
   {
     int byte_size = _magicevents_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
       target = stream->WriteEnumPacked(
-          8, magicevents_, byte_size, target);
+          12, magicevents_, byte_size, target);
     }
   }
 
-  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
   if (!this->_internal_playerattrs().empty()) {
     typedef ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_pointer
         ConstPtr;
@@ -1371,13 +1509,13 @@ uint8_t* Event::_InternalSerialize(
       }
       ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
       for (size_type i = 0; i < n; i++) {
-        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(9, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target, stream);
+        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(13, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target, stream);
       }
     } else {
       for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
           it = this->_internal_playerattrs().begin();
           it != this->_internal_playerattrs().end(); ++it) {
-        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(9, it->first, it->second, target, stream);
+        target = Event_PlayerAttrsEntry_DoNotUse::Funcs::InternalSerialize(13, it->first, it->second, target, stream);
       }
     }
   }
@@ -1398,7 +1536,7 @@ size_t Event::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .gameDataPb.MagicPb magicEvents = 8;
+  // repeated .gameDataPb.MagicPb magicEvents = 12;
   {
     size_t data_size = 0;
     unsigned int count = static_cast<unsigned int>(this->_internal_magicevents_size());for (unsigned int i = 0; i < count; i++) {
@@ -1416,7 +1554,7 @@ size_t Event::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
   total_size += 1 *
       ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_playerattrs_size());
   for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >::const_iterator
@@ -1432,18 +1570,28 @@ size_t Event::ByteSizeLong() const {
         this->_internal_playername());
   }
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 6;
   if (this->_internal_has_controlnodeeulerangles()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *controlnodeeulerangles_);
   }
 
-  // .gameDataPb.Vec3 moveDirection = 6;
+  // .gameDataPb.Vec3 moveDirection = 7;
   if (this->_internal_has_movedirection()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *movedirection_);
+  }
+
+  // uint32 playerStyle = 4;
+  if (this->_internal_playerstyle() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerstyle());
+  }
+
+  // uint32 playerGroup = 5;
+  if (this->_internal_playergroup() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playergroup());
   }
 
   // bool start = 1;
@@ -1456,15 +1604,26 @@ size_t Event::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  // uint32 playerStyle = 4;
-  if (this->_internal_playerstyle() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerstyle());
+  // bool roll = 10;
+  if (this->_internal_roll() != 0) {
+    total_size += 1 + 1;
   }
 
-  // .gameDataPb.DirState dirState = 7;
+  // bool toggleLock = 11;
+  if (this->_internal_togglelock() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // .gameDataPb.DirState dirState = 8;
   if (this->_internal_dirstate() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_dirstate());
+  }
+
+  // .gameDataPb.CharStatePb charStatePb = 9;
+  if (this->_internal_charstatepb() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_charstatepb());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1500,17 +1659,29 @@ void Event::MergeFrom(const Event& from) {
   if (from._internal_has_movedirection()) {
     _internal_mutable_movedirection()->::gameDataPb::Vec3::MergeFrom(from._internal_movedirection());
   }
+  if (from._internal_playerstyle() != 0) {
+    _internal_set_playerstyle(from._internal_playerstyle());
+  }
+  if (from._internal_playergroup() != 0) {
+    _internal_set_playergroup(from._internal_playergroup());
+  }
   if (from._internal_start() != 0) {
     _internal_set_start(from._internal_start());
   }
   if (from._internal_restart() != 0) {
     _internal_set_restart(from._internal_restart());
   }
-  if (from._internal_playerstyle() != 0) {
-    _internal_set_playerstyle(from._internal_playerstyle());
+  if (from._internal_roll() != 0) {
+    _internal_set_roll(from._internal_roll());
+  }
+  if (from._internal_togglelock() != 0) {
+    _internal_set_togglelock(from._internal_togglelock());
   }
   if (from._internal_dirstate() != 0) {
     _internal_set_dirstate(from._internal_dirstate());
+  }
+  if (from._internal_charstatepb() != 0) {
+    _internal_set_charstatepb(from._internal_charstatepb());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1539,8 +1710,8 @@ void Event::InternalSwap(Event* other) {
       &other->playername_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Event, dirstate_)
-      + sizeof(Event::dirstate_)
+      PROTOBUF_FIELD_OFFSET(Event, charstatepb_)
+      + sizeof(Event::charstatepb_)
       - PROTOBUF_FIELD_OFFSET(Event, controlnodeeulerangles_)>(
           reinterpret_cast<char*>(&controlnodeeulerangles_),
           reinterpret_cast<char*>(&other->controlnodeeulerangles_));
@@ -1601,8 +1772,8 @@ State_PlayerInfo::State_PlayerInfo(const State_PlayerInfo& from)
     movedirection_ = nullptr;
   }
   ::memcpy(&playerstyle_, &from.playerstyle_,
-    static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
-    reinterpret_cast<char*>(&playerstyle_)) + sizeof(dirstate_));
+    static_cast<size_t>(reinterpret_cast<char*>(&togglelock_) -
+    reinterpret_cast<char*>(&playerstyle_)) + sizeof(togglelock_));
   // @@protoc_insertion_point(copy_constructor:gameDataPb.State.PlayerInfo)
 }
 
@@ -1613,8 +1784,8 @@ playername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringA
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&controlnodeeulerangles_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&dirstate_) -
-    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(dirstate_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&togglelock_) -
+    reinterpret_cast<char*>(&controlnodeeulerangles_)) + sizeof(togglelock_));
 }
 
 State_PlayerInfo::~State_PlayerInfo() {
@@ -1658,8 +1829,8 @@ void State_PlayerInfo::Clear() {
   }
   movedirection_ = nullptr;
   ::memset(&playerstyle_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&dirstate_) -
-      reinterpret_cast<char*>(&playerstyle_)) + sizeof(dirstate_));
+      reinterpret_cast<char*>(&togglelock_) -
+      reinterpret_cast<char*>(&playerstyle_)) + sizeof(togglelock_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1687,37 +1858,70 @@ const char* State_PlayerInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+      // uint32 playerGroup = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          playergroup_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .gameDataPb.Vec3 controlNodeEulerAngles = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_controlnodeeulerangles(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.Vec3 moveDirection = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+      // .gameDataPb.Vec3 moveDirection = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr = ctx->ParseMessage(_internal_mutable_movedirection(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .gameDataPb.DirState dirState = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+      // .gameDataPb.DirState dirState = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_set_dirstate(static_cast<::gameDataPb::DirState>(val));
         } else
           goto handle_unusual;
         continue;
-      // repeated .gameDataPb.MagicPb magicEvents = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+      // .gameDataPb.CharStatePb charStatePb = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_charstatepb(static_cast<::gameDataPb::CharStatePb>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // bool roll = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+          roll_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool toggleLock = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          togglelock_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .gameDataPb.MagicPb magicEvents = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_magicevents(), ptr, ctx);
           CHK_(ptr);
-        } else if (static_cast<uint8_t>(tag) == 48) {
+        } else if (static_cast<uint8_t>(tag) == 80) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_add_magicevents(static_cast<::gameDataPb::MagicPb>(val));
@@ -1769,35 +1973,60 @@ uint8_t* State_PlayerInfo::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_playerstyle(), target);
   }
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  // uint32 playerGroup = 3;
+  if (this->_internal_playergroup() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_playergroup(), target);
+  }
+
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 4;
   if (this->_internal_has_controlnodeeulerangles()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::controlnodeeulerangles(this), target, stream);
+        4, _Internal::controlnodeeulerangles(this), target, stream);
   }
 
-  // .gameDataPb.Vec3 moveDirection = 4;
+  // .gameDataPb.Vec3 moveDirection = 5;
   if (this->_internal_has_movedirection()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        4, _Internal::movedirection(this), target, stream);
+        5, _Internal::movedirection(this), target, stream);
   }
 
-  // .gameDataPb.DirState dirState = 5;
+  // .gameDataPb.DirState dirState = 6;
   if (this->_internal_dirstate() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      5, this->_internal_dirstate(), target);
+      6, this->_internal_dirstate(), target);
   }
 
-  // repeated .gameDataPb.MagicPb magicEvents = 6;
+  // .gameDataPb.CharStatePb charStatePb = 7;
+  if (this->_internal_charstatepb() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      7, this->_internal_charstatepb(), target);
+  }
+
+  // bool roll = 8;
+  if (this->_internal_roll() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(8, this->_internal_roll(), target);
+  }
+
+  // bool toggleLock = 9;
+  if (this->_internal_togglelock() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(9, this->_internal_togglelock(), target);
+  }
+
+  // repeated .gameDataPb.MagicPb magicEvents = 10;
   {
     int byte_size = _magicevents_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
       target = stream->WriteEnumPacked(
-          6, magicevents_, byte_size, target);
+          10, magicevents_, byte_size, target);
     }
   }
 
@@ -1817,7 +2046,7 @@ size_t State_PlayerInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .gameDataPb.MagicPb magicEvents = 6;
+  // repeated .gameDataPb.MagicPb magicEvents = 10;
   {
     size_t data_size = 0;
     unsigned int count = static_cast<unsigned int>(this->_internal_magicevents_size());for (unsigned int i = 0; i < count; i++) {
@@ -1842,14 +2071,14 @@ size_t State_PlayerInfo::ByteSizeLong() const {
         this->_internal_playername());
   }
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 4;
   if (this->_internal_has_controlnodeeulerangles()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *controlnodeeulerangles_);
   }
 
-  // .gameDataPb.Vec3 moveDirection = 4;
+  // .gameDataPb.Vec3 moveDirection = 5;
   if (this->_internal_has_movedirection()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1861,10 +2090,31 @@ size_t State_PlayerInfo::ByteSizeLong() const {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playerstyle());
   }
 
-  // .gameDataPb.DirState dirState = 5;
+  // uint32 playerGroup = 3;
+  if (this->_internal_playergroup() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_playergroup());
+  }
+
+  // .gameDataPb.DirState dirState = 6;
   if (this->_internal_dirstate() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_dirstate());
+  }
+
+  // .gameDataPb.CharStatePb charStatePb = 7;
+  if (this->_internal_charstatepb() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_charstatepb());
+  }
+
+  // bool roll = 8;
+  if (this->_internal_roll() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool toggleLock = 9;
+  if (this->_internal_togglelock() != 0) {
+    total_size += 1 + 1;
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1902,8 +2152,20 @@ void State_PlayerInfo::MergeFrom(const State_PlayerInfo& from) {
   if (from._internal_playerstyle() != 0) {
     _internal_set_playerstyle(from._internal_playerstyle());
   }
+  if (from._internal_playergroup() != 0) {
+    _internal_set_playergroup(from._internal_playergroup());
+  }
   if (from._internal_dirstate() != 0) {
     _internal_set_dirstate(from._internal_dirstate());
+  }
+  if (from._internal_charstatepb() != 0) {
+    _internal_set_charstatepb(from._internal_charstatepb());
+  }
+  if (from._internal_roll() != 0) {
+    _internal_set_roll(from._internal_roll());
+  }
+  if (from._internal_togglelock() != 0) {
+    _internal_set_togglelock(from._internal_togglelock());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1931,8 +2193,8 @@ void State_PlayerInfo::InternalSwap(State_PlayerInfo* other) {
       &other->playername_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(State_PlayerInfo, dirstate_)
-      + sizeof(State_PlayerInfo::dirstate_)
+      PROTOBUF_FIELD_OFFSET(State_PlayerInfo, togglelock_)
+      + sizeof(State_PlayerInfo::togglelock_)
       - PROTOBUF_FIELD_OFFSET(State_PlayerInfo, controlnodeeulerangles_)>(
           reinterpret_cast<char*>(&controlnodeeulerangles_),
           reinterpret_cast<char*>(&other->controlnodeeulerangles_));

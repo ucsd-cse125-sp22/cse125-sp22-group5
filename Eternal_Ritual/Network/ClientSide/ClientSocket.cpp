@@ -142,8 +142,8 @@ void ClientSocket::sendData(char* pbArr, int dataLen) {
 
     long writeLen = write(client_socket_fd_, write_buffer_, MAX_BUFFER_SIZE);
 
-    //    std::cout << std::endl;
-    //    std::cout << "Sending: " << writeLen << std::endl;
+//        std::cout << std::endl;
+//        std::cout << "Sending: " << writeLen << std::endl;
 
     if (writeLen != MAX_BUFFER_SIZE) {
         perror("Send to client error");

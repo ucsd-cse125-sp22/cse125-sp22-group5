@@ -27,6 +27,10 @@ int main(int argc, char* argv[]) {
     
     ClientCore::Instance()->loadMagic();
     
+    ClientCore::Instance()->loadFont();
+    
+    ClientCore::Instance()->loadHUD();
+    
     ClientCore::Instance()->loadDamageSystem();
     
     

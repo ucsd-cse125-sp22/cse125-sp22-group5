@@ -21,6 +21,8 @@
 using namespace glm;
 using namespace std;
 
+#define GROUP 1
+
 
 ClientCore* ClientCore::client_core_ = nullptr;
 
@@ -34,7 +36,8 @@ ClientCore::~ClientCore() {
     delete event_pb_;
     
     map_system_manager_->Destructor();
-    hit_controller_->Destructor();
+    delete friend_hit_controller_;
+    delete enemy_hit_controller_;
     delete engine_;
 }
 
@@ -95,11 +98,11 @@ void ClientCore::loadCharacter() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 5 - Load Character --|" << std::endl;
     
-    bool mainChar = true;
+    int mainChar = 0;
     
     for (int i = 0; i < PLAYER_CAPACITY; i++) {
         CharNode* newChar;
-        if (mainChar) {
+        if (mainChar == 0) {
             newChar = new CharNode(vec3(0.0f, -1.0f, 0.0f));
             Node* controlNode = new Node();
             controlNode->position = vec3(0.0f, 1.2f, 0.0f);
@@ -113,12 +116,20 @@ void ClientCore::loadCharacter() {
         CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
         cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
         newChar->setCamera(cameraNode);
-        if (mainChar) {
+        if (mainChar == 0) {
             character_ = newChar;
             cameraNode->addChildNode(point_light_);
             engine_->mainCameraNode = cameraNode;
             
-            mainChar = false;
+            mainChar ++;
+        }
+        else if (mainChar == 1) {
+            ally_ = newChar;
+            
+            mainChar ++;
+        }
+        else {
+            enemies_.push_back(newChar);
         }
         
         newChar->stopAndPlay("idle", 0.0f, 0.0f);;
@@ -149,10 +160,10 @@ void ClientCore::loadMagic() {
         //DamageableMagic* thousandBlade = new ThousandBlade();
         DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
         
-        pre_chars_[i]->addMagics(stoneBlast);
-        all_magics_.insert(stoneBlast);
         pre_chars_[i]->addMagics(fireBall);
         all_magics_.insert(fireBall);
+        pre_chars_[i]->addMagics(stoneBlast);
+        all_magics_.insert(stoneBlast);
         //pre_chars_[i]->addMagics(lightningSpear);
         //all_magics_.insert(lightningSpear);
         pre_chars_[i]->addMagics(thunder);
@@ -166,33 +177,70 @@ void ClientCore::loadMagic() {
         pre_chars_[i]->addMagics(dragon);
         all_magics_.insert(dragon);
         
-        engine_->addNode(stoneBlast);
+//        engine_->addNode(stoneBlast);
         //engine_->addNode(flame);
         engine_->addNode(thunder);
     }
 }
 
+
+void ClientCore::loadFont()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 7 - Load Font --|" << std::endl;
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+
+void ClientCore::loadHUD()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load HUD --|" << std::endl;
+    UINode* base = new UINode();
+    base->renderingOrder = 10000.0f;
+    engine_->addNode(base);
+    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+}
+
+
 void ClientCore::loadDamageSystem() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 7 - Load Damage System --|" << std::endl;
+    std::cout << "|-- Loading Stage 9 - Load Damage System --|" << std::endl;
     
-    hit_controller_ = HitController::Instance();
+    friend_hit_controller_ = new HitController();
+    enemy_hit_controller_ = new HitController();
     
-    for (auto& magic : all_magics_) {
+    for (auto& magic : character_->magics) {
         DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
         if (damageableMagic != nullptr) {
-            hit_controller_->addMagic(damageableMagic);
+            enemy_hit_controller_->addMagic(damageableMagic);
         }
     }
+    enemy_hit_controller_->addCharacter(character_);
     
-    for (auto& character : pre_chars_) {
-        hit_controller_->addCharacter(character);
+    for (auto& magic : ally_->magics) {
+        DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
+        if (damageableMagic != nullptr) {
+            enemy_hit_controller_->addMagic(damageableMagic);
+        }
+    }
+    enemy_hit_controller_->addCharacter(ally_);
+    
+    for (int i = 2; i < PLAYER_CAPACITY; i++) {
+        for (auto& magic : pre_chars_[i]->magics) {
+            DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
+            if (damageableMagic != nullptr) {
+                friend_hit_controller_->addMagic(damageableMagic);
+            }
+        }
+        friend_hit_controller_->addCharacter(pre_chars_[i]);
     }
 }
 
 void ClientCore::loadPbPacket() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 8 - Load ProtoBuf Packet --|" << std::endl;
+    std::cout << "|-- Loading Stage 10 - Load ProtoBuf Packet --|" << std::endl;
     
     state_pb_ = new StatePb();
     event_pb_ = new EventPb();
@@ -201,7 +249,7 @@ void ClientCore::loadPbPacket() {
 
 void ClientCore::connectServer() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 9 - Connect to Server --|" << std::endl;
+    std::cout << "|-- Loading Stage 11 - Connect to Server --|" << std::endl;
     
     client_socket_ = new ClientSocket();
     client_socket_->connectServer();
@@ -227,7 +275,17 @@ void ClientCore::handleEvent() {
     }
     
     if (start_game_) {
-        character_->setName(character_->name);
+        event_pb_->setPlayerName(character_->name);
+        event_pb_->setPlayerGroup(GROUP);
+        
+        key_to_magic_[KEY_1] = Magic::FIREBALL;
+        magic_to_key_[Magic::FIREBALL] = KEY_1;
+        key_to_magic_[KEY_2] = Magic::STONEBLAST;
+        magic_to_key_[Magic::STONEBLAST] = KEY_2;
+        key_to_magic_[KEY_3] = Magic::THUNDER;
+        magic_to_key_[Magic::THUNDER] = KEY_3;
+        key_to_magic_[KEY_4] = Magic::DRAGON;
+        magic_to_key_[Magic::DRAGON] = KEY_4;
     }
     else {
         character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
@@ -246,64 +304,84 @@ void ClientCore::handleEvent() {
         
         event_pb_->setDirState(gameDataPb::DirState(character_->keyDirection));
         event_pb_->setMoveDirection(character_->moveDirection);
+        event_pb_->setCharStatePb(gameDataPb::CharStatePb(character_->state));
         
         event_pb_->setPlayerStyle(1);
         
-        if (engine_->input->wasKeyPressed(KEY_8)) {
-            key_to_magic_[KEY_1] = Magic::FIREBALL;
-            magic_to_key_[Magic::FIREBALL] = KEY_1;
-            key_to_magic_[KEY_2] = Magic::FLAME;
-            magic_to_key_[Magic::FLAME] = KEY_2;
-            key_to_magic_[KEY_3] = Magic::DRAGON;
-            magic_to_key_[Magic::DRAGON] = KEY_3;
-            
-            event_pb_->setPlayerStyle(2);
+        if(engine_->input->wasKeyReleased(KEY_SPACE)){
+            event_pb_->setRoll(true);
+        }
+        else {
+            event_pb_->setRoll(false);
         }
         
-        if (engine_->input->wasKeyPressed(KEY_9)) {
-            key_to_magic_[KEY_1] = Magic::LIGHTNINGSPEAR;
-            magic_to_key_[Magic::LIGHTNINGSPEAR] = KEY_1;
-            key_to_magic_[KEY_2] = Magic::THUNDER;
-            magic_to_key_[Magic::THUNDER] = KEY_2;
-            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
-            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
-            
-            event_pb_->setPlayerStyle(3);
+        if(engine_->input->wasKeyReleased(KEY_G)){
+            event_pb_->setToggleLock(true);
+        }
+        else {
+            event_pb_->setToggleLock(false);
         }
         
-        if (engine_->input->wasKeyPressed(KEY_0)) {
-            key_to_magic_[KEY_1] = Magic::STONEBLAST;
-            magic_to_key_[Magic::STONEBLAST] = KEY_1;
-            key_to_magic_[KEY_2] = Magic::GROUNDSMASH;
-            magic_to_key_[Magic::GROUNDSMASH] = KEY_2;
-            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
-            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
-            
-            event_pb_->setPlayerStyle(3);
-        }
+        
+//        if (engine_->input->wasKeyPressed(KEY_8)) {
+//            key_to_magic_[KEY_1] = Magic::FIREBALL;
+//            magic_to_key_[Magic::FIREBALL] = KEY_1;
+//            key_to_magic_[KEY_2] = Magic::FLAME;
+//            magic_to_key_[Magic::FLAME] = KEY_2;
+//            key_to_magic_[KEY_3] = Magic::DRAGON;
+//            magic_to_key_[Magic::DRAGON] = KEY_3;
+//
+//            event_pb_->setPlayerStyle(2);
+//        }
+//
+//        if (engine_->input->wasKeyPressed(KEY_9)) {
+//            key_to_magic_[KEY_1] = Magic::LIGHTNINGSPEAR;
+//            magic_to_key_[Magic::LIGHTNINGSPEAR] = KEY_1;
+//            key_to_magic_[KEY_2] = Magic::THUNDER;
+//            magic_to_key_[Magic::THUNDER] = KEY_2;
+//            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
+//            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
+//
+//            event_pb_->setPlayerStyle(3);
+//        }
+//
+//        if (engine_->input->wasKeyPressed(KEY_0)) {
+//            key_to_magic_[KEY_1] = Magic::STONEBLAST;
+//            magic_to_key_[Magic::STONEBLAST] = KEY_1;
+//            key_to_magic_[KEY_2] = Magic::GROUNDSMASH;
+//            magic_to_key_[Magic::GROUNDSMASH] = KEY_2;
+//            key_to_magic_[KEY_3] = Magic::THOUSANDBLADE;
+//            magic_to_key_[Magic::THOUSANDBLADE] = KEY_3;
+//
+//            event_pb_->setPlayerStyle(3);
+//        }
         
         if(engine_->input->wasKeyReleased(KEY_1)) {
-            if (key_to_magic_.count(KEY_1)) {
-                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_1]));
-            }
+            character_->setCurrMagic(key_to_magic_[KEY_1]);
         }
         
         if(engine_->input->wasKeyReleased(KEY_2)) {
-            if (key_to_magic_.count(KEY_2)) {
-                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_2]));
-            }
+            character_->setCurrMagic(key_to_magic_[KEY_2]);
         }
         
         if(engine_->input->wasKeyReleased(KEY_3)) {
-            if (key_to_magic_.count(KEY_3)) {
-                event_pb_->addMagicEvent(gameDataPb::MagicPb(key_to_magic_[KEY_3]));
-            }
+            character_->setCurrMagic(key_to_magic_[KEY_3]);
+        }
+        if (engine_->input->wasKeyPressed(KEY_4)) {
+            character_->setCurrMagic(key_to_magic_[KEY_4]);
+        }
+        
+        character_->scrollMagic(engine_->input->getScrollWheelAcceleration());
+        
+        if (engine_->input->wasKeyPressed(MOUSE_BUTTON_LEFT)) {
+            event_pb_->addMagicEvent(gameDataPb::MagicPb(character_->currMagic));
         }
         
         for (auto& it : all_chars_) {
             unsigned long character_ip = it.first;
             CharNode* character = it.second;
             event_pb_->setPlayerHP(character_ip, character->health);
+            event_pb_->setPlayerMP(character_ip, character->mana);
         }
     }
 }
@@ -349,12 +427,20 @@ void ClientCore::updateState() {
         
         vector<unsigned long> enemyIPs = state_pb_->getEnemyIPs(this->character_ip_);
         
-        for (auto enemyIP : enemyIPs) {
-            cout << enemyIP << endl;
-        }
-        
-        for (int i = 1; i < PLAYER_CAPACITY; i++) {
-            all_chars_[enemyIPs[i - 1]] = pre_chars_[i];
+        bool setThird = false;
+        for (int i = 0; i < PLAYER_CAPACITY - 1; i++) {
+            unsigned long currPlayerIP = enemyIPs[i];
+            int groupNum = state_pb_->getPlayerGroup(currPlayerIP);
+            if (groupNum == GROUP) {
+                all_chars_[currPlayerIP] = ally_;
+            }
+            else if (!setThird) {
+                all_chars_[currPlayerIP] = pre_chars_[2];
+                setThird = true;
+            }
+            else {
+                all_chars_[currPlayerIP] = pre_chars_[3];
+            }
         }
 
         start_game_ = false;
@@ -368,60 +454,22 @@ void ClientCore::updateState() {
             character->controlNode->eulerAngles = state_pb_->getControlNodeEulerAngles(character_ip);
             character->keyDirection = Direction::Type(state_pb_->getDirState(character_ip));
             character->moveDirection = state_pb_->getMoveDirection(character_ip);
+            character->state = CharState::Type(state_pb_->getCharStatePb(character_ip));
             character->updatePosition();
             character->updateTransform();
             
             character->health = state_pb_->getPlayerHP(character_ip);
+            character->mana = state_pb_->getPlayerMP(character_ip);
             
             character->setName(character->name + "  " + to_string(character->health));
             
-            if (character->health <= 0) {
-                // Load the font file:
-                FontLibrary* fontLibrary = new FontLibrary();
-                Font* title = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
-                delete(fontLibrary);
-                
-                // Create the base node that contains all the UI nodes:
-                UINode* baseNode = new UINode();
-                baseNode->screenPosition = vec2(0.5f);
-                baseNode->renderingOrder = 1000.0f;
-                engine_->addNode(baseNode);
-                
-                
-                
-                // Create the logo unit node that contains the logo image and a label:
-                UINode* logoUnitNode = new UINode();
-                baseNode->addChildNode(logoUnitNode);
-                
-                // Create the logo label node:
-                TextNode* logoLabelNode = new TextNode(title, 0.06f, 1.0f, 0.0f);
-                logoLabelNode->position = vec2(-0.165f, 0.0f);
-                logoLabelNode->color = vec4(1.0f);
-                
-                
-                if (character_ip != character_ip_) {
-                    if (!show) {
-                        logoLabelNode->text = "Victory !!";
-                        show = true;
-                    }
-                }
-                else {
-                    if (!show) {
-                        logoLabelNode->text = "Defeat !!";
-                        show = true;
-                    }
-                }
-                
-                logoLabelNode->setLeftHorizontalAlignment();
-                logoLabelNode->setTopVerticalAlignment();
-                logoUnitNode->addChildNode(logoLabelNode);
-                
-                SpriteNode* backgroundNode = new SpriteNode(vec2(10.0f));
-                backgroundNode->renderingOrder = -10.0f;
-                backgroundNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-                baseNode->addChildNode(backgroundNode);
+            if (state_pb_->getRoll(character_ip)) {
+                character_->roll();
             }
             
+            if (state_pb_->getToggleLock(character_ip)) {
+                character_->toggleLock(enemies_);
+            }
             
             if (state_pb_->hasMagicEvents(character_ip)) {
                 vector<gameDataPb::MagicPb> magicEvents = state_pb_->getMagicEvents(character_ip);
@@ -430,14 +478,12 @@ void ClientCore::updateState() {
                     
                     BaseMagic* magic = character->magics[magicEvent];
                     if (magicEvent == Magic::STONEBLAST) {
+                        character->currMagic = Magic::STONEBLAST;
                         character->castMagic();
                     }
                     else if (magicEvent == Magic::FIREBALL) {
-                        if (!magic->start) {
-                            magic->removeFromParentNode();
-                            character->rightHand->addChildNode(magic);
-                            character->castMagic();
-                        }
+                        character->currMagic = Magic::FIREBALL;
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::LIGHTNINGSPEAR) {
                         if (!magic->start) {
@@ -447,9 +493,8 @@ void ClientCore::updateState() {
                         }
                     }
                     else if (magicEvent == Magic::THUNDER) {
-                        if (!magic->start) {
-                            character->castMagic();
-                        }
+                        character->currMagic = Magic::THUNDER;
+                        character->castMagic();
                     }
                     else if (magicEvent == Magic::FLAME) {
                         character->castMagic();
@@ -461,6 +506,7 @@ void ClientCore::updateState() {
                         character->castMagic();
                     }
                     else if (magicEvent == Magic::DRAGON) {
+                        character->currMagic = Magic::DRAGON;
                         character->castMagic();
                     }
                 }
@@ -471,7 +517,14 @@ void ClientCore::updateState() {
             magic->updateMagic();
         }
         
-        hit_controller_->checkHit();
+        friend_hit_controller_->checkHit();
+        enemy_hit_controller_->checkHit();
+        
+        for (auto& it : all_chars_) {
+            it.second->genMana();
+        }
+        
+        HUD_->update();
     }
 }
 

@@ -20,14 +20,14 @@ class CharNode;
 namespace Magic {
 
 enum Type {
-    STONEBLAST = 0,
-    FIREBALL = 1,
-    LIGHTNINGSPEAR = 2,
-    GROUNDSMASH = 3,
-    THUNDER = 4,
-    FLAME = 5,
-    THOUSANDBLADE = 6,
-    DRAGON = 7
+    FIREBALL = 0,
+    STONEBLAST = 1,
+    THUNDER = 2,
+    DRAGON = 3,
+    LIGHTNINGSPEAR = 4,
+    GROUNDSMASH = 5,
+    FLAME = 6,
+    THOUSANDBLADE = 7,
 };
 
 } // namespace Magic
