@@ -14,6 +14,7 @@
 #include "Game/Map/MapSystemManager.hpp"
 
 #define DAMAGE 50
+#define COOLDOWN 3
 
 using namespace std;
 using namespace glm;
@@ -99,7 +100,7 @@ FireBall::FireBall(){
     if (!loaded) load();
     start = false;
     canDamage = false;
-    this->cooldown = 0;
+    this->cooldown = COOLDOWN;
     this->cost = 0;
     this->position = vec3(0);
     this->acceleration = vec3(0, -0.01, 0);
@@ -130,10 +131,12 @@ FireBall::FireBall(){
 
 }
 void FireBall::updateMagic(){
+    if (start) {
+        this->hitWall();
+    }
     if (threwOut) {
         position += velocity * 0.15f;
         velocity += acceleration;
-        this->hitWall();
     }
 }
 void FireBall::play(CharNode* character, int seed){
@@ -241,16 +244,14 @@ void FireBall::tryDamage(CharNode *character) {
     }
 }
 void FireBall::hitWall() {
-    if (!explodeDamage && canDamage) {
-        HitInfo hitInfo;
-        this->updateTransform();
-        if (MapSystemManager::Instance()->hitTest(this->position, this->position + this->velocity, hitInfo)) {
-            canDamage = false;
-            explodeDamage = true;
-            threwOut = false;
-            if (!exploded) {
-                explode();
-            }
+    HitInfo hitInfo;
+    this->updateTransform();
+    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), this->getWorldPosition() + this->velocity * 0.15f, hitInfo)) {
+        canDamage = false;
+        explodeDamage = true;
+        threwOut = false;
+        if (!exploded) {
+            explode();
         }
     }
 }

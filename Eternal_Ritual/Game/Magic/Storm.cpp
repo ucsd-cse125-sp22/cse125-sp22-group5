@@ -146,11 +146,11 @@ void Storm::updateMagic() {
     spinning->eulerAngles.y += 5;
     if (spinning->eulerAngles.y > 360) spinning->eulerAngles.y -= 360;
     if (start) {
-        position.y = radius * 2;
+        spinning->position.y = radius * 2;
         lightning->initialScale = radius * 2;
         cloud->initialScale = radius * 4;
         dust->initialScale = radius * 4;
-        dust->position.y = - position.y - 0.2;
+        dust->position.y = - spinning->position.y - 0.2;
         lightning->position.y = radius;
         lightning->setEmissionBox(vec3(radius * 4, radius, radius * 4));
         cloud->setEmissionStorm(radius * 2, radius * 4, radius * 2);

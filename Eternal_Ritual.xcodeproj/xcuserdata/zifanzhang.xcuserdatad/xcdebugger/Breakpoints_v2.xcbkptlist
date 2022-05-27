@@ -55,80 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "83E351C8-A93F-48D5-AE18-D55D637A3B88"
+            uuid = "55F72116-BD66-46AA-9C04-9B2AA42530AE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
+            filePath = "Eternal_Ritual/Game/Magic/FireBall.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
-            landmarkName = "CharNode::moveCamera(mouseTranslation)"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "FireBall::hitWall()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D39CC04B-FD92-4B3F-9BB7-006D6114E7DC"
+            uuid = "995D9CD6-3BEA-42DB-99E4-B9E6ACB9D27C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
+            filePath = "Eternal_Ritual/Game/Magic/FireBall.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
-            landmarkName = "CharNode::moveCamera(mouseTranslation)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "498AD09A-11E9-4306-A400-CCDEC61D81F8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Game/Magic/ThunderShock.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "ThunderShock::tryDamage(character)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "462EBB73-63E5-4156-B863-BCE1003C6787"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Core/OfflineCore/OfflineCore.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "OfflineCore::updateState()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "766E7B36-4656-4895-83E7-11FBDFD044C3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Game/Character/CharNode.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "600"
-            endingLineNumber = "600"
-            landmarkName = "CharNode::castMagic()"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "FireBall::hitWall()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

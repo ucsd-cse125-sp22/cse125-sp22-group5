@@ -38,7 +38,7 @@ void OfflineCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
+    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
@@ -49,7 +49,7 @@ void OfflineCore::loadSky() {
     std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
     
     this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
-                                "/Resources/Game/Skybox/Night Moon Burst_Cam_4_Up+Y.png", "/Resources/Game/Skybox/NMBo.png",
+                                "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
                                 "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                 2.0f);
 }
@@ -83,7 +83,7 @@ void OfflineCore::loadMap() {
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
-//    ImportMapHelper::importMapModel();
+    ImportMapHelper::importMapModel();
 }
 
 
