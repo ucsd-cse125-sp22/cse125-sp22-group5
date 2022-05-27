@@ -508,6 +508,9 @@ void CharNode::updatePosition(){
         // Hit map test
         vec3 movement = this->characterTargetPosition - this->position;
         vec3 movementNorm = normalize(movement);
+        if (isnan(movementNorm.x)) {
+            movementNorm = vec3(0);
+        }
   
         HitInfo leftBottomHitInfo, rightBottomHitInfo, midBottomHitInfo, leftTopHitInfo, rightTopHitInfo;
         vec3 modelWorldPosition = this->modelNode->getWorldPosition();
