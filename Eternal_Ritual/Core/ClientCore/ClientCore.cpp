@@ -151,7 +151,7 @@ void ClientCore::loadMagic() {
     std::cout << "|-- Loading Stage 6 - Load Magic --|" << std::endl;
     
     for (int i = 0; i < PLAYER_CAPACITY; i++) {
-        DamageableMagic* stoneBlast = new StoneBlast();
+        DamageableMagic* stoneBlast = new Storm();
         DamageableMagic* fireBall = new ScatteredFire();
         //DamageableMagic* lightningSpear = new LightningPhalanx();
         //DamageableMagic* groundSmash = new GroundSmash();
@@ -217,7 +217,7 @@ void ClientCore::loadDamageSystem() {
             enemy_hit_controller_->addMagic(damageableMagic);
         }
     }
-    enemy_hit_controller_->addCharacter(character_);
+    friend_hit_controller_->addCharacter(character_);
     
     for (auto& magic : ally_->magics) {
         DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);
@@ -225,7 +225,7 @@ void ClientCore::loadDamageSystem() {
             enemy_hit_controller_->addMagic(damageableMagic);
         }
     }
-    enemy_hit_controller_->addCharacter(ally_);
+    friend_hit_controller_->addCharacter(ally_);
     
     for (int i = 2; i < PLAYER_CAPACITY; i++) {
         for (auto& magic : pre_chars_[i]->magics) {
@@ -234,7 +234,7 @@ void ClientCore::loadDamageSystem() {
                 friend_hit_controller_->addMagic(damageableMagic);
             }
         }
-        friend_hit_controller_->addCharacter(pre_chars_[i]);
+        enemy_hit_controller_->addCharacter(pre_chars_[i]);
     }
 }
 
@@ -464,11 +464,11 @@ void ClientCore::updateState() {
             character->setName(character->name + "  " + to_string(character->health));
             
             if (state_pb_->getRoll(character_ip)) {
-                character_->roll();
+                character->roll();
             }
             
             if (state_pb_->getToggleLock(character_ip)) {
-                character_->toggleLock(enemies_);
+                character->toggleLock(enemies_);
             }
             
             if (state_pb_->hasMagicEvents(character_ip)) {
