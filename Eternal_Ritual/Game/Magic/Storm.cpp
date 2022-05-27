@@ -26,13 +26,14 @@ ParticleNode* Storm::metaDust = NULL;
 ParticleNode* Storm::metaHail = NULL;
 ParticleNode* Storm::metaLightning = NULL;
 LightNode* Storm::metaLight = NULL;
-
+AudioBuffer* Storm::stormSound = NULL;
+AudioBuffer* Storm::electricSound = NULL;
 void Storm::load() {
     loaded = true;
     metaCloud = new ParticleNode(200, 1.0f, 0.0f);
 //    cloud->position = vec3(0.5f,0,0);
     metaCloud->texture = new Texture("/Resources/Game/Magic/StoneBlast/cloud.png");
-    metaCloud->setMaxAmount(1000);
+    metaCloud->setMaxAmount(500);
     metaCloud->initialScaleVariation = 1.0;
     metaCloud->renderingOrder = 990;
     metaCloud->useLocalSpace = true;
@@ -41,7 +42,7 @@ void Storm::load() {
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0), 1);
     metaDust = new ParticleNode(200, 1.0f, 0.0f);
     metaDust->texture = new Texture("/Resources/Game/Magic/StoneBlast/cloud.png");
-    metaDust->setMaxAmount(1000);
+    metaDust->setMaxAmount(500);
     metaDust->initialScaleVariation = 1.0;
     metaDust->renderingOrder = 990;
     metaDust->useLocalSpace = true;
@@ -49,7 +50,7 @@ void Storm::load() {
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0.7), 0.5);
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0), 1);
     metaHail = new ParticleNode(200, 2, 0);
-    metaHail->setMaxAmount(1000);
+    metaHail->setMaxAmount(500);
     metaHail->useLocalSpace = true;
     metaHail->isAdditive = true;
     metaHail->renderingOrder = 999l;
@@ -75,9 +76,17 @@ void Storm::load() {
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 0);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0.9), 0.5);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
+    stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
+    electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
 }
 Storm::Storm() {
     if(!loaded) load();
+    this->loadAudioBuffer("storm sound", stormSound);
+    this->changeAudioVolume("storm sound", 0, 0);
+    this->sounds["storm sound"].setLoop(true);
+    this->loadAudioBuffer("electric sound", electricSound);
+    this->changeAudioVolume("electric sound", 0, 0);
+    this->sounds["electric sound"].setLoop(true);
     this->stopTime = 2.0f;
     this->actionName = "cast magic 2";
     this->cloud = metaCloud->copy()->convertToParticleNode();
@@ -102,6 +111,10 @@ Storm::Storm() {
 }
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
+        this->playAudio("storm sound");
+        this->changeAudioVolume("storm sound", 1, 1);
+        this->playAudio("electric sound");
+        this->changeAudioVolume("electric sound", 1, 1);
         start = true;
         caster = character;
         velocity = normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1));
@@ -122,6 +135,10 @@ void Storm::play(CharNode *character, int seed) {
         hail->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
         Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
+        expanding->setCompletionHandler([&] {
+            this->changeAudioVolume("storm sound", 0, 1);
+            this->changeAudioVolume("electric sound", 0, 1);
+        });
         expanding->setEaseOutTimingMode();
         expanding->setFloatAnimation(&radius, 1.5);
         Engine::main->playAnimation(expanding);

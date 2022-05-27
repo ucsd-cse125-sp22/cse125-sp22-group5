@@ -25,7 +25,8 @@ private:
     static ParticleNode* metaLightning;
     static ParticleNode* metaDust;
     static LightNode* metaLight;
-    
+    static AudioBuffer* stormSound;
+    static AudioBuffer* electricSound;
 public:
     glm::vec3 velocity;
     float radius;
