@@ -11,5 +11,6 @@
 #include "Game/UI/ButtonNode.hpp"
 #include "Game/UI/HPBarNode.hpp"
 #include "Game/UI/HUDNode.hpp"
+#include "Game/UI/Logo.hpp"
 
 #endif /* UI_h */

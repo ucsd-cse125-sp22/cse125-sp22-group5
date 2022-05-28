@@ -35,11 +35,13 @@ public:
         }
     }
     
-    void initEngine();
+    void initEngine(int* p, int* l);
 
     void loadFont();
     void loadHUD();
     void loadAlly();
+    void displayLogo();
+    void updateLoad();
 
 
     void loadSky();
@@ -53,8 +55,15 @@ public:
     void handleEvent();
     void updateState();
     void renderWorld();
+
+    void render();
     
 private:
+
+    int* pro;
+    int* loadState;
+    float loadingProgress;
+
     // Singleton pattern
     static OfflineCore* offline_core_;
     OfflineCore();
@@ -88,10 +97,15 @@ private:
     HitController*  hit_controller_;
 
     //HUD
+
     HUDNode* HUD_;
+    UINode* HUDbase_;
 
     //Font
     Font* font_;
+
+    //
+    Logo* logo_;
 
 };
 

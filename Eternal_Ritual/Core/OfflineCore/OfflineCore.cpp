@@ -28,11 +28,15 @@ OfflineCore::~OfflineCore() {
 }
 
 
-void OfflineCore::initEngine() {
+void OfflineCore::initEngine(int* p, int* l) {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
+
+    pro = p;
+    loadState = l;
+    loadingProgress = 0;
     
-    engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
+    engine_ = new Engine("KGLEngine", 0.7f, 0, NULL);
     engine_->workingDirectory = "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5";
     engine_->lockCursor();
 }
@@ -49,10 +53,14 @@ void OfflineCore::loadHUD()
 {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 6 - Load HUD --|" << std::endl;
-    UINode* base = new UINode();
-    base->renderingOrder = 10000;
-    engine_->addNode(base);
-    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+    HUDbase_ = new UINode();
+    HUDbase_->renderingOrder = 10000;
+    engine_->addNode(HUDbase_);
+    HUD_ = new HUDNode(engine_, HUDbase_, true, font_, character_, ally_);
+    HUDbase_->isDisabled = true;
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 void OfflineCore::loadAlly()
@@ -71,8 +79,24 @@ void OfflineCore::loadAlly()
     engine_->addNode(baseNode);
     ally_->setUINode(baseNode);
     ally_->setName("Ally");
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
+void OfflineCore::displayLogo()
+{
+    CameraNode* logoCam = new CameraNode(60.0f, 0.1f, 1000.0f);
+    logoCam->position = vec3(-2.5f, 0.0f, 0.0f);
+    engine_->mainCameraNode = logoCam;
+    logo_ = new Logo(engine_,font_, pro);
+    logo_->play();
+}
+
+void OfflineCore::updateLoad()
+{
+    logo_->updateLoad(loadingProgress);
+}
 
 void OfflineCore::loadSky() {
     std::cout << std::endl;
@@ -82,6 +106,9 @@ void OfflineCore::loadSky() {
                                 "/Resources/Game/Skybox/Night Moon Burst_Cam_4_Up+Y.png", "/Resources/Game/Skybox/NMBo.png",
                                 "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                 2.0f);
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -102,7 +129,9 @@ void OfflineCore::loadLight() {
     directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
     engine_->addNode(directional_light_);
-    
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -112,8 +141,11 @@ void OfflineCore::loadMap() {
 
     map_system_manager_ = MapSystemManager::Instance();
     
-    ImportMapHelper::importMapBox();
+    //ImportMapHelper::importMapBox();
     ImportMapHelper::importMapModel();
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -143,6 +175,9 @@ void OfflineCore::loadCharacter() {
     engine_->addNode(baseNode);
     character_->setUINode(baseNode);
     character_->setName("Player1");
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -163,6 +198,9 @@ void OfflineCore::loadEnemy() {
     enemy->setName("Enemy");
     
     enemies_.push_back(enemy);
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -198,6 +236,9 @@ void OfflineCore::loadMagic() {
     all_magics_.insert(dragon);
     
     engine_->addNode(thunder);
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
 }
 
 
@@ -217,6 +258,9 @@ void OfflineCore::loadDamageSystem() {
     for (auto& enemy : enemies_) {
         hit_controller_->addCharacter(enemy);
     }
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.2;
 }
 
 
@@ -291,10 +335,12 @@ void OfflineCore::updateState() {
 void OfflineCore::renderWorld() {
     engine_->renderDirectionalLightShadowMap(directional_light_);
     
-    engine_->render();
+    //engine_->render();
 }
 
-
+void OfflineCore::render() {
+    engine_->render();
+}
 
 void destructOfflineCore(int signum) {
     std::cout << "Game over" << std::endl;

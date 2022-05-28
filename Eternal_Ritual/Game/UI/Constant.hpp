@@ -14,6 +14,8 @@ namespace Color{
 	const glm::vec4 Hp = glm::vec4(0.45,0.15,0.15,1.0);
 	const glm::vec4 Mp = glm::vec4(0.2,0.2,0.7,1.0);
 	const glm::vec4 textColor = glm::vec4(0.76,0.67,0.5,1.0);
+	const glm::vec4 LogotextColor = glm::vec4(0.9, 0.79, 0.33, 1.0);
+	const glm::vec4 loadingBarColor = glm::vec4(0.3, 1, 0.33, 1.0);
 };
 
 namespace UISizes{
@@ -65,6 +67,10 @@ namespace UISizes{
 
 	// tutorial ===============
 	const glm::vec2 listHeadBackSize = glm::vec2(0.232,0.078);
+
+	// logo =================
+	const glm::vec2 logoLightSize = glm::vec2(1.018,0.585);
+	const glm::vec2 logoBackSize = glm::vec2(0.864, 0.324);
 	
 };
 

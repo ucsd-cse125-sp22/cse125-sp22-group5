@@ -15,38 +15,90 @@ int main(int argc, char* argv[]) {
         perror("Signal_handler error");
         exit(1);
     }
-    
-    OfflineCore::Instance()->initEngine();
 
-    OfflineCore::Instance()->loadSky();
-    
-    OfflineCore::Instance()->loadLight();
-    
-    OfflineCore::Instance()->loadMap();
-    
-    OfflineCore::Instance()->loadCharacter();
-    
-    OfflineCore::Instance()->loadEnemy();
-    
-    OfflineCore::Instance()->loadMagic();
+    int process = 1;
+    int loadState = 1;
 
-    // =============================
-    OfflineCore::Instance()->loadAlly();
+    OfflineCore::Instance()->initEngine(&process,&loadState);
 
-    OfflineCore::Instance()->loadFont();
 
-    OfflineCore::Instance()->loadHUD();
-    // =============================
-    
-    OfflineCore::Instance()->loadDamageSystem();
-    
     while(Engine::main->isRunning()) {
+
         if(Engine::main->shouldUpdate()) {
-            OfflineCore::Instance()->handleEvent();
-            
-            OfflineCore::Instance()->updateState();
-            
-            OfflineCore::Instance()->renderWorld();
+
+
+            if (process == 1) {
+                
+                // Logo =======================
+
+                OfflineCore::Instance()->loadFont();
+
+                OfflineCore::Instance()->displayLogo();
+
+                process = 0;
+            }
+            else if (process == 2) {
+
+                // Loading display =======================
+
+                OfflineCore::Instance()->updateLoad();
+            }
+            else if (process == 3) {
+
+                // Loading =========================
+
+                if (loadState == 1) {
+                    OfflineCore::Instance()->loadSky();
+                }
+                else if (loadState == 2) {
+                    OfflineCore::Instance()->loadLight();
+                }
+                else if (loadState == 3) {
+                    OfflineCore::Instance()->loadMap();
+                }
+                else if (loadState == 4) {
+                    OfflineCore::Instance()->loadCharacter();
+                }
+                else if (loadState == 5) {
+                    OfflineCore::Instance()->loadEnemy();
+                }
+                else if (loadState == 6) {
+                    OfflineCore::Instance()->loadMagic();
+                }
+                else if (loadState == 7) {
+                    OfflineCore::Instance()->loadAlly();
+                }
+                else if (loadState == 8) {
+                    OfflineCore::Instance()->loadHUD();
+                }
+                else if (loadState == 9) {
+                    OfflineCore::Instance()->loadDamageSystem();
+                }
+                else {
+                    process = 4;
+                }
+            }
+            else if (process == 4) {
+
+                // Start Scnene===========================
+
+
+            }
+            else if (process == 5) {
+
+                OfflineCore::Instance()->handleEvent();
+
+                OfflineCore::Instance()->updateState();
+
+                OfflineCore::Instance()->renderWorld();
+
+            }
+
+            /*OfflineCore::Instance()->handleEvent();*/
+
+            OfflineCore::Instance()->render();
+
+
         }
     }
     
