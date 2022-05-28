@@ -288,6 +288,10 @@ void CharNode::setEularAngle(vec3 eularAngle){
     this->modelNode->eulerAngles = eularAngle;
     this->characterTargetEulerAngles = eularAngle;
 }
+void CharNode::setPosition(vec3 position) {
+    this->position = position;
+    this->characterTargetPosition = position;
+}
 void CharNode::setName(string name) {
     this->nameNode->text = name;
 }
@@ -316,13 +320,15 @@ void CharNode::lock(vector<CharNode*>& targets){
     vec3 cameraPos = cameraNode->getWorldPosition();
     vec3 cameraFront = controlNode->getFrontVectorInWorld();
     for (int i = 0; i < targets.size(); i++) {
-        vec3 targetPos = targets[i]->getWorldPosition() + vec3(0, 0.2f, 0);
-        vec3 diffVec = targetPos - cameraPos;
-        float angle = acos(dot(normalize(diffVec), normalize(cameraFront)));
-        if (angle < radians(30.0f) && length(diffVec) < 20){
-            if (targetDist > diffVec.length()){
-                target = targets[i];
-                targetDist = diffVec.length();
+        if (!targets[i]->isDisabled) {
+            vec3 targetPos = targets[i]->getWorldPosition() + vec3(0, 0.2f, 0);
+            vec3 diffVec = targetPos - cameraPos;
+            float angle = acos(dot(normalize(diffVec), normalize(cameraFront)));
+            if (angle < radians(30.0f) && length(diffVec) < 20){
+                if (targetDist > diffVec.length()){
+                    target = targets[i];
+                    targetDist = diffVec.length();
+                }
             }
         }
     }
@@ -526,9 +532,12 @@ void CharNode::updatePosition(){
         
         // Hit map test
         vec3 movement = this->characterTargetPosition - this->position;
-        vec3 movementNorm = normalize(movement);
-        if (isnan(movementNorm.x)) {
+        vec3 movementNorm;
+        if (length(movement) < 0.00001) {
             movementNorm = vec3(0);
+        }
+        else {
+            movementNorm = normalize(movement);
         }
   
         HitInfo leftBottomHitInfo, rightBottomHitInfo, midBottomHitInfo, leftTopHitInfo, rightTopHitInfo;
@@ -715,7 +724,7 @@ void CharNode::castMagic(){
                 this->getAnimator(magic->actionName)->stop(0.4);
             });
             Engine::main->playAnimation(resume);
-            cout << "remaining mana: " << mana << endl;
+//            cout << "remaining mana: " << mana << endl;
         }
     }
 }
@@ -723,7 +732,7 @@ void CharNode::castMagic(){
 void CharNode::genMana() {
     if (state < CharState::ROLLING && mana < MAXMANA) {
         mana = std::min((float)MAXMANA, mana + manaRegen);
-        cout << "curr mana: " << mana << endl;
+//        cout << "curr mana: " << mana << endl;
     }
 }
 
@@ -780,5 +789,5 @@ void CharNode::receiveDamage(int damage){
         Engine::main->playAnimation(resume);
 
     }
-    cout << this->name << " health " << this->health << endl;
+//    cout << this->name << " health " << this->health << endl;
 }
