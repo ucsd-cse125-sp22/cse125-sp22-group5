@@ -1,11 +1,12 @@
 #ifndef HUDNode_hpp
 #define HUDNode_hpp
 
-#include <stdio.h>
 #include "KGLEngine/Engine.hpp"
+
 #include "Game/Character/CharNode.hpp"
 #include "Game/UI/BarNode.hpp"
 #include "Game/UI/MagicButton.hpp"
+
 
 class HUDNode {
 protected:

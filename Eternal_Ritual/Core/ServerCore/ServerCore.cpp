@@ -12,7 +12,9 @@
 using namespace std;
 
 
-int gettimeofday(struct timeval *tp, void *tzp);
+#ifdef _WIN64
+int gettimeofday(struct timeval* tp, void* tzp);
+#endif
 
 ServerCore* ServerCore::server_core_ = nullptr;
 
@@ -77,17 +79,19 @@ void ServerCore::receiveData() {
     std::cout << std::endl;
     std::cout << "|-- Stage 1 - Receive data --|" << std::endl;
     
-    unsigned long playerIP;
-    char* pbArr; 
-    int dataLen;
-    server_socket_->receiveData(playerIP, pbArr, dataLen);
-
-    processData(playerIP, pbArr, dataLen);
+    vector<unsigned long> playerIP;
+    vector<int> dataLen;
+    server_socket_->receiveData(playerIP, read_buffer_, dataLen);
+    
+    for (int i = 0; i < playerIP.size(); i++) {
+        processData(playerIP[i], read_buffer_[i], dataLen[i]);
+    }
 }
 
 
 void ServerCore::processData(unsigned long playerIP, char* pbArr, int dataLen) {
     if (event_pbs_.count(playerIP)) {
+    
         event_pbs_[playerIP]->clearData();
         event_pbs_[playerIP]->readData(pbArr, dataLen);
     }
@@ -99,16 +103,21 @@ void ServerCore::updateState() {
     std::cout << "|-- Stage 2 - Updata state --|" << std::endl;
     
     unordered_map<unsigned long, int> tempPlayerHPs;
+    unordered_map<unsigned long, int> tempPlayerMPs;
     for (auto& playerIP : player_ips_) {
         EventPb* event_pb = event_pbs_[playerIP];
         if (start_game_) {
             state_pb_->setPlayerName(playerIP, event_pb->getPlayerName());
+            state_pb_->setPlayerGroup(playerIP, event_pb->getPlayerGroup());
         }
         else {
             state_pb_->setControlNodeEulerAngles(playerIP, event_pb->getControlNodeEulerAngles());
             state_pb_->setMoveDirection(playerIP, event_pb->getMoveDirection());
             state_pb_->setDirState(playerIP, event_pb->getDirState());
+            state_pb_->setCharStatePb(playerIP, event_pb->getCharStatePb());
             state_pb_->setPlayerStyle(playerIP, event_pb->getPlayerStyle());
+            state_pb_->setRoll(playerIP, event_pb->getRoll());
+            state_pb_->setToggleLock(playerIP, event_pb->getToggleLock());
             
             if (event_pb->hasMagicEvents()) {
                 vector<gameDataPb::MagicPb> magicEvents = event_pb->getMagicEvents();
@@ -119,6 +128,7 @@ void ServerCore::updateState() {
             
             for (auto& tempPlayerIP : player_ips_) {
                 tempPlayerHPs[tempPlayerIP] += event_pb->getPlayerHP(tempPlayerIP);
+                tempPlayerMPs[tempPlayerIP] += event_pb->getPlayerMP(tempPlayerIP);
             }
         }
     }
@@ -126,6 +136,9 @@ void ServerCore::updateState() {
     if (!start_game_) {
         for (auto& it : tempPlayerHPs) {
             state_pb_->setPlayerHP(it.first, it.second / PLAYER_CAPACITY);
+        }
+        for (auto& it : tempPlayerMPs) {
+            state_pb_->setPlayerMP(it.first, it.second / PLAYER_CAPACITY);
         }
     }
 }
@@ -151,8 +164,8 @@ void ServerCore::sendData() {
         char* pbArr = state_pb_->sendData();
         int dataLen = state_pb_->data_len();
         
-        std::cout << std::endl;
-        std::cout << "datalen: " << dataLen << std::endl;
+//        std::cout << std::endl;
+//        std::cout << "datalen: " << dataLen << std::endl;
         
         for (auto& playerIP : this->player_ips_) {
             server_socket_->sendData(playerIP, pbArr, dataLen);
@@ -196,6 +209,7 @@ void destructClientCore(int signum) {
 }
 
 
+#ifdef _WIN64
 int gettimeofday(struct timeval *tp, void *tzp)
 {
   time_t clock;
@@ -214,3 +228,4 @@ int gettimeofday(struct timeval *tp, void *tzp)
   tp->tv_usec = wtm.wMilliseconds * 1000;
   return (0);
 }
+#endif

@@ -8,8 +8,6 @@
 #include "Game/Character/HitController.hpp"
 
 
-HitController* HitController::hit_controller_ = nullptr;
-
 void HitController::addMagic(DamageableMagic* damageableMagic) {
     magics_.push_back(damageableMagic);
 }

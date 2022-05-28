@@ -1,5 +1,9 @@
-#include "MagicButton.hpp"
+#include "Game/UI/MagicButton.hpp"
+
 #include <iostream>
+
+#include "Game/UI/Constant.hpp"
+
 
 MagicButton::MagicButton(UINode* parentNode, Texture* magicTex, glm::vec2 size, BaseMagic* magic)
 {

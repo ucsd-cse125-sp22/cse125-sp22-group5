@@ -7,8 +7,16 @@
 #ifndef SERVERSOCKET_HPP
 #define SERVERSOCKET_HPP
 
+#ifdef _WIN64
 #include <winsock2.h>
+#define SOCKET SOCKET
+#elif __APPLE__
+#include <arpa/inet.h>
+#define SOCKET int
+#endif
+
 #include <vector>
+#include <string>
 #include <unordered_map>
 
 #include "Network/NetworkSetting.inc"
@@ -21,7 +29,7 @@ public:
 
     void startListen();
     std::vector<unsigned long> connectAllClients();
-    void receiveData(unsigned long& playerIP, char*& pbArr, int& dataLen);
+    void receiveData(std::vector<unsigned long>& playerIP, char (*readBuffer)[MAX_BUFFER_SIZE], std::vector<int>& dataLen);
     void sendData(unsigned long playerIP, char* pbArr, int dataLen);
     void closeSockets();
     

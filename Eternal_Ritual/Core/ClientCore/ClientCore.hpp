@@ -20,6 +20,7 @@
 #include "Game/Character/HitController.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Magic/BaseMagic.hpp"
+#include "Game/UI/AllUI.inc"
 
 
 class ClientCore {
@@ -44,6 +45,8 @@ public:
     void loadScene();
     void loadCharacter();
     void loadMagic();
+    void loadFont();
+    void loadHUD();
     void loadDamageSystem();
     
     void loadPbPacket();
@@ -82,9 +85,18 @@ private:
     // Map
     MapSystemManager* map_system_manager_;
     
+    // Camera
+    bool main_camera_ = true;
+    
     // Character
     CharNode* character_;
     unsigned long character_ip_;
+    
+    // Ally
+    CharNode* ally_;
+    
+    // enemy
+    std::vector<CharNode*> enemies_;
     
     // Magic
     std::unordered_map<int, Magic::Type> key_to_magic_;
@@ -96,7 +108,14 @@ private:
     std::unordered_map<unsigned long, CharNode*> all_chars_;
     
     // HitController
-    HitController*  hit_controller_;
+    HitController*  friend_hit_controller_;
+    HitController*  enemy_hit_controller_;
+    
+    //HUD
+    HUDNode* HUD_;
+
+    //Font
+    Font* font_;
     
     // Game
     bool start_game_ = true;

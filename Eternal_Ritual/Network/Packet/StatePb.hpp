@@ -32,6 +32,9 @@ public:
     void setPlayerStyle(unsigned long playerIP, int playerStyle);
     int getPlayerStyle(unsigned long playerIP);
     
+    void setPlayerGroup(unsigned long playerIP, int playerGroup);
+    int getPlayerGroup(unsigned long playerIP);
+    
     void setControlNodeEulerAngles(unsigned long playerIP, glm::vec3 controlNodeEulerAngles);
     glm::vec3 getControlNodeEulerAngles(unsigned long playerIP);
     
@@ -41,12 +44,24 @@ public:
     void setDirState(unsigned long playerIP, gameDataPb::DirState dirState);
     gameDataPb::DirState getDirState(unsigned long playerIP);
     
+    void setCharStatePb(unsigned long playerIP, gameDataPb::CharStatePb charStatePb);
+    gameDataPb::CharStatePb getCharStatePb(unsigned long playerIP);
+    
+    void setRoll(unsigned long playerIP, bool roll);
+    bool getRoll(unsigned long playerIP);
+    
+    void setToggleLock(unsigned long playerIP, bool toggleLock);
+    bool getToggleLock(unsigned long playerIP);
+    
     void addMagicEvent(unsigned long playerIP, gameDataPb::MagicPb magicEvent);
     bool hasMagicEvents(unsigned long playerIP);
     std::vector<gameDataPb::MagicPb> getMagicEvents(unsigned long playerIP);
     
     void setPlayerHP(unsigned long playerIP, int playerHP);
     int getPlayerHP(unsigned long playerIP);
+    
+    void setPlayerMP(unsigned long playerIP, int playerMP);
+    int getPlayerMP(unsigned long playerIP);
     
     std::vector<unsigned long> getEnemyIPs(unsigned long playerIP);
     

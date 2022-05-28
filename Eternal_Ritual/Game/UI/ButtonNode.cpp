@@ -5,7 +5,9 @@
 //  Created by Jackie Li on 4/26/22.
 //
 
-#include "ButtonNode.hpp"
+#include "Game/UI/ButtonNode.hpp"
+
+#include "Game/UI/Constant.hpp"
 
 
 ButtonNode::ButtonNode(UINode* parentNode,Font* font, glm::vec2 size){

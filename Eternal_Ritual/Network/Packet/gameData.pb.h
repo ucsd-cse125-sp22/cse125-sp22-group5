@@ -101,14 +101,14 @@ namespace gameDataPb {
 
 enum DirState : int {
   NONE = 0,
-  FRONT = 1,
-  BACK = 2,
-  LEFT = 3,
-  RIGHT = 4,
-  FRONTLEFT = 5,
-  FRONTRIGHT = 6,
-  BACKLEFT = 7,
-  BACKRIGHT = 8,
+  FRONT = 4,
+  BACK = 8,
+  LEFT = 16,
+  RIGHT = 32,
+  FRONTLEFT = 64,
+  FRONTRIGHT = 128,
+  BACKLEFT = 256,
+  BACKRIGHT = 512,
   DirState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   DirState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
@@ -132,20 +132,20 @@ inline bool DirState_Parse(
     DirState_descriptor(), name, value);
 }
 enum MagicPb : int {
-  STONEBLAST = 0,
-  FIREBALL = 1,
-  LIGHTNINGSPEAR = 2,
-  GROUNDSMASH = 3,
-  THUNDER = 4,
-  FLAME = 5,
-  THOUSANDBLADE = 6,
-  DRAGON = 7,
+  FIREBALL = 0,
+  STONEBLAST = 1,
+  THUNDER = 2,
+  DRAGON = 3,
+  LIGHTNINGSPEAR = 4,
+  GROUNDSMASH = 5,
+  FLAME = 6,
+  THOUSANDBLADE = 7,
   MagicPb_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   MagicPb_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool MagicPb_IsValid(int value);
-constexpr MagicPb MagicPb_MIN = STONEBLAST;
-constexpr MagicPb MagicPb_MAX = DRAGON;
+constexpr MagicPb MagicPb_MIN = FIREBALL;
+constexpr MagicPb MagicPb_MAX = THOUSANDBLADE;
 constexpr int MagicPb_ARRAYSIZE = MagicPb_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MagicPb_descriptor();
@@ -161,6 +161,35 @@ inline bool MagicPb_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MagicPb* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MagicPb>(
     MagicPb_descriptor(), name, value);
+}
+enum CharStatePb : int {
+  IDLE = 0,
+  MOVING = 1,
+  ROLLING = 2,
+  COMBATING = 3,
+  DAMAGED = 4,
+  DEAD = 5,
+  CharStatePb_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  CharStatePb_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool CharStatePb_IsValid(int value);
+constexpr CharStatePb CharStatePb_MIN = IDLE;
+constexpr CharStatePb CharStatePb_MAX = DEAD;
+constexpr int CharStatePb_ARRAYSIZE = CharStatePb_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CharStatePb_descriptor();
+template<typename T>
+inline const std::string& CharStatePb_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, CharStatePb>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function CharStatePb_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    CharStatePb_descriptor(), enum_t_value);
+}
+inline bool CharStatePb_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, CharStatePb* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<CharStatePb>(
+    CharStatePb_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -612,6 +641,7 @@ class PlayerAttr final :
 
   enum : int {
     kPlayerHPFieldNumber = 1,
+    kPlayerMPFieldNumber = 2,
   };
   // uint32 playerHP = 1;
   void clear_playerhp();
@@ -622,6 +652,15 @@ class PlayerAttr final :
   void _internal_set_playerhp(uint32_t value);
   public:
 
+  // uint32 playerMP = 2;
+  void clear_playermp();
+  uint32_t playermp() const;
+  void set_playermp(uint32_t value);
+  private:
+  uint32_t _internal_playermp() const;
+  void _internal_set_playermp(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:gameDataPb.PlayerAttr)
  private:
   class _Internal;
@@ -630,6 +669,7 @@ class PlayerAttr final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   uint32_t playerhp_;
+  uint32_t playermp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
 };
@@ -781,17 +821,21 @@ class Event final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMagicEventsFieldNumber = 8,
-    kPlayerAttrsFieldNumber = 9,
+    kMagicEventsFieldNumber = 12,
+    kPlayerAttrsFieldNumber = 13,
     kPlayerNameFieldNumber = 3,
-    kControlNodeEulerAnglesFieldNumber = 5,
-    kMoveDirectionFieldNumber = 6,
+    kControlNodeEulerAnglesFieldNumber = 6,
+    kMoveDirectionFieldNumber = 7,
+    kPlayerStyleFieldNumber = 4,
+    kPlayerGroupFieldNumber = 5,
     kStartFieldNumber = 1,
     kRestartFieldNumber = 2,
-    kPlayerStyleFieldNumber = 4,
-    kDirStateFieldNumber = 7,
+    kRollFieldNumber = 10,
+    kToggleLockFieldNumber = 11,
+    kDirStateFieldNumber = 8,
+    kCharStatePbFieldNumber = 9,
   };
-  // repeated .gameDataPb.MagicPb magicEvents = 8;
+  // repeated .gameDataPb.MagicPb magicEvents = 12;
   int magicevents_size() const;
   private:
   int _internal_magicevents_size() const;
@@ -808,7 +852,7 @@ class Event final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& magicevents() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_magicevents();
 
-  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+  // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
   int playerattrs_size() const;
   private:
   int _internal_playerattrs_size() const;
@@ -839,7 +883,7 @@ class Event final :
   std::string* _internal_mutable_playername();
   public:
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 5;
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 6;
   bool has_controlnodeeulerangles() const;
   private:
   bool _internal_has_controlnodeeulerangles() const;
@@ -857,7 +901,7 @@ class Event final :
       ::gameDataPb::Vec3* controlnodeeulerangles);
   ::gameDataPb::Vec3* unsafe_arena_release_controlnodeeulerangles();
 
-  // .gameDataPb.Vec3 moveDirection = 6;
+  // .gameDataPb.Vec3 moveDirection = 7;
   bool has_movedirection() const;
   private:
   bool _internal_has_movedirection() const;
@@ -874,6 +918,24 @@ class Event final :
   void unsafe_arena_set_allocated_movedirection(
       ::gameDataPb::Vec3* movedirection);
   ::gameDataPb::Vec3* unsafe_arena_release_movedirection();
+
+  // uint32 playerStyle = 4;
+  void clear_playerstyle();
+  uint32_t playerstyle() const;
+  void set_playerstyle(uint32_t value);
+  private:
+  uint32_t _internal_playerstyle() const;
+  void _internal_set_playerstyle(uint32_t value);
+  public:
+
+  // uint32 playerGroup = 5;
+  void clear_playergroup();
+  uint32_t playergroup() const;
+  void set_playergroup(uint32_t value);
+  private:
+  uint32_t _internal_playergroup() const;
+  void _internal_set_playergroup(uint32_t value);
+  public:
 
   // bool start = 1;
   void clear_start();
@@ -893,22 +955,40 @@ class Event final :
   void _internal_set_restart(bool value);
   public:
 
-  // uint32 playerStyle = 4;
-  void clear_playerstyle();
-  uint32_t playerstyle() const;
-  void set_playerstyle(uint32_t value);
+  // bool roll = 10;
+  void clear_roll();
+  bool roll() const;
+  void set_roll(bool value);
   private:
-  uint32_t _internal_playerstyle() const;
-  void _internal_set_playerstyle(uint32_t value);
+  bool _internal_roll() const;
+  void _internal_set_roll(bool value);
   public:
 
-  // .gameDataPb.DirState dirState = 7;
+  // bool toggleLock = 11;
+  void clear_togglelock();
+  bool togglelock() const;
+  void set_togglelock(bool value);
+  private:
+  bool _internal_togglelock() const;
+  void _internal_set_togglelock(bool value);
+  public:
+
+  // .gameDataPb.DirState dirState = 8;
   void clear_dirstate();
   ::gameDataPb::DirState dirstate() const;
   void set_dirstate(::gameDataPb::DirState value);
   private:
   ::gameDataPb::DirState _internal_dirstate() const;
   void _internal_set_dirstate(::gameDataPb::DirState value);
+  public:
+
+  // .gameDataPb.CharStatePb charStatePb = 9;
+  void clear_charstatepb();
+  ::gameDataPb::CharStatePb charstatepb() const;
+  void set_charstatepb(::gameDataPb::CharStatePb value);
+  private:
+  ::gameDataPb::CharStatePb _internal_charstatepb() const;
+  void _internal_set_charstatepb(::gameDataPb::CharStatePb value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.Event)
@@ -928,10 +1008,14 @@ class Event final :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr playername_;
   ::gameDataPb::Vec3* controlnodeeulerangles_;
   ::gameDataPb::Vec3* movedirection_;
+  uint32_t playerstyle_;
+  uint32_t playergroup_;
   bool start_;
   bool restart_;
-  uint32_t playerstyle_;
+  bool roll_;
+  bool togglelock_;
   int dirstate_;
+  int charstatepb_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
 };
@@ -1059,14 +1143,18 @@ class State_PlayerInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMagicEventsFieldNumber = 6,
+    kMagicEventsFieldNumber = 10,
     kPlayerNameFieldNumber = 1,
-    kControlNodeEulerAnglesFieldNumber = 3,
-    kMoveDirectionFieldNumber = 4,
+    kControlNodeEulerAnglesFieldNumber = 4,
+    kMoveDirectionFieldNumber = 5,
     kPlayerStyleFieldNumber = 2,
-    kDirStateFieldNumber = 5,
+    kPlayerGroupFieldNumber = 3,
+    kDirStateFieldNumber = 6,
+    kCharStatePbFieldNumber = 7,
+    kRollFieldNumber = 8,
+    kToggleLockFieldNumber = 9,
   };
-  // repeated .gameDataPb.MagicPb magicEvents = 6;
+  // repeated .gameDataPb.MagicPb magicEvents = 10;
   int magicevents_size() const;
   private:
   int _internal_magicevents_size() const;
@@ -1097,7 +1185,7 @@ class State_PlayerInfo final :
   std::string* _internal_mutable_playername();
   public:
 
-  // .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+  // .gameDataPb.Vec3 controlNodeEulerAngles = 4;
   bool has_controlnodeeulerangles() const;
   private:
   bool _internal_has_controlnodeeulerangles() const;
@@ -1115,7 +1203,7 @@ class State_PlayerInfo final :
       ::gameDataPb::Vec3* controlnodeeulerangles);
   ::gameDataPb::Vec3* unsafe_arena_release_controlnodeeulerangles();
 
-  // .gameDataPb.Vec3 moveDirection = 4;
+  // .gameDataPb.Vec3 moveDirection = 5;
   bool has_movedirection() const;
   private:
   bool _internal_has_movedirection() const;
@@ -1142,13 +1230,49 @@ class State_PlayerInfo final :
   void _internal_set_playerstyle(uint32_t value);
   public:
 
-  // .gameDataPb.DirState dirState = 5;
+  // uint32 playerGroup = 3;
+  void clear_playergroup();
+  uint32_t playergroup() const;
+  void set_playergroup(uint32_t value);
+  private:
+  uint32_t _internal_playergroup() const;
+  void _internal_set_playergroup(uint32_t value);
+  public:
+
+  // .gameDataPb.DirState dirState = 6;
   void clear_dirstate();
   ::gameDataPb::DirState dirstate() const;
   void set_dirstate(::gameDataPb::DirState value);
   private:
   ::gameDataPb::DirState _internal_dirstate() const;
   void _internal_set_dirstate(::gameDataPb::DirState value);
+  public:
+
+  // .gameDataPb.CharStatePb charStatePb = 7;
+  void clear_charstatepb();
+  ::gameDataPb::CharStatePb charstatepb() const;
+  void set_charstatepb(::gameDataPb::CharStatePb value);
+  private:
+  ::gameDataPb::CharStatePb _internal_charstatepb() const;
+  void _internal_set_charstatepb(::gameDataPb::CharStatePb value);
+  public:
+
+  // bool roll = 8;
+  void clear_roll();
+  bool roll() const;
+  void set_roll(bool value);
+  private:
+  bool _internal_roll() const;
+  void _internal_set_roll(bool value);
+  public:
+
+  // bool toggleLock = 9;
+  void clear_togglelock();
+  bool togglelock() const;
+  void set_togglelock(bool value);
+  private:
+  bool _internal_togglelock() const;
+  void _internal_set_togglelock(bool value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.State.PlayerInfo)
@@ -1164,7 +1288,11 @@ class State_PlayerInfo final :
   ::gameDataPb::Vec3* controlnodeeulerangles_;
   ::gameDataPb::Vec3* movedirection_;
   uint32_t playerstyle_;
+  uint32_t playergroup_;
   int dirstate_;
+  int charstatepb_;
+  bool roll_;
+  bool togglelock_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gameData_2eproto;
 };
@@ -1547,6 +1675,26 @@ inline void PlayerAttr::set_playerhp(uint32_t value) {
   // @@protoc_insertion_point(field_set:gameDataPb.PlayerAttr.playerHP)
 }
 
+// uint32 playerMP = 2;
+inline void PlayerAttr::clear_playermp() {
+  playermp_ = 0u;
+}
+inline uint32_t PlayerAttr::_internal_playermp() const {
+  return playermp_;
+}
+inline uint32_t PlayerAttr::playermp() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.PlayerAttr.playerMP)
+  return _internal_playermp();
+}
+inline void PlayerAttr::_internal_set_playermp(uint32_t value) {
+  
+  playermp_ = value;
+}
+inline void PlayerAttr::set_playermp(uint32_t value) {
+  _internal_set_playermp(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.PlayerAttr.playerMP)
+}
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1664,7 +1812,27 @@ inline void Event::set_playerstyle(uint32_t value) {
   // @@protoc_insertion_point(field_set:gameDataPb.Event.playerStyle)
 }
 
-// .gameDataPb.Vec3 controlNodeEulerAngles = 5;
+// uint32 playerGroup = 5;
+inline void Event::clear_playergroup() {
+  playergroup_ = 0u;
+}
+inline uint32_t Event::_internal_playergroup() const {
+  return playergroup_;
+}
+inline uint32_t Event::playergroup() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.playerGroup)
+  return _internal_playergroup();
+}
+inline void Event::_internal_set_playergroup(uint32_t value) {
+  
+  playergroup_ = value;
+}
+inline void Event::set_playergroup(uint32_t value) {
+  _internal_set_playergroup(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.playerGroup)
+}
+
+// .gameDataPb.Vec3 controlNodeEulerAngles = 6;
 inline bool Event::_internal_has_controlnodeeulerangles() const {
   return this != internal_default_instance() && controlnodeeulerangles_ != nullptr;
 }
@@ -1754,7 +1922,7 @@ inline void Event::set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* cont
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.controlNodeEulerAngles)
 }
 
-// .gameDataPb.Vec3 moveDirection = 6;
+// .gameDataPb.Vec3 moveDirection = 7;
 inline bool Event::_internal_has_movedirection() const {
   return this != internal_default_instance() && movedirection_ != nullptr;
 }
@@ -1844,7 +2012,7 @@ inline void Event::set_allocated_movedirection(::gameDataPb::Vec3* movedirection
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.Event.moveDirection)
 }
 
-// .gameDataPb.DirState dirState = 7;
+// .gameDataPb.DirState dirState = 8;
 inline void Event::clear_dirstate() {
   dirstate_ = 0;
 }
@@ -1864,7 +2032,67 @@ inline void Event::set_dirstate(::gameDataPb::DirState value) {
   // @@protoc_insertion_point(field_set:gameDataPb.Event.dirState)
 }
 
-// repeated .gameDataPb.MagicPb magicEvents = 8;
+// .gameDataPb.CharStatePb charStatePb = 9;
+inline void Event::clear_charstatepb() {
+  charstatepb_ = 0;
+}
+inline ::gameDataPb::CharStatePb Event::_internal_charstatepb() const {
+  return static_cast< ::gameDataPb::CharStatePb >(charstatepb_);
+}
+inline ::gameDataPb::CharStatePb Event::charstatepb() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.charStatePb)
+  return _internal_charstatepb();
+}
+inline void Event::_internal_set_charstatepb(::gameDataPb::CharStatePb value) {
+  
+  charstatepb_ = value;
+}
+inline void Event::set_charstatepb(::gameDataPb::CharStatePb value) {
+  _internal_set_charstatepb(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.charStatePb)
+}
+
+// bool roll = 10;
+inline void Event::clear_roll() {
+  roll_ = false;
+}
+inline bool Event::_internal_roll() const {
+  return roll_;
+}
+inline bool Event::roll() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.roll)
+  return _internal_roll();
+}
+inline void Event::_internal_set_roll(bool value) {
+  
+  roll_ = value;
+}
+inline void Event::set_roll(bool value) {
+  _internal_set_roll(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.roll)
+}
+
+// bool toggleLock = 11;
+inline void Event::clear_togglelock() {
+  togglelock_ = false;
+}
+inline bool Event::_internal_togglelock() const {
+  return togglelock_;
+}
+inline bool Event::togglelock() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.Event.toggleLock)
+  return _internal_togglelock();
+}
+inline void Event::_internal_set_togglelock(bool value) {
+  
+  togglelock_ = value;
+}
+inline void Event::set_togglelock(bool value) {
+  _internal_set_togglelock(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.Event.toggleLock)
+}
+
+// repeated .gameDataPb.MagicPb magicEvents = 12;
 inline int Event::_internal_magicevents_size() const {
   return magicevents_.size();
 }
@@ -1907,7 +2135,7 @@ Event::mutable_magicevents() {
   return _internal_mutable_magicevents();
 }
 
-// map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 9;
+// map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
 inline int Event::_internal_playerattrs_size() const {
   return playerattrs_.size();
 }
@@ -2011,7 +2239,27 @@ inline void State_PlayerInfo::set_playerstyle(uint32_t value) {
   // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.playerStyle)
 }
 
-// .gameDataPb.Vec3 controlNodeEulerAngles = 3;
+// uint32 playerGroup = 3;
+inline void State_PlayerInfo::clear_playergroup() {
+  playergroup_ = 0u;
+}
+inline uint32_t State_PlayerInfo::_internal_playergroup() const {
+  return playergroup_;
+}
+inline uint32_t State_PlayerInfo::playergroup() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.playerGroup)
+  return _internal_playergroup();
+}
+inline void State_PlayerInfo::_internal_set_playergroup(uint32_t value) {
+  
+  playergroup_ = value;
+}
+inline void State_PlayerInfo::set_playergroup(uint32_t value) {
+  _internal_set_playergroup(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.playerGroup)
+}
+
+// .gameDataPb.Vec3 controlNodeEulerAngles = 4;
 inline bool State_PlayerInfo::_internal_has_controlnodeeulerangles() const {
   return this != internal_default_instance() && controlnodeeulerangles_ != nullptr;
 }
@@ -2101,7 +2349,7 @@ inline void State_PlayerInfo::set_allocated_controlnodeeulerangles(::gameDataPb:
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.controlNodeEulerAngles)
 }
 
-// .gameDataPb.Vec3 moveDirection = 4;
+// .gameDataPb.Vec3 moveDirection = 5;
 inline bool State_PlayerInfo::_internal_has_movedirection() const {
   return this != internal_default_instance() && movedirection_ != nullptr;
 }
@@ -2191,7 +2439,7 @@ inline void State_PlayerInfo::set_allocated_movedirection(::gameDataPb::Vec3* mo
   // @@protoc_insertion_point(field_set_allocated:gameDataPb.State.PlayerInfo.moveDirection)
 }
 
-// .gameDataPb.DirState dirState = 5;
+// .gameDataPb.DirState dirState = 6;
 inline void State_PlayerInfo::clear_dirstate() {
   dirstate_ = 0;
 }
@@ -2211,7 +2459,67 @@ inline void State_PlayerInfo::set_dirstate(::gameDataPb::DirState value) {
   // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.dirState)
 }
 
-// repeated .gameDataPb.MagicPb magicEvents = 6;
+// .gameDataPb.CharStatePb charStatePb = 7;
+inline void State_PlayerInfo::clear_charstatepb() {
+  charstatepb_ = 0;
+}
+inline ::gameDataPb::CharStatePb State_PlayerInfo::_internal_charstatepb() const {
+  return static_cast< ::gameDataPb::CharStatePb >(charstatepb_);
+}
+inline ::gameDataPb::CharStatePb State_PlayerInfo::charstatepb() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.charStatePb)
+  return _internal_charstatepb();
+}
+inline void State_PlayerInfo::_internal_set_charstatepb(::gameDataPb::CharStatePb value) {
+  
+  charstatepb_ = value;
+}
+inline void State_PlayerInfo::set_charstatepb(::gameDataPb::CharStatePb value) {
+  _internal_set_charstatepb(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.charStatePb)
+}
+
+// bool roll = 8;
+inline void State_PlayerInfo::clear_roll() {
+  roll_ = false;
+}
+inline bool State_PlayerInfo::_internal_roll() const {
+  return roll_;
+}
+inline bool State_PlayerInfo::roll() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.roll)
+  return _internal_roll();
+}
+inline void State_PlayerInfo::_internal_set_roll(bool value) {
+  
+  roll_ = value;
+}
+inline void State_PlayerInfo::set_roll(bool value) {
+  _internal_set_roll(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.roll)
+}
+
+// bool toggleLock = 9;
+inline void State_PlayerInfo::clear_togglelock() {
+  togglelock_ = false;
+}
+inline bool State_PlayerInfo::_internal_togglelock() const {
+  return togglelock_;
+}
+inline bool State_PlayerInfo::togglelock() const {
+  // @@protoc_insertion_point(field_get:gameDataPb.State.PlayerInfo.toggleLock)
+  return _internal_togglelock();
+}
+inline void State_PlayerInfo::_internal_set_togglelock(bool value) {
+  
+  togglelock_ = value;
+}
+inline void State_PlayerInfo::set_togglelock(bool value) {
+  _internal_set_togglelock(value);
+  // @@protoc_insertion_point(field_set:gameDataPb.State.PlayerInfo.toggleLock)
+}
+
+// repeated .gameDataPb.MagicPb magicEvents = 10;
 inline int State_PlayerInfo::_internal_magicevents_size() const {
   return magicevents_.size();
 }
@@ -2375,6 +2683,11 @@ template <> struct is_proto_enum< ::gameDataPb::MagicPb> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::gameDataPb::MagicPb>() {
   return ::gameDataPb::MagicPb_descriptor();
+}
+template <> struct is_proto_enum< ::gameDataPb::CharStatePb> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gameDataPb::CharStatePb>() {
+  return ::gameDataPb::CharStatePb_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

@@ -1,8 +1,10 @@
 #ifndef BarNode_hpp
 #define BarNode_hpp
 
-#include <stdio.h>
+#include <glm/glm.hpp>
+
 #include "KGLEngine/Engine.hpp"
+
 
 class BarNode {
 protected:

@@ -1,10 +1,12 @@
 #ifndef MagicButton_hpp
 #define MagicButton_hpp
 
-#include <stdio.h>
+#include <glm/glm.hpp>
+
 #include "KGLEngine/Engine.hpp"
+
 #include "Game/Magic/BaseMagic.hpp"
-#include "Game/UI/Constant.hpp"
+
 
 class MagicButton
 {

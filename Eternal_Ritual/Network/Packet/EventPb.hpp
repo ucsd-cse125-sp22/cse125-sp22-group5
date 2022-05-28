@@ -34,6 +34,9 @@ public:
     void setPlayerStyle(int playerStyle);
     int getPlayerStyle();
     
+    void setPlayerGroup(int playerGroup);
+    int getPlayerGroup();
+    
     void setControlNodeEulerAngles(glm::vec3 controlNodeEulerAngles);
     glm::vec3 getControlNodeEulerAngles();
     
@@ -43,12 +46,24 @@ public:
     void setDirState(gameDataPb::DirState dirState);
     gameDataPb::DirState getDirState();
     
+    void setCharStatePb(gameDataPb::CharStatePb charStatePb);
+    gameDataPb::CharStatePb getCharStatePb();
+    
+    void setRoll(bool roll);
+    bool getRoll();
+    
+    void setToggleLock(bool toggleLock);
+    bool getToggleLock();
+    
     void addMagicEvent(gameDataPb::MagicPb magicEvent);
     bool hasMagicEvents();
     std::vector<gameDataPb::MagicPb> getMagicEvents();
     
     void setPlayerHP(unsigned long playerIP, int playerHP);
     int getPlayerHP(unsigned long playerIP);
+    
+    void setPlayerMP(unsigned long playerIP, int playerMP);
+    int getPlayerMP(unsigned long playerIP);
     
 private:
     gameDataPb::Event* event_data_;

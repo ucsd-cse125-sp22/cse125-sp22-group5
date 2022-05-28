@@ -44,7 +44,8 @@ set(SFML_LIB_BIN_SYSTEM ${THIRD_PARTY_LIB_DIR}/SFML/bin/sfml-system-2.dll)
 set(SFML_LIB_BIN_OPENAL ${THIRD_PARTY_LIB_DIR}/SFML/bin/openal32.dll)
 
 set(PROTOBUF_LIB_INCLUDE ${THIRD_PARTY_LIB_DIR}/protobuf/include)
-set(PROTOBUF_LIB_LIBS ${THIRD_PARTY_LIB_DIR}/protobuf/libs/libprotobufd.lib)
+set(PROTOBUF_LIB_LIBS_RELEASE ${THIRD_PARTY_LIB_DIR}/protobuf/libs/libprotobuf.lib)
+set(PROTOBUF_LIB_LIBS_DEBUG ${THIRD_PARTY_LIB_DIR}/protobuf/libs/libprotobufd.lib)
 
 
 option(USE_SOLUTION_FOLDERS "USE_SOLUTION_FOLDERS" ON)

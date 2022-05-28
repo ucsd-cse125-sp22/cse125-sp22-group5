@@ -19,6 +19,7 @@ public:
     bool hitTest(const glm::vec3& start, const glm::vec3& end) override;
     glm::vec3 min_xyz() const;
     glm::vec3 max_xyz() const;
+    glm::vec3 position() const;
     
 private:
     void updateTransMtx();

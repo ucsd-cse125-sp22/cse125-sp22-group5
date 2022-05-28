@@ -7,8 +7,13 @@
 #ifndef SERVERCORE_HPP
 #define SERVERCORE_HPP
 
+#ifdef _WIN64
 #include <winsock2.h>
 #include <windows.h>
+#elif __APPLE__
+#include <sys/time.h>
+#endif
+
 
 #include <unordered_map>
 #include <vector>
@@ -54,6 +59,9 @@ private:
     
     // Socket
     ServerSocket* server_socket_;
+    
+    // ReadBuffer
+    char read_buffer_[PLAYER_CAPACITY][MAX_BUFFER_SIZE];
     
     // Pb
     std::vector<unsigned long> player_ips_;

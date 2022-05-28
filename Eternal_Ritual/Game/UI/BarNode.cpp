@@ -1,4 +1,7 @@
-#include "BarNode.hpp"
+#include "Game/UI/BarNode.hpp"
+
+#include <string>
+
 
 BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* fadeTex, glm::vec2 barSize, glm::vec2 fadeSize, int id,bool left)
 {

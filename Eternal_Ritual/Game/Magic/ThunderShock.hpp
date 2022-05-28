@@ -22,6 +22,7 @@ private:
     static Particle3DNode* metaLightning;
     static Particle3DNode* metaBase;
     static LightNode* metaLight;
+    static AudioBuffer* electricImpact;
 public:
     bool threwOut;
     bool canDamage;

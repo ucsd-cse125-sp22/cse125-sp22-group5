@@ -20,6 +20,7 @@ bool ThunderShock::loaded = false;
 LightNode* ThunderShock::metaLight = NULL;
 Particle3DNode* ThunderShock::metaBase = NULL;
 Particle3DNode* ThunderShock::metaLightning = NULL;
+AudioBuffer* ThunderShock::electricImpact = NULL;
 
 void ThunderShock::load() {
     metaBase = new Particle3DNode(50, 0.8f, 0.3f);
@@ -48,12 +49,14 @@ void ThunderShock::load() {
     metaLightning->useLocalSpace = true;
     metaLightning->setSpriteSheetAnimation(5, 5, 20, 28, 4);
     metaLightning->isDisabled = true;
+    electricImpact = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Impact_02.wav");
 }
 
 ThunderShock::ThunderShock() {
     if (!loaded) load();
     start = false;
     canDamage = false;
+    this->loadAudioBuffer("electric impact", electricImpact);
     this->position = vec3(0);
     this->eulerAngles = vec3(0);
     this->actionName = "cast magic 1";
@@ -101,6 +104,7 @@ void ThunderShock::play(CharNode* character, int seed){
         Animation* shock = new Animation("shock " + to_string(reinterpret_cast<long>(this)), 0.5);
         shock->setCompletionHandler([&] {
             this->canDamage = true;
+            this->playAudio("electric impact");
             for (int k = 0; k < this->lightnings.size(); k++) {
                 this->lightnings[k]->updateTransform();
                 this->lightnings[k]->reset();

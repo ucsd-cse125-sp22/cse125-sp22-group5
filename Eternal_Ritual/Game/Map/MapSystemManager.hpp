@@ -13,7 +13,8 @@
 
 #include "Game/Map/MapBoxObject.hpp"
 
-#define NUM_GRIDS 9
+#define NUM_WIDTH_GRIDS 30
+#define NUM_LENGTH_GRIDS 30
 
 
 struct HitInfo {
@@ -26,16 +27,16 @@ struct HitInfo {
 class MapSystemManager final {
 public:
     static MapSystemManager* Instance() {
-        if (mapSystemManager == nullptr) {
-            mapSystemManager = new MapSystemManager();
+        if (map_system_manager_ == nullptr) {
+            map_system_manager_ = new MapSystemManager();
         }
-        return mapSystemManager;
+        return map_system_manager_;
     }
 
     static void Destructor() {
-        if (mapSystemManager != nullptr) {
-            delete mapSystemManager;
-            mapSystemManager = nullptr;
+        if (map_system_manager_ != nullptr) {
+            delete map_system_manager_;
+            map_system_manager_ = nullptr;
         }
     }
     
@@ -46,9 +47,9 @@ public:
     
 private:
     // Singleton pattern
-    static MapSystemManager* mapSystemManager;
+    static MapSystemManager* map_system_manager_;
     MapSystemManager();
-    ~MapSystemManager(){};
+    ~MapSystemManager() {}
     
     std::vector<MapBoxObject*> boxes_;
     
@@ -57,7 +58,8 @@ private:
 
     float per_grid_width_;
     float per_grid_length_;
-    std::vector<MapBoxObject*> grids_[NUM_GRIDS];
+    int num_grids_ = NUM_WIDTH_GRIDS * NUM_LENGTH_GRIDS;
+    std::vector<MapBoxObject*> grids_[NUM_WIDTH_GRIDS * NUM_LENGTH_GRIDS];
 };
 
 #endif /* MapSystemManager_hpp */

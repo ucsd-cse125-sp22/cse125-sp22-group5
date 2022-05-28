@@ -11,25 +11,34 @@ option optimize_for = SPEED;
 
 enum DirState {
     NONE = 0;
-    FRONT = 1;
-    BACK = 2;
-    LEFT = 3;
-    RIGHT = 4;
-    FRONTLEFT = 5;
-    FRONTRIGHT = 6;
-    BACKLEFT = 7;
-    BACKRIGHT = 8;
+    FRONT = 4;
+    BACK = 8;
+    LEFT = 16;
+    RIGHT = 32;
+    FRONTLEFT = 64;
+    FRONTRIGHT = 128;
+    BACKLEFT = 256;
+    BACKRIGHT = 512;
 }
 
 enum MagicPb {
-    STONEBLAST = 0;
-    FIREBALL = 1;
-    LIGHTNINGSPEAR = 2;
-    GROUNDSMASH = 3;
-    THUNDER = 4;
-    FLAME = 5;
-    THOUSANDBLADE = 6;
-    DRAGON = 7;
+    FIREBALL = 0;
+    STONEBLAST = 1;
+    THUNDER = 2;
+    DRAGON = 3;
+    LIGHTNINGSPEAR = 4;
+    GROUNDSMASH = 5;
+    FLAME = 6;
+    THOUSANDBLADE = 7;
+}
+
+enum CharStatePb {
+    IDLE = 0;
+    MOVING = 1;
+    ROLLING = 2;
+    COMBATING = 3;
+    DAMAGED = 4;
+    DEAD = 5;
 }
 
 message Vec3 {
@@ -45,6 +54,7 @@ message Vec2 {
 
 message PlayerAttr {
     uint32 playerHP = 1;
+    uint32 playerMP = 2;
 }
 
 message Event {
@@ -53,14 +63,19 @@ message Event {
     
     string playerName = 3;
     uint32 playerStyle = 4;
+    uint32 playerGroup = 5;
         
-    Vec3 controlNodeEulerAngles = 5;
-    Vec3 moveDirection = 6;
-    DirState dirState = 7;
+    Vec3 controlNodeEulerAngles = 6;
+    Vec3 moveDirection = 7;
+    DirState dirState = 8;
+    CharStatePb charStatePb = 9;
     
-    repeated MagicPb magicEvents = 8;
+    bool roll = 10;
+    bool toggleLock = 11;
     
-    map <uint64, PlayerAttr> PlayerAttrs = 9;
+    repeated MagicPb magicEvents = 12;
+    
+    map <uint64, PlayerAttr> PlayerAttrs = 13;
 }
 
 
@@ -68,12 +83,17 @@ message State {
     message PlayerInfo {
         string playerName = 1;
         uint32 playerStyle = 2;
+        uint32 playerGroup = 3;
         
-        Vec3 controlNodeEulerAngles = 3;
-        Vec3 moveDirection = 4;
-        DirState dirState = 5;
+        Vec3 controlNodeEulerAngles = 4;
+        Vec3 moveDirection = 5;
+        DirState dirState = 6;
+        CharStatePb charStatePb = 7;
         
-        repeated MagicPb magicEvents = 6;
+        bool roll = 8;
+        bool toggleLock = 9;
+        
+        repeated MagicPb magicEvents = 10;
     }
     
     uint64 playerIP = 1;
@@ -82,4 +102,4 @@ message State {
 }
 
 
-//protoc -I= --cpp_out= gameData.proto
+//protoc -I=./ --cpp_out=./ gameData.proto

@@ -11,6 +11,12 @@
 #include "Game/Map/ImportMapHelper.hpp"
 #include "Game/Magic/AllMagic.inc"
 
+#ifdef _WIN64
+#define ROOT_PATH "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5"
+#elif __APPLE__
+#define ROOT_PATH "."
+#endif
+
 using namespace glm;
 using namespace std;
 
@@ -23,7 +29,7 @@ OfflineCore::OfflineCore() {
 
 OfflineCore::~OfflineCore() {
     map_system_manager_->Destructor();
-    hit_controller_->Destructor();
+    delete hit_controller_;
     delete engine_;
 }
 
@@ -35,7 +41,7 @@ void OfflineCore::initEngine(int* p, int* l) {
     pro = p;
     loadState = l;
     loadingProgress = 0;
-    
+
     engine_ = new Engine("KGLEngine", 0.7f, 0, NULL);
     engine_->workingDirectory = "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5";
     engine_->lockCursor();
@@ -98,12 +104,13 @@ void OfflineCore::updateLoad()
     logo_->updateLoad(loadingProgress);
 }
 
+
 void OfflineCore::loadSky() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
     
     this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
-                                "/Resources/Game/Skybox/Night Moon Burst_Cam_4_Up+Y.png", "/Resources/Game/Skybox/NMBo.png",
+                                "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
                                 "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                 2.0f);
     *pro = 2;
@@ -242,11 +249,51 @@ void OfflineCore::loadMagic() {
 }
 
 
+void OfflineCore::loadAlly()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load Ally --|" << std::endl;
+
+    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
+    ally_->name = "Ally";
+    ally_->setEularAngle(vec3(0, 90.0f, 0));
+
+    ally_->stopAndPlay("idle", 0.0f, 0.0f);
+    engine_->addNode(ally_);
+    UINode* baseNode = new UINode();
+    baseNode->renderingOrder = 1000.0f;
+    engine_->addNode(baseNode);
+    ally_->setUINode(baseNode);
+    ally_->setName("Ally");
+}
+
+
+void OfflineCore::loadFont()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 9 - Load Font --|" << std::endl;
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+void OfflineCore::loadHUD()
+{
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 10 - Load HUD --|" << std::endl;
+    UINode* base = new UINode();
+    base->renderingOrder = 10000.0f;
+    engine_->addNode(base);
+    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+}
+
+
+
+
 void OfflineCore::loadDamageSystem() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 8 - Load Damage System --|" << std::endl;
+    std::cout << "|-- Loading Stage 11 - Load Damage System --|" << std::endl;
     
-    hit_controller_ = HitController::Instance();
+    hit_controller_ = new HitController();
     
     for (auto& magic : all_magics_) {
         DamageableMagic* damageableMagic = dynamic_cast<DamageableMagic*>(magic);

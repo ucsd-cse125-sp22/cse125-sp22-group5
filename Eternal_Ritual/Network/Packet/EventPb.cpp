@@ -26,10 +26,12 @@ void EventPb::readData(char* pbArr, int dataLen) {
 char* EventPb::sendData() {
     data_len_ = static_cast<int>(event_data_->ByteSizeLong());
 
-//    std::cout << "DataLen (in eventPb): " << data_len_ << std::endl;
+    std::cout << "DataLen (in eventPb): " << data_len_ << std::endl;
     std::cout << std::endl << event_data_->DebugString() << std::endl;
     
     event_data_->SerializeToArray(pb_arr_, MAX_PB_BUFFER_SIZE);
+    
+    event_data_->ParseFromArray(pb_arr_, data_len_);
 
     return pb_arr_;
 }
@@ -65,12 +67,22 @@ string EventPb::getPlayerName() {
     return event_data_->playername();
 }
 
+
 void EventPb::setPlayerStyle(int playerStyle) {
     event_data_->set_playerstyle(playerStyle);
 }
 
 int EventPb::getPlayerStyle() {
     return event_data_->playerstyle();
+}
+
+
+void EventPb::setPlayerGroup(int playerGroup) {
+    event_data_->set_playergroup(playerGroup);
+}
+
+int EventPb::getPlayerGroup() {
+    return event_data_->playergroup();
 }
 
 
@@ -113,6 +125,33 @@ DirState EventPb::getDirState() {
 }
 
 
+void EventPb::setCharStatePb(gameDataPb::CharStatePb charStatePb) {
+    event_data_->set_charstatepb(charStatePb);
+}
+
+gameDataPb::CharStatePb EventPb::getCharStatePb() {
+    return event_data_->charstatepb();
+}
+
+
+void EventPb::setRoll(bool roll) {
+    event_data_->set_roll(roll);
+}
+
+bool EventPb::getRoll() {
+    return event_data_->roll();
+}
+
+
+void EventPb::setToggleLock(bool toggleLock) {
+    event_data_->set_togglelock(toggleLock);
+}
+
+bool EventPb::getToggleLock() {
+    return event_data_->togglelock();
+}
+
+
 void EventPb::addMagicEvent(MagicPb magicEvent) {
     event_data_->add_magicevents(magicEvent);
 }
@@ -140,5 +179,18 @@ void EventPb::setPlayerHP(unsigned long playerIP, int playerHP) {
 
 int EventPb::getPlayerHP(unsigned long playerIP){
     return event_data_->playerattrs().at(playerIP).playerhp();
+}
+
+
+void EventPb::setPlayerMP(unsigned long playerIP, int playerMP) {
+    if (!event_data_->playerattrs().count(playerIP)) {
+        PlayerAttr playerAttr;
+        event_data_->mutable_playerattrs()->insert({playerIP, playerAttr});
+    }
+    event_data_->mutable_playerattrs()->at(playerIP).set_playermp(playerMP);
+}
+
+int EventPb::getPlayerMP(unsigned long playerIP){
+    return event_data_->playerattrs().at(playerIP).playermp();
 }
 

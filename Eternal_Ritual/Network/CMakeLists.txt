@@ -34,5 +34,12 @@ target_include_directories(Network PUBLIC
 
 target_link_libraries(Network PUBLIC 
     ws2_32
-    ${PROTOBUF_LIB_LIBS}
+)
+
+target_link_libraries(Network PUBLIC debug
+    ${PROTOBUF_LIB_LIBS_DEBUG}
+)
+
+target_link_libraries(Network PUBLIC optimized 
+    ${PROTOBUF_LIB_LIBS_RELEASE}
 )

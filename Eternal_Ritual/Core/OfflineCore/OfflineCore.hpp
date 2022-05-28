@@ -17,7 +17,8 @@
 #include "Game/Character/HitController.hpp"
 #include "Game/Character/CharNode.hpp"
 #include "Game/Magic/BaseMagic.hpp"
-#include "Game/UI/UI.hpp"
+#include "Game/UI/AllUI.inc"
+
 
 class OfflineCore final{
 public:

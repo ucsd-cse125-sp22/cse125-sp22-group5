@@ -5,7 +5,10 @@
 //  Created by Jackie Li on 4/27/22.
 //
 
-#include "HPBarNode.hpp"
+#include "Game/UI/HPBarNode.hpp"
+
+#include "Game/UI/Constant.hpp"
+
 
 int HPBarNode::id = 0;
 
