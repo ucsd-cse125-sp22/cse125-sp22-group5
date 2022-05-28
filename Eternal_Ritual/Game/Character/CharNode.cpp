@@ -51,6 +51,7 @@ Texture* CharNode::pantsN = NULL;
 Texture* CharNode::hairD = NULL;
 Texture* CharNode::hairBaseD = NULL;
 AudioBuffer* CharNode::footStep = NULL;
+AudioBuffer* CharNode::rollSound = NULL;
 
 void CharNode::load() {
     loaded = true;
@@ -222,6 +223,7 @@ void CharNode::load() {
     death->repeats = false;
     death->clamps = true;
     footStep = new AudioBuffer("/Resources/Game/Sound/footstep", "wav", 1, 9);
+    rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 1);
 }
 
 CharNode::CharNode(vec3 position){
@@ -248,7 +250,9 @@ CharNode::CharNode(vec3 position){
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
-    this->loadAudioBuffer("foot step", footStep);
+    this->loadAudioBuffer("foot step", footStep, 2, 1);
+    this->loadAudioBuffer("roll", rollSound, 2, 1);
+    this->changeAudioVolume("roll", 0.1, 0);
     
     this->health = MAXHP;
     this->mana = MAXMANA;
@@ -726,6 +730,7 @@ void CharNode::genMana() {
 void CharNode::roll() {
     if (state < CharState::ROLLING && this->mana > MAXMANA / 10) {
         state = CharState::ROLLING;
+        this->playAudio("roll");
         stopAnimators(0xfffffffe, 0.2);
         playAnimators(Bitmask::ROLL, 0.2);
         mana -= ROLL_COST;

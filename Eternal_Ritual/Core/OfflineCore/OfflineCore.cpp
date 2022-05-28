@@ -38,7 +38,7 @@ void OfflineCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("KGLEngine", 0.8f, 0, NULL);
+    engine_ = new Engine("KGLEngine", 1.0f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
