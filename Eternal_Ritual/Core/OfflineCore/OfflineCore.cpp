@@ -12,7 +12,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5"
+#define ROOT_PATH "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif
@@ -43,7 +43,7 @@ void OfflineCore::initEngine(int* p, int* l) {
     loadingProgress = 0;
 
     engine_ = new Engine("KGLEngine", 0.7f, 0, NULL);
-    engine_->workingDirectory = "D:/StudyProject/Eternal_Ritual/VSProject/cse125-sp22-group5";
+    engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
 
@@ -248,47 +248,6 @@ void OfflineCore::loadMagic() {
     loadingProgress += 0.1;
 }
 
-
-void OfflineCore::loadAlly()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 8 - Load Ally --|" << std::endl;
-
-    ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
-    ally_->name = "Ally";
-    ally_->setEularAngle(vec3(0, 90.0f, 0));
-
-    ally_->stopAndPlay("idle", 0.0f, 0.0f);
-    engine_->addNode(ally_);
-    UINode* baseNode = new UINode();
-    baseNode->renderingOrder = 1000.0f;
-    engine_->addNode(baseNode);
-    ally_->setUINode(baseNode);
-    ally_->setName("Ally");
-}
-
-
-void OfflineCore::loadFont()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 9 - Load Font --|" << std::endl;
-    FontLibrary* fontLibrary = new FontLibrary();
-    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
-}
-
-void OfflineCore::loadHUD()
-{
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 10 - Load HUD --|" << std::endl;
-    UINode* base = new UINode();
-    base->renderingOrder = 10000.0f;
-    engine_->addNode(base);
-    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
-}
-
-
-
-
 void OfflineCore::loadDamageSystem() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 11 - Load Damage System --|" << std::endl;
@@ -361,9 +320,9 @@ void OfflineCore::updateState() {
     character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
     character_->updatePosition();
     character_->updateTransform();
-
+    
     for (int i = 0; i < enemies_.size(); i++){
-        enemies_[i]->updatePosition();
+        //enemies_[i]->updatePosition();
         enemies_[i]->updateTransform();
     }
     
@@ -372,6 +331,7 @@ void OfflineCore::updateState() {
         magic->updateMagic();
     }
 
+    
     hit_controller_->checkHit();
     character_->genMana();
 
@@ -380,9 +340,10 @@ void OfflineCore::updateState() {
 
 
 void OfflineCore::renderWorld() {
-    engine_->renderDirectionalLightShadowMap(directional_light_);
     
-    //engine_->render();
+    HUDbase_->isDisabled = false;
+    engine_->renderDirectionalLightShadowMap(directional_light_);
+
 }
 
 void OfflineCore::render() {

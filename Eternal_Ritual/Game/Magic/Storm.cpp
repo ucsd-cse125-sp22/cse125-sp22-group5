@@ -76,17 +76,17 @@ void Storm::load() {
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 0);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0.9), 0.5);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
-    stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
-    electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
+    //stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
+    //electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
 }
 Storm::Storm() {
     if(!loaded) load();
-    this->loadAudioBuffer("storm sound", stormSound, 2.0f, 1.0f);
+    /*this->loadAudioBuffer("storm sound", stormSound, 2.0f, 1.0f);
     this->changeAudioVolume("storm sound", 0, 0);
     this->sounds["storm sound"].setLoop(true);
     this->loadAudioBuffer("electric sound", electricSound, 2.0f, 1.0f);
     this->changeAudioVolume("electric sound", 0, 0);
-    this->sounds["electric sound"].setLoop(true);
+    this->sounds["electric sound"].setLoop(true);*/
     this->stopTime = 2.0f;
     this->actionName = "cast magic 2";
     this->cloud = metaCloud->copy()->convertToParticleNode();
@@ -111,10 +111,10 @@ Storm::Storm() {
 }
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
-        this->playAudio("storm sound");
+        /*this->playAudio("storm sound");
         this->changeAudioVolume("storm sound", 1, 1);
         this->playAudio("electric sound");
-        this->changeAudioVolume("electric sound", 1, 1);
+        this->changeAudioVolume("electric sound", 1, 1);*/
         start = true;
         caster = character;
         velocity = normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1));

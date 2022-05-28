@@ -113,342 +113,342 @@ void importMapBox() {
     boxPosition = vec3(-13.731363296508789f, -1.5f, 36.58491516113281f);
     boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
     MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 0;
-//    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
-//    boxPosition = vec3(-36.34000015258789f, -1.5f, 13.601505279541016f);
-//    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 0;
-//    boxSize = vec3(20.0f, 1.0f, 20.0f);
-//    boxPosition = vec3(-26.481189727783203f, -1.5f, 26.653076171875f);
-//    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 0;
-//    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
-//    boxPosition = vec3(13.596307754516602f, -1.5f, -36.33232116699219f);
-//    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 0;
-//    boxSize = vec3(20.0f, 1.0f, 20.0f);
-//    boxPosition = vec3(26.81570053100586f, -1.5f, -26.241455078125f);
-//    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 0;
-//    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
-//    boxPosition = vec3(36.2993278503418f, -1.5f, -13.646175384521484f);
-//    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(20.0f, 20.0f, 20.0f);
-//    boxPosition = vec3(0.0f, 9.0f, -60.0f);
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 20.0f);
-//    boxPosition = vec3(-19.679931640625f, 13.0f, 47.426387786865234f);
-//    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 20.0f);
-//    boxPosition = vec3(-35.30475616455078f, 13.0f, 35.362510681152344f);
-//    boxEulerAngles = vec3(0.0f, 44.999994422049916f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(20.0f, 30.0f, 5.0f);
-//    boxPosition = vec3(-47.292022705078125f, 13.0f, 19.538402557373047f);
-//    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(19.9999942779541f, 30.0f, 4.999998569488525f);
-//    boxPosition = vec3(-52.50025177001953f, 13.0f, -0.058162689208984375f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(20.0f, 30.0f, 5.0f);
-//    boxPosition = vec3(-47.196224212646484f, 13.0f, -19.518991470336914f);
-//    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 20.0f);
-//    boxPosition = vec3(-35.77626037597656f, 13.0f, -34.86589431762695f);
-//    boxEulerAngles = vec3(0.0f, -44.999994422049916f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 20.0f);
-//    boxPosition = vec3(-19.81863021850586f, 13.0f, -47.04525375366211f);
-//    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 5.0f);
-//    boxPosition = vec3(14.256914138793945f, 14.0f, 40.71234130859375f);
-//    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(29.999935150146484f, 2.999999523162842f, 16.999998092651367f);
-//    boxPosition = vec3(-36.28617477416992f, -1.132124423980713f, -18.673717498779297f);
-//    boxEulerAngles = vec3(9.99999970909292f, 60.00000849984128f, -1.707547699614187e-06f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 30.0f, 5.0f);
-//    boxPosition = vec3(27.738876342773438f, 14.0f, 30.06119155883789f);
-//    boxEulerAngles = vec3(0.0f, -44.999994422049916f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.0f, 7.0f, 5.0f);
-//    boxPosition = vec3(27.201324462890625f, 2.5f, -26.600440979003906f);
-//    boxEulerAngles = vec3(0.0f, 44.999994422049916f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(9.999994277954102f, 2.5f, 14.99999713897705f);
-//    boxPosition = vec3(-19.002153396606445f, 0.24999995529651642f, 24.259979248046875f);
-//    boxEulerAngles = vec3(0.0f, 59.99999483946294f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(4.999887943267822f, 4.999917030334473f, 22.999780654907227f);
-//    boxPosition = vec3(34.57914733886719f, 2.5202579498291016f, -17.966392517089844f);
-//    boxEulerAngles = vec3(13.46300038716412f, 38.7630003512636f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(9.999835968017578f, 2.499964952468872f, 14.999848365783691f);
-//    boxPosition = vec3(12.881000518798828f, 0.24999994039535522f, -10.011907577514648f);
-//    boxEulerAngles = vec3(0.0f, -69.99999967119774f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(4.999978542327881f, 3.000000238418579f, 17.00000762939453f);
-//    boxPosition = vec3(-5.298661231994629f, -1.336275339126587f, 31.8536376953125f);
-//    boxEulerAngles = vec3(8.999993420258647f, 60.00000849984128f, -5.122643913064559e-06f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.5f, 2.0f, 5.0f);
-//    boxPosition = vec3(10.21187973022461f, 0.0f, 21.193662643432617f);
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.4999998211860657f, 1.0f, 9.99999713897705f);
-//    boxPosition = vec3(25.113908767700195f, -0.5f, 11.59774398803711f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(0.5f, 1.0f, 10.0f);
-//    boxPosition = vec3(4.626926422119141f, -0.5f, 7.29351806640625f);
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(5.000000953674316f, 3.0f, 17.0f);
-//    boxPosition = vec3(5.108200550079346f, -1.3108752965927124f, -21.101150512695312f);
-//    boxEulerAngles = vec3(-9.000000250447817f, 19.99999771063855f, 5.6785429905125e-07f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(0.5f, 2.0f, 10.0f);
-//    boxPosition = vec3(-6.175685882568359f, 0.0f, -4.580935478210449f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.5f, 2.0f, 7.0f);
-//    boxPosition = vec3(-10.48333740234375f, 0.0f, 9.90719985961914f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.4999997913837433f, 1.0f, 3.999999761581421f);
-//    boxPosition = vec3(2.3769264221191406f, -0.5f, 6.538968086242676f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.5f, 2.0f, 5.0f);
-//    boxPosition = vec3(-9.59457778930664f, 0.0f, -1.830935001373291f);
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(4.9999680519104f, 0.9999958872795105f, 6.999967098236084f);
-//    boxPosition = vec3(-12.002592086791992f, -0.4999999701976776f, -18.14734649658203f);
-//    boxEulerAngles = vec3(0.0f, 33.53639957949186f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(2.9999992847442627f, 2.0f, 3.9999990463256836f);
-//    boxPosition = vec3(-7.776100158691406f, 0.0f, -15.409856796264648f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(4.999841690063477f, 4.0f, 5.0f);
-//    boxPosition = vec3(40.72988510131836f, 0.9999867081642151f, 2.3642375469207764f);
-//    boxEulerAngles = vec3(179.999991348578f, 20.135100559968695f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(4.999831199645996f, 3.0f, 4.9999918937683105f);
-//    boxPosition = vec3(39.35308837890625f, 0.5000176429748535f, 7.0984416007995605f);
-//    boxEulerAngles = vec3(179.999991348578f, -14.096251130778096f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(4.999912738800049f, 4.0f, 5.00007438659668f);
-//    boxPosition = vec3(39.572853088378906f, 0.9999866485595703f, 11.962966918945312f);
-//    boxEulerAngles = vec3(179.999991348578f, -71.10730310925103f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(3.0f, 2.999999761581421f, 3.0f);
-//    boxPosition = vec3(-13.633177757263184f, 2.999999761581421f, 23.612285614013672f);
-//    boxEulerAngles = vec3(179.999991348578f, -71.10728261868353f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
-//    boxPosition = vec3(-21.799108505249023f, 2.0f, 18.328943252563477f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.733391063798567f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
-//    boxPosition = vec3(-21.782814025878906f, 2.0f, 18.312650680541992f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
-//    boxPosition = vec3(-21.2570743560791f, 2.0f, 19.338041305541992f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.733394478893153f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 0.9999999403953552f, 1.0000003576278687f);
-//    boxPosition = vec3(-19.967870712280273f, 1.9999998807907104f, 19.419044494628906f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
-//    boxPosition = vec3(-18.6903018951416f, 2.0f, 20.22953224182129f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000005960464478f, 0.9999999403953552f, 1.0000005960464478f);
-//    boxPosition = vec3(-22.858861923217773f, 1.9999998807907104f, 18.720481872558594f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.733394478893153f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(9.0f, 4.0f, 5.0f);
-//    boxPosition = vec3(-22.26280975341797f, 0.9999867081642151f, -0.05115675926208496f);
-//    boxEulerAngles = vec3(179.999991348578f, 0.0f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(20.0f, 20.0f, 20.0f);
-//    boxPosition = vec3(0.0f, 9.0f, 60.0f);
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(2.999969720840454f, 1.9999911785125732f, 3.999952793121338f);
-//    boxPosition = vec3(-17.134122848510742f, 0.0f, 2.518460988998413f);
-//    boxEulerAngles = vec3(0.0f, 60.457330645908655f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(4.999832630157471f, 3.0f, 4.999993324279785f);
-//    boxPosition = vec3(18.351093292236328f, 0.5000176429748535f, 8.719722747802734f);
-//    boxEulerAngles = vec3(179.999991348578f, -14.096249423230805f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(0.5f, 2.0f, 7.0f);
-//    boxPosition = vec3(-10.890523910522461f, 0.0f, -35.301090240478516f);
-//    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(4.0f, 3.0f, 2.0f);
-//    boxPosition = vec3(-49.953739166259766f, 0.5f, 5.168451309204102f);
-//    boxEulerAngles = vec3(0.0f, -69.99999967119774f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(4.0f, 7.0f, 1.999990463256836f);
-//    boxPosition = vec3(-44.0306396484375f, 2.5f, 20.40106964111328f);
-//    boxEulerAngles = vec3(0.0f, -45.95227305651143f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(4.999993324279785f, 6.999980926513672f, 4.999993324279785f);
-//    boxPosition = vec3(14.83809757232666f, 2.499999761581421f, -37.63517761230469f);
-//    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(3.000000238418579f, 2.999999761581421f, 3.000000238418579f);
-//    boxPosition = vec3(17.829620361328125f, 2.9999845027923584f, -9.80679702758789f);
-//    boxEulerAngles = vec3(179.999991348578f, -71.10726895830518f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
-//    boxPosition = vec3(13.097940444946289f, 1.9999847412109375f, -6.686174392700195f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000169277191162f, 0.9999843239784241f, 1.0000169277191162f);
-//    boxPosition = vec3(7.924259662628174f, 1.9999691247940063f, -6.570480823516846f);
-//    boxEulerAngles = vec3(0.0f, -84.12961200720312f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000169277191162f, 0.9999842643737793f, 1.0000169277191162f);
-//    boxPosition = vec3(9.213461875915527f, 1.9999690055847168f, -6.489477634429932f);
-//    boxEulerAngles = vec3(0.0f, -84.12961200720312f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000022649765015f, 0.9999843239784241f, 1.0000022649765015f);
-//    boxPosition = vec3(10.4910306930542f, 1.9999691247940063f, -5.678989887237549f);
-//    boxEulerAngles = vec3(0.0f, -84.12957785625727f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 2;
-//    boxSize = vec3(1.0000008344650269f, 0.9999999403953552f, 1.0000008344650269f);
-//    boxPosition = vec3(12.021892547607422f, 1.999984622001648f, -6.278343200683594f);
-//    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = 1;
-//    boxSize = vec3(3.9999682903289795f, 2.9999806880950928f, 1.9999841451644897f);
-//    boxPosition = vec3(-23.76885414123535f, 0.4999694526195526f, 41.0047492980957f);
-//    boxEulerAngles = vec3(0.0f, 90.00000250447816f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(-36.34000015258789f, -1.5f, 13.601505279541016f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(-26.481189727783203f, -1.5f, 26.653076171875f);
+    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(13.596307754516602f, -1.5f, -36.33232116699219f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(26.81570053100586f, -1.5f, -26.241455078125f);
+    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(36.2993278503418f, -1.5f, -13.646175384521484f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(20.0f, 20.0f, 20.0f);
+    boxPosition = vec3(0.0f, 9.0f, -60.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 20.0f);
+    boxPosition = vec3(-19.679931640625f, 13.0f, 47.426387786865234f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 20.0f);
+    boxPosition = vec3(-35.30475616455078f, 13.0f, 35.362510681152344f);
+    boxEulerAngles = vec3(0.0f, 44.999994422049916f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(20.0f, 30.0f, 5.0f);
+    boxPosition = vec3(-47.292022705078125f, 13.0f, 19.538402557373047f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(19.9999942779541f, 30.0f, 4.999998569488525f);
+    boxPosition = vec3(-52.50025177001953f, 13.0f, -0.058162689208984375f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(20.0f, 30.0f, 5.0f);
+    boxPosition = vec3(-47.196224212646484f, 13.0f, -19.518991470336914f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 20.0f);
+    boxPosition = vec3(-35.77626037597656f, 13.0f, -34.86589431762695f);
+    boxEulerAngles = vec3(0.0f, -44.999994422049916f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 20.0f);
+    boxPosition = vec3(-19.81863021850586f, 13.0f, -47.04525375366211f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 5.0f);
+    boxPosition = vec3(14.256914138793945f, 14.0f, 40.71234130859375f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(29.999935150146484f, 2.999999523162842f, 16.999998092651367f);
+    boxPosition = vec3(-36.28617477416992f, -1.132124423980713f, -18.673717498779297f);
+    boxEulerAngles = vec3(9.99999970909292f, 60.00000849984128f, -1.707547699614187e-06f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 30.0f, 5.0f);
+    boxPosition = vec3(27.738876342773438f, 14.0f, 30.06119155883789f);
+    boxEulerAngles = vec3(0.0f, -44.999994422049916f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.0f, 7.0f, 5.0f);
+    boxPosition = vec3(27.201324462890625f, 2.5f, -26.600440979003906f);
+    boxEulerAngles = vec3(0.0f, 44.999994422049916f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(9.999994277954102f, 2.5f, 14.99999713897705f);
+    boxPosition = vec3(-19.002153396606445f, 0.24999995529651642f, 24.259979248046875f);
+    boxEulerAngles = vec3(0.0f, 59.99999483946294f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(4.999887943267822f, 4.999917030334473f, 22.999780654907227f);
+    boxPosition = vec3(34.57914733886719f, 2.5202579498291016f, -17.966392517089844f);
+    boxEulerAngles = vec3(13.46300038716412f, 38.7630003512636f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(9.999835968017578f, 2.499964952468872f, 14.999848365783691f);
+    boxPosition = vec3(12.881000518798828f, 0.24999994039535522f, -10.011907577514648f);
+    boxEulerAngles = vec3(0.0f, -69.99999967119774f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(4.999978542327881f, 3.000000238418579f, 17.00000762939453f);
+    boxPosition = vec3(-5.298661231994629f, -1.336275339126587f, 31.8536376953125f);
+    boxEulerAngles = vec3(8.999993420258647f, 60.00000849984128f, -5.122643913064559e-06f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.5f, 2.0f, 5.0f);
+    boxPosition = vec3(10.21187973022461f, 0.0f, 21.193662643432617f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.4999998211860657f, 1.0f, 9.99999713897705f);
+    boxPosition = vec3(25.113908767700195f, -0.5f, 11.59774398803711f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(0.5f, 1.0f, 10.0f);
+    boxPosition = vec3(4.626926422119141f, -0.5f, 7.29351806640625f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(5.000000953674316f, 3.0f, 17.0f);
+    boxPosition = vec3(5.108200550079346f, -1.3108752965927124f, -21.101150512695312f);
+    boxEulerAngles = vec3(-9.000000250447817f, 19.99999771063855f, 5.6785429905125e-07f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(0.5f, 2.0f, 10.0f);
+    boxPosition = vec3(-6.175685882568359f, 0.0f, -4.580935478210449f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.5f, 2.0f, 7.0f);
+    boxPosition = vec3(-10.48333740234375f, 0.0f, 9.90719985961914f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.4999997913837433f, 1.0f, 3.999999761581421f);
+    boxPosition = vec3(2.3769264221191406f, -0.5f, 6.538968086242676f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.5f, 2.0f, 5.0f);
+    boxPosition = vec3(-9.59457778930664f, 0.0f, -1.830935001373291f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(4.9999680519104f, 0.9999958872795105f, 6.999967098236084f);
+    boxPosition = vec3(-12.002592086791992f, -0.4999999701976776f, -18.14734649658203f);
+    boxEulerAngles = vec3(0.0f, 33.53639957949186f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(2.9999992847442627f, 2.0f, 3.9999990463256836f);
+    boxPosition = vec3(-7.776100158691406f, 0.0f, -15.409856796264648f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(4.999841690063477f, 4.0f, 5.0f);
+    boxPosition = vec3(40.72988510131836f, 0.9999867081642151f, 2.3642375469207764f);
+    boxEulerAngles = vec3(179.999991348578f, 20.135100559968695f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(4.999831199645996f, 3.0f, 4.9999918937683105f);
+    boxPosition = vec3(39.35308837890625f, 0.5000176429748535f, 7.0984416007995605f);
+    boxEulerAngles = vec3(179.999991348578f, -14.096251130778096f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(4.999912738800049f, 4.0f, 5.00007438659668f);
+    boxPosition = vec3(39.572853088378906f, 0.9999866485595703f, 11.962966918945312f);
+    boxEulerAngles = vec3(179.999991348578f, -71.10730310925103f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(3.0f, 2.999999761581421f, 3.0f);
+    boxPosition = vec3(-13.633177757263184f, 2.999999761581421f, 23.612285614013672f);
+    boxEulerAngles = vec3(179.999991348578f, -71.10728261868353f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
+    boxPosition = vec3(-21.799108505249023f, 2.0f, 18.328943252563477f);
+    boxEulerAngles = vec3(179.999991348578f, -23.733391063798567f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
+    boxPosition = vec3(-21.782814025878906f, 2.0f, 18.312650680541992f);
+    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
+    boxPosition = vec3(-21.2570743560791f, 2.0f, 19.338041305541992f);
+    boxEulerAngles = vec3(179.999991348578f, -23.733394478893153f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 0.9999999403953552f, 1.0000003576278687f);
+    boxPosition = vec3(-19.967870712280273f, 1.9999998807907104f, 19.419044494628906f);
+    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
+    boxPosition = vec3(-18.6903018951416f, 2.0f, 20.22953224182129f);
+    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000005960464478f, 0.9999999403953552f, 1.0000005960464478f);
+    boxPosition = vec3(-22.858861923217773f, 1.9999998807907104f, 18.720481872558594f);
+    boxEulerAngles = vec3(179.999991348578f, -23.733394478893153f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(9.0f, 4.0f, 5.0f);
+    boxPosition = vec3(-22.26280975341797f, 0.9999867081642151f, -0.05115675926208496f);
+    boxEulerAngles = vec3(179.999991348578f, 0.0f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(20.0f, 20.0f, 20.0f);
+    boxPosition = vec3(0.0f, 9.0f, 60.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(2.999969720840454f, 1.9999911785125732f, 3.999952793121338f);
+    boxPosition = vec3(-17.134122848510742f, 0.0f, 2.518460988998413f);
+    boxEulerAngles = vec3(0.0f, 60.457330645908655f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(4.999832630157471f, 3.0f, 4.999993324279785f);
+    boxPosition = vec3(18.351093292236328f, 0.5000176429748535f, 8.719722747802734f);
+    boxEulerAngles = vec3(179.999991348578f, -14.096249423230805f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(0.5f, 2.0f, 7.0f);
+    boxPosition = vec3(-10.890523910522461f, 0.0f, -35.301090240478516f);
+    boxEulerAngles = vec3(-0.0f, -90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(4.0f, 3.0f, 2.0f);
+    boxPosition = vec3(-49.953739166259766f, 0.5f, 5.168451309204102f);
+    boxEulerAngles = vec3(0.0f, -69.99999967119774f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(4.0f, 7.0f, 1.999990463256836f);
+    boxPosition = vec3(-44.0306396484375f, 2.5f, 20.40106964111328f);
+    boxEulerAngles = vec3(0.0f, -45.95227305651143f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(4.999993324279785f, 6.999980926513672f, 4.999993324279785f);
+    boxPosition = vec3(14.83809757232666f, 2.499999761581421f, -37.63517761230469f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(3.000000238418579f, 2.999999761581421f, 3.000000238418579f);
+    boxPosition = vec3(17.829620361328125f, 2.9999845027923584f, -9.80679702758789f);
+    boxEulerAngles = vec3(179.999991348578f, -71.10726895830518f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000003576278687f, 1.0f, 1.0000003576278687f);
+    boxPosition = vec3(13.097940444946289f, 1.9999847412109375f, -6.686174392700195f);
+    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000169277191162f, 0.9999843239784241f, 1.0000169277191162f);
+    boxPosition = vec3(7.924259662628174f, 1.9999691247940063f, -6.570480823516846f);
+    boxEulerAngles = vec3(0.0f, -84.12961200720312f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000169277191162f, 0.9999842643737793f, 1.0000169277191162f);
+    boxPosition = vec3(9.213461875915527f, 1.9999690055847168f, -6.489477634429932f);
+    boxEulerAngles = vec3(0.0f, -84.12961200720312f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000022649765015f, 0.9999843239784241f, 1.0000022649765015f);
+    boxPosition = vec3(10.4910306930542f, 1.9999691247940063f, -5.678989887237549f);
+    boxEulerAngles = vec3(0.0f, -84.12957785625727f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 2;
+    boxSize = vec3(1.0000008344650269f, 0.9999999403953552f, 1.0000008344650269f);
+    boxPosition = vec3(12.021892547607422f, 1.999984622001648f, -6.278343200683594f);
+    boxEulerAngles = vec3(179.999991348578f, -23.73339277134586f, 179.999991348578f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+
+    boxType = 1;
+    boxSize = vec3(3.9999682903289795f, 2.9999806880950928f, 1.9999841451644897f);
+    boxPosition = vec3(-23.76885414123535f, 0.4999694526195526f, 41.0047492980957f);
+    boxEulerAngles = vec3(0.0f, 90.00000250447816f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
     
     MapSystemManager::Instance()->updateGrids();
 

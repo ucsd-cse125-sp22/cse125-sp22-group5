@@ -26,7 +26,6 @@ int main(int argc, char* argv[]) {
 
         if(Engine::main->shouldUpdate()) {
 
-
             if (process == 1) {
                 
                 // Logo =======================
@@ -75,7 +74,7 @@ int main(int argc, char* argv[]) {
                     OfflineCore::Instance()->loadDamageSystem();
                 }
                 else {
-                    process = 4;
+                    process = 5;
                 }
             }
             else if (process == 4) {
@@ -97,7 +96,6 @@ int main(int argc, char* argv[]) {
             /*OfflineCore::Instance()->handleEvent();*/
 
             OfflineCore::Instance()->render();
-
 
         }
     }

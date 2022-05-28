@@ -101,7 +101,7 @@ private:
     static Texture* pantsN;
     static Texture* hairD;
     static Texture* hairBaseD;
-    static AudioBuffer* footStep;
+    //static AudioBuffer* footStep;
 public:
     CharNode(glm::vec3 position);
     ~CharNode();
