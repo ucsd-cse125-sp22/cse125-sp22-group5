@@ -142,12 +142,14 @@ void ClientCore::loadCharacter() {
     
     if (PLAYER_CAPACITY >= 1) {
         if (PLAYER_CAPACITY == 1 || PLAYER_CAPACITY == 2) {
-            pre_chars_[0]->setPosition(vec3(-46.0f, -1.0f, -1.4f));
-            pre_chars_[0]->setEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[0]->setCharacterPosition(vec3(-46.0f, -1.0f, -1.4f));
+            pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[0]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
         else if (PLAYER_CAPACITY == 3 || PLAYER_CAPACITY == 4) {
-            pre_chars_[0]->setPosition(vec3(-46.0f, -1.0f, 1.9f));
-            pre_chars_[0]->setEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[0]->setCharacterPosition(vec3(-46.0f, -1.0f, 1.9f));
+            pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[0]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
         pre_chars_[0]->name = "Kelin";
         pre_chars_[0]->isDisabled = false;
@@ -155,12 +157,14 @@ void ClientCore::loadCharacter() {
     }
     if (PLAYER_CAPACITY >= 2) {
         if (PLAYER_CAPACITY == 2 || PLAYER_CAPACITY == 3) {
-            pre_chars_[1]->setPosition(vec3(28.5f, -1.0f, -0.88f));
-            pre_chars_[1]->setEularAngle(vec3(0.0f, -92.6f, 0.0f));
+            pre_chars_[1]->setCharacterPosition(vec3(28.5f, -1.0f, -0.88f));
+            pre_chars_[1]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
+            pre_chars_[1]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
         else if (PLAYER_CAPACITY == 4) {
-            pre_chars_[1]->setPosition(vec3(28.5f, -1.0f, -4.22f));
-            pre_chars_[1]->setEularAngle(vec3(0.0f, -92.6f, 0.0f));
+            pre_chars_[1]->setCharacterPosition(vec3(28.5f, -1.0f, -4.22f));
+            pre_chars_[1]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
+            pre_chars_[1]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
         pre_chars_[1]->name = "Zifan";
         pre_chars_[1]->isDisabled = false;
@@ -168,8 +172,9 @@ void ClientCore::loadCharacter() {
     }
     if (PLAYER_CAPACITY >= 3) {
         if (PLAYER_CAPACITY == 3 || PLAYER_CAPACITY == 4) {
-            pre_chars_[2]->setPosition(vec3(-46.0f, -1.0f, -4.0f));
-            pre_chars_[2]->setEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[2]->setCharacterPosition(vec3(-46.0f, -1.0f, -4.0f));
+            pre_chars_[2]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
+            pre_chars_[2]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
         pre_chars_[2]->name = "Kangming";
         pre_chars_[2]->isDisabled = false;
@@ -179,8 +184,9 @@ void ClientCore::loadCharacter() {
         pre_chars_[3]->health = MAXHP;
         pre_chars_[3]->mana = MAXMANA;
         pre_chars_[3]->manaRegen = MAXMANAREGEN;
-        pre_chars_[3]->setPosition(vec3(28.5f, -1.0f, 2.46f));
-        pre_chars_[3]->setEularAngle(vec3(0.0f, -92.6f, 0.0f));
+        pre_chars_[3]->setCharacterPosition(vec3(28.5f, -1.0f, 2.46f));
+        pre_chars_[3]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
+        pre_chars_[3]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         pre_chars_[3]->name = "Mengxuan";
         pre_chars_[3]->isDisabled = false;
         pre_chars_[3]->uninjurable = false;
@@ -329,6 +335,7 @@ void ClientCore::handleEvent() {
     }
     else {
         cout << "eulerAngles 3 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
+        cout << "mouse : " << engine_->input->getMouseTranslation().x << " " << engine_->input->getMouseTranslation().y << endl;
         character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
         cout << "eulerAngles 4 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
         event_pb_->setControlNodeEulerAngles(character_->controlNode->eulerAngles);

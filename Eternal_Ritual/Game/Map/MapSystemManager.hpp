@@ -18,9 +18,9 @@
 
 
 struct HitInfo {
-    glm::vec3 hit_point;
-    glm::vec3 normal;
-    MapBoxObject* hit_box;
+    glm::vec3 hit_point = glm::vec3(0);
+    glm::vec3 normal = glm::vec3(0);
+    MapBoxObject* hit_box = nullptr;
 };
 
 

@@ -136,8 +136,9 @@ public:
     Node* rightHand;
     void setCamera(CameraNode* model);
     void setControl(Node* control);
-    void setEularAngle(glm::vec3 eularAngle);
-    void setPosition(glm::vec3 position);
+    void setCharacterEularAngle(glm::vec3 eularAngle);
+    void setCameraEularAngle(glm::vec3 eularAngle);
+    void setCharacterPosition(glm::vec3 position);
     void setName(std::string name);
     void setUINode(UINode* uiNode);
     

@@ -14,8 +14,8 @@
             filePath = "Eternal_Ritual/Core/ClientCore/ClientCore.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "ClientCore::updateState()"
             landmarkType = "7">
          </BreakpointContent>
