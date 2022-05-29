@@ -104,11 +104,11 @@ void ServerCore::updateState() {
     
     unordered_map<unsigned long, int> tempPlayerHPs;
     unordered_map<unsigned long, int> tempPlayerMPs;
-    for (auto& playerIP : player_ips_) {
+    for (int i = 0; i < player_ips_.size(); i++) {
+        unsigned long playerIP = player_ips_[i];
         EventPb* event_pb = event_pbs_[playerIP];
         if (start_game_) {
-            state_pb_->setPlayerName(playerIP, event_pb->getPlayerName());
-            state_pb_->setPlayerGroup(playerIP, event_pb->getPlayerGroup());
+            state_pb_->setPlayerGroup(playerIP, i);
         }
         else {
             state_pb_->setControlNodeEulerAngles(playerIP, event_pb->getControlNodeEulerAngles());

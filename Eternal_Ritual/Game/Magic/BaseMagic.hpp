@@ -21,13 +21,14 @@ namespace Magic {
 
 enum Type {
     FIREBALL = 0,
-    STONEBLAST = 1,
+    STORM = 1,
     THUNDER = 2,
     DRAGON = 3,
     LIGHTNINGSPEAR = 4,
     GROUNDSMASH = 5,
     FLAME = 6,
     THOUSANDBLADE = 7,
+    STONEBLAST = 8
 };
 
 } // namespace Magic
