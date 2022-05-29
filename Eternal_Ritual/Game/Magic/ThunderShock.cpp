@@ -56,7 +56,8 @@ ThunderShock::ThunderShock() {
     if (!loaded) load();
     start = false;
     canDamage = false;
-    this->loadAudioBuffer("electric impact", electricImpact);
+    this->loadAudioBuffer("electric impact", electricImpact, 2, 1);
+    this->changeAudioVolume("electric impact", 0.7f, 0);
     this->position = vec3(0);
     this->eulerAngles = vec3(0);
     this->actionName = "cast magic 1";

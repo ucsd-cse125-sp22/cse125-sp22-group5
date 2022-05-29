@@ -223,7 +223,7 @@ void CharNode::load() {
     death->repeats = false;
     death->clamps = true;
     footStep = new AudioBuffer("/Resources/Game/Sound/footstep", "wav", 1, 9);
-    rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 1);
+    rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 3);
 }
 
 CharNode::CharNode(vec3 position){
@@ -252,7 +252,7 @@ CharNode::CharNode(vec3 position){
     this->scrollValue = 0;
     this->loadAudioBuffer("foot step", footStep, 2, 1);
     this->loadAudioBuffer("roll", rollSound, 2, 1);
-    this->changeAudioVolume("roll", 0.1, 0);
+    this->changeAudioVolume("roll", 0.2, 0);
     
     this->health = MAXHP;
     this->mana = MAXMANA;
@@ -477,14 +477,14 @@ void CharNode::moveRight(){
     }
 }
 void CharNode::predictMoveTarget(){
-    this->displacement *=  0.85f;
+    this->displacement *=  0.0f;
     if (length(this->moveDirection) > 0){
         if (this->isLocked && (state != CharState::ROLLING)){
-            this->displacement += normalize(this->moveDirection) * 0.08f;
+            this->displacement = normalize(this->moveDirection) * 0.5f;
             this->characterTargetPosition += this->displacement * 0.1f;
             this->characterTargetEulerAngles = vec3(0, this->getLockAngle().y + 90.0f, 0);
         }else{
-            this->displacement += normalize(this->moveDirection) * 0.15f;
+            this->displacement = normalize(this->moveDirection) * 1.f;
             this->characterTargetPosition += this->displacement * 0.1f;
             if (this->moveDirection.x >= 0){
                 this->characterTargetEulerAngles = vec3(0, degrees(calcAngle(this->displacement, vec3(0,0,1))), 0);
@@ -624,9 +624,6 @@ void CharNode::updatePosition(){
             this->modelNode->eulerAngles.y += 360;
         }
         this->refreshed = true;
-        vec3 positionOnScreen = headTop->getPositionOnScreen();
-        //this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        //this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 
 }
@@ -723,7 +720,6 @@ void CharNode::castMagic(){
 void CharNode::genMana() {
     if (state < CharState::ROLLING && mana < MAXMANA) {
         mana = std::min((float)MAXMANA, mana + manaRegen);
-        cout << "curr mana: " << mana << endl;
     }
 }
 

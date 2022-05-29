@@ -30,6 +30,9 @@ ParticleNode* DragonMagic::lineTemplate = NULL;
 ParticleNode* DragonMagic::sparkTemplate = NULL;
 ParticleNode* DragonMagic::fragmentTemplate = NULL;
 ParticleNode* DragonMagic::magicTemplate = NULL;
+AudioBuffer* DragonMagic::growl = NULL;
+AudioBuffer* DragonMagic::castSound = NULL;
+AudioBuffer* DragonMagic::flyingSound = NULL;
 
 void DragonMagic::load() {
     DragonMagic::templateDragonNode = new Node();
@@ -185,10 +188,16 @@ void DragonMagic::load() {
     DragonMagic::magicTemplate->setColorAnimation(vec4(1.0f, 0.0f, 0.0f, 1.0f), 0.2f);
     DragonMagic::magicTemplate->setColorAnimation(vec4(1.0f, 0.0f, 0.0f, 1.0f), 0.8f);
     DragonMagic::magicTemplate->setColorAnimation(vec4(1.0f, 0.0f, 0.0f, 0.0f), 1.0f);
+    growl = new AudioBuffer("/Resources/Game/Sound/Large Creature 13 - Long ", "wav", 1, 3);
+    castSound = new AudioBuffer("/Resources/Game/Sound/Nature Spell 20.wav");
+    flyingSound = new AudioBuffer("/Resources/Game/Sound/Fire Spelll 27.wav");
 }
 
 DragonMagic::DragonMagic(Node* characterNode) {
     if (!loaded) { load(); loaded = true; }
+    this->loadAudioBuffer("growl", growl, 2.0f, 1.0f);
+    this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
+    this->loadAudioBuffer("flying sound", flyingSound);
     this->actionName = "dragon attack";
     this->stopTime = 3.0f;
     this->damage = DAMAGE;
@@ -303,6 +312,7 @@ void DragonMagic::play() {
     
     this->attack->reset();
     this->attack->play(0.0f);
+    this->playAudio("cast");
     
     Animation* delay1 = new Animation(this->getAnimationName("Delay1"), 2.5f);
     delay1->setCompletionHandler([&] {
@@ -316,6 +326,8 @@ void DragonMagic::play() {
     Animation* delay2 = new Animation(this->getAnimationName("Delay2"), 1.0f);
     delay2->setCompletionHandler([&] {
         Animation* range1 = new Animation(this->getAnimationName("Range1"), 0.1f);
+        this->playAudio("growl");
+        this->playAudio("flying sound");
         range1->setFloatAnimation(&this->rangeFactor, 1.0f);
         range1->setEaseInTimingMode();
         Engine::main->playAnimation(range1);

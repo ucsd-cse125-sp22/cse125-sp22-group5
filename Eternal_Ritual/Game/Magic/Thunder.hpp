@@ -18,6 +18,9 @@ class CharNode;
 
 
 class Thunder final : public DamageableMagic{
+private:
+    static bool loaded;
+    static AudioBuffer* castSound;
 public:
     bool threwOut;
     bool canDamage;
@@ -28,6 +31,7 @@ public:
     Node* middle;
     Node* right;
     Thunder();
+    void load();
     ~Thunder() override = default;
     void playNextThunder(int index);
     void hitWall() override {}

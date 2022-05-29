@@ -25,6 +25,8 @@ private:
     static ParticleNode* metaExplosion;
     static ParticleNode* metaSpark;
     static LightNode* metaLight;
+    static AudioBuffer* explodeSound;
+    static AudioBuffer* flyingSound;
     
 public:
     glm::vec3 velocity;

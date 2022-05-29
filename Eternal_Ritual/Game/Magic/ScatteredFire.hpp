@@ -18,9 +18,14 @@ class CharNode;
 
 
 class ScatteredFire final : public DamageableMagic{
+private:
+    static bool loaded;
+    static AudioBuffer* castSound;
+
 public:
     std::vector<FireBall*> balls;
     Node* ballNode;
+    void load();
     ScatteredFire();
     ~ScatteredFire() override = default;
     void hitWall() override {}

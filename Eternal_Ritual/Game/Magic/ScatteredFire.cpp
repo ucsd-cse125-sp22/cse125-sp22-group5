@@ -20,7 +20,17 @@ using namespace glm;
 
 #define NUMBALLS 10
 
+bool ScatteredFire::loaded = false;
+AudioBuffer* ScatteredFire::castSound = NULL;
+
+
+void ScatteredFire::load() {
+    loaded = true;
+    castSound = new AudioBuffer("/Resources/Game/Sound/Debuff_Silence_01.wav");
+}
+
 ScatteredFire::ScatteredFire() {
+    if (!loaded) load();
     start = false;
     this->actionName = "cast magic 3";
     this->stopTime = 1.8f;
@@ -36,10 +46,12 @@ ScatteredFire::ScatteredFire() {
         FireBall* fireBall = new FireBall();
         balls.push_back(fireBall);
     }
+    this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
 }
 void ScatteredFire::play(CharNode* character, int seed){
     if (!start){
         this->caster = character;
+        this->playAudio("cast");
         this->seed = seed;
         start = true;
         srand(seed);

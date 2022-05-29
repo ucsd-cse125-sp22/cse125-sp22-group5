@@ -63,6 +63,9 @@ private:
     ParticleNode* magic;
     
     std::string getAnimationName(std::string name);
+    static AudioBuffer* growl;
+    static AudioBuffer* castSound;
+    static AudioBuffer* flyingSound;
     
 public:
     static void load();

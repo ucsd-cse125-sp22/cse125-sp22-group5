@@ -18,8 +18,16 @@
 using namespace std;
 using namespace glm;
 
+bool Thunder::loaded = false;
+AudioBuffer* Thunder::castSound = NULL;
 
+
+void Thunder::load() {
+    loaded = true;
+    castSound = new AudioBuffer("/Resources/Game/Sound/Positive Effect 1_", "wav", 1, 3);
+}
 Thunder::Thunder() {
+    if (!loaded) load();
     start = false;
     canDamage = false;
     this->actionName = "cast magic 1";
@@ -51,9 +59,12 @@ Thunder::Thunder() {
         right->addChildNode(thunder);
         thunders.push_back(thunder);
     }
+    this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
 }
 void Thunder::play(CharNode* character, int seed){
     if (!start){
+        this->start = true;
+        this->playAudio("cast");
         this->seed = seed;
         srand(seed);
         this->caster = character;
