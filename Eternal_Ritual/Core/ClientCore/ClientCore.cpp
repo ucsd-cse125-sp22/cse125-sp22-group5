@@ -500,33 +500,16 @@ void ClientCore::updateState() {
                 for (auto it : magicEvents) {
                     Magic::Type magicEvent = Magic::Type(it);
                     
-                    BaseMagic* magic = character->magics[magicEvent];
-                    if (magicEvent == Magic::STONEBLAST) {
-                        character->currMagic = Magic::STONEBLAST;
+                    if (magicEvent == Magic::STORM) {
+                        character->currMagic = Magic::STORM;
                         character->castMagic();
                     }
                     else if (magicEvent == Magic::FIREBALL) {
                         character->currMagic = Magic::FIREBALL;
                         character->castMagic();
                     }
-                    else if (magicEvent == Magic::LIGHTNINGSPEAR) {
-                        if (!magic->start) {
-                            magic->removeFromParentNode();
-                            character->headTop->addChildNode(magic);
-                            character->castMagic();
-                        }
-                    }
                     else if (magicEvent == Magic::THUNDER) {
                         character->currMagic = Magic::THUNDER;
-                        character->castMagic();
-                    }
-                    else if (magicEvent == Magic::FLAME) {
-                        character->castMagic();
-                    }
-                    else if (magicEvent == Magic::THOUSANDBLADE) {
-                        character->castMagic();
-                    }
-                    else if (magicEvent == Magic::GROUNDSMASH) {
                         character->castMagic();
                     }
                     else if (magicEvent == Magic::DRAGON) {

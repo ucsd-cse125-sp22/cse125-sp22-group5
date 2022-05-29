@@ -133,19 +133,20 @@ inline bool DirState_Parse(
 }
 enum MagicPb : int {
   FIREBALL = 0,
-  STONEBLAST = 1,
+  STORM = 1,
   THUNDER = 2,
   DRAGON = 3,
   LIGHTNINGSPEAR = 4,
   GROUNDSMASH = 5,
   FLAME = 6,
   THOUSANDBLADE = 7,
+  STONEBLAST = 8,
   MagicPb_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   MagicPb_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool MagicPb_IsValid(int value);
 constexpr MagicPb MagicPb_MIN = FIREBALL;
-constexpr MagicPb MagicPb_MAX = THOUSANDBLADE;
+constexpr MagicPb MagicPb_MAX = STONEBLAST;
 constexpr int MagicPb_ARRAYSIZE = MagicPb_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MagicPb_descriptor();
