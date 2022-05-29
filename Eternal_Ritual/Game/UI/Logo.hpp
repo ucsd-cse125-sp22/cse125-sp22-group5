@@ -19,7 +19,7 @@ protected:
 	bool isload;
 	bool isPlaying;
 public:
-	Logo(Engine* e, Font* font, int* process);
+	Logo(Engine* e, Font* font, UINode* parentNode, int* process);
 	~Logo() = default;
 	void play();
 	void updateLoad(float loadingProgess);

@@ -92,16 +92,60 @@ void OfflineCore::loadAlly()
 
 void OfflineCore::displayLogo()
 {
+    UIBase_ = new UINode();
+    UIBase_->renderingOrder = 10000;
+    UIBase_->size = glm::vec2(1.0);
     CameraNode* logoCam = new CameraNode(60.0f, 0.1f, 1000.0f);
     logoCam->position = vec3(-2.5f, 0.0f, 0.0f);
     engine_->mainCameraNode = logoCam;
-    logo_ = new Logo(engine_,font_, pro);
+    logo_ = new Logo(engine_,font_, UIBase_, pro);
     logo_->play();
 }
 
 void OfflineCore::updateLoad()
 {
     logo_->updateLoad(loadingProgress);
+}
+
+void OfflineCore::loadStartScene()
+{
+    cursor_ = new Cursor(engine_);
+    ButtonBase_ = new UINode();
+    ButtonBase_->size = glm::vec2(1.0);
+    ButtonBase_->screenPosition = glm::vec2(0.5);
+    engine_->mainCameraNode->position = glm::vec3(-7.95262, 49.7237, 41.5025);
+    engine_->mainCameraNode->eulerAngles = glm::vec3(0, 91.6, -47.1);
+    startSceneUI_ = new StartSceneUI(engine_, font_, UIBase_,ButtonBase_);
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.1;
+}
+
+void OfflineCore::displayStart()
+{
+    cursor_->isDisable(false);
+    startSceneUI_->isDisbled(false);
+    Animation* startDelay = new Animation("startDelay",0.9);
+    startDelay->setCompletionHandler([&] {
+        Animation* showStart = new Animation("showStart", 1);
+        showStart->setEaseInTimingMode();
+        showStart->setFloatAnimation(&(ButtonBase_->alpha), 1.0);
+        engine_->playAnimation(showStart);
+    });
+    engine_->playAnimation(startDelay);
+    *pro = 5;
+}
+
+void OfflineCore::updateStart()
+{
+    int state = startSceneUI_->update();
+    if (state == 1) {
+        *pro = 6;
+    }
+    else if(state == 2) {
+
+    }
+    cursor_->update();
 }
 
 
@@ -148,7 +192,7 @@ void OfflineCore::loadMap() {
 
     map_system_manager_ = MapSystemManager::Instance();
     
-    //ImportMapHelper::importMapBox();
+    ImportMapHelper::importMapBox();
     ImportMapHelper::importMapModel();
     *pro = 2;
     (*loadState)++;
@@ -266,7 +310,7 @@ void OfflineCore::loadDamageSystem() {
     }
     *pro = 2;
     (*loadState)++;
-    loadingProgress += 0.2;
+    loadingProgress += 0.1;
 }
 
 
@@ -316,32 +360,77 @@ void OfflineCore::handleEvent() {
 }
 
 
-void OfflineCore::updateState() {
-    character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
-    character_->updatePosition();
-    character_->updateTransform();
-    
-    for (int i = 0; i < enemies_.size(); i++){
-        //enemies_[i]->updatePosition();
-        enemies_[i]->updateTransform();
+void OfflineCore::cameraHandle() {
+
+    if (engine_->input->wasKeyReleased(KEY_ESCAPE)) {
+        engine_->terminate();
     }
+
+    glm::vec3 cameraTargetPosition = engine_->mainCameraNode->position;
+
+    // Update target position:
+    if (engine_->input->isPressingKey(KEY_W)) {
+        cameraTargetPosition += engine_->mainCameraNode->getFrontVectorInWorld() * 0.2f;
+    }
+    else if (engine_->input->isPressingKey(KEY_S)) {
+        cameraTargetPosition += engine_->mainCameraNode->getBackVectorInWorld() * 0.2f;
+    }
+    if (engine_->input->isPressingKey(KEY_A)) {
+        cameraTargetPosition += engine_->mainCameraNode->getLeftVectorInWorld() * 0.2f;
+    }
+    else if (engine_->input->isPressingKey(KEY_D)) {
+        cameraTargetPosition += engine_->mainCameraNode->getRightVectorInWorld() * 0.2f;
+    }
+    if (engine_->input->isPressingKey(KEY_E)) {
+        cameraTargetPosition += engine_->mainCameraNode->getUpVectorInWorld() * 0.2f;
+    }
+    else if (engine_->input->isPressingKey(KEY_Q)) {
+        cameraTargetPosition += engine_->mainCameraNode->getDownVectorInWorld() * 0.2f;
+    }
+
+    glm::vec3 cameraTargetEulerAngles = engine_->mainCameraNode->eulerAngles;
+    // Update target euler angles:
+    vec2 mouseTranslation = engine_->input->getMouseTranslation() * 0.1f;
+    cameraTargetEulerAngles.y -= mouseTranslation.x;
+    cameraTargetEulerAngles.z -= mouseTranslation.y;
+    cameraTargetEulerAngles.z = glm::max(-60.0f, glm::min(cameraTargetEulerAngles.z, 60.0f));
+
+
+    engine_->mainCameraNode->position = cameraTargetPosition;
+    engine_->mainCameraNode->eulerAngles = cameraTargetEulerAngles;
+    //// Smooth rotation:
+    std::cout << "p: " << cameraTargetPosition.x << "," << cameraTargetPosition.y << "," << cameraTargetPosition.z << std::endl;
+    std::cout << "A: " << cameraTargetEulerAngles.x << "," << cameraTargetEulerAngles.y << "," << cameraTargetEulerAngles.z << std::endl;
+}
+
+
+
+void OfflineCore::updateState() {
+    //character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
+    //character_->updatePosition();
+    //character_->updateTransform();
+    
+   /* for (int i = 0; i < enemies_.size(); i++){
+        enemies_[i]->updatePosition();
+        enemies_[i]->updateTransform();
+    }*/
     
     
-    for (auto& magic : all_magics_) {
+    /*for (auto& magic : all_magics_) {
         magic->updateMagic();
     }
 
     
     hit_controller_->checkHit();
-    character_->genMana();
+    character_->genMana();*/
 
-    HUD_->update();
+    //HUD_->update();
 }
 
 
 void OfflineCore::renderWorld() {
     
-    HUDbase_->isDisabled = false;
+    //HUDbase_->isDisabled = false;
     engine_->renderDirectionalLightShadowMap(directional_light_);
 
 }

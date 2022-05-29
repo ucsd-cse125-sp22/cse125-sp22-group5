@@ -43,7 +43,9 @@ public:
     void loadAlly();
     void displayLogo();
     void updateLoad();
-
+    void loadStartScene();
+    void displayStart();
+    void updateStart();
 
     void loadSky();
     void loadLight();
@@ -54,6 +56,9 @@ public:
     void loadDamageSystem();
     
     void handleEvent();
+
+    void cameraHandle();
+
     void updateState();
     void renderWorld();
 
@@ -100,13 +105,18 @@ private:
     //HUD
 
     HUDNode* HUD_;
+    UINode* UIBase_;
+    UINode* ButtonBase_;
     UINode* HUDbase_;
+    StartSceneUI* startSceneUI_;
 
     //Font
     Font* font_;
 
     //
     Logo* logo_;
+
+    Cursor* cursor_;
 
 };
 

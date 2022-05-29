@@ -73,23 +73,31 @@ int main(int argc, char* argv[]) {
                 else if (loadState == 9) {
                     OfflineCore::Instance()->loadDamageSystem();
                 }
+                else if (loadState == 10) {
+                    OfflineCore::Instance()->loadStartScene();
+                }
                 else {
-                    process = 5;
+                    process = 4;
                 }
             }
             else if (process == 4) {
 
                 // Start Scnene===========================
-
+                OfflineCore::Instance()->displayStart();
 
             }
             else if (process == 5) {
-
-                OfflineCore::Instance()->handleEvent();
-
-                OfflineCore::Instance()->updateState();
+                OfflineCore::Instance()->updateStart();
 
                 OfflineCore::Instance()->renderWorld();
+            }
+            else if (process == 6) {
+
+                OfflineCore::Instance()->cameraHandle();
+
+                //OfflineCore::Instance()->handleEvent();
+
+                OfflineCore::Instance()->updateState();
 
             }
 

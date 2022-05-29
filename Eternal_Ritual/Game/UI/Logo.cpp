@@ -1,6 +1,6 @@
 #include "Logo.hpp"
 
-Logo::Logo(Engine* e, Font* font, int* process)
+Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 {
 	engine = e;
 	this->font = font;
@@ -11,7 +11,6 @@ Logo::Logo(Engine* e, Font* font, int* process)
 	glm::vec2 winSize = glm::vec2(e->getWindowResolution().x / e->getWindowResolution().y, 1.0);
 	background = new SpriteNode(winSize);
 	background->color = glm::vec4(0,0,0,1);
-	background->renderingOrder = 10000;
 	background->screenPosition = glm::vec2(0.5);
 
 	logoPic = new SpriteNode(glm::vec2(1));
@@ -28,19 +27,21 @@ Logo::Logo(Engine* e, Font* font, int* process)
 	nameBackground = new SpriteNode(UISizes::logoBackSize);
 	nameBackground->texture = new Texture("/Resources/Game/UI/logo_back.png");
 	nameBackground->alpha = 0;
-	nameBackground->parentCoordinatePosition = glm::vec2(0.5,0.48);
+	nameBackground->renderingOrder = 1;
+	nameBackground->screenPosition = glm::vec2(0.5,0.48);
 
 	name = new TextNode(font,0.15f,1.0f,0.1f);
 	name->text = "Eternal Ritual";
 	name->color = Color::LogotextColor;
 	name->parentCoordinatePosition = glm::vec2(0.5,0.69);
 
-	background->addChildNode(nameBackground);
+	parentNode->addChildNode(background);
+	parentNode->addChildNode(nameBackground);
 	nameBackground->addChildNode(name);
 	background->addChildNode(logoPic);
 	background->addChildNode(light);
 
-	e->addNode(background);
+	e->addNode(parentNode);
 
 }
 
@@ -134,8 +135,20 @@ void Logo::updateLoad(float loadingProgess)
 		}
 	}
 	if (loadingProgess > 1) {
-		background->isDisabled = true;
-		*pro = 4;
+		Animation* end = new Animation("LoadEnd", 1.0);
+		end->setFloatAnimation(&background->alpha, 0);
+		end->setCompletionHandler([&] {
+			background->isDisabled = true;
+			Animation* move = new Animation("titleMove", 1.0);
+			move->setFloatAnimation(&nameBackground->screenPosition.y, 0.25);
+			move->setEaseInEaseOutTimingMode();
+			Animation* changeScale = new Animation("titleScale", 1.0);
+			changeScale->setVec2Animation(&nameBackground->scale, glm::vec2(0.9));
+			engine->playAnimation(move);
+			engine->playAnimation(changeScale);
+			*pro = 4;
+		});
+		engine->playAnimation(end);
 	}
 }
 

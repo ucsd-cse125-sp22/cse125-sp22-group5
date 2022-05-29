@@ -1,16 +1,55 @@
 #include "StartSceneUI.hpp"
+#include <iostream>
 
-StartSceneUI::StartSceneUI(Engine* e, Font* font)
+StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* buttonBase)
 {
-	UINode* base = new UINode();
-	nameBackground = new SpriteNode(UISizes::logoBackSize);
-	nameBackground->texture = new Texture("/Resources/Game/UI/logo_back.png");
-	nameBackground->alpha = 1;
+	this->parentNode = parentNode;
+	this->buttonBase = buttonBase;
+	this->engine = e;
 
-	name = new TextNode(font, 0.15f, 1.0f, 0.1f);
-	name->text = "Eternal Ritual";
-	name->color = Color::LogotextColor;
-	name->parentCoordinatePosition = glm::vec2(0.5, 0.69);
+	float scale = 1.1;
 
-	e->addNode(base);
+	startButton = new ButtonNode(buttonBase,font);
+	startButton->setText("Start");
+	startButton->setPosition(glm::vec2(0.5,0.5));
+	startButton->setScale(scale);
+
+	creditButton = new ButtonNode(buttonBase, font);
+	creditButton->setText("Credit");
+	creditButton->setPosition(glm::vec2(0.5, 0.65));
+	creditButton->setScale(scale);
+
+	exitButton = new ButtonNode(buttonBase, font);
+	exitButton->setText("Exit");
+	exitButton->setPosition(glm::vec2(0.5, 0.8));
+	exitButton->setScale(scale);
+
+	buttonBase->alpha = 0;
+	buttonBase->isDisabled = true;
+	parentNode->addChildNode(buttonBase);
+}
+
+void StartSceneUI::isDisbled(bool t)
+{
+	parentNode->isDisabled = t;
+	buttonBase->isDisabled = t;
+}
+
+int StartSceneUI::update() {
+
+	glm::vec2 position = engine->input->getMouseScreenPosition();
+	Input* input = engine->input;
+
+	if (startButton->checkState(position, input)) {
+		return 1;
+	}
+
+	if (exitButton->checkState(position,input)) {
+		engine->terminate();
+	}
+
+	if (creditButton->checkState(position, input)) {
+		return 2;
+	}
+	
 }

@@ -711,7 +711,7 @@ void CharNode::castMagic(){
                 this->getAnimator(magic->actionName)->stop(0.4);
             });
             Engine::main->playAnimation(resume);
-            cout << "remaining mana: " << mana << endl;
+            //cout << "remaining mana: " << mana << endl;
         }
     }
 }
@@ -719,7 +719,7 @@ void CharNode::castMagic(){
 void CharNode::genMana() {
     if (state < CharState::ROLLING && mana < MAXMANA) {
         mana = std::min((float)MAXMANA, mana + manaRegen);
-        cout << "curr mana: " << mana << endl;
+        //cout << "curr mana: " << mana << endl;
     }
 }
 
