@@ -226,6 +226,7 @@
 		C2F7796028078726001A214D /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F7795F28078726001A214D /* libfreetype.6.dylib */; };
 		E21F17D3281DCB260099A81C /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */; };
 		E21F17D5281DCB260099A81C /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */; };
+		E22C59EA284536D1007FFC49 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
 		E22E3016283D9B1300BEA708 /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
 		E265F1922834446E008B4AD0 /* DragonMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F1902834446E008B4AD0 /* DragonMagic.cpp */; };
 		E265F2632835661D008B4AD0 /* LightningPhalanx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F2612835661D008B4AD0 /* LightningPhalanx.cpp */; };
@@ -401,6 +402,8 @@
 		C2F7795F28078726001A214D /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../opt/homebrew/Cellar/freetype/2.12.0/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "../../../../../../../../../opt/homebrew/Cellar/sfml/2.5.1_1/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
 		E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "../../../../../../../../../opt/homebrew/Cellar/sfml/2.5.1_1/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
+		E22C59E8284536D1007FFC49 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
+		E22C59E9284536D1007FFC49 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		E22E3014283D9B1300BEA708 /* Storm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Storm.cpp; sourceTree = "<group>"; };
 		E22E3015283D9B1300BEA708 /* Storm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Storm.hpp; sourceTree = "<group>"; };
 		E265F1902834446E008B4AD0 /* DragonMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DragonMagic.cpp; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 		3D2D27582834220100159082 /* Magic */ = {
 			isa = PBXGroup;
 			children = (
+				E22C59E9284536D1007FFC49 /* Circle.cpp */,
+				E22C59E8284536D1007FFC49 /* Circle.hpp */,
 				3D2D276F2834220100159082 /* AllMagic.inc */,
 				3D2D27662834220100159082 /* BaseMagic.cpp */,
 				3D2D27622834220100159082 /* BaseMagic.hpp */,
@@ -1157,6 +1162,7 @@
 				12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */,
 				3D6FD3A2283F985200BC5083 /* UINode.cpp in Sources */,
 				3D2D27712834220100159082 /* ThunderShock.cpp in Sources */,
+				E22C59EA284536D1007FFC49 /* Circle.cpp in Sources */,
 				3D2D277A2834220100159082 /* Thunder.cpp in Sources */,
 				3D6FD390283F985200BC5083 /* Sprite.cpp in Sources */,
 				3D2D27702834220100159082 /* FireBall.cpp in Sources */,
