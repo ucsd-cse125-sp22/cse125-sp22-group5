@@ -125,7 +125,7 @@ void OfflineCore::loadEnemy() {
     
     CharNode* enemy = character_->copy(vec3(2.0, -1.0f, 2.0f));
     enemy->name = "enemy1";
-    enemy->setEularAngle(vec3(0,90.0f,0));
+    enemy->setCharacterEularAngle(vec3(0,90.0f,0));
     
     enemy->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(enemy);
@@ -181,7 +181,7 @@ void OfflineCore::loadAlly()
 
     ally_ = character_->copy(vec3(-2.0, -1.0f, -2.0f));
     ally_->name = "Ally";
-    ally_->setEularAngle(vec3(0, 90.0f, 0));
+    ally_->setCharacterEularAngle(vec3(0, 90.0f, 0));
 
     ally_->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(ally_);

@@ -320,17 +320,18 @@ const char descriptor_table_protodef_gameData_2eproto[] PROTOBUF_SECTION_VARIABL
   "\0132\026.gameDataPb.PlayerAttr:\0028\001*}\n\010DirStat"
   "e\022\010\n\004NONE\020\000\022\t\n\005FRONT\020\004\022\010\n\004BACK\020\010\022\010\n\004LEFT"
   "\020\020\022\t\n\005RIGHT\020 \022\r\n\tFRONTLEFT\020@\022\017\n\nFRONTRIG"
-  "HT\020\200\001\022\r\n\010BACKLEFT\020\200\002\022\016\n\tBACKRIGHT\020\200\004*\203\001\n"
-  "\007MagicPb\022\014\n\010FIREBALL\020\000\022\016\n\nSTONEBLAST\020\001\022\013"
-  "\n\007THUNDER\020\002\022\n\n\006DRAGON\020\003\022\022\n\016LIGHTNINGSPEA"
-  "R\020\004\022\017\n\013GROUNDSMASH\020\005\022\t\n\005FLAME\020\006\022\021\n\rTHOUS"
-  "ANDBLADE\020\007*V\n\013CharStatePb\022\010\n\004IDLE\020\000\022\n\n\006M"
-  "OVING\020\001\022\013\n\007ROLLING\020\002\022\r\n\tCOMBATING\020\003\022\013\n\007D"
-  "AMAGED\020\004\022\010\n\004DEAD\020\005B\002H\001b\006proto3"
+  "HT\020\200\001\022\r\n\010BACKLEFT\020\200\002\022\016\n\tBACKRIGHT\020\200\004*\216\001\n"
+  "\007MagicPb\022\014\n\010FIREBALL\020\000\022\t\n\005STORM\020\001\022\013\n\007THU"
+  "NDER\020\002\022\n\n\006DRAGON\020\003\022\022\n\016LIGHTNINGSPEAR\020\004\022\017"
+  "\n\013GROUNDSMASH\020\005\022\t\n\005FLAME\020\006\022\021\n\rTHOUSANDBL"
+  "ADE\020\007\022\016\n\nSTONEBLAST\020\010*V\n\013CharStatePb\022\010\n\004"
+  "IDLE\020\000\022\n\n\006MOVING\020\001\022\013\n\007ROLLING\020\002\022\r\n\tCOMBA"
+  "TING\020\003\022\013\n\007DAMAGED\020\004\022\010\n\004DEAD\020\005B\002H\001b\006proto"
+  "3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gameData_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gameData_2eproto = {
-  false, false, 1630, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
+  false, false, 1641, descriptor_table_protodef_gameData_2eproto, "gameData.proto", 
   &descriptor_table_gameData_2eproto_once, nullptr, 0, 9,
   schemas, file_default_instances, TableStruct_gameData_2eproto::offsets,
   file_level_metadata_gameData_2eproto, file_level_enum_descriptors_gameData_2eproto, file_level_service_descriptors_gameData_2eproto,
@@ -377,6 +378,7 @@ bool MagicPb_IsValid(int value) {
     case 5:
     case 6:
     case 7:
+    case 8:
       return true;
     default:
       return false;

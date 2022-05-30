@@ -239,6 +239,7 @@ CharNode::CharNode(vec3 position){
     this->characterTargetPosition = position;
     this->eulerAngles = vec3(0.0f);
     this->characterTargetEulerAngles = vec3(0.0f);
+    this->cameraTargetEulerAngles = vec3(0.0f);
     this->scale = vec3(1.0f);
     this->parent = NULL;
     this->isDisabled = false;
@@ -285,11 +286,15 @@ void CharNode::setCamera(CameraNode* camera){
     this->cameraNode = camera;
     this->controlNode->addChildNode(camera);
 }
-void CharNode::setEularAngle(vec3 eularAngle){
+void CharNode::setCharacterEularAngle(vec3 eularAngle){
     this->modelNode->eulerAngles = eularAngle;
     this->characterTargetEulerAngles = eularAngle;
 }
-void CharNode::setPosition(vec3 position) {
+void CharNode::setCameraEularAngle(vec3 eularAngle){
+    this->controlNode->eulerAngles = eularAngle;
+    this->cameraTargetEulerAngles = eularAngle;
+}
+void CharNode::setCharacterPosition(vec3 position) {
     this->position = position;
     this->characterTargetPosition = position;
 }

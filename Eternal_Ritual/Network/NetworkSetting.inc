@@ -6,7 +6,7 @@
 
 #ifdef SERVERSOCKET_HPP
 
-#define SERVER_PORT 8888
+#define SERVER_PORT 8887
 #define LISTEN_QUEUE_SISE 10
 
 #endif
@@ -14,7 +14,7 @@
 
 #ifdef CLIENTSOCKET_HPP
 
-#define SERVER_PORT 8888
+#define SERVER_PORT 8887
 //#define SERVER_IP "70.95.147.7"
 //#define SERVER_IP "100.81.36.66"
 //#define SERVER_IP "127.0.0.1"
@@ -24,4 +24,4 @@
 
 
 #define MAX_BUFFER_SIZE 500
-#define PLAYER_CAPACITY 2
+#define PLAYER_CAPACITY 1
