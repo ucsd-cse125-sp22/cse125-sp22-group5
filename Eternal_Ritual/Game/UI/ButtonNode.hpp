@@ -35,7 +35,7 @@ public:
     void setText(std::string t);
     void setPosition(glm::vec2 position);
     void setScale(float i);
-    bool checkState(glm::vec2 mousePosition, Input* input);
+    bool checkState(glm::vec2 mousePosition, Input* input, bool isReleasd);
     void disable(bool disable);
 };
 

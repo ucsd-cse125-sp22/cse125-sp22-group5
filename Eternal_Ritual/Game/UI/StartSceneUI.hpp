@@ -14,12 +14,17 @@ private:
 	ButtonNode* startButton;
 	ButtonNode* creditButton;
 	ButtonNode* exitButton;
+	SpriteNode* netWinBack;
+	SpriteNode* creditBack;
+	TextNode* netText;
+	TextNode* creditText;
 	TextNode* name;
+
 public:
 	StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* buttonBase);
 	~StartSceneUI() = default;
 	void isDisbled(bool t);
-	int update();
+	int update(bool isWaiting);
 
 };
 

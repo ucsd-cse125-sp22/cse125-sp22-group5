@@ -14,5 +14,6 @@
 #include "Game/UI/Logo.hpp"
 #include "Game/UI/StartSceneUI.hpp"
 #include "Game/UI/Cursor.hpp"
+#include "Game/UI/DeathScene.hpp"
 
 #endif /* UI_h */

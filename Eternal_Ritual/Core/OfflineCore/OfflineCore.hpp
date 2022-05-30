@@ -46,6 +46,9 @@ public:
     void loadStartScene();
     void displayStart();
     void updateStart();
+    void loadEnd();
+    void displayEnd();
+    void reset();
 
     void loadSky();
     void loadLight();
@@ -69,6 +72,10 @@ private:
     int* pro;
     int* loadState;
     float loadingProgress;
+    bool isWaiting;
+    bool enterGame;
+    bool mainCamera;
+ 
 
     // Singleton pattern
     static OfflineCore* offline_core_;
@@ -109,6 +116,10 @@ private:
     UINode* ButtonBase_;
     UINode* HUDbase_;
     StartSceneUI* startSceneUI_;
+    DeathScene* deathScene_;
+
+    CameraNode* UIcam;
+    CameraNode* charcam;
 
     //Font
     Font* font_;

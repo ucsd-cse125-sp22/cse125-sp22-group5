@@ -44,7 +44,7 @@ void OfflineCore::initEngine(int* p, int* l) {
 
     engine_ = new Engine("KGLEngine", 0.7f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
-    engine_->lockCursor();
+    //engine_->lockCursor();
 }
 
 void OfflineCore::loadFont()
@@ -57,6 +57,8 @@ void OfflineCore::loadFont()
 
 void OfflineCore::loadHUD()
 {
+    mainCamera = true;
+
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 6 - Load HUD --|" << std::endl;
     HUDbase_ = new UINode();
@@ -95,9 +97,11 @@ void OfflineCore::displayLogo()
     UIBase_ = new UINode();
     UIBase_->renderingOrder = 10000;
     UIBase_->size = glm::vec2(1.0);
-    CameraNode* logoCam = new CameraNode(60.0f, 0.1f, 1000.0f);
-    logoCam->position = vec3(-2.5f, 0.0f, 0.0f);
-    engine_->mainCameraNode = logoCam;
+    UIcam = new CameraNode(60.0f, 0.1f, 1000.0f);
+    UIcam->position = glm::vec3(-7.95262, 49.7237, 41.5025);
+    UIcam->eulerAngles = glm::vec3(0, 91.6, -47.1);
+    engine_->addNode(UIcam);
+    engine_->mainCameraNode = UIcam;
     logo_ = new Logo(engine_,font_, UIBase_, pro);
     logo_->play();
 }
@@ -113,16 +117,17 @@ void OfflineCore::loadStartScene()
     ButtonBase_ = new UINode();
     ButtonBase_->size = glm::vec2(1.0);
     ButtonBase_->screenPosition = glm::vec2(0.5);
-    engine_->mainCameraNode->position = glm::vec3(-7.95262, 49.7237, 41.5025);
-    engine_->mainCameraNode->eulerAngles = glm::vec3(0, 91.6, -47.1);
+    
     startSceneUI_ = new StartSceneUI(engine_, font_, UIBase_,ButtonBase_);
     *pro = 2;
     (*loadState)++;
-    loadingProgress += 0.1;
+    loadingProgress += 0.05;
 }
 
 void OfflineCore::displayStart()
 {
+    enterGame = true;
+    isWaiting = false;
     cursor_->isDisable(false);
     startSceneUI_->isDisbled(false);
     Animation* startDelay = new Animation("startDelay",0.9);
@@ -138,14 +143,45 @@ void OfflineCore::displayStart()
 
 void OfflineCore::updateStart()
 {
-    int state = startSceneUI_->update();
+    int state = startSceneUI_->update(isWaiting);
     if (state == 1) {
         *pro = 6;
     }
-    else if(state == 2) {
 
-    }
+    //engine_->mainCameraNode->position = glm::vec3(-7.95262, 49.7237, 41.5025);
+    //engine_->mainCameraNode->eulerAngles = glm::vec3(0, 91.6, -47.1);
+
     cursor_->update();
+
+    if (engine_->input->wasKeyPressed(KEY_1)) {
+        isWaiting = false;
+    }
+}
+
+void OfflineCore::loadEnd()
+{
+    deathScene_ = new DeathScene(engine_);
+    *pro = 2;
+    (*loadState)++;
+    loadingProgress += 0.05;
+}
+
+void OfflineCore::displayEnd()
+{
+    deathScene_->display(true,pro);
+    (* pro)++;
+}
+
+void OfflineCore::reset()
+{
+    enterGame = true;
+    character_->health = 1000;
+    HUD_->reset();
+    engine_->mainCameraNode = UIcam;
+    /*engine_->mainCameraNode->position = glm::vec3(-7.95262, 49.7237, 41.5025);
+    engine_->mainCameraNode->eulerAngles = glm::vec3(0, 91.6, -47.1);*/
+    HUDbase_->isDisabled = true;
+    *pro = 4;
 }
 
 
@@ -211,12 +247,12 @@ void OfflineCore::loadCharacter() {
     controlNode->position = vec3(0.0f, 1.2f, 0.0f);
     character_->setControl(controlNode);
     
-    CameraNode* cameraNode = new CameraNode(60.0f, 0.1f, 1000.0f);
-    cameraNode->position = vec3(-2.5f, 0.0f, 0.0f);
-    cameraNode->addChildNode(point_light_);
-    character_->setCamera(cameraNode);
-    engine_->mainCameraNode = cameraNode;
-    
+    charcam = new CameraNode(60.0f, 0.1f, 1000.0f);
+    charcam->position = vec3(-2.5f, 0.0f, 0.0f);
+    charcam->addChildNode(point_light_);
+    character_->setCamera(charcam);
+    //engine_->mainCameraNode = cameraNode;
+
     character_->stopAndPlay("idle", 0.0f, 0.0f);;
     
     engine_->addNode(character_);
@@ -357,6 +393,35 @@ void OfflineCore::handleEvent() {
         character_->castMagic();
     }
     character_->scrollMagic(engine_->input->getScrollWheelAcceleration());
+
+
+
+    if (engine_->input->wasKeyPressed(KEY_P)) {
+        character_->health = 0;
+    }
+    if (engine_->input->wasKeyPressed(KEY_L)) {
+        mainCamera = true;
+    }
+    if (engine_->input->wasKeyPressed(KEY_K)) {
+        mainCamera = false;
+    }
+    if (engine_->input->wasKeyPressed(KEY_O)) {
+        HUD_->toggleViewDead(enemies_[0]);
+    }
+    if (engine_->input->wasKeyPressed(KEY_I)) {
+        HUD_->toggleViewDead(ally_);
+    }
+    if (engine_->input->wasKeyPressed(KEY_U)) {
+        HUD_->toggleViewDead(character_);
+    }
+    if (engine_->input->wasKeyPressed(KEY_J)) {
+        deathScene_->display(true, pro);
+        Animation* delay = new Animation("resetdelay", 1.5);
+        delay->setCompletionHandler([&] {
+            *pro = 7;
+            });
+        engine_->playAnimation(delay);
+    }
 }
 
 
@@ -399,40 +464,48 @@ void OfflineCore::cameraHandle() {
     engine_->mainCameraNode->position = cameraTargetPosition;
     engine_->mainCameraNode->eulerAngles = cameraTargetEulerAngles;
     //// Smooth rotation:
-    std::cout << "p: " << cameraTargetPosition.x << "," << cameraTargetPosition.y << "," << cameraTargetPosition.z << std::endl;
+    std::cout << "p: " << UIcam->position.x << "," << UIcam->position.y << "," << UIcam->position.z << std::endl;
+    std::cout << "p: " << engine_->mainCameraNode->position.x << "," << engine_->mainCameraNode->position.y << "," << engine_->mainCameraNode->position.z << std::endl;
     std::cout << "A: " << cameraTargetEulerAngles.x << "," << cameraTargetEulerAngles.y << "," << cameraTargetEulerAngles.z << std::endl;
 }
 
 
 
 void OfflineCore::updateState() {
-    //character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
-    //character_->updatePosition();
-    //character_->updateTransform();
     
-   /* for (int i = 0; i < enemies_.size(); i++){
+    cursor_->isDisable(true);
+
+    if (enterGame) {
+        UIBase_->isDisabled = true;
+        HUDbase_->isDisabled = false;
+        engine_->mainCameraNode = charcam;
+        enterGame = false;
+    }
+
+    character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
+    character_->updatePosition();
+    character_->updateTransform();
+    
+   for (int i = 0; i < enemies_.size(); i++){
         enemies_[i]->updatePosition();
         enemies_[i]->updateTransform();
-    }*/
+    }
     
     
-    /*for (auto& magic : all_magics_) {
+    for (auto& magic : all_magics_) {
         magic->updateMagic();
     }
 
     
     hit_controller_->checkHit();
-    character_->genMana();*/
+    character_->genMana();
 
-    //HUD_->update();
+    HUD_->update(!mainCamera);
 }
 
 
 void OfflineCore::renderWorld() {
-    
-    //HUDbase_->isDisabled = false;
     engine_->renderDirectionalLightShadowMap(directional_light_);
-
 }
 
 void OfflineCore::render() {

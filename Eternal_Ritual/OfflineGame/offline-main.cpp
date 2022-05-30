@@ -76,6 +76,9 @@ int main(int argc, char* argv[]) {
                 else if (loadState == 10) {
                     OfflineCore::Instance()->loadStartScene();
                 }
+                else if (loadState == 11) {
+                    OfflineCore::Instance()->loadEnd();
+                }
                 else {
                     process = 4;
                 }
@@ -90,18 +93,19 @@ int main(int argc, char* argv[]) {
                 OfflineCore::Instance()->updateStart();
 
                 OfflineCore::Instance()->renderWorld();
+                
             }
             else if (process == 6) {
 
-                OfflineCore::Instance()->cameraHandle();
-
-                //OfflineCore::Instance()->handleEvent();
-
                 OfflineCore::Instance()->updateState();
 
-            }
+                OfflineCore::Instance()->handleEvent();
 
-            /*OfflineCore::Instance()->handleEvent();*/
+                OfflineCore::Instance()->renderWorld();
+            }
+            else if (process == 7) {
+                OfflineCore::Instance()->reset();
+            }
 
             OfflineCore::Instance()->render();
 

@@ -6,6 +6,7 @@
 //
 
 #include "Game/UI/ButtonNode.hpp"
+#include <iostream>
 
 ButtonNode::ButtonNode(UINode* parentNode,Font* font){
     
@@ -53,18 +54,18 @@ void ButtonNode::restore(){
     background->multiplyColor = glm::vec4(1);
 }
 
-bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input){
+bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input, bool isReleasd){
     if(background->isDisabled){
         return false;
     }
 
-    bool isReleased = input->wasKeyReleased(MOUSE_BUTTON_LEFT);
 
     if(background->checkSizeIncludesScreenPosition(mousePosition)){
+        std::cout << text->text  + ": " << isReleasd << std::endl;
         if(input->isPressingKey(MOUSE_BUTTON_LEFT)){
             background->texture = dark;
             return false;
-        }else if(isReleased) {
+        }else if(isReleasd) {
             background->texture = normal;
             return true;
         }
@@ -75,7 +76,6 @@ bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input){
     }else{
         background->texture = normal;
         return false;
-        isReleased = false;
     }
 
 }
