@@ -15,18 +15,24 @@
 #include "Game/Magic/ThunderShock.hpp"
 
 class CharNode;
+class Circle;
 
 
 class Thunder final : public DamageableMagic{
 private:
     static bool loaded;
     static AudioBuffer* castSound;
+    static ParticleNode* metaShiny;
+    static ParticleNode* metaShimmer;
 public:
     bool threwOut;
     bool canDamage;
     std::vector<ThunderShock*> thunders;
     LightNode* light;
     Animation* createFireball;
+    ParticleNode* shiny;
+    ParticleNode* shimmer;
+    Circle* circle;
     Node* left;
     Node* middle;
     Node* right;

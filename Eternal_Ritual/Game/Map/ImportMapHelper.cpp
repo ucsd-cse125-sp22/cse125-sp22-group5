@@ -2769,4 +2769,207 @@ void importMapModel() {
     Engine::main->addNode(tree1_281);
 }
 
+void importTestMap() {
+    unsigned int boxType;
+    vec3 boxSize, boxPosition, boxEulerAngles;
+    
+    boxType = 1;
+    boxSize = vec3(20.0f, 20.0f, 20.0f);
+    boxPosition = vec3(0.0f, 9.0f, 60.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 40.0f);
+    boxPosition = vec3(0.0f, -1.5f, 30.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(100.0f, 1.0f, 20.0f);
+    boxPosition = vec3(0.0f, -1.5f, 0.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 40.0f);
+    boxPosition = vec3(0.0f, -1.5f, -30.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(36.339744567871094f, -1.5f, 13.65999984741211f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(26.200000762939453f, -1.5f, 27.0f);
+    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(13.65999984741211f, -1.5f, 36.34000015258789f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(20.0f, -1.5f, 20.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(-13.600000381469727f, -1.5f, -36.33000183105469f);
+    boxEulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(-36.34000015258789f, -1.5f, -13.600000381469727f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(-26.95877456665039f, -1.5f, -26.158771514892578f);
+    boxEulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(-20.0f, -1.5f, -20.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(20.0f, -1.5f, -20.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = 0;
+    boxSize = vec3(20.0f, 1.0f, 20.0f);
+    boxPosition = vec3(-20.0f, -1.5f, 20.0f);
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    MapSystemManager::Instance()->updateGrids();
+    
+    boxType = 0;
+    boxSize = vec3(19.999998092651367f, 1.0f, 20.0f);
+    boxPosition = vec3(-13.731363296508789f, -1.5f, 36.58491516113281f);
+    boxEulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    PBRShader* cubeShader = new PBRShader(0.5f, 0.5f);
+    Node* testNode1 = new Node();
+    testNode1->loadUnitCube();
+    testNode1->geometries[0]->setShader(cubeShader);
+    testNode1->scale = vec3(20.0f, 20.0f, 20.0f);
+    testNode1->position = vec3(0.0f, 9.0f, 60.0f);
+    testNode1->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode1);
+    Node* testNode2 = new Node();
+    testNode2->loadUnitCube();
+    testNode2->geometries[0]->setShader(cubeShader);
+    testNode2->scale = vec3(20.0f, 1.0f, 40.0f);
+    testNode2->position = vec3(0.0f, -1.5f, 30.0f);
+    testNode2->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode2);
+    Node* testNode3 = new Node();
+    testNode3->loadUnitCube();
+    testNode3->geometries[0]->setShader(cubeShader);
+    testNode3->scale = vec3(100.0f, 1.0f, 20.0f);
+    testNode3->position = vec3(0.0f, -1.5f, 0.0f);
+    testNode3->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode3);
+    Node* testNode4 = new Node();
+    testNode4->loadUnitCube();
+    testNode4->geometries[0]->setShader(cubeShader);
+    testNode4->scale = vec3(20.0f, 1.0f, 40.0f);
+    testNode4->position = vec3(0.0f, -1.5f, -30.0f);
+    testNode4->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode4);
+    Node* testNode5 = new Node();
+    testNode5->loadUnitCube();
+    testNode5->geometries[0]->setShader(cubeShader);
+    testNode5->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode5->position = vec3(36.339744567871094f, -1.5f, 13.65999984741211f);
+    testNode5->eulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    Engine::main->addNode(testNode5);
+    Node* testNode6 = new Node();
+    testNode6->loadUnitCube();
+    testNode6->geometries[0]->setShader(cubeShader);
+    testNode6->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode6->position = vec3(26.200000762939453f, -1.5f, 27.0f);
+    testNode6->eulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    Engine::main->addNode(testNode6);
+    Node* testNode7 = new Node();
+    testNode7->loadUnitCube();
+    testNode7->geometries[0]->setShader(cubeShader);
+    testNode7->scale = vec3(19.999998092651367f, 1.0f, 20.0f);
+    testNode7->position = vec3(13.65999984741211f, -1.5f, 36.34000015258789f);
+    testNode7->eulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    Engine::main->addNode(testNode7);
+    Node* testNode8 = new Node();
+    testNode8->loadUnitCube();
+    testNode8->geometries[0]->setShader(cubeShader);
+    testNode8->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode8->position = vec3(20.0f, -1.5f, 20.0f);
+    testNode8->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode8);
+    Node* testNode9 = new Node();
+    testNode9->loadUnitCube();
+    testNode9->geometries[0]->setShader(cubeShader);
+    testNode9->scale = vec3(19.999998092651367f, 1.0f, 20.0f);
+    testNode9->position = vec3(-13.600000381469727f, -1.5f, -36.33000183105469f);
+    testNode9->eulerAngles = vec3(0.0f, -60.000001669652114f, 0.0f);
+    Engine::main->addNode(testNode9);
+    Node* testNode10 = new Node();
+    testNode10->loadUnitCube();
+    testNode10->geometries[0]->setShader(cubeShader);
+    testNode10->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode10->position = vec3(-36.34000015258789f, -1.5f, -13.600000381469727f);
+    testNode10->eulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    Engine::main->addNode(testNode10);
+    Node* testNode11 = new Node();
+    testNode11->loadUnitCube();
+    testNode11->geometries[0]->setShader(cubeShader);
+    testNode11->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode11->position = vec3(-26.95877456665039f, -1.5f, -26.158771514892578f);
+    testNode11->eulerAngles = vec3(0.0f, 45.00000466733367f, 0.0f);
+    Engine::main->addNode(testNode11);
+    Node* testNode12 = new Node();
+    testNode12->loadUnitCube();
+    testNode12->geometries[0]->setShader(cubeShader);
+    testNode12->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode12->position = vec3(-20.0f, -1.5f, -20.0f);
+    testNode12->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode12);
+    Node* testNode13 = new Node();
+    testNode13->loadUnitCube();
+    testNode13->geometries[0]->setShader(cubeShader);
+    testNode13->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode13->position = vec3(20.0f, -1.5f, -20.0f);
+    testNode13->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode13);
+    Node* testNode14 = new Node();
+    testNode14->loadUnitCube();
+    testNode14->geometries[0]->setShader(cubeShader);
+    testNode14->scale = vec3(20.0f, 1.0f, 20.0f);
+    testNode14->position = vec3(-20.0f, -1.5f, 20.0f);
+    testNode14->eulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    Engine::main->addNode(testNode14);
+    Node* testNode15 = new Node();
+    testNode15->loadUnitCube();
+    testNode15->geometries[0]->setShader(cubeShader);
+    testNode15->scale = vec3(19.999998092651367f, 1.0f, 20.0f);
+    testNode15->position = vec3(-13.731363296508789f, -1.5f, 36.58491516113281f);
+    testNode15->eulerAngles = vec3(0.0f, 60.000001669652114f, 0.0f);
+    Engine::main->addNode(testNode15);
+    
+}
+
 } // namespace ImportMapHelper

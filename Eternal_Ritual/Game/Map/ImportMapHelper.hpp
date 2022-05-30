@@ -12,6 +12,7 @@ namespace ImportMapHelper {
 
 void importMapBox();
 void importMapModel();
+void importTestMap();
 
 } // namespace ImportMapHelper
 

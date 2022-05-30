@@ -274,6 +274,7 @@ void CharNode::setModel(Node* model){
     headTop->position.z = 1.7;
     rootNode->addChildNode(headTop);
     this->rightHand = generateBoneNode("Weapon_r");
+    this->leftHand = generateBoneNode("Weapon_l");
 }
 void CharNode::setControl(Node* control){
     this->controlNode = control;

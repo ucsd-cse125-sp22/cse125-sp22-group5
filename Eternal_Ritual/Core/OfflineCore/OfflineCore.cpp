@@ -71,6 +71,7 @@ void OfflineCore::loadLight() {
     directional_light_->setDirectionalLight();
     directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
+    directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
     
 }
@@ -82,8 +83,10 @@ void OfflineCore::loadMap() {
 
     map_system_manager_ = MapSystemManager::Instance();
     
-    ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+//    ImportMapHelper::importMapBox();
+//    ImportMapHelper::importMapModel();
+    
+    ImportMapHelper::importTestMap();
 }
 
 

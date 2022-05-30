@@ -15,16 +15,21 @@
 #include "Game/Magic/FireBall.hpp"
 
 class CharNode;
-
+class Circle;
 
 class ScatteredFire final : public DamageableMagic{
 private:
     static bool loaded;
     static AudioBuffer* castSound;
+    static ParticleNode* metaShiny;
+    static ParticleNode* metaWhirl;
 
 public:
     std::vector<FireBall*> balls;
     Node* ballNode;
+    ParticleNode* shiny;
+    Circle* circle;
+    Node* whirl;
     void load();
     ScatteredFire();
     ~ScatteredFire() override = default;

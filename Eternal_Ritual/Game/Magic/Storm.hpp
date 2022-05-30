@@ -15,6 +15,7 @@
 
 
 class CharNode;
+class Circle;
 
 
 class Storm final : public DamageableMagic{
@@ -24,6 +25,7 @@ private:
     static ParticleNode* metaHail;
     static ParticleNode* metaLightning;
     static ParticleNode* metaDust;
+    static ParticleNode* metaShiny;
     static LightNode* metaLight;
     static AudioBuffer* stormSound;
     static AudioBuffer* electricSound;
@@ -39,7 +41,9 @@ public:
     ParticleNode* hail;
     ParticleNode* lightning;
     ParticleNode* dust;
+    ParticleNode* shiny;
     LightNode* light;
+    Circle* circle;
     void load();
     Storm();
     ~Storm() override = default;

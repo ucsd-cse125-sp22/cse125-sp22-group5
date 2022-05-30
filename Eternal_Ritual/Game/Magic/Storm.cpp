@@ -11,6 +11,7 @@
 #include <cmath>
 
 #include "Game/Character/CharNode.hpp"
+#include "Game/Magic/Circle.hpp"
 #include "Game/Map/MapSystemManager.hpp"
 
 #define DAMAGE 50
@@ -25,6 +26,7 @@ ParticleNode* Storm::metaCloud = NULL;
 ParticleNode* Storm::metaDust = NULL;
 ParticleNode* Storm::metaHail = NULL;
 ParticleNode* Storm::metaLightning = NULL;
+ParticleNode* Storm::metaShiny = NULL;
 LightNode* Storm::metaLight = NULL;
 AudioBuffer* Storm::stormSound = NULL;
 AudioBuffer* Storm::electricSound = NULL;
@@ -62,9 +64,9 @@ void Storm::load() {
     metaHail->scalingSpeed = -0.05;
     metaHail->initialRotationVariation = 360;
     metaHail->initialScaleVariation = 0.05;
-    metaHail->setColorAnimation(vec4(0.3, 0.4, 1, 0), 0);
-    metaHail->setColorAnimation(vec4(0.2, 0.4, 0.7, 0.7), 0.5);
-    metaHail->setColorAnimation(vec4(0.3, 0.4, 1, 0), 1);
+    metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0), 0);
+    metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0.7), 0.5);
+    metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0), 1);
     metaLightning = new ParticleNode(10, 0.3, 0);
     metaLightning->isAdditive = true;
     metaLightning->renderingOrder = 999l;
@@ -77,6 +79,22 @@ void Storm::load() {
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 0);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0.9), 0.5);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
+    metaShiny = new ParticleNode(200, 1.5, 0);
+    metaShiny->texture = new Texture("/Resources/Game/Effects/Particle1.png");
+    metaShiny->renderingOrder = 1000;
+    metaShiny->setEmissionStorm(0, 4, 1);
+    metaShiny->eulerAngles = vec3(0,0,90);
+    metaShiny->setMaxAmount(200);
+    metaShiny->initialSpeed = 0.8f;
+    metaShiny->initialSpeedVariation = 0.025f;
+    metaShiny->initialScale = 0.1;
+    metaShiny->initialScaleVariation = 0.05;
+    metaShiny->accelerationVariation = vec3(0.1,0.8,0.1);
+    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 0), 0);
+    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 1), 0.5);
+    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 0), 1);
+    metaShiny->isAdditive = true;
+    metaShiny->isDisabled = true;
     stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
     electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
     castSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Cast.wav");
@@ -111,6 +129,12 @@ Storm::Storm() {
     cooldown = COOLDOWN;
     damage = DAMAGE;
     cost = COST;
+    this->circle = new Circle();
+    this->circle->setColor(vec3(0.5, 0.7, 1));
+    Engine::main->addNode(circle);
+    this->circle->isDisabled = true;
+    this->shiny = metaShiny->copy()->convertToParticleNode();
+    Engine::main->addNode(shiny);
 }
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
@@ -137,6 +161,34 @@ void Storm::play(CharNode *character, int seed) {
         cloud->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         dust->setEmissionStorm(radius * 3, radius * 6, radius);
         hail->setEmissionStorm(radius * 2, radius * 4, radius * 2);
+        circle->isDisabled = false;
+        this->circle->setColor(vec3(0.8, 1, 1.3));
+        circle->position = character->getWorldPosition() + vec3(0, 1.6, 0);
+        circle->scale = vec3(1);
+        shiny->position = character->getWorldPosition();
+        shiny->isDisabled = false;
+        shiny->reset();
+        Animation* circleExpand = new Animation("circle expand " + to_string(reinterpret_cast<long>(this)), 0.6);
+        circleExpand->setVec3Animation(&circle->scale, vec3(2));
+        Engine::main->playAnimation(circleExpand);
+        circleExpand->setCompletionHandler([&] {
+            circle->position = circle->getWorldPosition();
+            circle->removeFromParentNode();
+            Engine::main->addNode(circle);
+            Animation* circleFall = new Animation("circle fall " + to_string(reinterpret_cast<long>(this)), 0.2);
+            circleFall->setVec3Animation(&circle->position, this->caster->getWorldPosition() + vec3(0, 0.1, 0));
+            circleFall->setEaseInTimingMode();
+            circleFall->setCompletionHandler([&] {
+                Animation* circleDim = new Animation("circle dim " + to_string(reinterpret_cast<long>(this)), 1.5);
+                circleDim->setVec3Animation(&circle->shader->multiplyColor, vec3(0));
+                Engine::main->playAnimation(circleDim);
+            });
+            Engine::main->playAnimation(circleFall);
+            Animation* circleExpand2 = new Animation("circle expand 2 " + to_string(reinterpret_cast<long>(this)), 0.2);
+            circleExpand2->setVec3Animation(&circle->scale, vec3(6));
+            circleExpand2->setEaseInTimingMode();
+            Engine::main->playAnimation(circleExpand2);
+        });
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
         Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
         expanding->setCompletionHandler([&] {
