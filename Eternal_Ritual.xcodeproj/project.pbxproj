@@ -459,6 +459,7 @@
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				3D79154328448CFB00A5E354 /* CG */,
 				3D6FD301283F97B700BC5083 /* UI */,
 				3D2D27582834220100159082 /* Magic */,
 				E28020832813159700A810E7 /* Map */,
@@ -747,6 +748,13 @@
 				3D6FD3C4283F98C200BC5083 /* server-main.cpp */,
 			);
 			path = ServerGame;
+			sourceTree = "<group>";
+		};
+		3D79154328448CFB00A5E354 /* CG */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CG;
 			sourceTree = "<group>";
 		};
 		3DD5A5B1282FAAE30010B1A5 /* Credits */ = {
