@@ -227,6 +227,8 @@
 		E21F17D3281DCB260099A81C /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D1281DCB260099A81C /* libsfml-audio.2.5.1.dylib */; };
 		E21F17D5281DCB260099A81C /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21F17D2281DCB260099A81C /* libsfml-system.2.5.1.dylib */; };
 		E22C59EA284536D1007FFC49 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
+		E22C59EB2845BA0E007FFC49 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
+		E22C59EC2845BA0F007FFC49 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
 		E22E3016283D9B1300BEA708 /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
 		E265F1922834446E008B4AD0 /* DragonMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F1902834446E008B4AD0 /* DragonMagic.cpp */; };
 		E265F2632835661D008B4AD0 /* LightningPhalanx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E265F2612835661D008B4AD0 /* LightningPhalanx.cpp */; };
@@ -1018,6 +1020,7 @@
 				3D2D27E72835B23100159082 /* HitController.cpp in Sources */,
 				3D008937284094C6007E5CAD /* Storm.cpp in Sources */,
 				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
+				E22C59EB2845BA0E007FFC49 /* Circle.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
 				3D79156E28448EE800A5E354 /* AllUI.inc in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
@@ -1094,6 +1097,7 @@
 				3D2D282F2835B3C500159082 /* HitController.cpp in Sources */,
 				3D008938284094C6007E5CAD /* Storm.cpp in Sources */,
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
+				E22C59EC2845BA0F007FFC49 /* Circle.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
 				3D79156F28448EE800A5E354 /* AllUI.inc in Sources */,
 				3D2D28782835B82000159082 /* EventPb.cpp in Sources */,
