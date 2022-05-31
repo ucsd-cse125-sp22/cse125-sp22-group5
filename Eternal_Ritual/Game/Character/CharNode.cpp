@@ -260,6 +260,36 @@ CharNode::CharNode(vec3 position){
     this->manaRegen = MAXMANAREGEN;
     this->stepAvailable = 0;
 }
+void CharNode::reset() {
+    this->moveDirection = vec3(0);
+    this->displacement = vec3(0);
+    
+    this->hitbox = new Hitbox(this->position, vec3(0.8, 1.6, 0.8));
+    this->uninjurable = false;
+    this->characterTargetPosition = position;
+    this->eulerAngles = vec3(0.0f);
+    this->characterTargetEulerAngles = vec3(0.0f);
+    this->cameraTargetEulerAngles = vec3(0.0f);
+    this->scale = vec3(1.0f);
+    this->parent = NULL;
+    this->isDisabled = false;
+    stopAnimators(0xffffffff, 0.2);
+    playAnimators(Bitmask::IDLE, 0.1);
+    this->target = NULL;
+    this->isLocked = false;
+    this->refreshed = true;
+    this->uiNode = 0;
+    this->state = CharState::IDLE;
+    this->keyDirection = Direction::NONE;
+    this->currMagic = 0;
+    this->scrollValue = 0;
+    
+    this->health = MAXHP;
+    this->mana = MAXMANA;
+    this->manaRegen = MAXMANAREGEN;
+    this->stepAvailable = 0;
+    
+}
 CharNode::~CharNode(){
     
 }
@@ -790,6 +820,7 @@ void CharNode::receiveDamage(int damage){
                 playAnimators(Bitmask::DEAD, 0.1);
                 this->state = CharState::DEAD;
                 this->uiNode->isDisabled = true;
+                this->hitbox = new Hitbox(this->position, vec3(0, 0, 0));
             }
         });
         Engine::main->playAnimation(resume);
