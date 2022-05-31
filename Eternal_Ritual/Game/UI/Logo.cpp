@@ -134,7 +134,7 @@ void Logo::updateLoad(float loadingProgess)
 			});
 		}
 	}
-	if (loadingProgess > 1) {
+	if (loadingProgess >= 1) {
 		Animation* end = new Animation("LoadEnd", 1.0);
 		end->setFloatAnimation(&background->alpha, 0);
 		end->setCompletionHandler([&] {

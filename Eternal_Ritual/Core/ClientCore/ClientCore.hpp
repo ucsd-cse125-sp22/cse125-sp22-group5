@@ -41,15 +41,25 @@ public:
     }
     
     void initEngine();
+    void loadFont();
+    void displayLogo();
+    
+    void updateLoad();
+    
     void loadSky();
     void loadLight();
-    void loadScene();
+    void loadMap();
     void loadCharacter();
     void loadMagic();
-    void loadFont();
-    void loadHUD();
     void loadDamageSystem();
+    void loadStartScene();
+    void loadDeathScene();
     
+    void displayStart();
+    void updateStart();
+    void playCG();
+    
+    void loadHUD();
     void loadPbPacket();
     void connectServer();
     void handleEvent();
@@ -59,6 +69,10 @@ public:
     void updateState();
     void renderWorld();
     void closeConnect();
+    
+    int process();
+    void set_process(int process);
+    int load_state();
 
 private:
     // Singleton pattern
@@ -87,6 +101,8 @@ private:
     MapSystemManager* map_system_manager_;
     
     // Camera
+    CameraNode* ui_camera_;
+    CameraNode* char_camera_;
     bool main_camera_ = true;
     
     // Character
@@ -112,15 +128,36 @@ private:
     HitController*  group_one_hit_controller_;
     HitController*  group_two_hit_controller_;
     
-    // HUD
-    HUDNode* HUD_;
-    UINode* HUDbase_;
+    // UI
+    HUDNode* hud_;
+    UINode* hud_base_;
+    UINode* ui_base_;
+    UINode* button_base_;
+    StartSceneUI* start_scene_ui_;
+    DeathScene* death_scene_;
+    bool isNetDelayDefine = false;
+    
+    // CG
+    CameraController* camera_controller_;
 
     // Font
     Font* font_;
     
+    // Logo
+    Logo* logo_;
+    
+    // Cursor
+    Cursor* cursor_;
+    
     // Game
     bool start_game_ = true;
+    bool is_waiting_;
+    bool enter_game_;
+    
+    // Logics
+    int process_ = 1;
+    int load_state_ = 1;
+    float loading_progress_ = 0.0f;
 };
 
 void destructClientCore(int signum);

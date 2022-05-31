@@ -230,6 +230,8 @@
 		3D7915E82846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
 		3D7915E92846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
 		3D7915EA2846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
+		3D7915EB2846B46900A5E354 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
+		3D7915EC2846B46A00A5E354 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22C59E9284536D1007FFC49 /* Circle.cpp */; };
 		3DD5A5B7282FFA510010B1A5 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		C294F8F527FCFB19002B6550 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F427FCFB19002B6550 /* OpenGL.framework */; };
 		C294F8F727FCFB22002B6550 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F627FCFB22002B6550 /* libglfw.3.3.dylib */; };
@@ -1026,6 +1028,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2D27DA2835B23100159082 /* HittableObject.cpp in Sources */,
+				3D7915EC2846B46A00A5E354 /* Circle.cpp in Sources */,
 				3D6FD38E283F985200BC5083 /* Geometry.cpp in Sources */,
 				3D6FD36D283F985200BC5083 /* PBRShader.cpp in Sources */,
 				3D6FD388283F985200BC5083 /* Animator.cpp in Sources */,
@@ -1106,6 +1109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2D28222835B3C500159082 /* HittableObject.cpp in Sources */,
+				3D7915EB2846B46900A5E354 /* Circle.cpp in Sources */,
 				3D6FD38F283F985200BC5083 /* Geometry.cpp in Sources */,
 				3D6FD36E283F985200BC5083 /* PBRShader.cpp in Sources */,
 				3D6FD389283F985200BC5083 /* Animator.cpp in Sources */,

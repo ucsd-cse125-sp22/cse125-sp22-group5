@@ -305,7 +305,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	viewBack = new SpriteNode(UISizes::viewBackSize);
 	viewBack->texture = new Texture("/Resources/Game/UI/notification_back.png");
 	viewText = new TextNode(font,0.05,1,0.1);
-	viewText->text = "Jackie's view";
+	viewText->text = ally->name + "'s view";
 	viewText->parentCoordinatePosition = glm::vec2(0.5,0.73);
 	viewBack->screenPosition = glm::vec2(0.5, 0.2);
 	viewBack->addChildNode(viewText);

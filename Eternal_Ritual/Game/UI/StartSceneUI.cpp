@@ -28,7 +28,7 @@ StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* bu
 	netWinBack->texture = new Texture("/Resources/Game/UI/net_back.png");
 	netWinBack->isDisabled = true;
 	netWinBack->renderingOrder = 3;
-	netWinBack->screenPosition = glm::vec2(0.5);
+	netWinBack->screenPosition = glm::vec2(0.5, 0.65);
 
 	netText = new TextNode(font,0.03,UISizes::netWinBackSize.x*0.8,0.1);
 	//netText->parentCoordinatePosition = glm::vec2(0, 0.5);
@@ -50,27 +50,33 @@ void StartSceneUI::isDisbled(bool t)
 }
 
 int StartSceneUI::update(bool isWaiting) {
-
 	glm::vec2 position = engine->input->getMouseScreenPosition();
 	Input* input = engine->input;
 	bool show = !netWinBack->isDisabled;
 
 	if (show && !isWaiting) {
-		netWinBack->isDisabled = true;
+        Animation* netWinExit = new Animation("netWinExit", 0.3f);
+        netWinExit->setFloatAnimation(&netWinBack->alpha, 0.0f);
+        engine->playAnimation(netWinExit);
 		return 1;
 	}
+    if (show && isWaiting) {
+        return 5;
+    }
 
 	if (!show) {
 
 		bool isReleased = input->wasKeyReleased(MOUSE_BUTTON_LEFT);
 
 		if (startButton->checkState(position, input, isReleased)) {
-			if (isWaiting) {
-				netWinBack->isDisabled = false;
-			}
-			else {
-				return 1;
-			}
+            Animation* buttonExit = new Animation("buttonExit", 0.3f);
+            buttonExit->setFloatAnimation(&buttonBase->alpha, 0.0f);
+            engine->playAnimation(buttonExit);
+            netWinBack->isDisabled = false;
+            Animation* netWinShow = new Animation("netWinShow", 0.3f);
+            netWinShow->setFloatAnimation(&netWinBack->alpha, 1.0f);
+            engine->playAnimation(netWinShow);
+            return 4;
 		}
 
 		if (creditButton->checkState(position, input, isReleased)) {
@@ -82,5 +88,5 @@ int StartSceneUI::update(bool isWaiting) {
 		}
 	}
     
-    return 1;
+    return 3;
 }

@@ -41,28 +41,62 @@ ClientCore::~ClientCore() {
 
 void ClientCore::initEngine() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 1 - Initial Engine --|" << std::endl;
+    std::cout << "|-- Initial Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("Eternal Ritual", 0.5f, 0, NULL);
+    engine_ = new Engine("Eternal Ritual", 0.8f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
 
 
+void ClientCore::loadFont() {
+    std::cout << std::endl;
+    std::cout << "|-- Pre-Loading Stage 1 - Load Font --|" << std::endl;
+    
+    FontLibrary* fontLibrary = new FontLibrary();
+    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+}
+
+
+void ClientCore::displayLogo() {
+    std::cout << std::endl;
+    std::cout << "|-- Pre-Loading Stage 2 - Display logo --|" << std::endl;
+    
+    ui_base_ = new UINode();
+    ui_base_->renderingOrder = 10000.0f;
+    ui_base_->size = glm::vec2(1.0f);
+    ui_camera_ = new CameraNode(60.0f, 0.1f, 1000.0f);
+    ui_camera_->position = glm::vec3(-7.95262, 49.7237, 41.5025);
+    ui_camera_->eulerAngles = glm::vec3(0, 91.6, -47.1);
+    engine_->addNode(ui_camera_);
+    engine_->mainCameraNode = ui_camera_;
+    logo_ = new Logo(engine_,font_, ui_base_, &process_);
+    logo_->play();
+}
+
+
+void ClientCore::updateLoad() {
+    logo_->updateLoad(loading_progress_);
+}
+
+
 void ClientCore::loadSky() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
+    std::cout << "|-- Loading Stage 1 - Load Sky Box --|" << std::endl;
     
     engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
                                  "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
                                  "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                  2.0f);
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.1;
 }
 
 
 void ClientCore::loadLight() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 3 - Load Lights --|" << std::endl;
+    std::cout << "|-- Loading Stage 2 - Load Lights --|" << std::endl;
     
     point_light_ = new LightNode(vec3(5.0f));
     point_light_->setPointLight(2.0f, 20.0f);
@@ -76,24 +110,33 @@ void ClientCore::loadLight() {
     directional_light_->setDirectionalLight();
     directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
+    directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.1;
 }
 
 
-void ClientCore::loadScene() {
+void ClientCore::loadMap() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 4 - Load Scene --|" << std::endl;
+    std::cout << "|-- Loading Stage 3 - Load Map --|" << std::endl;
 
     map_system_manager_ = MapSystemManager::Instance();
     
     ImportMapHelper::importMapBox();
     ImportMapHelper::importMapModel();
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.2;
 }
 
 
 void ClientCore::loadCharacter() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 5 - Load Character --|" << std::endl;
+    std::cout << "|-- Loading Stage 4 - Load Character --|" << std::endl;
     
     for (int i = 0; i < 4; i++) {
         CharNode* newChar;
@@ -126,7 +169,6 @@ void ClientCore::loadCharacter() {
         baseNode->renderingOrder = 1000.0f;
         engine_->addNode(baseNode);
         newChar->setUINode(baseNode);
-//        newChar->setName("player" + to_string(i) + "  " + to_string(newChar->health));
         
         pre_chars_.push_back(newChar);
     }
@@ -191,11 +233,16 @@ void ClientCore::loadCharacter() {
         pre_chars_[3]->isDisabled = false;
         pre_chars_[3]->uninjurable = false;
     }
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.2;
 }
+
 
 void ClientCore::loadMagic() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 6 - Load Magic --|" << std::endl;
+    std::cout << "|-- Loading Stage 5 - Load Magic --|" << std::endl;
     
     for (int i = 0; i < 4; i++) {
         DamageableMagic* storm = new Storm();
@@ -214,30 +261,16 @@ void ClientCore::loadMagic() {
         
         engine_->addNode(thunder);
     }
-}
-
-
-void ClientCore::loadFont() {
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 7 - Load Font --|" << std::endl;
-    FontLibrary* fontLibrary = new FontLibrary();
-    font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
-}
-
-
-void ClientCore::loadHUD() {
-    std::cout << std::endl;
-    std::cout << "|-- Loading Stage 8 - Load HUD --|" << std::endl;
-    HUDbase_ = new UINode();
-    HUDbase_->renderingOrder = 10000.0f;
-    engine_->addNode(HUDbase_);
-    HUD_ = new HUDNode(engine_, HUDbase_, true, font_, character_, ally_);
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.2;
 }
 
 
 void ClientCore::loadDamageSystem() {
     std::cout << std::endl;
-    std::cout << "|-- Loading Stage 9 - Load Damage System --|" << std::endl;
+    std::cout << "|-- Loading Stage 6 - Load Damage System --|" << std::endl;
     
     group_one_hit_controller_ = new HitController();
     group_two_hit_controller_ = new HitController();
@@ -281,7 +314,130 @@ void ClientCore::loadDamageSystem() {
         }
         group_two_hit_controller_->addCharacter(pre_chars_[3]);
     }
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.1;
 }
+
+
+void ClientCore::loadStartScene() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 7 - Load Start Scene --|" << std::endl;
+    
+    cursor_ = new Cursor(engine_);
+    button_base_ = new UINode();
+    button_base_->size = glm::vec2(1.0);
+    button_base_->screenPosition = glm::vec2(0.5);
+    start_scene_ui_ = new StartSceneUI(engine_, font_, ui_base_, button_base_);
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.05;
+}
+
+
+void ClientCore::loadDeathScene() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load Death Scene --|" << std::endl;
+    
+    death_scene_ = new DeathScene(engine_);
+
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.05;
+}
+
+
+void ClientCore::displayStart() {
+    std::cout << std::endl;
+    std::cout << "|-- Pre-Game Stage 1 - Display Start Scene --|" << std::endl;
+    
+    enter_game_ = true;
+    is_waiting_ = true;
+    cursor_->isDisable(false);
+    start_scene_ui_->isDisbled(false);
+    Animation* startDelay = new Animation("startDelay",0.9);
+    startDelay->setCompletionHandler([&] {
+        Animation* showStart = new Animation("showStart", 1);
+        showStart->setEaseInTimingMode();
+        showStart->setFloatAnimation(&(button_base_->alpha), 1.0);
+        engine_->playAnimation(showStart);
+    });
+    engine_->playAnimation(startDelay);
+    
+    process_ = 5;
+}
+
+
+void ClientCore::updateStart() {
+    int state = start_scene_ui_->update(is_waiting_);
+    if (state == 1) {
+        process_ = 6;
+        Animation* uiBaseExit = new Animation("uiBaseExit", 0.3f);
+        uiBaseExit->setFloatAnimation(&ui_base_->alpha, 0.0f);
+        uiBaseExit->setCompletionHandler([&] {ui_base_->isDisabled = true;});
+        engine_->playAnimation(uiBaseExit);
+    }
+    if (state == 4) {
+        cursor_->isDisable(true);
+    }
+    if (state == 5 && !isNetDelayDefine) {
+        Animation* netDelay = new Animation("netDelay", 0.3f);
+        isNetDelayDefine = true;
+        netDelay->setCompletionHandler([&] {
+            loadPbPacket();
+            connectServer();
+            handleEvent();
+            sendData();
+            receiveData();
+            updateState();
+            CameraController::BezierCurve bezierCurve;
+            bezierCurve.controll_points.push_back(vec3(-7.95262, 49.7237, 41.5025));
+            bezierCurve.controll_points.push_back(vec3(48.43, 47.37, 55.37));
+            bezierCurve.controll_points.push_back(vec3(57.97, 39.19, 2.22));
+            bezierCurve.controll_points.push_back(vec3(30.45, 28.39, -2.33));
+            bezierCurve.level_of_detail = 500;
+
+            CameraController::EularChangeInfo eularChangeInfo;
+            eularChangeInfo.is_clockwise = false;
+            eularChangeInfo.start_angle = vec3(0.0f, 91.6, -47.1);
+            eularChangeInfo.end_angle = vec3(0.0f, 179.3, -3.7);
+            
+            camera_controller_ = new CameraController(engine_->mainCameraNode, bezierCurve, eularChangeInfo, 0.1, 5.0);
+            
+            is_waiting_ = false;
+        });
+        engine_->playAnimation(netDelay);
+    }
+    
+    cursor_->update();
+}
+
+
+void ClientCore::playCG() {
+//    camera_controller_->moveCamera();
+    hud_base_->isDisabled = false;
+    char_camera_ = character_->cameraNode;
+    engine_->mainCameraNode = char_camera_;
+    enter_game_ = false;
+    
+    process_ = 7;
+}
+
+
+void ClientCore::loadHUD() {
+    std::cout << std::endl;
+    std::cout << "|-- Loading Stage 8 - Load HUD --|" << std::endl;
+    hud_base_ = new UINode();
+    hud_base_->renderingOrder = 10000.0f;
+    engine_->addNode(hud_base_);
+    hud_ = new HUDNode(engine_, hud_base_, true, font_, character_, ally_);
+    hud_base_->isDisabled = true;
+}
+
+
+
 
 void ClientCore::loadPbPacket() {
     std::cout << std::endl;
@@ -454,7 +610,7 @@ void ClientCore::updateState() {
         all_chars_[character_ip_] = character_;
         character_->cameraNode->addChildNode(point_light_);
         
-        engine_->mainCameraNode = character_->cameraNode;
+//        engine_->mainCameraNode = character_->cameraNode;
         
         vector<unsigned long> enemyIPs = state_pb_->getEnemyIPs(character_ip_);
         
@@ -531,7 +687,7 @@ void ClientCore::updateState() {
             it.second->genMana();
         }
         
-        HUD_->update();
+        hud_->update(false);
     }
 }
 
@@ -542,9 +698,9 @@ void ClientCore::renderWorld() {
     
 //    engine_->renderDirectionalLightShadowMap(directional_light_);
     
-    cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
-    
-    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
+//    cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
+//
+//    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
     
     engine_->render();
 }
@@ -555,6 +711,20 @@ void ClientCore::closeConnect() {
     std::cout << "|-- Finsh - Close Connect --|" << std::endl;
     
     client_socket_->closeSockets();
+}
+
+
+int ClientCore::process() {
+    return process_;
+}
+
+void ClientCore::set_process(int process) {
+    process_ = process;
+}
+
+
+int ClientCore::load_state() {
+    return load_state_;
 }
 
 
