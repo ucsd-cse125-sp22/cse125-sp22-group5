@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Engine.cpp" />
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\Geometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\Particle3DRenderer.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\ParticleRenderer.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\Skybox.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\Sprite.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\TextRenderer.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\UnitCube.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\CameraNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\LightNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\Node.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\Particle3DNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\ParticleNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\SpriteNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\TextNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\UINode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\AlphaShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Image.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\PBRShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Particle3DShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\ParticleShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Shader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\SpriteShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Texture.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\SkeletalAnimation\Animator.cpp">
+      <Filter>SkeletalAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\SkeletalAnimation\Bone.cpp">
+      <Filter>SkeletalAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Animation.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\AudioBuffer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Font.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\FontLibrary.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Input.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Engine.hpp" />
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Geometry\Geometry.hpp">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Node\Node.hpp">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Image.hpp">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Shader.hpp">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Texture.hpp">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\SkeletalAnimation\Animator.hpp">
+      <Filter>SkeletalAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\SkeletalAnimation\Bone.hpp">
+      <Filter>SkeletalAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Animation.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\AudioBuffer.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Font.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\FontLibrary.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\System\Input.hpp">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Toolkit\assimp_helper.h">
+      <Filter>Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Toolkit\glm_helper.h">
+      <Filter>Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Toolkit\keys.h">
+      <Filter>Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Toolkit\libraries.h">
+      <Filter>Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Toolkit\stb_image.h">
+      <Filter>Toolkit</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{9F6DF2F6-F588-30D1-9F23-14B4AD0619C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node">
+      <UniqueIdentifier>{2F56963C-06F8-3C48-B55B-71F0460E6A96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading">
+      <UniqueIdentifier>{18C2EF58-7D96-342F-82B1-602C3E1AF600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkeletalAnimation">
+      <UniqueIdentifier>{34ACBA84-C0E4-332B-AA1F-120A68E61639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{ACDFB666-F654-37F6-AEE8-D8D91E98FF57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Toolkit">
+      <UniqueIdentifier>{60E3BCE3-4D43-366C-A628-97F94E9AD3A1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

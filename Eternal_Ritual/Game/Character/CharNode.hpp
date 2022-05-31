@@ -135,7 +135,6 @@ public:
     Node* generateBoneNode(std::string boneName);
     Node* rightHand;
     Node* leftHand;
-    void reset();
     void setCamera(CameraNode* model);
     void setControl(Node* control);
     void setCharacterEularAngle(glm::vec3 eularAngle);

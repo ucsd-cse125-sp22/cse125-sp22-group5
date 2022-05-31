@@ -199,7 +199,6 @@ DragonMagic::DragonMagic(Node* characterNode) {
     this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
     this->loadAudioBuffer("flying sound", flyingSound);
     this->actionName = "dragon attack";
-    this->availableTime = 0;
     this->stopTime = 3.0f;
     this->damage = DAMAGE;
     this->cooldown = COOLDOWN;

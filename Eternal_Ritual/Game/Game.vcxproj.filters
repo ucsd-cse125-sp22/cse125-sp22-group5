@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\CG\CameraController.cpp">
+      <Filter>CG</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\CharNode.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\HitController.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\Hitbox.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\BaseMagic.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Circle.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\DragonMagic.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Flame.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\GroundSmash.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningPhalanx.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Projectile.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ScatteredFire.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\StoneBlast.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThousandBlade.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThunderShock.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\HittableObject.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\ImportMapHelper.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\MapBoxObject.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\MapSystemManager.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\BarNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\ButtonNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\HPBarNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\HUDNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\InputBoxNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\MagicButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\CG\CameraController.hpp">
+      <Filter>CG</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\CharNode.hpp">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\HitController.hpp">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\Hitbox.hpp">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\BaseMagic.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Circle.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\DragonMagic.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Flame.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\GroundSmash.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningPhalanx.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Projectile.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ScatteredFire.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\StoneBlast.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThousandBlade.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThunderShock.hpp">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\HittableObject.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\ImportMapHelper.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\MapBoxObject.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Map\MapSystemManager.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\BarNode.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\ButtonNode.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\Constant.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\HPBarNode.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\HUDNode.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\InputBoxNode.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\MagicButton.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\AllMagic.inc">
+      <Filter>Magic</Filter>
+    </None>
+    <None Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\UI\AllUI.inc">
+      <Filter>UI</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CG">
+      <UniqueIdentifier>{F51F062A-C172-3FF1-9E6C-721CCDD89B72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{97EBE49B-59BD-3CF6-B29C-7C401516A49A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magic">
+      <UniqueIdentifier>{5DECC53E-B70F-3A23-BF60-01AF017C2F68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{EF9F024E-14CE-3DD9-AD53-E8DAA8A96608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{00D0478D-E2E9-3899-A720-514BCC6B618A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

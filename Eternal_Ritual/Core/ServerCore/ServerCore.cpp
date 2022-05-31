@@ -9,6 +9,13 @@
 #include <time.h>
 #include <iostream>
 
+#ifdef _WIN64
+#include <winsock2.h>
+#include <windows.h>
+#elif __APPLE__
+#include <sys/time.h>
+#endif
+
 using namespace std;
 
 

@@ -1,0 +1,10 @@
+^C:\USERS\ZIZ012\DESKTOP\CSE125-SP22-GROUP5-MAIN\ETERNAL_RITUAL\OFFLINEGAME\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main -BC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main --check-stamp-file C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/OfflineGame/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

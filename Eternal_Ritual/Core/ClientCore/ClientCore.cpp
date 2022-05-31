@@ -13,7 +13,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5"
+#define ROOT_PATH "C:/Users/ziz012/Desktop/cse125-sp22-group5-main"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif
@@ -305,11 +305,11 @@ void ClientCore::handleEvent() {
     std::cout << std::endl;
     std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
 
-    cout << "eulerAngles 1 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
+    //cout << "eulerAngles 1 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
     
     engine_->shouldUpdate();
     
-    cout << "eulerAngles 2 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
+    //cout << "eulerAngles 2 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
     
     if (engine_->input->wasKeyReleased(KEY_ESCAPE)) {
         exit(1);
@@ -334,10 +334,10 @@ void ClientCore::handleEvent() {
         magic_to_key_[Magic::DRAGON] = KEY_4;
     }
     else {
-        cout << "eulerAngles 3 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
-        cout << "mouse : " << engine_->input->getMouseTranslation().x << " " << engine_->input->getMouseTranslation().y << endl;
+        //cout << "eulerAngles 3 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
+        //cout << "mouse : " << engine_->input->getMouseTranslation().x << " " << engine_->input->getMouseTranslation().y << endl;
         character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
-        cout << "eulerAngles 4 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
+        //cout << "eulerAngles 4 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
         event_pb_->setControlNodeEulerAngles(character_->controlNode->eulerAngles);
         
         if(engine_->input->isPressingKey(KEY_W)) {
@@ -542,9 +542,9 @@ void ClientCore::renderWorld() {
     
 //    engine_->renderDirectionalLightShadowMap(directional_light_);
     
-    cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
+    //cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
     
-    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
+    //cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
     
     engine_->render();
 }

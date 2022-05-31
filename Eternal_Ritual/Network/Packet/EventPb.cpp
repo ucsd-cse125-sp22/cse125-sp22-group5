@@ -26,8 +26,8 @@ void EventPb::readData(char* pbArr, int dataLen) {
 char* EventPb::sendData() {
     data_len_ = static_cast<int>(event_data_->ByteSizeLong());
 
-    std::cout << "DataLen (in eventPb): " << data_len_ << std::endl;
-    std::cout << std::endl << event_data_->DebugString() << std::endl;
+    //std::cout << "DataLen (in eventPb): " << data_len_ << std::endl;
+    //std::cout << std::endl << event_data_->DebugString() << std::endl;
     
     event_data_->SerializeToArray(pb_arr_, MAX_PB_BUFFER_SIZE);
     

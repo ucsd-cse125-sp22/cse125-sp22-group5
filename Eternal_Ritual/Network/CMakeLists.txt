@@ -36,10 +36,10 @@ target_link_libraries(Network PUBLIC
     ws2_32
 )
 
-target_link_libraries(Network PUBLIC debug
-    ${PROTOBUF_LIB_LIBS_DEBUG}
-)
+#target_link_libraries(Network PUBLIC debug
+#    ${PROTOBUF_LIB_LIBS_DEBUG}
+#)
 
-target_link_libraries(Network PUBLIC optimized 
+target_link_libraries(Network PUBLIC
     ${PROTOBUF_LIB_LIBS_RELEASE}
 )

@@ -74,7 +74,6 @@ Thunder::Thunder() {
     right = new Node();
     left->eulerAngles.y = 30;
     right->eulerAngles.y = -30;
-    this->availableTime = 0;
     addChildNode(left);
     addChildNode(middle);
     addChildNode(right);

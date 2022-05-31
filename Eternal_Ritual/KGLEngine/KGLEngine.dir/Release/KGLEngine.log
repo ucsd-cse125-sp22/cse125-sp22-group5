@@ -1,0 +1,44 @@
+﻿  Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/KGLEngine/CMakeLists.txt
+  Engine.cpp
+  Geometry.cpp
+  Particle3DRenderer.cpp
+  ParticleRenderer.cpp
+  Skybox.cpp
+  Sprite.cpp
+  TextRenderer.cpp
+  UnitCube.cpp
+  CameraNode.cpp
+  LightNode.cpp
+  Node.cpp
+  Particle3DNode.cpp
+  ParticleNode.cpp
+  SpriteNode.cpp
+  TextNode.cpp
+  UINode.cpp
+  AlphaShader.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\AlphaShader.cpp(73,49): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+  Image.cpp
+  PBRShader.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\PBRShader.cpp(686,43): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\PBRShader.cpp(698,44): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+  Particle3DShader.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Particle3DShader.cpp(191,56): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Particle3DShader.cpp(203,53): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+  Generating Code...
+  Compiling...
+  ParticleShader.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\ParticleShader.cpp(167,56): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\ParticleShader.cpp(171,53): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+  Shader.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Shading\Shader.cpp(240,49): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+  SpriteShader.cpp
+  Texture.cpp
+  Animator.cpp
+  Bone.cpp
+  Animation.cpp
+  AudioBuffer.cpp
+  Font.cpp
+  FontLibrary.cpp
+  Input.cpp
+  Generating Code...
+  KGLEngine.vcxproj -> C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\Release\KGLEngine.lib

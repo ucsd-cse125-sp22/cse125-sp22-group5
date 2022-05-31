@@ -1,0 +1,5 @@
+﻿  client-main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include\GLFW/glfw3.h(123): message : see previous definition of 'APIENTRY'
+  ClientGame.vcxproj -> C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\Release\ClientGame.exe
+  "Copying all dll libs to ClientGame Debug folder..."

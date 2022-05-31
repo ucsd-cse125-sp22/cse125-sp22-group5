@@ -59,15 +59,15 @@ void OfflineCore::loadLight() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 3 - Load Lights --|" << std::endl;
     
-    point_light_ = new LightNode(vec3(0));
+    point_light_ = new LightNode(vec3(5.0f));
     point_light_->setPointLight(2.0f, 20.0f);
     point_light_->highlightIntensity = 0.0f;
     
-    ambient_light_ = new LightNode(vec3(0));
+    ambient_light_ = new LightNode(vec3(0.5f));
     ambient_light_->setAmbientLight();
     engine_->addNode(ambient_light_);
     
-    directional_light_ = new LightNode(vec3(0.5f, 0.5f, 0.5f));
+    directional_light_ = new LightNode(vec3(1.0f, 1.0f, 1.0f));
     directional_light_->setDirectionalLight();
     directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
@@ -83,10 +83,10 @@ void OfflineCore::loadMap() {
 
     map_system_manager_ = MapSystemManager::Instance();
     
-    ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+//    ImportMapHelper::importMapBox();
+//    ImportMapHelper::importMapModel();
     
-//    ImportMapHelper::importTestMap();
+    ImportMapHelper::importTestMap();
 }
 
 

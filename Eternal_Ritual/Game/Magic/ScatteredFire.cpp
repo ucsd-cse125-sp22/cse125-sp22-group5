@@ -55,7 +55,6 @@ ScatteredFire::ScatteredFire() {
     if (!loaded) load();
     start = false;
     this->actionName = "cast magic 3";
-    this->availableTime = 0;
     this->stopTime = 1.8f;
     this->cooldown = COOLDOWN;
     this->cost = COST;

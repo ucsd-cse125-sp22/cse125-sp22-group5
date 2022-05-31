@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\ClientSide\ClientSocket.cpp">
+      <Filter>ClientSide</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\EventPb.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\PbData.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\StatePb.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\gameData.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\ServerSide\ServerSocket.cpp">
+      <Filter>ServerSide</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\ClientSide\ClientSocket.hpp">
+      <Filter>ClientSide</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\EventPb.hpp">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\PbData.hpp">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\StatePb.hpp">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Packet\gameData.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\ServerSide\ServerSocket.hpp">
+      <Filter>ServerSide</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\NetworkSetting.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ClientSide">
+      <UniqueIdentifier>{CC04C1AE-1D87-3C8A-AA8B-0A59990B67D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packet">
+      <UniqueIdentifier>{B6A44C39-EC84-37CF-95AB-5244B2D2A4E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerSide">
+      <UniqueIdentifier>{70888A46-7B00-3267-AC6D-34C0A7CD7004}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

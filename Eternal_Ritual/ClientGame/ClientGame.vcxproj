@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{04CB13FA-5C9C-3085-84D6-45BEFA420E25}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ClientGame</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ClientGame.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ClientGame</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ClientGame.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ClientGame</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ClientGame.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ClientGame</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ClientGame.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ClientGame</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+echo "Copying all dll libs to ClientGame Debug folder..."
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/assimp/bin/assimp-vc143-mt.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/freetype/bin/freetype.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glew/bin/glew32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glfw/bin/glfw3.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-audio-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-system-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/openal32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\Core\ClientCore\Debug\ClientCore.lib;..\Game\Debug\Game.lib;..\KGLEngine\Debug\KGLEngine.lib;..\..\3rdparty\assimp\libs\assimp-vc143-mt.lib;..\..\3rdparty\freetype\libs\freetype.lib;..\..\3rdparty\glew\libs\glew32.lib;..\..\3rdparty\glfw\libs\glfw3dll.lib;..\..\3rdparty\SFML\libs\sfml-audio.lib;..\..\3rdparty\SFML\libs\sfml-system.lib;opengl32.lib;..\Network\Debug\Network.lib;ws2_32.lib;..\..\3rdparty\protobuf\libs\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug/ClientGame.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Debug/ClientGame.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+echo "Copying all dll libs to ClientGame Debug folder..."
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/assimp/bin/assimp-vc143-mt.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/freetype/bin/freetype.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glew/bin/glew32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glfw/bin/glfw3.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-audio-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-system-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/openal32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\Core\ClientCore\Release\ClientCore.lib;..\Game\Release\Game.lib;..\KGLEngine\Release\KGLEngine.lib;..\..\3rdparty\assimp\libs\assimp-vc143-mt.lib;..\..\3rdparty\freetype\libs\freetype.lib;..\..\3rdparty\glew\libs\glew32.lib;..\..\3rdparty\glfw\libs\glfw3dll.lib;..\..\3rdparty\SFML\libs\sfml-audio.lib;..\..\3rdparty\SFML\libs\sfml-system.lib;opengl32.lib;..\Network\Release\Network.lib;ws2_32.lib;..\..\3rdparty\protobuf\libs\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release/ClientGame.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/Release/ClientGame.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+echo "Copying all dll libs to ClientGame Debug folder..."
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/assimp/bin/assimp-vc143-mt.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/freetype/bin/freetype.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glew/bin/glew32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glfw/bin/glfw3.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-audio-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-system-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/openal32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\Core\ClientCore\MinSizeRel\ClientCore.lib;..\Game\MinSizeRel\Game.lib;..\KGLEngine\MinSizeRel\KGLEngine.lib;..\..\3rdparty\assimp\libs\assimp-vc143-mt.lib;..\..\3rdparty\freetype\libs\freetype.lib;..\..\3rdparty\glew\libs\glew32.lib;..\..\3rdparty\glfw\libs\glfw3dll.lib;..\..\3rdparty\SFML\libs\sfml-audio.lib;..\..\3rdparty\SFML\libs\sfml-system.lib;opengl32.lib;..\Network\MinSizeRel\Network.lib;ws2_32.lib;..\..\3rdparty\protobuf\libs\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel/ClientGame.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/MinSizeRel/ClientGame.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\assimp\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\freetype\include\freetype;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glew\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glfw\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\glm\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\SFML\include;C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\3rdparty\protobuf\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+echo "Copying all dll libs to ClientGame Debug folder..."
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/assimp/bin/assimp-vc143-mt.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/freetype/bin/freetype.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glew/bin/glew32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/glfw/bin/glfw3.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-audio-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/sfml-system-2.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/3rdparty/SFML/bin/openal32.dll C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\Core\ClientCore\RelWithDebInfo\ClientCore.lib;..\Game\RelWithDebInfo\Game.lib;..\KGLEngine\RelWithDebInfo\KGLEngine.lib;..\..\3rdparty\assimp\libs\assimp-vc143-mt.lib;..\..\3rdparty\freetype\libs\freetype.lib;..\..\3rdparty\glew\libs\glew32.lib;..\..\3rdparty\glfw\libs\glfw3dll.lib;..\..\3rdparty\SFML\libs\sfml-audio.lib;..\..\3rdparty\SFML\libs\sfml-system.lib;opengl32.lib;..\Network\RelWithDebInfo\Network.lib;ws2_32.lib;..\..\3rdparty\protobuf\libs\libprotobuf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo/ClientGame.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/RelWithDebInfo/ClientGame.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main -BC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main --check-stamp-file C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main -BC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main --check-stamp-file C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main -BC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main --check-stamp-file C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main -BC:/Users/ziz012/DESKTOP/cse125-sp22-group5-main --check-stamp-file C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/ClientGame/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\ClientGame\client-main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\ZERO_CHECK.vcxproj">
+      <Project>{535E4E8D-D425-3A9F-BF3E-C0583EC74CF3}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Core\ClientCore\ClientCore.vcxproj">
+      <Project>{3F50A476-8B3A-3FF9-904D-E9A19A2A2160}</Project>
+      <Name>ClientCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Game.vcxproj">
+      <Project>{4D47FE8C-BC41-38FA-84D0-E4ACB262111F}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\KGLEngine\KGLEngine.vcxproj">
+      <Project>{0B70DC8B-5FA5-356F-A0A6-25EB601A9FC4}</Project>
+      <Name>KGLEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Network\Network.vcxproj">
+      <Project>{98A2BA90-8FD8-3B66-BBA3-78754D83E2D6}</Project>
+      <Name>Network</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

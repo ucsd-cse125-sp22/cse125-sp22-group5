@@ -1,0 +1,95 @@
+﻿  Building Custom Rule C:/Users/ziz012/DESKTOP/cse125-sp22-group5-main/Eternal_Ritual/Game/CMakeLists.txt
+  CameraController.cpp
+  CharNode.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\CharNode.cpp(718,85): warning C4311: 'reinterpret_cast': pointer truncation from 'CharNode *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Character\CharNode.cpp(753,81): warning C4311: 'reinterpret_cast': pointer truncation from 'CharNode *' to 'long'
+  HitController.cpp
+  Hitbox.cpp
+  BaseMagic.cpp
+  Circle.cpp
+  DragonMagic.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\DragonMagic.cpp(415,110): warning C4311: 'reinterpret_cast': pointer truncation from 'DragonMagic *' to 'long'
+  FireBall.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(131,94): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(133,88): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(177,115): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(193,125): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(197,1): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\FireBall.cpp(217,86): warning C4311: 'reinterpret_cast': pointer truncation from 'FireBall *' to 'long'
+  Flame.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Flame.cpp(78,107): warning C4311: 'reinterpret_cast': pointer truncation from 'Flame *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Flame.cpp(82,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Flame *const ' to 'long'
+  GroundSmash.cpp
+  LightningPhalanx.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningPhalanx.cpp(49,110): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=LightningSpear *
+          ]
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningPhalanx.cpp(54,131): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningPhalanx *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningPhalanx.cpp(64,113): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=LightningSpear *
+          ]
+  LightningSpear.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp(80,141): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningSpear *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp(84,1): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningSpear *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp(110,103): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningSpear *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp(114,127): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningSpear *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\LightningSpear.cpp(144,98): warning C4311: 'reinterpret_cast': pointer truncation from 'LightningSpear *' to 'long'
+  Projectile.cpp
+  ScatteredFire.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ScatteredFire.cpp(96,109): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=FireBall *
+          ]
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ScatteredFire.cpp(102,1): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=FireBall *
+          ]
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ScatteredFire.cpp(110,108): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=FireBall *
+          ]
+  StoneBlast.cpp
+  Storm.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(171,105): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(178,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(182,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(187,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(192,100): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(193,104): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(203,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(209,108): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Storm.cpp(248,98): warning C4311: 'reinterpret_cast': pointer truncation from 'Storm *' to 'long'
+  ThousandBlade.cpp
+  Thunder.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.cpp(115,111): warning C4311: 'reinterpret_cast': pointer truncation from 'Thunder *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.cpp(132,105): warning C4311: 'reinterpret_cast': pointer truncation from 'Thunder *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.cpp(139,1): warning C4311: 'reinterpret_cast': pointer truncation from 'Thunder *const ' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\Thunder.cpp(153,117): warning C4311: 'reinterpret_cast': pointer truncation from '_Ty *' to 'long'
+          with
+          [
+              _Ty=ThunderShock *
+          ]
+  ThunderShock.cpp
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThunderShock.cpp(105,90): warning C4311: 'reinterpret_cast': pointer truncation from 'ThunderShock *' to 'long'
+C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Magic\ThunderShock.cpp(115,1): warning C4311: 'reinterpret_cast': pointer truncation from 'ThunderShock *const ' to 'long'
+  HittableObject.cpp
+  Generating Code...
+  Compiling...
+  ImportMapHelper.cpp
+  MapBoxObject.cpp
+  MapSystemManager.cpp
+  BarNode.cpp
+  ButtonNode.cpp
+  HPBarNode.cpp
+  HUDNode.cpp
+  InputBoxNode.cpp
+  MagicButton.cpp
+  Generating Code...
+  Game.vcxproj -> C:\Users\ziz012\DESKTOP\cse125-sp22-group5-main\Eternal_Ritual\Game\Release\Game.lib
