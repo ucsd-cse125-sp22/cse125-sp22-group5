@@ -106,7 +106,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 		mainIcon->scale = UISizes::avatarIconScale;
 	}
 
-	parentNode->addChildNode(mainBackground);
+	//parentNode->addChildNode(mainBackground);
 	mainBackground->addChildNode(mainAvatarBack);
 	mainAvatarBack->renderingOrder = 2;
 	mainBackground->addChildNode(mainName);
@@ -164,8 +164,8 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 
 	UINode* placehold = new UINode();
 
-	parentNode->addChildNode(placehold);
-	parentNode->addChildNode(partyBackground);
+	//parentNode->addChildNode(placehold);
+	//parentNode->addChildNode(partyBackground);
 
 	placehold->addChildNode(partyAvatarBack);
 	partyAvatarBack->renderingOrder = 2;
@@ -224,7 +224,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 		enAvatarTop->parentCoordinatePosition = glm::vec2(0.26, 0.5);
 	}
 
-	parentNode->addChildNode(enBackground);
+	//parentNode->addChildNode(enBackground);
 	enBackground->addChildNode(enAvatarBack);
 	enAvatarBack->renderingOrder = 2;
 	enBackground->addChildNode(enName);
@@ -258,7 +258,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 
 	selectMagic();
 	
-	parentNode->addChildNode(magicBack);
+	//parentNode->addChildNode(magicBack);
 	
 	// Tutorial ==================
 	UINode* listBack = new UINode();
@@ -299,33 +299,119 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	
 	listBack->scale = glm::vec2(1);
 	listBack->position = glm::vec2(winSize.x - UISizes::listHeadBackSize.x/2,winSize.y-(listBack->size.y/2 + UISizes::listHeadBackSize.y + 0.01));
-	parentNode->addChildNode(listBack);
+	//parentNode->addChildNode(listBack);
 
+	// Notification
+	viewBack = new SpriteNode(UISizes::viewBackSize);
+	viewBack->texture = new Texture("/Resources/Game/UI/notification_back.png");
+	viewText = new TextNode(font,0.05,1,0.1);
+	viewText->text = "Jackie's view";
+	viewText->parentCoordinatePosition = glm::vec2(0.5,0.73);
+	viewBack->screenPosition = glm::vec2(0.5, 0.2);
+	viewBack->addChildNode(viewText);
+	viewBack->alpha = 0;
+
+	deathBack = new SpriteNode(UISizes::deathBackSize);
+	deathBack->texture = new Texture("/Resources/Game/UI/death_back.png");
+	deathText = new TextNode(font, 0.08, 1, 0.1);
+	deathText->text = "You Dead";
+	deathText->parentCoordinatePosition = glm::vec2(0.5, 0.65);
+	deathText->color = Color::textColor;
+	deathBack->screenPosition = glm::vec2(0.5, 0.75);
+	deathBack->addChildNode(deathText);
+	deathBack->alpha = 0;
+	deathBack->isDisabled = true;
+	deathBack->scale = glm::vec2(0, 1);
+
+	aliveBase = new UINode();
+	aliveBase->addChildNode(mainBackground);
+	aliveBase->addChildNode(enBackground);
+	aliveBase->addChildNode(magicBack);
+	aliveBase->addChildNode(listBack);
+	aliveBase->addChildNode(partyBackground);
+	aliveBase->addChildNode(placehold);
+
+	parentNode->addChildNode(aliveBase);
+	parentNode->addChildNode(viewBack);
+	parentNode->addChildNode(deathBack);
 }
 
-void HUDNode::update()
+void HUDNode::update(bool viewAlly)
 {
-	// Character
 	mainHpBar->update(selfChar->health, engine);
 	mainMpBar->update(selfChar->mana, engine);
 
 	partyHpBar->update(ally->health, engine);
 	partyMpBar->update(ally->mana, engine);
 
-	if (selfChar->isLocked) {
-		enBackground->isDisabled = false;
-		enName->text = selfChar->target->name;
-		enHpBar->update(selfChar->target->health, engine);
+	// Character
+	if (selfChar->health <= 0) {
+		deathBack->isDisabled = false;
+		viewBack->isDisabled = false;
+		Animation* death = new Animation("showDeath", 0.3);
+		death->setFloatAnimation(&deathBack->alpha, 1);
+		//death->setEaseInEaseOutTimingMode();
+		Animation* deathWidth = new Animation("showDeathWidth", 0.3);
+		deathWidth->setFloatAnimation(&deathBack->scale.x, 1);
+		//deathWidth->setEaseInEaseOutTimingMode();
+		Animation* view = new Animation("showViewDead", 0.1);
+		view->setFloatAnimation(&viewBack->alpha, 1);
+		view->setEaseInEaseOutTimingMode();
+		Animation* back = new Animation("deBack", 0.1);
+		back->setFloatAnimation(&aliveBase->alpha, 0);
+		back->setEaseInEaseOutTimingMode();
+		engine->playAnimation(view);
+		engine->playAnimation(death);
+		engine->playAnimation(deathWidth);
+		engine->playAnimation(back);
 	}
 	else {
-		enBackground->isDisabled = true;
+
+		if (viewAlly) {
+			Animation* view = new Animation("showView", 0.1);
+			view->setFloatAnimation(&viewBack->alpha, 1);
+			view->setEaseInEaseOutTimingMode();
+			engine->playAnimation(view);
+		}
+		else {
+			Animation* DiView = new Animation("dishowView", 0.1);
+			DiView->setFloatAnimation(&viewBack->alpha, 0);
+			DiView->setEaseInEaseOutTimingMode();
+			engine->playAnimation(DiView);
+		}
+
+		if (selfChar->isLocked) {
+			enBackground->isDisabled = false;
+			enName->text = selfChar->target->name;
+			enHpBar->update(selfChar->target->health, engine);
+		}
+		else {
+			enBackground->isDisabled = true;
+		}
+
+		// Magic
+		selectMagic();
+		magicLarge->setProgess();
+		magic1->setProgess();
+		magic2->setProgess();
+		magic3->setProgess();
+
 	}
+	
+}
 
-	// Magic
-	selectMagic();
-	magicLarge->setProgess();
-	magic1->setProgess();
-	magic2->setProgess();
-	magic3->setProgess();
+void HUDNode::toggleViewDead(CharNode* name)
+{
+	viewText->text = name->name + "'s View";
+}
 
+void HUDNode::reset() {
+	viewBack->isDisabled = true;
+	deathBack->isDisabled = true;
+	deathBack->scale = glm::vec2(0, 1);
+	engine->stopAnimation("showDeathWidth");
+	engine->stopAnimation("showDeath");
+	engine->stopAnimation("deBack");
+	aliveBase->isDisabled = false;
+	aliveBase->alpha = 1;
 }

@@ -194,30 +194,42 @@
 		3D6FD3BD283F98A500BC5083 /* client-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D6FD3BC283F98A500BC5083 /* client-main.cpp */; };
 		3D6FD3C1283F98B500BC5083 /* offline-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D6FD3C0283F98B500BC5083 /* offline-main.cpp */; };
 		3D6FD3C5283F98C200BC5083 /* server-main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D6FD3C4283F98C200BC5083 /* server-main.cpp */; };
-		3D79156D28448EE800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D79155E28448EE800A5E354 /* AllUI.inc */; };
-		3D79156E28448EE800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D79155E28448EE800A5E354 /* AllUI.inc */; };
-		3D79156F28448EE800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D79155E28448EE800A5E354 /* AllUI.inc */; };
-		3D79157028448EE800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156128448EE800A5E354 /* MagicButton.cpp */; };
-		3D79157128448EE800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156128448EE800A5E354 /* MagicButton.cpp */; };
-		3D79157228448EE800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156128448EE800A5E354 /* MagicButton.cpp */; };
-		3D79157328448EE800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156728448EE800A5E354 /* BarNode.cpp */; };
-		3D79157428448EE800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156728448EE800A5E354 /* BarNode.cpp */; };
-		3D79157528448EE800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156728448EE800A5E354 /* BarNode.cpp */; };
-		3D79157628448EE800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156828448EE800A5E354 /* HUDNode.cpp */; };
-		3D79157728448EE800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156828448EE800A5E354 /* HUDNode.cpp */; };
-		3D79157828448EE800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156828448EE800A5E354 /* HUDNode.cpp */; };
-		3D79157928448EE800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156928448EE800A5E354 /* ButtonNode.cpp */; };
-		3D79157A28448EE800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156928448EE800A5E354 /* ButtonNode.cpp */; };
-		3D79157B28448EE800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156928448EE800A5E354 /* ButtonNode.cpp */; };
-		3D79157C28448EE800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156A28448EE800A5E354 /* HPBarNode.cpp */; };
-		3D79157D28448EE800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156A28448EE800A5E354 /* HPBarNode.cpp */; };
-		3D79157E28448EE800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156A28448EE800A5E354 /* HPBarNode.cpp */; };
-		3D79157F28448EE800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156B28448EE800A5E354 /* InputBoxNode.cpp */; };
-		3D79158028448EE800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156B28448EE800A5E354 /* InputBoxNode.cpp */; };
-		3D79158128448EE800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D79156B28448EE800A5E354 /* InputBoxNode.cpp */; };
 		3D7915842844907200A5E354 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915822844907200A5E354 /* CameraController.cpp */; };
 		3D7915852844907200A5E354 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915822844907200A5E354 /* CameraController.cpp */; };
 		3D7915862844907200A5E354 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915822844907200A5E354 /* CameraController.cpp */; };
+		3D7915CA2846413800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B42846413800A5E354 /* AllUI.inc */; };
+		3D7915CB2846413800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B42846413800A5E354 /* AllUI.inc */; };
+		3D7915CC2846413800A5E354 /* AllUI.inc in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B42846413800A5E354 /* AllUI.inc */; };
+		3D7915CD2846413800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B72846413800A5E354 /* MagicButton.cpp */; };
+		3D7915CE2846413800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B72846413800A5E354 /* MagicButton.cpp */; };
+		3D7915CF2846413800A5E354 /* MagicButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B72846413800A5E354 /* MagicButton.cpp */; };
+		3D7915D02846413800A5E354 /* Logo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B82846413800A5E354 /* Logo.cpp */; };
+		3D7915D12846413800A5E354 /* Logo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B82846413800A5E354 /* Logo.cpp */; };
+		3D7915D22846413800A5E354 /* Logo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B82846413800A5E354 /* Logo.cpp */; };
+		3D7915D32846413800A5E354 /* DeathScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B92846413800A5E354 /* DeathScene.cpp */; };
+		3D7915D42846413800A5E354 /* DeathScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B92846413800A5E354 /* DeathScene.cpp */; };
+		3D7915D52846413800A5E354 /* DeathScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915B92846413800A5E354 /* DeathScene.cpp */; };
+		3D7915D62846413800A5E354 /* StartSceneUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C22846413800A5E354 /* StartSceneUI.cpp */; };
+		3D7915D72846413800A5E354 /* StartSceneUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C22846413800A5E354 /* StartSceneUI.cpp */; };
+		3D7915D82846413800A5E354 /* StartSceneUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C22846413800A5E354 /* StartSceneUI.cpp */; };
+		3D7915D92846413800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C32846413800A5E354 /* BarNode.cpp */; };
+		3D7915DA2846413800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C32846413800A5E354 /* BarNode.cpp */; };
+		3D7915DB2846413800A5E354 /* BarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C32846413800A5E354 /* BarNode.cpp */; };
+		3D7915DC2846413800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C42846413800A5E354 /* HUDNode.cpp */; };
+		3D7915DD2846413800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C42846413800A5E354 /* HUDNode.cpp */; };
+		3D7915DE2846413800A5E354 /* HUDNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C42846413800A5E354 /* HUDNode.cpp */; };
+		3D7915DF2846413800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C52846413800A5E354 /* ButtonNode.cpp */; };
+		3D7915E02846413800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C52846413800A5E354 /* ButtonNode.cpp */; };
+		3D7915E12846413800A5E354 /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C52846413800A5E354 /* ButtonNode.cpp */; };
+		3D7915E22846413800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C62846413800A5E354 /* HPBarNode.cpp */; };
+		3D7915E32846413800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C62846413800A5E354 /* HPBarNode.cpp */; };
+		3D7915E42846413800A5E354 /* HPBarNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C62846413800A5E354 /* HPBarNode.cpp */; };
+		3D7915E52846413800A5E354 /* Cursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C72846413800A5E354 /* Cursor.cpp */; };
+		3D7915E62846413800A5E354 /* Cursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C72846413800A5E354 /* Cursor.cpp */; };
+		3D7915E72846413800A5E354 /* Cursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C72846413800A5E354 /* Cursor.cpp */; };
+		3D7915E82846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
+		3D7915E92846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
+		3D7915EA2846413800A5E354 /* InputBoxNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D7915C82846413800A5E354 /* InputBoxNode.cpp */; };
 		3DD5A5B7282FFA510010B1A5 /* libprotobuf.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD5A5B6282FFA510010B1A5 /* libprotobuf.dylib */; };
 		C294F8F527FCFB19002B6550 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F427FCFB19002B6550 /* OpenGL.framework */; };
 		C294F8F727FCFB22002B6550 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C294F8F627FCFB22002B6550 /* libglfw.3.3.dylib */; };
@@ -371,24 +383,32 @@
 		3D6FD3BC283F98A500BC5083 /* client-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "client-main.cpp"; sourceTree = "<group>"; };
 		3D6FD3C0283F98B500BC5083 /* offline-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "offline-main.cpp"; sourceTree = "<group>"; };
 		3D6FD3C4283F98C200BC5083 /* server-main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "server-main.cpp"; sourceTree = "<group>"; };
-		3D79155D28448EE800A5E354 /* HPBarNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HPBarNode.hpp; sourceTree = "<group>"; };
-		3D79155E28448EE800A5E354 /* AllUI.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllUI.inc; sourceTree = "<group>"; };
-		3D79155F28448EE800A5E354 /* InputBoxNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputBoxNode.hpp; sourceTree = "<group>"; };
-		3D79156028448EE800A5E354 /* Constant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Constant.hpp; sourceTree = "<group>"; };
-		3D79156128448EE800A5E354 /* MagicButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MagicButton.cpp; sourceTree = "<group>"; };
-		3D79156228448EE800A5E354 /* MagicShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MagicShader.vs; sourceTree = "<group>"; };
-		3D79156328448EE800A5E354 /* HUDNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HUDNode.hpp; sourceTree = "<group>"; };
-		3D79156428448EE800A5E354 /* BarNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BarNode.hpp; sourceTree = "<group>"; };
-		3D79156528448EE800A5E354 /* ButtonNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ButtonNode.hpp; sourceTree = "<group>"; };
-		3D79156628448EE800A5E354 /* MagicShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MagicShader.fs; sourceTree = "<group>"; };
-		3D79156728448EE800A5E354 /* BarNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BarNode.cpp; sourceTree = "<group>"; };
-		3D79156828448EE800A5E354 /* HUDNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUDNode.cpp; sourceTree = "<group>"; };
-		3D79156928448EE800A5E354 /* ButtonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonNode.cpp; sourceTree = "<group>"; };
-		3D79156A28448EE800A5E354 /* HPBarNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPBarNode.cpp; sourceTree = "<group>"; };
-		3D79156B28448EE800A5E354 /* InputBoxNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputBoxNode.cpp; sourceTree = "<group>"; };
-		3D79156C28448EE800A5E354 /* MagicButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MagicButton.hpp; sourceTree = "<group>"; };
 		3D7915822844907200A5E354 /* CameraController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
 		3D7915832844907200A5E354 /* CameraController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CameraController.hpp; sourceTree = "<group>"; };
+		3D7915B22846413800A5E354 /* HPBarNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HPBarNode.hpp; sourceTree = "<group>"; };
+		3D7915B32846413800A5E354 /* Cursor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cursor.hpp; sourceTree = "<group>"; };
+		3D7915B42846413800A5E354 /* AllUI.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AllUI.inc; sourceTree = "<group>"; };
+		3D7915B52846413800A5E354 /* InputBoxNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputBoxNode.hpp; sourceTree = "<group>"; };
+		3D7915B62846413800A5E354 /* Constant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Constant.hpp; sourceTree = "<group>"; };
+		3D7915B72846413800A5E354 /* MagicButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MagicButton.cpp; sourceTree = "<group>"; };
+		3D7915B82846413800A5E354 /* Logo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logo.cpp; sourceTree = "<group>"; };
+		3D7915B92846413800A5E354 /* DeathScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeathScene.cpp; sourceTree = "<group>"; };
+		3D7915BA2846413800A5E354 /* MagicShader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MagicShader.vs; sourceTree = "<group>"; };
+		3D7915BB2846413800A5E354 /* StartSceneUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StartSceneUI.hpp; sourceTree = "<group>"; };
+		3D7915BC2846413800A5E354 /* HUDNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HUDNode.hpp; sourceTree = "<group>"; };
+		3D7915BD2846413800A5E354 /* BarNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BarNode.hpp; sourceTree = "<group>"; };
+		3D7915BE2846413800A5E354 /* ButtonNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ButtonNode.hpp; sourceTree = "<group>"; };
+		3D7915BF2846413800A5E354 /* Logo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logo.hpp; sourceTree = "<group>"; };
+		3D7915C02846413800A5E354 /* MagicShader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MagicShader.fs; sourceTree = "<group>"; };
+		3D7915C12846413800A5E354 /* DeathScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeathScene.hpp; sourceTree = "<group>"; };
+		3D7915C22846413800A5E354 /* StartSceneUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartSceneUI.cpp; sourceTree = "<group>"; };
+		3D7915C32846413800A5E354 /* BarNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BarNode.cpp; sourceTree = "<group>"; };
+		3D7915C42846413800A5E354 /* HUDNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUDNode.cpp; sourceTree = "<group>"; };
+		3D7915C52846413800A5E354 /* ButtonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonNode.cpp; sourceTree = "<group>"; };
+		3D7915C62846413800A5E354 /* HPBarNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPBarNode.cpp; sourceTree = "<group>"; };
+		3D7915C72846413800A5E354 /* Cursor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cursor.cpp; sourceTree = "<group>"; };
+		3D7915C82846413800A5E354 /* InputBoxNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputBoxNode.cpp; sourceTree = "<group>"; };
+		3D7915C92846413800A5E354 /* MagicButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MagicButton.hpp; sourceTree = "<group>"; };
 		3DD5A5B2282FAAE30010B1A5 /* credits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = credits.txt; sourceTree = "<group>"; };
 		3DD5A5B3282FBDB80010B1A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DD5A5B5282FF8A40010B1A5 /* Sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sample; sourceTree = "<group>"; };
@@ -470,7 +490,7 @@
 		12EA9AF2280FE6B100541504 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				3D79155C28448EE800A5E354 /* UI */,
+				3D7915B12846413800A5E354 /* UI */,
 				3D79154328448CFB00A5E354 /* CG */,
 				3D2D27582834220100159082 /* Magic */,
 				E28020832813159700A810E7 /* Map */,
@@ -749,25 +769,33 @@
 			path = CG;
 			sourceTree = "<group>";
 		};
-		3D79155C28448EE800A5E354 /* UI */ = {
+		3D7915B12846413800A5E354 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3D79155D28448EE800A5E354 /* HPBarNode.hpp */,
-				3D79155E28448EE800A5E354 /* AllUI.inc */,
-				3D79155F28448EE800A5E354 /* InputBoxNode.hpp */,
-				3D79156028448EE800A5E354 /* Constant.hpp */,
-				3D79156128448EE800A5E354 /* MagicButton.cpp */,
-				3D79156228448EE800A5E354 /* MagicShader.vs */,
-				3D79156328448EE800A5E354 /* HUDNode.hpp */,
-				3D79156428448EE800A5E354 /* BarNode.hpp */,
-				3D79156528448EE800A5E354 /* ButtonNode.hpp */,
-				3D79156628448EE800A5E354 /* MagicShader.fs */,
-				3D79156728448EE800A5E354 /* BarNode.cpp */,
-				3D79156828448EE800A5E354 /* HUDNode.cpp */,
-				3D79156928448EE800A5E354 /* ButtonNode.cpp */,
-				3D79156A28448EE800A5E354 /* HPBarNode.cpp */,
-				3D79156B28448EE800A5E354 /* InputBoxNode.cpp */,
-				3D79156C28448EE800A5E354 /* MagicButton.hpp */,
+				3D7915B42846413800A5E354 /* AllUI.inc */,
+				3D7915C32846413800A5E354 /* BarNode.cpp */,
+				3D7915BD2846413800A5E354 /* BarNode.hpp */,
+				3D7915C52846413800A5E354 /* ButtonNode.cpp */,
+				3D7915BE2846413800A5E354 /* ButtonNode.hpp */,
+				3D7915B62846413800A5E354 /* Constant.hpp */,
+				3D7915C72846413800A5E354 /* Cursor.cpp */,
+				3D7915B32846413800A5E354 /* Cursor.hpp */,
+				3D7915B92846413800A5E354 /* DeathScene.cpp */,
+				3D7915C12846413800A5E354 /* DeathScene.hpp */,
+				3D7915C62846413800A5E354 /* HPBarNode.cpp */,
+				3D7915B22846413800A5E354 /* HPBarNode.hpp */,
+				3D7915C42846413800A5E354 /* HUDNode.cpp */,
+				3D7915BC2846413800A5E354 /* HUDNode.hpp */,
+				3D7915C82846413800A5E354 /* InputBoxNode.cpp */,
+				3D7915B52846413800A5E354 /* InputBoxNode.hpp */,
+				3D7915B82846413800A5E354 /* Logo.cpp */,
+				3D7915BF2846413800A5E354 /* Logo.hpp */,
+				3D7915B72846413800A5E354 /* MagicButton.cpp */,
+				3D7915C92846413800A5E354 /* MagicButton.hpp */,
+				3D7915C02846413800A5E354 /* MagicShader.fs */,
+				3D7915BA2846413800A5E354 /* MagicShader.vs */,
+				3D7915C22846413800A5E354 /* StartSceneUI.cpp */,
+				3D7915BB2846413800A5E354 /* StartSceneUI.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1005,11 +1033,12 @@
 				3D2D27E02835B23100159082 /* CharNode.cpp in Sources */,
 				3D2D27E12835B23100159082 /* ThunderShock.cpp in Sources */,
 				3D6FD394283F985200BC5083 /* Particle3DRenderer.cpp in Sources */,
+				3D7915D72846413800A5E354 /* StartSceneUI.cpp in Sources */,
 				3D6FD376283F985200BC5083 /* Input.cpp in Sources */,
 				3D6FD3B2283F985200BC5083 /* CameraNode.cpp in Sources */,
+				3D7915E32846413800A5E354 /* HPBarNode.cpp in Sources */,
 				3D2D27E22835B23100159082 /* Thunder.cpp in Sources */,
-				3D79157A28448EE800A5E354 /* ButtonNode.cpp in Sources */,
-				3D79158028448EE800A5E354 /* InputBoxNode.cpp in Sources */,
+				3D7915DD2846413800A5E354 /* HUDNode.cpp in Sources */,
 				3D2D27E32835B23100159082 /* FireBall.cpp in Sources */,
 				3D6FD3A3283F985200BC5083 /* UINode.cpp in Sources */,
 				3D6FD38B283F985200BC5083 /* Engine.cpp in Sources */,
@@ -1017,19 +1046,19 @@
 				3D6FD37C283F985200BC5083 /* Font.cpp in Sources */,
 				3D2D27E72835B23100159082 /* HitController.cpp in Sources */,
 				3D008937284094C6007E5CAD /* Storm.cpp in Sources */,
+				3D7915CB2846413800A5E354 /* AllUI.inc in Sources */,
 				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
-				3D79156E28448EE800A5E354 /* AllUI.inc in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
-				3D79157128448EE800A5E354 /* MagicButton.cpp in Sources */,
-				3D79157428448EE800A5E354 /* BarNode.cpp in Sources */,
 				3D2D28772835B82000159082 /* EventPb.cpp in Sources */,
 				3D6FD3A6283F985200BC5083 /* Particle3DNode.cpp in Sources */,
+				3D7915D12846413800A5E354 /* Logo.cpp in Sources */,
 				3D2D27EA2835B23100159082 /* Flame.cpp in Sources */,
 				3D6FD3BD283F98A500BC5083 /* client-main.cpp in Sources */,
 				3D6FD3AC283F985200BC5083 /* TextNode.cpp in Sources */,
 				3D6FD36A283F985200BC5083 /* Shader.cpp in Sources */,
 				3D6FD379283F985200BC5083 /* FontLibrary.cpp in Sources */,
+				3D7915CE2846413800A5E354 /* MagicButton.cpp in Sources */,
 				3D6FD367283F985200BC5083 /* Texture.cpp in Sources */,
 				3D6FD397283F985200BC5083 /* UnitCube.cpp in Sources */,
 				3D2D27EB2835B23100159082 /* MapBoxObject.cpp in Sources */,
@@ -1038,11 +1067,14 @@
 				3D2D287D2835B82B00159082 /* StatePb.cpp in Sources */,
 				3D6FD370283F985200BC5083 /* Particle3DShader.cpp in Sources */,
 				3D6FD391283F985200BC5083 /* Sprite.cpp in Sources */,
+				3D7915E02846413800A5E354 /* ButtonNode.cpp in Sources */,
 				3D2D287F2835B82E00159082 /* gameData.proto in Sources */,
-				3D79157D28448EE800A5E354 /* HPBarNode.cpp in Sources */,
 				3D2D27F02835B23100159082 /* ImportMapHelper.cpp in Sources */,
 				3D2D28762835B81700159082 /* ClientSocket.cpp in Sources */,
+				3D7915DA2846413800A5E354 /* BarNode.cpp in Sources */,
 				3D6FD3A9283F985200BC5083 /* Node.cpp in Sources */,
+				3D7915D42846413800A5E354 /* DeathScene.cpp in Sources */,
+				3D7915E62846413800A5E354 /* Cursor.cpp in Sources */,
 				3D2D27F32835B23100159082 /* LightningSpear.cpp in Sources */,
 				3D6FD39A283F985200BC5083 /* Skybox.cpp in Sources */,
 				3D2D27F42835B23100159082 /* ThousandBlade.cpp in Sources */,
@@ -1051,7 +1083,7 @@
 				3D6FD361283F985200BC5083 /* AlphaShader.cpp in Sources */,
 				3D6FD364283F985200BC5083 /* Image.cpp in Sources */,
 				3D2D28792835B82300159082 /* gameData.pb.cc in Sources */,
-				3D79157728448EE800A5E354 /* HUDNode.cpp in Sources */,
+				3D7915E92846413800A5E354 /* InputBoxNode.cpp in Sources */,
 				3D6FD3A0283F985200BC5083 /* ParticleRenderer.cpp in Sources */,
 				3D2D27FC2835B23100159082 /* Projectile.cpp in Sources */,
 				3D2D28012835B23100159082 /* DragonMagic.cpp in Sources */,
@@ -1081,11 +1113,12 @@
 				3D2D28282835B3C500159082 /* CharNode.cpp in Sources */,
 				3D2D28292835B3C500159082 /* ThunderShock.cpp in Sources */,
 				3D6FD395283F985200BC5083 /* Particle3DRenderer.cpp in Sources */,
+				3D7915D82846413800A5E354 /* StartSceneUI.cpp in Sources */,
 				3D6FD377283F985200BC5083 /* Input.cpp in Sources */,
 				3D6FD3B3283F985200BC5083 /* CameraNode.cpp in Sources */,
+				3D7915E42846413800A5E354 /* HPBarNode.cpp in Sources */,
 				3D2D282A2835B3C500159082 /* Thunder.cpp in Sources */,
-				3D79157B28448EE800A5E354 /* ButtonNode.cpp in Sources */,
-				3D79158128448EE800A5E354 /* InputBoxNode.cpp in Sources */,
+				3D7915DE2846413800A5E354 /* HUDNode.cpp in Sources */,
 				3D2D282B2835B3C500159082 /* FireBall.cpp in Sources */,
 				3D6FD3A4283F985200BC5083 /* UINode.cpp in Sources */,
 				3D6FD38C283F985200BC5083 /* Engine.cpp in Sources */,
@@ -1093,19 +1126,19 @@
 				3D6FD37D283F985200BC5083 /* Font.cpp in Sources */,
 				3D2D282F2835B3C500159082 /* HitController.cpp in Sources */,
 				3D008938284094C6007E5CAD /* Storm.cpp in Sources */,
+				3D7915CC2846413800A5E354 /* AllUI.inc in Sources */,
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
-				3D79156F28448EE800A5E354 /* AllUI.inc in Sources */,
 				3D2D28782835B82000159082 /* EventPb.cpp in Sources */,
-				3D79157228448EE800A5E354 /* MagicButton.cpp in Sources */,
-				3D79157528448EE800A5E354 /* BarNode.cpp in Sources */,
 				3D2D28322835B3C500159082 /* Flame.cpp in Sources */,
 				3D6FD3A7283F985200BC5083 /* Particle3DNode.cpp in Sources */,
+				3D7915D22846413800A5E354 /* Logo.cpp in Sources */,
 				3D2D28332835B3C500159082 /* MapBoxObject.cpp in Sources */,
 				3D6FD3AD283F985200BC5083 /* TextNode.cpp in Sources */,
 				3D6FD36B283F985200BC5083 /* Shader.cpp in Sources */,
 				3D6FD37A283F985200BC5083 /* FontLibrary.cpp in Sources */,
 				3D6FD368283F985200BC5083 /* Texture.cpp in Sources */,
+				3D7915CF2846413800A5E354 /* MagicButton.cpp in Sources */,
 				3D6FD3C5283F98C200BC5083 /* server-main.cpp in Sources */,
 				3D6FD398283F985200BC5083 /* UnitCube.cpp in Sources */,
 				3D6FD383283F985200BC5083 /* AudioBuffer.cpp in Sources */,
@@ -1114,11 +1147,14 @@
 				3D2D28802835B82F00159082 /* gameData.proto in Sources */,
 				3D6FD371283F985200BC5083 /* Particle3DShader.cpp in Sources */,
 				3D6FD392283F985200BC5083 /* Sprite.cpp in Sources */,
+				3D7915E12846413800A5E354 /* ButtonNode.cpp in Sources */,
 				3D2D28382835B3C500159082 /* ImportMapHelper.cpp in Sources */,
-				3D79157E28448EE800A5E354 /* HPBarNode.cpp in Sources */,
 				3D2D283B2835B3C500159082 /* LightningSpear.cpp in Sources */,
 				3D2D283C2835B3C500159082 /* ThousandBlade.cpp in Sources */,
+				3D7915DB2846413800A5E354 /* BarNode.cpp in Sources */,
 				3D6FD3AA283F985200BC5083 /* Node.cpp in Sources */,
+				3D7915D52846413800A5E354 /* DeathScene.cpp in Sources */,
+				3D7915E72846413800A5E354 /* Cursor.cpp in Sources */,
 				3D2D283D2835B3C500159082 /* AllMagic.inc in Sources */,
 				3D6FD39B283F985200BC5083 /* Skybox.cpp in Sources */,
 				3D2D287A2835B82400159082 /* gameData.pb.cc in Sources */,
@@ -1127,7 +1163,7 @@
 				3D6FD362283F985200BC5083 /* AlphaShader.cpp in Sources */,
 				3D6FD365283F985200BC5083 /* Image.cpp in Sources */,
 				3D2D28492835B3C500159082 /* DragonMagic.cpp in Sources */,
-				3D79157828448EE800A5E354 /* HUDNode.cpp in Sources */,
+				3D7915EA2846413800A5E354 /* InputBoxNode.cpp in Sources */,
 				3D6FD3A1283F985200BC5083 /* ParticleRenderer.cpp in Sources */,
 				3D2D284B2835B3C500159082 /* StoneBlast.cpp in Sources */,
 				3D2D287C2835B82700159082 /* PbData.cpp in Sources */,
@@ -1161,40 +1197,44 @@
 				3D6FD3B1283F985200BC5083 /* CameraNode.cpp in Sources */,
 				12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */,
 				3D6FD3A2283F985200BC5083 /* UINode.cpp in Sources */,
+				3D7915E82846413800A5E354 /* InputBoxNode.cpp in Sources */,
 				3D2D27712834220100159082 /* ThunderShock.cpp in Sources */,
 				E22C59EA284536D1007FFC49 /* Circle.cpp in Sources */,
+				3D7915D92846413800A5E354 /* BarNode.cpp in Sources */,
 				3D2D277A2834220100159082 /* Thunder.cpp in Sources */,
 				3D6FD390283F985200BC5083 /* Sprite.cpp in Sources */,
 				3D2D27702834220100159082 /* FireBall.cpp in Sources */,
 				3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */,
 				E22E3016283D9B1300BEA708 /* Storm.cpp in Sources */,
-				3D79157F28448EE800A5E354 /* InputBoxNode.cpp in Sources */,
 				3D2D27782834220100159082 /* GroundSmash.cpp in Sources */,
 				3D6FD39F283F985200BC5083 /* ParticleRenderer.cpp in Sources */,
+				3D7915D62846413800A5E354 /* StartSceneUI.cpp in Sources */,
 				3D6FD372283F985200BC5083 /* ParticleShader.cpp in Sources */,
 				12309CA6281A022500423625 /* HitController.cpp in Sources */,
 				E265F2632835661D008B4AD0 /* LightningPhalanx.cpp in Sources */,
+				3D7915CA2846413800A5E354 /* AllUI.inc in Sources */,
 				E2802089281315C000A810E7 /* MapSystemManager.cpp in Sources */,
 				3D7915842844907200A5E354 /* CameraController.cpp in Sources */,
 				3D2D27752834220100159082 /* Flame.cpp in Sources */,
 				3D6FD3AE283F985200BC5083 /* SpriteNode.cpp in Sources */,
-				3D79157628448EE800A5E354 /* HUDNode.cpp in Sources */,
 				3D6FD378283F985200BC5083 /* FontLibrary.cpp in Sources */,
 				3D6FD38D283F985200BC5083 /* Geometry.cpp in Sources */,
 				3D6FD396283F985200BC5083 /* UnitCube.cpp in Sources */,
 				E2802086281315AF00A810E7 /* MapBoxObject.cpp in Sources */,
+				3D7915DC2846413800A5E354 /* HUDNode.cpp in Sources */,
 				3D6FD39C283F985200BC5083 /* TextRenderer.cpp in Sources */,
 				3D6FD3C1283F98B500BC5083 /* offline-main.cpp in Sources */,
-				3D79156D28448EE800A5E354 /* AllUI.inc in Sources */,
 				3D6FD384283F985200BC5083 /* Bone.cpp in Sources */,
 				3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */,
+				3D7915D32846413800A5E354 /* DeathScene.cpp in Sources */,
 				3D6FD387283F985200BC5083 /* Animator.cpp in Sources */,
+				3D7915CD2846413800A5E354 /* MagicButton.cpp in Sources */,
 				3D6FD37B283F985200BC5083 /* Font.cpp in Sources */,
 				3D2D27722834220100159082 /* LightningSpear.cpp in Sources */,
 				3D6FD366283F985200BC5083 /* Texture.cpp in Sources */,
-				3D79157C28448EE800A5E354 /* HPBarNode.cpp in Sources */,
+				3D7915DF2846413800A5E354 /* ButtonNode.cpp in Sources */,
+				3D7915E22846413800A5E354 /* HPBarNode.cpp in Sources */,
 				3D6FD37E283F985200BC5083 /* Animation.cpp in Sources */,
-				3D79157928448EE800A5E354 /* ButtonNode.cpp in Sources */,
 				3D2D27742834220100159082 /* ThousandBlade.cpp in Sources */,
 				3D2D277B2834220100159082 /* AllMagic.inc in Sources */,
 				3D2D27762834220100159082 /* Projectile.cpp in Sources */,
@@ -1202,16 +1242,16 @@
 				3D6FD38A283F985200BC5083 /* Engine.cpp in Sources */,
 				3D6FD369283F985200BC5083 /* Shader.cpp in Sources */,
 				3D2D27792834220100159082 /* StoneBlast.cpp in Sources */,
-				3D79157328448EE800A5E354 /* BarNode.cpp in Sources */,
 				E265F26628357B41008B4AD0 /* ScatteredFire.cpp in Sources */,
 				3D6FD393283F985200BC5083 /* Particle3DRenderer.cpp in Sources */,
-				3D79157028448EE800A5E354 /* MagicButton.cpp in Sources */,
 				3D6FD3A5283F985200BC5083 /* Particle3DNode.cpp in Sources */,
 				3D6FD399283F985200BC5083 /* Skybox.cpp in Sources */,
+				3D7915D02846413800A5E354 /* Logo.cpp in Sources */,
 				3D2D27772834220100159082 /* BaseMagic.cpp in Sources */,
 				3D6FD36C283F985200BC5083 /* PBRShader.cpp in Sources */,
 				3D6FD381283F985200BC5083 /* AudioBuffer.cpp in Sources */,
 				3D6FD363283F985200BC5083 /* Image.cpp in Sources */,
+				3D7915E52846413800A5E354 /* Cursor.cpp in Sources */,
 				3D6FD360283F985200BC5083 /* AlphaShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

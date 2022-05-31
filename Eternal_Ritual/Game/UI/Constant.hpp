@@ -14,9 +14,14 @@ namespace Color{
 	const glm::vec4 Hp = glm::vec4(0.45,0.15,0.15,1.0);
 	const glm::vec4 Mp = glm::vec4(0.2,0.2,0.7,1.0);
 	const glm::vec4 textColor = glm::vec4(0.76,0.67,0.5,1.0);
+	const glm::vec4 LogotextColor = glm::vec4(0.9, 0.79, 0.33, 1.0);
+	const glm::vec4 loadingBarColor = glm::vec4(0.3, 0.4, 0.9, 1.0);
 };
 
 namespace UISizes{
+
+	const glm::vec2 cursorSize = glm::vec2(0.032);
+
 	// General ============
 	const glm::vec2 avatarSize = glm::vec2(0.140, 0.140);
 	const glm::vec2 avatarIconSize = glm::vec2(0.124);
@@ -65,6 +70,23 @@ namespace UISizes{
 
 	// tutorial ===============
 	const glm::vec2 listHeadBackSize = glm::vec2(0.232,0.078);
+
+	// notification ===============
+	const glm::vec2 viewBackSize = glm::vec2(0.569,0.101);
+	const glm::vec2 deathBackSize = glm::vec2(1.419,0.101);
+
+	// logo =================
+	const glm::vec2 logoLightSize = glm::vec2(1.018,0.585);
+	const glm::vec2 logoBackSize = glm::vec2(0.864, 0.324);
+
+	// button ===============
+	const glm::vec2 buttonSize = glm::vec2(0.276,0.094);
+
+	// windows ==============
+	const glm::vec2 netWinBackSize = glm::vec2(0.852,0.078);
+
+	// end ================
+	const glm::vec2 endLogoSize = glm::vec2(0.539,0.238);
 	
 };
 
