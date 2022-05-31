@@ -21,6 +21,7 @@
 #include "Game/Character/CharNode.hpp"
 #include "Game/Magic/BaseMagic.hpp"
 #include "Game/UI/AllUI.inc"
+#include "Game/CG/CameraController.hpp"
 
 
 class ClientCore {

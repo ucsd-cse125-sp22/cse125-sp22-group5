@@ -58,13 +58,21 @@ protected:
     SpriteNode* listBottom;
     TextNode* tutorialText;
 
+    // Notification
+    SpriteNode* viewBack;
+    TextNode* viewText;
+    SpriteNode* deathBack;
+    TextNode* deathText;
+
+    UINode* aliveBase;
     UINode* parentNode;
     void selectMagic();
 public:
     HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally);
     ~HUDNode() = default;
-    void update();
-    void updateMagic();
+    void update(bool viewAlly);
+    void toggleViewDead(CharNode* name);
+    void reset();
 };
 
 #endif

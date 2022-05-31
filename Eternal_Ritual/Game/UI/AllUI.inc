@@ -11,5 +11,9 @@
 #include "Game/UI/ButtonNode.hpp"
 #include "Game/UI/HPBarNode.hpp"
 #include "Game/UI/HUDNode.hpp"
+#include "Game/UI/Logo.hpp"
+#include "Game/UI/StartSceneUI.hpp"
+#include "Game/UI/Cursor.hpp"
+#include "Game/UI/DeathScene.hpp"
 
 #endif /* UI_h */
