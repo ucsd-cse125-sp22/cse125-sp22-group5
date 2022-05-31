@@ -297,7 +297,7 @@ void OfflineCore::updateState() {
     hit_controller_->checkHit();
     character_->genMana();
 
-    HUD_->update();
+    HUD_->update(false);
 }
 
 
