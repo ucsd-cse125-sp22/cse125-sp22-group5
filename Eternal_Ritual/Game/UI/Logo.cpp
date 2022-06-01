@@ -16,6 +16,7 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	logoPic = new SpriteNode(glm::vec2(1));
 	logoPic->texture = new Texture("/Resources/Game/UI/logo.png");
 	logoPic->scale=glm::vec2(0.55f);
+    
 	logoPic->alpha = 0;
 
 	light = new SpriteNode(glm::vec2(1));
@@ -28,7 +29,7 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	nameBackground->texture = new Texture("/Resources/Game/UI/logo_back.png");
 	nameBackground->alpha = 0;
 	nameBackground->renderingOrder = 1;
-	nameBackground->screenPosition = glm::vec2(0.5,0.48);
+	nameBackground->screenPosition = glm::vec2(0.5,0.4);
 
 	name = new TextNode(font,0.15f,1.0f,0.1f);
 	name->text = "Eternal Ritual";
@@ -121,18 +122,18 @@ void Logo::updateLoad(float loadingProgess)
 		*pro = 3;
 	}
 	else {
-		if (!isPlaying) {
-			int i = (int)(loadingProgess * 100);
-			loadingText->text = "Loading " + std::to_string(i) + "%";
-			Animation* ani = new Animation(std::to_string(i), 0.5);
-			ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
-			engine->playAnimation(ani);
-			isPlaying = true;
-			ani->setCompletionHandler([&] {
-				isPlaying = false;
-				*pro = 3;
-			});
-		}
+        loadingText->text = "Loading " + std::to_string((int)((loadingbar->scale.x + 0.01) * 100)) + "%";
+        if (!isPlaying) {
+            int i = (int)(loadingProgess * 100);
+            Animation* ani = new Animation(std::to_string(i), 1);
+            ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
+            engine->playAnimation(ani);
+            isPlaying = true;
+            ani->setCompletionHandler([&] {
+            isPlaying = false;
+            *pro = 3;
+           });
+        }
 	}
 	if (loadingProgess >= 1) {
 		Animation* end = new Animation("LoadEnd", 1.0);

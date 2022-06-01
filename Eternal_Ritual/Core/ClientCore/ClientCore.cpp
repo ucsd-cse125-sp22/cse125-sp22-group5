@@ -88,6 +88,12 @@ void ClientCore::loadSky() {
                                  "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
                                  "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
                                  2.0f);
+    
+    Node* bgmNode = new Node();
+    engine_->addNode(bgmNode);
+    AudioBuffer* bgm = new AudioBuffer("/Resources/Game/Sound/bgm01.wav");
+    bgmNode->loadAudioBuffer("bgm 1", bgm);
+    bgmNode->playAudio("bgm 1");
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.1;
@@ -727,7 +733,7 @@ void ClientCore::renderWorld() {
     std::cout << std::endl;
     std::cout << "|-- Cycle Stage 5 - Render World --|" << std::endl;
     
-//    engine_->renderDirectionalLightShadowMap(directional_light_);
+    engine_->renderDirectionalLightShadowMap(directional_light_);
     
 //    cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
 //

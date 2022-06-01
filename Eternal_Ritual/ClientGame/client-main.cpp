@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
         }
     }
     
-
+    
     while (true) {
         if (ClientCore::Instance()->process() == 8) {
             ClientCore::Instance()->handleEvent();

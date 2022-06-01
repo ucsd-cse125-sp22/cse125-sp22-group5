@@ -28,7 +28,7 @@ StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* bu
 	netWinBack->texture = new Texture("/Resources/Game/UI/net_back.png");
 	netWinBack->isDisabled = true;
 	netWinBack->renderingOrder = 3;
-	netWinBack->screenPosition = glm::vec2(0.5, 0.65);
+	netWinBack->screenPosition = glm::vec2(0.5, 0.6);
 
 	netText = new TextNode(font,0.03,UISizes::netWinBackSize.x*0.8,0.1);
 	//netText->parentCoordinatePosition = glm::vec2(0, 0.5);

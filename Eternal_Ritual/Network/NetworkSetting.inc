@@ -25,4 +25,4 @@
 
 
 #define MAX_BUFFER_SIZE 500
-#define PLAYER_CAPACITY 2
+#define PLAYER_CAPACITY 1
