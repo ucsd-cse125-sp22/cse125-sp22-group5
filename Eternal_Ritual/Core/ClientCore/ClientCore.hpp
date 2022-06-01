@@ -68,6 +68,9 @@ public:
     void processData(char* pbArr, int dataLen);
     void updateState();
     void renderWorld();
+    
+    void resetGame();
+    
     void closeConnect();
     
     int process();
@@ -104,13 +107,16 @@ private:
     CameraNode* ui_camera_;
     CameraNode* char_camera_;
     bool main_camera_ = true;
+    int char_camera_index_;
     
     // Character
     CharNode* character_;
     unsigned long character_ip_;
+    int character_index_;
     
     // Ally
     CharNode* ally_;
+    int ally_index_;
     
     // enemy
     std::unordered_map<CharNode*, std::vector<CharNode*>> enemies_;
@@ -135,7 +141,7 @@ private:
     UINode* button_base_;
     StartSceneUI* start_scene_ui_;
     DeathScene* death_scene_;
-    bool isNetDelayDefine = false;
+    bool is_net_delay_define_ = false;
     
     // CG
     CameraController* camera_controller_;

@@ -382,9 +382,9 @@ void ClientCore::updateStart() {
     if (state == 4) {
         cursor_->isDisable(true);
     }
-    if (state == 5 && !isNetDelayDefine) {
+    if (state == 5 && !is_net_delay_define_) {
         Animation* netDelay = new Animation("netDelay", 0.3f);
-        isNetDelayDefine = true;
+        is_net_delay_define_ = true;
         netDelay->setCompletionHandler([&] {
             loadPbPacket();
             connectServer();
@@ -437,8 +437,6 @@ void ClientCore::loadHUD() {
 }
 
 
-
-
 void ClientCore::loadPbPacket() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 10 - Load ProtoBuf Packet --|" << std::endl;
@@ -460,12 +458,8 @@ void ClientCore::connectServer() {
 void ClientCore::handleEvent() {
     std::cout << std::endl;
     std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
-
-    cout << "eulerAngles 1 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
     
     engine_->shouldUpdate();
-    
-    cout << "eulerAngles 2 : " << pre_chars_[1]->controlNode->eulerAngles.x << " " << pre_chars_[1]->controlNode->eulerAngles.y << " " << pre_chars_[1]->controlNode->eulerAngles.z << endl;
     
     if (engine_->input->wasKeyReleased(KEY_ESCAPE)) {
         exit(1);
@@ -490,10 +484,7 @@ void ClientCore::handleEvent() {
         magic_to_key_[Magic::DRAGON] = KEY_4;
     }
     else {
-        cout << "eulerAngles 3 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
-        cout << "mouse : " << engine_->input->getMouseTranslation().x << " " << engine_->input->getMouseTranslation().y << endl;
         character_->moveCamera(engine_->input->getMouseTranslation() * 0.1f);
-        cout << "eulerAngles 4 : " << character_->controlNode->eulerAngles.x << " " << character_->controlNode->eulerAngles.y << " " << character_->controlNode->eulerAngles.z << endl;
         event_pb_->setControlNodeEulerAngles(character_->controlNode->eulerAngles);
         
         if(engine_->input->isPressingKey(KEY_W)) {
@@ -527,14 +518,29 @@ void ClientCore::handleEvent() {
         }
         
         if(engine_->input->wasKeyReleased(KEY_C)){
-            if (!ally_->isDisabled) {
-                if (main_camera_) {
-                    engine_->mainCameraNode = ally_->cameraNode;
+            if (character_->health <= 0) {
+                for (int i = 1; i < 4; i++) {
+                    CharNode* currChar = pre_chars_[(char_camera_index_ + i) % 4];
+                    if(!currChar->isDisabled) {
+                        hud_->toggleViewDead(currChar);
+                        engine_->mainCameraNode = currChar->cameraNode;
+                        main_camera_ = false;
+                        break;
+                    }
                 }
-                else {
-                    engine_->mainCameraNode = character_->cameraNode;
+            }
+            else {
+                if (!ally_->isDisabled) {
+                    if (main_camera_) {
+                        engine_->mainCameraNode = ally_->cameraNode;
+                        char_camera_index_ = ally_index_;
+                    }
+                    else {
+                        engine_->mainCameraNode = character_->cameraNode;
+                        char_camera_index_ = character_index_;
+                    }
+                    main_camera_ = !main_camera_;
                 }
-                main_camera_ = !main_camera_;
             }
         }
         
@@ -606,11 +612,11 @@ void ClientCore::updateState() {
     if (start_game_) {
         character_ip_ = state_pb_->getPlayerIP();
         int mainGroupNum = state_pb_->getPlayerGroup(character_ip_);
-        character_ = pre_chars_[mainGroupNum];
+        character_index_ = mainGroupNum;
+        char_camera_index_ = character_index_;
+        character_ = pre_chars_[character_index_];
         all_chars_[character_ip_] = character_;
         character_->cameraNode->addChildNode(point_light_);
-        
-//        engine_->mainCameraNode = character_->cameraNode;
         
         vector<unsigned long> enemyIPs = state_pb_->getEnemyIPs(character_ip_);
         
@@ -620,7 +626,8 @@ void ClientCore::updateState() {
             int groupNum = state_pb_->getPlayerGroup(currPlayerIP);
             all_chars_[currPlayerIP] = pre_chars_[groupNum];
             if (groupNum % 2 == mainGroupNum % 2) {
-                ally_ = pre_chars_[groupNum];
+                ally_index_ = groupNum;
+                ally_ = pre_chars_[ally_index_];
             }
         }
         
@@ -687,7 +694,31 @@ void ClientCore::updateState() {
             it.second->genMana();
         }
         
-        hud_->update(false);
+        hud_->update(!main_camera_);
+        
+        if (pre_chars_[0]->health <= 0 && pre_chars_[2]->health <= 0) {
+            if (character_index_ == 0 || character_index_ == 2) {
+                death_scene_->display(false, &process_);
+            }
+            else {
+                death_scene_->display(true, &process_);
+            }
+            Animation* delay = new Animation("resetdelay", 1.5);
+            engine_->playAnimation(delay);
+            process_ = 9;
+        }
+        
+        if (pre_chars_[1]->health <= 0 && pre_chars_[3]->health <= 0) {
+            if (character_index_ == 1 || character_index_ == 3) {
+                death_scene_->display(false, &process_);
+            }
+            else {
+                death_scene_->display(true, &process_);
+            }
+            Animation* delay = new Animation("resetdelay", 1.5);
+            engine_->playAnimation(delay);
+            process_ = 9;
+        }
     }
 }
 
@@ -703,6 +734,11 @@ void ClientCore::renderWorld() {
 //    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
     
     engine_->render();
+}
+
+
+void ClientCore::resetGame() {
+    engine_->mainCameraNode = ui_camera_;
 }
 
 

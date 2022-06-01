@@ -97,6 +97,7 @@ int main(int argc, char* argv[]) {
                 ClientCore::Instance()->playCG();
             }
             else if (ClientCore::Instance()->process() == 7) {
+                ClientCore::Instance()->set_process(8);
                 break;
             }
             ClientCore::Instance()->renderWorld();
@@ -105,15 +106,35 @@ int main(int argc, char* argv[]) {
     
 
     while (true) {
-        ClientCore::Instance()->handleEvent();
-        
-        ClientCore::Instance()->sendData();
-        
-        ClientCore::Instance()->receiveData();
-        
-        ClientCore::Instance()->updateState();
-        
-        ClientCore::Instance()->renderWorld();
+        if (ClientCore::Instance()->process() == 8) {
+            ClientCore::Instance()->handleEvent();
+            
+            ClientCore::Instance()->sendData();
+            
+            ClientCore::Instance()->receiveData();
+            
+            ClientCore::Instance()->updateState();
+            
+            ClientCore::Instance()->renderWorld();
+        }
+        else if (ClientCore::Instance()->process() == 9) {
+            ClientCore::Instance()->set_process(10);
+            break;
+        }
+    }
+    
+    
+    // Post-Game while
+    while(Engine::main->isRunning()) {
+        if(Engine::main->shouldUpdate()) {
+            if (Engine::main->input->wasKeyReleased(KEY_ESCAPE)) {
+                exit(1);
+            }
+            if (ClientCore::Instance()->process() == 10) {
+                ClientCore::Instance()->resetGame();
+            }
+            ClientCore::Instance()->renderWorld();
+        }
     }
     
     return 0;

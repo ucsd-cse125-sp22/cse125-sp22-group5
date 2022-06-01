@@ -3,22 +3,4 @@
    uuid = "AF29DDD1-2EE9-4CF6-8AD0-F7EC24C41A86"
    type = "1"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D2122A84-5EBB-40DF-B23B-4F00C4C49F6D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Eternal_Ritual/Core/ClientCore/ClientCore.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
-            landmarkName = "ClientCore::updateState()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>
