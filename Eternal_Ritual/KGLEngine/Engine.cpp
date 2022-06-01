@@ -187,7 +187,7 @@ void Engine::render() {
         this->preparedLightNodes.clear();
         this->preparedLightNodeShadows.clear();
     }
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
     glfwSwapBuffers(this->window);
 }
 void Engine::renderDirectionalLightShadowMap(LightNode* directionalLightNode) {

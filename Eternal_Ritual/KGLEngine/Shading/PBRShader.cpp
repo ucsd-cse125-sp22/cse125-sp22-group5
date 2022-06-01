@@ -309,6 +309,7 @@ void main() {
     float roughness4MinusOne = roughness4 - 1.0f;
     float shadowAmount = 0.0f;
     for(int i = 0; i < lightCount; i += 1) {
+break;
         if(lights[i].type == 0) {
             lightingColor += diffuseColor.rgb * lights[i].colorFactor;
             continue;
