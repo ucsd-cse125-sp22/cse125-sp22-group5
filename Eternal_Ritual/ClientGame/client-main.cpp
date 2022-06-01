@@ -8,7 +8,37 @@
 
 #include "Core/ClientCore/ClientCore.hpp"
 #include "KGLEngine/Engine.hpp"
+timeval* timepre = new timeval();
+timeval* timecurr = new timeval();
 
+void printtime(timeval* timecurr, timeval* timepre) {
+    std::cout << (timecurr->tv_sec - timepre->tv_sec) * 1000000 + (timecurr->tv_usec - timepre->tv_usec) << std::endl;
+}
+
+#ifdef _WIN64
+int gettimeofday(struct timeval* tp, void* tzp)
+{
+    time_t clock;
+    struct tm tm;
+    SYSTEMTIME wtm;
+    GetLocalTime(&wtm);
+    tm.tm_year = wtm.wYear - 1900;
+    tm.tm_mon = wtm.wMonth - 1;
+    tm.tm_mday = wtm.wDay;
+    tm.tm_hour = wtm.wHour;
+    tm.tm_min = wtm.wMinute;
+    tm.tm_sec = wtm.wSecond;
+    tm.tm_isdst = -1;
+    clock = mktime(&tm);
+    tp->tv_sec = clock;
+    tp->tv_usec = wtm.wMilliseconds * 1000;
+    return (0);
+}
+#endif
+
+#ifdef _WIN64
+int gettimeofday(struct timeval* tp, void* tzp);
+#endif
 
 int main(int argc, char* argv[]) {
     if (signal(SIGINT, destructClientCore) == SIG_ERR) {
@@ -104,18 +134,26 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    
+    float time;
     while (true) {
-        if (ClientCore::Instance()->process() == 8) {
+        if (ClientCore::Instance()->process() == 8 && Engine::main->shouldUpdate()) {
             ClientCore::Instance()->handleEvent();
             
             ClientCore::Instance()->sendData();
             
+            gettimeofday(timepre, NULL);
+            ClientCore::Instance()->renderWorld();
+            gettimeofday(timecurr, NULL);
+            std::cout << "renderWorld" << std::endl;
+            printtime(timecurr, timepre);
+
             ClientCore::Instance()->receiveData();
             
             ClientCore::Instance()->updateState();
-            
-            ClientCore::Instance()->renderWorld();
+            time = Engine::main->getTime();
+
+            std::cout << "render time: " << Engine::main->getTime() - time << std::endl;
+            std::cout << "fps: " << Engine::main->getCurrentFPS() << std::endl;
         }
         else if (ClientCore::Instance()->process() == 9) {
             ClientCore::Instance()->set_process(10);

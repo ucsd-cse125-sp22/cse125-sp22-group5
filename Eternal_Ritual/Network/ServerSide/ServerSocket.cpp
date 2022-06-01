@@ -99,6 +99,10 @@ vector<unsigned long> ServerSocket::connectAllClients() {
             continue;
         }
 
+        // disable Nagle's algorithm
+        char value = 1;
+        setsockopt(clientSocketFD, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
+
         show_client_info();
         
         unsigned long clientIP = ntohl(client_addr_.sin_addr.s_addr) + ntohs(client_addr_.sin_port);

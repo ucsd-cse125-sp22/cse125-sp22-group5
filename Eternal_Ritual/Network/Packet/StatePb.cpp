@@ -26,7 +26,7 @@ void StatePb::readData(char* pbArr, int dataLen) {
 char* StatePb::sendData() {
     data_len_ = static_cast<int>(state_data_->ByteSizeLong());
 
-    std::cout << std::endl << state_data_->DebugString() << std::endl;
+    //std::cout << std::endl << state_data_->DebugString() << std::endl;
     state_data_->SerializeToArray(pb_arr_, MAX_PB_BUFFER_SIZE);
     
     return pb_arr_;

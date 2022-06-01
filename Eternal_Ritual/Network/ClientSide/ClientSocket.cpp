@@ -59,6 +59,10 @@ void ClientSocket::connectServer() {
         closesocket(client_socket_fd_);
         exit(1);
     }
+
+    // disable Nagle's algorithm
+    char value = 1;
+    setsockopt(client_socket_fd_, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 }
 #elif __APPLE__
 void ClientSocket::connectServer() {
