@@ -3573,13 +3573,13 @@ void importMapModel() {
     wallShader8->alphaCutThreshold = 0.0f;
     newMap->geometries[1]->setDoubleSided();
     newMap->geometries[1]->setShader(wallShader8);
-    PBRShader* wallShader9 = new PBRShader(0.3f, 0.5f);
-    wallShader9->setDiffuseMap(new Texture("/Resources/Game/Map/New Terrain Basemap Diffuse.png", 2, true));
-    wallShader9->setNormalMap(new Texture("/Resources/Game/Map/New Terrain Basemap Normal.png", 1, true));
+    PBRShader* wallShader9 = new PBRShader("/Resources/Game/Map/Terrain", 0.1f, 0.9f);
+    wallShader9->setDiffuseMap(new Texture("/Resources/Game/Map/TexturesCom_Rock_Mossy_1K_albedo.png", 2, true));
+    wallShader9->setNormalMap(new Texture("/Resources/Game/Map/TexturesCom_Rock_Mossy_1K_normal.png", 1, true));
     wallShader9->alphaCutThreshold = 0.0f;
     newMap->geometries[9]->setDoubleSided();
     newMap->geometries[9]->setShader(wallShader9);
-    PBRShader* wallShadera = new PBRShader(0.3f, 0.7f);
+    PBRShader* wallShadera = new PBRShader(0.3f, 0.3f);
     wallShadera->setDiffuseMap(new Texture("/Resources/Game/Map/T_Column_01_Albedo.png", 2, true));
     wallShadera->setNormalMap(new Texture("/Resources/Game/Map/T_Column_01_Normal.png", 1, true));
     wallShadera->alphaCutThreshold = 0.0f;
@@ -3984,7 +3984,7 @@ void importMapModel() {
     rockpile1_63->eulerAngles = vec3(0.0, 72.16633077025068, 0.0);
     rockpile1_63->scale = vec3(0.4999984359741211, 0.49999893188476563, 0.4999984359741211);
     Engine::main->addNode(rockpile1_63);
-    PBRShader* fernShader = new PBRShader(0.3, 0.5);
+    PBRShader* fernShader = new PBRShader(0.2, 0.8);
     fernShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Fern_01_Albedo.png", 2.0, true));
     fernShader->setNormalMap(new Texture("/Resources/Game/Map/T_Fern_01_Normal.png", 2.0, true));
     Node* fern5 = new Node();
@@ -4113,10 +4113,10 @@ void importMapModel() {
     fern9_86->eulerAngles = vec3(0.0, 70.97032366544643, 0.0);
     fern9_86->scale = vec3(0.9999851989746094, 0.9999829864501953, 0.9999851989746094);
     Engine::main->addNode(fern9_86);
-    PBRShader* ivyAtlasShader = new PBRShader(0.3, 0.5);
+    PBRShader* ivyAtlasShader = new PBRShader(0.1, 0.9);
     ivyAtlasShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ivy_Atlas_01_Albedo.png", 2.0, true));
     ivyAtlasShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ivy_Atlas_01_Normal.png", 2.0, true));
-    PBRShader* ivyTileableShader = new PBRShader(0.3, 0.5);
+    PBRShader* ivyTileableShader = new PBRShader(0.1, 0.9);
     ivyTileableShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ivy_Tileable_01_Albedo.png", 2.0, true));
     ivyTileableShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ivy_Tileable_01_Normal.png", 2.0, true));
     Node* ivy1 = new Node();
@@ -4231,7 +4231,7 @@ void importMapModel() {
     Engine::main->addNode(ivy7_100);
     Node* ivy5_101 = ivy5->copy();
     ivy5_101->position += vec3(-67.56355285644531, 121.14012145996094, 28.94426918029785);
-    ivy5_101->eulerAngles = vec3(4.145316085587963, 58.834436717978605, -178.23433280661635);
+    ivy5_101->eulerAngles = vec3(175.855, 121.168, 1.766);
     ivy5_101->scale = vec3(1.0000023651123047, 1.0000018310546874, 0.9999864196777344);
     Engine::main->addNode(ivy5_101);
     Node* ivy4_102 = ivy4->copy();
@@ -4330,7 +4330,7 @@ void importMapModel() {
     ivy1_120->scale = vec3(0.9999720001220703, 0.9999440765380859, 0.9999421691894531);
     Engine::main->addNode(ivy1_120);
     Node* ivy5_121 = ivy5->copy();
-    ivy5_121->position += vec3(-19.967988967895508, 108.75482177734375, 42.52937698364258);
+    ivy5_121->position += vec3(-19.579, 108.75482177734375, 42.255);
     ivy5_121->eulerAngles = vec3(-88.60811923465629, 35.14794173302134, -0.05031372474209276);
     ivy5_121->scale = vec3(0.9999610137939453, 0.9999594879150391, 0.9999606323242187);
     Engine::main->addNode(ivy5_121);
@@ -5236,7 +5236,7 @@ void importMapModel() {
     cover1_271->eulerAngles = vec3(-0.0, 90.00000250447816, 0.0);
     cover1_271->scale = vec3(0.9999967956542969, 1.9999998474121095, 0.9998963165283203);
     Engine::main->addNode(cover1_271);
-    PBRShader* ruinedShader = new PBRShader(0.2, 0.7);
+    PBRShader* ruinedShader = new PBRShader(0.3, 0.3);
     ruinedShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ballustrade_01_Albedo.png", 2.0, true));
     ruinedShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ballustrade_01_Normal.png", 2.0, true));
     Node* ruined1 = new Node();
