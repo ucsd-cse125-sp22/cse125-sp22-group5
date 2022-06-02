@@ -42,6 +42,7 @@ void BarNode::setPosition(glm::vec2 position)
 
 void BarNode::update(float value)
 {
+	if (value == curValue) { return; }
 	bool isincrease = this->curValue < value;
 	if (value > initValue) { value = initValue; }
 	if (value < 0) { value = 0; }
@@ -55,12 +56,12 @@ void BarNode::update(float value)
 		engine->playAnimation(fadeAni);
 	}
 	else {
-		Animation* ani = new Animation("hudBar" + std::to_string(id), 0.5);
+		Animation* ani = new Animation("hudBar" + std::to_string(id), 1);
 		ani->setVec2Animation(&baseNode->scale, glm::vec2(scale, 1.0));
 		engine->playAnimation(ani);
-		Animation* delay = new Animation("fadebardelay" + std::to_string(id), 0.08);
+		Animation* delay = new Animation("fadebardelay" + std::to_string(id), 0.4);
 		delay->setCompletionHandler([=] {
-			Animation* fadeAni = new Animation("fade" + std::to_string(id), 0.4);
+			Animation* fadeAni = new Animation("fade" + std::to_string(id), 0.5);
 			std::cout << "cur: " << value << std::endl;
 			std::cout << "init: " << initValue << std::endl;
 			std::cout << "scale: " << scale << std::endl;
