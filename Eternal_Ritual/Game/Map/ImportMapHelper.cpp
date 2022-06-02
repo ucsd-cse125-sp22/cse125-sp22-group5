@@ -12,7 +12,7 @@
 #include "KGLEngine/Engine.hpp"
 
 #define MAPX 40
-#define MAPY -101   
+#define MAPY -101
 #define MAPZ -50
 
 using namespace glm;
@@ -1528,7 +1528,7 @@ void importMapBox() {
     boxType = 0;
     boxSize = vec3(2.6499550342559814f, 0.5061374306678772f, 1.1937456130981445f);
     boxPosition = vec3(-49.26051712036133f + (MAPX), 100.55846405029297f + (MAPY), 66.35468292236328f + (MAPZ));
-    boxEulerAngles = vec3(70.58603673217401f, 71.14381730055392f, 159.57383252241297f);
+    boxEulerAngles = vec3(-70.58603673217401f, 108.856, 20.426);
     MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
 
     boxType = 0;
@@ -3385,7 +3385,7 @@ void importMapBox() {
 //    testNode252->geometries[0]->setShader(cubeShader);
 //    testNode252->scale = vec3(2.6499550342559814f, 0.5061374306678772f, 1.1937456130981445f);
 //    testNode252->position = vec3(-49.26051712036133f + (MAPX), 100.55846405029297f + (MAPY), 66.35468292236328f + (MAPZ));
-//    testNode252->eulerAngles = vec3(70.58603673217401f, 71.14381730055392f, 159.57383252241297f);
+//    testNode252->eulerAngles = vec3(-70.58603673217401f, 108.856, 20.426);
 //    Engine::main->addNode(testNode252);
 //    Node* testNode253 = new Node();
 //    testNode253->loadUnitCube();
@@ -5060,7 +5060,7 @@ void importMapModel() {
     rack1->position.y  = MAPY;
     Node* rack1_247 = rack1->copy();
     rack1_247->position += vec3(-65.17606353759766, 100.00313568115234, 29.69363021850586);
-    rack1_247->eulerAngles = vec3(179.999991348578, 57.47447092214819, 179.999991348578);
+    rack1_247->eulerAngles = vec3(0, 122.53, 0);
     rack1_247->scale = vec3(1.9999990844726563, 2.999999694824219, 1.9999990844726563);
     Engine::main->addNode(rack1_247);
     Node* rack1_248 = rack1->copy();
@@ -5070,7 +5070,7 @@ void importMapModel() {
     Engine::main->addNode(rack1_248);
     Node* rack1_249 = rack1->copy();
     rack1_249->position += vec3(-24.43468475341797, 100.00312042236328, 38.02402877807617);
-    rack1_249->eulerAngles = vec3(179.999991348578, 55.379047431963734, 179.999991348578);
+    rack1_249->eulerAngles = vec3(0, 124.621, 0);
     rack1_249->scale = vec3(1.9999917602539063, 2.999993896484375, 1.9999917602539063);
     Engine::main->addNode(rack1_249);
     Node* barrel1 = new Node();
@@ -5119,7 +5119,7 @@ void importMapModel() {
     Engine::main->addNode(barrel1_262);
     Node* barrel1_263 = barrel1->copy();
     barrel1_263->position += vec3(-23.967884063720703, 106.4652099609375, 37.575130462646484);
-    barrel1_263->eulerAngles = vec3(-89.99951073085793, -84.4773505982268, 179.99952689571444);
+    barrel1_263->eulerAngles = vec3(89.99951073085793, -84.4773505982268, 0);
     barrel1_263->scale = vec3(0.9998902130126953, 0.9998339080810547, 0.9998487854003906);
     Engine::main->addNode(barrel1_263);
     Node* brazier1 = new Node();
@@ -5218,12 +5218,12 @@ void importMapModel() {
     Engine::main->addNode(cover1_267);
     Node* cover1_268 = cover1->copy();
     cover1_268->position += vec3(-33.6307373046875, 100.00248718261719, 57.174041748046875);
-    cover1_268->eulerAngles = vec3(179.999991348578, -68.89168536514728, 179.999991348578);
+    cover1_268->eulerAngles = vec3(0, -111.1, 0);
     cover1_268->scale = vec3(0.999992446899414, 0.9999156188964844, 0.9999075317382813);
     Engine::main->addNode(cover1_268);
     Node* cover1_269 = cover1->copy();
     cover1_269->position += vec3(-56.97282409667969, 100.12015533447266, 56.37169647216797);
-    cover1_269->eulerAngles = vec3(-172.4976842434793, 70.27423859656292, -172.44170401304189);
+    cover1_269->eulerAngles = vec3(0, 109.726, 0);
     cover1_269->scale = vec3(1.9999891662597655, 0.9999658966064453, 0.9999494934082032);
     Engine::main->addNode(cover1_269);
     Node* cover1_270 = cover1->copy();
@@ -5233,7 +5233,7 @@ void importMapModel() {
     Engine::main->addNode(cover1_270);
     Node* cover1_271 = cover1->copy();
     cover1_271->position += vec3(-62.63439178466797, 100.00309753417969, 41.29227066040039);
-    cover1_271->eulerAngles = vec3(-0.0, -90.00000250447816, 0.0);
+    cover1_271->eulerAngles = vec3(-0.0, 90.00000250447816, 0.0);
     cover1_271->scale = vec3(0.9999967956542969, 1.9999998474121095, 0.9998963165283203);
     Engine::main->addNode(cover1_271);
     PBRShader* ruinedShader = new PBRShader(0.2, 0.7);
@@ -5262,7 +5262,7 @@ void importMapModel() {
     ruined5->position.y  = MAPY;
     Node* ruined5_66 = ruined5->copy();
     ruined5_66->position += vec3(-62.7413444519043, 100.16389465332031, 45.17681884765625);
-    ruined5_66->eulerAngles = vec3(-90.00001616485652, -46.48136000018813, -179.999991348578);
+    ruined5_66->eulerAngles = vec3(90.00001616485652, -136.48136000018813, 0);
     ruined5_66->scale = vec3(0.9999694061279297, 0.9999420928955078, 0.9999604797363282);
     Engine::main->addNode(ruined5_66);
     Node* ruined2_271 = ruined2->copy();
@@ -5287,12 +5287,12 @@ void importMapModel() {
     Engine::main->addNode(ruined5_274);
     Node* ruined5_275 = ruined5->copy();
     ruined5_275->position += vec3(-48.91549301147461, 99.95623779296875, 67.52113342285156);
-    ruined5_275->eulerAngles = vec3(158.2510707669916, 70.88033592313151, 157.10909045852216);
+    ruined5_275->eulerAngles = vec3(11.749, 109.12, 12.891);
     ruined5_275->scale = vec3(0.9999714660644531, 0.9999848937988282, 0.999972915649414);
     Engine::main->addNode(ruined5_275);
     Node* ruined5_276 = ruined5->copy();
     ruined5_276->position += vec3(-46.2738037109375, 100.04888916015625, 67.17887878417969);
-    ruined5_276->eulerAngles = vec3(80.55053141041391, 42.70265346452695, 171.1927902629267);
+    ruined5_276->eulerAngles = vec3(-80.551, 137.297, 0);
     ruined5_276->scale = vec3(0.9999746704101562, 0.9999679565429688, 0.9999694061279297);
     Engine::main->addNode(ruined5_276);
     PBRShader* barkShader = new PBRShader(0.2, 0.7);
@@ -5335,6 +5335,36 @@ void importMapModel() {
     tree1_281->eulerAngles = vec3(0.0, 38.717832310282304, 0.0);
     tree1_281->scale = vec3(0.9999897766113282, 0.9999896240234375, 0.9999897766113282);
     Engine::main->addNode(tree1_281);
+    Node* elevator = new Node();
+    elevator->loadModelFile("/Resources/Game/Map/woodflooro1lod0.dae");
+    elevator->geometries[0]->setShader(plankShader);
+    elevator->geometries[0]->setDoubleSided();
+    elevator->position.x = MAPX;
+    elevator->position.z = MAPZ;
+    elevator->position.y  = MAPY;
+    Node* elevator_1 = elevator->copy();
+    elevator_1->position += vec3(-86.081, 124, 49.022);
+    elevator_1->scale = vec3(1.75);
+    Engine::main->addNode(elevator_1);
+    Node* elevator_2 = elevator->copy();
+    elevator_2->position += vec3(-12.175, 124, 49.002);
+    elevator_2->scale = vec3(1.75);
+    Engine::main->addNode(elevator_2);
+    Node* bar = new Node();
+    bar->loadModelFile("/Resources/Game/Map/bars02lod0.dae");
+    bar->geometries[0]->setShader(wallShader8);
+    bar->geometries[0]->setDoubleSided();
+    bar->position.x = MAPX;
+    bar->position.z = MAPZ;
+    bar->position.y  = MAPY;
+    Node* bar_1 = bar->copy();
+    bar_1->position += vec3(-18.305, 100.012, 48.923);
+    bar_1->eulerAngles = vec3(0.0, 90, 0.0);
+    Engine::main->addNode(bar_1);
+    Node* bar_2 = bar->copy();
+    bar_2->position += vec3(-79.952, 100.012, 49.011);
+    bar_2->eulerAngles = vec3(0.0, 90, 0.0);
+    Engine::main->addNode(bar_2);
 }
 
 void importTestMap() {
