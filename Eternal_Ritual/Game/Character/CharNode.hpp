@@ -135,6 +135,8 @@ public:
     Node* generateBoneNode(std::string boneName);
     Node* rightHand;
     Node* leftHand;
+    std::vector<CharNode*> enemies;
+    
     void reset();
     void setCamera(CameraNode* model);
     void setControl(Node* control);

@@ -22,6 +22,10 @@ class ThousandBlade final : public DamageableMagic {
 public:
     ThousandBlade();
     
+    std::vector<CharNode*> enemies;
+    int enemy_index;
+    std::vector<glm::vec3> positions;
+    
     std::string swordTextureFile;
     std::string shaderFile;
     std::string swordModelFile;

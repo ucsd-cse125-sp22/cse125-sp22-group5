@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <glm/gtc/random.hpp>
+#include <iostream>
 
 #include "Game/Character/CharNode.hpp"
 
@@ -250,41 +251,41 @@ void ThousandBlade::play(CharNode* character, int seed){
     if (!start){
         start = true;
         this->isDisabled = false;
-        this->position = vec3(character->modelNode->getWorldPosition());
-        this->eulerAngles = vec3(character->modelNode->getWorldEulerAngles()) - vec3(0, 90, 0);
-        vector<vec3> positions;
+        this->position = vec3(0);
+        this->eulerAngles = vec3(0);
+        positions = {};
+        
+        this->enemy_index = 0;
+        this->enemies = {};
+        for (int i = 0; i < character->enemies.size(); i++){
+            this->enemies.push_back(character->enemies[i]);
+        }
         
         for (int i = 0; i < this->number_groups; i++){
-            vec3 position = randomPosition(60, 2.0f, this->cast_range);
-            bool pass = true;
-            int count = 0;
-            while (pass) {
-                pass = false;
-                for (int i = 0; i < positions.size(); i++){
-                    if (distanceBetween(positions[i], position) < damage_range){
-                        position = randomPosition(60, 2.0f, this->cast_range);
-                        pass = true;
-                        break;
-                    }
-                }
-                count++;
-                if (count > 100){
-                    break;
-                }
-            }
-            positions.push_back(position);
+
             float random_rotate = glm::linearRand(0.0f, 360.0f);
-            this->projectiles[i]->position = position + vec3(0, 20, 0);
+            
             this->projectiles[i]->eulerAngles = vec3(0,random_rotate,0);
+            this->magicCircles[i]->eulerAngles = vec3(0,random_rotate,0);
             this->projectiles[i]->scale = vec3(glm::linearRand(1.0f, 1.1f)) * this->swordScale;
-            this->magicCircles[i]->position = position + magicCirclePosition;
-            this->cracks[i]->position = position + magicCirclePosition;
+            
             this->cracks[i]->scale = this->projectiles[i]->scale * 12.0f;
 
             
             Animation* wait = new Animation(this->name + " wait " + to_string(i), this->waitTime + this->variation_time / this->number_groups * i);
             
             wait->setCompletionHandler([&]{
+                vec3 position = character->position + character->getFrontVectorInWorld() * float(this->rounds[0]) * 10.0f;
+                if (this->enemies.size() > 0){
+                    position = this->enemies[enemy_index]->position;
+                    enemy_index += 1;
+                    enemy_index %= this->enemies.size();
+                }
+                this->positions.push_back(position);
+                this->projectiles[this->rounds[0]]->position = position + vec3(0, 20, 0);
+                this->magicCircles[this->rounds[0]]->position = position + magicCirclePosition;
+                this->cracks[this->rounds[0]]->position = position + magicCirclePosition;
+                
                 this->magicCircles[this->rounds[0]]->isDisabled = false;
                 
                 this->circleParticles[this->rounds[0]]->play();
@@ -307,7 +308,7 @@ void ThousandBlade::play(CharNode* character, int seed){
                     Engine::main->playAnimation(sword_in);
                     
                     Animation* sword_up = new Animation(this->name + " sword up " + to_string(this->rounds[1]), this->sword_in_time);
-                    sword_up->setFloatAnimation(&this->projectiles[this->rounds[1]]->position.y, glm::linearRand(0.0f, 0.5f));
+                    sword_up->setFloatAnimation(&this->projectiles[this->rounds[1]]->position.y, glm::linearRand(-1.0f, -0.5f));
                     sword_up->setEaseInTimingMode();
                     Engine::main->playAnimation(sword_up);
                     

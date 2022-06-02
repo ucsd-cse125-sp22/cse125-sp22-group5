@@ -136,6 +136,7 @@ void OfflineCore::loadEnemy() {
     enemy->setName("Enemy");
     
     enemies_.push_back(enemy);
+    character_->enemies.push_back(enemy);
 }
 
 
@@ -147,6 +148,7 @@ void OfflineCore::loadMagic() {
     DamageableMagic* stoneBlast = new Storm();
     DamageableMagic* fireBall = new ScatteredFire();
     DamageableMagic* thunder = new Thunder();
+    DamageableMagic* blade = new ThousandBlade();
     DamageableMagic* dragon = new DragonMagic(character_->modelNode);
     
     key_to_magic_[KEY_1] = magicIndex;
@@ -161,9 +163,9 @@ void OfflineCore::loadMagic() {
     all_magics_.insert(stoneBlast);
     key_to_magic_[KEY_3] = magicIndex;
     magic_to_key_[magicIndex] = KEY_3;
-    character_->addMagics(thunder);
+    character_->addMagics(blade);
     magicIndex++;
-    all_magics_.insert(thunder);
+    all_magics_.insert(blade);
     key_to_magic_[KEY_4] = magicIndex;
     magic_to_key_[magicIndex] = KEY_4;
     character_->addMagics(dragon);
