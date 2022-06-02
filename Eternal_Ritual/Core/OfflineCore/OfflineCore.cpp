@@ -40,7 +40,7 @@ void OfflineCore::initEngine() {
     
     engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
-    //engine_->lockCursor();
+    engine_->lockCursor();
 }
 
 
@@ -67,12 +67,20 @@ void OfflineCore::loadLight() {
     ambient_light_->setAmbientLight();
    // engine_->addNode(ambient_light_);
     
-    directional_light_ = new LightNode(vec3(1));
+    directional_light_ = new LightNode(vec3(1.5, 2.5, 5));
     directional_light_->setDirectionalLight();
-    directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
+    directional_light_->eulerAngles = vec3(0.0f, 95.0f, -25.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
     directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
+    
+    verticle_light_ = new LightNode(vec3(1.5, 2.5, 5) * 0.0f);
+    verticle_light_->setDirectionalLight();
+    verticle_light_->eulerAngles = vec3(0.0f, 0.0f, -90.0f);
+    verticle_light_->highlightIntensity = 0.0f;
+    verticle_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
+    verticle_light_->shadowBitMask = 0xfffffffe;
+    engine_->addNode(verticle_light_);
     
 }
 
@@ -304,6 +312,7 @@ void OfflineCore::updateState() {
 
 void OfflineCore::renderWorld() {
     engine_->renderDirectionalLightShadowMap(directional_light_);
+    engine_->renderDirectionalLightShadowMap(verticle_light_);
     
     engine_->render();
 }
