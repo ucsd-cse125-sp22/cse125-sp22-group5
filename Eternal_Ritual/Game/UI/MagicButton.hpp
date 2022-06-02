@@ -24,7 +24,7 @@ public:
 	MagicButton(UINode* parentNode, Texture* magicTex, glm::vec2 scale, BaseMagic* magic);
 	void setPosition(glm::vec2 position);
 	void toggleSelect(bool select);
-	void setProgess();
+	void setProgess(float mpleft);
 };
 
 #endif

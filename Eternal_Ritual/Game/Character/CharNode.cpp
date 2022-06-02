@@ -329,20 +329,21 @@ void CharNode::setCharacterPosition(vec3 position) {
     this->characterTargetPosition = position;
 }
 void CharNode::setName(string name) {
-    this->nameNode->text = name;
+//    this->nameNode->text = name;
 }
+
 void CharNode::setUINode(UINode* uiNode){
     this->uiNode = uiNode;
-    FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
-    Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
-    TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
+    //FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
+    //Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
+  /*  TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
     nameNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     nameNode->text = "New Character";
     nameNode->setCenterHorizontalAlignment();
     nameNode->setTopVerticalAlignment();
     nameNode->position = vec2(0, -0.12f);
-    uiNode->addChildNode(nameNode);
-    this->nameNode = nameNode;
+    uiNode->addChildNode(nameNode);*/
+    //this->nameNode = nameNode;
 }
 
 // Helper function
@@ -670,8 +671,8 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        //this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        //this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
+        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
+        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 
 }

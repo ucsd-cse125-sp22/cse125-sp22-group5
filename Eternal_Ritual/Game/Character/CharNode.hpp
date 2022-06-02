@@ -131,7 +131,7 @@ public:
     Node* controlNode;
     Node* headTop;
     UINode* uiNode;
-    TextNode* nameNode;
+    //TextNode* nameNode;
     Node* generateBoneNode(std::string boneName);
     Node* rightHand;
     Node* leftHand;

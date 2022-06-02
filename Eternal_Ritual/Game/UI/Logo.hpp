@@ -9,6 +9,7 @@ protected:
 	Engine* engine;
 	SpriteNode* background;
 	SpriteNode* logoPic;
+	SpriteNode* logoBright;
 	SpriteNode* light;
 	SpriteNode* nameBackground;
 	SpriteNode* loadingbar;

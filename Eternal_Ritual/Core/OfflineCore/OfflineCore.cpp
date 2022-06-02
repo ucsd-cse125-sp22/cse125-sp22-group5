@@ -12,7 +12,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "C:/Users/microsoft/Desktop/CSE_125/cse125-sp22-group5"
+#define ROOT_PATH "D:/StudyProject/cse125-sp22-group5"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif
@@ -40,7 +40,7 @@ void OfflineCore::initEngine() {
     
     engine_ = new Engine("KGLEngine", 0.5f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
-    engine_->lockCursor();
+    //engine_->lockCursor();
 }
 
 
@@ -185,11 +185,12 @@ void OfflineCore::loadAlly()
 
     ally_->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(ally_);
-    UINode* baseNode = new UINode();
+    HPBarNode* hpBarNodeAlly = new HPBarNode(engine_, font_, true, ally_);
+    /*UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
     engine_->addNode(baseNode);
     ally_->setUINode(baseNode);
-    ally_->setName("Ally");
+    ally_->setName("Ally");*/
 }
 
 

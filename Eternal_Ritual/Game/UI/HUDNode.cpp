@@ -66,12 +66,12 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	mainHpBar = new BarNode(mainBackground,selfChar->health,
 		new Texture("/Resources/Game/UI/hp_bar_main.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_main.png"),
-		UISizes::mainHpBarSize, UISizes::mainHpFadeBarSize, id++, true);
+		UISizes::mainHpBarSize, UISizes::mainHpFadeBarSize, id++, true, engine);
 	mainHpBar->setPosition(glm::vec2(0.5,0.32));
 	mainMpBar = new BarNode(mainBackground, selfChar->mana,
 		new Texture("/Resources/Game/UI/mp_bar_main.png"),
 		new Texture("/Resources/Game/UI/mp_bar_fade_main.png"),
-		UISizes::mainMpBarSize, UISizes::mainMpFadeBarSize, id++, true);
+		UISizes::mainMpBarSize, UISizes::mainMpFadeBarSize, id++, true, engine);
 	mainMpBar->setPosition(glm::vec2(0.44,0.75));
 	mainAvatar = new SpriteNode(UISizes::avatarSize);
 	mainAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
@@ -126,12 +126,12 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	partyHpBar = new BarNode(partyBackground, ally->health,
 		new Texture("/Resources/Game/UI/hp_bar_party.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_party.png"),
-		UISizes::partyHpBarSize, UISizes::partyHpFadeBarSize, id++, true);
+		UISizes::partyHpBarSize, UISizes::partyHpFadeBarSize, id++, true, engine);
 	partyHpBar->setPosition(glm::vec2(0.5, 0.32));
 	partyMpBar = new BarNode(partyBackground, ally->mana,
 		new Texture("/Resources/Game/UI/mp_bar_party.png"),
 		new Texture("/Resources/Game/UI/mp_bar_fade_party.png"),
-		UISizes::partyMpBarSize, UISizes::partyMpFadeBarSize, id++, true);
+		UISizes::partyMpBarSize, UISizes::partyMpFadeBarSize, id++, true, engine);
 	partyMpBar->setPosition(glm::vec2(0.44, 0.75));
 	partyAvatar = new SpriteNode(UISizes::avatarSize);
 	partyAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
@@ -192,7 +192,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	enHpBar = new BarNode(enBackground, selfChar->health,
 		new Texture("/Resources/Game/UI/hp_bar_en.png"),
 		new Texture("/Resources/Game/UI/hp_bar_fade_en.png"),
-		UISizes::enHpBarSize, UISizes::enHpFadeBarSize, id++, false);
+		UISizes::enHpBarSize, UISizes::enHpFadeBarSize, id++, false, engine);
 	enAvatar = new SpriteNode(UISizes::avatarSize);
 	enAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
 	enAvatar->scale = glm::vec2(0.9);
@@ -251,9 +251,9 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	magicLarge->setPosition(glm::vec2(0.3,0.7));
 	magic1 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/fire_4.png"), UISizes::magicIconSmallScale, selfChar->magics[0]);
 	magic1->setPosition(glm::vec2(0.3, 0.27));
-	magic2 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_11.png"), UISizes::magicIconSmallScale, selfChar->magics[1]);
+	magic2 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_51.png"), UISizes::magicIconSmallScale, selfChar->magics[1]);
 	magic2->setPosition(glm::vec2(0.615, 0.4));
-	magic3 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_51.png"), UISizes::magicIconSmallScale, selfChar->magics[2]);
+	magic3 = new MagicButton(magicBack, new Texture("/Resources/Game/UI/blazing_11.png"), UISizes::magicIconSmallScale, selfChar->magics[2]);
 	magic3->setPosition(glm::vec2(0.75, 0.72));
 
 	selectMagic();
@@ -338,11 +338,11 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 
 void HUDNode::update(bool viewAlly)
 {
-	mainHpBar->update(selfChar->health, engine);
-	mainMpBar->update(selfChar->mana, engine);
+	mainHpBar->update(selfChar->health);
+	mainMpBar->update(selfChar->mana);
 
-	partyHpBar->update(ally->health, engine);
-	partyMpBar->update(ally->mana, engine);
+	partyHpBar->update(ally->health);
+	partyMpBar->update(ally->mana);
 
 	// Character
 	if (selfChar->health <= 0) {
@@ -383,18 +383,19 @@ void HUDNode::update(bool viewAlly)
 		if (selfChar->isLocked) {
 			enBackground->isDisabled = false;
 			enName->text = selfChar->target->name;
-			enHpBar->update(selfChar->target->health, engine);
+			enHpBar->update(selfChar->target->health);
 		}
 		else {
 			enBackground->isDisabled = true;
 		}
 
 		// Magic
+		float mpleft = selfChar->mana;
 		selectMagic();
-		magicLarge->setProgess();
-		magic1->setProgess();
-		magic2->setProgess();
-		magic3->setProgess();
+		magicLarge->setProgess(mpleft);
+		magic1->setProgess(mpleft);
+		magic2->setProgess(mpleft);
+		magic3->setProgess(mpleft);
 
 	}
 	
