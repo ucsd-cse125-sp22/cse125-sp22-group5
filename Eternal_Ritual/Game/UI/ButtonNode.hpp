@@ -26,6 +26,7 @@ protected:
     Texture* normal;
     Texture* glow;
     Texture* dark;
+    bool hover;
     void switchOn();
     void switchOff();
     void restore();

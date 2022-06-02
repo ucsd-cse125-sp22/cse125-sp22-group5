@@ -26,6 +26,7 @@ ButtonNode::ButtonNode(UINode* parentNode,Font* font){
     parentNode->addChildNode(background);
     Engine::main->loadMusic("click button", new AudioBuffer("/Resources/Game/Sound/Skill_Unlock_02.wav"));
     Engine::main->loadMusic("hover button", new AudioBuffer("/Resources/Game/Sound/Nail 6_4.wav"));
+    hover = false;
     
 }
 
@@ -74,10 +75,14 @@ bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input, bool isReleas
         }
         else {
             background->texture = glow;
-            Engine::main->playMusic("hover button");
+            if (hover) {
+                Engine::main->playMusic("hover button");
+                hover = false;
+            }
             return false;
         }
     }else{
+        hover = true;
         background->texture = normal;
         return false;
     }

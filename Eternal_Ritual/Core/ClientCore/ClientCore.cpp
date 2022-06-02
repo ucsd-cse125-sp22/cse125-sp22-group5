@@ -84,10 +84,10 @@ void ClientCore::loadSky() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 1 - Load Sky Box --|" << std::endl;
     
-    engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
-                                 "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
-                                 "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
-                                 2.0f);
+    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NML.png", "/Resources/Game/Skybox/NMR.png",
+                                "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
+                                "/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
+                                2.0f);
     
     Node* bgmNode = new Node();
     engine_->addNode(bgmNode);

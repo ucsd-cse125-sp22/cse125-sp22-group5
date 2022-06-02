@@ -639,9 +639,9 @@ void CharNode::updatePosition(){
         }
         
         
-        this->position.x += (this->characterTargetPosition.x - this->position.x) * 0.1f;
-        this->position.z += (this->characterTargetPosition.z - this->position.z) * 0.1f;
-        this->position.y += (this->characterTargetPosition.y - this->position.y) * 0.18f;
+        this->position.x += (this->characterTargetPosition.x - this->position.x) * 0.5f;
+        this->position.z += (this->characterTargetPosition.z - this->position.z) * 0.5f;
+        this->position.y += (this->characterTargetPosition.y - this->position.y) * 0.9f;
         
         
         this->hitbox->updatePosition(this->position);
