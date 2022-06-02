@@ -254,6 +254,8 @@ void ThousandBlade::play(CharNode* character, int seed){
         this->position = vec3(0);
         this->eulerAngles = vec3(0);
         positions = {};
+        this->cast_position = character->position;
+        this->cast_front = character->getFrontVectorInWorld();
         
         this->enemy_index = 0;
         this->enemies = {};
@@ -275,11 +277,14 @@ void ThousandBlade::play(CharNode* character, int seed){
             Animation* wait = new Animation(this->name + " wait " + to_string(i), this->waitTime + this->variation_time / this->number_groups * i);
             
             wait->setCompletionHandler([&]{
-                vec3 position = character->position + character->getFrontVectorInWorld() * float(this->rounds[0]) * 10.0f;
+                vec3 position;
                 if (this->enemies.size() > 0){
-                    position = this->enemies[enemy_index]->position;
-                    enemy_index += 1;
-                    enemy_index %= this->enemies.size();
+                    this->enemy_index %= this->enemies.size();
+                    position = this->enemies[this->enemy_index]->position;
+                    this->enemy_index += 1;
+                    this->enemy_index %= this->enemies.size();
+                }else{
+                    position = this->cast_position + this->cast_front * float(this->rounds[0]) * 10.0f;
                 }
                 this->positions.push_back(position);
                 this->projectiles[this->rounds[0]]->position = position + vec3(0, 20, 0);

@@ -26,6 +26,9 @@ public:
     int enemy_index;
     std::vector<glm::vec3> positions;
     
+    glm::vec3 cast_position;
+    glm::vec3 cast_front;
+    
     std::string swordTextureFile;
     std::string shaderFile;
     std::string swordModelFile;
