@@ -37,6 +37,7 @@ private:
     bool cursorHidden;
     bool cursorLocked;
     Node* rootNode;
+    Node* musicNode;
     std::map<std::string, Animation*> animations;
 public:
     std::string workingDirectory;
@@ -60,6 +61,9 @@ public:
     void addNode(Node* node);
     void playAnimation(Animation* animation);
     void stopAnimation(std::string name);
+    void loadMusic(std::string name, AudioBuffer* audio);
+    void playMusic(std::string name);
+    void stopMusic(std::string name);
     void render();
     void renderDirectionalLightShadowMap(LightNode* directionalLightNode);
     glm::vec2 getScreenResolution();

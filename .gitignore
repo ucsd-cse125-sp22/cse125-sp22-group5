@@ -8,3 +8,4 @@ Thumbs.db
 .idea
 Build
 .vscode
+cmake-build-debug

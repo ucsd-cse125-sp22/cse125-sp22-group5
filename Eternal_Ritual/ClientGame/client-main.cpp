@@ -141,11 +141,7 @@ int main(int argc, char* argv[]) {
             
             ClientCore::Instance()->sendData();
             
-            gettimeofday(timepre, NULL);
             ClientCore::Instance()->renderWorld();
-            gettimeofday(timecurr, NULL);
-            std::cout << "renderWorld" << std::endl;
-            printtime(timecurr, timepre);
 
             ClientCore::Instance()->receiveData();
             
