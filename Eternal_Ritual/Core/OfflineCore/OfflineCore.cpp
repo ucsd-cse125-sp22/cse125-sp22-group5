@@ -48,9 +48,9 @@ void OfflineCore::loadSky() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Sky Box --|" << std::endl;
     
-    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
+    this->engine_->skybox = new Skybox("/Resources/Game/Skybox/NML.png", "/Resources/Game/Skybox/NMR.png",
                                 "/Resources/Game/Skybox/NMU.png", "/Resources/Game/Skybox/NMD.png",
-                                "/Resources/Game/Skybox/NMR.png", "/Resources/Game/Skybox/NML.png",
+                                "/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
                                 2.0f);
 }
 
@@ -59,15 +59,15 @@ void OfflineCore::loadLight() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 3 - Load Lights --|" << std::endl;
     
-    point_light_ = new LightNode(vec3(0));
+    point_light_ = new LightNode(vec3(1));
     point_light_->setPointLight(2.0f, 20.0f);
     point_light_->highlightIntensity = 0.0f;
     
     ambient_light_ = new LightNode(vec3(0));
     ambient_light_->setAmbientLight();
-    engine_->addNode(ambient_light_);
+   // engine_->addNode(ambient_light_);
     
-    directional_light_ = new LightNode(vec3(0.5f, 0.5f, 0.5f));
+    directional_light_ = new LightNode(vec3(1));
     directional_light_->setDirectionalLight();
     directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
