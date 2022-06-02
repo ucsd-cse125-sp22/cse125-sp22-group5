@@ -24,6 +24,7 @@ ButtonNode::ButtonNode(UINode* parentNode,Font* font){
 
     background->addChildNode(text);
     parentNode->addChildNode(background);
+    Engine::main->loadMusic("click button", new AudioBuffer("/Resources/Game/Sound/Skill_Unlock_01.wav"));
     
 }
 
@@ -67,6 +68,7 @@ bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input, bool isReleas
             return false;
         }else if(isReleasd) {
             background->texture = normal;
+            Engine::main->playMusic("click button");
             return true;
         }
         else {

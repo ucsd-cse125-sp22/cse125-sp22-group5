@@ -54,6 +54,10 @@ void Logo::play() {
 		Animation* lightExpand = new Animation("lightExpand", 1.2);
 		lightExpand->setVec2Animation(&light->scale, glm::vec2(2.7));
 		lightExpand->setEaseInTimingMode();
+        Node* sound = new Node();
+        Engine::main->addNode(sound);
+        sound->loadAudioBuffer("wink", new AudioBuffer("/Resources/Game/Sound/Buff_05.wav"));
+        sound->playAudio("wink");
 
 
 		Animation* shine = new Animation("logoShine", 0.5);

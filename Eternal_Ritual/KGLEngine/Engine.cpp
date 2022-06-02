@@ -97,6 +97,8 @@ Engine::Engine(const char* windowTitle,
     this->rootNode = new Node();
     this->mainCameraNode = NULL;
     this->skybox = NULL;
+    this->musicNode = new Node();
+    this->rootNode->addChildNode(musicNode);
 }
 void Engine::hideCursor() {
     this->cursorHidden = true;
@@ -158,6 +160,15 @@ void Engine::stopAnimation(string name) {
     Animation* animation = new Animation(name, 0.0f);
     animation->engineActivateAnimation();
     this->animations[name] = animation;
+}
+void Engine::loadMusic(std::string name, AudioBuffer *audio) {
+    musicNode->loadAudioBuffer(name, audio);
+}
+void Engine::playMusic(std::string name) {
+    musicNode->playAudio(name);
+}
+void Engine::stopMusic(std::string name) {
+    musicNode->stopAudio(name);
 }
 void Engine::render() {
     int width, height;
