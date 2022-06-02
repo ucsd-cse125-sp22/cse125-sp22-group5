@@ -11,38 +11,24 @@
 #include <string>
 #include <glm/glm.hpp>
 #include "KGLEngine/Engine.hpp"
-
+#include "Game/Character/CharNode.hpp"
+#include "Game/UI/Constant.hpp"
 
 class HPBarNode{
 protected:
-    static int id;
+    Engine* engine;
+    UINode* baseNode;
     SpriteNode* background;
     SpriteNode* HpBar;
-    SpriteNode* MpBar;
-    SpriteNode* HpValue;
-    SpriteNode* MpValue;
-    SpriteNode* HpFade;
     SpriteNode* icon;
-    SpriteNode* Enemy;
-    TextNode* player;
-    Animation* hpAni;
-    Animation* hpFadeAni;
-    Animation* mpAni;
-    UINode* HpNode;
-    UINode* HpFadeNode;
-    UINode* MpNode;
+    TextNode* name;
     float initHp;
-    float initMp;
-    float curHp;
-    float curMp;
-    UINode* parentNode;
+    //float curHp;
+    CharNode* character;
 public:
-    HPBarNode(UINode* parentNode, Font* font,float length, bool isEnemy,float initHp, float initMp,std::string playerName);
+    HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character);
     ~HPBarNode() = default;
-    void setPosition(glm::vec2 position);
-    void setText(std::string t);
-    void updateHp(float value,bool isIncrease,Engine* engine);
-    void updateMp(float value,bool isIncrease,Engine* engine);
+    void update(float curHP);
 };
 
 

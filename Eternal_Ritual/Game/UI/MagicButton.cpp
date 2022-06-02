@@ -51,18 +51,22 @@ void MagicButton::toggleSelect(bool select) {
 	}
 }
 
-void MagicButton::setProgess()
+void MagicButton::setProgess(float mpleft)
 {
+
 	float cd = magic->availableTime - Engine::main->getTime();
 	if (cd > 0) {
 		magicIcon->multiplyColor = glm::vec3(0.5,0.5,0.5);
 		magicProgess->isDisabled = false;
 		float p = cd / magic->cooldown;
-		progress->setFloat("progess", 1-p);
-		
+		progress->setFloat("progess", 1-p);	
 	}
 	else {
 		magicIcon->multiplyColor = glm::vec3(1);
 		magicProgess->isDisabled = true;
+	}
+
+	if (mpleft < magic->cost) {
+		magicIcon->multiplyColor = glm::vec3(0.5, 0.5, 0.5);
 	}
 }

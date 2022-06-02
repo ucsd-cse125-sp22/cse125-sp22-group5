@@ -9,8 +9,8 @@ Cursor::Cursor(Engine* e)
 	cursor->texture = new Texture("/Resources/Game/UI/cursor.png");
 	cursor->renderingOrder = 20000;
 	cursor->isDisabled = true;
-	//cursor->screenPosition = glm::vec2(0.5);
 	e->addNode(cursor);
+	//e->input->engineSetMouseEvent(glm::vec2(0.5));
 }
 
 void Cursor::update()

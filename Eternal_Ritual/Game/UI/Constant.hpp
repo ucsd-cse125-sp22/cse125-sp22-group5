@@ -68,6 +68,11 @@ namespace UISizes{
 	const glm::vec2 enAvatarRedTopSize = glm::vec2(0.117, 0.152);
 	const glm::vec2 enAvatarBlueTopSize = glm::vec2(0.117, 0.152);
 
+	// target ==============
+	const glm::vec2 targetBackSize = glm::vec2(0.228,0.029);
+	const glm::vec2 targetBarSize = glm::vec2(0.218,0.020);
+	const glm::vec2 targetIconSize = glm::vec2(0.031);
+
 	// tutorial ===============
 	const glm::vec2 listHeadBackSize = glm::vec2(0.232,0.078);
 
@@ -77,7 +82,7 @@ namespace UISizes{
 
 	// logo =================
 	const glm::vec2 logoLightSize = glm::vec2(1.018,0.585);
-	const glm::vec2 logoBackSize = glm::vec2(0.864, 0.324);
+	const glm::vec2 logoBackSize = glm::vec2(1.023, 0.331);
 
 	// button ===============
 	const glm::vec2 buttonSize = glm::vec2(0.276,0.094);

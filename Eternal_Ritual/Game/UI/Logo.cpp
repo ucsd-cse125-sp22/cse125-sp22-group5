@@ -16,8 +16,12 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	logoPic = new SpriteNode(glm::vec2(1));
 	logoPic->texture = new Texture("/Resources/Game/UI/logo.png");
 	logoPic->scale=glm::vec2(0.55f);
-    
 	logoPic->alpha = 0;
+
+	logoBright = new SpriteNode(glm::vec2(1));
+	logoBright->texture = new Texture("/Resources/Game/UI/logo_bright.png");
+	logoBright->renderingOrder = 1;
+	logoBright->alpha = 0;
 
 	light = new SpriteNode(glm::vec2(1));
 	light->scale = glm::vec2(0);
@@ -31,15 +35,16 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	nameBackground->renderingOrder = 1;
 	nameBackground->screenPosition = glm::vec2(0.5,0.4);
 
-	name = new TextNode(font,0.15f,1.0f,0.1f);
+	/*name = new TextNode(font,0.15f,1.0f,0.1f);
 	name->text = "Eternal Ritual";
 	name->color = Color::LogotextColor;
-	name->parentCoordinatePosition = glm::vec2(0.5,0.69);
+	name->parentCoordinatePosition = glm::vec2(0.5,0.69);*/
 
 	parentNode->addChildNode(background);
 	parentNode->addChildNode(nameBackground);
-	nameBackground->addChildNode(name);
+	//nameBackground->addChildNode(name);
 	background->addChildNode(logoPic);
+	logoPic->addChildNode(logoBright);
 	background->addChildNode(light);
 
 	e->addNode(parentNode);
@@ -78,22 +83,29 @@ void Logo::play() {
 	load->setFloatAnimation(&(logoPic->alpha), 1);
 	load->setEaseInTimingMode();
 	load->setCompletionHandler([&] {	
-		Animation* delay = new Animation("logodelay", 2);
+		Animation* delay = new Animation("logodelay", 1.5);
 		delay->setCompletionHandler([&] {
-			Animation* fade = new Animation("logofade", 0.5);
-			fade->setEaseOutTimingMode();
-			fade->setFloatAnimation(&(logoPic->alpha), 0);
-			fade->setCompletionHandler([&] {
-				Animation* loadtext = new Animation("loadText",0.7);
-				loadtext->setEaseInTimingMode();
-				loadtext->setFloatAnimation(&nameBackground->alpha, 1);
-				loadtext->setCompletionHandler([&] {
-					*pro = 2;
+			Animation* bright = new Animation("logobright", 0.5);
+			bright->setFloatAnimation(&logoBright->alpha, 1);
+			bright->setCompletionHandler([&] {
+				Animation* fade = new Animation("logofade", 0.5);
+				fade->setEaseOutTimingMode();
+				fade->setFloatAnimation(&(logoPic->alpha), 0);
+				fade->setCompletionHandler([&] {
+					Animation* loadtext = new Animation("loadText", 0.7);
+					loadtext->setEaseInTimingMode();
+					loadtext->setFloatAnimation(&nameBackground->alpha, 1);
+					loadtext->setCompletionHandler([&] {
+						*pro = 2;
+						});
+					engine->playAnimation(loadtext);
+					});
+				engine->playAnimation(fade);
 				});
-				engine->playAnimation(loadtext);
+			engine->playAnimation(bright);
 			});
-			engine->playAnimation(fade);
-		});
+		
+			
 		engine->playAnimation(delay);
 	});
 
