@@ -90,9 +90,12 @@ void OfflineCore::loadMap() {
     std::cout << "|-- Loading Stage 4 - Load Scene --|" << std::endl;
 
     map_system_manager_ = MapSystemManager::Instance();
+    std::vector<Node*> cg_used_node_;
+    std::vector<MapBoxObject*> cg_used_box_;
     
-    ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+    ImportMapHelper::importMapBox(cg_used_box_);
+    
+    ImportMapHelper::importMapModel1();;
     
 //    ImportMapHelper::importTestMap();
 }

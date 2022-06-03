@@ -42,6 +42,10 @@ void BarNode::setPosition(glm::vec2 position)
 
 void BarNode::update(float value)
 {
+    if (fadeBaseNode->scale.x < baseNode->scale.x) {
+        engine->stopAnimation("hudBarFadeDecrease" + std::to_string(id));
+        fadeBaseNode->scale.x = baseNode->scale.x;
+    }
 	if (value == curValue) { return; }
 	if (value > initValue) { value = initValue; }
 	if (value < 0) { value = 0; }
@@ -65,5 +69,6 @@ void BarNode::update(float value)
         ani->setVec2Animation(&fadeBaseNode->scale, baseNode->scale);
         engine->playAnimation(ani);
     }
+    std::cout << baseNode->scale.x << ", " << fadeBaseNode->scale.x << std::endl;
 	curValue = value;
 }
