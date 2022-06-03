@@ -88,7 +88,7 @@ namespace UISizes{
 
 
 	// button ===============
-	const glm::vec2 buttonSize = glm::vec2(0.276,0.094);
+	const glm::vec2 buttonSize = glm::vec2(0.24f, 0.08f);
 
 	// windows ==============
 	const glm::vec2 netWinBackSize = glm::vec2(0.852,0.078);

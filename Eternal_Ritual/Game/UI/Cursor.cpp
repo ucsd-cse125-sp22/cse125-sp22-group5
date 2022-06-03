@@ -25,7 +25,7 @@ void Cursor::isDisable(bool t)
     if(t == false) {
 		cursorAnimation->setEaseInTimingMode();
 		cursorAnimation->setFloatAnimation(&this->cursor->alpha, 1.0f);
-        this->cursorScreenPosition = glm::vec2(0.5f);
+        this->cursorScreenPosition = glm::vec2(0.5f, 0.56f);
 	} else {
 		cursorAnimation->setEaseOutTimingMode();
 		cursorAnimation->setFloatAnimation(&this->cursor->alpha, 0.0f);

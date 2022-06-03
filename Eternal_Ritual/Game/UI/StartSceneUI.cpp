@@ -78,7 +78,7 @@ int StartSceneUI::update(bool isWaiting) {
         return 5;
     }
 
-	if (!show && !creditShow) {
+	if (!show && !creditShow && enabled) {
 
 		bool isReleased = input->wasKeyReleased(MOUSE_BUTTON_LEFT);
 

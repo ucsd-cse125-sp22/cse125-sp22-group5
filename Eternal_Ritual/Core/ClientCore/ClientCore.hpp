@@ -22,6 +22,7 @@
 #include "Game/Magic/BaseMagic.hpp"
 #include "Game/UI/AllUI.inc"
 #include "Game/CG/CameraController.hpp"
+#include "Game/CG/CharacterController.hpp"
 
 
 class ClientCore {
@@ -146,11 +147,15 @@ public:
     // CG
     CameraController* camera_controller_1_;
     CameraController* camera_controller_2_;
+    CharacterController* character_controller_1_;
+    CharacterController* character_controller_2_;
+    CharacterController* character_controller_3_;
+    CharacterController* character_controller_4_;
     bool is_cg_finished_ = false;
     bool is_set_cg_animation_ = false;
     std::vector<Node*> cg_used_node_;
     std::vector<MapBoxObject*> cg_used_box_;
-    
+    int cg_stage_ = 0;
 
     // Font
     Font* font_;
