@@ -43,6 +43,7 @@ public:
     void initEngine();
     void loadFont();
     void displayLogo();
+    void playLogo();
     
     void updateLoad();
     
@@ -161,7 +162,7 @@ private:
     bool enter_game_;
     
     // Logics
-    int process_ = 1;
+    int process_ = -1;
     int load_state_ = 1;
     float loading_progress_ = 0.0f;
 };

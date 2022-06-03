@@ -10,11 +10,11 @@ protected:
 	SpriteNode* background;
 	SpriteNode* logoPic;
 	SpriteNode* logoBright;
-	SpriteNode* light;
+    SpriteNode* light;
+    SpriteNode* lightSmall;
 	SpriteNode* nameBackground;
 	SpriteNode* loadingbar;
 	TextNode* loadingText;
-	TextNode* name;
 	Font* font;
 	int* pro;
 	bool isload;

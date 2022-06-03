@@ -48,6 +48,16 @@ int main(int argc, char* argv[]) {
     
     ClientCore::Instance()->initEngine();
     
+    int cooldown = 10;
+    SpriteNode* curtain = new SpriteNode(glm::vec2(10.0f));
+    curtain->color = glm::vec4(10.0f / 255.0f, 15.0f / 255.0f, 20.0f / 255.0f, 1.0f);
+    curtain->alpha = 1.0f;
+    curtain->screenPosition = glm::vec2(0.5);
+    curtain->renderingOrder = 10000000.0f;
+    Engine::main->addNode(curtain);
+    
+    Engine::main->mainCameraNode = new CameraNode(60.0f, 0.1f, 10.0f);
+    
     // Loading while
     while (Engine::main->isRunning()) {
         if (Engine::main->input->wasKeyReleased(KEY_ESCAPE)) {
@@ -55,11 +65,20 @@ int main(int argc, char* argv[]) {
         }
         
         if(Engine::main->shouldUpdate()) {
+            
             // Pre-loading --- process: 1
             if (ClientCore::Instance()->process() == 1) {
                 ClientCore::Instance()->loadFont();
                 ClientCore::Instance()->displayLogo();
                 ClientCore::Instance()->set_process(0);
+                
+                Animation* curtainAnimation = new Animation("curtainAnimation", 3.0f);
+                curtainAnimation->setFloatAnimation(&curtain->alpha, 0.0f);
+                curtainAnimation->setEaseInEaseOutTimingMode();
+                curtainAnimation->setCompletionHandler([&] {
+                    ClientCore::Instance()->playLogo();
+                });
+                Engine::main->playAnimation(curtainAnimation);
             }
             
             // Loading display --- process: 2
@@ -109,6 +128,10 @@ int main(int argc, char* argv[]) {
             }
             // Render
             Engine::main->render();
+            cooldown -= 1;
+            if (ClientCore::Instance()->process() == -1 && cooldown <= 0) {
+                ClientCore::Instance()->set_process(1);
+            }
         }
     }
     

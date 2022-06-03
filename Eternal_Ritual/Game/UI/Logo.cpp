@@ -10,7 +10,7 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 
 	glm::vec2 winSize = glm::vec2(e->getWindowResolution().x / e->getWindowResolution().y, 1.0);
 	background = new SpriteNode(winSize);
-	background->color = glm::vec4(0,0,0,1);
+	background->color = glm::vec4(10.0f / 255.0f, 15.0f / 255.0f, 20.0f / 255.0f, 1.0f);
 	background->screenPosition = glm::vec2(0.5);
 
 	logoPic = new SpriteNode(glm::vec2(1));
@@ -22,27 +22,33 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	logoBright->texture = new Texture("/Resources/Game/UI/logo_bright.png");
 	logoBright->renderingOrder = 1;
 	logoBright->alpha = 0;
+    logoBright->setAdditive();
 
 	light = new SpriteNode(glm::vec2(1));
 	light->scale = glm::vec2(0);
 	light->texture = new Texture("/Resources/Game/UI/logo_light.png");
 	light->parentCoordinatePosition = glm::vec2(0.46,0.4);
+    light->renderingOrder = 10;
 	light->alpha = 0;
-
+    light->rotation = 10.0f;
+    light->setAdditive();
+    
+    lightSmall = new SpriteNode(glm::vec2(1));
+    lightSmall->texture = new Texture("/Resources/Game/UI/logo_light_small.png");
+    lightSmall->renderingOrder = 10;
+    lightSmall->alpha = 0.5f;
+    lightSmall->setAdditive();
+    lightSmall->scale = glm::vec2(0.8f);
+    light->addChildNode(lightSmall);
+    
 	nameBackground = new SpriteNode(UISizes::logoBackSize);
 	nameBackground->texture = new Texture("/Resources/Game/UI/logo_back.png");
 	nameBackground->alpha = 0;
 	nameBackground->renderingOrder = 1;
 	nameBackground->screenPosition = glm::vec2(0.5,0.4);
-
-	/*name = new TextNode(font,0.15f,1.0f,0.1f);
-	name->text = "Eternal Ritual";
-	name->color = Color::LogotextColor;
-	name->parentCoordinatePosition = glm::vec2(0.5,0.69);*/
-
+    
 	parentNode->addChildNode(background);
 	parentNode->addChildNode(nameBackground);
-	//nameBackground->addChildNode(name);
 	background->addChildNode(logoPic);
 	logoPic->addChildNode(logoBright);
 	background->addChildNode(light);
@@ -52,70 +58,76 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 }
 
 void Logo::play() {
+    
+    /*Animation* loadtext = new Animation("loadText", 0.7);
+    loadtext->setEaseOutTimingMode();
+    loadtext->setFloatAnimation(&nameBackground->alpha, 1);
+    loadtext->setCompletionHandler([&] {
+        *pro = 2;
+    });
+    engine->playAnimation(loadtext);*/
+    
+    /*Node* sound = new Node();
+    Engine::main->addNode(sound);
+    sound->loadAudioBuffer("wink", new AudioBuffer("/Resources/Game/Sound/Buff_05.wav"));
+    sound->playAudio("wink");*/
+    
+    Animation* load = new Animation("loadlogo", 3.0f);
+    load->setFloatAnimation(&logoPic->alpha, 1);
+    load->setEaseOutTimingMode();
+    engine->playAnimation(load);
 
-	Animation* lightWait = new Animation("lightWait", 2.8);
-	lightWait->setCompletionHandler([&] {
-
-		Animation* lightExpand = new Animation("lightExpand", 1.2);
-		lightExpand->setVec2Animation(&light->scale, glm::vec2(2.7));
-		lightExpand->setEaseInTimingMode();
-        Node* sound = new Node();
-        Engine::main->addNode(sound);
-        sound->loadAudioBuffer("wink", new AudioBuffer("/Resources/Game/Sound/Buff_05.wav"));
-        sound->playAudio("wink");
-
-
-		Animation* shine = new Animation("logoShine", 0.5);
-		shine->setFloatAnimation(&light->alpha, 1);
-		shine->setEaseInTimingMode();
-		shine->setCompletionHandler([&] {
-			Animation* delay = new Animation("shinedelay", 0.4);
-			delay->setCompletionHandler([&] {
-
-				Animation* lightFade = new Animation("lightFade", 0.3);
-				lightFade->setFloatAnimation(&light->alpha, 0);
-				lightFade->setEaseOutTimingMode();
-				engine->playAnimation(lightFade);
-			});
-			engine->playAnimation(delay);
-		});
-		engine->playAnimation(lightExpand);
-		engine->playAnimation(shine);
-	});
-
-	Animation* load = new Animation("loadlogo", 1.5);
-	load->setFloatAnimation(&(logoPic->alpha), 1);
-	load->setEaseInTimingMode();
-	load->setCompletionHandler([&] {	
-		Animation* delay = new Animation("logodelay", 1.5);
-		delay->setCompletionHandler([&] {
-			Animation* bright = new Animation("logobright", 0.5);
-			bright->setFloatAnimation(&logoBright->alpha, 1);
-			bright->setCompletionHandler([&] {
-				Animation* fade = new Animation("logofade", 0.5);
-				fade->setEaseOutTimingMode();
-				fade->setFloatAnimation(&(logoPic->alpha), 0);
-				fade->setCompletionHandler([&] {
-					Animation* loadtext = new Animation("loadText", 0.7);
-					loadtext->setEaseInTimingMode();
-					loadtext->setFloatAnimation(&nameBackground->alpha, 1);
-					loadtext->setCompletionHandler([&] {
-						*pro = 2;
-						});
-					engine->playAnimation(loadtext);
-					});
-				engine->playAnimation(fade);
-				});
-			engine->playAnimation(bright);
-			});
-		
-			
-		engine->playAnimation(delay);
-	});
-
-	engine->playAnimation(lightWait);
-	engine->playAnimation(load);
-
+    Animation* brightDelay = new Animation("brightDelay", 1.5f);
+    brightDelay->setCompletionHandler([&] {
+        Animation* bright = new Animation("logobright", 2.0f);
+        bright->setEaseInTimingMode();
+        bright->setFloatAnimation(&logoBright->alpha, 1);
+        engine->playAnimation(bright);
+    });
+    engine->playAnimation(brightDelay);
+    
+    Animation* logoDeathDelay = new Animation("logoDeathDelay", 3.0f);
+    logoDeathDelay->setCompletionHandler([&] {
+        engine->stopAnimation("logobright");
+        Animation* fade = new Animation("logofade", 0.5);
+        fade->setEaseInTimingMode();
+        fade->setFloatAnimation(&logoPic->alpha, 0);
+        engine->playAnimation(fade);
+    });
+    engine->playAnimation(logoDeathDelay);
+    
+    Animation* lightWait = new Animation("lightWait", 2.5f);
+    lightWait->setCompletionHandler([&] {
+        
+        Animation* lightRotation = new Animation("lightRotation", 3.0f);
+        lightRotation->setFloatAnimation(&lightSmall->rotation, 360.0f);
+        engine->playAnimation(lightRotation);
+        
+        Animation* lightRotation2 = new Animation("lightRotation2", 3.0f);
+        lightRotation2->setFloatAnimation(&light->rotation, -30.0f);
+        engine->playAnimation(lightRotation2);
+        
+        Animation* lightExpand = new Animation("lightExpand", 1.2);
+        lightExpand->setVec2Animation(&light->scale, glm::vec2(1.5f));
+        lightExpand->setEaseInTimingMode();
+        engine->playAnimation(lightExpand);
+        Animation* shine = new Animation("logoShine", 0.5);
+        shine->setFloatAnimation(&light->alpha, 1);
+        shine->setEaseInTimingMode();
+        shine->setCompletionHandler([&] {
+            Animation* delay = new Animation("shinedelay", 0.4);
+            delay->setCompletionHandler([&] {
+                Animation* lightFade = new Animation("lightFade", 0.3);
+                lightFade->setFloatAnimation(&light->alpha, 0);
+                lightFade->setEaseOutTimingMode();
+                engine->playAnimation(lightFade);
+            });
+            engine->playAnimation(delay);
+        });
+        engine->playAnimation(shine);
+    });
+    engine->playAnimation(lightWait);
+    
 }
 
 void Logo::updateLoad(float loadingProgess)

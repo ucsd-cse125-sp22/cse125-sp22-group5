@@ -71,6 +71,8 @@ void ClientCore::displayLogo() {
     engine_->addNode(ui_camera_);
     engine_->mainCameraNode = ui_camera_;
     logo_ = new Logo(engine_,font_, ui_base_, &process_);
+}
+void ClientCore::playLogo() {
     logo_->play();
 }
 

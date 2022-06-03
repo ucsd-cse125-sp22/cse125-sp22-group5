@@ -94,8 +94,8 @@
             filePath = "Eternal_Ritual/Core/ClientCore/ClientCore.hpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "ClientCore"
             landmarkType = "3">
          </BreakpointContent>
