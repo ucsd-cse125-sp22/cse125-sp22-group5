@@ -70,7 +70,7 @@ public:
 public:
     HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally);
     ~HUDNode() = default;
-    void update(bool viewAlly);
+    void update(bool viewAlly, int isWin);
     void toggleViewDead(CharNode* name);
     void reset();
 };

@@ -336,8 +336,43 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	parentNode->addChildNode(deathBack);
 }
 
-void HUDNode::update(bool viewAlly)
+void HUDNode::update(bool viewAlly, int isWin)
 {
+    if(isWin!=0){
+        if(isWin==1){
+            deathBack->isDisabled = false;
+            deathText->text = "Victory";
+            Animation* death = new Animation("showDeath", 0.3);
+            death->setFloatAnimation(&deathBack->alpha, 1);
+            death->setEaseOutTimingMode();
+            Animation* deathWidth = new Animation("showDeathWidth", 0.3);
+            deathWidth->setFloatAnimation(&deathBack->scale.x, 1);
+            deathWidth->setEaseOutTimingMode();
+            Animation* back = new Animation("deBack", 0.1);
+            back->setFloatAnimation(&aliveBase->alpha, 0);
+            back->setEaseInTimingMode();
+            engine->playAnimation(death);
+            engine->playAnimation(deathWidth);
+            engine->playAnimation(back);
+            return;
+        }else if(isWin==0){
+            deathBack->isDisabled = false;
+            deathText->text = "Defeat";
+            Animation* death = new Animation("showDeath", 0.3);
+            death->setFloatAnimation(&deathBack->alpha, 1);
+            death->setEaseOutTimingMode();
+            Animation* deathWidth = new Animation("showDeathWidth", 0.3);
+            deathWidth->setFloatAnimation(&deathBack->scale.x, 1);
+            deathWidth->setEaseOutTimingMode();
+            Animation* back = new Animation("deBack", 0.1);
+            back->setFloatAnimation(&aliveBase->alpha, 0);
+            back->setEaseInTimingMode();
+            engine->playAnimation(death);
+            engine->playAnimation(deathWidth);
+            engine->playAnimation(back);
+            return;
+        }
+    }
 	mainHpBar->update(selfChar->health);
 	mainMpBar->update(selfChar->mana);
 
