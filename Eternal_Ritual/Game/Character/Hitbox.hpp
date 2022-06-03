@@ -20,7 +20,7 @@ public:
     bool testHit(glm::vec3 start, glm::vec3 end);
     bool testSphere(glm::vec3 center, float radius);
     
-private:
+public:
     glm::vec3 position, size;
     Node* cube;
     float front, back, left, right, top, bottom;

@@ -18,7 +18,7 @@ public:
     virtual bool hitTest(const glm::vec3& start, const glm::vec3& end) = 0;
     virtual ~HittableObject() {}
     
-protected:
+public:
     glm::vec3 hit_point_;
     glm::vec3 normal_;
     float hit_time_;

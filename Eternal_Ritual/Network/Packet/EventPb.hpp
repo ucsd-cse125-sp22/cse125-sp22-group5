@@ -65,7 +65,7 @@ public:
     void setPlayerMP(unsigned long playerIP, int playerMP);
     int getPlayerMP(unsigned long playerIP);
     
-private:
+public:
     gameDataPb::Event* event_data_;
 };
 

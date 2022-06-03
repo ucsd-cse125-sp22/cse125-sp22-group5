@@ -18,7 +18,7 @@ class CharNode;
 class Circle;
 
 class ScatteredFire final : public DamageableMagic{
-private:
+public:
     static bool loaded;
     static AudioBuffer* castSound;
     static ParticleNode* metaShiny;

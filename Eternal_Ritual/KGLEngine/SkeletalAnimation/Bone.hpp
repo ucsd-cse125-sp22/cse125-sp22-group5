@@ -27,7 +27,7 @@ struct BoneKeyFrameScale final {
     float timestamp;
 };
 class Bone final {
-private:
+public:
     std::string name;
     glm::vec3 position;
     glm::quat rotation;

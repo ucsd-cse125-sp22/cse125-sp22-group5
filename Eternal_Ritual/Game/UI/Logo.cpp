@@ -204,23 +204,24 @@ void Logo::play() {
 void Logo::updateLoad(float loadingProgess)
 {
     
-    loadingText->text = "Loading " + std::to_string((int)((loadingbar->scale.x + 0.01) * 100)) + "%";
     if (!isPlaying) {
         int i = (int)(loadingProgess * 100);
-        Animation* ani = new Animation(std::to_string(i), 1);
-        ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
+        Animation* ani = new Animation(std::to_string(i), 1.0f);
+        ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1.0f));
         ani->setEaseInEaseOutTimingMode();
         engine->playAnimation(ani);
         isPlaying = true;
         ani->setCompletionHandler([&] {
-        isPlaying = false;
-        *pro = 3;
+            isPlaying = false;
+            *pro = 3;
         });
     }
     
 	if (loadingProgess >= 1) {
-
-        Animation* loadingTextDelay1 = new Animation("loadingTextDelay1", 3.0f);
+        
+        *pro = -10;
+        
+        Animation* loadingTextDelay1 = new Animation("loadingTextDelay1", 1.0f);
         loadingTextDelay1->setCompletionHandler([&] {
             Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 1.0f);
             showLoadingbarTop->setEaseOutTimingMode();
@@ -263,10 +264,10 @@ void Logo::updateLoad(float loadingProgess)
             end->setEaseInTimingMode();
             engine->playAnimation(end);
 
-            //*pro = 4;
+            *pro = 4;
 
         });
-        //engine->playAnimation(loadingTextDelay2);
+        engine->playAnimation(loadingTextDelay2);
 		
 	}
 }

@@ -53,7 +53,7 @@ struct Particle3DVertex {
     glm::vec3 bitangent;
 };
 class Geometry {
-protected:
+public:
     bool updated;
     bool prepared;
     unsigned int cullMode;
@@ -115,7 +115,7 @@ public:
     ~UnitCube() override = default;
 };
 class ParticleRenderer final: public Geometry {
-private:
+public:
     unsigned int particleAmount;
     unsigned int dataBuffers;
     std::vector<ParticleData> dataVector;
@@ -128,7 +128,7 @@ public:
     unsigned int engineGetGeometryInstanceCount() override;
 };
 class Particle3DRenderer final: public Geometry {
-private:
+public:
     unsigned int particleAmount;
     unsigned int dataBuffers;
     std::vector<Particle3DData> dataVector;
@@ -143,7 +143,7 @@ public:
     unsigned int engineGetGeometryInstanceCount() override;
 };
 class Skybox final: public Geometry {
-private:
+public:
     Texture* texture;
 public:
     Skybox(std::string right, std::string left,
@@ -159,7 +159,7 @@ public:
     ~Sprite() override = default;
 };
 class TextRenderer final: public Geometry {
-private:
+public:
     std::vector<Texture*> textures;
     std::vector<glm::mat4> transforms;
     glm::mat4 mainTransform;

@@ -13,7 +13,7 @@ const float dragonMagicBaseRenderingOrder = 100.0f;
 class CharNode;
 class DragonMagic final : public DamageableMagic {
     
-private:
+public:
     
     static int UID;
     

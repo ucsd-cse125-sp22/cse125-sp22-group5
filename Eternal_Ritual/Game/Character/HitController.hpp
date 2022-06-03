@@ -22,7 +22,7 @@ public:
     void addCharacter(CharNode* charNode);
     void checkHit();
     
-private:
+public:
     std::vector<CharNode*> characters_;
     std::vector<DamageableMagic*> magics_;
 };

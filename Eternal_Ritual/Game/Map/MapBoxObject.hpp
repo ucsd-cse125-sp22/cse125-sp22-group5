@@ -31,7 +31,7 @@ public:
     glm::vec3 position() const;
     unsigned int type() {return type_;}
     
-private:
+public:
     void updateTransMtx();
     void updateMostXYZ();
     /*

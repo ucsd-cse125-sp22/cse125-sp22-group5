@@ -5,7 +5,7 @@
 #include "Game/UI/Constant.hpp"
 
 class Logo{
-protected:
+public:
 	Engine* engine;
 	SpriteNode* background;
 	SpriteNode* logoPic;

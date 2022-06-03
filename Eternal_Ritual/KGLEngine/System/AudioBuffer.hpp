@@ -7,7 +7,7 @@
 #include <SFML/Audio.hpp>
 
 class AudioBuffer final {
-private:
+public:
     std::vector<sf::SoundBuffer> buffers;
     std::vector<unsigned int> previousBufferIndices;
 public:

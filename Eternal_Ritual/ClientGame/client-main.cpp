@@ -81,10 +81,16 @@ int main(int argc, char* argv[]) {
             // Loading display --- process: 2
             else if (ClientCore::Instance()->process() == 2) {
                 ClientCore::Instance()->updateLoad();
+                
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
+                
             }
             
             // Loading --- process: 3
             else if (ClientCore::Instance()->process() == 3) {
+                
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
+                
                 // Loading sky --- load_state: 1
                 if (ClientCore::Instance()->load_state() == 1) {
                     ClientCore::Instance()->loadSky();
@@ -119,9 +125,13 @@ int main(int argc, char* argv[]) {
                 }
                 // Loading End
                 else {
-                    ClientCore::Instance()->set_process(4);
+                    ClientCore::Instance()->set_process(2);
                     break;
                 }
+            }
+            else if (ClientCore::Instance()->process() == -10) {
+                
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
             }
             // Render
             Engine::main->render();
@@ -129,6 +139,9 @@ int main(int argc, char* argv[]) {
             if (ClientCore::Instance()->process() == -1 && cooldown <= 0) {
                 ClientCore::Instance()->set_process(1);
             }
+            
+            
+            
         }
     }
     

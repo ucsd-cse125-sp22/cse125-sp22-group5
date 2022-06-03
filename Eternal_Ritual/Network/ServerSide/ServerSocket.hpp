@@ -35,7 +35,7 @@ public:
     
     void show_client_info();
 
-private:
+public:
     SOCKET server_socket_fd_;
     unsigned short player_count_;
     std::unordered_map<unsigned long, SOCKET> client_socket_fds_;

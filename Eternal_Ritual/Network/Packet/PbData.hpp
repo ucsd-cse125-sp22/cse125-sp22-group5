@@ -21,7 +21,7 @@ public:
     unsigned long player_ip();
     int data_len();
 
-protected:
+public:
     unsigned long player_ip_;
     int data_len_;
     

@@ -28,7 +28,7 @@ public:
     void sendData(char* pbArr,int dataLen);
     void closeSockets();
 
-private:
+public:
     SOCKET client_socket_fd_;
     sockaddr_in server_addr_;
     char read_buffer_[MAX_BUFFER_SIZE];

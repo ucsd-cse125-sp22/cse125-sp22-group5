@@ -51,7 +51,7 @@ public:
     void waitTickEnd();
     void closeServer();
 
-private:
+public:
     // Singleton pattern
     static ServerCore* server_core_;
     ServerCore();

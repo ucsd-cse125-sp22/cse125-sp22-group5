@@ -5,7 +5,7 @@
 #include "Game/UI/Constant.hpp"
 
 class Cursor {
-private:
+public:
 	Engine* engine;
 	SpriteNode* cursor;
 public:
