@@ -99,7 +99,7 @@ void ClientCore::loadSky() {
     
     ImportMapHelper::importMapBox(cg_used_box_);
     
-    ImportMapHelper::importMapModel1();;
+    ImportMapHelper::importMapModel1();
 }
 
 
@@ -190,7 +190,9 @@ void ClientCore::loadCharacter() {
 //            pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, -1.4f));
             pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, 0.60f));
             pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
+//            pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
             pre_chars_[0]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
+//            pre_chars_[0]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
         else if (PLAYER_CAPACITY == 3 || PLAYER_CAPACITY == 4) {
             pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, 0.60f));
@@ -203,7 +205,8 @@ void ClientCore::loadCharacter() {
     }
     if (PLAYER_CAPACITY >= 2) {
         if (PLAYER_CAPACITY == 2 || PLAYER_CAPACITY == 3) {
-            pre_chars_[1]->setCharacterPosition(vec3(28.36f, 23.07f, -0.88f));
+//            pre_chars_[1]->setCharacterPosition(vec3(28.36f, 23.07f, -0.88f));
+            pre_chars_[1]->setCharacterPosition(vec3(28.36f, 23.07f, -2.63f));
             pre_chars_[1]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
             pre_chars_[1]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
@@ -406,6 +409,20 @@ void ClientCore::updateStart() {
             sendData();
             receiveData();
             updateState();
+            
+//            CharacterController::BezierCurve charBezierCurve2;
+//            charBezierCurve2.controll_points.push_back(vec3(28.36f, -0.7f, -2.63f));
+//            charBezierCurve2.controll_points.push_back(vec3(27.0582, -0.7f, -1.96449));
+//            charBezierCurve2.controll_points.push_back(vec3(24.0796, -0.7f, 0.659909));
+//            charBezierCurve2.controll_points.push_back(vec3(19.3051, -0.7f, 0.166199));
+//            charBezierCurve2.controll_points.push_back(vec3(17.431, -0.7f, -4.85999));
+//            charBezierCurve2.controll_points.push_back(vec3(15.2216, -0.7f, -6.83952));
+//            charBezierCurve2.controll_points.push_back(vec3(13.125, -0.7f, -7.0875));
+//            charBezierCurve2.level_of_detail = 200;
+//
+//            character_controller_2_ = new CharacterController(pre_chars_[1], charBezierCurve2);
+            
+            
             if (character_index_ == 0 || character_index_ == 2) {
                 CameraController::BezierCurve bezierCurve1;
                 bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
@@ -483,6 +500,7 @@ void ClientCore::updateStart() {
                 bezierCurve1.controll_points.push_back(vec3(-35.091, 15.7257, -19.702));
                 bezierCurve1.controll_points.push_back(vec3(-35.5757, 19.3824, -12.499));
                 bezierCurve1.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
+                bezierCurve1.level_of_detail = 800;
                 
                 CameraController::EularChangeInfo eularChangeInfo1;
                 eularChangeInfo1.is_clockwise_x = true;
@@ -544,54 +562,88 @@ void ClientCore::updateStart() {
 
 
 void ClientCore::playCG() {
-    if (!camera_controller_1_->moveCamera()) {
+    if (cg_stage_ == 0 && !camera_controller_1_->moveCamera()) {
         if (!camera_controller_2_->moveCamera()) {
-            char_camera_ = character_->cameraNode;
-            engine_->mainCameraNode = char_camera_;
-            
-            if (!is_set_cg_animation_) {
-                is_set_cg_animation_ = true;
-                Animation* startDelay = new Animation("startDelay",0.9);
-                startDelay->setCompletionHandler([&] {
-                    Animation* elevatorNodeMove1 = new Animation("elevatorNodeMove1", 6);
-                    elevatorNodeMove1->setEaseInEaseOutTimingMode();
-                    elevatorNodeMove1->setFloatAnimation(&(cg_used_node_[0]->position.y), -1.0f);
-                    engine_->playAnimation(elevatorNodeMove1);
-                    Animation* elevatorNodeMove2 = new Animation("elevatorNodeMove2", 6);
-                    elevatorNodeMove2->setEaseInEaseOutTimingMode();
-                    elevatorNodeMove2->setFloatAnimation(&(cg_used_node_[1]->position.y), -1.0f);
-                    engine_->playAnimation(elevatorNodeMove2);
-                    
-                    Animation* elevatorBoxMove1 = new Animation("elevatorBoxMove1", 6);
-                    elevatorBoxMove1->setEaseInEaseOutTimingMode();
-                    elevatorBoxMove1->setFloatAnimation(&(cg_used_box_[0]->position_.y), -1.0f);
-                    engine_->playAnimation(elevatorBoxMove1);
-                    Animation* elevatorBoxMove2 = new Animation("elevatorBoxMove2", 6);
-                    elevatorBoxMove2->setEaseInEaseOutTimingMode();
-                    elevatorBoxMove2->setFloatAnimation(&(cg_used_box_[1]->position_.y), -1.0f);
-                    engine_->playAnimation(elevatorBoxMove2);
-                    
-                    is_cg_finished_ = true;
-                });
-                engine_->playAnimation(startDelay);
-            }
-            
-            for (auto& box : cg_used_box_) {
-                box->updateTransMtx();
-                box->updateMostXYZ();
-            }
-            
-            cout << cg_used_box_[0]->position_.y << endl;
-            for (auto& it : all_chars_) {
-                it.second->updatePosition();
-            }
+            cg_stage_ = 1;
         }
-        
     }
-    if (is_cg_finished_) {
+    
+    else if (cg_stage_ == 1) {
+        char_camera_ = character_->cameraNode;
+        engine_->mainCameraNode = char_camera_;
+        
+        Animation* startDelay = new Animation("startDelay",0.9);
+        startDelay->setCompletionHandler([&] {
+            Animation* elevatorNodeMove1 = new Animation("elevatorNodeMove1", 9);
+            elevatorNodeMove1->setEaseInEaseOutTimingMode();
+            elevatorNodeMove1->setFloatAnimation(&(cg_used_node_[0]->position.y), -0.7f);
+            engine_->playAnimation(elevatorNodeMove1);
+            Animation* elevatorNodeMove2 = new Animation("elevatorNodeMove2", 9);
+            elevatorNodeMove2->setEaseInEaseOutTimingMode();
+            elevatorNodeMove2->setFloatAnimation(&(cg_used_node_[1]->position.y), -0.7f);
+            engine_->playAnimation(elevatorNodeMove2);
+            
+            Animation* elevatorBoxMove1 = new Animation("elevatorBoxMove1", 9);
+            elevatorBoxMove1->setEaseInEaseOutTimingMode();
+            elevatorBoxMove1->setFloatAnimation(&(cg_used_box_[0]->position_.y), -1.2f);
+            engine_->playAnimation(elevatorBoxMove1);
+            Animation* elevatorBoxMove2 = new Animation("elevatorBoxMove2", 9);
+            elevatorBoxMove2->setEaseInEaseOutTimingMode();
+            elevatorBoxMove2->setFloatAnimation(&(cg_used_box_[1]->position_.y), -1.2f);
+            engine_->playAnimation(elevatorBoxMove2);
+            
+            elevatorBoxMove2->setCompletionHandler([&] {
+                Animation* gateNodeMove1 = new Animation("gateNodeMove1", 9);
+                gateNodeMove1->setEaseInEaseOutTimingMode();
+                gateNodeMove1->setFloatAnimation(&(cg_used_node_[2]->position.y), 3.3f);
+                engine_->playAnimation(gateNodeMove1);
+                Animation* gateNodeMove2 = new Animation("gateNodeMove2", 9);
+                gateNodeMove2->setEaseInEaseOutTimingMode();
+                gateNodeMove2->setFloatAnimation(&(cg_used_node_[3]->position.y), 3.3f);
+                engine_->playAnimation(gateNodeMove2);
+                
+                Animation* gateBoxMove1 = new Animation("gateBoxMove1", 9);
+                gateBoxMove1->setEaseInEaseOutTimingMode();
+                gateBoxMove1->setFloatAnimation(&(cg_used_box_[2]->position_.y), 5.0f);
+                engine_->playAnimation(gateBoxMove1);
+                Animation* gateBoxMove2 = new Animation("gateBoxMove2", 9);
+                gateBoxMove2->setEaseInEaseOutTimingMode();
+                gateBoxMove2->setFloatAnimation(&(cg_used_box_[3]->position_.y), 5.0f);
+                engine_->playAnimation(gateBoxMove2);
+                
+                gateBoxMove2->setCompletionHandler([&] {
+                    cg_stage_ = 3;
+                });
+            });
+        });
+        engine_->playAnimation(startDelay);
+        
+        cg_stage_ = 2;
+    }
+    
+    else if (cg_stage_ == 2) {
+        for (auto& box : cg_used_box_) {
+            box->updateTransMtx();
+            box->updateMostXYZ();
+        }
+    }
+    
+//    else if (cg_stage_ == 3) {
+//        if (!character_controller_2_->moveCharacter()) {
+//            pre_chars_[1]->isLocked = true;
+//            pre_chars_[1]->state = CharState::IDLE;
+//            cg_stage_ = 4;
+//        }
+//    }
+    
+    else if (cg_stage_ == 3) {
         hud_base_->isDisabled = false;
         enter_game_ = false;
         process_ = 7;
+    }
+    
+    for (auto& it : all_chars_) {
+        it.second->updatePosition();
     }
 }
 
@@ -892,9 +944,9 @@ void ClientCore::renderWorld() {
 ////
 //    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
         
-        cout << "position: " << engine_->mainCameraNode->getWorldPosition().x << " " << engine_->mainCameraNode->getWorldPosition().y << " " << engine_->mainCameraNode->getWorldPosition().z << endl;
-    //
-        cout << "Angle: " << engine_->mainCameraNode->getWorldEulerAngles().x << " " << engine_->mainCameraNode->getWorldEulerAngles().y << " " << engine_->mainCameraNode->getWorldEulerAngles().z << endl;
+//        cout << "position: " << engine_->mainCameraNode->getWorldPosition().x << " " << engine_->mainCameraNode->getWorldPosition().y << " " << engine_->mainCameraNode->getWorldPosition().z << endl;
+//    //
+//        cout << "Angle: " << engine_->mainCameraNode->getWorldEulerAngles().x << " " << engine_->mainCameraNode->getWorldEulerAngles().y << " " << engine_->mainCameraNode->getWorldEulerAngles().z << endl;
     }
     
     float time1 = systemTime();
