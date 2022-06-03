@@ -43,33 +43,27 @@ void BarNode::setPosition(glm::vec2 position)
 void BarNode::update(float value)
 {
 	if (value == curValue) { return; }
-	bool isincrease = this->curValue < value;
 	if (value > initValue) { value = initValue; }
 	if (value < 0) { value = 0; }
 	float scale = value / initValue;
-	if (isincrease) {
+	if (this->curValue < value) {
 		Animation* ani = new Animation("hudBarIncrease" + std::to_string(id), 0.5);
 		ani->setVec2Animation(&baseNode->scale, glm::vec2(scale, 1.0));
-		Animation* fadeAni = new Animation("fadeincrease" + std::to_string(id), 0.5);
-		fadeAni->setVec2Animation(&fadeBaseNode->scale, glm::vec2(scale, 1.0));
 		engine->playAnimation(ani);
-		engine->playAnimation(fadeAni);
 	}
 	else {
-		Animation* ani = new Animation("hudBar" + std::to_string(id), 1);
-		ani->setVec2Animation(&baseNode->scale, glm::vec2(scale, 1.0));
-		engine->playAnimation(ani);
-		Animation* delay = new Animation("fadebardelay" + std::to_string(id), 0.4);
-		delay->setCompletionHandler([=] {
-			Animation* fadeAni = new Animation("fade" + std::to_string(id), 0.5);
-			std::cout << "cur: " << value << std::endl;
-			std::cout << "init: " << initValue << std::endl;
-			std::cout << "scale: " << scale << std::endl;
-			fadeAni->setVec2Animation(&fadeBaseNode->scale, glm::vec2(scale, 1.0));
-			fadeAni->setEaseInTimingMode();
-			engine->playAnimation(fadeAni);
-			});
-		engine->playAnimation(delay);
+        engine->stopAnimation("hudBarIncrease" + std::to_string(id));
+        baseNode->scale = glm::vec2(scale, 1.0);
 	}
+    if (fadeBaseNode->scale.x < baseNode->scale.x) {
+        engine->stopAnimation("hudBarFadeDecrease" + std::to_string(id));
+        fadeBaseNode->scale.x = baseNode->scale.x;
+    }
+    else {
+        Animation* ani = new Animation("hudBarFadeDecrease" + std::to_string(id), 0.5);
+        ani->setEaseInEaseOutTimingMode();
+        ani->setVec2Animation(&fadeBaseNode->scale, baseNode->scale);
+        engine->playAnimation(ani);
+    }
 	curValue = value;
 }
