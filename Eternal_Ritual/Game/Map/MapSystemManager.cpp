@@ -18,26 +18,28 @@ MapSystemManager* MapSystemManager::map_system_manager_ = nullptr;
 
 MapSystemManager::MapSystemManager() : min_xyz_(INT_MAX), max_xyz_(INT_MIN) {}
 
-bool MapSystemManager::hitTest(const vec3& start, const vec3& end, HitInfo& hitInfo) {
+bool MapSystemManager::hitTest(const vec3& start, const vec3& end, HitInfo& hitInfo, unsigned int bitMask) {
     bool isHit = false;
     float minTime = FLT_MAX;
     float hitTime;
     for (auto& box : boxes_) {
-        if (box->hitTest(start, end)) {
-            isHit = true;
-            hitTime = box->hit_time();
-            if (hitTime < minTime) {
-                hitInfo.hit_point = box->hit_point();
-                hitInfo.normal = box->normal();
-                hitInfo.hit_box = box;
-                minTime = hitTime;
+        if (bitMask & box->type()) {
+            if (box->hitTest(start, end)) {
+                isHit = true;
+                hitTime = box->hit_time();
+                if (hitTime < minTime) {
+                    hitInfo.hit_point = box->hit_point();
+                    hitInfo.normal = box->normal();
+                    hitInfo.hit_box = box;
+                    minTime = hitTime;
+                }
             }
         }
     }
     return isHit;
 }
 
-bool MapSystemManager::gridsHitTest(const vec3& start, const vec3& end, HitInfo& hitInfo) {
+bool MapSystemManager::gridsHitTest(const vec3& start, const vec3& end, HitInfo& hitInfo, unsigned int bitMask) {
     if (start == end) return false;
     bool isHit = false;
     float minTime = FLT_MAX;
@@ -47,14 +49,16 @@ bool MapSystemManager::gridsHitTest(const vec3& start, const vec3& end, HitInfo&
     int lengthIdx = (end.z - min_xyz_.z) / per_grid_length_;
     int gridIdx = lengthIdx * NUM_WIDTH_GRIDS + widthIdx;
     for (auto& box : grids_[gridIdx]) {
-        if (box->hitTest(start, end)) {
-            isHit = true;
-            hitTime = box->hit_time();
-            if (hitTime < minTime) {
-                hitInfo.hit_point = box->hit_point();
-                hitInfo.normal = box->normal();
-                hitInfo.hit_box = box;
-                minTime = hitTime;
+        if (bitMask & box->type()) {
+            if (box->hitTest(start, end)) {
+                isHit = true;
+                hitTime = box->hit_time();
+                if (hitTime < minTime) {
+                    hitInfo.hit_point = box->hit_point();
+                    hitInfo.normal = box->normal();
+                    hitInfo.hit_box = box;
+                    minTime = hitTime;
+                }
             }
         }
     }

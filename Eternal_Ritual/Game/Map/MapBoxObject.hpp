@@ -12,6 +12,15 @@
 
 #include "Game/Map/HittableObject.hpp"
 
+namespace Map {
+enum Type {
+    WALL = 1,
+    DOOR = 2,
+    ELEVATOR = 4,
+    AIR = 8
+};
+}
+
 
 class MapBoxObject final : public HittableObject {
 public:
@@ -20,11 +29,17 @@ public:
     glm::vec3 min_xyz() const;
     glm::vec3 max_xyz() const;
     glm::vec3 position() const;
+    unsigned int type() {return type_;}
     
 private:
     void updateTransMtx();
     void updateMostXYZ();
-    
+    /*
+     type 0: normal box
+     type 1: metal door
+     type 2: elevator floor
+     type 3: air wall
+     */
     unsigned int type_;
     glm::vec3 position_;
     glm::vec3 size_;

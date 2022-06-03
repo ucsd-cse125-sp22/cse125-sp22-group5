@@ -164,7 +164,7 @@ void LightningSpear::hitWall() {
     if (!exploded && canDamage) {
         HitInfo hitInfo;
         this->updateTransform();
-        if (MapSystemManager::Instance()->hitTest(this->position, this->position + this->velocity, hitInfo)) {
+        if (MapSystemManager::Instance()->hitTest(this->position, this->position + this->velocity, hitInfo, 7)) {
             canDamage = false;
             exploded = true;
             threwOut = false;

@@ -482,7 +482,7 @@ void DragonMagic::hitWall() {
     this->updateTransform();
     vec3 startPosition = this->getBeamPosition();
     vec3 endPosition = this->getBeamPosition() + this->getBeamDirection() * 10000.0f * this->rangeFactor;
-    if (MapSystemManager::Instance()->hitTest(startPosition, endPosition, hitInfo)) {
+    if (MapSystemManager::Instance()->hitTest(startPosition, endPosition, hitInfo, 7)) {
         this->setRange(glm::length(hitInfo.hit_point - this->getBeamPosition()));
     }else{
         this->setRange(10000.0f);
