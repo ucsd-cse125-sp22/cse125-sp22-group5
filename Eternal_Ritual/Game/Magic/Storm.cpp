@@ -144,9 +144,12 @@ void Storm::play(CharNode *character, int seed) {
         dust->setEmissionStorm(radius * 3, radius * 6, radius);
         hail->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
-        Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
+        Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 8.5);
         expanding->setEaseOutTimingMode();
         expanding->setFloatAnimation(&radius, 1.5);
+        expanding->setCompletionHandler([&] {
+            lightning->isDisabled = true;
+        });
         Engine::main->playAnimation(expanding);
         casting->setCompletionHandler([&] {
             threw = true;
@@ -160,7 +163,6 @@ void Storm::play(CharNode *character, int seed) {
         Engine::main->playAnimation(stormCoolDown);
         stormCoolDown->setCompletionHandler([&] {
             start = false;
-            lightning->isDisabled = true;
         });
         this->availableTime = Engine::main->getTime() + cooldown;
     }
