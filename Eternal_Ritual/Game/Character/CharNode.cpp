@@ -199,10 +199,17 @@ void CharNode::load() {
     backLeft->animatorBitMask = Bitmask::WALKBL;
     Animator* backRight = metaModel->loadAnimator("back right", "/Resources/Game/Character/Animations/Back Right.dae");
     backRight->animatorBitMask = Bitmask::WALKBR;
-    Animator* roll = metaModel->loadAnimator("roll", "/Resources/Game/Character/Animations/Roll Fwd.dae");
-    roll->animatorBitMask = Bitmask::ROLL;
-    roll->speed = 1.5;
-    roll->repeats = false;
+    
+    Animator* roll1 = metaModel->loadAnimator("roll1", "/Resources/Game/Character/Animations/Roll Fwd.dae");
+    roll1->animatorBitMask = Bitmask::ROLL1;
+    roll1->speed = 1.5;
+    roll1->repeats = false;
+    
+    Animator* roll2 = metaModel->loadAnimator("roll2", "/Resources/Game/Character/Animations/Roll Fwd.dae");
+    roll2->animatorBitMask = Bitmask::ROLL2;
+    roll2->speed = 1.5;
+    roll2->repeats = false;
+    
     Animator* dragonAttack = metaModel->loadAnimator("dragon attack", "/Resources/Game/Character/Animations/DragonAttack.dae");
     dragonAttack->animatorBitMask = Bitmask::DRAGON_ATT;
     dragonAttack->repeats = false;
@@ -766,14 +773,23 @@ void CharNode::roll() {
         this->loadAudioBuffer("roll" + soundID, rollSound, 2, 1);
         this->playAudio("roll" + soundID);
         
-        stopAnimators(0xfffffffe, 0.2);
-        playAnimators(Bitmask::ROLL, 0.2);
+        
+        rollingID += 1;
+        
+        if(rollingID % 2 == 0) {
+            stopAnimators(0xfffffffe^Bitmask::ROLL2, 0.4);
+            playAnimators(Bitmask::ROLL1, 0.4);
+        }else{
+            stopAnimators(0xfffffffe^Bitmask::ROLL1, 0.4);
+            playAnimators(Bitmask::ROLL2, 0.4);
+        }
         mana -= ROLL_COST;
         manaRegen = 0;
         Animation* manaGen = new Animation(to_string(reinterpret_cast<long>(this)) + "mana regen ", 1);
         manaGen->setFloatAnimation(&(this->manaRegen), MAXMANAREGEN);
         manaGen->setEaseInTimingMode();
         Engine::main->playAnimation(manaGen);
+        
         Animation* resume = new Animation(this->name + " resume", 0.8);
         this->moveDirection = this->modelNode->getRightVectorInWorld();
         this->moveDirection.y = 0;
@@ -782,7 +798,13 @@ void CharNode::roll() {
         resume->setCompletionHandler([&]{
             this->state = CharState::IDLE;
             this->moveDirection = vec3(0);
-            stopAnimators(Bitmask::ROLL, 0.3);
+            
+            if(rollingID % 2 == 0) {
+                stopAnimators(Bitmask::ROLL1, 0.4);
+            }else{
+                stopAnimators(Bitmask::ROLL2, 0.4);
+            }
+            
             this->uninjurable = false;
         });
         Engine::main->playAnimation(resume);
