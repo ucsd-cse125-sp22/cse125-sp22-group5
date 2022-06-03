@@ -201,6 +201,7 @@ DragonMagic::DragonMagic(Node* characterNode) {
     this->actionName = "dragon attack";
     this->availableTime = 0;
     this->stopTime = 3.0f;
+    this->start = false;
     this->damage = DAMAGE;
     this->cooldown = COOLDOWN;
     this->cost = COST;

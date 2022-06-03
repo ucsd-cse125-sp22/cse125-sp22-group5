@@ -23,6 +23,7 @@ Particle3DNode* ThunderShock::metaLightning = NULL;
 AudioBuffer* ThunderShock::electricImpact = NULL;
 
 void ThunderShock::load() {
+    loaded = true;
     metaBase = new Particle3DNode(50, 0.8f, 0.3f);
     metaBase->loadModelFile("/Resources/Game/Effects/Sheet3.dae");
     metaBase->setMaxAmount(20);

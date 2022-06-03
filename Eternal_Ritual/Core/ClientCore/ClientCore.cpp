@@ -94,6 +94,12 @@ void ClientCore::loadSky() {
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.1;
+    
+    map_system_manager_ = MapSystemManager::Instance();
+    
+    ImportMapHelper::importMapBox(cg_used_box_);
+    
+    ImportMapHelper::importMapModel1();;
 }
 
 
@@ -115,13 +121,8 @@ void ClientCore::loadLight() {
     directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
     
-    verticle_light_ = new LightNode(vec3(1.5, 2.5, 5) * 0.0f);
-    verticle_light_->setDirectionalLight();
-    verticle_light_->eulerAngles = vec3(0.0f, 0.0f, -90.0f);
-    verticle_light_->highlightIntensity = 0.0f;
-    verticle_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
-    verticle_light_->shadowBitMask = 0xfffffffe;
-    engine_->addNode(verticle_light_);
+    ImportMapHelper::importMapModel2();
+    
     
     process_ = 2;
     load_state_ ++;
@@ -133,12 +134,8 @@ void ClientCore::loadMap() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 3 - Load Map --|" << std::endl;
 
-    map_system_manager_ = MapSystemManager::Instance();
-    
-    ImportMapHelper::importMapBox(cg_used_box_);
-    ImportMapHelper::importMapModel(cg_used_node_);
-    
-    
+    ImportMapHelper::importMapModel3(cg_used_node_);
+        
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.2;
@@ -252,9 +249,13 @@ void ClientCore::loadMagic() {
     std::cout << "|-- Loading Stage 5 - Load Magic --|" << std::endl;
     
     for (int i = 0; i < 4; i++) {
+        
         DamageableMagic* storm = new Storm();
+        
         DamageableMagic* fireBall = new ScatteredFire();
+        
         DamageableMagic* thunder = new Thunder();
+        
         DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
         
         pre_chars_[i]->addMagics(fireBall);
@@ -654,21 +655,21 @@ void ClientCore::handleEvent() {
         event_pb_->setCharStatePb(gameDataPb::CharStatePb(character_->state));
         
 
-        if(engine_->input->wasKeyReleased(KEY_SPACE)){
+        if(engine_->input->wasKeyPressed(KEY_SPACE)){
             event_pb_->setRoll(true);
         }
         else {
             event_pb_->setRoll(false);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_G)){
+        if(engine_->input->wasKeyPressed(KEY_G)){
             event_pb_->setToggleLock(true);
         }
         else {
             event_pb_->setToggleLock(false);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_C)){
+        if(engine_->input->wasKeyPressed(KEY_C)){
             if (character_->health <= 0) {
                 for (int i = 1; i < 4; i++) {
                     CharNode* currChar = pre_chars_[(char_camera_index_ + i) % 4];
@@ -695,15 +696,15 @@ void ClientCore::handleEvent() {
             }
         }
         
-        if(engine_->input->wasKeyReleased(KEY_1)) {
+        if(engine_->input->wasKeyPressed(KEY_1)) {
             character_->setCurrMagic(key_to_magic_[KEY_1]);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_2)) {
+        if(engine_->input->wasKeyPressed(KEY_2)) {
             character_->setCurrMagic(key_to_magic_[KEY_2]);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_3)) {
+        if(engine_->input->wasKeyPressed(KEY_3)) {
             character_->setCurrMagic(key_to_magic_[KEY_3]);
         }
         if (engine_->input->wasKeyPressed(KEY_4)) {

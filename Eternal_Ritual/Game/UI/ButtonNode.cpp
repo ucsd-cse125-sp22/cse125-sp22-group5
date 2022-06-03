@@ -8,7 +8,7 @@
 #include "Game/UI/ButtonNode.hpp"
 #include <iostream>
 
-ButtonNode::ButtonNode(UINode* parentNode,Font* font){
+ButtonNode::ButtonNode(UINode* parentNode, Font* font){
     
     normal = new Texture("/Resources/Game/UI/btn_back.png");
     glow = new Texture("/Resources/Game/UI/btn_glow_back.png");
@@ -17,10 +17,12 @@ ButtonNode::ButtonNode(UINode* parentNode,Font* font){
     background = new SpriteNode(UISizes::buttonSize);
     background->texture = normal;
     
-    text = new TextNode(font, UISizes::buttonSize.y/3, UISizes::buttonSize.x,0.01f);
+    background->scale = glm::vec2(0.8f);
+    
+    text = new TextNode(font, UISizes::buttonSize.y * 0.5f, UISizes::buttonSize.x, 0.01f);
     text->setCenterVerticalAlignment();
     text->setCenterHorizontalAlignment();
-    text->parentCoordinatePosition = glm::vec2(0.5,0.6);
+    text->parentCoordinatePosition = glm::vec2(0.5f, 0.62f);
 
     background->addChildNode(text);
     parentNode->addChildNode(background);

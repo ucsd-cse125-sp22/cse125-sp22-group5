@@ -15,9 +15,11 @@
 
 namespace ImportMapHelper {
 
-void importMapBox(std::vector<MapBoxObject*>& cgUsedBox);
-void importMapModel(std::vector<Node*>& cgUsedNode);
-void importTestMap();
+    void importMapBox(std::vector<MapBoxObject*>& cgUsedBox);
+    void importMapModel1();
+    void importMapModel2();
+    void importMapModel3(std::vector<Node*>& cgUsedNode);
+    void importTestMap();
 
 } // namespace ImportMapHelper
 

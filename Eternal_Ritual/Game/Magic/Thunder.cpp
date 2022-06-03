@@ -59,7 +59,9 @@ void Thunder::load() {
     castSound = new AudioBuffer("/Resources/Game/Sound/Positive Effect 1_", "wav", 1, 3);
 }
 Thunder::Thunder() {
+    
     if (!loaded) load();
+    
     start = false;
     canDamage = false;
     this->actionName = "cast magic 1";
@@ -83,6 +85,7 @@ Thunder::Thunder() {
     this->circle->isDisabled = true;
     this->circle->scale = vec3(3);
     Engine::main->addNode(circle);
+    
     for (int k = 0; k < 12; k++) {
         ThunderShock* thunder = new ThunderShock();
         thunder->position.z = glm::log2((float)k + 2) / 2 + k;
@@ -97,10 +100,12 @@ Thunder::Thunder() {
         right->addChildNode(thunder);
         thunders.push_back(thunder);
     }
+    
     this->shiny = metaShiny->copy()->convertToParticleNode();
     Engine::main->addNode(shiny);
     this->shimmer = metaShimmer->copy()->convertToParticleNode();
     this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
+    
 }
 void Thunder::play(CharNode* character, int seed){
     if (!start){
