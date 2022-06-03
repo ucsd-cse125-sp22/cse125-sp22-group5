@@ -98,7 +98,7 @@ void FireBall::load() {
     metaExplosion->setMaxAmount(50);
     metaExplosion->setSpriteSheetAnimation(7, 12, 40, 100, 40);
     metaExplosion->isDisabled = true;
-    explodeSound = new AudioBuffer("/Resources/Game/Sound/Medium_Neutral_Impact_2_0", "wav", 1, 4);
+    explodeSound = new AudioBuffer("/Resources/Game/Sound/Explosion", "wav", 1, 4);
     flyingSound = new AudioBuffer("/Resources/Game/Sound/Bonfire.wav");
 }
 
@@ -135,7 +135,6 @@ FireBall::FireBall(){
     createFireball->setFloatAnimation(&fireball->initialScale, 0.5);
     createFlame = new Animation("create flame " + to_string(reinterpret_cast<long>(this)), 0.8);
     createFlame->setFloatAnimation(&flame->initialScale, 0.4);
-    this->loadAudioBuffer("explode sound", explodeSound, 2.0f, 1.0f);
     this->loadAudioBuffer("flying sound", flyingSound, 2.0f, 1.0f);
 
 }
@@ -189,7 +188,13 @@ void FireBall::play(CharNode* character, int seed){
 }
 void FireBall::explode() {
     this->stopAudio("flying sound");
-    this->playAudio("explode sound");
+    
+    Engine::main->soundID += 1;
+    std::string soundID = std::to_string(Engine::main->soundID);
+    
+    this->loadAudioBuffer("explode sound" + soundID, explodeSound, 2.0f, 1.0f);
+    this->playAudio("explode sound" + soundID);
+    
     exploded = true;
     spark->isDisabled = false;
     spark->reset();
