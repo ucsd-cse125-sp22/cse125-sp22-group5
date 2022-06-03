@@ -250,7 +250,6 @@ CharNode::CharNode(vec3 position){
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
-    this->loadAudioBuffer("foot step", footStep, 2, 1);
     this->loadAudioBuffer("roll", rollSound, 2, 1);
     this->changeAudioVolume("roll", 0.2, 0);
     
@@ -532,12 +531,14 @@ void CharNode::updatePosition(){
                 if (this->isLocked){
                     this->playAnimators(this->keyDirection, 0.1f);
                     if (Engine::main->getTime() > this->stepAvailable) {
+                        this->loadAudioBuffer("foot step", footStep, 2, 1);
                         this->playAudio("foot step");
                         this->stepAvailable = Engine::main->getTime() + WALK_STEP_TIME;
                     }
                 }else{
                     this->playAnimators(Bitmask::RUNNING, 0.1f);
                     if (Engine::main->getTime() > this->stepAvailable) {
+                        this->loadAudioBuffer("foot step", footStep, 2, 1);
                         this->playAudio("foot step");
                         this->stepAvailable = Engine::main->getTime() + RUN_STEP_TIME;
                     }
