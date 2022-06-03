@@ -45,7 +45,7 @@ public:
     void addMapBox(MapBoxObject* mapBox);
     void updateGrids();
     
-private:
+public:
     // Singleton pattern
     static MapSystemManager* map_system_manager_;
     MapSystemManager();

@@ -78,7 +78,7 @@ public:
     void set_process(int process);
     int load_state();
 
-private:
+public:
     // Singleton pattern
     static ClientCore* client_core_;
     ClientCore();

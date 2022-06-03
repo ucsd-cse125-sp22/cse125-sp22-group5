@@ -55,7 +55,7 @@ public:
     void updateState();
     void renderWorld();
     
-private:
+public:
     // Singleton pattern
     static OfflineCore* offline_core_;
     OfflineCore();

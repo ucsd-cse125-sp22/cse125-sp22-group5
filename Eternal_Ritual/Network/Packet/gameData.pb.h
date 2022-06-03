@@ -275,7 +275,7 @@ class Vec3 final :
   void CopyFrom(const Vec3& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const Vec3& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -287,21 +287,21 @@ class Vec3 final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Vec3* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.Vec3";
   }
-  protected:
+  public:
   explicit Vec3(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -324,7 +324,7 @@ class Vec3 final :
   void clear_x();
   float x() const;
   void set_x(float value);
-  private:
+  public:
   float _internal_x() const;
   void _internal_set_x(float value);
   public:
@@ -333,7 +333,7 @@ class Vec3 final :
   void clear_y();
   float y() const;
   void set_y(float value);
-  private:
+  public:
   float _internal_y() const;
   void _internal_set_y(float value);
   public:
@@ -342,13 +342,13 @@ class Vec3 final :
   void clear_z();
   float z() const;
   void set_z(float value);
-  private:
+  public:
   float _internal_z() const;
   void _internal_set_z(float value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.Vec3)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
@@ -443,7 +443,7 @@ class Vec2 final :
   void CopyFrom(const Vec2& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const Vec2& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -455,21 +455,21 @@ class Vec2 final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Vec2* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.Vec2";
   }
-  protected:
+  public:
   explicit Vec2(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -491,7 +491,7 @@ class Vec2 final :
   void clear_x();
   float x() const;
   void set_x(float value);
-  private:
+  public:
   float _internal_x() const;
   void _internal_set_x(float value);
   public:
@@ -500,13 +500,13 @@ class Vec2 final :
   void clear_y();
   float y() const;
   void set_y(float value);
-  private:
+  public:
   float _internal_y() const;
   void _internal_set_y(float value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.Vec2)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
@@ -600,7 +600,7 @@ class PlayerAttr final :
   void CopyFrom(const PlayerAttr& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const PlayerAttr& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -612,21 +612,21 @@ class PlayerAttr final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(PlayerAttr* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.PlayerAttr";
   }
-  protected:
+  public:
   explicit PlayerAttr(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -648,7 +648,7 @@ class PlayerAttr final :
   void clear_playerhp();
   uint32_t playerhp() const;
   void set_playerhp(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playerhp() const;
   void _internal_set_playerhp(uint32_t value);
   public:
@@ -657,13 +657,13 @@ class PlayerAttr final :
   void clear_playermp();
   uint32_t playermp() const;
   void set_playermp(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playermp() const;
   void _internal_set_playermp(uint32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.PlayerAttr)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
@@ -780,7 +780,7 @@ class Event final :
   void CopyFrom(const Event& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const Event& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -792,21 +792,21 @@ class Event final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Event* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.Event";
   }
-  protected:
+  public:
   explicit Event(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -838,11 +838,11 @@ class Event final :
   };
   // repeated .gameDataPb.MagicPb magicEvents = 12;
   int magicevents_size() const;
-  private:
+  public:
   int _internal_magicevents_size() const;
   public:
   void clear_magicevents();
-  private:
+  public:
   ::gameDataPb::MagicPb _internal_magicevents(int index) const;
   void _internal_add_magicevents(::gameDataPb::MagicPb value);
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_magicevents();
@@ -855,11 +855,11 @@ class Event final :
 
   // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 13;
   int playerattrs_size() const;
-  private:
+  public:
   int _internal_playerattrs_size() const;
   public:
   void clear_playerattrs();
-  private:
+  public:
   const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
       _internal_playerattrs() const;
   ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
@@ -878,7 +878,7 @@ class Event final :
   std::string* mutable_playername();
   PROTOBUF_NODISCARD std::string* release_playername();
   void set_allocated_playername(std::string* playername);
-  private:
+  public:
   const std::string& _internal_playername() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_playername(const std::string& value);
   std::string* _internal_mutable_playername();
@@ -886,7 +886,7 @@ class Event final :
 
   // .gameDataPb.Vec3 controlNodeEulerAngles = 6;
   bool has_controlnodeeulerangles() const;
-  private:
+  public:
   bool _internal_has_controlnodeeulerangles() const;
   public:
   void clear_controlnodeeulerangles();
@@ -894,7 +894,7 @@ class Event final :
   PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_controlnodeeulerangles();
   ::gameDataPb::Vec3* mutable_controlnodeeulerangles();
   void set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* controlnodeeulerangles);
-  private:
+  public:
   const ::gameDataPb::Vec3& _internal_controlnodeeulerangles() const;
   ::gameDataPb::Vec3* _internal_mutable_controlnodeeulerangles();
   public:
@@ -904,7 +904,7 @@ class Event final :
 
   // .gameDataPb.Vec3 moveDirection = 7;
   bool has_movedirection() const;
-  private:
+  public:
   bool _internal_has_movedirection() const;
   public:
   void clear_movedirection();
@@ -912,7 +912,7 @@ class Event final :
   PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_movedirection();
   ::gameDataPb::Vec3* mutable_movedirection();
   void set_allocated_movedirection(::gameDataPb::Vec3* movedirection);
-  private:
+  public:
   const ::gameDataPb::Vec3& _internal_movedirection() const;
   ::gameDataPb::Vec3* _internal_mutable_movedirection();
   public:
@@ -924,7 +924,7 @@ class Event final :
   void clear_playerstyle();
   uint32_t playerstyle() const;
   void set_playerstyle(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playerstyle() const;
   void _internal_set_playerstyle(uint32_t value);
   public:
@@ -933,7 +933,7 @@ class Event final :
   void clear_playergroup();
   uint32_t playergroup() const;
   void set_playergroup(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playergroup() const;
   void _internal_set_playergroup(uint32_t value);
   public:
@@ -942,7 +942,7 @@ class Event final :
   void clear_start();
   bool start() const;
   void set_start(bool value);
-  private:
+  public:
   bool _internal_start() const;
   void _internal_set_start(bool value);
   public:
@@ -951,7 +951,7 @@ class Event final :
   void clear_restart();
   bool restart() const;
   void set_restart(bool value);
-  private:
+  public:
   bool _internal_restart() const;
   void _internal_set_restart(bool value);
   public:
@@ -960,7 +960,7 @@ class Event final :
   void clear_roll();
   bool roll() const;
   void set_roll(bool value);
-  private:
+  public:
   bool _internal_roll() const;
   void _internal_set_roll(bool value);
   public:
@@ -969,7 +969,7 @@ class Event final :
   void clear_togglelock();
   bool togglelock() const;
   void set_togglelock(bool value);
-  private:
+  public:
   bool _internal_togglelock() const;
   void _internal_set_togglelock(bool value);
   public:
@@ -978,7 +978,7 @@ class Event final :
   void clear_dirstate();
   ::gameDataPb::DirState dirstate() const;
   void set_dirstate(::gameDataPb::DirState value);
-  private:
+  public:
   ::gameDataPb::DirState _internal_dirstate() const;
   void _internal_set_dirstate(::gameDataPb::DirState value);
   public:
@@ -987,13 +987,13 @@ class Event final :
   void clear_charstatepb();
   ::gameDataPb::CharStatePb charstatepb() const;
   void set_charstatepb(::gameDataPb::CharStatePb value);
-  private:
+  public:
   ::gameDataPb::CharStatePb _internal_charstatepb() const;
   void _internal_set_charstatepb(::gameDataPb::CharStatePb value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.Event)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
@@ -1103,7 +1103,7 @@ class State_PlayerInfo final :
   void CopyFrom(const State_PlayerInfo& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const State_PlayerInfo& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1115,21 +1115,21 @@ class State_PlayerInfo final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(State_PlayerInfo* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.State.PlayerInfo";
   }
-  protected:
+  public:
   explicit State_PlayerInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -1157,11 +1157,11 @@ class State_PlayerInfo final :
   };
   // repeated .gameDataPb.MagicPb magicEvents = 10;
   int magicevents_size() const;
-  private:
+  public:
   int _internal_magicevents_size() const;
   public:
   void clear_magicevents();
-  private:
+  public:
   ::gameDataPb::MagicPb _internal_magicevents(int index) const;
   void _internal_add_magicevents(::gameDataPb::MagicPb value);
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_magicevents();
@@ -1180,7 +1180,7 @@ class State_PlayerInfo final :
   std::string* mutable_playername();
   PROTOBUF_NODISCARD std::string* release_playername();
   void set_allocated_playername(std::string* playername);
-  private:
+  public:
   const std::string& _internal_playername() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_playername(const std::string& value);
   std::string* _internal_mutable_playername();
@@ -1188,7 +1188,7 @@ class State_PlayerInfo final :
 
   // .gameDataPb.Vec3 controlNodeEulerAngles = 4;
   bool has_controlnodeeulerangles() const;
-  private:
+  public:
   bool _internal_has_controlnodeeulerangles() const;
   public:
   void clear_controlnodeeulerangles();
@@ -1196,7 +1196,7 @@ class State_PlayerInfo final :
   PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_controlnodeeulerangles();
   ::gameDataPb::Vec3* mutable_controlnodeeulerangles();
   void set_allocated_controlnodeeulerangles(::gameDataPb::Vec3* controlnodeeulerangles);
-  private:
+  public:
   const ::gameDataPb::Vec3& _internal_controlnodeeulerangles() const;
   ::gameDataPb::Vec3* _internal_mutable_controlnodeeulerangles();
   public:
@@ -1206,7 +1206,7 @@ class State_PlayerInfo final :
 
   // .gameDataPb.Vec3 moveDirection = 5;
   bool has_movedirection() const;
-  private:
+  public:
   bool _internal_has_movedirection() const;
   public:
   void clear_movedirection();
@@ -1214,7 +1214,7 @@ class State_PlayerInfo final :
   PROTOBUF_NODISCARD ::gameDataPb::Vec3* release_movedirection();
   ::gameDataPb::Vec3* mutable_movedirection();
   void set_allocated_movedirection(::gameDataPb::Vec3* movedirection);
-  private:
+  public:
   const ::gameDataPb::Vec3& _internal_movedirection() const;
   ::gameDataPb::Vec3* _internal_mutable_movedirection();
   public:
@@ -1226,7 +1226,7 @@ class State_PlayerInfo final :
   void clear_playerstyle();
   uint32_t playerstyle() const;
   void set_playerstyle(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playerstyle() const;
   void _internal_set_playerstyle(uint32_t value);
   public:
@@ -1235,7 +1235,7 @@ class State_PlayerInfo final :
   void clear_playergroup();
   uint32_t playergroup() const;
   void set_playergroup(uint32_t value);
-  private:
+  public:
   uint32_t _internal_playergroup() const;
   void _internal_set_playergroup(uint32_t value);
   public:
@@ -1244,7 +1244,7 @@ class State_PlayerInfo final :
   void clear_dirstate();
   ::gameDataPb::DirState dirstate() const;
   void set_dirstate(::gameDataPb::DirState value);
-  private:
+  public:
   ::gameDataPb::DirState _internal_dirstate() const;
   void _internal_set_dirstate(::gameDataPb::DirState value);
   public:
@@ -1253,7 +1253,7 @@ class State_PlayerInfo final :
   void clear_charstatepb();
   ::gameDataPb::CharStatePb charstatepb() const;
   void set_charstatepb(::gameDataPb::CharStatePb value);
-  private:
+  public:
   ::gameDataPb::CharStatePb _internal_charstatepb() const;
   void _internal_set_charstatepb(::gameDataPb::CharStatePb value);
   public:
@@ -1262,7 +1262,7 @@ class State_PlayerInfo final :
   void clear_roll();
   bool roll() const;
   void set_roll(bool value);
-  private:
+  public:
   bool _internal_roll() const;
   void _internal_set_roll(bool value);
   public:
@@ -1271,13 +1271,13 @@ class State_PlayerInfo final :
   void clear_togglelock();
   bool togglelock() const;
   void set_togglelock(bool value);
-  private:
+  public:
   bool _internal_togglelock() const;
   void _internal_set_togglelock(bool value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.State.PlayerInfo)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
@@ -1426,7 +1426,7 @@ class State final :
   void CopyFrom(const State& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
   void MergeFrom(const State& from);
-  private:
+  public:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
@@ -1438,21 +1438,21 @@ class State final :
       uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
 
-  private:
+  public:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(State* other);
 
-  private:
+  public:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "gameDataPb.State";
   }
-  protected:
+  public:
   explicit State(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
-  private:
+  public:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
@@ -1475,11 +1475,11 @@ class State final :
   };
   // map<uint64, .gameDataPb.State.PlayerInfo> playerInfos = 2;
   int playerinfos_size() const;
-  private:
+  public:
   int _internal_playerinfos_size() const;
   public:
   void clear_playerinfos();
-  private:
+  public:
   const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::State_PlayerInfo >&
       _internal_playerinfos() const;
   ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::State_PlayerInfo >*
@@ -1492,11 +1492,11 @@ class State final :
 
   // map<uint64, .gameDataPb.PlayerAttr> PlayerAttrs = 3;
   int playerattrs_size() const;
-  private:
+  public:
   int _internal_playerattrs_size() const;
   public:
   void clear_playerattrs();
-  private:
+  public:
   const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >&
       _internal_playerattrs() const;
   ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, ::gameDataPb::PlayerAttr >*
@@ -1511,13 +1511,13 @@ class State final :
   void clear_playerip();
   uint64_t playerip() const;
   void set_playerip(uint64_t value);
-  private:
+  public:
   uint64_t _internal_playerip() const;
   void _internal_set_playerip(uint64_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:gameDataPb.State)
- private:
+ public:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;

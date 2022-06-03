@@ -13,7 +13,7 @@
 #include "KGLEngine/Engine.hpp"
 
 class Circle: public Node {
-private:
+public:
     static bool loaded;
     static Node* metaCircle;
     static Texture* circleTexture;

@@ -10,7 +10,7 @@
 
 class MagicButton
 {
-private:
+public:
 	SpriteNode* background;
 	SpriteNode* magicIcon;
 	SpriteNode* magicSelect;

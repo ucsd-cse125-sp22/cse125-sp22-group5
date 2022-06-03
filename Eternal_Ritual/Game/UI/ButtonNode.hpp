@@ -20,7 +20,7 @@ class TextNode;
 class UINode;
 class Input;
 class ButtonNode{
-protected:
+public:
     SpriteNode* background;
     TextNode* text;
     Texture* normal;

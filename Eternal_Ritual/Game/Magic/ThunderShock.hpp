@@ -17,7 +17,7 @@ class CharNode;
 
 
 class ThunderShock final : public DamageableMagic{
-private:
+public:
     static bool loaded;
     static Particle3DNode* metaLightning;
     static Particle3DNode* metaBase;

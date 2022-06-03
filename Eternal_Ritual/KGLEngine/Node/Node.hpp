@@ -28,7 +28,7 @@ class TextNode;
 #define LIGHTS_LIMIT 30
 #define SHADOWS_LIMIT 6
 class Node {
-protected:
+public:
     static unsigned int UID;
     unsigned int ID;
     glm::mat4 worldTransform;
@@ -127,7 +127,7 @@ public:
     ~CameraNode() = default;
 };
 class LightNode final: public Node {
-private:
+public:
     unsigned int lightType;
     float cameraNodeDistance;
     bool hasDirectionalLightShadow;
@@ -167,7 +167,7 @@ public:
     void engineConfigurateShadowForShader(Shader* shader, int index);
 };
 class ParticleNode final: public Node {
-private:
+public:
     bool isPlaying;
     bool hasLimit;
     unsigned int maxAmount;
@@ -235,7 +235,7 @@ public:
     void enginePrepareNodeForRendering(glm::mat4 parentWorldTransform, glm::vec2 data, unsigned int renderingMode) override;
 };
 class UINode: public Node {
-private:
+public:
     glm::mat4 renderingTransform;
 public:
     glm::vec2 screenPosition;
@@ -258,7 +258,7 @@ public:
     void engineCalculateNodeWorldTransform(glm::mat4 parentWorldTransform) override;
 };
 class SpriteNode: public UINode {
-private:
+public:
     SpriteShader* spriteShader;
 public:
     glm::vec4 color;
@@ -279,7 +279,7 @@ public:
     void engineCalculateNodeWorldTransform(glm::mat4 parentWorldTransform) override;
 };
 class TextNode final: public UINode {
-private:
+public:
     Font* font;
     float lineHeight;
     float lineLength;
@@ -307,7 +307,7 @@ public:
     void engineCalculateNodeWorldTransform(glm::mat4 parentWorldTransform) override;
 };
 class Particle3DNode final: public Node {
-private:
+public:
     bool isPlaying;
     bool hasLimit;
     unsigned int maxAmount;

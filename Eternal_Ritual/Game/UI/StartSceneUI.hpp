@@ -7,7 +7,7 @@
 #include "Game/UI/Cursor.hpp"
 
 class StartSceneUI {
-private:
+public:
 	Engine* engine;
 	UINode* parentNode;
 	UINode* buttonBase;

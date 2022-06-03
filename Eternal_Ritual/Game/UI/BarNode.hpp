@@ -7,7 +7,7 @@
 
 
 class BarNode {
-protected:
+public:
     int id;
     Engine* engine;
     SpriteNode* bar;

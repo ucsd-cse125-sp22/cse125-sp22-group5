@@ -21,7 +21,7 @@ public:
     glm::vec3 max_xyz() const;
     glm::vec3 position() const;
     
-private:
+public:
     void updateTransMtx();
     void updateMostXYZ();
     

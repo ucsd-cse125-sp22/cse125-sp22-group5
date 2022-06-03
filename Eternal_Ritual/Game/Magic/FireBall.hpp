@@ -18,7 +18,7 @@ class CharNode;
 
 
 class FireBall final : public DamageableMagic{
-private:
+public:
     static bool loaded;
     static ParticleNode* metaFireball;
     static ParticleNode* metaFlame;

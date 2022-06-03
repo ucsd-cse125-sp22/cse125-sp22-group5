@@ -14,7 +14,7 @@ class Particle3DNode;
 
 
 class Shader {
-protected:
+public:
     static int currentProgramID;
     static int currentBlendMode;
     static int currentWriteToDepthBuffer;
@@ -56,7 +56,7 @@ public:
     virtual void engineRenderShader(Geometry* geometry, unsigned int renderingMode);
 };
 class PBRShader final: public Shader {
-private:
+public:
     float currentOpacity;
     glm::vec4 currentDiffuseColor;
     float currentDiffuseIntensity;
@@ -113,7 +113,7 @@ public:
     void engineRenderShader(Geometry* geometry, unsigned int renderingMode) override;
 };
 class SpriteShader final: public Shader {
-private:
+public:
     float currentAlpha;
     glm::vec4 currentDefaultColor;
     Texture* currentTextureMap;
@@ -138,7 +138,7 @@ public:
     void engineRenderShader(Geometry* geometry, unsigned int renderingMode) override;
 };
 class ParticleShader final: public Shader {
-private:
+public:
     ParticleNode* particleNode;
     int currentUseLocalSpace;
     int currentIsAdditive;
@@ -164,7 +164,7 @@ public:
     void engineRenderShader(Geometry* geometry, unsigned int renderingMode) override;
 };
 class Particle3DShader final: public Shader {
-private:
+public:
     Particle3DNode* particleNode;
     int currentUseLocalSpace;
     int currentIsAdditive;
@@ -200,7 +200,7 @@ public:
     AlphaShader* copy();
     void engineRenderShader(Geometry* geometry, unsigned int renderingMode) override;
     ~AlphaShader() override = default;
-private:
+public:
     float currentAlpha;
     glm::vec3 currenEmissiontColor;
 };

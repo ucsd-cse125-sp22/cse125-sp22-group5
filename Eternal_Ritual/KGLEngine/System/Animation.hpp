@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 
 class Animation final {
-private:
+public:
     std::string name;
     float startTime;
     float duration;

@@ -10,7 +10,7 @@
 
 
 class InputBoxNode{
-protected:
+public:
     
 public:
     InputBoxNode();

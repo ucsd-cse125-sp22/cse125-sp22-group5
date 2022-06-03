@@ -9,7 +9,7 @@
 
 
 class HUDNode {
-protected:
+public:
     Engine* engine;
 
     // Main ============================
