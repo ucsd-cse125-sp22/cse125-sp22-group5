@@ -13,7 +13,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "D:/StudyProject/cse125-sp22-group5"
+#define ROOT_PATH "C:/Users/cse125/Desktop/cse125-sp22-group5"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif

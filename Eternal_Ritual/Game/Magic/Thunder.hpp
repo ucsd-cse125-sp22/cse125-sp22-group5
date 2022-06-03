@@ -19,7 +19,7 @@ class Circle;
 
 
 class Thunder final : public DamageableMagic{
-private:
+public:
     static bool loaded;
     static AudioBuffer* castSound;
     static ParticleNode* metaShiny;

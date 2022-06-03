@@ -5,14 +5,19 @@
 #include "Game/UI/Constant.hpp"
 
 class Logo{
-protected:
+public:
 	Engine* engine;
 	SpriteNode* background;
 	SpriteNode* logoPic;
 	SpriteNode* logoBright;
     SpriteNode* light;
     SpriteNode* lightSmall;
-	SpriteNode* nameBackground;
+    SpriteNode* nameBackground;
+    SpriteNode* nameTop = nullptr;
+    
+    SpriteNode* nameLight1 = nullptr;
+    SpriteNode* nameLight2 = nullptr;
+    
     SpriteNode* loadingbar;
 	SpriteNode* loadingbarBack;
 	SpriteNode* loadingbarTop;

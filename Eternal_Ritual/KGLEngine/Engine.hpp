@@ -44,7 +44,7 @@
 #include <unordered_map>
 
 class Engine final {
-private:
+public:
     glm::vec2 screenResolution;
     glm::vec2 windowResolution;
     float resolutionScaleFactor;

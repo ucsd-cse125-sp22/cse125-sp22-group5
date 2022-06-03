@@ -269,7 +269,7 @@ void FireBall::hitWall() {
             }
         }
     }
-    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), target, hitInfo)) {
+    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), target, hitInfo, 7)) {
         hasInt = true;
         wallInt = hitInfo.hit_point;
     }

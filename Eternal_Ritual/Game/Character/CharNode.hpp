@@ -72,7 +72,7 @@ enum Type{
 
 
 class CharNode final : public Node {
-private:
+public:
     static bool loaded;
     static Node* metaModel;
     static Texture* bootsD;

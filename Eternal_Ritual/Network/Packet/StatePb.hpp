@@ -65,7 +65,7 @@ public:
     
     std::vector<unsigned long> getEnemyIPs(unsigned long playerIP);
     
-private:
+public:
     gameDataPb::State* state_data_;
 };
 

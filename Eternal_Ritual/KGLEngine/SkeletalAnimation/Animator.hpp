@@ -22,7 +22,7 @@ struct AnimationBoneNode final {
 };
 
 class Animator final {
-private:
+public:
     unsigned int state;
     std::string name;
     float time;

@@ -15,7 +15,7 @@
 #include "Game/UI/Constant.hpp"
 
 class HPBarNode{
-protected:
+public:
     Engine* engine;
     UINode* baseNode;
     SpriteNode* background;

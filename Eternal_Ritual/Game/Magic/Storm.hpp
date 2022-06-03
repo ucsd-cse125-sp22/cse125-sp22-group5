@@ -19,7 +19,7 @@ class Circle;
 
 
 class Storm final : public DamageableMagic{
-private:
+public:
     static bool loaded;
     static ParticleNode* metaCloud;
     static ParticleNode* metaHail;

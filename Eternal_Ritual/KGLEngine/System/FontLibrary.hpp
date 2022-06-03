@@ -10,7 +10,7 @@
 
 
 class FontLibrary final {
-private:
+public:
     FT_Library* fontLibrary;
 public:
     FontLibrary();

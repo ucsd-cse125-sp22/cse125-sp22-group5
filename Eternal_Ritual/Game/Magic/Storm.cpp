@@ -244,7 +244,7 @@ void Storm::tryDamage(CharNode *character) {
 void Storm::hitWall() {
     HitInfo hitInfo;
     this->updateTransform();
-    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), this->getWorldPosition() + this->velocity * radius * 4.f, hitInfo)) {
+    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), this->getWorldPosition() + this->velocity * radius * 4.f, hitInfo, 7)) {
         Animation* moving = new Animation("moving storm " + to_string(reinterpret_cast<long>(this)), 5);
         Engine::main->playAnimation(moving);
     }

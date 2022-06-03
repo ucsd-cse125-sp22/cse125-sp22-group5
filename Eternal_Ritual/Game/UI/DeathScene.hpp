@@ -5,7 +5,7 @@
 #include "Game/UI/Constant.hpp"
 
 class DeathScene {
-private: 
+public: 
 	Engine* engine;
 	SpriteNode* background;
 	SpriteNode* logo;

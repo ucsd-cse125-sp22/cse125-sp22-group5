@@ -13,7 +13,7 @@ struct InputKeyEvent final {
     float stateUpdateTime;
 };
 class Input final {
-private:
+public:
     bool initialized;
     std::vector<InputKeyEvent*> keyEvents;
     std::string lastCharacter;

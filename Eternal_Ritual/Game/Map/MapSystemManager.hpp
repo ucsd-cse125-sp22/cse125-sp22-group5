@@ -40,12 +40,12 @@ public:
         }
     }
     
-    bool hitTest(const glm::vec3& start, const glm::vec3& end, HitInfo& hitInfo);
-    bool gridsHitTest(const glm::vec3& start, const glm::vec3& end, HitInfo& hitInfo);
+    bool hitTest(const glm::vec3& start, const glm::vec3& end, HitInfo& hitInfo, unsigned int bitMask);
+    bool gridsHitTest(const glm::vec3& start, const glm::vec3& end, HitInfo& hitInfo, unsigned int bitMask);
     void addMapBox(MapBoxObject* mapBox);
     void updateGrids();
     
-private:
+public:
     // Singleton pattern
     static MapSystemManager* map_system_manager_;
     MapSystemManager();

@@ -18,7 +18,7 @@ public:
     float advance;
 };
 class Font final {
-private:
+public:
     std::vector<FontCharacter*> characters;
 public:
     Font(FT_Face font);
