@@ -249,9 +249,13 @@ void ClientCore::loadMagic() {
     std::cout << "|-- Loading Stage 5 - Load Magic --|" << std::endl;
     
     for (int i = 0; i < 4; i++) {
+        
         DamageableMagic* storm = new Storm();
+        
         DamageableMagic* fireBall = new ScatteredFire();
+        
         DamageableMagic* thunder = new Thunder();
+        
         DamageableMagic* dragon = new DragonMagic(pre_chars_[i]->modelNode);
         
         pre_chars_[i]->addMagics(fireBall);
