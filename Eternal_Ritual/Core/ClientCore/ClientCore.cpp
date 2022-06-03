@@ -94,6 +94,12 @@ void ClientCore::loadSky() {
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.1;
+    
+    map_system_manager_ = MapSystemManager::Instance();
+    
+    ImportMapHelper::importMapBox();
+    
+    ImportMapHelper::importMapModel1();;
 }
 
 
@@ -115,13 +121,8 @@ void ClientCore::loadLight() {
     directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
     
-    verticle_light_ = new LightNode(vec3(1.5, 2.5, 5) * 0.0f);
-    verticle_light_->setDirectionalLight();
-    verticle_light_->eulerAngles = vec3(0.0f, 0.0f, -90.0f);
-    verticle_light_->highlightIntensity = 0.0f;
-    verticle_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
-    verticle_light_->shadowBitMask = 0xfffffffe;
-    engine_->addNode(verticle_light_);
+    ImportMapHelper::importMapModel2();
+    
     
     process_ = 2;
     load_state_ ++;
@@ -133,10 +134,7 @@ void ClientCore::loadMap() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 3 - Load Map --|" << std::endl;
 
-    map_system_manager_ = MapSystemManager::Instance();
-    
-    ImportMapHelper::importMapBox();
-    ImportMapHelper::importMapModel();
+    ImportMapHelper::importMapModel3();
     
     process_ = 2;
     load_state_ ++;

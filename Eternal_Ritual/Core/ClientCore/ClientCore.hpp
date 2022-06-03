@@ -99,8 +99,6 @@ public:
     LightNode* point_light_;
     LightNode* ambient_light_;
     LightNode* directional_light_;
-    LightNode* spot_light_;
-    LightNode* verticle_light_;
     
     // Map
     MapSystemManager* map_system_manager_;

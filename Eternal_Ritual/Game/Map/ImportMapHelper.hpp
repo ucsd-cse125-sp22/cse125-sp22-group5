@@ -10,9 +10,11 @@
 
 namespace ImportMapHelper {
 
-void importMapBox();
-void importMapModel();
-void importTestMap();
+    void importMapBox();
+    void importMapModel1();
+    void importMapModel2();
+    void importMapModel3();
+    void importTestMap();
 
 } // namespace ImportMapHelper
 
