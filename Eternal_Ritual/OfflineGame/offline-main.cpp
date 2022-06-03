@@ -18,6 +18,8 @@ int main(int argc, char* argv[]) {
     
     OfflineCore::Instance()->initEngine();
 
+    OfflineCore::Instance()->loadFont();
+
     OfflineCore::Instance()->loadSky();
     
     OfflineCore::Instance()->loadLight();
@@ -32,8 +34,6 @@ int main(int argc, char* argv[]) {
 
     // =============================
     OfflineCore::Instance()->loadAlly();
-
-    OfflineCore::Instance()->loadFont();
 
     OfflineCore::Instance()->loadHUD();
     // =============================

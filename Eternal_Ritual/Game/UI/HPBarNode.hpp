@@ -28,7 +28,7 @@ protected:
 public:
     HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character);
     ~HPBarNode() = default;
-    void update(float curHP);
+    void update(float curHp);
 };
 
 

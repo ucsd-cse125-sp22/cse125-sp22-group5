@@ -6,6 +6,7 @@
 //
 
 #include "Game/UI/HPBarNode.hpp"
+#include <iostream>
 
 HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 {
@@ -14,10 +15,10 @@ HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 	background->texture = new Texture("/Resources/Game/UI/target_back.png");
 	background->renderingOrder = 1000;
 	baseNode = new UINode();
-	baseNode->parentCoordinatePosition = glm::vec2(0.1, 0.5);
+	baseNode->parentCoordinatePosition = glm::vec2(0.05, 0.5);
 	HpBar = new SpriteNode(UISizes::targetBarSize);
 	HpBar->texture = new Texture("/Resources/Game/UI/target_bar.png");
-	HpBar->position = glm::vec2(HpBar->size.x,0.5);
+	HpBar->position = glm::vec2(HpBar->size.x/2,0);
 	icon = new SpriteNode(UISizes::targetIconSize);
 	if (isRed) {
 		icon->texture = new Texture("/Resources/Game/UI/target_red.png");
@@ -25,27 +26,25 @@ HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 	else {
 		icon->texture = new Texture("/Resources/Game/UI/target_blue.png");
 	}
-	icon->parentCoordinatePosition = glm::vec2(0.1, 0.5);
+	icon->parentCoordinatePosition = glm::vec2(0.05, 0.5);
 	name = new TextNode(font, 0.02, 1.0, 0.1);
 	name->text = character->name;
 	name->parentCoordinatePosition = glm::vec2(0.3, 0.1);
 
-	/*UINode* uiNode = new UINode();
-	uiNode->addChildNode(background);*/
 	background->addChildNode(baseNode);
 	baseNode->addChildNode(HpBar);
 	background->addChildNode(icon);
 	background->addChildNode(name);
-	//engine->addNode(background);
-	character->setUINode(background);
-	//character->headTop->addChildNode(background);
+	e->addNode(background);
+	character->uiNode = background;
+	initHp = character->health;
 }
 
-void HPBarNode::update(float curHP)
+void HPBarNode::update(float curHp)
 {
-	if (curHP > initHp) { curHP = initHp; }
-	if (curHP < 0) { curHP = 0; }
+	if (curHp > initHp) { curHp = initHp; }
+	if (curHp < 0) { curHp = 0; }
 	Animation* targetBarChange = new Animation("targetBarChange", 0.3);
-	targetBarChange->setVec2Animation(&(baseNode->scale), glm::vec2(curHP / initHp, 1.0));
+	targetBarChange->setFloatAnimation(&baseNode->scale.x, curHp / initHp);
 	engine->playAnimation(targetBarChange);
 }
