@@ -68,6 +68,7 @@ private:
     LightNode* point_light_;
     LightNode* ambient_light_;
     LightNode* directional_light_;
+    LightNode* verticle_light_;
     LightNode* spot_light_;
     
     // Map
