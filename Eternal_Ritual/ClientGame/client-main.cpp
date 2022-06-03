@@ -58,6 +58,8 @@ int main(int argc, char* argv[]) {
     
     Engine::main->mainCameraNode = new CameraNode(60.0f, 0.1f, 10.0f);
     
+    float frameTime = 0.0f;
+    
     // Loading while
     while (Engine::main->isRunning()) {
         
@@ -82,14 +84,18 @@ int main(int argc, char* argv[]) {
             else if (ClientCore::Instance()->process() == 2) {
                 ClientCore::Instance()->updateLoad();
                 
-                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
+                int progress = (int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100);
+                progress = glm::clamp(progress, 0, 100);
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string(progress) + "%";
                 
             }
             
             // Loading --- process: 3
             else if (ClientCore::Instance()->process() == 3) {
                 
-                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
+                int progress = (int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100);
+                progress = glm::clamp(progress, 0, 100);
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string(progress) + "%";
                 
                 // Loading sky --- load_state: 1
                 if (ClientCore::Instance()->load_state() == 1) {
@@ -131,9 +137,22 @@ int main(int argc, char* argv[]) {
             }
             else if (ClientCore::Instance()->process() == -10) {
                 
-                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string((int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100)) + "%";
+                int progress = (int)((ClientCore::Instance()->logo_->loadingbar->scale.x + 0.01f) * 100);
+                progress = glm::clamp(progress, 0, 100);
+                ClientCore::Instance()->logo_->loadingText->text = "Loading " + std::to_string(progress) + "%";
+                
             }
             // Render
+            if(ClientCore::Instance()->logo_ != nullptr) {
+                if(ClientCore::Instance()->logo_->nameTop != nullptr) {
+                    frameTime += 1.0f / 60.0f;
+                    ClientCore::Instance()->logo_->nameTop->alpha = 0.5f - glm::sin(frameTime * 2.0f) * 0.25f;
+                    ClientCore::Instance()->logo_->nameLight1->alpha = glm::sin(frameTime * 2.0f) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight2->alpha = glm::cos(frameTime) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight1->rotation += 0.5f;
+                    ClientCore::Instance()->logo_->nameLight2->rotation -= 1.0f;
+                }
+            }
             Engine::main->render();
             cooldown -= 1;
             if (ClientCore::Instance()->process() == -1 && cooldown <= 0) {
@@ -167,6 +186,17 @@ int main(int argc, char* argv[]) {
             Engine::main->input->wasKeyPressed(MOUSE_BUTTON_LEFT);
             Engine::main->input->wasKeyReleased(MOUSE_BUTTON_LEFT);
 
+            frameTime += Engine::main->getDeltaTime();
+            if(ClientCore::Instance()->logo_ != nullptr) {
+                if(ClientCore::Instance()->logo_->nameTop != nullptr) {
+                    frameTime += 1.0f / 60.0f;
+                    ClientCore::Instance()->logo_->nameTop->alpha = 0.5f - glm::sin(frameTime * 2.0f) * 0.25f;
+                    ClientCore::Instance()->logo_->nameLight1->alpha = glm::sin(frameTime * 2.0f) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight2->alpha = glm::cos(frameTime) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight1->rotation += 0.5f;
+                    ClientCore::Instance()->logo_->nameLight2->rotation -= 1.0f;
+                }
+            }
             ClientCore::Instance()->renderWorld();
         }
     }

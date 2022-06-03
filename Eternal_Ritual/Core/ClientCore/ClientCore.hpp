@@ -154,7 +154,7 @@ public:
     Font* font_;
     
     // Logo
-    Logo* logo_;
+    Logo* logo_ = nullptr;
     
     // Cursor
     Cursor* cursor_;
