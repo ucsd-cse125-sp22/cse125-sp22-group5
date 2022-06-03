@@ -27,9 +27,6 @@ public:
 public:
     std::vector<FireBall*> balls;
     Node* ballNode;
-    ParticleNode* shiny;
-    Circle* circle;
-    Node* whirl;
     void load();
     ScatteredFire();
     ~ScatteredFire() override = default;

@@ -26,7 +26,6 @@ ParticleNode* Storm::metaCloud = NULL;
 ParticleNode* Storm::metaDust = NULL;
 ParticleNode* Storm::metaHail = NULL;
 ParticleNode* Storm::metaLightning = NULL;
-ParticleNode* Storm::metaShiny = NULL;
 LightNode* Storm::metaLight = NULL;
 AudioBuffer* Storm::stormSound = NULL;
 AudioBuffer* Storm::electricSound = NULL;
@@ -52,6 +51,7 @@ void Storm::load() {
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0), 0);
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0.7), 0.5);
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0), 1);
+    
     metaHail = new ParticleNode(200, 2, 0);
     metaHail->setMaxAmount(1000);
     metaHail->useLocalSpace = true;
@@ -62,12 +62,17 @@ void Storm::load() {
     metaHail->setSpriteSheetAnimation(1, 8, 8, 1, 0);
     metaHail->initialScale = 0.2;
     metaHail->scalingSpeed = -0.05;
-    metaHail->initialRotationVariation = 360;
+    
+    metaHail->rotatingSpeed = 180;
+    metaHail->rotatingSpeedVariation = 90;
+    metaHail->randomizeRotatingDirection = true;
+    
     metaHail->initialScaleVariation = 0.05;
     metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0), 0);
     metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0.7), 0.5);
     metaHail->setColorAnimation(vec4(0.5, 0.6, 1, 0), 1);
-    metaLightning = new ParticleNode(10, 0.3, 0);
+    
+    metaLightning = new ParticleNode(30, 0.1, 0.05);
     metaLightning->isAdditive = true;
     metaLightning->renderingOrder = 999l;
     metaLightning->acceleration = vec3(0, -1, 0);
@@ -75,26 +80,14 @@ void Storm::load() {
     metaLightning->setSpriteSheetAnimation(5, 5, 25, 1, 0);
     metaLightning->initialRotation = 90;
     metaLightning->initialRotationVariation = 30;
-    metaLightning->initialScale = 1.9;
+    metaLightning->initialScale = 4.0f;
+    metaLightning->initialScaleVariation = 2.0f;
+    
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 0);
-    metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0.9), 0.5);
+    metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 1), 0.2);
+    metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 1), 0.8);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
-    metaShiny = new ParticleNode(200, 1.5, 0);
-    metaShiny->texture = new Texture("/Resources/Game/Effects/Particle1.png");
-    metaShiny->renderingOrder = 1000;
-    metaShiny->setEmissionStorm(0, 4, 1);
-    metaShiny->eulerAngles = vec3(0,0,90);
-    metaShiny->setMaxAmount(200);
-    metaShiny->initialSpeed = 0.8f;
-    metaShiny->initialSpeedVariation = 0.025f;
-    metaShiny->initialScale = 0.1;
-    metaShiny->initialScaleVariation = 0.05;
-    metaShiny->accelerationVariation = vec3(0.1,0.8,0.1);
-    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 0), 0);
-    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 1), 0.5);
-    metaShiny->setColorAnimation(vec4(0.5, 0.6, 1, 0), 1);
-    metaShiny->isAdditive = true;
-    metaShiny->isDisabled = true;
+    
     stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
     electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
     castSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Cast.wav");
@@ -121,20 +114,17 @@ Storm::Storm() {
     spinning->isDisabled = true;
     spinning->addChildNode(dust);
     spinning->addChildNode(cloud);
-    spinning->addChildNode(hail);
     spinning->addChildNode(lightning);
+    fastSpin = new Node();
+    this->addChildNode(fastSpin);
+    fastSpin->addChildNode(hail);
+    fastSpin->isDisabled = true;
     start = false;
     Engine::main->addNode(this);
     this->availableTime = 0;
     cooldown = COOLDOWN;
     damage = DAMAGE;
     cost = COST;
-    this->circle = new Circle();
-    this->circle->setColor(vec3(0.5, 0.7, 1));
-    //Engine::main->addNode(circle);
-    this->circle->isDisabled = true;
-    this->shiny = metaShiny->copy()->convertToParticleNode();
-    Engine::main->addNode(shiny);
 }
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
@@ -148,6 +138,7 @@ void Storm::play(CharNode *character, int seed) {
         velocity = normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1));
         position = character->headTop->getWorldPosition();
         spinning->isDisabled = false;
+        fastSpin->isDisabled = false;
         lightning->isDisabled = false;
         cloud->reset();
         dust->reset();
@@ -161,34 +152,6 @@ void Storm::play(CharNode *character, int seed) {
         cloud->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         dust->setEmissionStorm(radius * 3, radius * 6, radius);
         hail->setEmissionStorm(radius * 2, radius * 4, radius * 2);
-        circle->isDisabled = false;
-        this->circle->setColor(vec3(0.8, 1, 1.3));
-        circle->position = character->getWorldPosition() + vec3(0, 1.6, 0);
-        circle->scale = vec3(1);
-        shiny->position = character->getWorldPosition();
-        shiny->isDisabled = false;
-        shiny->reset();
-        Animation* circleExpand = new Animation("circle expand " + to_string(reinterpret_cast<long>(this)), 0.6);
-        circleExpand->setVec3Animation(&circle->scale, vec3(2));
-        Engine::main->playAnimation(circleExpand);
-        circleExpand->setCompletionHandler([&] {
-            circle->position = circle->getWorldPosition();
-            circle->removeFromParentNode();
-            Engine::main->addNode(circle);
-            Animation* circleFall = new Animation("circle fall " + to_string(reinterpret_cast<long>(this)), 0.2);
-            circleFall->setVec3Animation(&circle->position, this->caster->getWorldPosition() + vec3(0, 0.1, 0));
-            circleFall->setEaseInTimingMode();
-            circleFall->setCompletionHandler([&] {
-                Animation* circleDim = new Animation("circle dim " + to_string(reinterpret_cast<long>(this)), 1.5);
-                circleDim->setVec3Animation(&circle->shader->multiplyColor, vec3(0));
-                Engine::main->playAnimation(circleDim);
-            });
-            Engine::main->playAnimation(circleFall);
-            Animation* circleExpand2 = new Animation("circle expand 2 " + to_string(reinterpret_cast<long>(this)), 0.2);
-            circleExpand2->setVec3Animation(&circle->scale, vec3(6));
-            circleExpand2->setEaseInTimingMode();
-            Engine::main->playAnimation(circleExpand2);
-        });
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
         Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
         expanding->setCompletionHandler([&] {
@@ -217,9 +180,12 @@ void Storm::play(CharNode *character, int seed) {
 }
 void Storm::updateMagic() {
     spinning->eulerAngles.y += 5;
+    fastSpin->eulerAngles.y += 10;
     if (spinning->eulerAngles.y > 360) spinning->eulerAngles.y -= 360;
+    if (fastSpin->eulerAngles.y > 360) fastSpin->eulerAngles.y -= 360;
     if (start) {
         spinning->position.y = radius * 2;
+        fastSpin->position.y = radius * 2 - 0.2f;
         lightning->initialScale = radius * 2;
         cloud->initialScale = radius * 4;
         dust->initialScale = radius * 4;
@@ -228,7 +194,7 @@ void Storm::updateMagic() {
         lightning->setEmissionBox(vec3(radius * 4, radius, radius * 4));
         cloud->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         dust->setEmissionStorm(radius * 3, radius * 5, radius);
-        hail->setEmissionStorm(radius, radius * 6, radius * 2);
+        hail->setEmissionStorm(radius * 2, radius * 6, radius * 2);
         this->hitWall();
     }
     
