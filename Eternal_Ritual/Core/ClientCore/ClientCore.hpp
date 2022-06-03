@@ -142,6 +142,7 @@ public:
     UINode* button_base_;
     StartSceneUI* start_scene_ui_;
     DeathScene* death_scene_;
+    bool is_death_delay_define_ = false;
     bool is_net_delay_define_ = false;
     
     // CG
@@ -170,6 +171,7 @@ public:
     bool start_game_ = true;
     bool is_waiting_;
     bool enter_game_;
+    bool is_win_game_;
     
     // Logics
     int process_ = -1;

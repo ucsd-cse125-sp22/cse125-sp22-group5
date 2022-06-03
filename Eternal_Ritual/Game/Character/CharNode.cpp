@@ -223,7 +223,7 @@ void CharNode::load() {
     death->repeats = false;
     death->clamps = true;
     footStep = new AudioBuffer("/Resources/Game/Sound/Step", "wav", 1, 8);
-    rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 3);
+    rollSound = new AudioBuffer("/Resources/Game/Sound/Roll", "wav", 1, 3);
 }
 
 CharNode::CharNode(vec3 position){
@@ -250,8 +250,6 @@ CharNode::CharNode(vec3 position){
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
     this->scrollValue = 0;
-    this->loadAudioBuffer("roll", rollSound, 2, 1);
-    this->changeAudioVolume("roll", 0.2, 0);
     
     this->health = MAXHP;
     this->mana = MAXMANA;
@@ -531,15 +529,23 @@ void CharNode::updatePosition(){
                 if (this->isLocked){
                     this->playAnimators(this->keyDirection, 0.1f);
                     if (Engine::main->getTime() > this->stepAvailable) {
-                        this->loadAudioBuffer("foot step", footStep, 2, 1);
-                        this->playAudio("foot step");
+                        
+                        Engine::main->soundID += 1;
+                        std::string soundID = std::to_string(Engine::main->soundID);
+                        
+                        this->loadAudioBuffer("foot step" + soundID, footStep, 2, 1);
+                        this->playAudio("foot step" + soundID);
                         this->stepAvailable = Engine::main->getTime() + WALK_STEP_TIME;
                     }
                 }else{
                     this->playAnimators(Bitmask::RUNNING, 0.1f);
                     if (Engine::main->getTime() > this->stepAvailable) {
-                        this->loadAudioBuffer("foot step", footStep, 2, 1);
-                        this->playAudio("foot step");
+                        
+                        Engine::main->soundID += 1;
+                        std::string soundID = std::to_string(Engine::main->soundID);
+                        
+                        this->loadAudioBuffer("foot step" + soundID, footStep, 2, 1);
+                        this->playAudio("foot step" + soundID);
                         this->stepAvailable = Engine::main->getTime() + RUN_STEP_TIME;
                     }
                 }
@@ -754,7 +760,12 @@ void CharNode::genMana() {
 void CharNode::roll() {
     if (state < CharState::ROLLING && this->mana > MAXMANA / 10) {
         state = CharState::ROLLING;
-        this->playAudio("roll");
+        
+        Engine::main->soundID += 1;
+        std::string soundID = std::to_string(Engine::main->soundID);
+        this->loadAudioBuffer("roll" + soundID, rollSound, 2, 1);
+        this->playAudio("roll" + soundID);
+        
         stopAnimators(0xfffffffe, 0.2);
         playAnimators(Bitmask::ROLL, 0.2);
         mana -= ROLL_COST;

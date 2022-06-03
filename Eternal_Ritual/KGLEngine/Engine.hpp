@@ -45,6 +45,9 @@
 
 class Engine final {
 public:
+    
+    int soundID = 0;
+    
     glm::vec2 screenResolution;
     glm::vec2 windowResolution;
     float resolutionScaleFactor;

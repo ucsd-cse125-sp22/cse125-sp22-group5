@@ -8,6 +8,10 @@
 #include "Game/UI/ButtonNode.hpp"
 #include <iostream>
 
+AudioBuffer* ButtonNode::hoverBuffer = nullptr;
+AudioBuffer* ButtonNode::clickBuffer = nullptr;
+
+
 ButtonNode::ButtonNode(UINode* parentNode, Font* font){
     
     normal = new Texture("/Resources/Game/UI/btn_back.png");
@@ -26,8 +30,12 @@ ButtonNode::ButtonNode(UINode* parentNode, Font* font){
 
     background->addChildNode(text);
     parentNode->addChildNode(background);
-    Engine::main->loadMusic("click button", new AudioBuffer("/Resources/Game/Sound/Skill_Unlock_02.wav"));
-    Engine::main->loadMusic("hover button", new AudioBuffer("/Resources/Game/Sound/Nail 6_4.wav"));
+    
+    if(ButtonNode::hoverBuffer == nullptr) {
+        ButtonNode::hoverBuffer = new AudioBuffer("/Resources/Game/Sound/ButtonHover.wav");
+        ButtonNode::clickBuffer = new AudioBuffer("/Resources/Game/Sound/ButtonClick", "wav", 1, 2);
+    }
+    
     hover = false;
     
 }
@@ -70,13 +78,24 @@ bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input, bool isReleas
             return false;
         }else if(isReleasd) {
             background->texture = normal;
-            Engine::main->playMusic("click button");
+            
+            Engine::main->soundID += 1;
+            std::string soundID = std::to_string(Engine::main->soundID);
+            
+            Engine::main->loadMusic("click button" + soundID, ButtonNode::clickBuffer);
+            Engine::main->playMusic("click button" + soundID);
             return true;
         }
         else {
             background->texture = glow;
             if (hover) {
-                Engine::main->playMusic("hover button");
+                
+                Engine::main->soundID += 1;
+                std::string soundID = std::to_string(Engine::main->soundID);
+                
+                Engine::main->loadMusic("hover button" + soundID, ButtonNode::hoverBuffer);
+                Engine::main->musicNode->changeAudioVolume("hover button" + soundID, 0.5f, 0.0f);
+                Engine::main->playMusic("hover button" + soundID);
                 hover = false;
             }
             return false;

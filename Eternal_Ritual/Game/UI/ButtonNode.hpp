@@ -21,6 +21,8 @@ class UINode;
 class Input;
 class ButtonNode{
 public:
+    static AudioBuffer* hoverBuffer;
+    static AudioBuffer* clickBuffer;
     SpriteNode* background;
     TextNode* text;
     Texture* normal;
