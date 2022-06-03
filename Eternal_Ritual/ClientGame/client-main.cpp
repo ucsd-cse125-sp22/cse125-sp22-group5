@@ -245,6 +245,18 @@ int main(int argc, char* argv[]) {
 
             std::cout << "render time: " << Engine::main->getTime() - time << std::endl;
             std::cout << "fps: " << Engine::main->getCurrentFPS() << std::endl;
+            
+            frameTime += Engine::main->getDeltaTime();
+            if(ClientCore::Instance()->logo_ != nullptr) {
+                if(ClientCore::Instance()->logo_->nameTop != nullptr) {
+                    frameTime += 1.0f / 60.0f;
+                    ClientCore::Instance()->logo_->nameTop->alpha = 0.5f - glm::sin(frameTime * 2.0f) * 0.25f;
+                    ClientCore::Instance()->logo_->nameLight1->alpha = glm::sin(frameTime * 2.0f) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight2->alpha = glm::cos(frameTime) * 0.1f + 0.2f;
+                    ClientCore::Instance()->logo_->nameLight1->rotation += 0.5f;
+                    ClientCore::Instance()->logo_->nameLight2->rotation -= 1.0f;
+                }
+            }
         }
         else if (ClientCore::Instance()->process() == 9) {
             ClientCore::Instance()->set_process(10);
