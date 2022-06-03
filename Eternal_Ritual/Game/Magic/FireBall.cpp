@@ -43,6 +43,7 @@ void FireBall::load() {
     metaFireball->setColorAnimation(vec4(1.0f, 0.3f, 0.0f, 0.9f), 0.2f);
     metaFireball->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
     metaFireball->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
+    metaFireball->isDisabled = true;
     metaFlame = new ParticleNode(60, 0.5f, 0.3f);
     metaFlame->setEmissionSphere(0.04f, 0.04f);
     metaFlame->renderingOrder = 12.0f;
@@ -60,6 +61,7 @@ void FireBall::load() {
     metaFlame->setColorAnimation(vec4(1.0f, 0.3f, 0.0f, 0.9f), 0.2f);
     metaFlame->setColorAnimation(vec4(1.0f, 0.2f, 0.0f, 0.9f), 0.6f);
     metaFlame->setColorAnimation(vec4(1.0f, 0.1f, 0.0f, 0.0f), 1.0f);
+    metaFlame->isDisabled = true;
     metaLight = new LightNode(vec3(1, 0.4, 0));
     metaLight->setPointLight(2, 10);
     metaSpark = new ParticleNode(300, 1, 0);
