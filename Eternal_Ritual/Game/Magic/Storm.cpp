@@ -14,7 +14,7 @@
 #include "Game/Magic/Circle.hpp"
 #include "Game/Map/MapSystemManager.hpp"
 
-#define DAMAGE 50
+#define DAMAGE 10
 #define COOLDOWN 10
 #define COST 400
 
@@ -42,7 +42,7 @@ void Storm::load() {
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0), 0);
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0.3), 0.5);
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0), 1);
-    
+
     metaDust = new ParticleNode(200, 1.0f, 0.0f);
     metaDust->texture = new Texture("/Resources/Game/Magic/StoneBlast/cloud.png");
     metaDust->setMaxAmount(1000);

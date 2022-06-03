@@ -7,7 +7,7 @@
 
 #define COOLDOWN 5.5
 #define COST 800
-#define DAMAGE 200
+#define DAMAGE 100
 
 using namespace std;
 using namespace glm;

@@ -947,27 +947,25 @@ void ClientCore::updateState() {
             it.second->genMana();
         }
         
-        hud_->update(!main_camera_);
         
         if (pre_chars_[0]->health <= 0 && pre_chars_[2]->health <= 0) {
             if (character_index_ == 0 || character_index_ == 2) {
-                is_win_game_ = false;
+                is_win_game_ = 2;
             }
             else {
-                is_win_game_ = true;
+                is_win_game_ = 1;
             }
-            process_ = 9;
         }
-        
         if (pre_chars_[1]->health <= 0 && pre_chars_[3]->health <= 0) {
             if (character_index_ == 1 || character_index_ == 3) {
-                is_win_game_ = false;
+                is_win_game_ = 2;
             }
             else {
-                is_win_game_ = true;
+                is_win_game_ = 1;
             }
-            process_ = 9;
         }
+        
+        hud_->update(!main_camera_, is_win_game_);
     }
 }
 
