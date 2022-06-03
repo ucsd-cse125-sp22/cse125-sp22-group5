@@ -1,7 +1,7 @@
 #include "StartSceneUI.hpp"
 #include <iostream>
 
-StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* buttonBase)
+StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* buttonBase, Cursor* cursor)
 {
 	this->parentNode = parentNode;
 	this->buttonBase = buttonBase;
@@ -53,6 +53,7 @@ StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* bu
 	parentNode->addChildNode(buttonBase);
 	parentNode->addChildNode(netWinBack);
 	parentNode->addChildNode(winBack);
+    this->cursor = cursor;
 }
 
 void StartSceneUI::isDisbled(bool t)
@@ -62,7 +63,7 @@ void StartSceneUI::isDisbled(bool t)
 }
 
 int StartSceneUI::update(bool isWaiting) {
-	glm::vec2 position = engine->input->getMouseScreenPosition();
+	glm::vec2 position = cursor->cursorScreenPosition;
 	Input* input = engine->input;
 	bool show = !netWinBack->isDisabled;
 	bool creditShow = !winBack->isDisabled;

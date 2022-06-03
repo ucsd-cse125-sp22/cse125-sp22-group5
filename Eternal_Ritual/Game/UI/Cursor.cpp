@@ -15,11 +15,15 @@ Cursor::Cursor(Engine* e)
 
 void Cursor::update()
 {
-	glm::vec2 m = engine->input->getMouseScreenPosition();
-	cursor->screenPosition = glm::vec2(glm::min(glm::max(0.0f,m.x),1.0f), glm::min(glm::max(0.0f, m.y), 1.0f));
+    this->cursorScreenPosition += engine->input->getMouseTranslation() / Engine::main->getWindowResolution();
+    this->cursorScreenPosition = glm::clamp(this->cursorScreenPosition, glm::vec2(0.0f), glm::vec2(1.0f));
+	this->cursor->screenPosition = this->cursorScreenPosition + UISizes::cursorSize * 0.5f;
 }
 
 void Cursor::isDisable(bool t)
 {
 	cursor->isDisabled = t;
+    if(t == false) {
+        this->cursorScreenPosition = glm::vec2(0.5f);
+    }
 }

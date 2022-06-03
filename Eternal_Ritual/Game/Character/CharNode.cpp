@@ -222,7 +222,7 @@ void CharNode::load() {
     death->animatorBitMask = Bitmask::DEAD;
     death->repeats = false;
     death->clamps = true;
-    footStep = new AudioBuffer("/Resources/Game/Sound/footstep", "wav", 1, 9);
+    footStep = new AudioBuffer("/Resources/Game/Sound/Step", "wav", 1, 8);
     rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 3);
 }
 
@@ -246,7 +246,6 @@ CharNode::CharNode(vec3 position){
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -278,7 +277,6 @@ void CharNode::reset() {
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -327,23 +325,6 @@ void CharNode::setCameraEularAngle(vec3 eularAngle){
 void CharNode::setCharacterPosition(vec3 position) {
     this->position = position;
     this->characterTargetPosition = position;
-}
-void CharNode::setName(string name) {
-//    this->nameNode->text = name;
-}
-
-void CharNode::setUINode(UINode* uiNode){
-    this->uiNode = uiNode;
-    //FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
-    //Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
-  /*  TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
-    nameNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    nameNode->text = "New Character";
-    nameNode->setCenterHorizontalAlignment();
-    nameNode->setTopVerticalAlignment();
-    nameNode->position = vec2(0, -0.12f);
-    uiNode->addChildNode(nameNode);*/
-    //this->nameNode = nameNode;
 }
 
 // Helper function
@@ -671,8 +652,6 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
     }
 
 }
@@ -683,7 +662,6 @@ CharNode* CharNode::copy(vec3 position) {
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
     node->state = this->state;
-    node->uiNode = this->uiNode->copy()->convertToUINode();
     node->controlNode = this->controlNode->copy();
     node->health = this->health;
     node->stamina = this->stamina;
@@ -697,7 +675,6 @@ CharNode* CharNode::copy(vec3 position) {
         node->geometries.push_back(this->geometries[i]->copy(&node->animators));
     }
     node->addChildNode(node->controlNode);
-    node->addChildNode(node->uiNode);
 //    node->cameraNode = this->cameraNode;
     return(node);
 }
@@ -820,7 +797,6 @@ void CharNode::receiveDamage(int damage){
                 stopAnimators(0xffffffff, 0.2);
                 playAnimators(Bitmask::DEAD, 0.1);
                 this->state = CharState::DEAD;
-                this->uiNode->isDisabled = true;
                 this->hitbox = new Hitbox(this->position, vec3(0, 0, 0));
             }
         });

@@ -175,10 +175,10 @@ void ClientCore::loadCharacter() {
         
         engine_->addNode(newChar);
         
-        UINode* baseNode = new UINode();
+        SpriteNode* baseNode = new SpriteNode(glm::vec2(1.0f));
         baseNode->renderingOrder = 1000.0f;
         engine_->addNode(baseNode);
-        newChar->setUINode(baseNode);
+        newChar->uiNode = baseNode;
         
         pre_chars_.push_back(newChar);
     }
@@ -339,7 +339,7 @@ void ClientCore::loadStartScene() {
     button_base_ = new UINode();
     button_base_->size = glm::vec2(1.0);
     button_base_->screenPosition = glm::vec2(0.5);
-    start_scene_ui_ = new StartSceneUI(engine_, font_, ui_base_, button_base_);
+    start_scene_ui_ = new StartSceneUI(engine_, font_, ui_base_, button_base_, cursor_);
     
     process_ = 2;
     load_state_ ++;
@@ -572,14 +572,6 @@ void ClientCore::handleEvent() {
     std::cout << "|-- Cycle Stage 1 - Handle Event --|" << std::endl;
     
     engine_->shouldUpdate();
-    
-    if (engine_->input->wasKeyPressed(KEY_MINUS)) {
-        engine_->unlockCursor();
-    }
-    
-    if (engine_->input->wasKeyPressed(KEY_EQUAL)) {
-        engine_->lockCursor();
-    }
     
     if (start_game_) {
         key_to_magic_[KEY_1] = Magic::FIREBALL;
