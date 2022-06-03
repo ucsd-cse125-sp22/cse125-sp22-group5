@@ -437,7 +437,7 @@ void CharNode::moveCamera(vec2 mouseTranslation){
         controlNode->eulerAngles.y += 360;
     }
     HitInfo hitInfo;
-    if (MapSystemManager::Instance()->hitTest(this->controlNode->getWorldPosition(), this->cameraNode->getWorldPosition() + normalize(this->cameraNode->getWorldPosition() - this->controlNode->getWorldPosition()) * 0.3f, hitInfo)) {
+    if (MapSystemManager::Instance()->hitTest(this->controlNode->getWorldPosition(), this->cameraNode->getWorldPosition() + normalize(this->cameraNode->getWorldPosition() - this->controlNode->getWorldPosition()) * 0.3f, hitInfo, 15)) {
         this->cameraNode->position.x = std::max(-length(hitInfo.hit_point - this->controlNode->getWorldPosition()) + 0.1f, -2.5f);
     }
     else {
@@ -570,15 +570,15 @@ void CharNode::updatePosition(){
         rotationMtx = glm::rotate(trans, radians(-45.0f), vec3(0.0f, 1.0f, 0.0f));
         vec3 rightDir = rotationMtx * movementNorm * 0.7f;
         
-        bool midBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + midDir, midBottomHitInfo);
+        bool midBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + midDir, midBottomHitInfo, 15);
         
-        bool leftBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + leftDir, leftBottomHitInfo);
+        bool leftBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom, startBottom + leftDir, leftBottomHitInfo, 15);
         
-        bool rightBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom,  startBottom + rightDir, rightBottomHitInfo);
+        bool rightBottomHit = MapSystemManager::Instance()->gridsHitTest(startBottom,  startBottom + rightDir, rightBottomHitInfo, 15);
         
-        bool leftTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + leftDir, leftTopHitInfo);
+        bool leftTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + leftDir, leftTopHitInfo, 15);
 
-        bool rightTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + rightDir, rightTopHitInfo);
+        bool rightTopHit = MapSystemManager::Instance()->gridsHitTest(startTop, startTop + rightDir, rightTopHitInfo, 15);
         
         if (leftBottomHit && rightBottomHit) {
             this->characterTargetPosition = this->position;
@@ -607,7 +607,7 @@ void CharNode::updatePosition(){
         HitInfo heightHitInfo;
         vec3 startHeight = startBottom + vec3(0.0f, 0.1f, 0.0f);
         vec3 endHeight = vec3(startHeight.x, startHeight.y - 10.0f, startHeight.z);
-        MapSystemManager::Instance()->gridsHitTest(startHeight, endHeight, heightHitInfo);
+        MapSystemManager::Instance()->gridsHitTest(startHeight, endHeight, heightHitInfo, 15);
         vec3 hitPoint = heightHitInfo.hit_point;
         if (hitPoint.y < modelWorldPosition.y - 0.08f) {
             this->characterTargetPosition.y = hitPoint.y;
