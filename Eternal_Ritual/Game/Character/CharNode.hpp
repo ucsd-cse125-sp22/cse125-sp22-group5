@@ -130,7 +130,7 @@ public:
     glm::vec3 cameraTargetEulerAngles;
     Node* controlNode;
     Node* headTop;
-    UINode* uiNode;
+    SpriteNode* uiNode;
     //TextNode* nameNode;
     Node* generateBoneNode(std::string boneName);
     Node* rightHand;
@@ -141,8 +141,6 @@ public:
     void setCharacterEularAngle(glm::vec3 eularAngle);
     void setCameraEularAngle(glm::vec3 eularAngle);
     void setCharacterPosition(glm::vec3 position);
-    void setName(std::string name);
-    void setUINode(UINode* uiNode);
     
     bool isLocked;
     bool refreshed;

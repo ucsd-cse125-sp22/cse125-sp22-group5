@@ -246,7 +246,7 @@ CharNode::CharNode(vec3 position){
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    this->uiNode = 0;
+    //this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -278,7 +278,7 @@ void CharNode::reset() {
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    this->uiNode = 0;
+    //this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -327,23 +327,6 @@ void CharNode::setCameraEularAngle(vec3 eularAngle){
 void CharNode::setCharacterPosition(vec3 position) {
     this->position = position;
     this->characterTargetPosition = position;
-}
-void CharNode::setName(string name) {
-//    this->nameNode->text = name;
-}
-
-void CharNode::setUINode(UINode* uiNode){
-    this->uiNode = uiNode;
-    //FontLibrary* fontLibrary = new FontLibrary(); // todo move font global variable
-    //Font* font = fontLibrary->loadFontFile("/Resources/Fonts/Cormorant/Cormorant.ttf", 100);
-  /*  TextNode* nameNode = new TextNode(font, 0.05f, 1.0f, 0.0f);
-    nameNode->color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    nameNode->text = "New Character";
-    nameNode->setCenterHorizontalAlignment();
-    nameNode->setTopVerticalAlignment();
-    nameNode->position = vec2(0, -0.12f);
-    uiNode->addChildNode(nameNode);*/
-    //this->nameNode = nameNode;
 }
 
 // Helper function
@@ -671,8 +654,10 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
-        this->uiNode->scale = vec2(1/pow(positionOnScreen.z, 0.5));
+        if (uiNode != nullptr) {
+            this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y);
+            this->uiNode->scale = vec2(1 / pow(positionOnScreen.z, 0.5));
+        }
     }
 
 }
@@ -683,7 +668,8 @@ CharNode* CharNode::copy(vec3 position) {
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
     node->state = this->state;
-    node->uiNode = this->uiNode->copy()->convertToUINode();
+    //node->uiNode = this->uiNode;
+        //->copy()->convertToUINode();
     node->controlNode = this->controlNode->copy();
     node->health = this->health;
     node->stamina = this->stamina;

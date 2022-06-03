@@ -30,15 +30,11 @@ HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 	name->text = character->name;
 	name->parentCoordinatePosition = glm::vec2(0.3, 0.1);
 
-	/*UINode* uiNode = new UINode();
-	uiNode->addChildNode(background);*/
 	background->addChildNode(baseNode);
 	baseNode->addChildNode(HpBar);
 	background->addChildNode(icon);
 	background->addChildNode(name);
-	//engine->addNode(background);
-	character->setUINode(background);
-	//character->headTop->addChildNode(background);
+	character->uiNode = background;
 }
 
 void HPBarNode::update(float curHP)
