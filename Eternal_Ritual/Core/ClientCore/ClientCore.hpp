@@ -146,7 +146,9 @@ private:
     bool is_net_delay_define_ = false;
     
     // CG
-    CameraController* camera_controller_;
+    CameraController* camera_controller_1_;
+    CameraController* camera_controller_2_;
+    
 
     // Font
     Font* font_;
