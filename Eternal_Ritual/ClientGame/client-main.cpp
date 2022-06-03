@@ -174,6 +174,7 @@ int main(int argc, char* argv[]) {
     Engine::main->input->wasKeyPressed(KEY_3);
     Engine::main->input->wasKeyPressed(KEY_4);
     
+    ClientCore::Instance()->start_scene_ui_->enabled = false;
     
     // Pre-Game while
     while(Engine::main->isRunning()) {
