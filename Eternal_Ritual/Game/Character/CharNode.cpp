@@ -762,7 +762,7 @@ void CharNode::roll() {
         manaGen->setFloatAnimation(&(this->manaRegen), MAXMANAREGEN);
         manaGen->setEaseInTimingMode();
         Engine::main->playAnimation(manaGen);
-        Animation* resume = new Animation(this->name + " resume", 0.7);
+        Animation* resume = new Animation(this->name + " resume", 0.8);
         this->moveDirection = this->modelNode->getRightVectorInWorld();
         this->moveDirection.y = 0;
         this->moveDirection = normalize(this->moveDirection);

@@ -35,7 +35,7 @@ HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 	baseNode->addChildNode(HpBar);
 	background->addChildNode(icon);
 	background->addChildNode(name);
-	e->addNode(background);
+	character->headTop->addChildNode(background);
 	initHp = character->health;
 }
 
@@ -43,6 +43,12 @@ void HPBarNode::update(float curHp)
 {
 	if (curHp > initHp) { curHp = initHp; }
 	if (curHp < 0) { curHp = 0; }
+    if (baseNode->getPositionOnScreen().z < 0) {
+        baseNode->isDisabled = true;
+    }
+    else {
+        baseNode->isDisabled = false;
+    }
 	Animation* targetBarChange = new Animation("targetBarChange", 0.3);
 	targetBarChange->setFloatAnimation(&baseNode->scale.x, curHp / initHp);
 	engine->playAnimation(targetBarChange);
