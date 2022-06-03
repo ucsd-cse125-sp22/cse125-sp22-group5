@@ -79,7 +79,7 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
     loadingText->color = Color::textColor;
     loadingText->alpha = 0.0f;
         
-    loadingbar = new SpriteNode(glm::vec2(14.8f / 20.0f, 0.15f / 20.0f) * 1.2f);
+    loadingbar = new SpriteNode(glm::vec2(14.5f / 20.0f, 0.15f / 20.0f) * 1.2f);
     loadingbar->texture = new Texture("/Resources/Game/UI/loading.png");
     loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.7);
     loadingbar->renderingOrder = 1.0f;
@@ -235,7 +235,11 @@ void Logo::updateLoad(float loadingProgess)
         int i = (int)(loadingProgess * 100);
         Animation* ani = new Animation("Loading" + std::to_string(i), 1.0f);
         float factor = loadingProgess;
-        factor += glm::linearRand(0.0f, 0.1f);
+        if(factor < 0.9f) {
+            factor += glm::linearRand(0.0f, 0.1f);
+        }else{
+            factor += glm::linearRand(0.0f, 0.05f);
+        }
         factor = glm::clamp(factor, 0.0f, 1.0f);
         ani->setVec2Animation(&loadingbar->scale, glm::vec2(factor, 1.0f));
         ani->setEaseInEaseOutTimingMode();
