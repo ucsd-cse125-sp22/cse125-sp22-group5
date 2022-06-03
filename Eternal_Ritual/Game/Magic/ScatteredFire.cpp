@@ -75,7 +75,7 @@ ScatteredFire::ScatteredFire() {
     this->circle->setColor(vec3(1, 0.7, 0.5));
     this->circle->isDisabled = true;
     this->circle->scale = vec3(2.5);
-    Engine::main->addNode(circle);
+    //Engine::main->addNode(circle);
     this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
 }
 void ScatteredFire::play(CharNode* character, int seed){

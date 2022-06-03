@@ -84,7 +84,7 @@ Thunder::Thunder() {
     this->circle->setColor(vec3(1, 1, 0.5));
     this->circle->isDisabled = true;
     this->circle->scale = vec3(3);
-    Engine::main->addNode(circle);
+    //Engine::main->addNode(circle);
     
     for (int k = 0; k < 12; k++) {
         ThunderShock* thunder = new ThunderShock();

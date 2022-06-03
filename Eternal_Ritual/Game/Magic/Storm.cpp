@@ -131,7 +131,7 @@ Storm::Storm() {
     cost = COST;
     this->circle = new Circle();
     this->circle->setColor(vec3(0.5, 0.7, 1));
-    Engine::main->addNode(circle);
+    //Engine::main->addNode(circle);
     this->circle->isDisabled = true;
     this->shiny = metaShiny->copy()->convertToParticleNode();
     Engine::main->addNode(shiny);

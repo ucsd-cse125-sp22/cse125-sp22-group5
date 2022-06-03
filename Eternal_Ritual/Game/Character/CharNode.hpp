@@ -34,13 +34,15 @@ enum Type {
     WALKFR = 0x00000080,
     WALKBL = 0x00000100,
     WALKBR = 0x00000200,
-    ROLL = 0x00000400,
     MAGIC_CAST_1 = 0x00000800,
     MAGIC_CAST_2 = 0x00001000,
     MAGIC_CAST_3 = 0x00002000,
     DRAGON_ATT = 0x00004000,
     DAMAGED = 0x00008000,
-    DEAD = 0x00010000
+    DEAD = 0x00010000,
+    
+    ROLL1 = 0x01000400,
+    ROLL2 = 0x02000400,
 };
 }
 
@@ -73,6 +75,9 @@ enum Type{
 
 class CharNode final : public Node {
 public:
+    
+    int rollingID = 0;
+    
     static bool loaded;
     static Node* metaModel;
     static Texture* bootsD;
