@@ -27,9 +27,6 @@ protected:
     Texture* glow;
     Texture* dark;
     bool hover;
-    void switchOn();
-    void switchOff();
-    void restore();
 public:
     ButtonNode(UINode* partentNode,Font* font);
     ~ButtonNode() = default;
@@ -38,6 +35,7 @@ public:
     void setScale(float i);
     bool checkState(glm::vec2 mousePosition, Input* input, bool isReleasd);
     void disable(bool disable);
+    void setWinButton(std::string t);
 };
 
 

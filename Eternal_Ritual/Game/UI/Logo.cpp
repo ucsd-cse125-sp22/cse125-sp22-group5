@@ -35,14 +35,38 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	nameBackground->renderingOrder = 1;
 	nameBackground->screenPosition = glm::vec2(0.5,0.4);
 
-	/*name = new TextNode(font,0.15f,1.0f,0.1f);
-	name->text = "Eternal Ritual";
-	name->color = Color::LogotextColor;
-	name->parentCoordinatePosition = glm::vec2(0.5,0.69);*/
+
+	// loading ========================
+	loadingText = new TextNode(font, 0.05f, 1.0f, 0.1f);
+	loadingText->parentCoordinatePosition = glm::vec2(0.5, 0.7);
+	loadingText->text = "Loading 0%";
+	loadingText->color = Color::textColor;
+
+	loadingbar = new SpriteNode(UISizes::loadingBarTopSize);
+	loadingbar->texture = new Texture("/Resources/Game/UI/loading.png");
+	loadingbar->scale = glm::vec2(0, 1);
+
+	loadingbarBack = new SpriteNode(UISizes::loadingBarBackSize);
+	loadingbarBack->texture = new Texture("/Resources/Game/UI/loading_back.png");
+	loadingbarBack->parentCoordinatePosition = glm::vec2(0.5, 0.75);
+
+	loadingbarTop = new SpriteNode(UISizes::loadingBarTopSize);
+	loadingbarTop->texture = new Texture("/Resources/Game/UI/loading_top.png");
+	loadingbarTop->renderingOrder = 1;
+
+	background->addChildNode(loadingText);
+	background->addChildNode(loadingbarBack);
+	loadingbarBack->addChildNode(loadingbar);
+	loadingbarBack->addChildNode(loadingbarTop);
+
+	loadingbarBack->isDisabled = true;
+	loadingText->isDisabled = true;
+
+	loadingbarBack->scale = glm::vec2(0.8,0.5);
+
 
 	parentNode->addChildNode(background);
 	parentNode->addChildNode(nameBackground);
-	//nameBackground->addChildNode(name);
 	background->addChildNode(logoPic);
 	logoPic->addChildNode(logoBright);
 	background->addChildNode(light);
@@ -121,19 +145,8 @@ void Logo::play() {
 void Logo::updateLoad(float loadingProgess)
 {
 	if (!isload) {
-		loadingText = new TextNode(font, 0.05f, 1.0f, 0.1f);
-		loadingText->parentCoordinatePosition = glm::vec2(0.5, 0.7);
-		loadingText->text = "Loading 0%";
-		loadingText->color = Color::textColor;
-		
-		loadingbar = new SpriteNode(glm::vec2(engine->getWindowResolution().x / engine->getWindowResolution().y - 0.2, 0.01));
-		loadingbar->color = Color::loadingBarColor;
-		loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.75);
-		loadingbar->scale = glm::vec2(0, 1);
-
-		background->addChildNode(loadingText);
-		background->addChildNode(loadingbar);
-
+		loadingText->isDisabled = false;
+		loadingbarBack->isDisabled = false;
 		isload = true;
 		*pro = 3;
 	}

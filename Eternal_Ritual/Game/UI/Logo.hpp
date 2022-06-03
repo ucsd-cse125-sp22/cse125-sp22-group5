@@ -13,6 +13,8 @@ protected:
 	SpriteNode* light;
 	SpriteNode* nameBackground;
 	SpriteNode* loadingbar;
+	SpriteNode* loadingbarBack;
+	SpriteNode* loadingbarTop;
 	TextNode* loadingText;
 	TextNode* name;
 	Font* font;

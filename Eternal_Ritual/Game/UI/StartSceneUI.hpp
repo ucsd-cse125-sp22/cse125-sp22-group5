@@ -11,9 +11,11 @@ private:
 	UINode* parentNode;
 	UINode* buttonBase;
 	SpriteNode* nameBackground;
+	SpriteNode* winBack;
 	ButtonNode* startButton;
 	ButtonNode* creditButton;
 	ButtonNode* exitButton;
+	ButtonNode* winCloseButton;
 	SpriteNode* netWinBack;
 	SpriteNode* creditBack;
 	TextNode* netText;
