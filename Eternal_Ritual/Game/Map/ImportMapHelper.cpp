@@ -4137,10 +4137,10 @@ void importMapModel1() {
     ruined5_276->eulerAngles = vec3(-80.551, 137.297, 0);
     ruined5_276->scale = vec3(0.9999746704101562, 0.9999679565429688, 0.9999694061279297);
     Engine::main->addNode(ruined5_276);
-    PBRShader* barkShader = new PBRShader(0.2, 0.7);
+    PBRShader* barkShader = new PBRShader(0.2, 0.8);
     barkShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Albedo.png", 2.0, true));
     barkShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Normal.png", 2.0, true));
-    PBRShader* treeShader = new PBRShader(0.2, 0.7);
+    PBRShader* treeShader = new PBRShader(0.2, 0.8);
     treeShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Albedo.png", 2.0, true));
     treeShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Normal.png", 2.0, true));
     Node* tree1 = new Node();
@@ -4183,7 +4183,7 @@ void importMapModel1() {
     
     
 void importMapModel2() {
-    PBRShader* plant1Shader = new PBRShader(0.5, 0.4);
+    PBRShader* plant1Shader = new PBRShader(0.1, 0.9);
     plant1Shader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Plant_01_Albedo.png", 2.0, true));
     plant1Shader->setNormalMap(new Texture("/Resources/Game/Map/T_Plant_01_Normal.png", 2.0, true));
     Node* plant1 = new Node();
@@ -4297,7 +4297,7 @@ void importMapModel2() {
     Engine::main->addNode(plant1_18);
     
     
-    PBRShader* grassShader = new PBRShader(0.3, 0.5);
+    PBRShader* grassShader = new PBRShader(0.1, 0.9);
     grassShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Grass_03_Albedo.png", 2.0, true));
     grassShader->setNormalMap(new Texture("/Resources/Game/Map/T_Grass_03_Normal.png", 2.0, true));
     Node* grass2 = new Node();
@@ -4957,7 +4957,7 @@ void importMapModel2() {
     torch1_228->eulerAngles = vec3(179.999991348578, -5.008956130975331e-06, 179.999991348578);
     torch1_228->scale = vec3(1.4999998474121095, 1.4999998474121095, 1.4999998474121095);
     Engine::main->addNode(torch1_228);
-    PBRShader* rootShader = new PBRShader(0.6, 0.5);
+    PBRShader* rootShader = new PBRShader(0.2, 0.8);
     rootShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Roots_01_Albedo.png", 2.0, true));
     rootShader->setNormalMap(new Texture("/Resources/Game/Map/T_Roots_01_Normal.png", 2.0, true));
     Node* root1 = new Node();
@@ -5106,7 +5106,7 @@ void importMapModel3(std::vector<Node*>& cgUsedNode) {
     }
     Engine::main->addNode(newMap);
     
-    PBRShader* plankShader = new PBRShader(0.3, 0.7);
+    PBRShader* plankShader = new PBRShader(0.1, 0.8);
     plankShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Wood_01_Albedo.png", 2.0, true));
     plankShader->setNormalMap(new Texture("/Resources/Game/Map/T_Wood_01_Normal.png", 2.0, true));
     Node* plank1 = new Node();

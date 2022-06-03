@@ -43,7 +43,7 @@ void HUDNode::selectMagic()
 	}
 }
 
-HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally)
+HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, Font* smallFont, CharNode* selfChar, CharNode* ally)
 {
 	engine = e;
 	this->parentNode = parentNode;
@@ -75,10 +75,10 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	mainMpBar->setPosition(glm::vec2(0.44,0.75));
 	mainAvatar = new SpriteNode(UISizes::avatarSize);
 	mainAvatar->texture = new Texture("/Resources/Game/UI/human_female.png");
-	mainName = new TextNode(font, 0.45f, 3, 0.01f);
+	/*mainName = new TextNode(font, 0.45f, 3, 0.01f);
 	mainName->text = selfChar->name;
 	mainName->scale = glm::vec2(0.11);
-	mainName->parentCoordinatePosition = glm::vec2(0.29,-0.13);
+	mainName->parentCoordinatePosition = glm::vec2(0.29,-0.13);*/
 	
 	if (isRed) {
 		mainAvatar->parentCoordinatePosition = glm::vec2(0.118, 0.5);
@@ -109,7 +109,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	//parentNode->addChildNode(mainBackground);
 	mainBackground->addChildNode(mainAvatarBack);
 	mainAvatarBack->renderingOrder = 2;
-	mainBackground->addChildNode(mainName);
+	//mainBackground->addChildNode(mainName);
 	mainAvatarBack->addChildNode(mainAvatar);
 	mainAvatarBack->addChildNode(mainAvatarTop);
 	mainAvatarTop->addChildNode(mainIcon);
@@ -138,10 +138,10 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	partyAvatarBack = new SpriteNode(UISizes::partyAvatarBackSize);
 	partyAvatarBack->texture = new Texture("/Resources/Game/UI/avatar_back_party.png");
 	partyAvatarBack->parentCoordinatePosition = glm::vec2(0.05,0.5);
-	partyName = new TextNode(font, 0.45f, 3, 0.01f);
+/*	partyName = new TextNode(font, 0.45f, 3, 0.01f);
 	partyName->text = ally->name;
 	partyName->scale = glm::vec2(0.1,0.2);
-	partyName->parentCoordinatePosition = glm::vec2(0.36, -0.1);
+	partyName->parentCoordinatePosition = glm::vec2(0.36, -0.1)*/;
 
 	if (isRed) {
 		partyIcon = new SpriteNode(UISizes::avatarIconSize);
@@ -169,7 +169,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 
 	placehold->addChildNode(partyAvatarBack);
 	partyAvatarBack->renderingOrder = 2;
-	partyBackground->addChildNode(partyName);
+	//partyBackground->addChildNode(partyName);
 	partyAvatarBack->addChildNode(partyAvatar);
 	partyAvatarBack->addChildNode(partyAvatarTop);
 	partyAvatarTop->addChildNode(partyIcon);
@@ -201,9 +201,9 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	enAvatarBack->texture = new Texture("/Resources/Game/UI/avatar_back_en.png");
 	enAvatarBack->parentCoordinatePosition = glm::vec2(1 - 0.05, 0.5);
 
-	enName = new TextNode(font, 0.45f, 3, 0.01f);
+	/*enName = new TextNode(font, 0.45f, 3, 0.01f);
 	enName->scale = glm::vec2(0.1);
-	enName->parentCoordinatePosition = glm::vec2(1 - 0.35, -0.05);
+	enName->parentCoordinatePosition = glm::vec2(1 - 0.35, -0.05);*/
 
 	if (isRed) {
 		enIcon = new SpriteNode(UISizes::avatarIconSize);
@@ -227,7 +227,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	//parentNode->addChildNode(enBackground);
 	enBackground->addChildNode(enAvatarBack);
 	enAvatarBack->renderingOrder = 2;
-	enBackground->addChildNode(enName);
+	//enBackground->addChildNode(enName);
 	enAvatarBack->addChildNode(enAvatar);
 	enAvatarBack->addChildNode(enAvatarTop);
 	enAvatarTop->addChildNode(enIcon);
@@ -266,22 +266,23 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	listTop->texture = new Texture("/Resources/Game/UI/listTopBack.png");
 	listBottom = new SpriteNode(UISizes::listHeadBackSize);
 	listBottom->texture = new Texture("/Resources/Game/UI/listBottomBack.png");
-	float height = 0.022;
+	float height = 0.02;
 	float length = UISizes::listHeadBackSize.x - 0.03;
-	float distance = 0.004f;
-	tutorialText = new TextNode(font, height, length, distance);
-	tutorialText->text = "Movement: w/s/a/d \n Roll: space\nLock Enermy: F\n Acttack: mouse left\n Select magic: mouse middle";
+	float distance = 0.002f;
+	tutorialText = new TextNode(smallFont, height, length, distance);
+	tutorialText->text = "Movement: \n    w/s/a/d\nRoll: \n    Space\nLock Enermy: \n    G\nActtack:\n    Mouse Left\nSelect Magic: \n    Mouse Middle\nOr\n    1/2/3/4\nSwitch View: \n    C";
 	tutorialText->setLeftHorizontalAlignment();
 	tutorialText->color = Color::textColor;
+	tutorialText->position = glm::vec2(0.05, 0);
 	TextNode* title = new TextNode(font, height, length, distance);
 	title->text = "Tutorial";
 	title->setCenterVerticalAlignment();
 	title->color = Color::textColor;
 
-	float textY = 4 * (height + distance);
+	float textY = 14 * (height + distance);
 
 	SpriteNode* listBackground = new SpriteNode(glm::vec2(UISizes::listHeadBackSize.x, 
-		listTop->size.y + listBottom->size.y + textY));
+		listTop->size.y + listBottom->size.y + textY - 0.1));
 	listBackground->texture = new Texture("/Resources/Game/UI/list_back.png");
 	listBackground->parentCoordinatePosition = glm::vec2(0.5);
 	listBackground->alpha = 0.8;
@@ -295,7 +296,7 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	listBack->size = listBackground->size;
 	listTop->parentCoordinatePosition = glm::vec2(0.5, 0);
 	tutorialText->parentCoordinatePosition = glm::vec2(0.01,0.5);
-	listBottom->parentCoordinatePosition = glm::vec2(0.5,1);
+	listBottom->parentCoordinatePosition = glm::vec2(0.5,0.95);
 	
 	listBack->scale = glm::vec2(1);
 	listBack->position = glm::vec2(winSize.x - UISizes::listHeadBackSize.x/2,winSize.y-(listBack->size.y/2 + UISizes::listHeadBackSize.y + 0.01));
@@ -305,7 +306,8 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	viewBack = new SpriteNode(UISizes::viewBackSize);
 	viewBack->texture = new Texture("/Resources/Game/UI/notification_back.png");
 	viewText = new TextNode(font,0.05,1,0.1);
-	viewText->text = ally->name + "'s view";
+	//viewText->text = ally->name + "'s view";
+	viewText->text = "ally's view";
 	viewText->parentCoordinatePosition = glm::vec2(0.5,0.73);
 	viewBack->screenPosition = glm::vec2(0.5, 0.2);
 	viewBack->addChildNode(viewText);
@@ -336,8 +338,43 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode
 	parentNode->addChildNode(deathBack);
 }
 
-void HUDNode::update(bool viewAlly)
+void HUDNode::update(bool viewAlly, int isWin)
 {
+    if(isWin!=0){
+        if(isWin==1){
+            deathBack->isDisabled = false;
+            deathText->text = "Victory";
+            Animation* death = new Animation("showDeath", 0.3);
+            death->setFloatAnimation(&deathBack->alpha, 1);
+            death->setEaseOutTimingMode();
+            Animation* deathWidth = new Animation("showDeathWidth", 0.3);
+            deathWidth->setFloatAnimation(&deathBack->scale.x, 1);
+            deathWidth->setEaseOutTimingMode();
+            Animation* back = new Animation("deBack", 0.1);
+            back->setFloatAnimation(&aliveBase->alpha, 0);
+            back->setEaseInTimingMode();
+            engine->playAnimation(death);
+            engine->playAnimation(deathWidth);
+            engine->playAnimation(back);
+            return;
+        }else if(isWin==0){
+            deathBack->isDisabled = false;
+            deathText->text = "Defeat";
+            Animation* death = new Animation("showDeath", 0.3);
+            death->setFloatAnimation(&deathBack->alpha, 1);
+            death->setEaseOutTimingMode();
+            Animation* deathWidth = new Animation("showDeathWidth", 0.3);
+            deathWidth->setFloatAnimation(&deathBack->scale.x, 1);
+            deathWidth->setEaseOutTimingMode();
+            Animation* back = new Animation("deBack", 0.1);
+            back->setFloatAnimation(&aliveBase->alpha, 0);
+            back->setEaseInTimingMode();
+            engine->playAnimation(death);
+            engine->playAnimation(deathWidth);
+            engine->playAnimation(back);
+            return;
+        }
+    }
 	mainHpBar->update(selfChar->health);
 	mainMpBar->update(selfChar->mana);
 
@@ -403,7 +440,8 @@ void HUDNode::update(bool viewAlly)
 
 void HUDNode::toggleViewDead(CharNode* name)
 {
-	viewText->text = name->name + "'s View";
+	//viewText->text = name->name + "'s View";
+	viewText->text = "Enermy's View";
 }
 
 void HUDNode::reset() {

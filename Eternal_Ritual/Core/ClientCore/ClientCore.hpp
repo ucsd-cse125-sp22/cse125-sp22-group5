@@ -160,6 +160,7 @@ public:
 
     // Font
     Font* font_;
+    Font* fontSmall_;
     
     // Logo
     Logo* logo_ = nullptr;
@@ -171,7 +172,7 @@ public:
     bool start_game_ = true;
     bool is_waiting_;
     bool enter_game_;
-    bool is_win_game_;
+    int is_win_game_ = 0;
     
     // Logics
     int process_ = -1;

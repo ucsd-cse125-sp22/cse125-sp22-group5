@@ -17,8 +17,8 @@
 #define SERVER_PORT 1233
 //#define SERVER_IP "70.95.147.7"
 //#define SERVER_IP "100.81.36.66"
-//#define SERVER_IP "127.0.0.1"
-#define SERVER_IP "0.0.0.0"
+#define SERVER_IP "127.0.0.1"
+//#define SERVER_IP "0.0.0.0"
 //#define SERVER_IP "137.110.115.89"
 
 #endif

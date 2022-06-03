@@ -13,7 +13,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "C:/Users/cse125/Desktop/cse125-sp22-group5"
+#define ROOT_PATH "C:/Users/mel001/cse125-sp22-group5"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif
@@ -55,6 +55,7 @@ void ClientCore::loadFont() {
     
     FontLibrary* fontLibrary = new FontLibrary();
     font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+    fontSmall_ = fontLibrary->loadFontFile("/Resources/Fonts/GentiumPlus-Regular.ttf", 50);
 }
 
 
@@ -340,7 +341,7 @@ void ClientCore::loadStartScene() {
     button_base_ = new UINode();
     button_base_->size = glm::vec2(1.0);
     button_base_->screenPosition = glm::vec2(0.5);
-    start_scene_ui_ = new StartSceneUI(engine_, font_, ui_base_, button_base_, cursor_);
+    start_scene_ui_ = new StartSceneUI(engine_, font_, fontSmall_, ui_base_, button_base_, cursor_);
     
     process_ = 2;
     load_state_ ++;
@@ -419,7 +420,7 @@ void ClientCore::updateStart() {
     int state = start_scene_ui_->update(is_waiting_);
     if (state == 1) {
         process_ = 6;
-        Animation* uiBaseExit = new Animation("uiBaseExit", 0.3f);
+        Animation* uiBaseExit = new Animation("uiBaseExit", 0.5f);
         uiBaseExit->setFloatAnimation(&ui_base_->alpha, 0.0f);
         uiBaseExit->setCompletionHandler([&] {ui_base_->isDisabled = true;});
         engine_->playAnimation(uiBaseExit);
@@ -675,6 +676,10 @@ void ClientCore::playCG() {
     
     else if (cg_stage_ == 3) {
         hud_base_->isDisabled = false;
+        Animation* showHUDBase = new Animation("showHUDBase", 0.5);
+        showHUDBase->setFloatAnimation(&hud_base_->alpha, 1);
+        showHUDBase->setEaseOutTimingMode();
+        engine_->playAnimation(showHUDBase);
         enter_game_ = false;
         process_ = 7;
     }
@@ -691,8 +696,9 @@ void ClientCore::loadHUD() {
     hud_base_ = new UINode();
     hud_base_->renderingOrder = 10000.0f;
     engine_->addNode(hud_base_);
-    hud_ = new HUDNode(engine_, hud_base_, true, font_, character_, ally_);
+    hud_ = new HUDNode(engine_, hud_base_, true, font_, fontSmall_,character_, ally_);
     hud_base_->isDisabled = true;
+    hud_base_->alpha = 0;
 }
 
 
@@ -941,27 +947,25 @@ void ClientCore::updateState() {
             it.second->genMana();
         }
         
-        hud_->update(!main_camera_);
         
         if (pre_chars_[0]->health <= 0 && pre_chars_[2]->health <= 0) {
             if (character_index_ == 0 || character_index_ == 2) {
-                is_win_game_ = false;
+                is_win_game_ = 2;
             }
             else {
-                is_win_game_ = true;
+                is_win_game_ = 1;
             }
-            process_ = 9;
         }
-        
         if (pre_chars_[1]->health <= 0 && pre_chars_[3]->health <= 0) {
             if (character_index_ == 1 || character_index_ == 3) {
-                is_win_game_ = false;
+                is_win_game_ = 2;
             }
             else {
-                is_win_game_ = true;
+                is_win_game_ = 1;
             }
-            process_ = 9;
         }
+        
+        hud_->update(!main_camera_, is_win_game_);
     }
 }
 

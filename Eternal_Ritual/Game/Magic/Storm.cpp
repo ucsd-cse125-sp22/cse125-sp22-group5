@@ -15,7 +15,7 @@
 #include "Game/Map/MapSystemManager.hpp"
 
 #define DAMAGE 10
-#define COOLDOWN 6
+#define COOLDOWN 10
 #define COST 400
 
 using namespace std;
@@ -28,8 +28,6 @@ ParticleNode* Storm::metaHail = NULL;
 ParticleNode* Storm::metaLightning = NULL;
 LightNode* Storm::metaLight = NULL;
 AudioBuffer* Storm::stormSound = NULL;
-AudioBuffer* Storm::electricSound = NULL;
-AudioBuffer* Storm::castSound = NULL;
 void Storm::load() {
     loaded = true;
     metaCloud = new ParticleNode(200, 1.0f, 0.0f);
@@ -39,15 +37,20 @@ void Storm::load() {
     metaCloud->initialScaleVariation = 1.0;
     metaCloud->renderingOrder = 990;
     metaCloud->useLocalSpace = true;
+    metaCloud->initialRotationVariation = 360.0f;
+    metaCloud->rotatingSpeedVariation = 180.0f;
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0), 0);
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0.3), 0.5);
     metaCloud->setColorAnimation(vec4(0.8, 0.8, 0.8, 0), 1);
+
     metaDust = new ParticleNode(200, 1.0f, 0.0f);
     metaDust->texture = new Texture("/Resources/Game/Magic/StoneBlast/cloud.png");
     metaDust->setMaxAmount(1000);
     metaDust->initialScaleVariation = 1.0;
     metaDust->renderingOrder = 990;
     metaDust->useLocalSpace = true;
+    metaDust->initialRotationVariation = 360.0f;
+    metaDust->rotatingSpeedVariation = 180.0f;
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0), 0);
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0.7), 0.5);
     metaDust->setColorAnimation(vec4(0.5, 0.5, 0.5, 0), 1);
@@ -88,17 +91,11 @@ void Storm::load() {
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 1), 0.8);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
     
-    stormSound = new AudioBuffer("/Resources/Game/Sound/S.wav");
-    electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
-    castSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Cast.wav");
+    stormSound = new AudioBuffer("/Resources/Game/Sound/Storm.wav");
 }
 Storm::Storm() {
     if(!loaded) load();
-    this->loadAudioBuffer("storm sound", stormSound, 2.0f, 1.0f);
-    this->loadAudioBuffer("electric sound", electricSound, 2.0f, 1.0f);
-    this->changeAudioVolume("electric sound", 0, 0);
-    this->sounds["electric sound"].setLoop(true);
-    this->loadAudioBuffer("cast", castSound, 2.0f, 1.0f);
+    this->loadAudioBuffer("storm sound", stormSound, 3.0f, 0.5f);
     this->stopTime = 2.0f;
     this->actionName = "cast magic 2";
     this->cloud = metaCloud->copy()->convertToParticleNode();
@@ -127,9 +124,6 @@ Storm::Storm() {
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
         this->playAudio("storm sound");
-//        this->playAudio("electric sound");
-//        this->changeAudioVolume("electric sound", 1, 1);
-//        this->playAudio("cast");
         start = true;
         caster = character;
         velocity = normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1));
@@ -150,12 +144,12 @@ void Storm::play(CharNode *character, int seed) {
         dust->setEmissionStorm(radius * 3, radius * 6, radius);
         hail->setEmissionStorm(radius * 2, radius * 4, radius * 2);
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
-        Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
-        expanding->setCompletionHandler([&] {
-//            this->changeAudioVolume("electric sound", 0, 1);
-        });
+        Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 8.5);
         expanding->setEaseOutTimingMode();
         expanding->setFloatAnimation(&radius, 1.5);
+        expanding->setCompletionHandler([&] {
+            lightning->isDisabled = true;
+        });
         Engine::main->playAnimation(expanding);
         casting->setCompletionHandler([&] {
             threw = true;
@@ -169,7 +163,6 @@ void Storm::play(CharNode *character, int seed) {
         Engine::main->playAnimation(stormCoolDown);
         stormCoolDown->setCompletionHandler([&] {
             start = false;
-            lightning->isDisabled = true;
         });
         this->availableTime = Engine::main->getTime() + cooldown;
     }

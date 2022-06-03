@@ -272,7 +272,7 @@ int main(int argc, char* argv[]) {
             }
             
             else if (ClientCore::Instance()->process() == 11) {
-                ClientCore::Instance()->resetGame();
+//                ClientCore::Instance()->resetGame();
             }
             
             ClientCore::Instance()->renderWorld();
