@@ -160,6 +160,7 @@ public:
 
     // Font
     Font* font_;
+    Font* fontSmall_;
     
     // Logo
     Logo* logo_ = nullptr;
