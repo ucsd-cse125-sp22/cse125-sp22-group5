@@ -19,10 +19,10 @@ ButtonNode::ButtonNode(UINode* parentNode, Font* font){
     
     background->scale = glm::vec2(0.8f);
     
-    text = new TextNode(font, UISizes::buttonSize.y * 0.5f, UISizes::buttonSize.x, 0.01f);
+    text = new TextNode(font, UISizes::buttonSize.y * 0.4f, UISizes::buttonSize.x, 0.01f);
     text->setCenterVerticalAlignment();
     text->setCenterHorizontalAlignment();
-    text->parentCoordinatePosition = glm::vec2(0.5f, 0.62f);
+    text->parentCoordinatePosition = glm::vec2(0.5f, 0.6f);
 
     background->addChildNode(text);
     parentNode->addChildNode(background);
