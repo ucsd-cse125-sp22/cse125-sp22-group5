@@ -4146,7 +4146,7 @@ void importMapModel1() {
     PBRShader* barkShader = new PBRShader(0.2, 0.8);
     barkShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Albedo.png", 2.0, true));
     barkShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Normal.png", 2.0, true));
-    PBRShader* treeShader = new PBRShader(0.2, 0.8);
+    PBRShader* treeShader = new PBRShader("/Resources/Sample Shaders/Plants2", 0.2, 0.8);
     treeShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Albedo.png", 2.0, true));
     treeShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Normal.png", 2.0, true));
     Node* tree1 = new Node();
@@ -4189,7 +4189,7 @@ void importMapModel1() {
     
     
 void importMapModel2() {
-    PBRShader* plant1Shader = new PBRShader(0.1, 0.9);
+    PBRShader* plant1Shader = new PBRShader("/Resources/Sample Shaders/Plants1", 0.1, 0.9);
     plant1Shader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Plant_01_Albedo.png", 2.0, true));
     plant1Shader->setNormalMap(new Texture("/Resources/Game/Map/T_Plant_01_Normal.png", 2.0, true));
     Node* plant1 = new Node();
@@ -4303,7 +4303,7 @@ void importMapModel2() {
     Engine::main->addNode(plant1_18);
     
     
-    PBRShader* grassShader = new PBRShader(0.1, 0.9);
+    PBRShader* grassShader = new PBRShader("/Resources/Sample Shaders/Plants", 0.1, 0.9);
     grassShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Grass_03_Albedo.png", 2.0, true));
     grassShader->setNormalMap(new Texture("/Resources/Game/Map/T_Grass_03_Normal.png", 2.0, true));
     Node* grass2 = new Node();

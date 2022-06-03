@@ -45,6 +45,8 @@ public:
     void printControlNode();
     
 public:
+    glm::vec3 cameraTargetPosition = glm::vec3(0.0f);
+    glm::vec3 cameraTargetRotation = glm::vec3(0.0f);
     CameraNode* camera_node_;
     
     BezierCurve bezier_curve_;
