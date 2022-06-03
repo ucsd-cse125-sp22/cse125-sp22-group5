@@ -22,13 +22,14 @@ public:
 	ButtonNode* winCloseButton;
 	SpriteNode* netWinBack;
 	SpriteNode* creditBack;
+	SpriteNode* blackScreen;
 	TextNode* netText;
 	TextNode* creditText;
 	TextNode* name;
     Cursor* cursor;
 
 public:
-	StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* buttonBase, Cursor* cursor);
+	StartSceneUI(Engine* e, Font* font, Font* smallFont, UINode* parentNode, UINode* buttonBase, Cursor* cursor);
 	~StartSceneUI() = default;
 	void isDisbled(bool t);
 	int update(bool isWaiting);
