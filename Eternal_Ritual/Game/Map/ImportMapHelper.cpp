@@ -8,8 +8,6 @@
 
 #include <glm/glm.hpp>
 
-#include "Game/Map/MapSystemManager.hpp"
-#include "KGLEngine/Engine.hpp"
 
 #define MAPX 40
 #define MAPY -101
@@ -20,7 +18,7 @@ using namespace glm;
 
 namespace ImportMapHelper {
 
-void importMapBox() {
+void importMapBox(std::vector<MapBoxObject*>& cgUsedBox) {
     unsigned int boxType;
     vec3 boxSize, boxPosition, boxEulerAngles;
     PBRShader* cubeShader = new PBRShader(0.5f, 0.5f);
@@ -1579,29 +1577,37 @@ void importMapBox() {
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
     MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
 
-//    boxType = Map::DOOR;
-//    boxSize = vec3(0.5664000511169434f, 7.945343494415283f, 2.413800001144409f);
-//    boxPosition = vec3(-79.71293640136719f + (MAPX), 100.41064453125f + (MAPY), 49.08203125f + (MAPZ));
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-//
-//    boxType = Map::DOOR;
-//    boxSize = vec3(0.5664000511169434f, 7.945343494415283f, 2.413800001144409f);
-//    boxPosition = vec3(-18.24441909790039f + (MAPX), 100.41064453125f + (MAPY), 49.08203125f + (MAPZ));
-//    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-//    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
-
     boxType = Map::ELEVATOR;
     boxSize = vec3(7.02209997177124f, 1.0f, 7.021727561950684f);
     boxPosition = vec3(-12.227217674255371f + (MAPX), 123.5608139038086f + (MAPY), 49.0118522644043f + (MAPZ));
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    MapBoxObject* elevatorBox1 = new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles);
+    MapSystemManager::Instance()->addMapBox(elevatorBox1);
+    cgUsedBox.push_back(elevatorBox1);
 
     boxType = Map::ELEVATOR;
     boxSize = vec3(7.02209997177124f, 1.0f, 7.021727561950684f);
     boxPosition = vec3(-86.04368591308594f + (MAPX), 123.5608139038086f + (MAPY), 49.0118522644043f + (MAPZ));
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
-    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    MapBoxObject* elevatorBox2 = new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles);
+    MapSystemManager::Instance()->addMapBox(elevatorBox2);
+    cgUsedBox.push_back(elevatorBox2);
+    
+    boxType = Map::DOOR;
+    boxSize = vec3(0.5664000511169434f, 7.945343494415283f, 2.413800001144409f);
+    boxPosition = vec3(-79.71293640136719f + (MAPX), 100.41064453125f + (MAPY), 49.08203125f + (MAPZ));
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapBoxObject* doorBox1 = new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles);
+    MapSystemManager::Instance()->addMapBox(doorBox1);
+    cgUsedBox.push_back(doorBox1);
+
+    boxType = Map::DOOR;
+    boxSize = vec3(0.5664000511169434f, 7.945343494415283f, 2.413800001144409f);
+    boxPosition = vec3(-18.24441909790039f + (MAPX), 100.41064453125f + (MAPY), 49.08203125f + (MAPZ));
+    boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
+    MapBoxObject* doorBox2 = new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles);
+    MapSystemManager::Instance()->addMapBox(doorBox2);
+    cgUsedBox.push_back(doorBox2);
 
     boxType = Map::AIR;
     boxSize = vec3(22.118587493896484f, 34.160240173339844f, 0.9999827742576599f);
@@ -3522,9 +3528,7 @@ void importMapBox() {
 }
 
 
-void importMapModel1() {
-    
-    
+void importMapModel1() {    
     PBRShader* rocksmShader = new PBRShader(0.3, 0.7);
     rocksmShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Rock_Surface_01_Albedo.png", 2.0, true));
     rocksmShader->setNormalMap(new Texture("/Resources/Game/Map/T_Rock_Surface_01_Normal.png", 2.0, true));
@@ -4967,9 +4971,7 @@ void importMapModel2() {
     
     
     
-void importMapModel3() {
-    
-    
+void importMapModel3(std::vector<Node*>& cgUsedNode) {
     Node* newMap = new Node();
     newMap->loadModelFile("/Resources/Game/Map/newBase.dae");
     newMap->position.x = MAPX;
@@ -5383,10 +5385,12 @@ void importMapModel3() {
     Node* elevator_1 = elevator->clone();
     elevator_1->position += vec3(-86.081, 124, 49.022);
     elevator_1->scale = vec3(1.75);
+    cgUsedNode.push_back(elevator_1);
     Engine::main->addNode(elevator_1);
     Node* elevator_2 = elevator->clone();
     elevator_2->position += vec3(-12.175, 124, 49.002);
     elevator_2->scale = vec3(1.75);
+    cgUsedNode.push_back(elevator_2);
     Engine::main->addNode(elevator_2);
     Node* bar = new Node();
     bar->loadModelFile("/Resources/Game/Map/bars02lod0.dae");
@@ -5398,10 +5402,12 @@ void importMapModel3() {
     Node* bar_1 = bar->clone();
     bar_1->position += vec3(-18.305, 100.012, 48.923);
     bar_1->eulerAngles = vec3(0.0, 90, 0.0);
+    cgUsedNode.push_back(bar_1);
     Engine::main->addNode(bar_1);
     Node* bar_2 = bar->clone();
     bar_2->position += vec3(-79.952, 100.012, 49.011);
     bar_2->eulerAngles = vec3(0.0, 90, 0.0);
+    cgUsedNode.push_back(bar_2);
     Engine::main->addNode(bar_2);
 }
 

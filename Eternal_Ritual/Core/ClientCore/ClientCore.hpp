@@ -148,6 +148,8 @@ public:
     CameraController* camera_controller_2_;
     bool is_cg_finished_ = false;
     bool is_set_cg_animation_ = false;
+    std::vector<Node*> cg_used_node_;
+    std::vector<MapBoxObject*> cg_used_box_;
     
 
     // Font

@@ -97,7 +97,7 @@ void ClientCore::loadSky() {
     
     map_system_manager_ = MapSystemManager::Instance();
     
-    ImportMapHelper::importMapBox();
+    ImportMapHelper::importMapBox(cg_used_box_);
     
     ImportMapHelper::importMapModel1();;
 }
@@ -134,8 +134,8 @@ void ClientCore::loadMap() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 3 - Load Map --|" << std::endl;
 
-    ImportMapHelper::importMapModel3();
-    
+    ImportMapHelper::importMapModel3(cg_used_node_);
+        
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.2;
@@ -550,17 +550,41 @@ void ClientCore::playCG() {
             engine_->mainCameraNode = char_camera_;
             
             if (!is_set_cg_animation_) {
+                is_set_cg_animation_ = true;
                 Animation* startDelay = new Animation("startDelay",0.9);
                 startDelay->setCompletionHandler([&] {
-                    Animation* showStart = new Animation("showStart", 1);
-                    showStart->setEaseInTimingMode();
-                    showStart->setFloatAnimation(&(button_base_->alpha), 1.0);
-                    engine_->playAnimation(showStart);
+                    Animation* elevatorNodeMove1 = new Animation("elevatorNodeMove1", 6);
+                    elevatorNodeMove1->setEaseInEaseOutTimingMode();
+                    elevatorNodeMove1->setFloatAnimation(&(cg_used_node_[0]->position.y), -1.0f);
+                    engine_->playAnimation(elevatorNodeMove1);
+                    Animation* elevatorNodeMove2 = new Animation("elevatorNodeMove2", 6);
+                    elevatorNodeMove2->setEaseInEaseOutTimingMode();
+                    elevatorNodeMove2->setFloatAnimation(&(cg_used_node_[1]->position.y), -1.0f);
+                    engine_->playAnimation(elevatorNodeMove2);
+                    
+                    Animation* elevatorBoxMove1 = new Animation("elevatorBoxMove1", 6);
+                    elevatorBoxMove1->setEaseInEaseOutTimingMode();
+                    elevatorBoxMove1->setFloatAnimation(&(cg_used_box_[0]->position_.y), -1.0f);
+                    engine_->playAnimation(elevatorBoxMove1);
+                    Animation* elevatorBoxMove2 = new Animation("elevatorBoxMove2", 6);
+                    elevatorBoxMove2->setEaseInEaseOutTimingMode();
+                    elevatorBoxMove2->setFloatAnimation(&(cg_used_box_[1]->position_.y), -1.0f);
+                    engine_->playAnimation(elevatorBoxMove2);
+                    
+                    is_cg_finished_ = true;
                 });
                 engine_->playAnimation(startDelay);
             }
             
-            is_cg_finished_ = true;
+            for (auto& box : cg_used_box_) {
+                box->updateTransMtx();
+                box->updateMostXYZ();
+            }
+            
+            cout << cg_used_box_[0]->position_.y << endl;
+            for (auto& it : all_chars_) {
+                it.second->updatePosition();
+            }
         }
         
     }
