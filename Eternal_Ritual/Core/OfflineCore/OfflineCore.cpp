@@ -95,9 +95,9 @@ void OfflineCore::loadMap() {
     
     ImportMapHelper::importMapBox(cg_used_box_);
     
-    ImportMapHelper::importMapModel1();;
+    ImportMapHelper::importMapModel1();
     
-//    ImportMapHelper::importTestMap();
+    ImportMapHelper::importTestMap();
 }
 
 
@@ -202,6 +202,7 @@ void OfflineCore::loadFont()
     std::cout << "|-- Loading Stage 9 - Load Font --|" << std::endl;
     FontLibrary* fontLibrary = new FontLibrary();
     font_ = fontLibrary->loadFontFile("/Resources/Fonts/Cinzel/Cinzel.ttf", 50);
+    fontSmall_ = fontLibrary->loadFontFile("/Resources/Fonts/GentiumPlus-Regular.ttf", 50);
 }
 
 void OfflineCore::loadHUD()
@@ -211,7 +212,7 @@ void OfflineCore::loadHUD()
     UINode* base = new UINode();
     base->renderingOrder = 10000.0f;
     engine_->addNode(base);
-    HUD_ = new HUDNode(engine_, base, true, font_, character_, ally_);
+    HUD_ = new HUDNode(engine_, base, true, font_, fontSmall_,character_, ally_);
 }
 
 
@@ -297,7 +298,7 @@ void OfflineCore::updateState() {
     hit_controller_->checkHit();
     character_->genMana();
 
-    HUD_->update(false);
+    HUD_->update(false, false);
 
     //hpBarNode->update();
     hpBarNodeEn->update(enemies_[0]->health);
