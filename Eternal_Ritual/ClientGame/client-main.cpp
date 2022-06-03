@@ -164,6 +164,16 @@ int main(int argc, char* argv[]) {
         }
     }
     
+    Engine::main->input->wasKeyPressed(MOUSE_BUTTON_LEFT);
+    Engine::main->input->wasKeyReleased(MOUSE_BUTTON_LEFT);
+    Engine::main->input->wasKeyPressed(KEY_SPACE);
+    Engine::main->input->wasKeyPressed(KEY_G);
+    Engine::main->input->wasKeyPressed(KEY_C);
+    Engine::main->input->wasKeyPressed(KEY_1);
+    Engine::main->input->wasKeyPressed(KEY_2);
+    Engine::main->input->wasKeyPressed(KEY_3);
+    Engine::main->input->wasKeyPressed(KEY_4);
+    
     
     // Pre-Game while
     while(Engine::main->isRunning()) {
@@ -182,10 +192,17 @@ int main(int argc, char* argv[]) {
                 ClientCore::Instance()->set_process(8);
                 break;
             }
-
+            
             Engine::main->input->wasKeyPressed(MOUSE_BUTTON_LEFT);
             Engine::main->input->wasKeyReleased(MOUSE_BUTTON_LEFT);
-
+            Engine::main->input->wasKeyPressed(KEY_SPACE);
+            Engine::main->input->wasKeyPressed(KEY_G);
+            Engine::main->input->wasKeyPressed(KEY_C);
+            Engine::main->input->wasKeyPressed(KEY_1);
+            Engine::main->input->wasKeyPressed(KEY_2);
+            Engine::main->input->wasKeyPressed(KEY_3);
+            Engine::main->input->wasKeyPressed(KEY_4);
+            
             frameTime += Engine::main->getDeltaTime();
             if(ClientCore::Instance()->logo_ != nullptr) {
                 if(ClientCore::Instance()->logo_->nameTop != nullptr) {
@@ -200,6 +217,16 @@ int main(int argc, char* argv[]) {
             ClientCore::Instance()->renderWorld();
         }
     }
+    
+    Engine::main->input->wasKeyPressed(MOUSE_BUTTON_LEFT);
+    Engine::main->input->wasKeyReleased(MOUSE_BUTTON_LEFT);
+    Engine::main->input->wasKeyPressed(KEY_SPACE);
+    Engine::main->input->wasKeyPressed(KEY_G);
+    Engine::main->input->wasKeyPressed(KEY_C);
+    Engine::main->input->wasKeyPressed(KEY_1);
+    Engine::main->input->wasKeyPressed(KEY_2);
+    Engine::main->input->wasKeyPressed(KEY_3);
+    Engine::main->input->wasKeyPressed(KEY_4);
     
     float time;
     while (true) {

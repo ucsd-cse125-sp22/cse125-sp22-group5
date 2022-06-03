@@ -598,21 +598,21 @@ void ClientCore::handleEvent() {
         event_pb_->setCharStatePb(gameDataPb::CharStatePb(character_->state));
         
 
-        if(engine_->input->wasKeyReleased(KEY_SPACE)){
+        if(engine_->input->wasKeyPressed(KEY_SPACE)){
             event_pb_->setRoll(true);
         }
         else {
             event_pb_->setRoll(false);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_G)){
+        if(engine_->input->wasKeyPressed(KEY_G)){
             event_pb_->setToggleLock(true);
         }
         else {
             event_pb_->setToggleLock(false);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_C)){
+        if(engine_->input->wasKeyPressed(KEY_C)){
             if (character_->health <= 0) {
                 for (int i = 1; i < 4; i++) {
                     CharNode* currChar = pre_chars_[(char_camera_index_ + i) % 4];
@@ -639,15 +639,15 @@ void ClientCore::handleEvent() {
             }
         }
         
-        if(engine_->input->wasKeyReleased(KEY_1)) {
+        if(engine_->input->wasKeyPressed(KEY_1)) {
             character_->setCurrMagic(key_to_magic_[KEY_1]);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_2)) {
+        if(engine_->input->wasKeyPressed(KEY_2)) {
             character_->setCurrMagic(key_to_magic_[KEY_2]);
         }
         
-        if(engine_->input->wasKeyReleased(KEY_3)) {
+        if(engine_->input->wasKeyPressed(KEY_3)) {
             character_->setCurrMagic(key_to_magic_[KEY_3]);
         }
         if (engine_->input->wasKeyPressed(KEY_4)) {
