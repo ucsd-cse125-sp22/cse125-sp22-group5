@@ -25,15 +25,18 @@ using namespace glm;
 bool CharNode::loaded = false;
 Node* CharNode::metaModel = NULL;
 Texture* CharNode::bootsD = NULL;
+Texture* CharNode::bootsD2 = NULL;
 Texture* CharNode::bootsN = NULL;
 Texture* CharNode::bootsAO = NULL;
 Texture* CharNode::glovesD = NULL;
+Texture* CharNode::glovesD2 = NULL;
 Texture* CharNode::glovesN = NULL;
 Texture* CharNode::glovesAO = NULL;
 Texture* CharNode::bodyD = NULL;
 Texture* CharNode::bodyN = NULL;
 Texture* CharNode::bodyAO = NULL;
 Texture* CharNode::chestD = NULL;
+Texture* CharNode::chestD2 = NULL;
 Texture* CharNode::chestN = NULL;
 Texture* CharNode::chestAO = NULL;
 Texture* CharNode::staffD = NULL;
@@ -61,6 +64,7 @@ void CharNode::load() {
     if(true) {
         PBRShader* shader = new PBRShader(0.2f, 0.8f);
         bootsD = new Texture("/Resources/Game/Character/BootsD.png", 2.0f, true);
+        bootsD2 = new Texture("/Resources/Game/Character/T_BootsS2_W_BC.png", 2.0f, true);
         bootsN = new Texture("/Resources/Game/Character/BootsN.png", 2.0f, true);
         bootsAO = new Texture("/Resources/Game/Character/BootsAO.png", 2.0f, true);
         shader->setDiffuseMap(bootsD);
@@ -73,6 +77,7 @@ void CharNode::load() {
     if(true) {
         PBRShader* shader = new PBRShader(0.2f, 0.8f);
         glovesD = new Texture("/Resources/Game/Character/GlovesD.png", 2.0f, true);
+        glovesD2 = new Texture("/Resources/Game/Character/T_GlovesS2_W_BC.png", 2.0f, true);
         glovesN = new Texture("/Resources/Game/Character/GlovesN.png", 2.0f, true);
         glovesAO = new Texture("/Resources/Game/Character/GlovesAO.png", 2.0f, true);
         shader->setDiffuseMap(glovesD);
@@ -98,6 +103,7 @@ void CharNode::load() {
     if(true) {
         PBRShader* shader = new PBRShader("/Resources/Game/Character/Character", 0.4f, 0.4f);
         chestD = new Texture("/Resources/Game/Character/ChestD.png", 2.0f, true);
+        chestD2 = new Texture("/Resources/Game/Character/T_ChetS2_W_BC.png", 2.0f, true);
         chestN = new Texture("/Resources/Game/Character/ChestN.png", 1.0f, true);
         chestAO = new Texture("/Resources/Game/Character/ChestAO.png", 1.0f, true);
         shader->setDiffuseMap(chestD);
@@ -838,4 +844,38 @@ void CharNode::receiveDamage(int damage){
 
     }
 //    cout << this->name << " health " << this->health << endl;
+}
+
+void CharNode::setTeamWhite() {
+    if(true) {
+        PBRShader* shader = new PBRShader(0.2f, 0.8f);
+        shader->setDiffuseMap(bootsD2);
+        shader->setNormalMap(bootsN);
+        shader->setAmbientOcclusionMap(bootsAO);
+        this->modelNode->geometries[0]->setShader(shader);
+        this->modelNode->geometries[1]->setShader(shader);
+        this->modelNode->geometries[6]->setShader(shader);
+    }
+    if(true) {
+        PBRShader* shader = new PBRShader(0.2f, 0.8f);
+        shader->setDiffuseMap(glovesD2);
+        shader->setNormalMap(glovesN);
+        shader->setAmbientOcclusionMap(glovesAO);
+        this->modelNode->geometries[2]->setShader(shader);
+        this->modelNode->geometries[3]->setShader(shader);
+        this->modelNode->geometries[4]->setShader(shader);
+        this->modelNode->geometries[5]->setShader(shader);
+    }
+    if(true) {
+        PBRShader* shader = new PBRShader("/Resources/Game/Character/Character", 0.4f, 0.4f);
+        shader->setDiffuseMap(chestD2);
+        shader->setNormalMap(chestN);
+        shader->setAmbientOcclusionMap(chestAO);
+        shader->setFloat("shadowBias", 0.01f);
+        this->modelNode->geometries[8]->setShader(shader);
+        this->modelNode->geometries[9]->setShader(shader);
+        this->modelNode->geometries[10]->setShader(shader);
+        this->modelNode->geometries[11]->setShader(shader);
+        this->modelNode->geometries[12]->setShader(shader);
+    }
 }

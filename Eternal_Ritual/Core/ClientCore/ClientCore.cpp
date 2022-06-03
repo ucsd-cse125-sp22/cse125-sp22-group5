@@ -241,7 +241,8 @@ void ClientCore::loadCharacter() {
         pre_chars_[3]->isDisabled = false;
         pre_chars_[3]->uninjurable = false;
     }
-    
+    pre_chars_[3]->setTeamWhite();
+    pre_chars_[1]->setTeamWhite();
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.2;
