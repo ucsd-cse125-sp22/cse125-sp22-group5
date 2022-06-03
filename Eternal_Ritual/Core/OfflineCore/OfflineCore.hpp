@@ -95,6 +95,11 @@ private:
     //Font
     Font* font_;
 
+    // HPbarNode
+    HPBarNode* hpBarNode;
+    HPBarNode* hpBarNodeEn;
+    HPBarNode* hpBarNodeAlly;
+
 };
 
 

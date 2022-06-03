@@ -137,7 +137,7 @@ void OfflineCore::loadEnemy() {
     
     enemy->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(enemy);
-    HPBarNode* hpBarNodeEn = new HPBarNode(engine_, font_, true, enemy);
+    HPBarNode* hpBarNodeEn = new HPBarNode(engine_, font_, false, enemy);
     
     enemies_.push_back(enemy);
 }
@@ -298,6 +298,10 @@ void OfflineCore::updateState() {
     character_->genMana();
 
     HUD_->update(false);
+
+    //hpBarNode->update();
+    hpBarNodeEn->update(enemies_[0]->health);
+    //hpBarNodeAlly->update();
 }
 
 
