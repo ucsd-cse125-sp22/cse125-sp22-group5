@@ -23,6 +23,12 @@ void importMapBox(std::vector<MapBoxObject*>& cgUsedBox) {
     PBRShader* cubeShader = new PBRShader(0.5f, 0.5f);
     
     boxType = Map::WALL;
+    boxSize = vec3(11, 11, 11);
+    boxPosition = vec3(-40.221 + (MAPX), 105.066 + (MAPY), 26.11+ (MAPZ));
+    boxEulerAngles = vec3(0.0f, -6.f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = Map::WALL;
     boxSize = vec3(62.400001525878906f, 2.0f, 42.694854736328125f);
     boxPosition = vec3(-50.78607940673828f + (MAPX), 99.01634216308594f + (MAPY), 41.54486846923828f + (MAPZ));
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
