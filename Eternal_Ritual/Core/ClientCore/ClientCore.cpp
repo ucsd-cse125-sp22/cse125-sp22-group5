@@ -361,15 +361,20 @@ void ClientCore::displayStart() {
     std::cout << std::endl;
     std::cout << "|-- Pre-Game Stage 1 - Display Start Scene --|" << std::endl;
     
+    start_scene_ui_->enabled = false;
+    
     enter_game_ = true;
     is_waiting_ = true;
     cursor_->isDisable(false);
     start_scene_ui_->isDisbled(false);
-    Animation* startDelay = new Animation("startDelay",0.9);
+    Animation* startDelay = new Animation("startDelay", 1.0f);
     startDelay->setCompletionHandler([&] {
-        Animation* showStart = new Animation("showStart", 1);
+        Animation* showStart = new Animation("showStart", 1.0f);
         showStart->setEaseInTimingMode();
-        showStart->setFloatAnimation(&(button_base_->alpha), 1.0);
+        showStart->setFloatAnimation(&(button_base_->alpha), 1.0f);
+        showStart->setCompletionHandler([&] {
+            start_scene_ui_->enabled = true;
+        });
         engine_->playAnimation(showStart);
     });
     engine_->playAnimation(startDelay);
@@ -379,6 +384,7 @@ void ClientCore::displayStart() {
 
 
 void ClientCore::updateStart() {
+    
     int state = start_scene_ui_->update(is_waiting_);
     if (state == 1) {
         process_ = 6;

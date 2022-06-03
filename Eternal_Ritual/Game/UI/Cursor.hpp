@@ -10,7 +10,7 @@ public:
 	SpriteNode* cursor;
 public:
     
-    glm::vec2 cursorScreenPosition = glm::vec2(0.5f);
+    glm::vec2 cursorScreenPosition = glm::vec2(0.5f, 0.56f);
     
 	Cursor(Engine* e);
 	~Cursor() = default;

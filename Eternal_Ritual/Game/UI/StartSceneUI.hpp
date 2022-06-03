@@ -8,6 +8,9 @@
 
 class StartSceneUI {
 public:
+    
+    bool enabled = false;
+    
 	Engine* engine;
 	UINode* parentNode;
 	UINode* buttonBase;
