@@ -91,11 +91,6 @@ void ClientCore::loadSky() {
                                 "/Resources/Game/Skybox/NMF.png", "/Resources/Game/Skybox/NMB.png",
                                 2.0f);
     
-    Node* bgmNode = new Node();
-    engine_->addNode(bgmNode);
-    AudioBuffer* bgm = new AudioBuffer("/Resources/Game/Sound/bgm01.wav");
-    bgmNode->loadAudioBuffer("bgm 1", bgm);
-    bgmNode->playAudio("bgm 1");
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.1;

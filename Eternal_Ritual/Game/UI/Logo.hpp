@@ -17,7 +17,6 @@ protected:
 	TextNode* loadingText;
 	Font* font;
 	int* pro;
-	bool isload;
 	bool isPlaying;
 public:
 	Logo(Engine* e, Font* font, UINode* parentNode, int* process);
