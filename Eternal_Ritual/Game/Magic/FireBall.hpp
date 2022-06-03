@@ -27,6 +27,8 @@ private:
     static LightNode* metaLight;
     static AudioBuffer* explodeSound;
     static AudioBuffer* flyingSound;
+    glm::vec3 wallInt;
+    bool hasInt;
     
 public:
     glm::vec3 velocity;

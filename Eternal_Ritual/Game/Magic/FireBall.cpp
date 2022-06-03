@@ -116,6 +116,7 @@ FireBall::FireBall(){
     this->parent = NULL;
     this->isDisabled = false;
     this->damage = DAMAGE;
+    this->hasInt = false;
     fireball = metaFireball->copy()->convertToParticleNode();
     this->addChildNode(fireball);
     flame = metaFlame->copy()->convertToParticleNode();
@@ -138,16 +139,17 @@ FireBall::FireBall(){
 }
 void FireBall::updateMagic(){
     if (start) {
-        this->hitWall();
     }
     if (threwOut) {
         position += velocity * 0.15f;
         velocity += acceleration;
+        this->hitWall();
     }
 }
 void FireBall::play(CharNode* character, int seed){
     if (!start){
         this->playAudio("flying sound");
+        printf("construct");
         this->removeFromParentNode();
         Node* staffTop = new Node();
         staffTop->position.y = 1;
@@ -155,6 +157,7 @@ void FireBall::play(CharNode* character, int seed){
         staffTop->addChildNode(this);
         this->seed = seed;
         this->explosion->isDisabled = true;
+        hasInt = false;
         this->caster = character;
         velocity = normalize((character->modelNode->getRightVectorInWorld() + vec3(0, 0.2, 0)) + velocityError);
         this->spark->isDisabled = true;
@@ -255,12 +258,22 @@ void FireBall::tryDamage(CharNode *character) {
 void FireBall::hitWall() {
     HitInfo hitInfo;
     this->updateTransform();
-    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), this->getWorldPosition() + this->velocity * 0.15f, hitInfo)) {
-        canDamage = false;
-        explodeDamage = true;
-        threwOut = false;
-        if (!exploded) {
-            explode();
+    vec3 target = (this->position + this->velocity * 999.f);
+    if (hasInt) {
+        if (dot(target - this->position, wallInt - this->position) < 0) {
+            canDamage = false;
+            explodeDamage = true;
+            threwOut = false;
+            if (!exploded) {
+                explode();
+            }
         }
+    }
+    if (MapSystemManager::Instance()->hitTest(this->getWorldPosition(), target, hitInfo)) {
+        hasInt = true;
+        wallInt = hitInfo.hit_point;
+    }
+    else {
+        hasInt = false;
     }
 }

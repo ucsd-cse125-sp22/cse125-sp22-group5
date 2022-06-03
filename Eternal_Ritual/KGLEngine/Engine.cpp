@@ -25,7 +25,7 @@ Engine::Engine(const char* windowTitle,
                float resolutionScaleFactor,
                int samples,
                const char* iconFile) {
-    this->FPS = 1.0f / 30.0f;
+    this->FPS = 1.0f / 60.0f;
     this->currentFPS = 0.0f;
     this->currentTime = 0.0f;
     this->updateTime = 0.0f;
