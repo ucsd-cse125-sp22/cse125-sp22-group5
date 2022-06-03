@@ -52,14 +52,21 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
     loadingText->color = Color::textColor;
     loadingText->alpha = 0.0f;
         
-    loadingbar = new SpriteNode(glm::vec2(engine->getWindowResolution().x / engine->getWindowResolution().y - 0.2, 0.01));
-    loadingbar->color = Color::loadingBarColor;
+    loadingbar = new SpriteNode(glm::vec2(15.0f / 20.0f, 1.0f / 20.0f) * 1.2f);
+    loadingbar->texture = new Texture("/Resources/Game/UI/loading.png");
     loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.75);
     loadingbar->scale = glm::vec2(0, 1);
     loadingbar->alpha = 0.0f;
 
     background->addChildNode(loadingText);
     background->addChildNode(loadingbar);
+    
+    loadingbarBack = new SpriteNode(glm::vec2(15.0f / 20.0f, 1.0f / 20.0f) * 1.2f);
+    loadingbarBack->texture = new Texture("/Resources/Game/UI/loading_back.png");
+    loadingbarBack->parentCoordinatePosition = glm::vec2(0.5, 0.75);
+    loadingbarBack->scale = glm::vec2(1, 1);
+    loadingbarBack->alpha = 1.0f;
+    background->addChildNode(loadingbarBack);
     
 	parentNode->addChildNode(background);
 	parentNode->addChildNode(nameBackground);
@@ -153,12 +160,13 @@ void Logo::play() {
                 Animation* showLoadingBar = new Animation("showLoadingBar", 1.0f);
                 showLoadingBar->setEaseOutTimingMode();
                 showLoadingBar->setFloatAnimation(&this->loadingbar->alpha, 1.0f);
+                showLoadingBar->setCompletionHandler([&] {
+                    *pro = 2;
+                });
                 engine->playAnimation(showLoadingBar);
                 
             });
             engine->playAnimation(moveLoadText);
-            
-            //*pro = 2;
         });
         engine->playAnimation(loadtext);
         
