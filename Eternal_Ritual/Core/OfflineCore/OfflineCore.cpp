@@ -119,7 +119,7 @@ void OfflineCore::loadCharacter() {
     
     engine_->addNode(character_);
 
-    HPBarNode* hpBarNode = new HPBarNode(engine_, font_, true, character_);
+    hpBarNode = new HPBarNode(engine_, font_, true, character_);
     
     UINode* baseNode = new UINode();
     baseNode->renderingOrder = 1000.0f;
@@ -137,7 +137,7 @@ void OfflineCore::loadEnemy() {
     
     enemy->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(enemy);
-    HPBarNode* hpBarNodeEn = new HPBarNode(engine_, font_, false, enemy);
+    hpBarNodeEn = new HPBarNode(engine_, font_, false, enemy);
     
     enemies_.push_back(enemy);
 }
@@ -189,7 +189,7 @@ void OfflineCore::loadAlly()
 
     ally_->stopAndPlay("idle", 0.0f, 0.0f);
     engine_->addNode(ally_);
-    HPBarNode* hpBarNodeAlly = new HPBarNode(engine_, font_, true, ally_);
+    hpBarNodeAlly = new HPBarNode(engine_, font_, true, ally_);
 }
 
 
