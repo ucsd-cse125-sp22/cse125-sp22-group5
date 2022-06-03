@@ -150,6 +150,10 @@ int main(int argc, char* argv[]) {
                 ClientCore::Instance()->set_process(8);
                 break;
             }
+
+            Engine::main->input->wasKeyPressed(MOUSE_BUTTON_LEFT);
+            Engine::main->input->wasKeyReleased(MOUSE_BUTTON_LEFT);
+
             ClientCore::Instance()->renderWorld();
         }
     }

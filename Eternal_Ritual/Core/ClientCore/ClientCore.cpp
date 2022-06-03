@@ -13,7 +13,7 @@
 #include "Game/Magic/AllMagic.inc"
 
 #ifdef _WIN64
-#define ROOT_PATH "D:/StudyProject/cse125-sp22-group5"
+#define ROOT_PATH "C:/Users/cse125/Desktop/cse125-sp22-group5"
 #elif __APPLE__
 #define ROOT_PATH "."
 #endif
@@ -174,11 +174,6 @@ void ClientCore::loadCharacter() {
         newChar->setCamera(cameraNode);
         
         engine_->addNode(newChar);
-        
-        SpriteNode* baseNode = new SpriteNode(glm::vec2(1.0f));
-        baseNode->renderingOrder = 1000.0f;
-        engine_->addNode(baseNode);
-        newChar->uiNode = baseNode;
         
         pre_chars_.push_back(newChar);
     }

@@ -156,37 +156,43 @@ void Logo::play() {
         loadtext->setEaseOutTimingMode();
         loadtext->setFloatAnimation(&nameBackground->alpha, 1.0f);
         loadtext->setCompletionHandler([&] {
-            
-            Animation* moveLoadText = new Animation("moveLoadText", 1.0f);
-            moveLoadText->setEaseInEaseOutTimingMode();
-            moveLoadText->setVec2Animation(&this->nameBackground->screenPosition, glm::vec2(0.5f, 0.38f));
-            moveLoadText->setCompletionHandler([&] {
-                
-                Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 1.0f);
-                showLoadingbarTop->setEaseOutTimingMode();
-                showLoadingbarTop->setFloatAnimation(&this->loadingbarTop->alpha, 1.0f);
-                engine->playAnimation(showLoadingbarTop);
-                
-                Animation* showLoadingbarBack = new Animation("showLoadingbarBack", 1.0f);
-                showLoadingbarBack->setEaseOutTimingMode();
-                showLoadingbarBack->setFloatAnimation(&this->loadingbarBack->alpha, 1.0f);
-                engine->playAnimation(showLoadingbarBack);
-                
-                Animation* showLoadingText = new Animation("showLoadingText", 1.0f);
-                showLoadingText->setEaseOutTimingMode();
-                showLoadingText->setFloatAnimation(&this->loadingText->alpha, 1.0f);
-                engine->playAnimation(showLoadingText);
-                
-                Animation* showLoadingBar = new Animation("showLoadingBar", 1.0f);
-                showLoadingBar->setEaseOutTimingMode();
-                showLoadingBar->setFloatAnimation(&this->loadingbar->alpha, 1.0f);
-                showLoadingBar->setCompletionHandler([&] {
-                    *pro = 2;
+
+            Animation* loadingTextDelay2 = new Animation("loadingTextDelay2", 2.0f);
+            loadingTextDelay2->setCompletionHandler([&] {
+
+                Animation* moveLoadText = new Animation("moveLoadText", 2.0f);
+                moveLoadText->setEaseInEaseOutTimingMode();
+                moveLoadText->setVec2Animation(&this->nameBackground->screenPosition, glm::vec2(0.5f, 0.38f));
+                moveLoadText->setCompletionHandler([&] {
+
+                    Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 1.0f);
+                    showLoadingbarTop->setEaseOutTimingMode();
+                    showLoadingbarTop->setFloatAnimation(&this->loadingbarTop->alpha, 1.0f);
+                    engine->playAnimation(showLoadingbarTop);
+
+                    Animation* showLoadingbarBack = new Animation("showLoadingbarBack", 1.0f);
+                    showLoadingbarBack->setEaseOutTimingMode();
+                    showLoadingbarBack->setFloatAnimation(&this->loadingbarBack->alpha, 1.0f);
+                    engine->playAnimation(showLoadingbarBack);
+
+                    Animation* showLoadingText = new Animation("showLoadingText", 1.0f);
+                    showLoadingText->setEaseOutTimingMode();
+                    showLoadingText->setFloatAnimation(&this->loadingText->alpha, 1.0f);
+                    engine->playAnimation(showLoadingText);
+
+                    Animation* showLoadingBar = new Animation("showLoadingBar", 1.0f);
+                    showLoadingBar->setEaseOutTimingMode();
+                    showLoadingBar->setFloatAnimation(&this->loadingbar->alpha, 1.0f);
+                    showLoadingBar->setCompletionHandler([&] {
+                        *pro = 2;
+                    });
+                    engine->playAnimation(showLoadingBar);
+
                 });
-                engine->playAnimation(showLoadingBar);
-                
+                engine->playAnimation(moveLoadText);
             });
-            engine->playAnimation(moveLoadText);
+            engine->playAnimation(loadingTextDelay2);
+
         });
         engine->playAnimation(loadtext);
         
@@ -203,6 +209,7 @@ void Logo::updateLoad(float loadingProgess)
         int i = (int)(loadingProgess * 100);
         Animation* ani = new Animation(std::to_string(i), 1);
         ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
+        ani->setEaseInEaseOutTimingMode();
         engine->playAnimation(ani);
         isPlaying = true;
         ani->setCompletionHandler([&] {
@@ -212,20 +219,55 @@ void Logo::updateLoad(float loadingProgess)
     }
     
 	if (loadingProgess >= 1) {
-		Animation* end = new Animation("LoadEnd", 1.0);
-		end->setFloatAnimation(&background->alpha, 0);
-		end->setCompletionHandler([&] {
-			background->isDisabled = true;
-			Animation* move = new Animation("titleMove", 1.0);
-			move->setFloatAnimation(&nameBackground->screenPosition.y, 0.25);
-			move->setEaseInEaseOutTimingMode();
-			Animation* changeScale = new Animation("titleScale", 1.0);
-			changeScale->setVec2Animation(&nameBackground->scale, glm::vec2(0.9));
-			engine->playAnimation(move);
-			engine->playAnimation(changeScale);
-			*pro = 4;
-		});
-		engine->playAnimation(end);
+
+        Animation* loadingTextDelay1 = new Animation("loadingTextDelay1", 3.0f);
+        loadingTextDelay1->setCompletionHandler([&] {
+            Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 1.0f);
+            showLoadingbarTop->setEaseOutTimingMode();
+            showLoadingbarTop->setFloatAnimation(&this->loadingbarTop->alpha, 0.0f);
+            engine->playAnimation(showLoadingbarTop);
+
+            Animation* showLoadingbarBack = new Animation("showLoadingbarBack", 1.0f);
+            showLoadingbarBack->setEaseOutTimingMode();
+            showLoadingbarBack->setFloatAnimation(&this->loadingbarBack->alpha, 0.0f);
+            engine->playAnimation(showLoadingbarBack);
+
+            Animation* showLoadingText = new Animation("showLoadingText", 1.0f);
+            showLoadingText->setEaseOutTimingMode();
+            showLoadingText->setFloatAnimation(&this->loadingText->alpha, 0.0f);
+            engine->playAnimation(showLoadingText);
+
+            Animation* showLoadingBar = new Animation("showLoadingBar", 1.0f);
+            showLoadingBar->setEaseOutTimingMode();
+            showLoadingBar->setFloatAnimation(&this->loadingbar->alpha, 0.0f);
+            engine->playAnimation(showLoadingBar);
+
+        });
+        engine->playAnimation(loadingTextDelay1);
+
+        Animation* loadingTextDelay2 = new Animation("loadingTextDelay2", 4.0f);
+        loadingTextDelay2->setCompletionHandler([&] {
+
+            Animation* move = new Animation("titleMove", 1.0f);
+            move->setFloatAnimation(&nameBackground->screenPosition.y, 0.25f);
+            move->setEaseInEaseOutTimingMode();
+            engine->playAnimation(move);
+
+            Animation* changeScale = new Animation("titleScale", 1.0);
+            changeScale->setVec2Animation(&nameBackground->scale, glm::vec2(0.9f));
+            changeScale->setEaseInEaseOutTimingMode();
+            engine->playAnimation(changeScale);
+
+            Animation* end = new Animation("LoadEnd", 2.0f);
+            end->setFloatAnimation(&background->alpha, 0.0f);
+            end->setEaseInTimingMode();
+            engine->playAnimation(end);
+
+            //*pro = 4;
+
+        });
+        //engine->playAnimation(loadingTextDelay2);
+		
 	}
 }
 

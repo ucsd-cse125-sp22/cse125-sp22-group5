@@ -101,7 +101,7 @@ int StartSceneUI::update(bool isWaiting) {
 		}
 
 		if (exitButton->checkState(position, input, isReleased)) {
-			engine->terminate();
+			exit(0);
 		}
 	}
 
