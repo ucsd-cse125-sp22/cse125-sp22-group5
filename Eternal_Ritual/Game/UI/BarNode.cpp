@@ -33,6 +33,9 @@ BarNode::BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* 
 	baseNode->addChildNode(bar);
 	this->initValue = initValue;
 	curValue = initValue;
+    barPlaying = false;
+    fadePlaying = false;
+    this->id = id;
 }
 
 void BarNode::setPosition(glm::vec2 position)
@@ -42,33 +45,27 @@ void BarNode::setPosition(glm::vec2 position)
 
 void BarNode::update(float value)
 {
-    if (fadeBaseNode->scale.x < baseNode->scale.x) {
-        engine->stopAnimation("hudBarFadeDecrease" + std::to_string(id));
-        fadeBaseNode->scale.x = baseNode->scale.x;
+    if (value > initValue) { value = initValue; }
+    if (value < 0) { value = 0; }
+    float scale = value / initValue;
+    if (this->curValue < value) {
+            barPlaying = true;
+            Animation* ani = new Animation("hudBarIncrease" + std::to_string(id), 0.5);
+            ani->setVec2Animation(&baseNode->scale, glm::vec2(scale, 1.0));
+            engine->playAnimation(ani);
     }
-	if (value == curValue) { return; }
-	if (value > initValue) { value = initValue; }
-	if (value < 0) { value = 0; }
-	float scale = value / initValue;
-	if (this->curValue < value) {
-		Animation* ani = new Animation("hudBarIncrease" + std::to_string(id), 0.5);
-		ani->setVec2Animation(&baseNode->scale, glm::vec2(scale, 1.0));
-		engine->playAnimation(ani);
-	}
-	else {
+    else if (this->curValue > value) {
         engine->stopAnimation("hudBarIncrease" + std::to_string(id));
         baseNode->scale = glm::vec2(scale, 1.0);
-	}
+    }
     if (fadeBaseNode->scale.x < baseNode->scale.x) {
         engine->stopAnimation("hudBarFadeDecrease" + std::to_string(id));
         fadeBaseNode->scale.x = baseNode->scale.x;
     }
-    else {
-        Animation* ani = new Animation("hudBarFadeDecrease" + std::to_string(id), 0.5);
-        ani->setEaseInEaseOutTimingMode();
-        ani->setVec2Animation(&fadeBaseNode->scale, baseNode->scale);
-        engine->playAnimation(ani);
+    else if (fadeBaseNode->scale.x > baseNode->scale.x) {
+            Animation* ani = new Animation("hudBarFadeDecrease" + std::to_string(id), 0.5);
+            ani->setVec2Animation(&fadeBaseNode->scale, baseNode->scale);
+            engine->playAnimation(ani);
     }
-    std::cout << baseNode->scale.x << ", " << fadeBaseNode->scale.x << std::endl;
-	curValue = value;
+    curValue = value;
 }

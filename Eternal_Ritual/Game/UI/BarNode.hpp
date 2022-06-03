@@ -19,6 +19,8 @@ public:
     UINode* background;
     float initValue;
     float curValue;
+    bool barPlaying;
+    bool fadePlaying;
 public:
     BarNode(UINode* parentNode, float initValue, Texture* barTex, Texture* fadeTex, glm::vec2 barSize, glm::vec2 fadeSize, int id, bool left, Engine* e);
     ~BarNode() = default;
