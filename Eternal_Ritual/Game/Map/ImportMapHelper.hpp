@@ -7,11 +7,16 @@
 #ifndef ImportMapHelper_hpp
 #define ImportMapHelper_hpp
 
+#include <vector>
+
+#include "KGLEngine/Engine.hpp"
+#include "Game/Map/MapSystemManager.hpp"
+
 
 namespace ImportMapHelper {
 
-void importMapBox();
-void importMapModel();
+void importMapBox(std::vector<MapBoxObject*>& cgUsedBox);
+void importMapModel(std::vector<Node*>& cgUsedNode);
 void importTestMap();
 
 } // namespace ImportMapHelper
