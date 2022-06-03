@@ -349,6 +349,9 @@ void ClientCore::loadStartScene() {
     Engine::main->loadMusic("elevator sound", elevatorSound);
     AudioBuffer* elevatorFinish = new AudioBuffer("/Resources/Game/Sound/Stone Move 5_2.wav");
     Engine::main->loadMusic("elevator finish", elevatorFinish);
+    AudioBuffer* ambientSound = new AudioBuffer("/Resources/Game/Sound/Ambient.wav");
+    Engine::main->loadMusic("ambient sound 1", ambientSound);
+    Engine::main->loadMusic("ambient sound 2", ambientSound);
     Engine::main->musicNode->sounds["elevator sound"].setLoop(true);
     Engine::main->musicNode->changeAudioVolume("elevator sound", 0.5, 0);
 }
@@ -365,6 +368,24 @@ void ClientCore::loadDeathScene() {
     loading_progress_ += 0.05;
 }
 
+void playNextAmbientTrack(bool track1) {
+    if (track1) {
+        Engine::main->playMusic("ambient sound 1");
+        Animation* ambientPlaying = new Animation("ambient playing 1", 33);
+        ambientPlaying->setCompletionHandler([&] {
+            playNextAmbientTrack(false);
+        });
+        Engine::main->playAnimation(ambientPlaying);
+    }
+    else {
+        Engine::main->playMusic("ambient sound 2");
+        Animation* ambientPlaying = new Animation("ambient playing 2", 33);
+        ambientPlaying->setCompletionHandler([&] {
+            playNextAmbientTrack(true);
+        });
+        Engine::main->playAnimation(ambientPlaying);
+    }
+}
 
 void ClientCore::displayStart() {
     std::cout << std::endl;
@@ -376,6 +397,7 @@ void ClientCore::displayStart() {
     is_waiting_ = true;
     cursor_->isDisable(false);
     start_scene_ui_->isDisbled(false);
+    playNextAmbientTrack(true);
     Animation* startDelay = new Animation("startDelay", 1.0f);
     startDelay->setCompletionHandler([&] {
         Animation* showStart = new Animation("showStart", 1.0f);
