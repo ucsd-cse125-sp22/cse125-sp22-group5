@@ -397,19 +397,121 @@ void ClientCore::updateStart() {
             sendData();
             receiveData();
             updateState();
-            CameraController::BezierCurve bezierCurve;
-            bezierCurve.controll_points.push_back(vec3(-7.95262, 49.7237, 41.5025));
-            bezierCurve.controll_points.push_back(vec3(48.43, 47.37, 55.37));
-            bezierCurve.controll_points.push_back(vec3(57.97, 39.19, 2.22));
-            bezierCurve.controll_points.push_back(vec3(30.45, 28.39, -2.33));
-            bezierCurve.level_of_detail = 500;
-
-            CameraController::EularChangeInfo eularChangeInfo;
-            eularChangeInfo.is_clockwise = false;
-            eularChangeInfo.start_angle = vec3(0.0f, 91.6, -47.1);
-            eularChangeInfo.end_angle = vec3(0.0f, 179.3, -3.7);
-            
-            camera_controller_ = new CameraController(engine_->mainCameraNode, bezierCurve, eularChangeInfo, 0.1, 5.0);
+            if (character_index_ == 0 || character_index_ == 2) {
+                CameraController::BezierCurve bezierCurve1;
+                bezierCurve1.controll_points.push_back(vec3(-9.35278, 13.8266, 33.3838));
+                bezierCurve1.controll_points.push_back(vec3(-27.1926, 6.21359, 21.2189));
+                bezierCurve1.controll_points.push_back(vec3(-36.0384, 2.60817, 7.98844));
+                bezierCurve1.controll_points.push_back(vec3(-36.0166, 1.10242, -6.21638));
+                bezierCurve1.controll_points.push_back(vec3(-31.6031, 5.20109, -20.6809));
+                bezierCurve1.controll_points.push_back(vec3(-17.0633, 9.00687, -27.9127));
+                bezierCurve1.controll_points.push_back(vec3(1.22698, 14.1855, -28.7259));
+                bezierCurve1.controll_points.push_back(vec3(12.1842, 18.3501, -22.6672));
+                bezierCurve1.controll_points.push_back(vec3(21.9861, 22.5582, -10.2729));
+                bezierCurve1.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                bezierCurve1.level_of_detail = 800;
+                
+                CameraController::EularChangeInfo eularChangeInfo1;
+                eularChangeInfo1.is_clockwise_x = true;
+                eularChangeInfo1.is_clockwise_y = true;
+                eularChangeInfo1.is_clockwise_z = true;
+                eularChangeInfo1.start_angle = vec3(0.0, 87.9956, -18.941);
+                eularChangeInfo1.end_angle = vec3(0.0, 180.0, -25.0);
+                
+                CameraController::SpeedChangeInfo speedChangeInfo1;
+                speedChangeInfo1.init_speed = 0.0f;
+                speedChangeInfo1.max_speed = 2.8f;
+                speedChangeInfo1.move_af = 0.04f;
+                speedChangeInfo1.end_speed = 2.8f;
+                
+                camera_controller_1_ = new CameraController(engine_->mainCameraNode, bezierCurve1, eularChangeInfo1, speedChangeInfo1);
+                
+                
+                CameraController::BezierCurve bezierCurve2;
+                
+                bezierCurve2.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                bezierCurve2.controll_points.push_back(vec3(22.9861, 24.1623, 14.5142));
+                bezierCurve2.controll_points.push_back(vec3(22.1413, 27.3614, 32.8735));
+                bezierCurve2.controll_points.push_back(vec3(7.42197, 27.9976, 46.6137));
+                bezierCurve2.controll_points.push_back(vec3(-8.83625, 28.0162, 50.435));
+                bezierCurve2.controll_points.push_back(vec3(-31.7806, 27.7042, 48.2877));
+                bezierCurve2.controll_points.push_back(vec3(-43.6527, 27.1449, 41.8651));
+                bezierCurve2.controll_points.push_back(vec3(-65.4234, 29.673, 22.5053));
+                bezierCurve2.controll_points.push_back(vec3(-65.0254, 29.523, -0.545633));
+                bezierCurve2.controll_points.push_back(vec3(-49.9168, 27.7327, -0.561822));
+                bezierCurve2.level_of_detail = 800;
+                
+                CameraController::EularChangeInfo eularChangeInfo2;
+                eularChangeInfo2.is_clockwise_x = true;
+                eularChangeInfo2.is_clockwise_y = true;
+                eularChangeInfo2.is_clockwise_z = false;
+                eularChangeInfo2.start_angle = vec3(0.0, 180.0, -25.0);
+                eularChangeInfo2.end_angle = vec3(0.0f, 0.0, -9.0);
+                
+                CameraController::SpeedChangeInfo speedChangeInfo2;
+                speedChangeInfo2.init_speed = 3.0f;
+                speedChangeInfo2.max_speed = 3.1f;
+                speedChangeInfo2.move_af = 0.04f;
+                speedChangeInfo2.end_speed = 0.0f;
+                
+                camera_controller_2_ = new CameraController(engine_->mainCameraNode, bezierCurve2, eularChangeInfo2, speedChangeInfo2);
+            }
+            else {
+                CameraController::BezierCurve bezierCurve1;
+                bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
+                bezierCurve1.controll_points.push_back(vec3(4.87323, 4.37399, 26.4333));
+                bezierCurve1.controll_points.push_back(vec3(15.571, 0.519317, 6.87387));
+                bezierCurve1.controll_points.push_back(vec3(15.077, 2.89697, -10.9622));
+                bezierCurve1.controll_points.push_back(vec3(4.47728, 7.27986, -25.2025));
+                bezierCurve1.controll_points.push_back(vec3(-9.13663, 12.6829, -27.7081));
+                bezierCurve1.controll_points.push_back(vec3(-21.067, 14.726, -26.6613));
+                bezierCurve1.controll_points.push_back(vec3(-35.091, 15.7257, -19.702));
+                bezierCurve1.controll_points.push_back(vec3(-35.5757, 19.3824, -12.499));
+                bezierCurve1.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
+                
+                CameraController::EularChangeInfo eularChangeInfo1;
+                eularChangeInfo1.is_clockwise_x = true;
+                eularChangeInfo1.is_clockwise_y = false;
+                eularChangeInfo1.is_clockwise_z = true;
+                eularChangeInfo1.start_angle = vec3(0.0, 87.9956, -18.941);
+                eularChangeInfo1.end_angle = vec3(0.0, 0.0,-24.6152);
+                
+                CameraController::SpeedChangeInfo speedChangeInfo1;
+                speedChangeInfo1.init_speed = 0.0f;
+                speedChangeInfo1.max_speed = 2.8f;
+                speedChangeInfo1.move_af = 0.04f;
+                speedChangeInfo1.end_speed = 2.8f;
+                
+                camera_controller_1_ = new CameraController(engine_->mainCameraNode, bezierCurve1, eularChangeInfo1, speedChangeInfo1);
+                CameraController::BezierCurve bezierCurve2;
+                bezierCurve2.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
+                bezierCurve2.controll_points.push_back(vec3(-40.149, 23.8911, 12.6656));
+                bezierCurve2.controll_points.push_back(vec3(-37.0909, 25.369, 27.3833));
+                bezierCurve2.controll_points.push_back(vec3(-29.3621, 27.1266, 40.7915));
+                bezierCurve2.controll_points.push_back(vec3(-21.9414, 28.3229, 49.0625));
+                bezierCurve2.controll_points.push_back(vec3(-12.5228, 28.3229, 50.7738));
+                bezierCurve2.controll_points.push_back(vec3(2.40476, 27.9317, 48.6534));
+                bezierCurve2.controll_points.push_back(vec3(24.6695, 28.3048, 40.8248));
+                bezierCurve2.controll_points.push_back(vec3(46.2194, 27.7195, 16.297));
+                bezierCurve2.controll_points.push_back(vec3(51.1604, 30.8945, -0.92693));
+                bezierCurve2.controll_points.push_back(vec3(32.3742, 28.5622, -0.616311));
+                bezierCurve2.level_of_detail = 800;
+                
+                CameraController::EularChangeInfo eularChangeInfo2;
+                eularChangeInfo2.is_clockwise_x = true;
+                eularChangeInfo2.is_clockwise_y = false;
+                eularChangeInfo2.is_clockwise_z = false;
+                eularChangeInfo2.start_angle = vec3(0.0, 0.0,-24.6152);
+                eularChangeInfo2.end_angle = vec3(0.0f, -180.0, -9.0);
+                
+                CameraController::SpeedChangeInfo speedChangeInfo2;
+                speedChangeInfo2.init_speed = 3.0f;
+                speedChangeInfo2.max_speed = 3.1f;
+                speedChangeInfo2.move_af = 0.04f;
+                speedChangeInfo2.end_speed = 0.0f;
+                
+                camera_controller_2_ = new CameraController(engine_->mainCameraNode, bezierCurve2, eularChangeInfo2, speedChangeInfo2);
+            }
             
             is_waiting_ = false;
         });
