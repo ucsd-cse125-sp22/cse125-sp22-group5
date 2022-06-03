@@ -43,7 +43,7 @@ void ClientCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Initial Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("Eternal Ritual", 0.8f, 0, NULL);
+    engine_ = new Engine("Eternal Ritual", 1.0f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
