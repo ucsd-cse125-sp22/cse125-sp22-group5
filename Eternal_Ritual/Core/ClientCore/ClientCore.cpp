@@ -100,7 +100,6 @@ void ClientCore::loadSky() {
 void ClientCore::loadLight() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Lights --|" << std::endl;
-    
     point_light_ = new LightNode(vec3(1));
     point_light_->setPointLight(2.0f, 20.0f);
     point_light_->highlightIntensity = 0.0f;
@@ -123,6 +122,10 @@ void ClientCore::loadLight() {
     verticle_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
     verticle_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(verticle_light_);
+    
+    process_ = 2;
+    load_state_ ++;
+    loading_progress_ += 0.1;
 }
 
 
