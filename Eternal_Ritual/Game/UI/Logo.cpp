@@ -52,7 +52,7 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
     loadingText->color = Color::textColor;
     loadingText->alpha = 0.0f;
         
-    loadingbar = new SpriteNode(glm::vec2(15.0f / 20.0f, 0.2f / 20.0f) * 1.2f);
+    loadingbar = new SpriteNode(glm::vec2(15.0f / 20.0f, 0.15f / 20.0f) * 1.2f);
     loadingbar->texture = new Texture("/Resources/Game/UI/loading.png");
     loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.7);
     loadingbar->renderingOrder = 1.0f;
