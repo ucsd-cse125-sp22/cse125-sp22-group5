@@ -66,8 +66,8 @@ void ClientCore::displayLogo() {
     ui_base_->renderingOrder = 10000.0f;
     ui_base_->size = glm::vec2(1.0f);
     ui_camera_ = new CameraNode(60.0f, 0.1f, 1000.0f);
-    ui_camera_->position = glm::vec3(-7.95262, 49.7237, 41.5025);
-    ui_camera_->eulerAngles = glm::vec3(0, 91.6, -47.1);
+    ui_camera_->position = glm::vec3(-12.3641, 14.8889, 36.8971);
+    ui_camera_->eulerAngles = glm::vec3(0.0, 87.9956, -18.941);
     engine_->addNode(ui_camera_);
     engine_->mainCameraNode = ui_camera_;
     logo_ = new Logo(engine_,font_, ui_base_, &process_);
@@ -175,11 +175,6 @@ void ClientCore::loadCharacter() {
         
         engine_->addNode(newChar);
         
-        SpriteNode* baseNode = new SpriteNode(glm::vec2(1.0f));
-        baseNode->renderingOrder = 1000.0f;
-        engine_->addNode(baseNode);
-        newChar->uiNode = baseNode;
-        
         pre_chars_.push_back(newChar);
     }
     
@@ -194,12 +189,13 @@ void ClientCore::loadCharacter() {
     
     if (PLAYER_CAPACITY >= 1) {
         if (PLAYER_CAPACITY == 1 || PLAYER_CAPACITY == 2) {
-            pre_chars_[0]->setCharacterPosition(vec3(-46.0f, -1.0f, -1.4f));
+//            pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, -1.4f));
+            pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, 0.60f));
             pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
             pre_chars_[0]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
         else if (PLAYER_CAPACITY == 3 || PLAYER_CAPACITY == 4) {
-            pre_chars_[0]->setCharacterPosition(vec3(-46.0f, -1.0f, 1.9f));
+            pre_chars_[0]->setCharacterPosition(vec3(-46.40f, 23.07f, 0.60f));
             pre_chars_[0]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
             pre_chars_[0]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
@@ -209,12 +205,12 @@ void ClientCore::loadCharacter() {
     }
     if (PLAYER_CAPACITY >= 2) {
         if (PLAYER_CAPACITY == 2 || PLAYER_CAPACITY == 3) {
-            pre_chars_[1]->setCharacterPosition(vec3(28.5f, -1.0f, -0.88f));
+            pre_chars_[1]->setCharacterPosition(vec3(28.36f, 23.07f, -0.88f));
             pre_chars_[1]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
             pre_chars_[1]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
         else if (PLAYER_CAPACITY == 4) {
-            pre_chars_[1]->setCharacterPosition(vec3(28.5f, -1.0f, -4.22f));
+            pre_chars_[1]->setCharacterPosition(vec3(28.36f, 23.07f, -2.63f));
             pre_chars_[1]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
             pre_chars_[1]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         }
@@ -224,7 +220,7 @@ void ClientCore::loadCharacter() {
     }
     if (PLAYER_CAPACITY >= 3) {
         if (PLAYER_CAPACITY == 3 || PLAYER_CAPACITY == 4) {
-            pre_chars_[2]->setCharacterPosition(vec3(-46.0f, -1.0f, -4.0f));
+            pre_chars_[2]->setCharacterPosition(vec3(-46.40f, 23.07f, -2.76f));
             pre_chars_[2]->setCharacterEularAngle(vec3(0.0f, 85.5f, 0.0f));
             pre_chars_[2]->setCameraEularAngle(vec3(0.0f, -4.5f, -18.0f));
         }
@@ -236,7 +232,7 @@ void ClientCore::loadCharacter() {
         pre_chars_[3]->health = MAXHP;
         pre_chars_[3]->mana = MAXMANA;
         pre_chars_[3]->manaRegen = MAXMANAREGEN;
-        pre_chars_[3]->setCharacterPosition(vec3(28.5f, -1.0f, 2.46f));
+        pre_chars_[3]->setCharacterPosition(vec3(28.36f, 23.07f, 0.49f));
         pre_chars_[3]->setCharacterEularAngle(vec3(0.0f, -92.6f, 0.0f));
         pre_chars_[3]->setCameraEularAngle(vec3(0.0f, 177.4f, -18.0f));
         pre_chars_[3]->name = "Mengxuan";
@@ -404,7 +400,7 @@ void ClientCore::updateStart() {
             updateState();
             if (character_index_ == 0 || character_index_ == 2) {
                 CameraController::BezierCurve bezierCurve1;
-                bezierCurve1.controll_points.push_back(vec3(-9.35278, 13.8266, 33.3838));
+                bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
                 bezierCurve1.controll_points.push_back(vec3(-27.1926, 6.21359, 21.2189));
                 bezierCurve1.controll_points.push_back(vec3(-36.0384, 2.60817, 7.98844));
                 bezierCurve1.controll_points.push_back(vec3(-36.0166, 1.10242, -6.21638));
@@ -443,7 +439,13 @@ void ClientCore::updateStart() {
                 bezierCurve2.controll_points.push_back(vec3(-43.6527, 27.1449, 41.8651));
                 bezierCurve2.controll_points.push_back(vec3(-65.4234, 29.673, 22.5053));
                 bezierCurve2.controll_points.push_back(vec3(-65.0254, 29.523, -0.545633));
-                bezierCurve2.controll_points.push_back(vec3(-49.9168, 27.7327, -0.561822));
+                if (character_index_ == 0) {
+                    bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, 0.413452));
+                }
+                else if (character_index_ == 2) {
+                    bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, -2.94655));
+                }
+
                 bezierCurve2.level_of_detail = 800;
                 
                 CameraController::EularChangeInfo eularChangeInfo2;
@@ -451,7 +453,7 @@ void ClientCore::updateStart() {
                 eularChangeInfo2.is_clockwise_y = true;
                 eularChangeInfo2.is_clockwise_z = false;
                 eularChangeInfo2.start_angle = vec3(0.0, 180.0, -25.0);
-                eularChangeInfo2.end_angle = vec3(0.0f, 0.0, -9.0);
+                eularChangeInfo2.end_angle = vec3(0.0f, -4.5f, -18.0);
                 
                 CameraController::SpeedChangeInfo speedChangeInfo2;
                 speedChangeInfo2.init_speed = 3.0f;
@@ -500,6 +502,12 @@ void ClientCore::updateStart() {
                 bezierCurve2.controll_points.push_back(vec3(46.2194, 27.7195, 16.297));
                 bezierCurve2.controll_points.push_back(vec3(51.1604, 30.8945, -0.92693));
                 bezierCurve2.controll_points.push_back(vec3(32.3742, 28.5622, -0.616311));
+                if (character_index_ == 1) {
+                    bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, -2.52214));
+                }
+                else if (character_index_ == 3) {
+                    bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, 0.597857));
+                }
                 bezierCurve2.level_of_detail = 800;
                 
                 CameraController::EularChangeInfo eularChangeInfo2;
@@ -507,7 +515,7 @@ void ClientCore::updateStart() {
                 eularChangeInfo2.is_clockwise_y = false;
                 eularChangeInfo2.is_clockwise_z = false;
                 eularChangeInfo2.start_angle = vec3(0.0, 0.0,-24.6152);
-                eularChangeInfo2.end_angle = vec3(0.0f, -180.0, -9.0);
+                eularChangeInfo2.end_angle = vec3(0.0f, 177.4, -18.0);
                 
                 CameraController::SpeedChangeInfo speedChangeInfo2;
                 speedChangeInfo2.init_speed = 3.0f;
@@ -528,13 +536,31 @@ void ClientCore::updateStart() {
 
 
 void ClientCore::playCG() {
-//    camera_controller_->moveCamera();
-    hud_base_->isDisabled = false;
-    char_camera_ = character_->cameraNode;
-    engine_->mainCameraNode = char_camera_;
-    enter_game_ = false;
-    
-    process_ = 7;
+    if (!camera_controller_1_->moveCamera()) {
+        if (!camera_controller_2_->moveCamera()) {
+            char_camera_ = character_->cameraNode;
+            engine_->mainCameraNode = char_camera_;
+            
+            if (!is_set_cg_animation_) {
+                Animation* startDelay = new Animation("startDelay",0.9);
+                startDelay->setCompletionHandler([&] {
+                    Animation* showStart = new Animation("showStart", 1);
+                    showStart->setEaseInTimingMode();
+                    showStart->setFloatAnimation(&(button_base_->alpha), 1.0);
+                    engine_->playAnimation(showStart);
+                });
+                engine_->playAnimation(startDelay);
+            }
+            
+            is_cg_finished_ = true;
+        }
+        
+    }
+    if (is_cg_finished_) {
+        hud_base_->isDisabled = false;
+        enter_game_ = false;
+        process_ = 7;
+    }
 }
 
 
@@ -829,9 +855,15 @@ void ClientCore::renderWorld() {
     
     engine_->renderDirectionalLightShadowMap(directional_light_);
     
+    if (!enter_game_) {
 //    cout << "position: " << character_->modelNode->getWorldPosition().x << " " << character_->modelNode->getWorldPosition().y << " " << character_->modelNode->getWorldPosition().z << endl;
-//
+////
 //    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
+        
+        cout << "position: " << engine_->mainCameraNode->getWorldPosition().x << " " << engine_->mainCameraNode->getWorldPosition().y << " " << engine_->mainCameraNode->getWorldPosition().z << endl;
+    //
+        cout << "Angle: " << engine_->mainCameraNode->getWorldEulerAngles().x << " " << engine_->mainCameraNode->getWorldEulerAngles().y << " " << engine_->mainCameraNode->getWorldEulerAngles().z << endl;
+    }
     
     float time1 = systemTime();
     
