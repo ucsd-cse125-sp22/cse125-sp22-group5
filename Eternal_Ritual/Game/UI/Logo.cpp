@@ -4,7 +4,6 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 {
 	engine = e;
 	this->font = font;
-	isload = false;
 	isPlaying = false;
 	pro = process;
 
@@ -45,7 +44,22 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	nameBackground->texture = new Texture("/Resources/Game/UI/logo_back.png");
 	nameBackground->alpha = 0;
 	nameBackground->renderingOrder = 1;
-	nameBackground->screenPosition = glm::vec2(0.5,0.4);
+	nameBackground->screenPosition = glm::vec2(0.5f, 0.48f);
+    
+    loadingText = new TextNode(font, 0.05f, 1.0f, 0.1f);
+    loadingText->parentCoordinatePosition = glm::vec2(0.5, 0.7);
+    loadingText->text = "Loading 0%";
+    loadingText->color = Color::textColor;
+    loadingText->alpha = 0.0f;
+        
+    loadingbar = new SpriteNode(glm::vec2(engine->getWindowResolution().x / engine->getWindowResolution().y - 0.2, 0.01));
+    loadingbar->color = Color::loadingBarColor;
+    loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.75);
+    loadingbar->scale = glm::vec2(0, 1);
+    loadingbar->alpha = 0.0f;
+
+    background->addChildNode(loadingText);
+    background->addChildNode(loadingbar);
     
 	parentNode->addChildNode(background);
 	parentNode->addChildNode(nameBackground);
@@ -54,23 +68,13 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	background->addChildNode(light);
 
 	e->addNode(parentNode);
-
+    
+    Engine::main->loadMusic("logo music", new AudioBuffer("/Resources/Game/Sound/Logo.wav"));
 }
 
 void Logo::play() {
     
-    /*Animation* loadtext = new Animation("loadText", 0.7);
-    loadtext->setEaseOutTimingMode();
-    loadtext->setFloatAnimation(&nameBackground->alpha, 1);
-    loadtext->setCompletionHandler([&] {
-        *pro = 2;
-    });
-    engine->playAnimation(loadtext);*/
-    
-    /*Node* sound = new Node();
-    Engine::main->addNode(sound);
-    sound->loadAudioBuffer("wink", new AudioBuffer("/Resources/Game/Sound/Buff_05.wav"));
-    sound->playAudio("wink");*/
+    Engine::main->playMusic("logo music");
     
     Animation* load = new Animation("loadlogo", 3.0f);
     load->setFloatAnimation(&logoPic->alpha, 1);
@@ -128,41 +132,57 @@ void Logo::play() {
     });
     engine->playAnimation(lightWait);
     
+    Animation* loadingTextDelay = new Animation("loadingTextDelay", 3.5f);
+    loadingTextDelay->setCompletionHandler([&] {
+        
+        Animation* loadtext = new Animation("loadText", 1.0f);
+        loadtext->setEaseOutTimingMode();
+        loadtext->setFloatAnimation(&nameBackground->alpha, 1.0f);
+        loadtext->setCompletionHandler([&] {
+            
+            Animation* moveLoadText = new Animation("moveLoadText", 1.0f);
+            moveLoadText->setEaseInEaseOutTimingMode();
+            moveLoadText->setVec2Animation(&this->nameBackground->screenPosition, glm::vec2(0.5f, 0.4f));
+            moveLoadText->setCompletionHandler([&] {
+                
+                Animation* showLoadingText = new Animation("showLoadingText", 1.0f);
+                showLoadingText->setEaseOutTimingMode();
+                showLoadingText->setFloatAnimation(&this->loadingText->alpha, 1.0f);
+                engine->playAnimation(showLoadingText);
+                
+                Animation* showLoadingBar = new Animation("showLoadingBar", 1.0f);
+                showLoadingBar->setEaseOutTimingMode();
+                showLoadingBar->setFloatAnimation(&this->loadingbar->alpha, 1.0f);
+                engine->playAnimation(showLoadingBar);
+                
+            });
+            engine->playAnimation(moveLoadText);
+            
+            //*pro = 2;
+        });
+        engine->playAnimation(loadtext);
+        
+    });
+    engine->playAnimation(loadingTextDelay);
+    
 }
 
 void Logo::updateLoad(float loadingProgess)
 {
-	if (!isload) {
-		loadingText = new TextNode(font, 0.05f, 1.0f, 0.1f);
-		loadingText->parentCoordinatePosition = glm::vec2(0.5, 0.7);
-		loadingText->text = "Loading 0%";
-		loadingText->color = Color::textColor;
-		
-		loadingbar = new SpriteNode(glm::vec2(engine->getWindowResolution().x / engine->getWindowResolution().y - 0.2, 0.01));
-		loadingbar->color = Color::loadingBarColor;
-		loadingbar->parentCoordinatePosition = glm::vec2(0.5, 0.75);
-		loadingbar->scale = glm::vec2(0, 1);
-
-		background->addChildNode(loadingText);
-		background->addChildNode(loadingbar);
-
-		isload = true;
-		*pro = 3;
-	}
-	else {
-        loadingText->text = "Loading " + std::to_string((int)((loadingbar->scale.x + 0.01) * 100)) + "%";
-        if (!isPlaying) {
-            int i = (int)(loadingProgess * 100);
-            Animation* ani = new Animation(std::to_string(i), 1);
-            ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
-            engine->playAnimation(ani);
-            isPlaying = true;
-            ani->setCompletionHandler([&] {
-            isPlaying = false;
-            *pro = 3;
-           });
-        }
-	}
+    
+    loadingText->text = "Loading " + std::to_string((int)((loadingbar->scale.x + 0.01) * 100)) + "%";
+    if (!isPlaying) {
+        int i = (int)(loadingProgess * 100);
+        Animation* ani = new Animation(std::to_string(i), 1);
+        ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1));
+        engine->playAnimation(ani);
+        isPlaying = true;
+        ani->setCompletionHandler([&] {
+        isPlaying = false;
+        *pro = 3;
+        });
+    }
+    
 	if (loadingProgess >= 1) {
 		Animation* end = new Animation("LoadEnd", 1.0);
 		end->setFloatAnimation(&background->alpha, 0);
