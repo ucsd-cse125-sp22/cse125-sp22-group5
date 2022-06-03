@@ -14,7 +14,7 @@
 #include "Game/Magic/Circle.hpp"
 #include "Game/Map/MapSystemManager.hpp"
 
-#define DAMAGE 50
+#define DAMAGE 10
 #define COOLDOWN 6
 #define COST 400
 
