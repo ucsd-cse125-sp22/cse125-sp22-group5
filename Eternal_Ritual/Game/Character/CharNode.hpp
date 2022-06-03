@@ -130,7 +130,6 @@ public:
     glm::vec3 cameraTargetEulerAngles;
     Node* controlNode;
     Node* headTop;
-    SpriteNode* uiNode;
     //TextNode* nameNode;
     Node* generateBoneNode(std::string boneName);
     Node* rightHand;

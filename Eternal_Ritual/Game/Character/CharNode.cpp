@@ -246,7 +246,6 @@ CharNode::CharNode(vec3 position){
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    //this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -278,7 +277,6 @@ void CharNode::reset() {
     this->target = NULL;
     this->isLocked = false;
     this->refreshed = true;
-    //this->uiNode = 0;
     this->state = CharState::IDLE;
     this->keyDirection = Direction::NONE;
     this->currMagic = 0;
@@ -654,10 +652,6 @@ void CharNode::updatePosition(){
         }
         this->refreshed = true;
         vec3 positionOnScreen = headTop->getPositionOnScreen();
-        this->uiNode->isDisabled = false;
-        this->uiNode->screenPosition = vec2(positionOnScreen.x, positionOnScreen.y - 0.07);
-        //this->uiNode->scale = vec2(1 / pow(positionOnScreen.z, 0.5));
-        this->uiNode->scale = vec2(1.2);
     }
 
 }
@@ -668,7 +662,6 @@ CharNode* CharNode::copy(vec3 position) {
     node->eulerAngles = this->eulerAngles;
     node->scale = this->scale;
     node->state = this->state;
-    node->uiNode = this->uiNode->copy()->convertToSpriteNode();
     node->controlNode = this->controlNode->copy();
     node->health = this->health;
     node->stamina = this->stamina;
@@ -682,7 +675,6 @@ CharNode* CharNode::copy(vec3 position) {
         node->geometries.push_back(this->geometries[i]->copy(&node->animators));
     }
     node->addChildNode(node->controlNode);
-//    node->addChildNode(node->uiNode);
 //    node->cameraNode = this->cameraNode;
     return(node);
 }
@@ -805,7 +797,6 @@ void CharNode::receiveDamage(int damage){
                 stopAnimators(0xffffffff, 0.2);
                 playAnimators(Bitmask::DEAD, 0.1);
                 this->state = CharState::DEAD;
-                this->uiNode->isDisabled = true;
                 this->hitbox = new Hitbox(this->position, vec3(0, 0, 0));
             }
         });

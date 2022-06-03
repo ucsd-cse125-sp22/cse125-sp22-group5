@@ -36,7 +36,6 @@ HPBarNode::HPBarNode(Engine* e, Font* font, bool isRed, CharNode* character)
 	background->addChildNode(icon);
 	background->addChildNode(name);
 	e->addNode(background);
-	character->uiNode = background;
 	initHp = character->health;
 }
 
