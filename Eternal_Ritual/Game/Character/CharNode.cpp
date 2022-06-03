@@ -222,7 +222,7 @@ void CharNode::load() {
     death->animatorBitMask = Bitmask::DEAD;
     death->repeats = false;
     death->clamps = true;
-    footStep = new AudioBuffer("/Resources/Game/Sound/footstep", "wav", 1, 9);
+    footStep = new AudioBuffer("/Resources/Game/Sound/Step", "wav", 1, 8);
     rollSound = new AudioBuffer("/Resources/Game/Sound/roll", "wav", 1, 3);
 }
 
