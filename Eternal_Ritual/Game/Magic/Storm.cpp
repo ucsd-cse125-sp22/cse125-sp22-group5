@@ -88,15 +88,13 @@ void Storm::load() {
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 1), 0.8);
     metaLightning->setColorAnimation(vec4(0.2, 0.2, 1, 0), 1);
     
-    stormSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Loop.wav");
+    stormSound = new AudioBuffer("/Resources/Game/Sound/S.wav");
     electricSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Electric_Storm_Loop.wav");
     castSound = new AudioBuffer("/Resources/Game/Sound/Neutral_Ice_Cast.wav");
 }
 Storm::Storm() {
     if(!loaded) load();
     this->loadAudioBuffer("storm sound", stormSound, 2.0f, 1.0f);
-    this->changeAudioVolume("storm sound", 0, 0);
-    this->sounds["storm sound"].setLoop(true);
     this->loadAudioBuffer("electric sound", electricSound, 2.0f, 1.0f);
     this->changeAudioVolume("electric sound", 0, 0);
     this->sounds["electric sound"].setLoop(true);
@@ -129,10 +127,9 @@ Storm::Storm() {
 void Storm::play(CharNode *character, int seed) {
     if (!start) {
         this->playAudio("storm sound");
-        this->changeAudioVolume("storm sound", 1, 1);
-        this->playAudio("electric sound");
-        this->changeAudioVolume("electric sound", 1, 1);
-        this->playAudio("cast");
+//        this->playAudio("electric sound");
+//        this->changeAudioVolume("electric sound", 1, 1);
+//        this->playAudio("cast");
         start = true;
         caster = character;
         velocity = normalize(character->modelNode->getRightVectorInWorld() * vec3(1, 0, 1));
@@ -155,8 +152,7 @@ void Storm::play(CharNode *character, int seed) {
         Animation* casting = new Animation("casting storm " + to_string(reinterpret_cast<long>(this)), 0.6);
         Animation* expanding = new Animation("expanding storm " + to_string(reinterpret_cast<long>(this)), 6);
         expanding->setCompletionHandler([&] {
-            this->changeAudioVolume("storm sound", 0, 1);
-            this->changeAudioVolume("electric sound", 0, 1);
+//            this->changeAudioVolume("electric sound", 0, 1);
         });
         expanding->setEaseOutTimingMode();
         expanding->setFloatAnimation(&radius, 1.5);
