@@ -256,10 +256,25 @@ int main(int argc, char* argv[]) {
     // Post-Game while
     while(Engine::main->isRunning()) {
         if(Engine::main->shouldUpdate()) {
+            if (ClientCore::Instance()->process() == 10 && !ClientCore::Instance()->is_death_delay_define_) {
+                if (ClientCore::Instance()->is_win_game_) {
+                    ClientCore::Instance()->death_scene_->display(true, &(ClientCore::Instance()->process_));
+                }
+                else {
+                    ClientCore::Instance()->death_scene_->display(false, &ClientCore::Instance()->process_);
+                }
+                Animation* delay = new Animation("resetdelay", 1.5);
+                delay->setCompletionHandler([&] {
+                    ClientCore::Instance()->set_process(11);
+                    });
+                Engine::main->playAnimation(delay);
+                ClientCore::Instance()->is_death_delay_define_ = true;
+            }
             
-            if (ClientCore::Instance()->process() == 10) {
+            else if (ClientCore::Instance()->process() == 11) {
                 ClientCore::Instance()->resetGame();
             }
+            
             ClientCore::Instance()->renderWorld();
         }
     }

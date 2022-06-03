@@ -345,6 +345,12 @@ void ClientCore::loadStartScene() {
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.05;
+    AudioBuffer* elevatorSound = new AudioBuffer("/Resources/Game/Sound/Machine_Gears_Loop05.wav");
+    Engine::main->loadMusic("elevator sound", elevatorSound);
+    AudioBuffer* elevatorFinish = new AudioBuffer("/Resources/Game/Sound/Stone Move 5_2.wav");
+    Engine::main->loadMusic("elevator finish", elevatorFinish);
+    Engine::main->musicNode->sounds["elevator sound"].setLoop(true);
+    Engine::main->musicNode->changeAudioVolume("elevator sound", 0.5, 0);
 }
 
 
@@ -574,7 +580,16 @@ void ClientCore::playCG() {
         
         Animation* startDelay = new Animation("startDelay",0.9);
         startDelay->setCompletionHandler([&] {
+            Engine::main->playMusic("elevator sound");
+            Animation* elevatorFinishAni = new Animation("elevatorfinish1", 8.5);
+            elevatorFinishAni->setCompletionHandler([&] {
+                Engine::main->playMusic("elevator finish");
+            });
+            engine_->playAnimation(elevatorFinishAni);
             Animation* elevatorNodeMove1 = new Animation("elevatorNodeMove1", 9);
+            elevatorNodeMove1->setCompletionHandler([&] {
+                Engine::main->stopMusic("elevator sound");
+            });
             elevatorNodeMove1->setEaseInEaseOutTimingMode();
             elevatorNodeMove1->setFloatAnimation(&(cg_used_node_[0]->position.y), -0.7f);
             engine_->playAnimation(elevatorNodeMove1);
@@ -908,25 +923,21 @@ void ClientCore::updateState() {
         
         if (pre_chars_[0]->health <= 0 && pre_chars_[2]->health <= 0) {
             if (character_index_ == 0 || character_index_ == 2) {
-                death_scene_->display(false, &process_);
+                is_win_game_ = false;
             }
             else {
-                death_scene_->display(true, &process_);
+                is_win_game_ = true;
             }
-            Animation* delay = new Animation("resetdelay", 1.5);
-            engine_->playAnimation(delay);
             process_ = 9;
         }
         
         if (pre_chars_[1]->health <= 0 && pre_chars_[3]->health <= 0) {
             if (character_index_ == 1 || character_index_ == 3) {
-                death_scene_->display(false, &process_);
+                is_win_game_ = false;
             }
             else {
-                death_scene_->display(true, &process_);
+                is_win_game_ = true;
             }
-            Animation* delay = new Animation("resetdelay", 1.5);
-            engine_->playAnimation(delay);
             process_ = 9;
         }
     }
