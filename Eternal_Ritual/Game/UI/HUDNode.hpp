@@ -68,7 +68,7 @@ public:
     UINode* parentNode;
     void selectMagic();
 public:
-    HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, CharNode* selfChar, CharNode* ally);
+    HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, Font* smallFont, CharNode* selfChar, CharNode* ally);
     ~HUDNode() = default;
     void update(bool viewAlly);
     void toggleViewDead(CharNode* name);
