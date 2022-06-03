@@ -1,5 +1,7 @@
 #include "Logo.hpp"
 
+#include <glm/gtc/random.hpp>
+
 Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 {
 	engine = e;
@@ -45,6 +47,31 @@ Logo::Logo(Engine* e, Font* font, UINode* parentNode, int* process)
 	nameBackground->alpha = 0;
 	nameBackground->renderingOrder = 1;
 	nameBackground->screenPosition = glm::vec2(0.5f, 0.48f);
+    
+    nameTop = new SpriteNode(glm::vec2(UISizes::logoBackSize.y));
+    nameTop->texture = new Texture("/Resources/Game/UI/logo_top.png");
+    nameTop->alpha = 0;
+    nameTop->renderingOrder = 5;
+    nameTop->setAdditive();
+    nameBackground->addChildNode(nameTop);
+    
+    
+    nameLight1 = new SpriteNode(glm::vec2(0.3f));
+    nameLight1->texture = new Texture("/Resources/Game/UI/logo_light_small.png");
+    nameLight1->renderingOrder = 2;
+    nameLight1->alpha = 0.0f;
+    nameLight1->setAdditive();
+    nameLight1->position = glm::vec2(0.0f, -0.08f);
+    nameBackground->addChildNode(nameLight1);
+    
+    nameLight2 = new SpriteNode(glm::vec2(0.3f));
+    nameLight2->texture = new Texture("/Resources/Game/UI/logo_light_small.png");
+    nameLight2->renderingOrder = 3;
+    nameLight1->alpha = 0.0f;
+    nameLight2->setAdditive();
+    nameLight2->position = glm::vec2(0.0f, -0.08f);
+    nameBackground->addChildNode(nameLight2);
+    
     
     loadingText = new TextNode(font, 0.04f, 1.0f, 0.1f);
     loadingText->parentCoordinatePosition = glm::vec2(0.5, 0.66);
@@ -206,8 +233,11 @@ void Logo::updateLoad(float loadingProgess)
     
     if (!isPlaying) {
         int i = (int)(loadingProgess * 100);
-        Animation* ani = new Animation(std::to_string(i), 1.0f);
-        ani->setVec2Animation(&loadingbar->scale, glm::vec2(loadingProgess, 1.0f));
+        Animation* ani = new Animation("Loading" + std::to_string(i), 1.0f);
+        float factor = loadingProgess;
+        factor += glm::linearRand(0.0f, 0.1f);
+        factor = glm::clamp(factor, 0.0f, 1.0f);
+        ani->setVec2Animation(&loadingbar->scale, glm::vec2(factor, 1.0f));
         ani->setEaseInEaseOutTimingMode();
         engine->playAnimation(ani);
         isPlaying = true;
@@ -223,17 +253,17 @@ void Logo::updateLoad(float loadingProgess)
         
         Animation* loadingTextDelay1 = new Animation("loadingTextDelay1", 1.0f);
         loadingTextDelay1->setCompletionHandler([&] {
-            Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 1.0f);
+            Animation* showLoadingbarTop = new Animation("showLoadingbarTop", 2.0f);
             showLoadingbarTop->setEaseOutTimingMode();
             showLoadingbarTop->setFloatAnimation(&this->loadingbarTop->alpha, 0.0f);
             engine->playAnimation(showLoadingbarTop);
 
-            Animation* showLoadingbarBack = new Animation("showLoadingbarBack", 1.0f);
+            Animation* showLoadingbarBack = new Animation("showLoadingbarBack", 2.0f);
             showLoadingbarBack->setEaseOutTimingMode();
             showLoadingbarBack->setFloatAnimation(&this->loadingbarBack->alpha, 0.0f);
             engine->playAnimation(showLoadingbarBack);
 
-            Animation* showLoadingText = new Animation("showLoadingText", 1.0f);
+            Animation* showLoadingText = new Animation("showLoadingText", 2.0f);
             showLoadingText->setEaseOutTimingMode();
             showLoadingText->setFloatAnimation(&this->loadingText->alpha, 0.0f);
             engine->playAnimation(showLoadingText);
@@ -246,20 +276,20 @@ void Logo::updateLoad(float loadingProgess)
         });
         engine->playAnimation(loadingTextDelay1);
 
-        Animation* loadingTextDelay2 = new Animation("loadingTextDelay2", 4.0f);
+        Animation* loadingTextDelay2 = new Animation("loadingTextDelay2", 2.0f);
         loadingTextDelay2->setCompletionHandler([&] {
 
-            Animation* move = new Animation("titleMove", 1.0f);
+            Animation* move = new Animation("titleMove", 2.0f);
             move->setFloatAnimation(&nameBackground->screenPosition.y, 0.25f);
             move->setEaseInEaseOutTimingMode();
             engine->playAnimation(move);
 
-            Animation* changeScale = new Animation("titleScale", 1.0);
+            Animation* changeScale = new Animation("titleScale", 2.0);
             changeScale->setVec2Animation(&nameBackground->scale, glm::vec2(0.9f));
             changeScale->setEaseInEaseOutTimingMode();
             engine->playAnimation(changeScale);
 
-            Animation* end = new Animation("LoadEnd", 2.0f);
+            Animation* end = new Animation("LoadEnd", 3.0f);
             end->setFloatAnimation(&background->alpha, 0.0f);
             end->setEaseInTimingMode();
             engine->playAnimation(end);

@@ -148,13 +148,15 @@ public:
     // CG
     CameraController* camera_controller_1_;
     CameraController* camera_controller_2_;
+    bool is_cg_finished_ = false;
+    bool is_set_cg_animation_ = false;
     
 
     // Font
     Font* font_;
     
     // Logo
-    Logo* logo_;
+    Logo* logo_ = nullptr;
     
     // Cursor
     Cursor* cursor_;
