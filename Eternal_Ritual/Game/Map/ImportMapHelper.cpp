@@ -8,7 +8,6 @@
 
 #include <glm/glm.hpp>
 
-
 #define MAPX 40
 #define MAPY -101
 #define MAPZ -50

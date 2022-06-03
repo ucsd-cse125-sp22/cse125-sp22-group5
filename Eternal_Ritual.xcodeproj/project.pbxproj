@@ -12,6 +12,9 @@
 		12EA9AF1280FE68900541504 /* CharNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12EA9AEF280FE68900541504 /* CharNode.cpp */; };
 		3D008937284094C6007E5CAD /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
 		3D008938284094C6007E5CAD /* Storm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22E3014283D9B1300BEA708 /* Storm.cpp */; };
+		3D249145284A44FA00691143 /* CharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D249143284A44FA00691143 /* CharacterController.cpp */; };
+		3D249146284A44FA00691143 /* CharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D249143284A44FA00691143 /* CharacterController.cpp */; };
+		3D249147284A44FA00691143 /* CharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D249143284A44FA00691143 /* CharacterController.cpp */; };
 		3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D26C82831D53E00159082 /* ImportMapHelper.cpp */; };
 		3D2D27532833C86F00159082 /* OfflineCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D27512833C86F00159082 /* OfflineCore.cpp */; };
 		3D2D27702834220100159082 /* FireBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D275B2834220100159082 /* FireBall.cpp */; };
@@ -288,6 +291,8 @@
 		12309C9D281A022500423625 /* HitController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitController.cpp; sourceTree = "<group>"; };
 		12EA9AEF280FE68900541504 /* CharNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharNode.cpp; sourceTree = "<group>"; };
 		12EA9AF0280FE68900541504 /* CharNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharNode.hpp; sourceTree = "<group>"; };
+		3D249143284A44FA00691143 /* CharacterController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterController.cpp; sourceTree = "<group>"; };
+		3D249144284A44FA00691143 /* CharacterController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharacterController.hpp; sourceTree = "<group>"; };
 		3D2D26992831BA3D00159082 /* ClientSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ClientSocket.cpp; sourceTree = "<group>"; };
 		3D2D269B2831BA3D00159082 /* ClientSocket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClientSocket.hpp; sourceTree = "<group>"; };
 		3D2D269D2831BA3D00159082 /* EventPb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventPb.cpp; sourceTree = "<group>"; };
@@ -769,6 +774,8 @@
 			children = (
 				3D7915822844907200A5E354 /* CameraController.cpp */,
 				3D7915832844907200A5E354 /* CameraController.hpp */,
+				3D249143284A44FA00691143 /* CharacterController.cpp */,
+				3D249144284A44FA00691143 /* CharacterController.hpp */,
 			);
 			path = CG;
 			sourceTree = "<group>";
@@ -1054,6 +1061,7 @@
 				3D7915CB2846413800A5E354 /* AllUI.inc in Sources */,
 				3D2D28752835B80000159082 /* ClientCore.cpp in Sources */,
 				E22C59EB2845BA0E007FFC49 /* Circle.cpp in Sources */,
+				3D249146284A44FA00691143 /* CharacterController.cpp in Sources */,
 				3D2D27E82835B23100159082 /* LightningPhalanx.cpp in Sources */,
 				3D2D27E92835B23100159082 /* MapSystemManager.cpp in Sources */,
 				3D2D28772835B82000159082 /* EventPb.cpp in Sources */,
@@ -1136,6 +1144,7 @@
 				3D7915CC2846413800A5E354 /* AllUI.inc in Sources */,
 				3D2D28302835B3C500159082 /* LightningPhalanx.cpp in Sources */,
 				E22C59EC2845BA0F007FFC49 /* Circle.cpp in Sources */,
+				3D249147284A44FA00691143 /* CharacterController.cpp in Sources */,
 				3D2D28312835B3C500159082 /* MapSystemManager.cpp in Sources */,
 				3D2D28782835B82000159082 /* EventPb.cpp in Sources */,
 				3D2D28322835B3C500159082 /* Flame.cpp in Sources */,
@@ -1232,6 +1241,7 @@
 				3D7915DC2846413800A5E354 /* HUDNode.cpp in Sources */,
 				3D6FD39C283F985200BC5083 /* TextRenderer.cpp in Sources */,
 				3D6FD3C1283F98B500BC5083 /* offline-main.cpp in Sources */,
+				3D249145284A44FA00691143 /* CharacterController.cpp in Sources */,
 				3D6FD384283F985200BC5083 /* Bone.cpp in Sources */,
 				3D2D26CA2831D53E00159082 /* ImportMapHelper.cpp in Sources */,
 				3D7915D32846413800A5E354 /* DeathScene.cpp in Sources */,
