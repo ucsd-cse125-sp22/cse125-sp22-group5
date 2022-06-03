@@ -14,6 +14,8 @@ protected:
     SpriteNode* lightSmall;
 	SpriteNode* nameBackground;
 	SpriteNode* loadingbar;
+	SpriteNode* loadingbarBack;
+	SpriteNode* loadingbarTop;
 	TextNode* loadingText;
 	Font* font;
 	int* pro;

@@ -31,16 +31,28 @@ StartSceneUI::StartSceneUI(Engine* e, Font* font, UINode* parentNode, UINode* bu
 	netWinBack->screenPosition = glm::vec2(0.5, 0.6);
 
 	netText = new TextNode(font,0.03,UISizes::netWinBackSize.x*0.8,0.1);
-	//netText->parentCoordinatePosition = glm::vec2(0, 0.5);
 	netText->text = "Waiting for other players to join ...";
 	netText->color = Color::textColor;
 	
 	netWinBack->addChildNode(netText);
 
+	winBack = new SpriteNode(UISizes::creditWinBackSize);
+	winBack->texture = new Texture("/Resources/Game/UI/win_back.png");
+	winBack->alpha = 0;
+	winBack->isDisabled = true;
+	winBack->renderingOrder = 3;
+	winBack->screenPosition = glm::vec2(0.5);
+
+	winCloseButton = new ButtonNode(winBack, font);
+	winCloseButton->setWinButton("Close");
+	winCloseButton->setPosition(glm::vec2(0.5, 0.99));
+	//winCloseButton->setScale(0.7);
+
 	buttonBase->alpha = 0;
 	buttonBase->isDisabled = true;
 	parentNode->addChildNode(buttonBase);
 	parentNode->addChildNode(netWinBack);
+	parentNode->addChildNode(winBack);
 }
 
 void StartSceneUI::isDisbled(bool t)
@@ -53,6 +65,7 @@ int StartSceneUI::update(bool isWaiting) {
 	glm::vec2 position = engine->input->getMouseScreenPosition();
 	Input* input = engine->input;
 	bool show = !netWinBack->isDisabled;
+	bool creditShow = !winBack->isDisabled;
 
 	if (show && !isWaiting) {
         Animation* netWinExit = new Animation("netWinExit", 0.3f);
@@ -64,7 +77,7 @@ int StartSceneUI::update(bool isWaiting) {
         return 5;
     }
 
-	if (!show) {
+	if (!show && !creditShow) {
 
 		bool isReleased = input->wasKeyReleased(MOUSE_BUTTON_LEFT);
 
@@ -80,11 +93,24 @@ int StartSceneUI::update(bool isWaiting) {
 		}
 
 		if (creditButton->checkState(position, input, isReleased)) {
-			return 2;
+			winBack->isDisabled = false;
+			Animation* showCredit = new Animation("showCredit", 0.5f);
+			showCredit->setFloatAnimation(&winBack->alpha, 1);
+			engine->playAnimation(showCredit);
 		}
 
 		if (exitButton->checkState(position, input, isReleased)) {
 			engine->terminate();
+		}
+	}
+
+	if (creditShow) {
+		bool isReleased = input->wasKeyReleased(MOUSE_BUTTON_LEFT);
+		if (winCloseButton->checkState(position, input, isReleased)) {
+			Animation* closeCredit = new Animation("closeCredit", 0.5f);
+			closeCredit->setFloatAnimation(&winBack->alpha, 0);
+			engine->playAnimation(closeCredit);
+			winBack->isDisabled = true;
 		}
 	}
     

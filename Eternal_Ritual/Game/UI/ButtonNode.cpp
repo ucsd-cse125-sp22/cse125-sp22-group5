@@ -32,6 +32,16 @@ ButtonNode::ButtonNode(UINode* parentNode,Font* font){
 
 void ButtonNode::disable(bool disable){background->isDisabled = disable;}
 
+void ButtonNode::setWinButton(std::string t)
+{
+    normal = new Texture("/Resources/Game/UI/win_btn_back.png");
+    glow = new Texture("/Resources/Game/UI/win_btn_glow_back.png");
+    dark = new Texture("/Resources/Game/UI/win_btn_dark_back.png");
+    text->text = t;
+    background->scale = glm::vec2(0.7);
+    text->scale = glm::vec2(1.3);
+}
+
 void ButtonNode::setText(std::string t){
     text->text = t;
 }
@@ -46,22 +56,10 @@ void ButtonNode::setScale(float i)
     text->scale = glm::vec2(i);
 }
 
-void ButtonNode::switchOn(){
-    background->multiplyColor = glm::vec4(1.5);
-}
-void ButtonNode::switchOff(){
-    background->multiplyColor = glm::vec4(0.5,0.5,0.5,1.0);
-}
-
-void ButtonNode::restore(){
-    background->multiplyColor = glm::vec4(1);
-}
-
 bool ButtonNode::checkState(glm::vec2 mousePosition, Input* input, bool isReleasd){
     if(background->isDisabled){
         return false;
     }
-
 
     if(background->checkSizeIncludesScreenPosition(mousePosition)){
         std::cout << text->text  + ": " << isReleasd << std::endl;

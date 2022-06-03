@@ -15,7 +15,7 @@ namespace Color{
 	const glm::vec4 Mp = glm::vec4(0.2,0.2,0.7,1.0);
 	const glm::vec4 textColor = glm::vec4(0.76,0.67,0.5,1.0);
 	const glm::vec4 LogotextColor = glm::vec4(0.9, 0.79, 0.33, 1.0);
-	const glm::vec4 loadingBarColor = glm::vec4(0.3, 0.4, 0.9, 1.0);
+	const glm::vec4 loadingBarColor = glm::vec4(0.2, 0.8, 0.8, 1.0);
 };
 
 namespace UISizes{
@@ -83,12 +83,16 @@ namespace UISizes{
 	// logo =================
 	const glm::vec2 logoLightSize = glm::vec2(1.018,0.585);
 	const glm::vec2 logoBackSize = glm::vec2(1.023, 0.331);
+	const glm::vec2 loadingBarBackSize = glm::vec2(1.490,0.107);
+	const glm::vec2 loadingBarTopSize = glm::vec2(1.471,0.045);
+
 
 	// button ===============
 	const glm::vec2 buttonSize = glm::vec2(0.276,0.094);
 
 	// windows ==============
 	const glm::vec2 netWinBackSize = glm::vec2(0.852,0.078);
+	const glm::vec2 creditWinBackSize = glm::vec2(0.865,0.436);
 
 	// end ================
 	const glm::vec2 endLogoSize = glm::vec2(0.539,0.238);
