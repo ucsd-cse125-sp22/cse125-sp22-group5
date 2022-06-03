@@ -60,9 +60,6 @@ int main(int argc, char* argv[]) {
     
     // Loading while
     while (Engine::main->isRunning()) {
-        if (Engine::main->input->wasKeyReleased(KEY_ESCAPE)) {
-            exit(1);
-        }
         
         if(Engine::main->shouldUpdate()) {
             
@@ -184,9 +181,7 @@ int main(int argc, char* argv[]) {
     // Post-Game while
     while(Engine::main->isRunning()) {
         if(Engine::main->shouldUpdate()) {
-            if (Engine::main->input->wasKeyReleased(KEY_ESCAPE)) {
-                exit(1);
-            }
+            
             if (ClientCore::Instance()->process() == 10) {
                 ClientCore::Instance()->resetGame();
             }

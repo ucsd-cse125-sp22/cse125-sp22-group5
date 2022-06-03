@@ -243,9 +243,6 @@ void OfflineCore::loadDamageSystem() {
 
 
 void OfflineCore::handleEvent() {
-    if(engine_->input->wasKeyReleased(KEY_ESCAPE)) {
-        engine_->terminate();
-    }
     
     if(engine_->input->isPressingKey(KEY_W)) {
         character_->moveFront();

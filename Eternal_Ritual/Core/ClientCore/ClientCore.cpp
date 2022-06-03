@@ -101,24 +101,28 @@ void ClientCore::loadLight() {
     std::cout << std::endl;
     std::cout << "|-- Loading Stage 2 - Load Lights --|" << std::endl;
     
-    point_light_ = new LightNode(vec3(5.0f));
+    point_light_ = new LightNode(vec3(1));
     point_light_->setPointLight(2.0f, 20.0f);
     point_light_->highlightIntensity = 0.0f;
     
-    ambient_light_ = new LightNode(vec3(0.5f));
+    ambient_light_ = new LightNode(vec3(0));
     ambient_light_->setAmbientLight();
-    engine_->addNode(ambient_light_);
+   // engine_->addNode(ambient_light_);
     
-    directional_light_ = new LightNode(vec3(1.0f, 1.0f, 1.0f));
+    directional_light_ = new LightNode(vec3(1.5, 2.5, 5));
     directional_light_->setDirectionalLight();
-    directional_light_->eulerAngles = vec3(0.0f, 135.0f, -45.0f);
+    directional_light_->eulerAngles = vec3(0.0f, 95.0f, -25.0f);
     directional_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
     directional_light_->shadowBitMask = 0xfffffffe;
     engine_->addNode(directional_light_);
     
-    process_ = 2;
-    load_state_ ++;
-    loading_progress_ += 0.1;
+    verticle_light_ = new LightNode(vec3(1.5, 2.5, 5) * 0.0f);
+    verticle_light_->setDirectionalLight();
+    verticle_light_->eulerAngles = vec3(0.0f, 0.0f, -90.0f);
+    verticle_light_->highlightIntensity = 0.0f;
+    verticle_light_->activateDirectionalLightShadow(4096, 100.0f, 0.1f, 200.0f, -100.0f, 0.002f, 1);
+    verticle_light_->shadowBitMask = 0xfffffffe;
+    engine_->addNode(verticle_light_);
 }
 
 
@@ -464,10 +468,6 @@ void ClientCore::handleEvent() {
     
     engine_->shouldUpdate();
     
-    if (engine_->input->wasKeyReleased(KEY_ESCAPE)) {
-        exit(1);
-    }
-    
     if (engine_->input->wasKeyPressed(KEY_MINUS)) {
         engine_->unlockCursor();
     }
@@ -736,7 +736,13 @@ void ClientCore::renderWorld() {
 //
 //    cout << "Angle: " << character_->modelNode->getWorldEulerAngles().x << " " << character_->modelNode->getWorldEulerAngles().y << " " << character_->modelNode->getWorldEulerAngles().z << endl;
     
+    float time1 = systemTime();
+    
     engine_->render();
+    
+    float time2 = systemTime();
+    
+    print("FPS:", 1.0f / (time2 - time1));
 }
 
 

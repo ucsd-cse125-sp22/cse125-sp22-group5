@@ -23,6 +23,26 @@
 #include "KGLEngine/Node/Node.hpp"
 #include "KGLEngine/Toolkit/keys.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+#include <set>
+#include <map>
+#include <array>
+#include <vector>
+#include <thread>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <optional>
+#include <algorithm>
+#include <filesystem>
+#include <type_traits>
+#include <unordered_set>
+#include <unordered_map>
+
 class Engine final {
 private:
     glm::vec2 screenResolution;
@@ -78,4 +98,62 @@ public:
     static void engineReceiveMouseMovements(GLFWwindow* window, double x, double y);
     static void engineReceiveScrollWheelInteractions(GLFWwindow* window, double dx, double dy);
 };
+
+inline void print() {
+    std::cerr << std::endl;
+}
+template <typename T>
+inline void printVariable(const T& variable) {
+    std::cerr << &variable;
+}
+inline void printVariable(const bool& variable) {
+    std::cerr << (variable ? "true" : "false");
+}
+inline void printVariable(const int& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const unsigned int& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const char& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const unsigned char& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const long& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const unsigned long& variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const float& variable) {
+    std::cerr << std::to_string(variable);
+}
+inline void printVariable(const double& variable) {
+    std::cerr << std::to_string(variable);
+}
+inline void printVariable(const char* variable) {
+    std::cerr << variable;
+}
+inline void printVariable(const std::string& variable) {
+    std::cerr << variable;
+}
+template <typename T>
+inline void print(const T& variable) {
+    printVariable(variable);
+    std::cerr << std::endl;
+}
+template <typename T, typename...Arguments>
+inline void print(const T& argument, const Arguments&...arguments) {
+    printVariable(argument);
+    std::cerr << " ";
+    print(arguments...);
+}
+inline float systemTime() {
+    static std::chrono::time_point startTime = std::chrono::high_resolution_clock::now();
+    std::chrono::time_point currentTime = std::chrono::high_resolution_clock::now();
+    float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+    return(time);
+}
 #endif
