@@ -908,25 +908,21 @@ void ClientCore::updateState() {
         
         if (pre_chars_[0]->health <= 0 && pre_chars_[2]->health <= 0) {
             if (character_index_ == 0 || character_index_ == 2) {
-                death_scene_->display(false, &process_);
+                is_win_game_ = false;
             }
             else {
-                death_scene_->display(true, &process_);
+                is_win_game_ = true;
             }
-            Animation* delay = new Animation("resetdelay", 1.5);
-            engine_->playAnimation(delay);
             process_ = 9;
         }
         
         if (pre_chars_[1]->health <= 0 && pre_chars_[3]->health <= 0) {
             if (character_index_ == 1 || character_index_ == 3) {
-                death_scene_->display(false, &process_);
+                is_win_game_ = false;
             }
             else {
-                death_scene_->display(true, &process_);
+                is_win_game_ = true;
             }
-            Animation* delay = new Animation("resetdelay", 1.5);
-            engine_->playAnimation(delay);
             process_ = 9;
         }
     }
