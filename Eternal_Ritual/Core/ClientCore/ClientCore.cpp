@@ -43,7 +43,7 @@ void ClientCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Initial Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("Eternal Ritual", 1.0f, 0, NULL);
+    engine_ = new Engine("Eternal Ritual", 0.5f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
@@ -351,10 +351,13 @@ void ClientCore::loadStartScene() {
     Engine::main->loadMusic("elevator sound", elevatorSound);
     AudioBuffer* elevatorFinish = new AudioBuffer("/Resources/Game/Sound/Stone Move 5_2.wav");
     Engine::main->loadMusic("elevator finish", elevatorFinish);
+    AudioBuffer* doorSound = new AudioBuffer("/Resources/Game/Sound/Machine_Gears_Loop06.wav");
+    Engine::main->loadMusic("door sound", doorSound);
     AudioBuffer* ambientSound = new AudioBuffer("/Resources/Game/Sound/Ambient.wav");
     Engine::main->loadMusic("ambient sound 1", ambientSound);
     Engine::main->loadMusic("ambient sound 2", ambientSound);
     Engine::main->musicNode->sounds["elevator sound"].setLoop(true);
+    Engine::main->musicNode->sounds["door sound"].setLoop(true);
     Engine::main->musicNode->changeAudioVolume("elevator sound", 0.5, 0);
 }
 
@@ -670,6 +673,12 @@ void ClientCore::playCG() {
             
             elevatorBoxMove2->setCompletionHandler([&] {
                 Animation* gateNodeMove1 = new Animation("gateNodeMove1", 9);
+                Engine::main->playMusic("door sound");
+                Animation* gateSound = new Animation("gate sound", 7);
+                gateSound->setCompletionHandler([&] {
+                    Engine::main->musicNode->changeAudioVolume("door sound", 0, 1);
+                });
+                engine_->playAnimation(gateSound);
                 gateNodeMove1->setEaseInEaseOutTimingMode();
                 gateNodeMove1->setFloatAnimation(&(cg_used_node_[2]->position.y), 3.3f);
                 engine_->playAnimation(gateNodeMove1);
