@@ -81,15 +81,18 @@ public:
     static bool loaded;
     static Node* metaModel;
     static Texture* bootsD;
+    static Texture* bootsD2;
     static Texture* bootsN;
     static Texture* bootsAO;
     static Texture* glovesD;
+    static Texture* glovesD2;
     static Texture* glovesN;
     static Texture* glovesAO;
     static Texture* bodyD;
     static Texture* bodyN;
     static Texture* bodyAO;
     static Texture* chestD;
+    static Texture* chestD2;
     static Texture* chestN;
     static Texture* chestAO;
     static Texture* staffD;
@@ -110,6 +113,7 @@ public:
     static AudioBuffer* rollSound;
 public:
     CharNode(glm::vec3 position);
+    void setTeamWhite();
     ~CharNode();
     Node* modelNode;
     void setModel(Node* model);

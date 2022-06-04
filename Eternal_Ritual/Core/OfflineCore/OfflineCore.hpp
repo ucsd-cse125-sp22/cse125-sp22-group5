@@ -94,6 +94,7 @@ public:
 
     //Font
     Font* font_;
+    Font* fontSmall_;
 
     // HPbarNode
     HPBarNode* hpBarNode;

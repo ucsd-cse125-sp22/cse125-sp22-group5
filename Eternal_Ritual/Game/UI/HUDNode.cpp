@@ -332,6 +332,17 @@ HUDNode::HUDNode(Engine* e, UINode* parentNode, bool isRed, Font* font, Font* sm
 	aliveBase->addChildNode(listBack);
 	aliveBase->addChildNode(partyBackground);
 	aliveBase->addChildNode(placehold);
+    
+    
+    blackout = new SpriteNode(glm::vec2(e->getWindowResolution().x / e->getWindowResolution().y, 1.0));
+    blackout->color = glm::vec4(0, 0, 0, 1);
+    blackout->renderingOrder = 11001;
+    blackout->screenPosition = glm::vec2(0.5);
+    blackout->alpha = 0;
+    endlogo = new SpriteNode(UISizes::endLogoSize);
+    
+    blackout->addChildNode(endlogo);
+    parentNode->addChildNode(blackout);
 
 	parentNode->addChildNode(aliveBase);
 	parentNode->addChildNode(viewBack);
@@ -342,6 +353,11 @@ void HUDNode::update(bool viewAlly, int isWin)
 {
     if(isWin!=0){
         if(isWin==1){
+            endlogo->texture = new Texture("/Resources/Game/UI/end_victory.png");
+//            Animation* showEnd = new Animation("showEnd",0.5);
+//            showEnd->setFloatAnimation(&blackout->alpha, 1);
+//            showEnd->setEaseOutTimingMode();
+//            engine->playAnimation(showEnd);
             deathBack->isDisabled = false;
             deathText->text = "Victory";
             Animation* death = new Animation("showDeath", 0.3);
@@ -358,6 +374,11 @@ void HUDNode::update(bool viewAlly, int isWin)
             engine->playAnimation(back);
             return;
         }else if(isWin==0){
+//            endlogo->texture = new Texture("/Resources/Game/UI/end_defeat.png");
+//            Animation* showEnd = new Animation("showEnd",0.5);
+//            showEnd->setFloatAnimation(&blackout->alpha, 1);
+//            showEnd->setEaseOutTimingMode();
+//            engine->playAnimation(showEnd);
             deathBack->isDisabled = false;
             deathText->text = "Defeat";
             Animation* death = new Animation("showDeath", 0.3);
@@ -419,7 +440,7 @@ void HUDNode::update(bool viewAlly, int isWin)
 
 		if (selfChar->isLocked) {
 			enBackground->isDisabled = false;
-			enName->text = selfChar->target->name;
+			//enName->text = selfChar->target->name;
 			enHpBar->update(selfChar->target->health);
 		}
 		else {

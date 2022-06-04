@@ -23,6 +23,12 @@ void importMapBox(std::vector<MapBoxObject*>& cgUsedBox) {
     PBRShader* cubeShader = new PBRShader(0.5f, 0.5f);
     
     boxType = Map::WALL;
+    boxSize = vec3(11, 11, 11);
+    boxPosition = vec3(-40.221 + (MAPX), 105.066 + (MAPY), 26.11+ (MAPZ));
+    boxEulerAngles = vec3(0.0f, -6.f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = Map::WALL;
     boxSize = vec3(62.400001525878906f, 2.0f, 42.694854736328125f);
     boxPosition = vec3(-50.78607940673828f + (MAPX), 99.01634216308594f + (MAPY), 41.54486846923828f + (MAPZ));
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
@@ -3531,6 +3537,61 @@ void importMapModel1() {
     PBRShader* rocksmShader = new PBRShader(0.3, 0.7);
     rocksmShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Rock_Surface_01_Albedo.png", 2.0, true));
     rocksmShader->setNormalMap(new Texture("/Resources/Game/Map/T_Rock_Surface_01_Normal.png", 2.0, true));
+    Node* bear = new Node();
+    bear->position.x = MAPX -39.517;
+    bear->position.z = MAPZ + 27.394;
+    bear->position.y  = MAPY + 100.003;
+    bear->eulerAngles.y = -5.501;
+    bear->scale = vec3(0.8, 0.8, 0.8);
+    Engine::main->addNode(bear);
+    Node* bear1 = new Node();
+    bear1->loadModelFile("/Resources/Game/Map/Stone1.dae");
+    bear1->geometries[0]->setShader(rocksmShader);
+    bear1->geometries[0]->setDoubleSided();
+    bear1->position = vec3(-1, 14.9, 0.56);
+    bear->addChildNode(bear1);
+    Node* bear2 = new Node();
+    bear2->loadModelFile("/Resources/Game/Map/Stone2.dae");
+    bear2->geometries[0]->setShader(rocksmShader);
+    bear2->geometries[0]->setDoubleSided();
+    bear2->position = vec3(3.3, 6.3, 4.1);
+    bear->addChildNode(bear2);
+    Node* bear3 = new Node();
+    bear3->loadModelFile("/Resources/Game/Map/Stone3.dae");
+    bear3->geometries[0]->setShader(rocksmShader);
+    bear3->geometries[0]->setDoubleSided();
+    bear3->position = vec3(3, 2.3, 2.4);
+    bear->addChildNode(bear3);
+    Node* bear4 = new Node();
+    bear4->loadModelFile("/Resources/Game/Map/Stone4.dae");
+    bear4->geometries[0]->setShader(rocksmShader);
+    bear4->geometries[0]->setDoubleSided();
+    bear4->position = vec3(2.2, 15.6, 1.9);
+    bear->addChildNode(bear4);
+    Node* bear5 = new Node();
+    bear5->loadModelFile("/Resources/Game/Map/Stone5.dae");
+    bear5->geometries[0]->setShader(rocksmShader);
+    bear5->geometries[0]->setDoubleSided();
+    bear5->position = vec3(-4, 16.6, -0.1);
+    bear->addChildNode(bear5);
+    Node* bear6 = new Node();
+    bear6->loadModelFile("/Resources/Game/Map/Stone6.dae");
+    bear6->geometries[0]->setShader(rocksmShader);
+    bear6->geometries[0]->setDoubleSided();
+    bear6->position = vec3(-6, 7.7, 2.7);
+    bear->addChildNode(bear6);
+    Node* bear7 = new Node();
+    bear7->loadModelFile("/Resources/Game/Map/Stone7.dae");
+    bear7->geometries[0]->setShader(rocksmShader);
+    bear7->geometries[0]->setDoubleSided();
+    bear7->position = vec3(-5.3, 2.4, 1.9);
+    bear->addChildNode(bear7);
+    Node* bear8 = new Node();
+    bear8->loadModelFile("/Resources/Game/Map/Stone8.dae");
+    bear8->geometries[0]->setShader(rocksmShader);
+    bear8->geometries[0]->setDoubleSided();
+    bear8->position = vec3(-0.6, 6.8, -0.1);
+    bear->addChildNode(bear8);
     Node* rocksm1 = new Node();
     rocksm1->loadModelFile("/Resources/Game/Map/rock01lod0.dae");
     rocksm1->geometries[0]->setShader(rocksmShader);
@@ -4085,7 +4146,7 @@ void importMapModel1() {
     PBRShader* barkShader = new PBRShader(0.2, 0.8);
     barkShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Albedo.png", 2.0, true));
     barkShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Bark_01_Normal.png", 2.0, true));
-    PBRShader* treeShader = new PBRShader(0.2, 0.8);
+    PBRShader* treeShader = new PBRShader("/Resources/Sample Shaders/Plants2", 0.2, 0.8);
     treeShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Albedo.png", 2.0, true));
     treeShader->setNormalMap(new Texture("/Resources/Game/Map/T_Ash_Tree_Canopy_01_Normal.png", 2.0, true));
     Node* tree1 = new Node();
@@ -4128,7 +4189,7 @@ void importMapModel1() {
     
     
 void importMapModel2() {
-    PBRShader* plant1Shader = new PBRShader(0.1, 0.9);
+    PBRShader* plant1Shader = new PBRShader("/Resources/Sample Shaders/Plants1", 0.1, 0.9);
     plant1Shader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Plant_01_Albedo.png", 2.0, true));
     plant1Shader->setNormalMap(new Texture("/Resources/Game/Map/T_Plant_01_Normal.png", 2.0, true));
     Node* plant1 = new Node();
@@ -4242,7 +4303,7 @@ void importMapModel2() {
     Engine::main->addNode(plant1_18);
     
     
-    PBRShader* grassShader = new PBRShader(0.1, 0.9);
+    PBRShader* grassShader = new PBRShader("/Resources/Sample Shaders/Plants", 0.1, 0.9);
     grassShader->setDiffuseMap(new Texture("/Resources/Game/Map/T_Grass_03_Albedo.png", 2.0, true));
     grassShader->setNormalMap(new Texture("/Resources/Game/Map/T_Grass_03_Normal.png", 2.0, true));
     Node* grass2 = new Node();
@@ -5431,6 +5492,17 @@ void importTestMap() {
     boxPosition = vec3(0.0f, -1.5f, 0.0f);
     boxEulerAngles = vec3(0.0f, -0.0f, 0.0f);
     MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    
+    boxType = Map::WALL;
+    boxSize = vec3(11, 11, 9);
+    boxPosition = vec3(-40.221, 105.066, 26.11);
+    boxEulerAngles = vec3(0.0f, -6.f, 0.0f);
+    MapSystemManager::Instance()->addMapBox(new MapBoxObject(boxType, boxSize, boxPosition, boxEulerAngles));
+    Node* bearBox = new Node();
+    bearBox->loadUnitCube();
+    bearBox->scale =vec3(11, 11, 9);
+    bearBox->position =vec3(-40.221 + MAPX, 105.066 + MAPY, 26.11 + MAPZ);
+    Engine::main->addNode(bearBox);
     
     boxType = Map::WALL;
     boxSize = vec3(20.0f, 1.0f, 40.0f);

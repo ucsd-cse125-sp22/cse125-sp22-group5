@@ -63,6 +63,10 @@ public:
     TextNode* viewText;
     SpriteNode* deathBack;
     TextNode* deathText;
+    
+    //
+    SpriteNode* blackout;
+    SpriteNode* endlogo;
 
     UINode* aliveBase;
     UINode* parentNode;

@@ -43,7 +43,7 @@ void ClientCore::initEngine() {
     std::cout << std::endl;
     std::cout << "|-- Initial Stage 1 - Initial Engine --|" << std::endl;
     
-    engine_ = new Engine("Eternal Ritual", 0.8f, 0, NULL);
+    engine_ = new Engine("Eternal Ritual", 1.0f, 0, NULL);
     engine_->workingDirectory = ROOT_PATH;
     engine_->lockCursor();
 }
@@ -241,7 +241,8 @@ void ClientCore::loadCharacter() {
         pre_chars_[3]->isDisabled = false;
         pre_chars_[3]->uninjurable = false;
     }
-    
+    pre_chars_[3]->setTeamWhite();
+    pre_chars_[1]->setTeamWhite();
     process_ = 2;
     load_state_ ++;
     loading_progress_ += 0.2;
