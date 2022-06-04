@@ -458,7 +458,19 @@ void ClientCore::updateStart() {
             
             if (character_index_ == 0 || character_index_ == 2) {
                 CameraController::BezierCurve bezierCurve1;
+//                bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
+//                bezierCurve1.controll_points.push_back(vec3(-27.1926, 6.21359, 21.2189));
+//                bezierCurve1.controll_points.push_back(vec3(-36.0384, 2.60817, 7.98844));
+//                bezierCurve1.controll_points.push_back(vec3(-36.0166, 1.10242, -6.21638));
+//                bezierCurve1.controll_points.push_back(vec3(-31.6031, 5.20109, -20.6809));
+//                bezierCurve1.controll_points.push_back(vec3(-17.0633, 9.00687, -27.9127));
+//                bezierCurve1.controll_points.push_back(vec3(1.22698, 14.1855, -28.7259));
+//                bezierCurve1.controll_points.push_back(vec3(12.1842, 18.3501, -22.6672));
+//                bezierCurve1.controll_points.push_back(vec3(21.9861, 22.5582, -10.2729));
+//                bezierCurve1.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                
                 bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
+                bezierCurve1.controll_points.push_back(vec3(-27.1926, 6.21359, 21.2189));
                 bezierCurve1.controll_points.push_back(vec3(-27.1926, 6.21359, 21.2189));
                 bezierCurve1.controll_points.push_back(vec3(-36.0384, 2.60817, 7.98844));
                 bezierCurve1.controll_points.push_back(vec3(-36.0166, 1.10242, -6.21638));
@@ -467,7 +479,11 @@ void ClientCore::updateStart() {
                 bezierCurve1.controll_points.push_back(vec3(1.22698, 14.1855, -28.7259));
                 bezierCurve1.controll_points.push_back(vec3(12.1842, 18.3501, -22.6672));
                 bezierCurve1.controll_points.push_back(vec3(21.9861, 22.5582, -10.2729));
+                bezierCurve1.controll_points.push_back(vec3(21.9861, 22.5582, -10.2729));
                 bezierCurve1.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                bezierCurve1.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                
+                
                 bezierCurve1.level_of_detail = 800;
                 
                 CameraController::EularChangeInfo eularChangeInfo1;
@@ -481,13 +497,15 @@ void ClientCore::updateStart() {
                 speedChangeInfo1.init_speed = 0.0f;
                 speedChangeInfo1.max_speed = 2.8f;
                 speedChangeInfo1.move_af = 0.04f;
-                speedChangeInfo1.end_speed = 2.8f;
+                speedChangeInfo1.end_speed = 2.5f;
                 
                 camera_controller_1_ = new CameraController(engine_->mainCameraNode, bezierCurve1, eularChangeInfo1, speedChangeInfo1);
                 
                 
                 CameraController::BezierCurve bezierCurve2;
                 
+                bezierCurve2.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
+                bezierCurve2.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
                 bezierCurve2.controll_points.push_back(vec3(19.7959, 23.3058, 0.89875));
                 bezierCurve2.controll_points.push_back(vec3(22.9861, 24.1623, 14.5142));
                 bezierCurve2.controll_points.push_back(vec3(22.1413, 27.3614, 32.8735));
@@ -499,8 +517,10 @@ void ClientCore::updateStart() {
                 bezierCurve2.controll_points.push_back(vec3(-65.0254, 29.523, -0.545633));
                 if (character_index_ == 0) {
                     bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, 0.413452));
+                    bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, 0.413452));
                 }
                 else if (character_index_ == 2) {
+                    bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, -2.94655));
                     bezierCurve2.controll_points.push_back(vec3(-48.7703, 25.0334, -2.94655));
                 }
 
@@ -778,6 +798,10 @@ void ClientCore::handleEvent() {
         }
         else {
             event_pb_->setToggleLock(false);
+        }
+        
+        if (engine_->input->wasKeyPressed(KEY_ESCAPE)) {
+            exit(1);
         }
         
         if(engine_->input->wasKeyPressed(KEY_C)){
