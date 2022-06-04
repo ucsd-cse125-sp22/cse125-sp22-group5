@@ -17,12 +17,12 @@
 #define SERVER_PORT 1233
 //#define SERVER_IP "70.95.147.7"
 //#define SERVER_IP "100.81.36.66"
-#define SERVER_IP "127.0.0.1"
+//#define SERVER_IP "127.0.0.1"
 //#define SERVER_IP "0.0.0.0"
-//#define SERVER_IP "137.110.115.89"
+#define SERVER_IP "137.110.112.150"
 
 #endif
 
 
 #define MAX_BUFFER_SIZE 500
-#define PLAYER_CAPACITY 1
+#define PLAYER_CAPACITY 4

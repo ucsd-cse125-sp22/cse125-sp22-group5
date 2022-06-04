@@ -540,7 +540,18 @@ void ClientCore::updateStart() {
             }
             else {
                 CameraController::BezierCurve bezierCurve1;
+//                bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
+//                bezierCurve1.controll_points.push_back(vec3(4.87323, 4.37399, 26.4333));
+//                bezierCurve1.controll_points.push_back(vec3(15.571, 0.519317, 6.87387));
+//                bezierCurve1.controll_points.push_back(vec3(15.077, 2.89697, -10.9622));
+//                bezierCurve1.controll_points.push_back(vec3(4.47728, 7.27986, -25.2025));
+//                bezierCurve1.controll_points.push_back(vec3(-9.13663, 12.6829, -27.7081));
+//                bezierCurve1.controll_points.push_back(vec3(-21.067, 14.726, -26.6613));
+//                bezierCurve1.controll_points.push_back(vec3(-35.091, 15.7257, -19.702));
+//                bezierCurve1.controll_points.push_back(vec3(-35.5757, 19.3824, -12.499));
+//                bezierCurve1.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
                 bezierCurve1.controll_points.push_back(vec3(-12.3641, 14.8889, 36.8971));
+                bezierCurve1.controll_points.push_back(vec3(4.87323, 4.37399, 26.4333));
                 bezierCurve1.controll_points.push_back(vec3(4.87323, 4.37399, 26.4333));
                 bezierCurve1.controll_points.push_back(vec3(15.571, 0.519317, 6.87387));
                 bezierCurve1.controll_points.push_back(vec3(15.077, 2.89697, -10.9622));
@@ -549,6 +560,8 @@ void ClientCore::updateStart() {
                 bezierCurve1.controll_points.push_back(vec3(-21.067, 14.726, -26.6613));
                 bezierCurve1.controll_points.push_back(vec3(-35.091, 15.7257, -19.702));
                 bezierCurve1.controll_points.push_back(vec3(-35.5757, 19.3824, -12.499));
+                bezierCurve1.controll_points.push_back(vec3(-35.5757, 19.3824, -12.499));
+                bezierCurve1.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
                 bezierCurve1.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
                 bezierCurve1.level_of_detail = 800;
                 
@@ -563,10 +576,12 @@ void ClientCore::updateStart() {
                 speedChangeInfo1.init_speed = 0.0f;
                 speedChangeInfo1.max_speed = 2.8f;
                 speedChangeInfo1.move_af = 0.04f;
-                speedChangeInfo1.end_speed = 2.8f;
+                speedChangeInfo1.end_speed = 2.5f;
                 
                 camera_controller_1_ = new CameraController(engine_->mainCameraNode, bezierCurve1, eularChangeInfo1, speedChangeInfo1);
                 CameraController::BezierCurve bezierCurve2;
+                bezierCurve2.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
+                bezierCurve2.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
                 bezierCurve2.controll_points.push_back(vec3(-37.699, 21.2707, -1.3718));
                 bezierCurve2.controll_points.push_back(vec3(-40.149, 23.8911, 12.6656));
                 bezierCurve2.controll_points.push_back(vec3(-37.0909, 25.369, 27.3833));
@@ -580,9 +595,11 @@ void ClientCore::updateStart() {
                 bezierCurve2.controll_points.push_back(vec3(32.3742, 28.5622, -0.616311));
                 if (character_index_ == 1) {
                     bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, -2.52214));
+                    bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, -2.52214));
                 }
                 else if (character_index_ == 3) {
                     bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, 0.597857));
+                    bezierCurve2.controll_points.push_back(vec3(30.7352, 25.0334, -2.52214));
                 }
                 bezierCurve2.level_of_detail = 800;
                 
